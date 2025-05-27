@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Specification-Title: Renaissance Benchmark Suite
+Specification-Version: 0.16.0
+Specification-Vendor: org.renaissance
+Implementation-Title: renaissance
+Implementation-Version: 0.16.0
+Implementation-Vendor: org.renaissance
+Implementation-Vendor-Id: org.renaissance
+Main-Class: org.renaissance.core.Launcher
+Git-Head-Commit: 1de5790caa4c4756716dfcb9c34a6e0316c4727f
+Git-Head-Commit-Date: 2024-11-22T17:49:47+0100
+Git-Uncommitted-Changes: false
+Add-Opens: java.base/java.lang java.base/java.lang.invoke java.base/java
+ .lang.reflect java.base/java.util java.base/java.nio java.base/sun.nio.
+ ch java.management/sun.management java.management/sun.management.counte
+ r java.management/sun.management.counter.perf java.base/jdk.internal.re
+ f jdk.compiler/com.sun.tools.javac.file
+Enable-Native-Access: ALL-UNNAMED
+
