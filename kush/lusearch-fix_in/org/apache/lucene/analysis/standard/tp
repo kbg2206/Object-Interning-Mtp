@@ -1,0 +1,706 @@
+Classfile /home/omkar/personal/tokyo_escape/escapeAnalysis/benchmark_dump/lusearch-fix_in/org/apache/lucene/analysis/standard/StandardAnalyzer.class
+  Last modified 2 Oct, 2023; size 4854 bytes
+  MD5 checksum b453541379c890266aa4ccfd03e3d04f
+  Compiled from "StandardAnalyzer.java"
+public class org.apache.lucene.analysis.standard.StandardAnalyzer extends org.apache.lucene.analysis.Analyzer
+  minor version: 0
+  major version: 48
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+    #1 = Fieldref           #6.#102       // org/apache/lucene/analysis/standard/StandardAnalyzer.defaultReplaceInvalidAcronym:Z
+    #2 = Fieldref           #6.#103       // org/apache/lucene/analysis/standard/StandardAnalyzer.STOP_WORDS:[Ljava/lang/String;
+    #3 = Methodref          #6.#104       // org/apache/lucene/analysis/standard/StandardAnalyzer."<init>":([Ljava/lang/String;)V
+    #4 = Methodref          #38.#105      // org/apache/lucene/analysis/Analyzer."<init>":()V
+    #5 = Fieldref           #6.#106       // org/apache/lucene/analysis/standard/StandardAnalyzer.replaceInvalidAcronym:Z
+    #6 = Class              #107          // org/apache/lucene/analysis/standard/StandardAnalyzer
+    #7 = Fieldref           #6.#108       // org/apache/lucene/analysis/standard/StandardAnalyzer.maxTokenLength:I
+    #8 = Fieldref           #6.#109       // org/apache/lucene/analysis/standard/StandardAnalyzer.stopSet:Ljava/util/Set;
+    #9 = Methodref          #22.#110      // org/apache/lucene/analysis/StopFilter.makeStopSet:([Ljava/lang/String;)Ljava/util/Set;
+   #10 = Methodref          #111.#112     // org/apache/lucene/analysis/WordlistLoader.getWordSet:(Ljava/io/File;)Ljava/util/HashSet;
+   #11 = Methodref          #111.#113     // org/apache/lucene/analysis/WordlistLoader.getWordSet:(Ljava/io/Reader;)Ljava/util/HashSet;
+   #12 = Methodref          #6.#114       // org/apache/lucene/analysis/standard/StandardAnalyzer."<init>":(Ljava/io/Reader;)V
+   #13 = Methodref          #6.#115       // org/apache/lucene/analysis/standard/StandardAnalyzer."<init>":(Ljava/io/File;)V
+   #14 = Methodref          #6.#116       // org/apache/lucene/analysis/standard/StandardAnalyzer."<init>":(Ljava/util/Set;)V
+   #15 = Class              #117          // org/apache/lucene/analysis/standard/StandardTokenizer
+   #16 = Methodref          #15.#118      // org/apache/lucene/analysis/standard/StandardTokenizer."<init>":(Ljava/io/Reader;Z)V
+   #17 = Methodref          #15.#119      // org/apache/lucene/analysis/standard/StandardTokenizer.setMaxTokenLength:(I)V
+   #18 = Class              #120          // org/apache/lucene/analysis/standard/StandardFilter
+   #19 = Methodref          #18.#121      // org/apache/lucene/analysis/standard/StandardFilter."<init>":(Lorg/apache/lucene/analysis/TokenStream;)V
+   #20 = Class              #122          // org/apache/lucene/analysis/LowerCaseFilter
+   #21 = Methodref          #20.#121      // org/apache/lucene/analysis/LowerCaseFilter."<init>":(Lorg/apache/lucene/analysis/TokenStream;)V
+   #22 = Class              #123          // org/apache/lucene/analysis/StopFilter
+   #23 = Methodref          #22.#124      // org/apache/lucene/analysis/StopFilter."<init>":(Lorg/apache/lucene/analysis/TokenStream;Ljava/util/Set;)V
+   #24 = Methodref          #6.#125       // org/apache/lucene/analysis/standard/StandardAnalyzer.getPreviousTokenStream:()Ljava/lang/Object;
+   #25 = Class              #126          // org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams
+   #26 = Methodref          #25.#127      // org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams."<init>":(Lorg/apache/lucene/analysis/standard/StandardAnalyzer$1;)V
+   #27 = Methodref          #6.#128       // org/apache/lucene/analysis/standard/StandardAnalyzer.setPreviousTokenStream:(Ljava/lang/Object;)V
+   #28 = Methodref          #15.#114      // org/apache/lucene/analysis/standard/StandardTokenizer."<init>":(Ljava/io/Reader;)V
+   #29 = Fieldref           #25.#129      // org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams.tokenStream:Lorg/apache/lucene/analysis/standard/StandardTokenizer;
+   #30 = Fieldref           #25.#130      // org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams.filteredTokenStream:Lorg/apache/lucene/analysis/TokenStream;
+   #31 = Methodref          #15.#131      // org/apache/lucene/analysis/standard/StandardTokenizer.reset:(Ljava/io/Reader;)V
+   #32 = Methodref          #15.#132      // org/apache/lucene/analysis/standard/StandardTokenizer.setReplaceInvalidAcronym:(Z)V
+   #33 = String             #133          // org.apache.lucene.analysis.standard.StandardAnalyzer.replaceInvalidAcronym
+   #34 = Methodref          #134.#135     // java/lang/System.getProperty:(Ljava/lang/String;)Ljava/lang/String;
+   #35 = String             #136          // true
+   #36 = Methodref          #137.#138     // java/lang/String.equals:(Ljava/lang/Object;)Z
+   #37 = Fieldref           #139.#140     // org/apache/lucene/analysis/StopAnalyzer.ENGLISH_STOP_WORDS:[Ljava/lang/String;
+   #38 = Class              #141          // org/apache/lucene/analysis/Analyzer
+   #39 = Class              #142          // org/apache/lucene/analysis/standard/StandardAnalyzer$1
+   #40 = Utf8               InnerClasses
+   #41 = Utf8               SavedStreams
+   #42 = Utf8               stopSet
+   #43 = Utf8               Ljava/util/Set;
+   #44 = Utf8               replaceInvalidAcronym
+   #45 = Utf8               Z
+   #46 = Utf8               Deprecated
+   #47 = Utf8               defaultReplaceInvalidAcronym
+   #48 = Utf8               STOP_WORDS
+   #49 = Utf8               [Ljava/lang/String;
+   #50 = Utf8               DEFAULT_MAX_TOKEN_LENGTH
+   #51 = Utf8               I
+   #52 = Utf8               ConstantValue
+   #53 = Integer            255
+   #54 = Utf8               maxTokenLength
+   #55 = Utf8               getDefaultReplaceInvalidAcronym
+   #56 = Utf8               ()Z
+   #57 = Utf8               Code
+   #58 = Utf8               LineNumberTable
+   #59 = Utf8               setDefaultReplaceInvalidAcronym
+   #60 = Utf8               (Z)V
+   #61 = Utf8               LocalVariableTable
+   #62 = Utf8               <init>
+   #63 = Utf8               ()V
+   #64 = Utf8               this
+   #65 = Utf8               Lorg/apache/lucene/analysis/standard/StandardAnalyzer;
+   #66 = Utf8               (Ljava/util/Set;)V
+   #67 = Utf8               stopWords
+   #68 = Utf8               ([Ljava/lang/String;)V
+   #69 = Utf8               (Ljava/io/File;)V
+   #70 = Utf8               stopwords
+   #71 = Utf8               Ljava/io/File;
+   #72 = Utf8               Exceptions
+   #73 = Class              #143          // java/io/IOException
+   #74 = Utf8               (Ljava/io/Reader;)V
+   #75 = Utf8               Ljava/io/Reader;
+   #76 = Utf8               (Ljava/io/Reader;Z)V
+   #77 = Utf8               (Ljava/io/File;Z)V
+   #78 = Utf8               ([Ljava/lang/String;Z)V
+   #79 = Utf8               (Ljava/util/Set;Z)V
+   #80 = Utf8               tokenStream
+   #81 = Utf8               (Ljava/lang/String;Ljava/io/Reader;)Lorg/apache/lucene/analysis/TokenStream;
+   #82 = Utf8               fieldName
+   #83 = Utf8               Ljava/lang/String;
+   #84 = Utf8               reader
+   #85 = Utf8               Lorg/apache/lucene/analysis/standard/StandardTokenizer;
+   #86 = Utf8               result
+   #87 = Utf8               Lorg/apache/lucene/analysis/TokenStream;
+   #88 = Utf8               setMaxTokenLength
+   #89 = Utf8               (I)V
+   #90 = Utf8               length
+   #91 = Utf8               getMaxTokenLength
+   #92 = Utf8               ()I
+   #93 = Utf8               reusableTokenStream
+   #94 = Utf8               streams
+   #95 = Utf8               Lorg/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams;
+   #96 = Utf8               isReplaceInvalidAcronym
+   #97 = Utf8               setReplaceInvalidAcronym
+   #98 = Utf8               <clinit>
+   #99 = Utf8               v
+  #100 = Utf8               SourceFile
+  #101 = Utf8               StandardAnalyzer.java
+  #102 = NameAndType        #47:#45       // defaultReplaceInvalidAcronym:Z
+  #103 = NameAndType        #48:#49       // STOP_WORDS:[Ljava/lang/String;
+  #104 = NameAndType        #62:#68       // "<init>":([Ljava/lang/String;)V
+  #105 = NameAndType        #62:#63       // "<init>":()V
+  #106 = NameAndType        #44:#45       // replaceInvalidAcronym:Z
+  #107 = Utf8               org/apache/lucene/analysis/standard/StandardAnalyzer
+  #108 = NameAndType        #54:#51       // maxTokenLength:I
+  #109 = NameAndType        #42:#43       // stopSet:Ljava/util/Set;
+  #110 = NameAndType        #144:#145     // makeStopSet:([Ljava/lang/String;)Ljava/util/Set;
+  #111 = Class              #146          // org/apache/lucene/analysis/WordlistLoader
+  #112 = NameAndType        #147:#148     // getWordSet:(Ljava/io/File;)Ljava/util/HashSet;
+  #113 = NameAndType        #147:#149     // getWordSet:(Ljava/io/Reader;)Ljava/util/HashSet;
+  #114 = NameAndType        #62:#74       // "<init>":(Ljava/io/Reader;)V
+  #115 = NameAndType        #62:#69       // "<init>":(Ljava/io/File;)V
+  #116 = NameAndType        #62:#66       // "<init>":(Ljava/util/Set;)V
+  #117 = Utf8               org/apache/lucene/analysis/standard/StandardTokenizer
+  #118 = NameAndType        #62:#76       // "<init>":(Ljava/io/Reader;Z)V
+  #119 = NameAndType        #88:#89       // setMaxTokenLength:(I)V
+  #120 = Utf8               org/apache/lucene/analysis/standard/StandardFilter
+  #121 = NameAndType        #62:#150      // "<init>":(Lorg/apache/lucene/analysis/TokenStream;)V
+  #122 = Utf8               org/apache/lucene/analysis/LowerCaseFilter
+  #123 = Utf8               org/apache/lucene/analysis/StopFilter
+  #124 = NameAndType        #62:#151      // "<init>":(Lorg/apache/lucene/analysis/TokenStream;Ljava/util/Set;)V
+  #125 = NameAndType        #152:#153     // getPreviousTokenStream:()Ljava/lang/Object;
+  #126 = Utf8               org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams
+  #127 = NameAndType        #62:#154      // "<init>":(Lorg/apache/lucene/analysis/standard/StandardAnalyzer$1;)V
+  #128 = NameAndType        #155:#156     // setPreviousTokenStream:(Ljava/lang/Object;)V
+  #129 = NameAndType        #80:#85       // tokenStream:Lorg/apache/lucene/analysis/standard/StandardTokenizer;
+  #130 = NameAndType        #157:#87      // filteredTokenStream:Lorg/apache/lucene/analysis/TokenStream;
+  #131 = NameAndType        #158:#74      // reset:(Ljava/io/Reader;)V
+  #132 = NameAndType        #97:#60       // setReplaceInvalidAcronym:(Z)V
+  #133 = Utf8               org.apache.lucene.analysis.standard.StandardAnalyzer.replaceInvalidAcronym
+  #134 = Class              #159          // java/lang/System
+  #135 = NameAndType        #160:#161     // getProperty:(Ljava/lang/String;)Ljava/lang/String;
+  #136 = Utf8               true
+  #137 = Class              #162          // java/lang/String
+  #138 = NameAndType        #163:#164     // equals:(Ljava/lang/Object;)Z
+  #139 = Class              #165          // org/apache/lucene/analysis/StopAnalyzer
+  #140 = NameAndType        #166:#49      // ENGLISH_STOP_WORDS:[Ljava/lang/String;
+  #141 = Utf8               org/apache/lucene/analysis/Analyzer
+  #142 = Utf8               org/apache/lucene/analysis/standard/StandardAnalyzer$1
+  #143 = Utf8               java/io/IOException
+  #144 = Utf8               makeStopSet
+  #145 = Utf8               ([Ljava/lang/String;)Ljava/util/Set;
+  #146 = Utf8               org/apache/lucene/analysis/WordlistLoader
+  #147 = Utf8               getWordSet
+  #148 = Utf8               (Ljava/io/File;)Ljava/util/HashSet;
+  #149 = Utf8               (Ljava/io/Reader;)Ljava/util/HashSet;
+  #150 = Utf8               (Lorg/apache/lucene/analysis/TokenStream;)V
+  #151 = Utf8               (Lorg/apache/lucene/analysis/TokenStream;Ljava/util/Set;)V
+  #152 = Utf8               getPreviousTokenStream
+  #153 = Utf8               ()Ljava/lang/Object;
+  #154 = Utf8               (Lorg/apache/lucene/analysis/standard/StandardAnalyzer$1;)V
+  #155 = Utf8               setPreviousTokenStream
+  #156 = Utf8               (Ljava/lang/Object;)V
+  #157 = Utf8               filteredTokenStream
+  #158 = Utf8               reset
+  #159 = Utf8               java/lang/System
+  #160 = Utf8               getProperty
+  #161 = Utf8               (Ljava/lang/String;)Ljava/lang/String;
+  #162 = Utf8               java/lang/String
+  #163 = Utf8               equals
+  #164 = Utf8               (Ljava/lang/Object;)Z
+  #165 = Utf8               org/apache/lucene/analysis/StopAnalyzer
+  #166 = Utf8               ENGLISH_STOP_WORDS
+{
+  public static final java.lang.String[] STOP_WORDS;
+    descriptor: [Ljava/lang/String;
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+
+  public static final int DEFAULT_MAX_TOKEN_LENGTH;
+    descriptor: I
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+    ConstantValue: int 255
+
+  public static boolean getDefaultReplaceInvalidAcronym();
+    descriptor: ()Z
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: getstatic     #1                  // Field defaultReplaceInvalidAcronym:Z
+         3: ireturn
+      LineNumberTable:
+        line 66: 0
+    Deprecated: true
+
+  public static void setDefaultReplaceInvalidAcronym(boolean);
+    descriptor: (Z)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: iload_0
+         1: putstatic     #1                  // Field defaultReplaceInvalidAcronym:Z
+         4: return
+      LineNumberTable:
+        line 83: 0
+        line 84: 4
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0 replaceInvalidAcronym   Z
+    Deprecated: true
+
+  public org.apache.lucene.analysis.standard.StandardAnalyzer();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: getstatic     #2                  // Field STOP_WORDS:[Ljava/lang/String;
+         4: invokespecial #3                  // Method "<init>":([Ljava/lang/String;)V
+         7: return
+      LineNumberTable:
+        line 93: 0
+        line 94: 7
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       8     0  this   Lorg/apache/lucene/analysis/standard/StandardAnalyzer;
+
+  public org.apache.lucene.analysis.standard.StandardAnalyzer(java.util.Set);
+    descriptor: (Ljava/util/Set;)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: invokespecial #4                  // Method org/apache/lucene/analysis/Analyzer."<init>":()V
+         4: aload_0
+         5: getstatic     #1                  // Field defaultReplaceInvalidAcronym:Z
+         8: putfield      #5                  // Field replaceInvalidAcronym:Z
+        11: aload_0
+        12: sipush        255
+        15: putfield      #7                  // Field maxTokenLength:I
+        18: aload_0
+        19: aload_1
+        20: putfield      #8                  // Field stopSet:Ljava/util/Set;
+        23: return
+      LineNumberTable:
+        line 97: 0
+        line 44: 4
+        line 205: 11
+        line 98: 18
+        line 99: 23
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      24     0  this   Lorg/apache/lucene/analysis/standard/StandardAnalyzer;
+            0      24     1 stopWords   Ljava/util/Set;
+
+  public org.apache.lucene.analysis.standard.StandardAnalyzer(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: invokespecial #4                  // Method org/apache/lucene/analysis/Analyzer."<init>":()V
+         4: aload_0
+         5: getstatic     #1                  // Field defaultReplaceInvalidAcronym:Z
+         8: putfield      #5                  // Field replaceInvalidAcronym:Z
+        11: aload_0
+        12: sipush        255
+        15: putfield      #7                  // Field maxTokenLength:I
+        18: aload_0
+        19: aload_1
+        20: invokestatic  #9                  // Method org/apache/lucene/analysis/StopFilter.makeStopSet:([Ljava/lang/String;)Ljava/util/Set;
+        23: putfield      #8                  // Field stopSet:Ljava/util/Set;
+        26: return
+      LineNumberTable:
+        line 102: 0
+        line 44: 4
+        line 205: 11
+        line 103: 18
+        line 104: 26
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      27     0  this   Lorg/apache/lucene/analysis/standard/StandardAnalyzer;
+            0      27     1 stopWords   [Ljava/lang/String;
+
+  public org.apache.lucene.analysis.standard.StandardAnalyzer(java.io.File) throws java.io.IOException;
+    descriptor: (Ljava/io/File;)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: invokespecial #4                  // Method org/apache/lucene/analysis/Analyzer."<init>":()V
+         4: aload_0
+         5: getstatic     #1                  // Field defaultReplaceInvalidAcronym:Z
+         8: putfield      #5                  // Field replaceInvalidAcronym:Z
+        11: aload_0
+        12: sipush        255
+        15: putfield      #7                  // Field maxTokenLength:I
+        18: aload_0
+        19: aload_1
+        20: invokestatic  #10                 // Method org/apache/lucene/analysis/WordlistLoader.getWordSet:(Ljava/io/File;)Ljava/util/HashSet;
+        23: putfield      #8                  // Field stopSet:Ljava/util/Set;
+        26: return
+      LineNumberTable:
+        line 109: 0
+        line 44: 4
+        line 205: 11
+        line 110: 18
+        line 111: 26
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      27     0  this   Lorg/apache/lucene/analysis/standard/StandardAnalyzer;
+            0      27     1 stopwords   Ljava/io/File;
+    Exceptions:
+      throws java.io.IOException
+
+  public org.apache.lucene.analysis.standard.StandardAnalyzer(java.io.Reader) throws java.io.IOException;
+    descriptor: (Ljava/io/Reader;)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: invokespecial #4                  // Method org/apache/lucene/analysis/Analyzer."<init>":()V
+         4: aload_0
+         5: getstatic     #1                  // Field defaultReplaceInvalidAcronym:Z
+         8: putfield      #5                  // Field replaceInvalidAcronym:Z
+        11: aload_0
+        12: sipush        255
+        15: putfield      #7                  // Field maxTokenLength:I
+        18: aload_0
+        19: aload_1
+        20: invokestatic  #11                 // Method org/apache/lucene/analysis/WordlistLoader.getWordSet:(Ljava/io/Reader;)Ljava/util/HashSet;
+        23: putfield      #8                  // Field stopSet:Ljava/util/Set;
+        26: return
+      LineNumberTable:
+        line 116: 0
+        line 44: 4
+        line 205: 11
+        line 117: 18
+        line 118: 26
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      27     0  this   Lorg/apache/lucene/analysis/standard/StandardAnalyzer;
+            0      27     1 stopwords   Ljava/io/Reader;
+    Exceptions:
+      throws java.io.IOException
+
+  public org.apache.lucene.analysis.standard.StandardAnalyzer(boolean);
+    descriptor: (Z)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: getstatic     #2                  // Field STOP_WORDS:[Ljava/lang/String;
+         4: invokespecial #3                  // Method "<init>":([Ljava/lang/String;)V
+         7: aload_0
+         8: iload_1
+         9: putfield      #5                  // Field replaceInvalidAcronym:Z
+        12: return
+      LineNumberTable:
+        line 129: 0
+        line 130: 7
+        line 131: 12
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      13     0  this   Lorg/apache/lucene/analysis/standard/StandardAnalyzer;
+            0      13     1 replaceInvalidAcronym   Z
+    Deprecated: true
+
+  public org.apache.lucene.analysis.standard.StandardAnalyzer(java.io.Reader, boolean) throws java.io.IOException;
+    descriptor: (Ljava/io/Reader;Z)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=3, args_size=3
+         0: aload_0
+         1: aload_1
+         2: invokespecial #12                 // Method "<init>":(Ljava/io/Reader;)V
+         5: aload_0
+         6: iload_2
+         7: putfield      #5                  // Field replaceInvalidAcronym:Z
+        10: return
+      LineNumberTable:
+        line 142: 0
+        line 143: 5
+        line 144: 10
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      11     0  this   Lorg/apache/lucene/analysis/standard/StandardAnalyzer;
+            0      11     1 stopwords   Ljava/io/Reader;
+            0      11     2 replaceInvalidAcronym   Z
+    Exceptions:
+      throws java.io.IOException
+    Deprecated: true
+
+  public org.apache.lucene.analysis.standard.StandardAnalyzer(java.io.File, boolean) throws java.io.IOException;
+    descriptor: (Ljava/io/File;Z)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=3, args_size=3
+         0: aload_0
+         1: aload_1
+         2: invokespecial #13                 // Method "<init>":(Ljava/io/File;)V
+         5: aload_0
+         6: iload_2
+         7: putfield      #5                  // Field replaceInvalidAcronym:Z
+        10: return
+      LineNumberTable:
+        line 155: 0
+        line 156: 5
+        line 157: 10
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      11     0  this   Lorg/apache/lucene/analysis/standard/StandardAnalyzer;
+            0      11     1 stopwords   Ljava/io/File;
+            0      11     2 replaceInvalidAcronym   Z
+    Exceptions:
+      throws java.io.IOException
+    Deprecated: true
+
+  public org.apache.lucene.analysis.standard.StandardAnalyzer(java.lang.String[], boolean) throws java.io.IOException;
+    descriptor: ([Ljava/lang/String;Z)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=3, args_size=3
+         0: aload_0
+         1: aload_1
+         2: invokespecial #3                  // Method "<init>":([Ljava/lang/String;)V
+         5: aload_0
+         6: iload_2
+         7: putfield      #5                  // Field replaceInvalidAcronym:Z
+        10: return
+      LineNumberTable:
+        line 169: 0
+        line 170: 5
+        line 171: 10
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      11     0  this   Lorg/apache/lucene/analysis/standard/StandardAnalyzer;
+            0      11     1 stopwords   [Ljava/lang/String;
+            0      11     2 replaceInvalidAcronym   Z
+    Exceptions:
+      throws java.io.IOException
+    Deprecated: true
+
+  public org.apache.lucene.analysis.standard.StandardAnalyzer(java.util.Set, boolean) throws java.io.IOException;
+    descriptor: (Ljava/util/Set;Z)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=3, args_size=3
+         0: aload_0
+         1: aload_1
+         2: invokespecial #14                 // Method "<init>":(Ljava/util/Set;)V
+         5: aload_0
+         6: iload_2
+         7: putfield      #5                  // Field replaceInvalidAcronym:Z
+        10: return
+      LineNumberTable:
+        line 182: 0
+        line 183: 5
+        line 184: 10
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      11     0  this   Lorg/apache/lucene/analysis/standard/StandardAnalyzer;
+            0      11     1 stopwords   Ljava/util/Set;
+            0      11     2 replaceInvalidAcronym   Z
+    Exceptions:
+      throws java.io.IOException
+    Deprecated: true
+
+  public org.apache.lucene.analysis.TokenStream tokenStream(java.lang.String, java.io.Reader);
+    descriptor: (Ljava/lang/String;Ljava/io/Reader;)Lorg/apache/lucene/analysis/TokenStream;
+    flags: ACC_PUBLIC
+    Code:
+      stack=4, locals=5, args_size=3
+         0: new           #15                 // class org/apache/lucene/analysis/standard/StandardTokenizer
+         3: dup
+         4: aload_2
+         5: aload_0
+         6: getfield      #5                  // Field replaceInvalidAcronym:Z
+         9: invokespecial #16                 // Method org/apache/lucene/analysis/standard/StandardTokenizer."<init>":(Ljava/io/Reader;Z)V
+        12: astore_3
+        13: aload_3
+        14: aload_0
+        15: getfield      #7                  // Field maxTokenLength:I
+        18: invokevirtual #17                 // Method org/apache/lucene/analysis/standard/StandardTokenizer.setMaxTokenLength:(I)V
+        21: new           #18                 // class org/apache/lucene/analysis/standard/StandardFilter
+        24: dup
+        25: aload_3
+        26: invokespecial #19                 // Method org/apache/lucene/analysis/standard/StandardFilter."<init>":(Lorg/apache/lucene/analysis/TokenStream;)V
+        29: astore        4
+        31: new           #20                 // class org/apache/lucene/analysis/LowerCaseFilter
+        34: dup
+        35: aload         4
+        37: invokespecial #21                 // Method org/apache/lucene/analysis/LowerCaseFilter."<init>":(Lorg/apache/lucene/analysis/TokenStream;)V
+        40: astore        4
+        42: new           #22                 // class org/apache/lucene/analysis/StopFilter
+        45: dup
+        46: aload         4
+        48: aload_0
+        49: getfield      #8                  // Field stopSet:Ljava/util/Set;
+        52: invokespecial #23                 // Method org/apache/lucene/analysis/StopFilter."<init>":(Lorg/apache/lucene/analysis/TokenStream;Ljava/util/Set;)V
+        55: astore        4
+        57: aload         4
+        59: areturn
+      LineNumberTable:
+        line 189: 0
+        line 190: 13
+        line 191: 21
+        line 192: 31
+        line 193: 42
+        line 194: 57
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      60     0  this   Lorg/apache/lucene/analysis/standard/StandardAnalyzer;
+            0      60     1 fieldName   Ljava/lang/String;
+            0      60     2 reader   Ljava/io/Reader;
+           13      47     3 tokenStream   Lorg/apache/lucene/analysis/standard/StandardTokenizer;
+           31      29     4 result   Lorg/apache/lucene/analysis/TokenStream;
+
+  public void setMaxTokenLength(int);
+    descriptor: (I)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: iload_1
+         2: putfield      #7                  // Field maxTokenLength:I
+         5: return
+      LineNumberTable:
+        line 214: 0
+        line 215: 5
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lorg/apache/lucene/analysis/standard/StandardAnalyzer;
+            0       6     1 length   I
+
+  public int getMaxTokenLength();
+    descriptor: ()I
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #7                  // Field maxTokenLength:I
+         4: ireturn
+      LineNumberTable:
+        line 221: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lorg/apache/lucene/analysis/standard/StandardAnalyzer;
+
+  public org.apache.lucene.analysis.TokenStream reusableTokenStream(java.lang.String, java.io.Reader) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;Ljava/io/Reader;)Lorg/apache/lucene/analysis/TokenStream;
+    flags: ACC_PUBLIC
+    Code:
+      stack=5, locals=4, args_size=3
+         0: aload_0
+         1: invokevirtual #24                 // Method getPreviousTokenStream:()Ljava/lang/Object;
+         4: checkcast     #25                 // class org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams
+         7: astore_3
+         8: aload_3
+         9: ifnonnull     90
+        12: new           #25                 // class org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams
+        15: dup
+        16: aconst_null
+        17: invokespecial #26                 // Method org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams."<init>":(Lorg/apache/lucene/analysis/standard/StandardAnalyzer$1;)V
+        20: astore_3
+        21: aload_0
+        22: aload_3
+        23: invokevirtual #27                 // Method setPreviousTokenStream:(Ljava/lang/Object;)V
+        26: aload_3
+        27: new           #15                 // class org/apache/lucene/analysis/standard/StandardTokenizer
+        30: dup
+        31: aload_2
+        32: invokespecial #28                 // Method org/apache/lucene/analysis/standard/StandardTokenizer."<init>":(Ljava/io/Reader;)V
+        35: putfield      #29                 // Field org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams.tokenStream:Lorg/apache/lucene/analysis/standard/StandardTokenizer;
+        38: aload_3
+        39: new           #18                 // class org/apache/lucene/analysis/standard/StandardFilter
+        42: dup
+        43: aload_3
+        44: getfield      #29                 // Field org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams.tokenStream:Lorg/apache/lucene/analysis/standard/StandardTokenizer;
+        47: invokespecial #19                 // Method org/apache/lucene/analysis/standard/StandardFilter."<init>":(Lorg/apache/lucene/analysis/TokenStream;)V
+        50: putfield      #30                 // Field org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams.filteredTokenStream:Lorg/apache/lucene/analysis/TokenStream;
+        53: aload_3
+        54: new           #20                 // class org/apache/lucene/analysis/LowerCaseFilter
+        57: dup
+        58: aload_3
+        59: getfield      #30                 // Field org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams.filteredTokenStream:Lorg/apache/lucene/analysis/TokenStream;
+        62: invokespecial #21                 // Method org/apache/lucene/analysis/LowerCaseFilter."<init>":(Lorg/apache/lucene/analysis/TokenStream;)V
+        65: putfield      #30                 // Field org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams.filteredTokenStream:Lorg/apache/lucene/analysis/TokenStream;
+        68: aload_3
+        69: new           #22                 // class org/apache/lucene/analysis/StopFilter
+        72: dup
+        73: aload_3
+        74: getfield      #30                 // Field org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams.filteredTokenStream:Lorg/apache/lucene/analysis/TokenStream;
+        77: aload_0
+        78: getfield      #8                  // Field stopSet:Ljava/util/Set;
+        81: invokespecial #23                 // Method org/apache/lucene/analysis/StopFilter."<init>":(Lorg/apache/lucene/analysis/TokenStream;Ljava/util/Set;)V
+        84: putfield      #30                 // Field org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams.filteredTokenStream:Lorg/apache/lucene/analysis/TokenStream;
+        87: goto          98
+        90: aload_3
+        91: getfield      #29                 // Field org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams.tokenStream:Lorg/apache/lucene/analysis/standard/StandardTokenizer;
+        94: aload_2
+        95: invokevirtual #31                 // Method org/apache/lucene/analysis/standard/StandardTokenizer.reset:(Ljava/io/Reader;)V
+        98: aload_3
+        99: getfield      #29                 // Field org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams.tokenStream:Lorg/apache/lucene/analysis/standard/StandardTokenizer;
+       102: aload_0
+       103: getfield      #7                  // Field maxTokenLength:I
+       106: invokevirtual #17                 // Method org/apache/lucene/analysis/standard/StandardTokenizer.setMaxTokenLength:(I)V
+       109: aload_3
+       110: getfield      #29                 // Field org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams.tokenStream:Lorg/apache/lucene/analysis/standard/StandardTokenizer;
+       113: aload_0
+       114: getfield      #5                  // Field replaceInvalidAcronym:Z
+       117: invokevirtual #32                 // Method org/apache/lucene/analysis/standard/StandardTokenizer.setReplaceInvalidAcronym:(Z)V
+       120: aload_3
+       121: getfield      #30                 // Field org/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams.filteredTokenStream:Lorg/apache/lucene/analysis/TokenStream;
+       124: areturn
+      LineNumberTable:
+        line 225: 0
+        line 226: 8
+        line 227: 12
+        line 228: 21
+        line 229: 26
+        line 230: 38
+        line 231: 53
+        line 232: 68
+        line 234: 90
+        line 236: 98
+        line 238: 109
+        line 240: 120
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0     125     0  this   Lorg/apache/lucene/analysis/standard/StandardAnalyzer;
+            0     125     1 fieldName   Ljava/lang/String;
+            0     125     2 reader   Ljava/io/Reader;
+            8     117     3 streams   Lorg/apache/lucene/analysis/standard/StandardAnalyzer$SavedStreams;
+    Exceptions:
+      throws java.io.IOException
+
+  public boolean isReplaceInvalidAcronym();
+    descriptor: ()Z
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #5                  // Field replaceInvalidAcronym:Z
+         4: ireturn
+      LineNumberTable:
+        line 251: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lorg/apache/lucene/analysis/standard/StandardAnalyzer;
+    Deprecated: true
+
+  public void setReplaceInvalidAcronym(boolean);
+    descriptor: (Z)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: iload_1
+         2: putfield      #5                  // Field replaceInvalidAcronym:Z
+         5: return
+      LineNumberTable:
+        line 262: 0
+        line 263: 5
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lorg/apache/lucene/analysis/standard/StandardAnalyzer;
+            0       6     1 replaceInvalidAcronym   Z
+    Deprecated: true
+
+  static {};
+    descriptor: ()V
+    flags: ACC_STATIC
+    Code:
+      stack=2, locals=1, args_size=0
+         0: ldc           #33                 // String org.apache.lucene.analysis.standard.StandardAnalyzer.replaceInvalidAcronym
+         2: invokestatic  #34                 // Method java/lang/System.getProperty:(Ljava/lang/String;)Ljava/lang/String;
+         5: astore_0
+         6: aload_0
+         7: ifnull        19
+        10: aload_0
+        11: ldc           #35                 // String true
+        13: invokevirtual #36                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        16: ifeq          26
+        19: iconst_1
+        20: putstatic     #1                  // Field defaultReplaceInvalidAcronym:Z
+        23: goto          30
+        26: iconst_0
+        27: putstatic     #1                  // Field defaultReplaceInvalidAcronym:Z
+        30: getstatic     #37                 // Field org/apache/lucene/analysis/StopAnalyzer.ENGLISH_STOP_WORDS:[Ljava/lang/String;
+        33: putstatic     #2                  // Field STOP_WORDS:[Ljava/lang/String;
+        36: return
+      LineNumberTable:
+        line 50: 0
+        line 51: 6
+        line 52: 19
+        line 54: 26
+        line 89: 30
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            6      24     0     v   Ljava/lang/String;
+}
+SourceFile: "StandardAnalyzer.java"
+InnerClasses:
+     static #39; //class org/apache/lucene/analysis/standard/StandardAnalyzer$1

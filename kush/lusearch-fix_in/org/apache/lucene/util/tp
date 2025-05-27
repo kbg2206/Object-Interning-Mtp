@@ -1,0 +1,521 @@
+Classfile /home/omkar/personal/tokyo_escape/escapeAnalysis/benchmark_dump/lusearch-fix_in/org/apache/lucene/util/CloseableThreadLocal.class
+  Last modified 2 Oct, 2023; size 2898 bytes
+  MD5 checksum 13b165766245cda1644664ac51556fc4
+  Compiled from "CloseableThreadLocal.java"
+public class org.apache.lucene.util.CloseableThreadLocal
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+    #1 = Utf8               org/apache/lucene/util/CloseableThreadLocal
+    #2 = Class              #1            // org/apache/lucene/util/CloseableThreadLocal
+    #3 = Utf8               java/lang/Object
+    #4 = Class              #3            // java/lang/Object
+    #5 = Utf8               CloseableThreadLocal.java
+    #6 = Utf8               t
+    #7 = Utf8               Ljava/lang/ThreadLocal;
+    #8 = Utf8               hardRefs
+    #9 = Utf8               Ljava/util/Map;
+   #10 = Utf8               $assertionsDisabled
+   #11 = Utf8               Z
+   #12 = Utf8               class$org$apache$lucene$util$CloseableThreadLocal
+   #13 = Utf8               Ljava/lang/Class;
+   #14 = Utf8               <clinit>
+   #15 = Utf8               ()V
+   #16 = NameAndType        #12:#13       // class$org$apache$lucene$util$CloseableThreadLocal:Ljava/lang/Class;
+   #17 = Fieldref           #2.#16        // org/apache/lucene/util/CloseableThreadLocal.class$org$apache$lucene$util$CloseableThreadLocal:Ljava/lang/Class;
+   #18 = Utf8               org.apache.lucene.util.CloseableThreadLocal
+   #19 = String             #18           // org.apache.lucene.util.CloseableThreadLocal
+   #20 = Utf8               class$
+   #21 = Utf8               (Ljava/lang/String;)Ljava/lang/Class;
+   #22 = NameAndType        #20:#21       // class$:(Ljava/lang/String;)Ljava/lang/Class;
+   #23 = Methodref          #2.#22        // org/apache/lucene/util/CloseableThreadLocal.class$:(Ljava/lang/String;)Ljava/lang/Class;
+   #24 = Utf8               java/lang/Class
+   #25 = Class              #24           // java/lang/Class
+   #26 = Utf8               desiredAssertionStatus
+   #27 = Utf8               ()Z
+   #28 = NameAndType        #26:#27       // desiredAssertionStatus:()Z
+   #29 = Methodref          #25.#28       // java/lang/Class.desiredAssertionStatus:()Z
+   #30 = NameAndType        #10:#11       // $assertionsDisabled:Z
+   #31 = Fieldref           #2.#30        // org/apache/lucene/util/CloseableThreadLocal.$assertionsDisabled:Z
+   #32 = Utf8               <init>
+   #33 = NameAndType        #32:#15       // "<init>":()V
+   #34 = Methodref          #4.#33        // java/lang/Object."<init>":()V
+   #35 = Utf8               java/lang/ThreadLocal
+   #36 = Class              #35           // java/lang/ThreadLocal
+   #37 = Methodref          #36.#33       // java/lang/ThreadLocal."<init>":()V
+   #38 = NameAndType        #6:#7         // t:Ljava/lang/ThreadLocal;
+   #39 = Fieldref           #2.#38        // org/apache/lucene/util/CloseableThreadLocal.t:Ljava/lang/ThreadLocal;
+   #40 = Utf8               java/util/HashMap
+   #41 = Class              #40           // java/util/HashMap
+   #42 = Methodref          #41.#33       // java/util/HashMap."<init>":()V
+   #43 = NameAndType        #8:#9         // hardRefs:Ljava/util/Map;
+   #44 = Fieldref           #2.#43        // org/apache/lucene/util/CloseableThreadLocal.hardRefs:Ljava/util/Map;
+   #45 = Utf8               java/lang/ClassNotFoundException
+   #46 = Class              #45           // java/lang/ClassNotFoundException
+   #47 = Utf8               soot/rtlib/tamiflex/ReflectiveCalls
+   #48 = Class              #47           // soot/rtlib/tamiflex/ReflectiveCalls
+   #49 = Utf8               knownClassForName
+   #50 = Utf8               (ILjava/lang/String;)V
+   #51 = NameAndType        #49:#50       // knownClassForName:(ILjava/lang/String;)V
+   #52 = Methodref          #48.#51       // soot/rtlib/tamiflex/ReflectiveCalls.knownClassForName:(ILjava/lang/String;)V
+   #53 = Utf8               soot/rtlib/tamiflex/OpaquePredicate
+   #54 = Class              #53           // soot/rtlib/tamiflex/OpaquePredicate
+   #55 = Utf8               getFalse
+   #56 = NameAndType        #55:#27       // getFalse:()Z
+   #57 = Methodref          #54.#56       // soot/rtlib/tamiflex/OpaquePredicate.getFalse:()Z
+   #58 = Utf8               soot/rtlib/tamiflex/ReflectiveCallsWrapper
+   #59 = Class              #58           // soot/rtlib/tamiflex/ReflectiveCallsWrapper
+   #60 = Utf8               reflectiveCall26
+   #61 = Utf8               ()Ljava/lang/Class;
+   #62 = NameAndType        #60:#61       // reflectiveCall26:()Ljava/lang/Class;
+   #63 = Methodref          #59.#62       // soot/rtlib/tamiflex/ReflectiveCallsWrapper.reflectiveCall26:()Ljava/lang/Class;
+   #64 = Utf8               forName
+   #65 = NameAndType        #64:#21       // forName:(Ljava/lang/String;)Ljava/lang/Class;
+   #66 = Methodref          #25.#65       // java/lang/Class.forName:(Ljava/lang/String;)Ljava/lang/Class;
+   #67 = Utf8               java/lang/NoClassDefFoundError
+   #68 = Class              #67           // java/lang/NoClassDefFoundError
+   #69 = Methodref          #68.#33       // java/lang/NoClassDefFoundError."<init>":()V
+   #70 = Utf8               initCause
+   #71 = Utf8               (Ljava/lang/Throwable;)Ljava/lang/Throwable;
+   #72 = NameAndType        #70:#71       // initCause:(Ljava/lang/Throwable;)Ljava/lang/Throwable;
+   #73 = Methodref          #68.#72       // java/lang/NoClassDefFoundError.initCause:(Ljava/lang/Throwable;)Ljava/lang/Throwable;
+   #74 = Utf8               java/lang/String
+   #75 = Class              #74           // java/lang/String
+   #76 = Utf8               close
+   #77 = Utf8               get
+   #78 = Utf8               ()Ljava/lang/Object;
+   #79 = NameAndType        #77:#78       // get:()Ljava/lang/Object;
+   #80 = Methodref          #36.#79       // java/lang/ThreadLocal.get:()Ljava/lang/Object;
+   #81 = Utf8               java/lang/ref/WeakReference
+   #82 = Class              #81           // java/lang/ref/WeakReference
+   #83 = Utf8               initialValue
+   #84 = NameAndType        #83:#78       // initialValue:()Ljava/lang/Object;
+   #85 = Methodref          #2.#84        // org/apache/lucene/util/CloseableThreadLocal.initialValue:()Ljava/lang/Object;
+   #86 = Utf8               set
+   #87 = Utf8               (Ljava/lang/Object;)V
+   #88 = NameAndType        #86:#87       // set:(Ljava/lang/Object;)V
+   #89 = Methodref          #2.#88        // org/apache/lucene/util/CloseableThreadLocal.set:(Ljava/lang/Object;)V
+   #90 = Methodref          #82.#79       // java/lang/ref/WeakReference.get:()Ljava/lang/Object;
+   #91 = Utf8               java/lang/AssertionError
+   #92 = Class              #91           // java/lang/AssertionError
+   #93 = Methodref          #92.#33       // java/lang/AssertionError."<init>":()V
+   #94 = Utf8               java/lang/Throwable
+   #95 = Class              #94           // java/lang/Throwable
+   #96 = NameAndType        #32:#87       // "<init>":(Ljava/lang/Object;)V
+   #97 = Methodref          #82.#96       // java/lang/ref/WeakReference."<init>":(Ljava/lang/Object;)V
+   #98 = Methodref          #36.#88       // java/lang/ThreadLocal.set:(Ljava/lang/Object;)V
+   #99 = Utf8               java/lang/Thread
+  #100 = Class              #99           // java/lang/Thread
+  #101 = Utf8               currentThread
+  #102 = Utf8               ()Ljava/lang/Thread;
+  #103 = NameAndType        #101:#102     // currentThread:()Ljava/lang/Thread;
+  #104 = Methodref          #100.#103     // java/lang/Thread.currentThread:()Ljava/lang/Thread;
+  #105 = Utf8               java/util/Map
+  #106 = Class              #105          // java/util/Map
+  #107 = Utf8               put
+  #108 = Utf8               (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #109 = NameAndType        #107:#108     // put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #110 = InterfaceMethodref #106.#109     // java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #111 = Utf8               keySet
+  #112 = Utf8               ()Ljava/util/Set;
+  #113 = NameAndType        #111:#112     // keySet:()Ljava/util/Set;
+  #114 = InterfaceMethodref #106.#113     // java/util/Map.keySet:()Ljava/util/Set;
+  #115 = Utf8               java/util/Set
+  #116 = Class              #115          // java/util/Set
+  #117 = Utf8               iterator
+  #118 = Utf8               ()Ljava/util/Iterator;
+  #119 = NameAndType        #117:#118     // iterator:()Ljava/util/Iterator;
+  #120 = InterfaceMethodref #116.#119     // java/util/Set.iterator:()Ljava/util/Iterator;
+  #121 = Utf8               java/util/Iterator
+  #122 = Class              #121          // java/util/Iterator
+  #123 = Utf8               hasNext
+  #124 = NameAndType        #123:#27      // hasNext:()Z
+  #125 = InterfaceMethodref #122.#124     // java/util/Iterator.hasNext:()Z
+  #126 = Utf8               next
+  #127 = NameAndType        #126:#78      // next:()Ljava/lang/Object;
+  #128 = InterfaceMethodref #122.#127     // java/util/Iterator.next:()Ljava/lang/Object;
+  #129 = Utf8               isAlive
+  #130 = NameAndType        #129:#27      // isAlive:()Z
+  #131 = Methodref          #100.#130     // java/lang/Thread.isAlive:()Z
+  #132 = Utf8               remove
+  #133 = NameAndType        #132:#15      // remove:()V
+  #134 = InterfaceMethodref #122.#133     // java/util/Iterator.remove:()V
+  #135 = Utf8               Code
+  #136 = Utf8               StackMapTable
+  #137 = Utf8               LineNumberTable
+  #138 = Utf8               SourceFile
+{
+  static final boolean $assertionsDisabled;
+    descriptor: Z
+    flags: ACC_STATIC, ACC_FINAL, ACC_SYNTHETIC
+
+  static java.lang.Class class$org$apache$lucene$util$CloseableThreadLocal;
+    descriptor: Ljava/lang/Class;
+    flags: ACC_STATIC, ACC_SYNTHETIC
+
+  static {};
+    descriptor: ()V
+    flags: ACC_STATIC
+    Code:
+      stack=1, locals=2, args_size=0
+         0: getstatic     #17                 // Field class$org$apache$lucene$util$CloseableThreadLocal:Ljava/lang/Class;
+         3: ifnonnull     19
+         6: ldc           #19                 // String org.apache.lucene.util.CloseableThreadLocal
+         8: invokestatic  #23                 // Method class$:(Ljava/lang/String;)Ljava/lang/Class;
+        11: astore_0
+        12: aload_0
+        13: putstatic     #17                 // Field class$org$apache$lucene$util$CloseableThreadLocal:Ljava/lang/Class;
+        16: goto          23
+        19: getstatic     #17                 // Field class$org$apache$lucene$util$CloseableThreadLocal:Ljava/lang/Class;
+        22: astore_0
+        23: aload_0
+        24: invokevirtual #29                 // Method java/lang/Class.desiredAssertionStatus:()Z
+        27: ifne          35
+        30: iconst_1
+        31: istore_1
+        32: goto          37
+        35: iconst_0
+        36: istore_1
+        37: iload_1
+        38: putstatic     #31                 // Field $assertionsDisabled:Z
+        41: return
+      StackMapTable: number_of_entries = 4
+        frame_type = 19 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 3
+          locals = [ class java/lang/Class ]
+        frame_type = 11 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 1
+          locals = [ int ]
+      LineNumberTable:
+        line 45: 0
+        line 45: 3
+        line 45: 6
+        line 45: 8
+        line 45: 11
+        line 45: 12
+        line 45: 13
+        line 45: 16
+        line 45: 19
+        line 45: 22
+        line 45: 23
+        line 45: 24
+        line 45: 27
+        line 45: 30
+        line 45: 31
+        line 45: 32
+        line 45: 35
+        line 45: 36
+        line 45: 37
+        line 45: 38
+        line 45: 41
+
+  public org.apache.lucene.util.CloseableThreadLocal();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=3, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #34                 // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #36                 // class java/lang/ThreadLocal
+         8: dup
+         9: invokespecial #37                 // Method java/lang/ThreadLocal."<init>":()V
+        12: putfield      #39                 // Field t:Ljava/lang/ThreadLocal;
+        15: aload_0
+        16: new           #41                 // class java/util/HashMap
+        19: dup
+        20: invokespecial #42                 // Method java/util/HashMap."<init>":()V
+        23: putfield      #44                 // Field hardRefs:Ljava/util/Map;
+        26: return
+      LineNumberTable:
+        line 45: 0
+        line 45: 1
+        line 47: 4
+        line 47: 5
+        line 47: 8
+        line 47: 9
+        line 47: 12
+        line 49: 15
+        line 49: 16
+        line 49: 19
+        line 49: 20
+        line 49: 23
+        line 49: 26
+
+  static java.lang.Class class$(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/Class;
+    flags: ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=2, locals=3, args_size=1
+         0: bipush        17
+         2: aload_0
+         3: invokestatic  #52                 // Method soot/rtlib/tamiflex/ReflectiveCalls.knownClassForName:(ILjava/lang/String;)V
+         6: invokestatic  #57                 // Method soot/rtlib/tamiflex/OpaquePredicate.getFalse:()Z
+         9: ifeq          19
+        12: invokestatic  #63                 // Method soot/rtlib/tamiflex/ReflectiveCallsWrapper.reflectiveCall26:()Ljava/lang/Class;
+        15: astore_1
+        16: goto          24
+        19: aload_0
+        20: invokestatic  #66                 // Method java/lang/Class.forName:(Ljava/lang/String;)Ljava/lang/Class;
+        23: astore_1
+        24: aload_1
+        25: areturn
+        26: astore_2
+        27: new           #68                 // class java/lang/NoClassDefFoundError
+        30: dup
+        31: invokespecial #69                 // Method java/lang/NoClassDefFoundError."<init>":()V
+        34: aload_2
+        35: invokevirtual #73                 // Method java/lang/NoClassDefFoundError.initCause:(Ljava/lang/Throwable;)Ljava/lang/Throwable;
+        38: athrow
+      Exception table:
+         from    to  target type
+             0    24    26   Class java/lang/ClassNotFoundException
+      StackMapTable: number_of_entries = 3
+        frame_type = 19 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 4
+          locals = [ class java/lang/Class ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 1
+          locals = [ class java/lang/String ]
+          stack = [ class java/lang/ClassNotFoundException ]
+      LineNumberTable:
+        line 45: 19
+        line 45: 20
+        line 45: 23
+        line 45: 24
+        line 45: 25
+        line 45: 26
+        line 45: 27
+        line 45: 30
+        line 45: 31
+        line 45: 34
+        line 45: 35
+        line 45: 38
+
+  public void close();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: aconst_null
+         2: putfield      #44                 // Field hardRefs:Ljava/util/Map;
+         5: aload_0
+         6: aconst_null
+         7: putfield      #39                 // Field t:Ljava/lang/ThreadLocal;
+        10: return
+      LineNumberTable:
+        line 94: 0
+        line 94: 1
+        line 94: 2
+        line 95: 5
+        line 95: 6
+        line 95: 7
+        line 96: 10
+
+  public java.lang.Object get();
+    descriptor: ()Ljava/lang/Object;
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=4, args_size=1
+         0: aload_0
+         1: getfield      #39                 // Field t:Ljava/lang/ThreadLocal;
+         4: invokevirtual #80                 // Method java/lang/ThreadLocal.get:()Ljava/lang/Object;
+         7: checkcast     #82                 // class java/lang/ref/WeakReference
+        10: astore_1
+        11: aload_1
+        12: ifnonnull     33
+        15: aload_0
+        16: invokevirtual #85                 // Method initialValue:()Ljava/lang/Object;
+        19: astore_3
+        20: aload_3
+        21: ifnull        31
+        24: aload_0
+        25: aload_3
+        26: invokevirtual #89                 // Method set:(Ljava/lang/Object;)V
+        29: aload_3
+        30: areturn
+        31: aconst_null
+        32: areturn
+        33: aload_1
+        34: invokevirtual #90                 // Method java/lang/ref/WeakReference.get:()Ljava/lang/Object;
+        37: astore_2
+        38: getstatic     #31                 // Field $assertionsDisabled:Z
+        41: ifne          56
+        44: aload_2
+        45: ifnonnull     56
+        48: new           #92                 // class java/lang/AssertionError
+        51: dup
+        52: invokespecial #93                 // Method java/lang/AssertionError."<init>":()V
+        55: athrow
+        56: aload_2
+        57: areturn
+      StackMapTable: number_of_entries = 3
+        frame_type = 254 /* append */
+          offset_delta = 31
+          locals = [ class java/lang/ref/WeakReference, top, class java/lang/Object ]
+        frame_type = 249 /* chop */
+          offset_delta = 1
+        frame_type = 252 /* append */
+          offset_delta = 22
+          locals = [ class java/lang/Object ]
+      LineNumberTable:
+        line 56: 0
+        line 56: 1
+        line 56: 4
+        line 56: 7
+        line 56: 10
+        line 57: 11
+        line 57: 12
+        line 58: 15
+        line 58: 16
+        line 58: 19
+        line 59: 20
+        line 59: 21
+        line 60: 24
+        line 60: 25
+        line 60: 26
+        line 61: 29
+        line 61: 30
+        line 63: 31
+        line 63: 32
+        line 65: 33
+        line 65: 34
+        line 65: 37
+        line 68: 38
+        line 68: 41
+        line 68: 44
+        line 68: 45
+        line 68: 48
+        line 68: 51
+        line 68: 52
+        line 68: 55
+        line 69: 56
+        line 69: 57
+
+  protected java.lang.Object initialValue();
+    descriptor: ()Ljava/lang/Object;
+    flags: ACC_PROTECTED
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aconst_null
+         1: areturn
+      LineNumberTable:
+        line 52: 0
+        line 52: 1
+
+  public void set(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=4, locals=5, args_size=2
+         0: aload_0
+         1: getfield      #39                 // Field t:Ljava/lang/ThreadLocal;
+         4: new           #82                 // class java/lang/ref/WeakReference
+         7: dup
+         8: aload_1
+         9: invokespecial #97                 // Method java/lang/ref/WeakReference."<init>":(Ljava/lang/Object;)V
+        12: invokevirtual #98                 // Method java/lang/ThreadLocal.set:(Ljava/lang/Object;)V
+        15: aload_0
+        16: getfield      #44                 // Field hardRefs:Ljava/util/Map;
+        19: astore_2
+        20: aload_2
+        21: monitorenter
+        22: aload_0
+        23: getfield      #44                 // Field hardRefs:Ljava/util/Map;
+        26: invokestatic  #104                // Method java/lang/Thread.currentThread:()Ljava/lang/Thread;
+        29: aload_1
+        30: invokeinterface #110,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        35: pop
+        36: aload_0
+        37: getfield      #44                 // Field hardRefs:Ljava/util/Map;
+        40: invokeinterface #114,  1          // InterfaceMethod java/util/Map.keySet:()Ljava/util/Set;
+        45: invokeinterface #120,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+        50: astore_3
+        51: aload_3
+        52: invokeinterface #125,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        57: ifeq          84
+        60: aload_3
+        61: invokeinterface #128,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        66: checkcast     #100                // class java/lang/Thread
+        69: invokevirtual #131                // Method java/lang/Thread.isAlive:()Z
+        72: ifne          81
+        75: aload_3
+        76: invokeinterface #134,  1          // InterfaceMethod java/util/Iterator.remove:()V
+        81: goto          51
+        84: aload_2
+        85: monitorexit
+        86: goto          96
+        89: astore        4
+        91: aload_2
+        92: monitorexit
+        93: aload         4
+        95: athrow
+        96: return
+      Exception table:
+         from    to  target type
+            22    86    89   Class java/lang/Throwable
+            89    93    89   Class java/lang/Throwable
+      StackMapTable: number_of_entries = 5
+        frame_type = 253 /* append */
+          offset_delta = 51
+          locals = [ class java/util/Map, class java/util/Iterator ]
+        frame_type = 29 /* same */
+        frame_type = 2 /* same */
+        frame_type = 255 /* full_frame */
+          offset_delta = 4
+          locals = [ class org/apache/lucene/util/CloseableThreadLocal, class java/lang/Object, class java/util/Map ]
+          stack = [ class java/lang/Throwable ]
+        frame_type = 252 /* append */
+          offset_delta = 6
+          locals = [ class java/util/Iterator ]
+      LineNumberTable:
+        line 75: 0
+        line 75: 1
+        line 75: 4
+        line 75: 7
+        line 75: 8
+        line 75: 9
+        line 75: 12
+        line 77: 15
+        line 77: 16
+        line 77: 19
+        line 77: 20
+        line 77: 21
+        line 78: 22
+        line 78: 23
+        line 78: 26
+        line 78: 29
+        line 78: 30
+        line 78: 35
+        line 81: 36
+        line 81: 37
+        line 81: 40
+        line 81: 45
+        line 81: 50
+        line 82: 51
+        line 82: 52
+        line 82: 57
+        line 83: 60
+        line 83: 61
+        line 83: 66
+        line 84: 69
+        line 84: 72
+        line 85: 75
+        line 85: 76
+        line 86: 81
+        line 87: 84
+        line 87: 85
+        line 87: 86
+        line 86: 89
+        line 86: 91
+        line 86: 92
+        line 86: 93
+        line 86: 95
+        line 88: 96
+}
+SourceFile: "CloseableThreadLocal.java"

@@ -1,0 +1,2266 @@
+Classfile /home/omkar/personal/tokyo_escape/escapeAnalysis/benchmark_dump/h2_in/org/h2/table/Column.class
+  Last modified 11 Sep, 2023; size 12446 bytes
+  MD5 checksum e9637d04fe804e5ad2628c2b2009f50d
+  Compiled from "Column.java"
+public class org.h2.table.Column
+  minor version: 0
+  major version: 49
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+    #1 = Long               -1l
+    #3 = Methodref          #15.#275      // org/h2/table/Column."<init>":(Ljava/lang/String;IJII)V
+    #4 = Methodref          #153.#276     // java/lang/Object."<init>":()V
+    #5 = Fieldref           #15.#277      // org/h2/table/Column.nullable:Z
+    #6 = Fieldref           #15.#278      // org/h2/table/Column.name:Ljava/lang/String;
+    #7 = Fieldref           #15.#279      // org/h2/table/Column.type:I
+    #8 = Methodref          #280.#281     // org/h2/value/DataType.getDataType:(I)Lorg/h2/value/DataType;
+    #9 = Fieldref           #280.#282     // org/h2/value/DataType.defaultPrecision:J
+   #10 = Fieldref           #280.#283     // org/h2/value/DataType.defaultScale:I
+   #11 = Fieldref           #280.#284     // org/h2/value/DataType.defaultDisplaySize:I
+   #12 = Fieldref           #15.#285      // org/h2/table/Column.precision:J
+   #13 = Fieldref           #15.#286      // org/h2/table/Column.scale:I
+   #14 = Fieldref           #15.#287      // org/h2/table/Column.displaySize:I
+   #15 = Class              #288          // org/h2/table/Column
+   #16 = Fieldref           #15.#289      // org/h2/table/Column.table:Lorg/h2/table/Table;
+   #17 = Methodref          #86.#290      // java/lang/String.equals:(Ljava/lang/Object;)Z
+   #18 = Methodref          #291.#292     // org/h2/table/Table.getId:()I
+   #19 = Methodref          #86.#293      // java/lang/String.hashCode:()I
+   #20 = Fieldref           #15.#294      // org/h2/table/Column.defaultExpression:Lorg/h2/expression/Expression;
+   #21 = Fieldref           #15.#295      // org/h2/table/Column.originalSQL:Ljava/lang/String;
+   #22 = Fieldref           #15.#296      // org/h2/table/Column.convertNullToDefault:Z
+   #23 = Fieldref           #15.#297      // org/h2/table/Column.sequence:Lorg/h2/schema/Sequence;
+   #24 = Fieldref           #15.#298      // org/h2/table/Column.comment:Ljava/lang/String;
+   #25 = Fieldref           #15.#299      // org/h2/table/Column.computeTableFilter:Lorg/h2/table/TableFilter;
+   #26 = Fieldref           #15.#300      // org/h2/table/Column.isComputed:Z
+   #27 = Fieldref           #15.#301      // org/h2/table/Column.selectivity:I
+   #28 = Fieldref           #15.#302      // org/h2/table/Column.primaryKey:Z
+   #29 = Methodref          #303.#304     // org/h2/value/Value.convertTo:(I)Lorg/h2/value/Value;
+   #30 = Class              #305          // java/sql/SQLException
+   #31 = Methodref          #30.#306      // java/sql/SQLException.getErrorCode:()I
+   #32 = Integer            90021
+   #33 = Class              #307          // java/lang/StringBuilder
+   #34 = Methodref          #33.#276      // java/lang/StringBuilder."<init>":()V
+   #35 = Methodref          #303.#308     // org/h2/value/Value.getSQL:()Ljava/lang/String;
+   #36 = Methodref          #33.#309      // java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+   #37 = String             #310          //  (
+   #38 = Methodref          #15.#311      // org/h2/table/Column.getCreateSQL:()Ljava/lang/String;
+   #39 = String             #312          // )
+   #40 = Methodref          #33.#313      // java/lang/StringBuilder.toString:()Ljava/lang/String;
+   #41 = Methodref          #314.#315     // org/h2/message/Message.getSQLException:(ILjava/lang/String;)Lorg/h2/jdbc/JdbcSQLException;
+   #42 = Methodref          #118.#316     // org/h2/table/TableFilter.setSession:(Lorg/h2/engine/Session;)V
+   #43 = Methodref          #118.#317     // org/h2/table/TableFilter.set:(Lorg/h2/result/Row;)V
+   #44 = Methodref          #318.#319     // org/h2/expression/Expression.getValue:(Lorg/h2/engine/Session;)Lorg/h2/value/Value;
+   #45 = Fieldref           #15.#320      // org/h2/table/Column.columnId:I
+   #46 = Methodref          #318.#321     // org/h2/expression/Expression.optimize:(Lorg/h2/engine/Session;)Lorg/h2/expression/Expression;
+   #47 = Methodref          #318.#322     // org/h2/expression/Expression.isConstant:()Z
+   #48 = Methodref          #323.#324     // org/h2/expression/ValueExpression.get:(Lorg/h2/value/Value;)Lorg/h2/expression/ValueExpression;
+   #49 = Methodref          #144.#325     // org/h2/command/Parser.quoteIdentifier:(Ljava/lang/String;)Ljava/lang/String;
+   #50 = Fieldref           #326.#327     // org/h2/value/ValueNull.INSTANCE:Lorg/h2/value/ValueNull;
+   #51 = Methodref          #328.#329     // org/h2/engine/Session.setLastIdentity:(Lorg/h2/value/Value;)V
+   #52 = Methodref          #328.#330     // org/h2/engine/Session.getDatabase:()Lorg/h2/engine/Database;
+   #53 = Methodref          #331.#332     // org/h2/engine/Database.getMode:()Lorg/h2/engine/Mode;
+   #54 = Fieldref           #333.#334     // org/h2/engine/Mode.convertInsertNullToZero:Z
+   #55 = Fieldref           #280.#335     // org/h2/value/DataType.decimal:Z
+   #56 = Methodref          #336.#337     // org/h2/value/ValueInt.get:(I)Lorg/h2/value/ValueInt;
+   #57 = Methodref          #336.#304     // org/h2/value/ValueInt.convertTo:(I)Lorg/h2/value/Value;
+   #58 = Fieldref           #280.#279     // org/h2/value/DataType.type:I
+   #59 = Class              #338          // java/sql/Timestamp
+   #60 = Methodref          #339.#340     // java/lang/System.currentTimeMillis:()J
+   #61 = Methodref          #59.#341      // java/sql/Timestamp."<init>":(J)V
+   #62 = Methodref          #342.#343     // org/h2/value/ValueTimestamp.getNoCopy:(Ljava/sql/Timestamp;)Lorg/h2/value/ValueTimestamp;
+   #63 = String             #344          // 0:0:0
+   #64 = Methodref          #345.#346     // java/sql/Time.valueOf:(Ljava/lang/String;)Ljava/sql/Time;
+   #65 = Methodref          #347.#348     // org/h2/value/ValueTime.get:(Ljava/sql/Time;)Lorg/h2/value/ValueTime;
+   #66 = Methodref          #342.#304     // org/h2/value/ValueTimestamp.convertTo:(I)Lorg/h2/value/Value;
+   #67 = String             #349          //
+   #68 = Methodref          #350.#351     // org/h2/value/ValueString.get:(Ljava/lang/String;)Lorg/h2/value/ValueString;
+   #69 = Methodref          #350.#304     // org/h2/value/ValueString.convertTo:(I)Lorg/h2/value/Value;
+   #70 = Integer            90006
+   #71 = Fieldref           #15.#352      // org/h2/table/Column.checkConstraint:Lorg/h2/expression/Expression;
+   #72 = Fieldref           #15.#353      // org/h2/table/Column.resolver:Lorg/h2/table/SingleColumnResolver;
+   #73 = Methodref          #138.#354     // org/h2/table/SingleColumnResolver.setValue:(Lorg/h2/value/Value;)V
+   #74 = Fieldref           #355.#356     // java/lang/Boolean.FALSE:Ljava/lang/Boolean;
+   #75 = Methodref          #303.#357     // org/h2/value/Value.getBoolean:()Ljava/lang/Boolean;
+   #76 = Methodref          #355.#290     // java/lang/Boolean.equals:(Ljava/lang/Object;)Z
+   #77 = Methodref          #318.#308     // org/h2/expression/Expression.getSQL:()Ljava/lang/String;
+   #78 = Fieldref           #333.#358     // org/h2/engine/Mode.convertOnlyToSmallerScale:Z
+   #79 = Methodref          #303.#359     // org/h2/value/Value.convertScale:(ZI)Lorg/h2/value/Value;
+   #80 = Methodref          #303.#360     // org/h2/value/Value.checkPrecision:(J)Z
+   #81 = Methodref          #303.#361     // org/h2/value/Value.getTraceSQL:()Ljava/lang/String;
+   #82 = Methodref          #86.#362      // java/lang/String.length:()I
+   #83 = Methodref          #86.#363      // java/lang/String.substring:(II)Ljava/lang/String;
+   #84 = String             #364          // ...
+   #85 = Integer            90005
+   #86 = Class              #365          // java/lang/String
+   #87 = Methodref          #303.#366     // org/h2/value/Value.getPrecision:()J
+   #88 = Methodref          #33.#367      // java/lang/StringBuilder.append:(J)Ljava/lang/StringBuilder;
+   #89 = Methodref          #314.#368     // org/h2/message/Message.getSQLException:(I[Ljava/lang/String;)Lorg/h2/jdbc/JdbcSQLException;
+   #90 = Methodref          #15.#369      // org/h2/table/Column.updateSequenceIfRequired:(Lorg/h2/engine/Session;Lorg/h2/value/Value;)V
+   #91 = Methodref          #107.#370     // org/h2/schema/Sequence.getCurrentValue:()J
+   #92 = Methodref          #107.#371     // org/h2/schema/Sequence.getIncrement:()J
+   #93 = Methodref          #303.#372     // org/h2/value/Value.getLong:()J
+   #94 = Methodref          #107.#373     // org/h2/schema/Sequence.setStartValue:(J)V
+   #95 = Methodref          #374.#375     // org/h2/value/ValueLong.get:(J)Lorg/h2/value/ValueLong;
+   #96 = Methodref          #107.#376     // org/h2/schema/Sequence.flush:(Lorg/h2/engine/Session;)V
+   #97 = Fieldref           #15.#377      // org/h2/table/Column.autoIncrement:Z
+   #98 = Methodref          #314.#378     // org/h2/message/Message.throwInternalError:()Ljava/lang/RuntimeException;
+   #99 = String             #379          // IDENTITY
+  #100 = String             #380          // BIGINT
+  #101 = Methodref          #381.#382     // org/h2/value/ValueUuid.getNewRandom:()Lorg/h2/value/ValueUuid;
+  #102 = Methodref          #381.#383     // org/h2/value/ValueUuid.getString:()Ljava/lang/String;
+  #103 = Methodref          #86.#384      // java/lang/String.replace:(CC)Ljava/lang/String;
+  #104 = Methodref          #86.#385      // java/lang/String.toUpperCase:()Ljava/lang/String;
+  #105 = String             #386          // SYSTEM_SEQUENCE_
+  #106 = Methodref          #387.#388     // org/h2/schema/Schema.findSequence:(Ljava/lang/String;)Lorg/h2/schema/Sequence;
+  #107 = Class              #389          // org/h2/schema/Sequence
+  #108 = Methodref          #107.#390     // org/h2/schema/Sequence."<init>":(Lorg/h2/schema/Schema;ILjava/lang/String;Z)V
+  #109 = Fieldref           #15.#391      // org/h2/table/Column.start:J
+  #110 = Fieldref           #15.#392      // org/h2/table/Column.increment:J
+  #111 = Methodref          #107.#393     // org/h2/schema/Sequence.setIncrement:(J)V
+  #112 = Methodref          #331.#394     // org/h2/engine/Database.addSchemaObject:(Lorg/h2/engine/Session;Lorg/h2/schema/SchemaObject;)V
+  #113 = Methodref          #15.#395      // org/h2/table/Column.setAutoIncrement:(ZJJ)V
+  #114 = Class              #396          // org/h2/expression/SequenceValue
+  #115 = Methodref          #114.#397     // org/h2/expression/SequenceValue."<init>":(Lorg/h2/schema/Sequence;)V
+  #116 = Methodref          #15.#398      // org/h2/table/Column.setDefaultExpression:(Lorg/h2/engine/Session;Lorg/h2/expression/Expression;)V
+  #117 = Methodref          #15.#399      // org/h2/table/Column.setSequence:(Lorg/h2/schema/Sequence;)V
+  #118 = Class              #400          // org/h2/table/TableFilter
+  #119 = Methodref          #118.#401     // org/h2/table/TableFilter."<init>":(Lorg/h2/engine/Session;Lorg/h2/table/Table;Ljava/lang/String;ZLorg/h2/command/dml/Select;)V
+  #120 = Methodref          #318.#402     // org/h2/expression/Expression.mapColumns:(Lorg/h2/table/ColumnResolver;I)V
+  #121 = Methodref          #33.#403      // java/lang/StringBuilder.append:(C)Ljava/lang/StringBuilder;
+  #122 = Fieldref           #280.#278     // org/h2/value/DataType.name:Ljava/lang/String;
+  #123 = String             #404          // ,
+  #124 = Methodref          #33.#405      // java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+  #125 = Long               2147483647l
+  #127 = String             #406          //  AS
+  #128 = String             #407          //  DEFAULT
+  #129 = String             #408          //  NOT NULL
+  #130 = String             #409          //  NULL_TO_DEFAULT
+  #131 = String             #410          //  SEQUENCE
+  #132 = Methodref          #107.#308     // org/h2/schema/Sequence.getSQL:()Ljava/lang/String;
+  #133 = String             #411          //  SELECTIVITY
+  #134 = String             #412          //  CHECK
+  #135 = Fieldref           #15.#413      // org/h2/table/Column.checkConstraintSQL:Ljava/lang/String;
+  #136 = String             #414          //  COMMENT
+  #137 = Methodref          #415.#416     // org/h2/util/StringUtils.quoteStringSQL:(Ljava/lang/String;)Ljava/lang/String;
+  #138 = Class              #417          // org/h2/table/SingleColumnResolver
+  #139 = Methodref          #138.#418     // org/h2/table/SingleColumnResolver."<init>":(Lorg/h2/table/Column;)V
+  #140 = String             #419          // VALUE
+  #141 = Class              #420          // org/h2/expression/ConditionAndOr
+  #142 = Methodref          #141.#421     // org/h2/expression/ConditionAndOr."<init>":(ILorg/h2/expression/Expression;Lorg/h2/expression/Expression;)V
+  #143 = Methodref          #15.#422      // org/h2/table/Column.getCheckConstraintSQL:(Lorg/h2/engine/Session;Ljava/lang/String;)Ljava/lang/String;
+  #144 = Class              #423          // org/h2/command/Parser
+  #145 = Methodref          #144.#424     // org/h2/command/Parser."<init>":(Lorg/h2/engine/Session;)V
+  #146 = Methodref          #144.#425     // org/h2/command/Parser.parseExpression:(Ljava/lang/String;)Lorg/h2/expression/Expression;
+  #147 = Methodref          #426.#427     // org/h2/util/MathUtils.convertLongToInt:(J)I
+  #148 = Methodref          #15.#428      // org/h2/table/Column.getCheckConstraint:(Lorg/h2/engine/Session;Ljava/lang/String;)Lorg/h2/expression/Expression;
+  #149 = Methodref          #429.#430     // org/h2/expression/ExpressionVisitor.getType:()I
+  #150 = Methodref          #429.#431     // org/h2/expression/ExpressionVisitor.getDependencies:()Ljava/util/HashSet;
+  #151 = Methodref          #432.#433     // java/util/HashSet.add:(Ljava/lang/Object;)Z
+  #152 = Methodref          #318.#434     // org/h2/expression/Expression.isEverything:(Lorg/h2/expression/ExpressionVisitor;)Z
+  #153 = Class              #435          // java/lang/Object
+  #154 = Utf8               NOT_NULLABLE
+  #155 = Utf8               I
+  #156 = Utf8               ConstantValue
+  #157 = Integer            0
+  #158 = Utf8               NULLABLE
+  #159 = Integer            1
+  #160 = Utf8               NULLABLE_UNKNOWN
+  #161 = Integer            2
+  #162 = Utf8               type
+  #163 = Utf8               precision
+  #164 = Utf8               J
+  #165 = Utf8               scale
+  #166 = Utf8               displaySize
+  #167 = Utf8               table
+  #168 = Utf8               Lorg/h2/table/Table;
+  #169 = Utf8               name
+  #170 = Utf8               Ljava/lang/String;
+  #171 = Utf8               columnId
+  #172 = Utf8               nullable
+  #173 = Utf8               Z
+  #174 = Utf8               defaultExpression
+  #175 = Utf8               Lorg/h2/expression/Expression;
+  #176 = Utf8               checkConstraint
+  #177 = Utf8               checkConstraintSQL
+  #178 = Utf8               originalSQL
+  #179 = Utf8               autoIncrement
+  #180 = Utf8               start
+  #181 = Utf8               increment
+  #182 = Utf8               convertNullToDefault
+  #183 = Utf8               sequence
+  #184 = Utf8               Lorg/h2/schema/Sequence;
+  #185 = Utf8               isComputed
+  #186 = Utf8               computeTableFilter
+  #187 = Utf8               Lorg/h2/table/TableFilter;
+  #188 = Utf8               selectivity
+  #189 = Utf8               resolver
+  #190 = Utf8               Lorg/h2/table/SingleColumnResolver;
+  #191 = Utf8               comment
+  #192 = Utf8               primaryKey
+  #193 = Utf8               <init>
+  #194 = Utf8               (Ljava/lang/String;I)V
+  #195 = Utf8               Code
+  #196 = Utf8               LineNumberTable
+  #197 = Utf8               (Ljava/lang/String;IJII)V
+  #198 = Utf8               equals
+  #199 = Utf8               (Ljava/lang/Object;)Z
+  #200 = Utf8               hashCode
+  #201 = Utf8               ()I
+  #202 = Utf8               getClone
+  #203 = Utf8               ()Lorg/h2/table/Column;
+  #204 = Utf8               convert
+  #205 = Utf8               (Lorg/h2/value/Value;)Lorg/h2/value/Value;
+  #206 = Utf8               Exceptions
+  #207 = Utf8               getComputed
+  #208 = Utf8               ()Z
+  #209 = Utf8               computeValue
+  #210 = Utf8               (Lorg/h2/engine/Session;Lorg/h2/result/Row;)Lorg/h2/value/Value;
+  #211 = Utf8               setComputedExpression
+  #212 = Utf8               (Lorg/h2/expression/Expression;)V
+  #213 = Utf8               setTable
+  #214 = Utf8               (Lorg/h2/table/Table;I)V
+  #215 = Utf8               getTable
+  #216 = Utf8               ()Lorg/h2/table/Table;
+  #217 = Utf8               setDefaultExpression
+  #218 = Utf8               (Lorg/h2/engine/Session;Lorg/h2/expression/Expression;)V
+  #219 = Utf8               getColumnId
+  #220 = Utf8               getSQL
+  #221 = Utf8               ()Ljava/lang/String;
+  #222 = Utf8               getName
+  #223 = Utf8               getType
+  #224 = Utf8               getPrecision
+  #225 = Utf8               ()J
+  #226 = Utf8               getDisplaySize
+  #227 = Utf8               getScale
+  #228 = Utf8               setNullable
+  #229 = Utf8               (Z)V
+  #230 = Utf8               validateConvertUpdateSequence
+  #231 = Utf8               (Lorg/h2/engine/Session;Lorg/h2/value/Value;)Lorg/h2/value/Value;
+  #232 = Utf8               updateSequenceIfRequired
+  #233 = Utf8               (Lorg/h2/engine/Session;Lorg/h2/value/Value;)V
+  #234 = Utf8               convertAutoIncrementToSequence
+  #235 = Utf8               (Lorg/h2/engine/Session;Lorg/h2/schema/Schema;IZ)V
+  #236 = Utf8               prepareExpression
+  #237 = Utf8               (Lorg/h2/engine/Session;)V
+  #238 = Utf8               getCreateSQL
+  #239 = Utf8               isNullable
+  #240 = Utf8               setOriginalSQL
+  #241 = Utf8               (Ljava/lang/String;)V
+  #242 = Utf8               getOriginalSQL
+  #243 = Utf8               getDefaultExpression
+  #244 = Utf8               ()Lorg/h2/expression/Expression;
+  #245 = Utf8               isAutoIncrement
+  #246 = Utf8               setAutoIncrement
+  #247 = Utf8               (ZJJ)V
+  #248 = Utf8               setConvertNullToDefault
+  #249 = Utf8               rename
+  #250 = Utf8               setSequence
+  #251 = Utf8               (Lorg/h2/schema/Sequence;)V
+  #252 = Utf8               getSequence
+  #253 = Utf8               ()Lorg/h2/schema/Sequence;
+  #254 = Utf8               getSelectivity
+  #255 = Utf8               setSelectivity
+  #256 = Utf8               (I)V
+  #257 = Utf8               addCheckConstraint
+  #258 = Utf8               getCheckConstraint
+  #259 = Utf8               (Lorg/h2/engine/Session;Ljava/lang/String;)Lorg/h2/expression/Expression;
+  #260 = Utf8               getDefaultSQL
+  #261 = Utf8               getPrecisionAsInt
+  #262 = Utf8               getDataType
+  #263 = Utf8               ()Lorg/h2/value/DataType;
+  #264 = Utf8               getCheckConstraintSQL
+  #265 = Utf8               (Lorg/h2/engine/Session;Ljava/lang/String;)Ljava/lang/String;
+  #266 = Utf8               setComment
+  #267 = Utf8               getComment
+  #268 = Utf8               setPrimaryKey
+  #269 = Utf8               isEverything
+  #270 = Utf8               (Lorg/h2/expression/ExpressionVisitor;)Z
+  #271 = Utf8               isPrimaryKey
+  #272 = Utf8               toString
+  #273 = Utf8               SourceFile
+  #274 = Utf8               Column.java
+  #275 = NameAndType        #193:#197     // "<init>":(Ljava/lang/String;IJII)V
+  #276 = NameAndType        #193:#436     // "<init>":()V
+  #277 = NameAndType        #172:#173     // nullable:Z
+  #278 = NameAndType        #169:#170     // name:Ljava/lang/String;
+  #279 = NameAndType        #162:#155     // type:I
+  #280 = Class              #437          // org/h2/value/DataType
+  #281 = NameAndType        #262:#438     // getDataType:(I)Lorg/h2/value/DataType;
+  #282 = NameAndType        #439:#164     // defaultPrecision:J
+  #283 = NameAndType        #440:#155     // defaultScale:I
+  #284 = NameAndType        #441:#155     // defaultDisplaySize:I
+  #285 = NameAndType        #163:#164     // precision:J
+  #286 = NameAndType        #165:#155     // scale:I
+  #287 = NameAndType        #166:#155     // displaySize:I
+  #288 = Utf8               org/h2/table/Column
+  #289 = NameAndType        #167:#168     // table:Lorg/h2/table/Table;
+  #290 = NameAndType        #198:#199     // equals:(Ljava/lang/Object;)Z
+  #291 = Class              #442          // org/h2/table/Table
+  #292 = NameAndType        #443:#201     // getId:()I
+  #293 = NameAndType        #200:#201     // hashCode:()I
+  #294 = NameAndType        #174:#175     // defaultExpression:Lorg/h2/expression/Expression;
+  #295 = NameAndType        #178:#170     // originalSQL:Ljava/lang/String;
+  #296 = NameAndType        #182:#173     // convertNullToDefault:Z
+  #297 = NameAndType        #183:#184     // sequence:Lorg/h2/schema/Sequence;
+  #298 = NameAndType        #191:#170     // comment:Ljava/lang/String;
+  #299 = NameAndType        #186:#187     // computeTableFilter:Lorg/h2/table/TableFilter;
+  #300 = NameAndType        #185:#173     // isComputed:Z
+  #301 = NameAndType        #188:#155     // selectivity:I
+  #302 = NameAndType        #192:#173     // primaryKey:Z
+  #303 = Class              #444          // org/h2/value/Value
+  #304 = NameAndType        #445:#446     // convertTo:(I)Lorg/h2/value/Value;
+  #305 = Utf8               java/sql/SQLException
+  #306 = NameAndType        #447:#201     // getErrorCode:()I
+  #307 = Utf8               java/lang/StringBuilder
+  #308 = NameAndType        #220:#221     // getSQL:()Ljava/lang/String;
+  #309 = NameAndType        #448:#449     // append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #310 = Utf8                (
+  #311 = NameAndType        #238:#221     // getCreateSQL:()Ljava/lang/String;
+  #312 = Utf8               )
+  #313 = NameAndType        #272:#221     // toString:()Ljava/lang/String;
+  #314 = Class              #450          // org/h2/message/Message
+  #315 = NameAndType        #451:#452     // getSQLException:(ILjava/lang/String;)Lorg/h2/jdbc/JdbcSQLException;
+  #316 = NameAndType        #453:#237     // setSession:(Lorg/h2/engine/Session;)V
+  #317 = NameAndType        #454:#455     // set:(Lorg/h2/result/Row;)V
+  #318 = Class              #456          // org/h2/expression/Expression
+  #319 = NameAndType        #457:#458     // getValue:(Lorg/h2/engine/Session;)Lorg/h2/value/Value;
+  #320 = NameAndType        #171:#155     // columnId:I
+  #321 = NameAndType        #459:#460     // optimize:(Lorg/h2/engine/Session;)Lorg/h2/expression/Expression;
+  #322 = NameAndType        #461:#208     // isConstant:()Z
+  #323 = Class              #462          // org/h2/expression/ValueExpression
+  #324 = NameAndType        #463:#464     // get:(Lorg/h2/value/Value;)Lorg/h2/expression/ValueExpression;
+  #325 = NameAndType        #465:#466     // quoteIdentifier:(Ljava/lang/String;)Ljava/lang/String;
+  #326 = Class              #467          // org/h2/value/ValueNull
+  #327 = NameAndType        #468:#469     // INSTANCE:Lorg/h2/value/ValueNull;
+  #328 = Class              #470          // org/h2/engine/Session
+  #329 = NameAndType        #471:#472     // setLastIdentity:(Lorg/h2/value/Value;)V
+  #330 = NameAndType        #473:#474     // getDatabase:()Lorg/h2/engine/Database;
+  #331 = Class              #475          // org/h2/engine/Database
+  #332 = NameAndType        #476:#477     // getMode:()Lorg/h2/engine/Mode;
+  #333 = Class              #478          // org/h2/engine/Mode
+  #334 = NameAndType        #479:#173     // convertInsertNullToZero:Z
+  #335 = NameAndType        #480:#173     // decimal:Z
+  #336 = Class              #481          // org/h2/value/ValueInt
+  #337 = NameAndType        #463:#482     // get:(I)Lorg/h2/value/ValueInt;
+  #338 = Utf8               java/sql/Timestamp
+  #339 = Class              #483          // java/lang/System
+  #340 = NameAndType        #484:#225     // currentTimeMillis:()J
+  #341 = NameAndType        #193:#485     // "<init>":(J)V
+  #342 = Class              #486          // org/h2/value/ValueTimestamp
+  #343 = NameAndType        #487:#488     // getNoCopy:(Ljava/sql/Timestamp;)Lorg/h2/value/ValueTimestamp;
+  #344 = Utf8               0:0:0
+  #345 = Class              #489          // java/sql/Time
+  #346 = NameAndType        #490:#491     // valueOf:(Ljava/lang/String;)Ljava/sql/Time;
+  #347 = Class              #492          // org/h2/value/ValueTime
+  #348 = NameAndType        #463:#493     // get:(Ljava/sql/Time;)Lorg/h2/value/ValueTime;
+  #349 = Utf8
+  #350 = Class              #494          // org/h2/value/ValueString
+  #351 = NameAndType        #463:#495     // get:(Ljava/lang/String;)Lorg/h2/value/ValueString;
+  #352 = NameAndType        #176:#175     // checkConstraint:Lorg/h2/expression/Expression;
+  #353 = NameAndType        #189:#190     // resolver:Lorg/h2/table/SingleColumnResolver;
+  #354 = NameAndType        #496:#472     // setValue:(Lorg/h2/value/Value;)V
+  #355 = Class              #497          // java/lang/Boolean
+  #356 = NameAndType        #498:#499     // FALSE:Ljava/lang/Boolean;
+  #357 = NameAndType        #500:#501     // getBoolean:()Ljava/lang/Boolean;
+  #358 = NameAndType        #502:#173     // convertOnlyToSmallerScale:Z
+  #359 = NameAndType        #503:#504     // convertScale:(ZI)Lorg/h2/value/Value;
+  #360 = NameAndType        #505:#506     // checkPrecision:(J)Z
+  #361 = NameAndType        #507:#221     // getTraceSQL:()Ljava/lang/String;
+  #362 = NameAndType        #508:#201     // length:()I
+  #363 = NameAndType        #509:#510     // substring:(II)Ljava/lang/String;
+  #364 = Utf8               ...
+  #365 = Utf8               java/lang/String
+  #366 = NameAndType        #224:#225     // getPrecision:()J
+  #367 = NameAndType        #448:#511     // append:(J)Ljava/lang/StringBuilder;
+  #368 = NameAndType        #451:#512     // getSQLException:(I[Ljava/lang/String;)Lorg/h2/jdbc/JdbcSQLException;
+  #369 = NameAndType        #232:#233     // updateSequenceIfRequired:(Lorg/h2/engine/Session;Lorg/h2/value/Value;)V
+  #370 = NameAndType        #513:#225     // getCurrentValue:()J
+  #371 = NameAndType        #514:#225     // getIncrement:()J
+  #372 = NameAndType        #515:#225     // getLong:()J
+  #373 = NameAndType        #516:#485     // setStartValue:(J)V
+  #374 = Class              #517          // org/h2/value/ValueLong
+  #375 = NameAndType        #463:#518     // get:(J)Lorg/h2/value/ValueLong;
+  #376 = NameAndType        #519:#237     // flush:(Lorg/h2/engine/Session;)V
+  #377 = NameAndType        #179:#173     // autoIncrement:Z
+  #378 = NameAndType        #520:#521     // throwInternalError:()Ljava/lang/RuntimeException;
+  #379 = Utf8               IDENTITY
+  #380 = Utf8               BIGINT
+  #381 = Class              #522          // org/h2/value/ValueUuid
+  #382 = NameAndType        #523:#524     // getNewRandom:()Lorg/h2/value/ValueUuid;
+  #383 = NameAndType        #525:#221     // getString:()Ljava/lang/String;
+  #384 = NameAndType        #526:#527     // replace:(CC)Ljava/lang/String;
+  #385 = NameAndType        #528:#221     // toUpperCase:()Ljava/lang/String;
+  #386 = Utf8               SYSTEM_SEQUENCE_
+  #387 = Class              #529          // org/h2/schema/Schema
+  #388 = NameAndType        #530:#531     // findSequence:(Ljava/lang/String;)Lorg/h2/schema/Sequence;
+  #389 = Utf8               org/h2/schema/Sequence
+  #390 = NameAndType        #193:#532     // "<init>":(Lorg/h2/schema/Schema;ILjava/lang/String;Z)V
+  #391 = NameAndType        #180:#164     // start:J
+  #392 = NameAndType        #181:#164     // increment:J
+  #393 = NameAndType        #533:#485     // setIncrement:(J)V
+  #394 = NameAndType        #534:#535     // addSchemaObject:(Lorg/h2/engine/Session;Lorg/h2/schema/SchemaObject;)V
+  #395 = NameAndType        #246:#247     // setAutoIncrement:(ZJJ)V
+  #396 = Utf8               org/h2/expression/SequenceValue
+  #397 = NameAndType        #193:#251     // "<init>":(Lorg/h2/schema/Sequence;)V
+  #398 = NameAndType        #217:#218     // setDefaultExpression:(Lorg/h2/engine/Session;Lorg/h2/expression/Expression;)V
+  #399 = NameAndType        #250:#251     // setSequence:(Lorg/h2/schema/Sequence;)V
+  #400 = Utf8               org/h2/table/TableFilter
+  #401 = NameAndType        #193:#536     // "<init>":(Lorg/h2/engine/Session;Lorg/h2/table/Table;Ljava/lang/String;ZLorg/h2/command/dml/Select;)V
+  #402 = NameAndType        #537:#538     // mapColumns:(Lorg/h2/table/ColumnResolver;I)V
+  #403 = NameAndType        #448:#539     // append:(C)Ljava/lang/StringBuilder;
+  #404 = Utf8               ,
+  #405 = NameAndType        #448:#540     // append:(I)Ljava/lang/StringBuilder;
+  #406 = Utf8                AS
+  #407 = Utf8                DEFAULT
+  #408 = Utf8                NOT NULL
+  #409 = Utf8                NULL_TO_DEFAULT
+  #410 = Utf8                SEQUENCE
+  #411 = Utf8                SELECTIVITY
+  #412 = Utf8                CHECK
+  #413 = NameAndType        #177:#170     // checkConstraintSQL:Ljava/lang/String;
+  #414 = Utf8                COMMENT
+  #415 = Class              #541          // org/h2/util/StringUtils
+  #416 = NameAndType        #542:#466     // quoteStringSQL:(Ljava/lang/String;)Ljava/lang/String;
+  #417 = Utf8               org/h2/table/SingleColumnResolver
+  #418 = NameAndType        #193:#543     // "<init>":(Lorg/h2/table/Column;)V
+  #419 = Utf8               VALUE
+  #420 = Utf8               org/h2/expression/ConditionAndOr
+  #421 = NameAndType        #193:#544     // "<init>":(ILorg/h2/expression/Expression;Lorg/h2/expression/Expression;)V
+  #422 = NameAndType        #264:#265     // getCheckConstraintSQL:(Lorg/h2/engine/Session;Ljava/lang/String;)Ljava/lang/String;
+  #423 = Utf8               org/h2/command/Parser
+  #424 = NameAndType        #193:#237     // "<init>":(Lorg/h2/engine/Session;)V
+  #425 = NameAndType        #545:#546     // parseExpression:(Ljava/lang/String;)Lorg/h2/expression/Expression;
+  #426 = Class              #547          // org/h2/util/MathUtils
+  #427 = NameAndType        #548:#549     // convertLongToInt:(J)I
+  #428 = NameAndType        #258:#259     // getCheckConstraint:(Lorg/h2/engine/Session;Ljava/lang/String;)Lorg/h2/expression/Expression;
+  #429 = Class              #550          // org/h2/expression/ExpressionVisitor
+  #430 = NameAndType        #223:#201     // getType:()I
+  #431 = NameAndType        #551:#552     // getDependencies:()Ljava/util/HashSet;
+  #432 = Class              #553          // java/util/HashSet
+  #433 = NameAndType        #554:#199     // add:(Ljava/lang/Object;)Z
+  #434 = NameAndType        #269:#270     // isEverything:(Lorg/h2/expression/ExpressionVisitor;)Z
+  #435 = Utf8               java/lang/Object
+  #436 = Utf8               ()V
+  #437 = Utf8               org/h2/value/DataType
+  #438 = Utf8               (I)Lorg/h2/value/DataType;
+  #439 = Utf8               defaultPrecision
+  #440 = Utf8               defaultScale
+  #441 = Utf8               defaultDisplaySize
+  #442 = Utf8               org/h2/table/Table
+  #443 = Utf8               getId
+  #444 = Utf8               org/h2/value/Value
+  #445 = Utf8               convertTo
+  #446 = Utf8               (I)Lorg/h2/value/Value;
+  #447 = Utf8               getErrorCode
+  #448 = Utf8               append
+  #449 = Utf8               (Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #450 = Utf8               org/h2/message/Message
+  #451 = Utf8               getSQLException
+  #452 = Utf8               (ILjava/lang/String;)Lorg/h2/jdbc/JdbcSQLException;
+  #453 = Utf8               setSession
+  #454 = Utf8               set
+  #455 = Utf8               (Lorg/h2/result/Row;)V
+  #456 = Utf8               org/h2/expression/Expression
+  #457 = Utf8               getValue
+  #458 = Utf8               (Lorg/h2/engine/Session;)Lorg/h2/value/Value;
+  #459 = Utf8               optimize
+  #460 = Utf8               (Lorg/h2/engine/Session;)Lorg/h2/expression/Expression;
+  #461 = Utf8               isConstant
+  #462 = Utf8               org/h2/expression/ValueExpression
+  #463 = Utf8               get
+  #464 = Utf8               (Lorg/h2/value/Value;)Lorg/h2/expression/ValueExpression;
+  #465 = Utf8               quoteIdentifier
+  #466 = Utf8               (Ljava/lang/String;)Ljava/lang/String;
+  #467 = Utf8               org/h2/value/ValueNull
+  #468 = Utf8               INSTANCE
+  #469 = Utf8               Lorg/h2/value/ValueNull;
+  #470 = Utf8               org/h2/engine/Session
+  #471 = Utf8               setLastIdentity
+  #472 = Utf8               (Lorg/h2/value/Value;)V
+  #473 = Utf8               getDatabase
+  #474 = Utf8               ()Lorg/h2/engine/Database;
+  #475 = Utf8               org/h2/engine/Database
+  #476 = Utf8               getMode
+  #477 = Utf8               ()Lorg/h2/engine/Mode;
+  #478 = Utf8               org/h2/engine/Mode
+  #479 = Utf8               convertInsertNullToZero
+  #480 = Utf8               decimal
+  #481 = Utf8               org/h2/value/ValueInt
+  #482 = Utf8               (I)Lorg/h2/value/ValueInt;
+  #483 = Utf8               java/lang/System
+  #484 = Utf8               currentTimeMillis
+  #485 = Utf8               (J)V
+  #486 = Utf8               org/h2/value/ValueTimestamp
+  #487 = Utf8               getNoCopy
+  #488 = Utf8               (Ljava/sql/Timestamp;)Lorg/h2/value/ValueTimestamp;
+  #489 = Utf8               java/sql/Time
+  #490 = Utf8               valueOf
+  #491 = Utf8               (Ljava/lang/String;)Ljava/sql/Time;
+  #492 = Utf8               org/h2/value/ValueTime
+  #493 = Utf8               (Ljava/sql/Time;)Lorg/h2/value/ValueTime;
+  #494 = Utf8               org/h2/value/ValueString
+  #495 = Utf8               (Ljava/lang/String;)Lorg/h2/value/ValueString;
+  #496 = Utf8               setValue
+  #497 = Utf8               java/lang/Boolean
+  #498 = Utf8               FALSE
+  #499 = Utf8               Ljava/lang/Boolean;
+  #500 = Utf8               getBoolean
+  #501 = Utf8               ()Ljava/lang/Boolean;
+  #502 = Utf8               convertOnlyToSmallerScale
+  #503 = Utf8               convertScale
+  #504 = Utf8               (ZI)Lorg/h2/value/Value;
+  #505 = Utf8               checkPrecision
+  #506 = Utf8               (J)Z
+  #507 = Utf8               getTraceSQL
+  #508 = Utf8               length
+  #509 = Utf8               substring
+  #510 = Utf8               (II)Ljava/lang/String;
+  #511 = Utf8               (J)Ljava/lang/StringBuilder;
+  #512 = Utf8               (I[Ljava/lang/String;)Lorg/h2/jdbc/JdbcSQLException;
+  #513 = Utf8               getCurrentValue
+  #514 = Utf8               getIncrement
+  #515 = Utf8               getLong
+  #516 = Utf8               setStartValue
+  #517 = Utf8               org/h2/value/ValueLong
+  #518 = Utf8               (J)Lorg/h2/value/ValueLong;
+  #519 = Utf8               flush
+  #520 = Utf8               throwInternalError
+  #521 = Utf8               ()Ljava/lang/RuntimeException;
+  #522 = Utf8               org/h2/value/ValueUuid
+  #523 = Utf8               getNewRandom
+  #524 = Utf8               ()Lorg/h2/value/ValueUuid;
+  #525 = Utf8               getString
+  #526 = Utf8               replace
+  #527 = Utf8               (CC)Ljava/lang/String;
+  #528 = Utf8               toUpperCase
+  #529 = Utf8               org/h2/schema/Schema
+  #530 = Utf8               findSequence
+  #531 = Utf8               (Ljava/lang/String;)Lorg/h2/schema/Sequence;
+  #532 = Utf8               (Lorg/h2/schema/Schema;ILjava/lang/String;Z)V
+  #533 = Utf8               setIncrement
+  #534 = Utf8               addSchemaObject
+  #535 = Utf8               (Lorg/h2/engine/Session;Lorg/h2/schema/SchemaObject;)V
+  #536 = Utf8               (Lorg/h2/engine/Session;Lorg/h2/table/Table;Ljava/lang/String;ZLorg/h2/command/dml/Select;)V
+  #537 = Utf8               mapColumns
+  #538 = Utf8               (Lorg/h2/table/ColumnResolver;I)V
+  #539 = Utf8               (C)Ljava/lang/StringBuilder;
+  #540 = Utf8               (I)Ljava/lang/StringBuilder;
+  #541 = Utf8               org/h2/util/StringUtils
+  #542 = Utf8               quoteStringSQL
+  #543 = Utf8               (Lorg/h2/table/Column;)V
+  #544 = Utf8               (ILorg/h2/expression/Expression;Lorg/h2/expression/Expression;)V
+  #545 = Utf8               parseExpression
+  #546 = Utf8               (Ljava/lang/String;)Lorg/h2/expression/Expression;
+  #547 = Utf8               org/h2/util/MathUtils
+  #548 = Utf8               convertLongToInt
+  #549 = Utf8               (J)I
+  #550 = Utf8               org/h2/expression/ExpressionVisitor
+  #551 = Utf8               getDependencies
+  #552 = Utf8               ()Ljava/util/HashSet;
+  #553 = Utf8               java/util/HashSet
+  #554 = Utf8               add
+{
+  public static final int NOT_NULLABLE;
+    descriptor: I
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+    ConstantValue: int 0
+
+  public static final int NULLABLE;
+    descriptor: I
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+    ConstantValue: int 1
+
+  public static final int NULLABLE_UNKNOWN;
+    descriptor: I
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+    ConstantValue: int 2
+
+  public org.h2.table.Column(java.lang.String, int);
+    descriptor: (Ljava/lang/String;I)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=7, locals=3, args_size=3
+         0: aload_0
+         1: aload_1
+         2: iload_2
+         3: ldc2_w        #1                  // long -1l
+         6: iconst_m1
+         7: iconst_m1
+         8: invokespecial #3                  // Method "<init>":(Ljava/lang/String;IJII)V
+        11: return
+      LineNumberTable:
+        line 85: 0
+        line 86: 11
+
+  public org.h2.table.Column(java.lang.String, int, long, int, int);
+    descriptor: (Ljava/lang/String;IJII)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=4, locals=8, args_size=6
+         0: aload_0
+         1: invokespecial #4                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: iconst_1
+         6: putfield      #5                  // Field nullable:Z
+         9: aload_0
+        10: aload_1
+        11: putfield      #6                  // Field name:Ljava/lang/String;
+        14: aload_0
+        15: iload_2
+        16: putfield      #7                  // Field type:I
+        19: lload_3
+        20: ldc2_w        #1                  // long -1l
+        23: lcmp
+        24: ifne          65
+        27: iload         5
+        29: iconst_m1
+        30: if_icmpne     65
+        33: iload         6
+        35: iconst_m1
+        36: if_icmpne     65
+        39: iload_2
+        40: invokestatic  #8                  // Method org/h2/value/DataType.getDataType:(I)Lorg/h2/value/DataType;
+        43: astore        7
+        45: aload         7
+        47: getfield      #9                  // Field org/h2/value/DataType.defaultPrecision:J
+        50: lstore_3
+        51: aload         7
+        53: getfield      #10                 // Field org/h2/value/DataType.defaultScale:I
+        56: istore        5
+        58: aload         7
+        60: getfield      #11                 // Field org/h2/value/DataType.defaultDisplaySize:I
+        63: istore        6
+        65: aload_0
+        66: lload_3
+        67: putfield      #12                 // Field precision:J
+        70: aload_0
+        71: iload         5
+        73: putfield      #13                 // Field scale:I
+        76: aload_0
+        77: iload         6
+        79: putfield      #14                 // Field displaySize:I
+        82: return
+      LineNumberTable:
+        line 88: 0
+        line 67: 4
+        line 89: 9
+        line 90: 14
+        line 91: 19
+        line 92: 39
+        line 93: 45
+        line 94: 51
+        line 95: 58
+        line 97: 65
+        line 98: 70
+        line 99: 76
+        line 100: 82
+
+  public boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=3, args_size=2
+         0: aload_1
+         1: aload_0
+         2: if_acmpne     7
+         5: iconst_1
+         6: ireturn
+         7: aload_1
+         8: instanceof    #15                 // class org/h2/table/Column
+        11: ifne          16
+        14: iconst_0
+        15: ireturn
+        16: aload_1
+        17: checkcast     #15                 // class org/h2/table/Column
+        20: astore_2
+        21: aload_0
+        22: getfield      #16                 // Field table:Lorg/h2/table/Table;
+        25: ifnull        49
+        28: aload_2
+        29: getfield      #16                 // Field table:Lorg/h2/table/Table;
+        32: ifnull        49
+        35: aload_0
+        36: getfield      #6                  // Field name:Ljava/lang/String;
+        39: ifnull        49
+        42: aload_2
+        43: getfield      #6                  // Field name:Ljava/lang/String;
+        46: ifnonnull     51
+        49: iconst_0
+        50: ireturn
+        51: aload_0
+        52: getfield      #16                 // Field table:Lorg/h2/table/Table;
+        55: aload_2
+        56: getfield      #16                 // Field table:Lorg/h2/table/Table;
+        59: if_acmpne     80
+        62: aload_0
+        63: getfield      #6                  // Field name:Ljava/lang/String;
+        66: aload_2
+        67: getfield      #6                  // Field name:Ljava/lang/String;
+        70: invokevirtual #17                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        73: ifeq          80
+        76: iconst_1
+        77: goto          81
+        80: iconst_0
+        81: ireturn
+      LineNumberTable:
+        line 103: 0
+        line 104: 5
+        line 105: 7
+        line 106: 14
+        line 108: 16
+        line 109: 21
+        line 110: 49
+        line 112: 51
+
+  public int hashCode();
+    descriptor: ()I
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #16                 // Field table:Lorg/h2/table/Table;
+         4: ifnull        14
+         7: aload_0
+         8: getfield      #6                  // Field name:Ljava/lang/String;
+        11: ifnonnull     16
+        14: iconst_0
+        15: ireturn
+        16: aload_0
+        17: getfield      #16                 // Field table:Lorg/h2/table/Table;
+        20: invokevirtual #18                 // Method org/h2/table/Table.getId:()I
+        23: aload_0
+        24: getfield      #6                  // Field name:Ljava/lang/String;
+        27: invokevirtual #19                 // Method java/lang/String.hashCode:()I
+        30: ixor
+        31: ireturn
+      LineNumberTable:
+        line 116: 0
+        line 117: 14
+        line 119: 16
+
+  public org.h2.table.Column getClone();
+    descriptor: ()Lorg/h2/table/Column;
+    flags: ACC_PUBLIC
+    Code:
+      stack=8, locals=2, args_size=1
+         0: new           #15                 // class org/h2/table/Column
+         3: dup
+         4: aload_0
+         5: getfield      #6                  // Field name:Ljava/lang/String;
+         8: aload_0
+         9: getfield      #7                  // Field type:I
+        12: aload_0
+        13: getfield      #12                 // Field precision:J
+        16: aload_0
+        17: getfield      #13                 // Field scale:I
+        20: aload_0
+        21: getfield      #14                 // Field displaySize:I
+        24: invokespecial #3                  // Method "<init>":(Ljava/lang/String;IJII)V
+        27: astore_1
+        28: aload_1
+        29: aload_0
+        30: getfield      #5                  // Field nullable:Z
+        33: putfield      #5                  // Field nullable:Z
+        36: aload_1
+        37: aload_0
+        38: getfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+        41: putfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+        44: aload_1
+        45: aload_0
+        46: getfield      #21                 // Field originalSQL:Ljava/lang/String;
+        49: putfield      #21                 // Field originalSQL:Ljava/lang/String;
+        52: aload_1
+        53: aload_0
+        54: getfield      #22                 // Field convertNullToDefault:Z
+        57: putfield      #22                 // Field convertNullToDefault:Z
+        60: aload_1
+        61: aload_0
+        62: getfield      #23                 // Field sequence:Lorg/h2/schema/Sequence;
+        65: putfield      #23                 // Field sequence:Lorg/h2/schema/Sequence;
+        68: aload_1
+        69: aload_0
+        70: getfield      #24                 // Field comment:Ljava/lang/String;
+        73: putfield      #24                 // Field comment:Ljava/lang/String;
+        76: aload_1
+        77: aload_0
+        78: getfield      #25                 // Field computeTableFilter:Lorg/h2/table/TableFilter;
+        81: putfield      #25                 // Field computeTableFilter:Lorg/h2/table/TableFilter;
+        84: aload_1
+        85: aload_0
+        86: getfield      #26                 // Field isComputed:Z
+        89: putfield      #26                 // Field isComputed:Z
+        92: aload_1
+        93: aload_0
+        94: getfield      #27                 // Field selectivity:I
+        97: putfield      #27                 // Field selectivity:I
+       100: aload_1
+       101: aload_0
+       102: getfield      #28                 // Field primaryKey:Z
+       105: putfield      #28                 // Field primaryKey:Z
+       108: aload_1
+       109: areturn
+      LineNumberTable:
+        line 123: 0
+        line 126: 28
+        line 127: 36
+        line 128: 44
+        line 130: 52
+        line 131: 60
+        line 132: 68
+        line 133: 76
+        line 134: 84
+        line 135: 92
+        line 136: 100
+        line 137: 108
+
+  public org.h2.value.Value convert(org.h2.value.Value) throws java.sql.SQLException;
+    descriptor: (Lorg/h2/value/Value;)Lorg/h2/value/Value;
+    flags: ACC_PUBLIC
+    Code:
+      stack=3, locals=3, args_size=2
+         0: aload_1
+         1: aload_0
+         2: getfield      #7                  // Field type:I
+         5: invokevirtual #29                 // Method org/h2/value/Value.convertTo:(I)Lorg/h2/value/Value;
+         8: areturn
+         9: astore_2
+        10: aload_2
+        11: invokevirtual #31                 // Method java/sql/SQLException.getErrorCode:()I
+        14: ldc           #32                 // int 90021
+        16: if_icmpne     59
+        19: ldc           #32                 // int 90021
+        21: new           #33                 // class java/lang/StringBuilder
+        24: dup
+        25: invokespecial #34                 // Method java/lang/StringBuilder."<init>":()V
+        28: aload_1
+        29: invokevirtual #35                 // Method org/h2/value/Value.getSQL:()Ljava/lang/String;
+        32: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        35: ldc           #37                 // String  (
+        37: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        40: aload_0
+        41: invokevirtual #38                 // Method getCreateSQL:()Ljava/lang/String;
+        44: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        47: ldc           #39                 // String )
+        49: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        52: invokevirtual #40                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        55: invokestatic  #41                 // Method org/h2/message/Message.getSQLException:(ILjava/lang/String;)Lorg/h2/jdbc/JdbcSQLException;
+        58: astore_2
+        59: aload_2
+        60: athrow
+      Exception table:
+         from    to  target type
+             0     8     9   Class java/sql/SQLException
+      LineNumberTable:
+        line 148: 0
+        line 149: 9
+        line 150: 10
+        line 151: 19
+        line 153: 59
+    Exceptions:
+      throws java.sql.SQLException
+
+  boolean getComputed();
+    descriptor: ()Z
+    flags:
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #26                 // Field isComputed:Z
+         4: ireturn
+      LineNumberTable:
+        line 158: 0
+
+  org.h2.value.Value computeValue(org.h2.engine.Session, org.h2.result.Row) throws java.sql.SQLException;
+    descriptor: (Lorg/h2/engine/Session;Lorg/h2/result/Row;)Lorg/h2/value/Value;
+    flags:
+    Code:
+      stack=2, locals=5, args_size=3
+         0: aload_0
+         1: dup
+         2: astore_3
+         3: monitorenter
+         4: aload_0
+         5: getfield      #25                 // Field computeTableFilter:Lorg/h2/table/TableFilter;
+         8: aload_1
+         9: invokevirtual #42                 // Method org/h2/table/TableFilter.setSession:(Lorg/h2/engine/Session;)V
+        12: aload_0
+        13: getfield      #25                 // Field computeTableFilter:Lorg/h2/table/TableFilter;
+        16: aload_2
+        17: invokevirtual #43                 // Method org/h2/table/TableFilter.set:(Lorg/h2/result/Row;)V
+        20: aload_0
+        21: getfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+        24: aload_1
+        25: invokevirtual #44                 // Method org/h2/expression/Expression.getValue:(Lorg/h2/engine/Session;)Lorg/h2/value/Value;
+        28: aload_3
+        29: monitorexit
+        30: areturn
+        31: astore        4
+        33: aload_3
+        34: monitorexit
+        35: aload         4
+        37: athrow
+      Exception table:
+         from    to  target type
+             4    30    31   any
+            31    35    31   any
+      LineNumberTable:
+        line 169: 0
+        line 170: 4
+        line 171: 12
+        line 172: 20
+        line 173: 31
+    Exceptions:
+      throws java.sql.SQLException
+
+  public void setComputedExpression(org.h2.expression.Expression);
+    descriptor: (Lorg/h2/expression/Expression;)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: iconst_1
+         2: putfield      #26                 // Field isComputed:Z
+         5: aload_0
+         6: aload_1
+         7: putfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+        10: return
+      LineNumberTable:
+        line 183: 0
+        line 184: 5
+        line 185: 10
+
+  public void setTable(org.h2.table.Table, int);
+    descriptor: (Lorg/h2/table/Table;I)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=3, args_size=3
+         0: aload_0
+         1: aload_1
+         2: putfield      #16                 // Field table:Lorg/h2/table/Table;
+         5: aload_0
+         6: iload_2
+         7: putfield      #45                 // Field columnId:I
+        10: return
+      LineNumberTable:
+        line 194: 0
+        line 195: 5
+        line 196: 10
+
+  public org.h2.table.Table getTable();
+    descriptor: ()Lorg/h2/table/Table;
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #16                 // Field table:Lorg/h2/table/Table;
+         4: areturn
+      LineNumberTable:
+        line 199: 0
+
+  public void setDefaultExpression(org.h2.engine.Session, org.h2.expression.Expression) throws java.sql.SQLException;
+    descriptor: (Lorg/h2/engine/Session;Lorg/h2/expression/Expression;)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=3, args_size=3
+         0: aload_2
+         1: ifnull        26
+         4: aload_2
+         5: aload_1
+         6: invokevirtual #46                 // Method org/h2/expression/Expression.optimize:(Lorg/h2/engine/Session;)Lorg/h2/expression/Expression;
+         9: astore_2
+        10: aload_2
+        11: invokevirtual #47                 // Method org/h2/expression/Expression.isConstant:()Z
+        14: ifeq          26
+        17: aload_2
+        18: aload_1
+        19: invokevirtual #44                 // Method org/h2/expression/Expression.getValue:(Lorg/h2/engine/Session;)Lorg/h2/value/Value;
+        22: invokestatic  #48                 // Method org/h2/expression/ValueExpression.get:(Lorg/h2/value/Value;)Lorg/h2/expression/ValueExpression;
+        25: astore_2
+        26: aload_0
+        27: aload_2
+        28: putfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+        31: return
+      LineNumberTable:
+        line 210: 0
+        line 211: 4
+        line 212: 10
+        line 213: 17
+        line 216: 26
+        line 217: 31
+    Exceptions:
+      throws java.sql.SQLException
+
+  public int getColumnId();
+    descriptor: ()I
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #45                 // Field columnId:I
+         4: ireturn
+      LineNumberTable:
+        line 220: 0
+
+  public java.lang.String getSQL();
+    descriptor: ()Ljava/lang/String;
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #6                  // Field name:Ljava/lang/String;
+         4: invokestatic  #49                 // Method org/h2/command/Parser.quoteIdentifier:(Ljava/lang/String;)Ljava/lang/String;
+         7: areturn
+      LineNumberTable:
+        line 224: 0
+
+  public java.lang.String getName();
+    descriptor: ()Ljava/lang/String;
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #6                  // Field name:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 228: 0
+
+  public int getType();
+    descriptor: ()I
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #7                  // Field type:I
+         4: ireturn
+      LineNumberTable:
+        line 232: 0
+
+  public long getPrecision();
+    descriptor: ()J
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #12                 // Field precision:J
+         4: lreturn
+      LineNumberTable:
+        line 236: 0
+
+  public int getDisplaySize();
+    descriptor: ()I
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #14                 // Field displaySize:I
+         4: ireturn
+      LineNumberTable:
+        line 240: 0
+
+  public int getScale();
+    descriptor: ()I
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #13                 // Field scale:I
+         4: ireturn
+      LineNumberTable:
+        line 244: 0
+
+  public void setNullable(boolean);
+    descriptor: (Z)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: iload_1
+         2: putfield      #5                  // Field nullable:Z
+         5: return
+      LineNumberTable:
+        line 248: 0
+        line 249: 5
+
+  public org.h2.value.Value validateConvertUpdateSequence(org.h2.engine.Session, org.h2.value.Value) throws java.sql.SQLException;
+    descriptor: (Lorg/h2/engine/Session;Lorg/h2/value/Value;)Lorg/h2/value/Value;
+    flags: ACC_PUBLIC
+    Code:
+      stack=7, locals=7, args_size=3
+         0: aload_2
+         1: ifnonnull     62
+         4: aload_0
+         5: getfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+         8: ifnonnull     18
+        11: getstatic     #50                 // Field org/h2/value/ValueNull.INSTANCE:Lorg/h2/value/ValueNull;
+        14: astore_2
+        15: goto          62
+        18: aload_0
+        19: dup
+        20: astore_3
+        21: monitorenter
+        22: aload_0
+        23: getfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+        26: aload_1
+        27: invokevirtual #44                 // Method org/h2/expression/Expression.getValue:(Lorg/h2/engine/Session;)Lorg/h2/value/Value;
+        30: aload_0
+        31: getfield      #7                  // Field type:I
+        34: invokevirtual #29                 // Method org/h2/value/Value.convertTo:(I)Lorg/h2/value/Value;
+        37: astore_2
+        38: aload_3
+        39: monitorexit
+        40: goto          50
+        43: astore        4
+        45: aload_3
+        46: monitorexit
+        47: aload         4
+        49: athrow
+        50: aload_0
+        51: getfield      #28                 // Field primaryKey:Z
+        54: ifeq          62
+        57: aload_1
+        58: aload_2
+        59: invokevirtual #51                 // Method org/h2/engine/Session.setLastIdentity:(Lorg/h2/value/Value;)V
+        62: aload_1
+        63: invokevirtual #52                 // Method org/h2/engine/Session.getDatabase:()Lorg/h2/engine/Database;
+        66: invokevirtual #53                 // Method org/h2/engine/Database.getMode:()Lorg/h2/engine/Mode;
+        69: astore_3
+        70: aload_2
+        71: getstatic     #50                 // Field org/h2/value/ValueNull.INSTANCE:Lorg/h2/value/ValueNull;
+        74: if_acmpne     282
+        77: aload_0
+        78: getfield      #22                 // Field convertNullToDefault:Z
+        81: ifeq          119
+        84: aload_0
+        85: dup
+        86: astore        4
+        88: monitorenter
+        89: aload_0
+        90: getfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+        93: aload_1
+        94: invokevirtual #44                 // Method org/h2/expression/Expression.getValue:(Lorg/h2/engine/Session;)Lorg/h2/value/Value;
+        97: aload_0
+        98: getfield      #7                  // Field type:I
+       101: invokevirtual #29                 // Method org/h2/value/Value.convertTo:(I)Lorg/h2/value/Value;
+       104: astore_2
+       105: aload         4
+       107: monitorexit
+       108: goto          119
+       111: astore        5
+       113: aload         4
+       115: monitorexit
+       116: aload         5
+       118: athrow
+       119: aload_2
+       120: getstatic     #50                 // Field org/h2/value/ValueNull.INSTANCE:Lorg/h2/value/ValueNull;
+       123: if_acmpne     282
+       126: aload_0
+       127: getfield      #5                  // Field nullable:Z
+       130: ifne          282
+       133: aload_3
+       134: getfield      #54                 // Field org/h2/engine/Mode.convertInsertNullToZero:Z
+       137: ifeq          272
+       140: aload_0
+       141: getfield      #7                  // Field type:I
+       144: invokestatic  #8                  // Method org/h2/value/DataType.getDataType:(I)Lorg/h2/value/DataType;
+       147: astore        4
+       149: aload         4
+       151: getfield      #55                 // Field org/h2/value/DataType.decimal:Z
+       154: ifeq          172
+       157: iconst_0
+       158: invokestatic  #56                 // Method org/h2/value/ValueInt.get:(I)Lorg/h2/value/ValueInt;
+       161: aload_0
+       162: getfield      #7                  // Field type:I
+       165: invokevirtual #57                 // Method org/h2/value/ValueInt.convertTo:(I)Lorg/h2/value/Value;
+       168: astore_2
+       169: goto          269
+       172: aload         4
+       174: getfield      #58                 // Field org/h2/value/DataType.type:I
+       177: bipush        11
+       179: if_icmpne     199
+       182: new           #59                 // class java/sql/Timestamp
+       185: dup
+       186: invokestatic  #60                 // Method java/lang/System.currentTimeMillis:()J
+       189: invokespecial #61                 // Method java/sql/Timestamp."<init>":(J)V
+       192: invokestatic  #62                 // Method org/h2/value/ValueTimestamp.getNoCopy:(Ljava/sql/Timestamp;)Lorg/h2/value/ValueTimestamp;
+       195: astore_2
+       196: goto          269
+       199: aload         4
+       201: getfield      #58                 // Field org/h2/value/DataType.type:I
+       204: bipush        9
+       206: if_icmpne     221
+       209: ldc           #63                 // String 0:0:0
+       211: invokestatic  #64                 // Method java/sql/Time.valueOf:(Ljava/lang/String;)Ljava/sql/Time;
+       214: invokestatic  #65                 // Method org/h2/value/ValueTime.get:(Ljava/sql/Time;)Lorg/h2/value/ValueTime;
+       217: astore_2
+       218: goto          269
+       221: aload         4
+       223: getfield      #58                 // Field org/h2/value/DataType.type:I
+       226: bipush        10
+       228: if_icmpne     256
+       231: new           #59                 // class java/sql/Timestamp
+       234: dup
+       235: invokestatic  #60                 // Method java/lang/System.currentTimeMillis:()J
+       238: invokespecial #61                 // Method java/sql/Timestamp."<init>":(J)V
+       241: invokestatic  #62                 // Method org/h2/value/ValueTimestamp.getNoCopy:(Ljava/sql/Timestamp;)Lorg/h2/value/ValueTimestamp;
+       244: aload         4
+       246: getfield      #58                 // Field org/h2/value/DataType.type:I
+       249: invokevirtual #66                 // Method org/h2/value/ValueTimestamp.convertTo:(I)Lorg/h2/value/Value;
+       252: astore_2
+       253: goto          269
+       256: ldc           #67                 // String
+       258: invokestatic  #68                 // Method org/h2/value/ValueString.get:(Ljava/lang/String;)Lorg/h2/value/ValueString;
+       261: aload_0
+       262: getfield      #7                  // Field type:I
+       265: invokevirtual #69                 // Method org/h2/value/ValueString.convertTo:(I)Lorg/h2/value/Value;
+       268: astore_2
+       269: goto          282
+       272: ldc           #70                 // int 90006
+       274: aload_0
+       275: getfield      #6                  // Field name:Ljava/lang/String;
+       278: invokestatic  #41                 // Method org/h2/message/Message.getSQLException:(ILjava/lang/String;)Lorg/h2/jdbc/JdbcSQLException;
+       281: athrow
+       282: aload_0
+       283: getfield      #71                 // Field checkConstraint:Lorg/h2/expression/Expression;
+       286: ifnull        354
+       289: aload_0
+       290: getfield      #72                 // Field resolver:Lorg/h2/table/SingleColumnResolver;
+       293: aload_2
+       294: invokevirtual #73                 // Method org/h2/table/SingleColumnResolver.setValue:(Lorg/h2/value/Value;)V
+       297: aload_0
+       298: dup
+       299: astore        5
+       301: monitorenter
+       302: aload_0
+       303: getfield      #71                 // Field checkConstraint:Lorg/h2/expression/Expression;
+       306: aload_1
+       307: invokevirtual #44                 // Method org/h2/expression/Expression.getValue:(Lorg/h2/engine/Session;)Lorg/h2/value/Value;
+       310: astore        4
+       312: aload         5
+       314: monitorexit
+       315: goto          326
+       318: astore        6
+       320: aload         5
+       322: monitorexit
+       323: aload         6
+       325: athrow
+       326: getstatic     #74                 // Field java/lang/Boolean.FALSE:Ljava/lang/Boolean;
+       329: aload         4
+       331: invokevirtual #75                 // Method org/h2/value/Value.getBoolean:()Ljava/lang/Boolean;
+       334: invokevirtual #76                 // Method java/lang/Boolean.equals:(Ljava/lang/Object;)Z
+       337: ifeq          354
+       340: sipush        23000
+       343: aload_0
+       344: getfield      #71                 // Field checkConstraint:Lorg/h2/expression/Expression;
+       347: invokevirtual #77                 // Method org/h2/expression/Expression.getSQL:()Ljava/lang/String;
+       350: invokestatic  #41                 // Method org/h2/message/Message.getSQLException:(ILjava/lang/String;)Lorg/h2/jdbc/JdbcSQLException;
+       353: athrow
+       354: aload_2
+       355: aload_3
+       356: getfield      #78                 // Field org/h2/engine/Mode.convertOnlyToSmallerScale:Z
+       359: aload_0
+       360: getfield      #13                 // Field scale:I
+       363: invokevirtual #79                 // Method org/h2/value/Value.convertScale:(ZI)Lorg/h2/value/Value;
+       366: astore_2
+       367: aload_0
+       368: getfield      #12                 // Field precision:J
+       371: lconst_0
+       372: lcmp
+       373: ifle          484
+       376: aload_2
+       377: aload_0
+       378: getfield      #12                 // Field precision:J
+       381: invokevirtual #80                 // Method org/h2/value/Value.checkPrecision:(J)Z
+       384: ifne          484
+       387: aload_2
+       388: invokevirtual #81                 // Method org/h2/value/Value.getTraceSQL:()Ljava/lang/String;
+       391: astore        4
+       393: aload         4
+       395: invokevirtual #82                 // Method java/lang/String.length:()I
+       398: bipush        127
+       400: if_icmple     432
+       403: new           #33                 // class java/lang/StringBuilder
+       406: dup
+       407: invokespecial #34                 // Method java/lang/StringBuilder."<init>":()V
+       410: aload         4
+       412: iconst_0
+       413: sipush        128
+       416: invokevirtual #83                 // Method java/lang/String.substring:(II)Ljava/lang/String;
+       419: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       422: ldc           #84                 // String ...
+       424: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       427: invokevirtual #40                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       430: astore        4
+       432: ldc           #85                 // int 90005
+       434: iconst_2
+       435: anewarray     #86                 // class java/lang/String
+       438: dup
+       439: iconst_0
+       440: aload_0
+       441: invokevirtual #38                 // Method getCreateSQL:()Ljava/lang/String;
+       444: aastore
+       445: dup
+       446: iconst_1
+       447: new           #33                 // class java/lang/StringBuilder
+       450: dup
+       451: invokespecial #34                 // Method java/lang/StringBuilder."<init>":()V
+       454: aload         4
+       456: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       459: ldc           #37                 // String  (
+       461: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       464: aload_2
+       465: invokevirtual #87                 // Method org/h2/value/Value.getPrecision:()J
+       468: invokevirtual #88                 // Method java/lang/StringBuilder.append:(J)Ljava/lang/StringBuilder;
+       471: ldc           #39                 // String )
+       473: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       476: invokevirtual #40                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       479: aastore
+       480: invokestatic  #89                 // Method org/h2/message/Message.getSQLException:(I[Ljava/lang/String;)Lorg/h2/jdbc/JdbcSQLException;
+       483: athrow
+       484: aload_0
+       485: aload_1
+       486: aload_2
+       487: invokespecial #90                 // Method updateSequenceIfRequired:(Lorg/h2/engine/Session;Lorg/h2/value/Value;)V
+       490: aload_2
+       491: areturn
+      Exception table:
+         from    to  target type
+            22    40    43   any
+            43    47    43   any
+            89   108   111   any
+           111   116   111   any
+           302   315   318   any
+           318   323   318   any
+      LineNumberTable:
+        line 261: 0
+        line 262: 4
+        line 263: 11
+        line 265: 18
+        line 266: 22
+        line 267: 38
+        line 268: 50
+        line 269: 57
+        line 273: 62
+        line 274: 70
+        line 275: 77
+        line 276: 84
+        line 277: 89
+        line 278: 105
+        line 280: 119
+        line 281: 133
+        line 282: 140
+        line 283: 149
+        line 284: 157
+        line 285: 172
+        line 286: 182
+        line 287: 199
+        line 289: 209
+        line 290: 221
+        line 291: 231
+        line 293: 256
+        line 295: 269
+        line 296: 272
+        line 300: 282
+        line 301: 289
+        line 303: 297
+        line 304: 302
+        line 305: 312
+        line 307: 326
+        line 308: 340
+        line 311: 354
+        line 312: 367
+        line 313: 376
+        line 314: 387
+        line 315: 393
+        line 316: 403
+        line 318: 432
+        line 322: 484
+        line 323: 490
+    Exceptions:
+      throws java.sql.SQLException
+
+  public void convertAutoIncrementToSequence(org.h2.engine.Session, org.h2.schema.Schema, int, boolean) throws java.sql.SQLException;
+    descriptor: (Lorg/h2/engine/Session;Lorg/h2/schema/Schema;IZ)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=6, locals=9, args_size=5
+         0: aload_0
+         1: getfield      #97                 // Field autoIncrement:Z
+         4: ifne          11
+         7: invokestatic  #98                 // Method org/h2/message/Message.throwInternalError:()Ljava/lang/RuntimeException;
+        10: pop
+        11: ldc           #99                 // String IDENTITY
+        13: aload_0
+        14: getfield      #21                 // Field originalSQL:Ljava/lang/String;
+        17: invokevirtual #17                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        20: ifeq          29
+        23: aload_0
+        24: ldc           #100                // String BIGINT
+        26: putfield      #21                 // Field originalSQL:Ljava/lang/String;
+        29: iconst_0
+        30: istore        6
+        32: invokestatic  #101                // Method org/h2/value/ValueUuid.getNewRandom:()Lorg/h2/value/ValueUuid;
+        35: astore        7
+        37: aload         7
+        39: invokevirtual #102                // Method org/h2/value/ValueUuid.getString:()Ljava/lang/String;
+        42: astore        8
+        44: aload         8
+        46: bipush        45
+        48: bipush        95
+        50: invokevirtual #103                // Method java/lang/String.replace:(CC)Ljava/lang/String;
+        53: invokevirtual #104                // Method java/lang/String.toUpperCase:()Ljava/lang/String;
+        56: astore        8
+        58: new           #33                 // class java/lang/StringBuilder
+        61: dup
+        62: invokespecial #34                 // Method java/lang/StringBuilder."<init>":()V
+        65: ldc           #105                // String SYSTEM_SEQUENCE_
+        67: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        70: aload         8
+        72: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        75: invokevirtual #40                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        78: astore        5
+        80: aload_2
+        81: aload         5
+        83: invokevirtual #106                // Method org/h2/schema/Schema.findSequence:(Ljava/lang/String;)Lorg/h2/schema/Sequence;
+        86: ifnonnull     92
+        89: goto          98
+        92: iinc          6, 1
+        95: goto          32
+        98: new           #107                // class org/h2/schema/Sequence
+       101: dup
+       102: aload_2
+       103: iload_3
+       104: aload         5
+       106: iconst_1
+       107: invokespecial #108                // Method org/h2/schema/Sequence."<init>":(Lorg/h2/schema/Schema;ILjava/lang/String;Z)V
+       110: astore        6
+       112: aload         6
+       114: aload_0
+       115: getfield      #109                // Field start:J
+       118: invokevirtual #94                 // Method org/h2/schema/Sequence.setStartValue:(J)V
+       121: aload         6
+       123: aload_0
+       124: getfield      #110                // Field increment:J
+       127: invokevirtual #111                // Method org/h2/schema/Sequence.setIncrement:(J)V
+       130: iload         4
+       132: ifne          145
+       135: aload_1
+       136: invokevirtual #52                 // Method org/h2/engine/Session.getDatabase:()Lorg/h2/engine/Database;
+       139: aload_1
+       140: aload         6
+       142: invokevirtual #112                // Method org/h2/engine/Database.addSchemaObject:(Lorg/h2/engine/Session;Lorg/h2/schema/SchemaObject;)V
+       145: aload_0
+       146: iconst_0
+       147: lconst_0
+       148: lconst_0
+       149: invokevirtual #113                // Method setAutoIncrement:(ZJJ)V
+       152: new           #114                // class org/h2/expression/SequenceValue
+       155: dup
+       156: aload         6
+       158: invokespecial #115                // Method org/h2/expression/SequenceValue."<init>":(Lorg/h2/schema/Sequence;)V
+       161: astore        7
+       163: aload_0
+       164: aload_1
+       165: aload         7
+       167: invokevirtual #116                // Method setDefaultExpression:(Lorg/h2/engine/Session;Lorg/h2/expression/Expression;)V
+       170: aload_0
+       171: aload         6
+       173: invokevirtual #117                // Method setSequence:(Lorg/h2/schema/Sequence;)V
+       176: return
+      LineNumberTable:
+        line 357: 0
+        line 358: 7
+        line 360: 11
+        line 361: 23
+        line 364: 29
+        line 365: 32
+        line 366: 37
+        line 367: 44
+        line 368: 58
+        line 369: 80
+        line 370: 89
+        line 364: 92
+        line 373: 98
+        line 374: 112
+        line 375: 121
+        line 376: 130
+        line 377: 135
+        line 379: 145
+        line 380: 152
+        line 381: 163
+        line 382: 170
+        line 383: 176
+    Exceptions:
+      throws java.sql.SQLException
+
+  public void prepareExpression(org.h2.engine.Session) throws java.sql.SQLException;
+    descriptor: (Lorg/h2/engine/Session;)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=8, locals=2, args_size=2
+         0: aload_0
+         1: getfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+         4: ifnull        50
+         7: aload_0
+         8: new           #118                // class org/h2/table/TableFilter
+        11: dup
+        12: aload_1
+        13: aload_0
+        14: getfield      #16                 // Field table:Lorg/h2/table/Table;
+        17: aconst_null
+        18: iconst_0
+        19: aconst_null
+        20: invokespecial #119                // Method org/h2/table/TableFilter."<init>":(Lorg/h2/engine/Session;Lorg/h2/table/Table;Ljava/lang/String;ZLorg/h2/command/dml/Select;)V
+        23: putfield      #25                 // Field computeTableFilter:Lorg/h2/table/TableFilter;
+        26: aload_0
+        27: getfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+        30: aload_0
+        31: getfield      #25                 // Field computeTableFilter:Lorg/h2/table/TableFilter;
+        34: iconst_0
+        35: invokevirtual #120                // Method org/h2/expression/Expression.mapColumns:(Lorg/h2/table/ColumnResolver;I)V
+        38: aload_0
+        39: aload_0
+        40: getfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+        43: aload_1
+        44: invokevirtual #46                 // Method org/h2/expression/Expression.optimize:(Lorg/h2/engine/Session;)Lorg/h2/expression/Expression;
+        47: putfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+        50: return
+      LineNumberTable:
+        line 391: 0
+        line 392: 7
+        line 393: 26
+        line 394: 38
+        line 396: 50
+    Exceptions:
+      throws java.sql.SQLException
+
+  public java.lang.String getCreateSQL();
+    descriptor: ()Ljava/lang/String;
+    flags: ACC_PUBLIC
+    Code:
+      stack=4, locals=3, args_size=1
+         0: new           #33                 // class java/lang/StringBuilder
+         3: dup
+         4: invokespecial #34                 // Method java/lang/StringBuilder."<init>":()V
+         7: astore_1
+         8: aload_0
+         9: getfield      #6                  // Field name:Ljava/lang/String;
+        12: ifnull        32
+        15: aload_1
+        16: aload_0
+        17: getfield      #6                  // Field name:Ljava/lang/String;
+        20: invokestatic  #49                 // Method org/h2/command/Parser.quoteIdentifier:(Ljava/lang/String;)Ljava/lang/String;
+        23: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        26: bipush        32
+        28: invokevirtual #121                // Method java/lang/StringBuilder.append:(C)Ljava/lang/StringBuilder;
+        31: pop
+        32: aload_0
+        33: getfield      #21                 // Field originalSQL:Ljava/lang/String;
+        36: ifnull        51
+        39: aload_1
+        40: aload_0
+        41: getfield      #21                 // Field originalSQL:Ljava/lang/String;
+        44: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        47: pop
+        48: goto          187
+        51: aload_1
+        52: aload_0
+        53: getfield      #7                  // Field type:I
+        56: invokestatic  #8                  // Method org/h2/value/DataType.getDataType:(I)Lorg/h2/value/DataType;
+        59: getfield      #122                // Field org/h2/value/DataType.name:Ljava/lang/String;
+        62: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        65: pop
+        66: aload_0
+        67: getfield      #7                  // Field type:I
+        70: lookupswitch  { // 5
+                       6: 120
+                      12: 154
+                      13: 154
+                      14: 154
+                      21: 154
+                 default: 187
+            }
+       120: aload_1
+       121: bipush        40
+       123: invokevirtual #121                // Method java/lang/StringBuilder.append:(C)Ljava/lang/StringBuilder;
+       126: aload_0
+       127: getfield      #12                 // Field precision:J
+       130: invokevirtual #88                 // Method java/lang/StringBuilder.append:(J)Ljava/lang/StringBuilder;
+       133: ldc           #123                // String ,
+       135: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       138: aload_0
+       139: getfield      #13                 // Field scale:I
+       142: invokevirtual #124                // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+       145: bipush        41
+       147: invokevirtual #121                // Method java/lang/StringBuilder.append:(C)Ljava/lang/StringBuilder;
+       150: pop
+       151: goto          187
+       154: aload_0
+       155: getfield      #12                 // Field precision:J
+       158: ldc2_w        #125                // long 2147483647l
+       161: lcmp
+       162: ifge          187
+       165: aload_1
+       166: bipush        40
+       168: invokevirtual #121                // Method java/lang/StringBuilder.append:(C)Ljava/lang/StringBuilder;
+       171: aload_0
+       172: getfield      #12                 // Field precision:J
+       175: invokevirtual #88                 // Method java/lang/StringBuilder.append:(J)Ljava/lang/StringBuilder;
+       178: bipush        41
+       180: invokevirtual #121                // Method java/lang/StringBuilder.append:(C)Ljava/lang/StringBuilder;
+       183: pop
+       184: goto          187
+       187: aload_0
+       188: getfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+       191: ifnull        245
+       194: aload_0
+       195: getfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+       198: invokevirtual #77                 // Method org/h2/expression/Expression.getSQL:()Ljava/lang/String;
+       201: astore_2
+       202: aload_2
+       203: ifnull        245
+       206: aload_0
+       207: getfield      #26                 // Field isComputed:Z
+       210: ifeq          227
+       213: aload_1
+       214: ldc           #127                // String  AS
+       216: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       219: aload_2
+       220: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       223: pop
+       224: goto          245
+       227: aload_0
+       228: getfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+       231: ifnull        245
+       234: aload_1
+       235: ldc           #128                // String  DEFAULT
+       237: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       240: aload_2
+       241: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       244: pop
+       245: aload_0
+       246: getfield      #5                  // Field nullable:Z
+       249: ifne          259
+       252: aload_1
+       253: ldc           #129                // String  NOT NULL
+       255: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       258: pop
+       259: aload_0
+       260: getfield      #22                 // Field convertNullToDefault:Z
+       263: ifeq          273
+       266: aload_1
+       267: ldc           #130                // String  NULL_TO_DEFAULT
+       269: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       272: pop
+       273: aload_0
+       274: getfield      #23                 // Field sequence:Lorg/h2/schema/Sequence;
+       277: ifnull        297
+       280: aload_1
+       281: ldc           #131                // String  SEQUENCE
+       283: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       286: aload_0
+       287: getfield      #23                 // Field sequence:Lorg/h2/schema/Sequence;
+       290: invokevirtual #132                // Method org/h2/schema/Sequence.getSQL:()Ljava/lang/String;
+       293: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       296: pop
+       297: aload_0
+       298: getfield      #27                 // Field selectivity:I
+       301: ifeq          318
+       304: aload_1
+       305: ldc           #133                // String  SELECTIVITY
+       307: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       310: aload_0
+       311: getfield      #27                 // Field selectivity:I
+       314: invokevirtual #124                // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+       317: pop
+       318: aload_0
+       319: getfield      #71                 // Field checkConstraint:Lorg/h2/expression/Expression;
+       322: ifnull        339
+       325: aload_1
+       326: ldc           #134                // String  CHECK
+       328: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       331: aload_0
+       332: getfield      #135                // Field checkConstraintSQL:Ljava/lang/String;
+       335: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       338: pop
+       339: aload_0
+       340: getfield      #24                 // Field comment:Ljava/lang/String;
+       343: ifnull        363
+       346: aload_1
+       347: ldc           #136                // String  COMMENT
+       349: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       352: aload_0
+       353: getfield      #24                 // Field comment:Ljava/lang/String;
+       356: invokestatic  #137                // Method org/h2/util/StringUtils.quoteStringSQL:(Ljava/lang/String;)Ljava/lang/String;
+       359: invokevirtual #36                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       362: pop
+       363: aload_1
+       364: invokevirtual #40                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       367: areturn
+      LineNumberTable:
+        line 399: 0
+        line 400: 8
+        line 401: 15
+        line 403: 32
+        line 404: 39
+        line 406: 51
+        line 407: 66
+        line 409: 120
+        line 410: 151
+        line 415: 154
+        line 416: 165
+        line 422: 187
+        line 423: 194
+        line 424: 202
+        line 425: 206
+        line 426: 213
+        line 427: 227
+        line 428: 234
+        line 432: 245
+        line 433: 252
+        line 435: 259
+        line 436: 266
+        line 438: 273
+        line 439: 280
+        line 441: 297
+        line 442: 304
+        line 444: 318
+        line 445: 325
+        line 447: 339
+        line 448: 346
+        line 450: 363
+
+  public boolean isNullable();
+    descriptor: ()Z
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #5                  // Field nullable:Z
+         4: ireturn
+      LineNumberTable:
+        line 454: 0
+
+  public void setOriginalSQL(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #21                 // Field originalSQL:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 458: 0
+        line 459: 5
+
+  public java.lang.String getOriginalSQL();
+    descriptor: ()Ljava/lang/String;
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #21                 // Field originalSQL:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 462: 0
+
+  public org.h2.expression.Expression getDefaultExpression();
+    descriptor: ()Lorg/h2/expression/Expression;
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+         4: areturn
+      LineNumberTable:
+        line 466: 0
+
+  public boolean isAutoIncrement();
+    descriptor: ()Z
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #97                 // Field autoIncrement:Z
+         4: ireturn
+      LineNumberTable:
+        line 470: 0
+
+  public void setAutoIncrement(boolean, long, long);
+    descriptor: (ZJJ)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=3, locals=6, args_size=4
+         0: aload_0
+         1: iload_1
+         2: putfield      #97                 // Field autoIncrement:Z
+         5: aload_0
+         6: lload_2
+         7: putfield      #109                // Field start:J
+        10: aload_0
+        11: lload         4
+        13: putfield      #110                // Field increment:J
+        16: aload_0
+        17: iconst_0
+        18: putfield      #5                  // Field nullable:Z
+        21: iload_1
+        22: ifeq          30
+        25: aload_0
+        26: iconst_1
+        27: putfield      #22                 // Field convertNullToDefault:Z
+        30: return
+      LineNumberTable:
+        line 481: 0
+        line 482: 5
+        line 483: 10
+        line 484: 16
+        line 485: 21
+        line 486: 25
+        line 488: 30
+
+  public void setConvertNullToDefault(boolean);
+    descriptor: (Z)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: iload_1
+         2: putfield      #22                 // Field convertNullToDefault:Z
+         5: return
+      LineNumberTable:
+        line 491: 0
+        line 492: 5
+
+  public void rename(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #6                  // Field name:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 501: 0
+        line 502: 5
+
+  public void setSequence(org.h2.schema.Sequence);
+    descriptor: (Lorg/h2/schema/Sequence;)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #23                 // Field sequence:Lorg/h2/schema/Sequence;
+         5: return
+      LineNumberTable:
+        line 505: 0
+        line 506: 5
+
+  public org.h2.schema.Sequence getSequence();
+    descriptor: ()Lorg/h2/schema/Sequence;
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #23                 // Field sequence:Lorg/h2/schema/Sequence;
+         4: areturn
+      LineNumberTable:
+        line 509: 0
+
+  public int getSelectivity();
+    descriptor: ()I
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #27                 // Field selectivity:I
+         4: ifne          12
+         7: bipush        50
+         9: goto          16
+        12: aload_0
+        13: getfield      #27                 // Field selectivity:I
+        16: ireturn
+      LineNumberTable:
+        line 519: 0
+
+  public void setSelectivity(int);
+    descriptor: (I)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: iload_1
+         1: ifge          8
+         4: iconst_0
+         5: goto          20
+         8: iload_1
+         9: bipush        100
+        11: if_icmple     19
+        14: bipush        100
+        16: goto          20
+        19: iload_1
+        20: istore_1
+        21: aload_0
+        22: iload_1
+        23: putfield      #27                 // Field selectivity:I
+        26: return
+      LineNumberTable:
+        line 528: 0
+        line 529: 21
+        line 530: 26
+
+  public void addCheckConstraint(org.h2.engine.Session, org.h2.expression.Expression) throws java.sql.SQLException;
+    descriptor: (Lorg/h2/engine/Session;Lorg/h2/expression/Expression;)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=6, locals=7, args_size=3
+         0: aload_0
+         1: new           #138                // class org/h2/table/SingleColumnResolver
+         4: dup
+         5: aload_0
+         6: invokespecial #139                // Method org/h2/table/SingleColumnResolver."<init>":(Lorg/h2/table/Column;)V
+         9: putfield      #72                 // Field resolver:Lorg/h2/table/SingleColumnResolver;
+        12: aload_0
+        13: dup
+        14: astore_3
+        15: monitorenter
+        16: aload_0
+        17: getfield      #6                  // Field name:Ljava/lang/String;
+        20: astore        4
+        22: aload_0
+        23: getfield      #6                  // Field name:Ljava/lang/String;
+        26: ifnonnull     35
+        29: aload_0
+        30: ldc           #140                // String VALUE
+        32: putfield      #6                  // Field name:Ljava/lang/String;
+        35: aload_2
+        36: aload_0
+        37: getfield      #72                 // Field resolver:Lorg/h2/table/SingleColumnResolver;
+        40: iconst_0
+        41: invokevirtual #120                // Method org/h2/expression/Expression.mapColumns:(Lorg/h2/table/ColumnResolver;I)V
+        44: aload_0
+        45: aload         4
+        47: putfield      #6                  // Field name:Ljava/lang/String;
+        50: aload_3
+        51: monitorexit
+        52: goto          62
+        55: astore        5
+        57: aload_3
+        58: monitorexit
+        59: aload         5
+        61: athrow
+        62: aload_2
+        63: aload_1
+        64: invokevirtual #46                 // Method org/h2/expression/Expression.optimize:(Lorg/h2/engine/Session;)Lorg/h2/expression/Expression;
+        67: astore_2
+        68: aload_0
+        69: getfield      #72                 // Field resolver:Lorg/h2/table/SingleColumnResolver;
+        72: getstatic     #50                 // Field org/h2/value/ValueNull.INSTANCE:Lorg/h2/value/ValueNull;
+        75: invokevirtual #73                 // Method org/h2/table/SingleColumnResolver.setValue:(Lorg/h2/value/Value;)V
+        78: aload_0
+        79: dup
+        80: astore_3
+        81: monitorenter
+        82: aload_2
+        83: aload_1
+        84: invokevirtual #44                 // Method org/h2/expression/Expression.getValue:(Lorg/h2/engine/Session;)Lorg/h2/value/Value;
+        87: pop
+        88: aload_3
+        89: monitorexit
+        90: goto          100
+        93: astore        6
+        95: aload_3
+        96: monitorexit
+        97: aload         6
+        99: athrow
+       100: aload_0
+       101: getfield      #71                 // Field checkConstraint:Lorg/h2/expression/Expression;
+       104: ifnonnull     115
+       107: aload_0
+       108: aload_2
+       109: putfield      #71                 // Field checkConstraint:Lorg/h2/expression/Expression;
+       112: goto          132
+       115: aload_0
+       116: new           #141                // class org/h2/expression/ConditionAndOr
+       119: dup
+       120: iconst_0
+       121: aload_0
+       122: getfield      #71                 // Field checkConstraint:Lorg/h2/expression/Expression;
+       125: aload_2
+       126: invokespecial #142                // Method org/h2/expression/ConditionAndOr."<init>":(ILorg/h2/expression/Expression;Lorg/h2/expression/Expression;)V
+       129: putfield      #71                 // Field checkConstraint:Lorg/h2/expression/Expression;
+       132: aload_0
+       133: aload_0
+       134: aload_1
+       135: aload_0
+       136: getfield      #6                  // Field name:Ljava/lang/String;
+       139: invokevirtual #143                // Method getCheckConstraintSQL:(Lorg/h2/engine/Session;Ljava/lang/String;)Ljava/lang/String;
+       142: putfield      #135                // Field checkConstraintSQL:Ljava/lang/String;
+       145: return
+      Exception table:
+         from    to  target type
+            16    52    55   any
+            55    59    55   any
+            82    90    93   any
+            93    97    93   any
+      LineNumberTable:
+        line 540: 0
+        line 541: 12
+        line 542: 16
+        line 543: 22
+        line 544: 29
+        line 546: 35
+        line 547: 44
+        line 548: 50
+        line 549: 62
+        line 550: 68
+        line 552: 78
+        line 553: 82
+        line 554: 88
+        line 555: 100
+        line 556: 107
+        line 558: 115
+        line 560: 132
+        line 561: 145
+    Exceptions:
+      throws java.sql.SQLException
+
+  public org.h2.expression.Expression getCheckConstraint(org.h2.engine.Session, java.lang.String) throws java.sql.SQLException;
+    descriptor: (Lorg/h2/engine/Session;Ljava/lang/String;)Lorg/h2/expression/Expression;
+    flags: ACC_PUBLIC
+    Code:
+      stack=3, locals=8, args_size=3
+         0: aload_0
+         1: getfield      #71                 // Field checkConstraint:Lorg/h2/expression/Expression;
+         4: ifnonnull     9
+         7: aconst_null
+         8: areturn
+         9: new           #144                // class org/h2/command/Parser
+        12: dup
+        13: aload_1
+        14: invokespecial #145                // Method org/h2/command/Parser."<init>":(Lorg/h2/engine/Session;)V
+        17: astore_3
+        18: aload_0
+        19: dup
+        20: astore        5
+        22: monitorenter
+        23: aload_0
+        24: getfield      #6                  // Field name:Ljava/lang/String;
+        27: astore        6
+        29: aload_0
+        30: aload_2
+        31: putfield      #6                  // Field name:Ljava/lang/String;
+        34: aload_0
+        35: getfield      #71                 // Field checkConstraint:Lorg/h2/expression/Expression;
+        38: invokevirtual #77                 // Method org/h2/expression/Expression.getSQL:()Ljava/lang/String;
+        41: astore        4
+        43: aload_0
+        44: aload         6
+        46: putfield      #6                  // Field name:Ljava/lang/String;
+        49: aload         5
+        51: monitorexit
+        52: goto          63
+        55: astore        7
+        57: aload         5
+        59: monitorexit
+        60: aload         7
+        62: athrow
+        63: aload_3
+        64: aload         4
+        66: invokevirtual #146                // Method org/h2/command/Parser.parseExpression:(Ljava/lang/String;)Lorg/h2/expression/Expression;
+        69: astore        5
+        71: aload         5
+        73: areturn
+      Exception table:
+         from    to  target type
+            23    52    55   any
+            55    60    55   any
+      LineNumberTable:
+        line 571: 0
+        line 572: 7
+        line 574: 9
+        line 576: 18
+        line 577: 23
+        line 578: 29
+        line 579: 34
+        line 580: 43
+        line 581: 49
+        line 582: 63
+        line 583: 71
+    Exceptions:
+      throws java.sql.SQLException
+
+  java.lang.String getDefaultSQL();
+    descriptor: ()Ljava/lang/String;
+    flags:
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+         4: ifnonnull     11
+         7: aconst_null
+         8: goto          18
+        11: aload_0
+        12: getfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+        15: invokevirtual #77                 // Method org/h2/expression/Expression.getSQL:()Ljava/lang/String;
+        18: areturn
+      LineNumberTable:
+        line 587: 0
+
+  int getPrecisionAsInt();
+    descriptor: ()I
+    flags:
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #12                 // Field precision:J
+         4: invokestatic  #147                // Method org/h2/util/MathUtils.convertLongToInt:(J)I
+         7: ireturn
+      LineNumberTable:
+        line 591: 0
+
+  org.h2.value.DataType getDataType();
+    descriptor: ()Lorg/h2/value/DataType;
+    flags:
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #7                  // Field type:I
+         4: invokestatic  #8                  // Method org/h2/value/DataType.getDataType:(I)Lorg/h2/value/DataType;
+         7: areturn
+      LineNumberTable:
+        line 595: 0
+
+  java.lang.String getCheckConstraintSQL(org.h2.engine.Session, java.lang.String) throws java.sql.SQLException;
+    descriptor: (Lorg/h2/engine/Session;Ljava/lang/String;)Ljava/lang/String;
+    flags:
+    Code:
+      stack=3, locals=4, args_size=3
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: invokevirtual #148                // Method getCheckConstraint:(Lorg/h2/engine/Session;Ljava/lang/String;)Lorg/h2/expression/Expression;
+         6: astore_3
+         7: aload_3
+         8: ifnonnull     16
+        11: ldc           #67                 // String
+        13: goto          20
+        16: aload_3
+        17: invokevirtual #77                 // Method org/h2/expression/Expression.getSQL:()Ljava/lang/String;
+        20: areturn
+      LineNumberTable:
+        line 606: 0
+        line 607: 7
+    Exceptions:
+      throws java.sql.SQLException
+
+  public void setComment(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #24                 // Field comment:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 611: 0
+        line 612: 5
+
+  public java.lang.String getComment();
+    descriptor: ()Ljava/lang/String;
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #24                 // Field comment:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 615: 0
+
+  public void setPrimaryKey(boolean);
+    descriptor: (Z)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: iload_1
+         2: putfield      #28                 // Field primaryKey:Z
+         5: return
+      LineNumberTable:
+        line 619: 0
+        line 620: 5
+
+  boolean isEverything(org.h2.expression.ExpressionVisitor);
+    descriptor: (Lorg/h2/expression/ExpressionVisitor;)Z
+    flags:
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_1
+         1: invokevirtual #149                // Method org/h2/expression/ExpressionVisitor.getType:()I
+         4: bipush        7
+         6: if_icmpne     28
+         9: aload_0
+        10: getfield      #23                 // Field sequence:Lorg/h2/schema/Sequence;
+        13: ifnull        28
+        16: aload_1
+        17: invokevirtual #150                // Method org/h2/expression/ExpressionVisitor.getDependencies:()Ljava/util/HashSet;
+        20: aload_0
+        21: getfield      #23                 // Field sequence:Lorg/h2/schema/Sequence;
+        24: invokevirtual #151                // Method java/util/HashSet.add:(Ljava/lang/Object;)Z
+        27: pop
+        28: aload_0
+        29: getfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+        32: ifnull        48
+        35: aload_0
+        36: getfield      #20                 // Field defaultExpression:Lorg/h2/expression/Expression;
+        39: aload_1
+        40: invokevirtual #152                // Method org/h2/expression/Expression.isEverything:(Lorg/h2/expression/ExpressionVisitor;)Z
+        43: ifne          48
+        46: iconst_0
+        47: ireturn
+        48: aload_0
+        49: getfield      #71                 // Field checkConstraint:Lorg/h2/expression/Expression;
+        52: ifnull        68
+        55: aload_0
+        56: getfield      #71                 // Field checkConstraint:Lorg/h2/expression/Expression;
+        59: aload_1
+        60: invokevirtual #152                // Method org/h2/expression/Expression.isEverything:(Lorg/h2/expression/ExpressionVisitor;)Z
+        63: ifne          68
+        66: iconst_0
+        67: ireturn
+        68: iconst_1
+        69: ireturn
+      LineNumberTable:
+        line 631: 0
+        line 632: 9
+        line 633: 16
+        line 636: 28
+        line 637: 46
+        line 639: 48
+        line 640: 66
+        line 642: 68
+
+  public boolean isPrimaryKey();
+    descriptor: ()Z
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #28                 // Field primaryKey:Z
+         4: ireturn
+      LineNumberTable:
+        line 646: 0
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #6                  // Field name:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 650: 0
+}
+SourceFile: "Column.java"

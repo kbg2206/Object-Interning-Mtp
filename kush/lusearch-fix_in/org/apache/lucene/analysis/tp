@@ -1,0 +1,224 @@
+Classfile /home/omkar/personal/tokyo_escape/escapeAnalysis/benchmark_dump/lusearch-fix_in/org/apache/lucene/analysis/Analyzer.class
+  Last modified 2 Oct, 2023; size 1597 bytes
+  MD5 checksum b515374205a9f36cc52297bf91ff33e8
+  Compiled from "Analyzer.java"
+public abstract class org.apache.lucene.analysis.Analyzer
+  minor version: 0
+  major version: 48
+  flags: ACC_PUBLIC, ACC_SUPER, ACC_ABSTRACT
+Constant pool:
+   #1 = Methodref          #14.#46        // java/lang/Object."<init>":()V
+   #2 = Class              #47            // org/apache/lucene/util/CloseableThreadLocal
+   #3 = Methodref          #2.#46         // org/apache/lucene/util/CloseableThreadLocal."<init>":()V
+   #4 = Fieldref           #13.#48        // org/apache/lucene/analysis/Analyzer.tokenStreams:Lorg/apache/lucene/util/CloseableThreadLocal;
+   #5 = Methodref          #13.#49        // org/apache/lucene/analysis/Analyzer.tokenStream:(Ljava/lang/String;Ljava/io/Reader;)Lorg/apache/lucene/analysis/TokenStream;
+   #6 = Methodref          #2.#50         // org/apache/lucene/util/CloseableThreadLocal.get:()Ljava/lang/Object;
+   #7 = Class              #51            // java/lang/NullPointerException
+   #8 = Class              #52            // org/apache/lucene/store/AlreadyClosedException
+   #9 = String             #53            // this Analyzer is closed
+  #10 = Methodref          #8.#54         // org/apache/lucene/store/AlreadyClosedException."<init>":(Ljava/lang/String;)V
+  #11 = Methodref          #2.#55         // org/apache/lucene/util/CloseableThreadLocal.set:(Ljava/lang/Object;)V
+  #12 = Methodref          #2.#56         // org/apache/lucene/util/CloseableThreadLocal.close:()V
+  #13 = Class              #57            // org/apache/lucene/analysis/Analyzer
+  #14 = Class              #58            // java/lang/Object
+  #15 = Utf8               tokenStreams
+  #16 = Utf8               Lorg/apache/lucene/util/CloseableThreadLocal;
+  #17 = Utf8               <init>
+  #18 = Utf8               ()V
+  #19 = Utf8               Code
+  #20 = Utf8               LineNumberTable
+  #21 = Utf8               LocalVariableTable
+  #22 = Utf8               this
+  #23 = Utf8               Lorg/apache/lucene/analysis/Analyzer;
+  #24 = Utf8               tokenStream
+  #25 = Utf8               (Ljava/lang/String;Ljava/io/Reader;)Lorg/apache/lucene/analysis/TokenStream;
+  #26 = Utf8               reusableTokenStream
+  #27 = Utf8               fieldName
+  #28 = Utf8               Ljava/lang/String;
+  #29 = Utf8               reader
+  #30 = Utf8               Ljava/io/Reader;
+  #31 = Utf8               Exceptions
+  #32 = Class              #59            // java/io/IOException
+  #33 = Utf8               getPreviousTokenStream
+  #34 = Utf8               ()Ljava/lang/Object;
+  #35 = Utf8               npe
+  #36 = Utf8               Ljava/lang/NullPointerException;
+  #37 = Utf8               setPreviousTokenStream
+  #38 = Utf8               (Ljava/lang/Object;)V
+  #39 = Utf8               obj
+  #40 = Utf8               Ljava/lang/Object;
+  #41 = Utf8               getPositionIncrementGap
+  #42 = Utf8               (Ljava/lang/String;)I
+  #43 = Utf8               close
+  #44 = Utf8               SourceFile
+  #45 = Utf8               Analyzer.java
+  #46 = NameAndType        #17:#18        // "<init>":()V
+  #47 = Utf8               org/apache/lucene/util/CloseableThreadLocal
+  #48 = NameAndType        #15:#16        // tokenStreams:Lorg/apache/lucene/util/CloseableThreadLocal;
+  #49 = NameAndType        #24:#25        // tokenStream:(Ljava/lang/String;Ljava/io/Reader;)Lorg/apache/lucene/analysis/TokenStream;
+  #50 = NameAndType        #60:#34        // get:()Ljava/lang/Object;
+  #51 = Utf8               java/lang/NullPointerException
+  #52 = Utf8               org/apache/lucene/store/AlreadyClosedException
+  #53 = Utf8               this Analyzer is closed
+  #54 = NameAndType        #17:#61        // "<init>":(Ljava/lang/String;)V
+  #55 = NameAndType        #62:#38        // set:(Ljava/lang/Object;)V
+  #56 = NameAndType        #43:#18        // close:()V
+  #57 = Utf8               org/apache/lucene/analysis/Analyzer
+  #58 = Utf8               java/lang/Object
+  #59 = Utf8               java/io/IOException
+  #60 = Utf8               get
+  #61 = Utf8               (Ljava/lang/String;)V
+  #62 = Utf8               set
+{
+  public org.apache.lucene.analysis.Analyzer();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=3, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #2                  // class org/apache/lucene/util/CloseableThreadLocal
+         8: dup
+         9: invokespecial #3                  // Method org/apache/lucene/util/CloseableThreadLocal."<init>":()V
+        12: putfield      #4                  // Field tokenStreams:Lorg/apache/lucene/util/CloseableThreadLocal;
+        15: return
+      LineNumberTable:
+        line 33: 0
+        line 50: 4
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      16     0  this   Lorg/apache/lucene/analysis/Analyzer;
+
+  public abstract org.apache.lucene.analysis.TokenStream tokenStream(java.lang.String, java.io.Reader);
+    descriptor: (Ljava/lang/String;Ljava/io/Reader;)Lorg/apache/lucene/analysis/TokenStream;
+    flags: ACC_PUBLIC, ACC_ABSTRACT
+
+  public org.apache.lucene.analysis.TokenStream reusableTokenStream(java.lang.String, java.io.Reader) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;Ljava/io/Reader;)Lorg/apache/lucene/analysis/TokenStream;
+    flags: ACC_PUBLIC
+    Code:
+      stack=3, locals=3, args_size=3
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: invokevirtual #5                  // Method tokenStream:(Ljava/lang/String;Ljava/io/Reader;)Lorg/apache/lucene/analysis/TokenStream;
+         6: areturn
+      LineNumberTable:
+        line 47: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       7     0  this   Lorg/apache/lucene/analysis/Analyzer;
+            0       7     1 fieldName   Ljava/lang/String;
+            0       7     2 reader   Ljava/io/Reader;
+    Exceptions:
+      throws java.io.IOException
+
+  protected java.lang.Object getPreviousTokenStream();
+    descriptor: ()Ljava/lang/Object;
+    flags: ACC_PROTECTED
+    Code:
+      stack=3, locals=2, args_size=1
+         0: aload_0
+         1: getfield      #4                  // Field tokenStreams:Lorg/apache/lucene/util/CloseableThreadLocal;
+         4: invokevirtual #6                  // Method org/apache/lucene/util/CloseableThreadLocal.get:()Ljava/lang/Object;
+         7: areturn
+         8: astore_1
+         9: aload_0
+        10: getfield      #4                  // Field tokenStreams:Lorg/apache/lucene/util/CloseableThreadLocal;
+        13: ifnonnull     26
+        16: new           #8                  // class org/apache/lucene/store/AlreadyClosedException
+        19: dup
+        20: ldc           #9                  // String this Analyzer is closed
+        22: invokespecial #10                 // Method org/apache/lucene/store/AlreadyClosedException."<init>":(Ljava/lang/String;)V
+        25: athrow
+        26: aload_1
+        27: athrow
+      Exception table:
+         from    to  target type
+             0     7     8   Class java/lang/NullPointerException
+      LineNumberTable:
+        line 57: 0
+        line 58: 8
+        line 59: 9
+        line 60: 16
+        line 62: 26
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            9      19     1   npe   Ljava/lang/NullPointerException;
+            0      28     0  this   Lorg/apache/lucene/analysis/Analyzer;
+
+  protected void setPreviousTokenStream(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)V
+    flags: ACC_PROTECTED
+    Code:
+      stack=3, locals=3, args_size=2
+         0: aload_0
+         1: getfield      #4                  // Field tokenStreams:Lorg/apache/lucene/util/CloseableThreadLocal;
+         4: aload_1
+         5: invokevirtual #11                 // Method org/apache/lucene/util/CloseableThreadLocal.set:(Ljava/lang/Object;)V
+         8: goto          31
+        11: astore_2
+        12: aload_0
+        13: getfield      #4                  // Field tokenStreams:Lorg/apache/lucene/util/CloseableThreadLocal;
+        16: ifnonnull     29
+        19: new           #8                  // class org/apache/lucene/store/AlreadyClosedException
+        22: dup
+        23: ldc           #9                  // String this Analyzer is closed
+        25: invokespecial #10                 // Method org/apache/lucene/store/AlreadyClosedException."<init>":(Ljava/lang/String;)V
+        28: athrow
+        29: aload_2
+        30: athrow
+        31: return
+      Exception table:
+         from    to  target type
+             0     8    11   Class java/lang/NullPointerException
+      LineNumberTable:
+        line 72: 0
+        line 79: 8
+        line 73: 11
+        line 74: 12
+        line 75: 19
+        line 77: 29
+        line 80: 31
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           12      19     2   npe   Ljava/lang/NullPointerException;
+            0      32     0  this   Lorg/apache/lucene/analysis/Analyzer;
+            0      32     1   obj   Ljava/lang/Object;
+
+  public int getPositionIncrementGap(java.lang.String);
+    descriptor: (Ljava/lang/String;)I
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=2, args_size=2
+         0: iconst_0
+         1: ireturn
+      LineNumberTable:
+        line 98: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       2     0  this   Lorg/apache/lucene/analysis/Analyzer;
+            0       2     1 fieldName   Ljava/lang/String;
+
+  public void close();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #4                  // Field tokenStreams:Lorg/apache/lucene/util/CloseableThreadLocal;
+         4: invokevirtual #12                 // Method org/apache/lucene/util/CloseableThreadLocal.close:()V
+         7: aload_0
+         8: aconst_null
+         9: putfield      #4                  // Field tokenStreams:Lorg/apache/lucene/util/CloseableThreadLocal;
+        12: return
+      LineNumberTable:
+        line 103: 0
+        line 104: 7
+        line 105: 12
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      13     0  this   Lorg/apache/lucene/analysis/Analyzer;
+}
+SourceFile: "Analyzer.java"

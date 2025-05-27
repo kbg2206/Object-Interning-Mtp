@@ -1,0 +1,2458 @@
+Classfile /home/omkar/personal/tokyo_escape/escapeAnalysis/benchmark_dump/lusearch_in/org/apache/lucene/util/UnicodeUtil.class
+  Last modified 11 Sep, 2023; size 8669 bytes
+  MD5 checksum 6806c16d544cd427bdb90888efaecd4d
+  Compiled from "UnicodeUtil.java"
+public final class org.apache.lucene.util.UnicodeUtil
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_FINAL, ACC_SUPER
+Constant pool:
+    #1 = Utf8               org/apache/lucene/util/UnicodeUtil
+    #2 = Class              #1            // org/apache/lucene/util/UnicodeUtil
+    #3 = Utf8               java/lang/Object
+    #4 = Class              #3            // java/lang/Object
+    #5 = Utf8               UnicodeUtil.java
+    #6 = Utf8               org/apache/lucene/util/UnicodeUtil$UTF16Result
+    #7 = Class              #6            // org/apache/lucene/util/UnicodeUtil$UTF16Result
+    #8 = Utf8               UTF16Result
+    #9 = Utf8               org/apache/lucene/util/UnicodeUtil$UTF8Result
+   #10 = Class              #9            // org/apache/lucene/util/UnicodeUtil$UTF8Result
+   #11 = Utf8               UTF8Result
+   #12 = Utf8               UNI_SUR_HIGH_START
+   #13 = Utf8               I
+   #14 = Integer            55296
+   #15 = Utf8               UNI_SUR_HIGH_END
+   #16 = Integer            56319
+   #17 = Utf8               UNI_SUR_LOW_START
+   #18 = Integer            56320
+   #19 = Utf8               UNI_SUR_LOW_END
+   #20 = Integer            57343
+   #21 = Utf8               UNI_REPLACEMENT_CHAR
+   #22 = Integer            65533
+   #23 = Utf8               UNI_MAX_BMP
+   #24 = Utf8               J
+   #25 = Long               65535l
+   #27 = Utf8               HALF_BASE
+   #28 = Integer            65536
+   #29 = Utf8               HALF_SHIFT
+   #30 = Long               10l
+   #32 = Utf8               HALF_MASK
+   #33 = Long               1023l
+   #35 = Utf8               $assertionsDisabled
+   #36 = Utf8               Z
+   #37 = Utf8               class$org$apache$lucene$util$UnicodeUtil
+   #38 = Utf8               Ljava/lang/Class;
+   #39 = Utf8               <clinit>
+   #40 = Utf8               ()V
+   #41 = NameAndType        #37:#38       // class$org$apache$lucene$util$UnicodeUtil:Ljava/lang/Class;
+   #42 = Fieldref           #2.#41        // org/apache/lucene/util/UnicodeUtil.class$org$apache$lucene$util$UnicodeUtil:Ljava/lang/Class;
+   #43 = Utf8               org.apache.lucene.util.UnicodeUtil
+   #44 = String             #43           // org.apache.lucene.util.UnicodeUtil
+   #45 = Utf8               class$
+   #46 = Utf8               (Ljava/lang/String;)Ljava/lang/Class;
+   #47 = NameAndType        #45:#46       // class$:(Ljava/lang/String;)Ljava/lang/Class;
+   #48 = Methodref          #2.#47        // org/apache/lucene/util/UnicodeUtil.class$:(Ljava/lang/String;)Ljava/lang/Class;
+   #49 = Utf8               java/lang/Class
+   #50 = Class              #49           // java/lang/Class
+   #51 = Utf8               desiredAssertionStatus
+   #52 = Utf8               ()Z
+   #53 = NameAndType        #51:#52       // desiredAssertionStatus:()Z
+   #54 = Methodref          #50.#53       // java/lang/Class.desiredAssertionStatus:()Z
+   #55 = NameAndType        #35:#36       // $assertionsDisabled:Z
+   #56 = Fieldref           #2.#55        // org/apache/lucene/util/UnicodeUtil.$assertionsDisabled:Z
+   #57 = Utf8               <init>
+   #58 = NameAndType        #57:#40       // "<init>":()V
+   #59 = Methodref          #4.#58        // java/lang/Object."<init>":()V
+   #60 = Utf8               UTF16toUTF8
+   #61 = Utf8               ([CILorg/apache/lucene/util/UnicodeUtil$UTF8Result;)V
+   #62 = Utf8               result
+   #63 = Utf8               [B
+   #64 = NameAndType        #62:#63       // result:[B
+   #65 = Fieldref           #10.#64       // org/apache/lucene/util/UnicodeUtil$UTF8Result.result:[B
+   #66 = Utf8               java/lang/AssertionError
+   #67 = Class              #66           // java/lang/AssertionError
+   #68 = Methodref          #67.#58       // java/lang/AssertionError."<init>":()V
+   #69 = Utf8               java/lang/System
+   #70 = Class              #69           // java/lang/System
+   #71 = Utf8               arraycopy
+   #72 = Utf8               (Ljava/lang/Object;ILjava/lang/Object;II)V
+   #73 = NameAndType        #71:#72       // arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+   #74 = Methodref          #70.#73       // java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+   #75 = Integer            65535
+   #76 = Integer            55232
+   #77 = Utf8               length
+   #78 = NameAndType        #77:#13       // length:I
+   #79 = Fieldref           #10.#78       // org/apache/lucene/util/UnicodeUtil$UTF8Result.length:I
+   #80 = Class              #63           // "[B"
+   #81 = Utf8               ([CIILorg/apache/lucene/util/UnicodeUtil$UTF8Result;)V
+   #82 = Utf8               [C
+   #83 = Class              #82           // "[C"
+   #84 = Utf8               (Ljava/lang/String;IILorg/apache/lucene/util/UnicodeUtil$UTF8Result;)V
+   #85 = Utf8               java/lang/String
+   #86 = Class              #85           // java/lang/String
+   #87 = Utf8               charAt
+   #88 = Utf8               (I)C
+   #89 = NameAndType        #87:#88       // charAt:(I)C
+   #90 = Methodref          #86.#89       // java/lang/String.charAt:(I)C
+   #91 = Utf8               UTF8toUTF16
+   #92 = Utf8               ([BIILorg/apache/lucene/util/UnicodeUtil$UTF16Result;)V
+   #93 = NameAndType        #62:#82       // result:[C
+   #94 = Fieldref           #7.#93        // org/apache/lucene/util/UnicodeUtil$UTF16Result.result:[C
+   #95 = Utf8               offsets
+   #96 = Utf8               [I
+   #97 = NameAndType        #95:#96       // offsets:[I
+   #98 = Fieldref           #7.#97        // org/apache/lucene/util/UnicodeUtil$UTF16Result.offsets:[I
+   #99 = Long               56320l
+  #101 = Fieldref           #7.#78        // org/apache/lucene/util/UnicodeUtil$UTF16Result.length:I
+  #102 = Class              #96           // "[I"
+  #103 = Utf8               java/lang/ClassNotFoundException
+  #104 = Class              #103          // java/lang/ClassNotFoundException
+  #105 = Utf8               soot/rtlib/tamiflex/ReflectiveCalls
+  #106 = Class              #105          // soot/rtlib/tamiflex/ReflectiveCalls
+  #107 = Utf8               knownClassForName
+  #108 = Utf8               (ILjava/lang/String;)V
+  #109 = NameAndType        #107:#108     // knownClassForName:(ILjava/lang/String;)V
+  #110 = Methodref          #106.#109     // soot/rtlib/tamiflex/ReflectiveCalls.knownClassForName:(ILjava/lang/String;)V
+  #111 = Utf8               soot/rtlib/tamiflex/OpaquePredicate
+  #112 = Class              #111          // soot/rtlib/tamiflex/OpaquePredicate
+  #113 = Utf8               getFalse
+  #114 = NameAndType        #113:#52      // getFalse:()Z
+  #115 = Methodref          #112.#114     // soot/rtlib/tamiflex/OpaquePredicate.getFalse:()Z
+  #116 = Utf8               soot/rtlib/tamiflex/ReflectiveCallsWrapper
+  #117 = Class              #116          // soot/rtlib/tamiflex/ReflectiveCallsWrapper
+  #118 = Utf8               reflectiveCall27
+  #119 = Utf8               ()Ljava/lang/Class;
+  #120 = NameAndType        #118:#119     // reflectiveCall27:()Ljava/lang/Class;
+  #121 = Methodref          #117.#120     // soot/rtlib/tamiflex/ReflectiveCallsWrapper.reflectiveCall27:()Ljava/lang/Class;
+  #122 = Utf8               forName
+  #123 = NameAndType        #122:#46      // forName:(Ljava/lang/String;)Ljava/lang/Class;
+  #124 = Methodref          #50.#123      // java/lang/Class.forName:(Ljava/lang/String;)Ljava/lang/Class;
+  #125 = Utf8               java/lang/NoClassDefFoundError
+  #126 = Class              #125          // java/lang/NoClassDefFoundError
+  #127 = Methodref          #126.#58      // java/lang/NoClassDefFoundError."<init>":()V
+  #128 = Utf8               initCause
+  #129 = Utf8               (Ljava/lang/Throwable;)Ljava/lang/Throwable;
+  #130 = NameAndType        #128:#129     // initCause:(Ljava/lang/Throwable;)Ljava/lang/Throwable;
+  #131 = Methodref          #126.#130     // java/lang/NoClassDefFoundError.initCause:(Ljava/lang/Throwable;)Ljava/lang/Throwable;
+  #132 = Utf8               ConstantValue
+  #133 = Utf8               Code
+  #134 = Utf8               StackMapTable
+  #135 = Utf8               LineNumberTable
+  #136 = Utf8               InnerClasses
+  #137 = Utf8               SourceFile
+{
+  public static final int UNI_SUR_HIGH_START;
+    descriptor: I
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+    ConstantValue: int 55296
+
+  public static final int UNI_SUR_HIGH_END;
+    descriptor: I
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+    ConstantValue: int 56319
+
+  public static final int UNI_SUR_LOW_START;
+    descriptor: I
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+    ConstantValue: int 56320
+
+  public static final int UNI_SUR_LOW_END;
+    descriptor: I
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+    ConstantValue: int 57343
+
+  public static final int UNI_REPLACEMENT_CHAR;
+    descriptor: I
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+    ConstantValue: int 65533
+
+  static final boolean $assertionsDisabled;
+    descriptor: Z
+    flags: ACC_STATIC, ACC_FINAL, ACC_SYNTHETIC
+
+  static java.lang.Class class$org$apache$lucene$util$UnicodeUtil;
+    descriptor: Ljava/lang/Class;
+    flags: ACC_STATIC, ACC_SYNTHETIC
+
+  static {};
+    descriptor: ()V
+    flags: ACC_STATIC
+    Code:
+      stack=1, locals=2, args_size=0
+         0: getstatic     #42                 // Field class$org$apache$lucene$util$UnicodeUtil:Ljava/lang/Class;
+         3: ifnonnull     19
+         6: ldc           #44                 // String org.apache.lucene.util.UnicodeUtil
+         8: invokestatic  #48                 // Method class$:(Ljava/lang/String;)Ljava/lang/Class;
+        11: astore_0
+        12: aload_0
+        13: putstatic     #42                 // Field class$org$apache$lucene$util$UnicodeUtil:Ljava/lang/Class;
+        16: goto          23
+        19: getstatic     #42                 // Field class$org$apache$lucene$util$UnicodeUtil:Ljava/lang/Class;
+        22: astore_0
+        23: aload_0
+        24: invokevirtual #54                 // Method java/lang/Class.desiredAssertionStatus:()Z
+        27: ifne          35
+        30: iconst_1
+        31: istore_1
+        32: goto          37
+        35: iconst_0
+        36: istore_1
+        37: iload_1
+        38: putstatic     #56                 // Field $assertionsDisabled:Z
+        41: return
+      StackMapTable: number_of_entries = 4
+        frame_type = 19 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 3
+          locals = [ class java/lang/Class ]
+        frame_type = 11 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 1
+          locals = [ int ]
+      LineNumberTable:
+        line 61: 0
+        line 61: 3
+        line 61: 6
+        line 61: 8
+        line 61: 11
+        line 61: 12
+        line 61: 13
+        line 61: 16
+        line 61: 19
+        line 61: 22
+        line 61: 23
+        line 61: 24
+        line 61: 27
+        line 61: 30
+        line 61: 31
+        line 61: 32
+        line 61: 35
+        line 61: 36
+        line 61: 37
+        line 61: 38
+        line 61: 41
+
+  public org.apache.lucene.util.UnicodeUtil();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #59                 // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 61: 0
+        line 61: 1
+        line 61: 4
+
+  public static void UTF16toUTF8(char[], int, org.apache.lucene.util.UnicodeUtil$UTF8Result);
+    descriptor: ([CILorg/apache/lucene/util/UnicodeUtil$UTF8Result;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=8, locals=13, args_size=3
+         0: iconst_0
+         1: istore_3
+         2: iload_1
+         3: istore        4
+         5: aload_2
+         6: getfield      #65                 // Field org/apache/lucene/util/UnicodeUtil$UTF8Result.result:[B
+         9: astore        5
+        11: aload_0
+        12: iload         4
+        14: iinc          4, 1
+        17: caload
+        18: istore        6
+        20: iload_3
+        21: iconst_4
+        22: iadd
+        23: aload         5
+        25: arraylength
+        26: if_icmple     81
+        29: iconst_2
+        30: aload         5
+        32: arraylength
+        33: imul
+        34: newarray       byte
+        36: astore        7
+        38: getstatic     #56                 // Field $assertionsDisabled:Z
+        41: ifne          61
+        44: aload         7
+        46: arraylength
+        47: iload_3
+        48: iconst_4
+        49: iadd
+        50: if_icmpge     61
+        53: new           #67                 // class java/lang/AssertionError
+        56: dup
+        57: invokespecial #68                 // Method java/lang/AssertionError."<init>":()V
+        60: athrow
+        61: aload         5
+        63: iconst_0
+        64: aload         7
+        66: iconst_0
+        67: iload_3
+        68: invokestatic  #74                 // Method java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+        71: aload         7
+        73: astore        5
+        75: aload_2
+        76: aload         7
+        78: putfield      #65                 // Field org/apache/lucene/util/UnicodeUtil$UTF8Result.result:[B
+        81: iload         6
+        83: sipush        128
+        86: if_icmpge     102
+        89: aload         5
+        91: iload_3
+        92: iinc          3, 1
+        95: iload         6
+        97: i2b
+        98: bastore
+        99: goto          399
+       102: iload         6
+       104: sipush        2048
+       107: if_icmpge     147
+       110: aload         5
+       112: iload_3
+       113: iconst_1
+       114: iadd
+       115: dup
+       116: aload         5
+       118: iload_3
+       119: sipush        192
+       122: iload         6
+       124: bipush        6
+       126: ishr
+       127: ior
+       128: i2b
+       129: bastore
+       130: iconst_1
+       131: iadd
+       132: istore_3
+       133: sipush        128
+       136: iload         6
+       138: bipush        63
+       140: iand
+       141: ior
+       142: i2b
+       143: bastore
+       144: goto          399
+       147: iload         6
+       149: ldc           #14                 // int 55296
+       151: if_icmplt     161
+       154: iload         6
+       156: ldc           #20                 // int 57343
+       158: if_icmple     232
+       161: iload         6
+       163: ldc           #75                 // int 65535
+       165: if_icmpne     171
+       168: goto          402
+       171: aload         5
+       173: iload_3
+       174: iconst_1
+       175: iadd
+       176: dup
+       177: aload         5
+       179: iload_3
+       180: sipush        224
+       183: iload         6
+       185: bipush        12
+       187: ishr
+       188: ior
+       189: i2b
+       190: bastore
+       191: iconst_1
+       192: iadd
+       193: istore        8
+       195: sipush        128
+       198: iload         6
+       200: bipush        6
+       202: ishr
+       203: bipush        63
+       205: iand
+       206: ior
+       207: i2b
+       208: bastore
+       209: iload         8
+       211: iconst_1
+       212: iadd
+       213: istore_3
+       214: aload         5
+       216: iload         8
+       218: sipush        128
+       221: iload         6
+       223: bipush        63
+       225: iand
+       226: ior
+       227: i2b
+       228: bastore
+       229: goto          399
+       232: iload         6
+       234: ldc           #18                 // int 56320
+       236: if_icmpge     368
+       239: aload_0
+       240: iload         4
+       242: caload
+       243: ldc           #75                 // int 65535
+       245: if_icmpeq     368
+       248: aload_0
+       249: iload         4
+       251: caload
+       252: istore        9
+       254: iload         9
+       256: ldc           #18                 // int 56320
+       258: if_icmplt     368
+       261: iload         9
+       263: ldc           #20                 // int 57343
+       265: if_icmpgt     368
+       268: iload         6
+       270: ldc           #76                 // int 55232
+       272: isub
+       273: bipush        10
+       275: ishl
+       276: iload         9
+       278: sipush        1023
+       281: iand
+       282: iadd
+       283: istore        10
+       285: iinc          4, 1
+       288: aload         5
+       290: iload_3
+       291: iconst_1
+       292: iadd
+       293: dup
+       294: aload         5
+       296: iload_3
+       297: sipush        240
+       300: iload         10
+       302: bipush        18
+       304: ishr
+       305: ior
+       306: i2b
+       307: bastore
+       308: iconst_1
+       309: iadd
+       310: istore        11
+       312: sipush        128
+       315: iload         10
+       317: bipush        12
+       319: ishr
+       320: bipush        63
+       322: iand
+       323: ior
+       324: i2b
+       325: bastore
+       326: aload         5
+       328: iload         11
+       330: iconst_1
+       331: iadd
+       332: dup
+       333: aload         5
+       335: iload         11
+       337: sipush        128
+       340: iload         10
+       342: bipush        6
+       344: ishr
+       345: bipush        63
+       347: iand
+       348: ior
+       349: i2b
+       350: bastore
+       351: iconst_1
+       352: iadd
+       353: istore_3
+       354: sipush        128
+       357: iload         10
+       359: bipush        63
+       361: iand
+       362: ior
+       363: i2b
+       364: bastore
+       365: goto          11
+       368: aload         5
+       370: iload_3
+       371: iconst_1
+       372: iadd
+       373: dup
+       374: aload         5
+       376: iload_3
+       377: bipush        -17
+       379: bastore
+       380: iconst_1
+       381: iadd
+       382: istore        12
+       384: bipush        -65
+       386: bastore
+       387: iload         12
+       389: iconst_1
+       390: iadd
+       391: istore_3
+       392: aload         5
+       394: iload         12
+       396: bipush        -67
+       398: bastore
+       399: goto          11
+       402: aload_2
+       403: iload_3
+       404: putfield      #79                 // Field org/apache/lucene/util/UnicodeUtil$UTF8Result.length:I
+       407: return
+      StackMapTable: number_of_entries = 11
+        frame_type = 254 /* append */
+          offset_delta = 11
+          locals = [ int, int, class "[B" ]
+        frame_type = 253 /* append */
+          offset_delta = 49
+          locals = [ int, class "[B" ]
+        frame_type = 250 /* chop */
+          offset_delta = 19
+        frame_type = 20 /* same */
+        frame_type = 44 /* same */
+        frame_type = 13 /* same */
+        frame_type = 9 /* same */
+        frame_type = 60 /* same */
+        frame_type = 251 /* same_frame_extended */
+          offset_delta = 135
+        frame_type = 30 /* same */
+        frame_type = 2 /* same */
+      LineNumberTable:
+        line 114: 0
+        line 114: 1
+        line 115: 2
+        line 115: 3
+        line 116: 5
+        line 116: 6
+        line 116: 9
+        line 120: 11
+        line 120: 14
+        line 120: 17
+        line 120: 18
+        line 122: 20
+        line 122: 21
+        line 122: 22
+        line 122: 23
+        line 122: 25
+        line 122: 26
+        line 123: 29
+        line 123: 30
+        line 123: 32
+        line 123: 33
+        line 123: 34
+        line 123: 36
+        line 124: 38
+        line 124: 41
+        line 124: 44
+        line 124: 46
+        line 124: 47
+        line 124: 48
+        line 124: 49
+        line 124: 50
+        line 124: 53
+        line 124: 56
+        line 124: 57
+        line 124: 60
+        line 125: 61
+        line 125: 63
+        line 125: 64
+        line 125: 66
+        line 125: 67
+        line 125: 68
+        line 126: 71
+        line 126: 73
+        line 126: 75
+        line 126: 76
+        line 126: 78
+        line 128: 81
+        line 128: 83
+        line 128: 86
+        line 129: 89
+        line 129: 91
+        line 129: 92
+        line 129: 95
+        line 129: 97
+        line 129: 98
+        line 129: 99
+        line 130: 102
+        line 130: 104
+        line 130: 107
+        line 132: 110
+        line 131: 112
+        line 131: 113
+        line 131: 114
+        line 131: 115
+        line 131: 116
+        line 131: 118
+        line 131: 119
+        line 131: 122
+        line 131: 124
+        line 131: 126
+        line 131: 127
+        line 131: 128
+        line 131: 129
+        line 132: 130
+        line 132: 131
+        line 132: 132
+        line 132: 133
+        line 132: 136
+        line 132: 138
+        line 132: 140
+        line 132: 141
+        line 132: 142
+        line 132: 143
+        line 132: 144
+        line 133: 147
+        line 133: 149
+        line 133: 151
+        line 133: 154
+        line 133: 156
+        line 133: 158
+        line 134: 161
+        line 134: 163
+        line 134: 165
+        line 136: 168
+        line 138: 171
+        line 137: 173
+        line 137: 174
+        line 137: 175
+        line 137: 176
+        line 137: 177
+        line 137: 179
+        line 137: 180
+        line 137: 183
+        line 137: 185
+        line 137: 187
+        line 137: 188
+        line 137: 189
+        line 137: 190
+        line 138: 191
+        line 138: 192
+        line 138: 193
+        line 138: 195
+        line 138: 198
+        line 138: 200
+        line 138: 202
+        line 138: 203
+        line 138: 205
+        line 138: 206
+        line 138: 207
+        line 138: 208
+        line 139: 209
+        line 139: 211
+        line 139: 212
+        line 139: 213
+        line 139: 214
+        line 139: 216
+        line 139: 218
+        line 139: 221
+        line 139: 223
+        line 139: 225
+        line 139: 226
+        line 139: 227
+        line 139: 228
+        line 139: 229
+        line 143: 232
+        line 143: 234
+        line 143: 236
+        line 143: 239
+        line 143: 240
+        line 143: 242
+        line 143: 243
+        line 143: 245
+        line 144: 248
+        line 144: 249
+        line 144: 251
+        line 144: 252
+        line 146: 254
+        line 146: 256
+        line 146: 258
+        line 146: 261
+        line 146: 263
+        line 146: 265
+        line 147: 268
+        line 147: 270
+        line 147: 272
+        line 147: 273
+        line 147: 275
+        line 147: 276
+        line 147: 278
+        line 147: 281
+        line 147: 282
+        line 147: 283
+        line 148: 285
+        line 150: 288
+        line 149: 290
+        line 149: 291
+        line 149: 292
+        line 149: 293
+        line 149: 294
+        line 149: 296
+        line 149: 297
+        line 149: 300
+        line 149: 302
+        line 149: 304
+        line 149: 305
+        line 149: 306
+        line 149: 307
+        line 150: 308
+        line 150: 309
+        line 150: 310
+        line 150: 312
+        line 150: 315
+        line 150: 317
+        line 150: 319
+        line 150: 320
+        line 150: 322
+        line 150: 323
+        line 150: 324
+        line 150: 325
+        line 152: 326
+        line 151: 328
+        line 151: 330
+        line 151: 331
+        line 151: 332
+        line 151: 333
+        line 151: 335
+        line 151: 337
+        line 151: 340
+        line 151: 342
+        line 151: 344
+        line 151: 345
+        line 151: 347
+        line 151: 348
+        line 151: 349
+        line 151: 350
+        line 152: 351
+        line 152: 352
+        line 152: 353
+        line 152: 354
+        line 152: 357
+        line 152: 359
+        line 152: 361
+        line 152: 362
+        line 152: 363
+        line 152: 364
+        line 153: 365
+        line 159: 368
+        line 158: 370
+        line 158: 371
+        line 158: 372
+        line 158: 373
+        line 158: 374
+        line 158: 376
+        line 158: 377
+        line 158: 379
+        line 159: 380
+        line 159: 381
+        line 159: 382
+        line 159: 384
+        line 159: 386
+        line 160: 387
+        line 160: 389
+        line 160: 390
+        line 160: 391
+        line 160: 392
+        line 160: 394
+        line 160: 396
+        line 160: 398
+        line 162: 399
+        line 164: 402
+        line 164: 403
+        line 164: 404
+        line 165: 407
+
+  public static void UTF16toUTF8(char[], int, int, org.apache.lucene.util.UnicodeUtil$UTF8Result);
+    descriptor: ([CIILorg/apache/lucene/util/UnicodeUtil$UTF8Result;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=8, locals=15, args_size=4
+         0: iconst_0
+         1: istore        6
+         3: iload_1
+         4: istore        7
+         6: iload_1
+         7: iload_2
+         8: iadd
+         9: istore        4
+        11: aload_3
+        12: getfield      #65                 // Field org/apache/lucene/util/UnicodeUtil$UTF8Result.result:[B
+        15: astore        8
+        17: iload         7
+        19: iload         4
+        21: if_icmpge     428
+        24: aload_0
+        25: iload         7
+        27: iinc          7, 1
+        30: caload
+        31: istore        5
+        33: iload         6
+        35: iconst_4
+        36: iadd
+        37: aload         8
+        39: arraylength
+        40: if_icmple     97
+        43: iconst_2
+        44: aload         8
+        46: arraylength
+        47: imul
+        48: newarray       byte
+        50: astore        9
+        52: getstatic     #56                 // Field $assertionsDisabled:Z
+        55: ifne          76
+        58: aload         9
+        60: arraylength
+        61: iload         6
+        63: iconst_4
+        64: iadd
+        65: if_icmpge     76
+        68: new           #67                 // class java/lang/AssertionError
+        71: dup
+        72: invokespecial #68                 // Method java/lang/AssertionError."<init>":()V
+        75: athrow
+        76: aload         8
+        78: iconst_0
+        79: aload         9
+        81: iconst_0
+        82: iload         6
+        84: invokestatic  #74                 // Method java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+        87: aload         9
+        89: astore        8
+        91: aload_3
+        92: aload         9
+        94: putfield      #65                 // Field org/apache/lucene/util/UnicodeUtil$UTF8Result.result:[B
+        97: iload         5
+        99: sipush        128
+       102: if_icmpge     119
+       105: aload         8
+       107: iload         6
+       109: iinc          6, 1
+       112: iload         5
+       114: i2b
+       115: bastore
+       116: goto          425
+       119: iload         5
+       121: sipush        2048
+       124: if_icmpge     167
+       127: aload         8
+       129: iload         6
+       131: iconst_1
+       132: iadd
+       133: dup
+       134: aload         8
+       136: iload         6
+       138: sipush        192
+       141: iload         5
+       143: bipush        6
+       145: ishr
+       146: ior
+       147: i2b
+       148: bastore
+       149: iconst_1
+       150: iadd
+       151: istore        6
+       153: sipush        128
+       156: iload         5
+       158: bipush        63
+       160: iand
+       161: ior
+       162: i2b
+       163: bastore
+       164: goto          425
+       167: iload         5
+       169: ldc           #14                 // int 55296
+       171: if_icmplt     181
+       174: iload         5
+       176: ldc           #20                 // int 57343
+       178: if_icmple     245
+       181: aload         8
+       183: iload         6
+       185: iconst_1
+       186: iadd
+       187: dup
+       188: aload         8
+       190: iload         6
+       192: sipush        224
+       195: iload         5
+       197: bipush        12
+       199: ishr
+       200: ior
+       201: i2b
+       202: bastore
+       203: iconst_1
+       204: iadd
+       205: istore        10
+       207: sipush        128
+       210: iload         5
+       212: bipush        6
+       214: ishr
+       215: bipush        63
+       217: iand
+       218: ior
+       219: i2b
+       220: bastore
+       221: iload         10
+       223: iconst_1
+       224: iadd
+       225: istore        6
+       227: aload         8
+       229: iload         10
+       231: sipush        128
+       234: iload         5
+       236: bipush        63
+       238: iand
+       239: ior
+       240: i2b
+       241: bastore
+       242: goto          425
+       245: iload         5
+       247: ldc           #18                 // int 56320
+       249: if_icmpge     391
+       252: iload         7
+       254: iload         4
+       256: if_icmpge     391
+       259: aload_0
+       260: iload         7
+       262: caload
+       263: ldc           #75                 // int 65535
+       265: if_icmpeq     391
+       268: aload_0
+       269: iload         7
+       271: caload
+       272: istore        11
+       274: iload         11
+       276: ldc           #18                 // int 56320
+       278: if_icmplt     391
+       281: iload         11
+       283: ldc           #20                 // int 57343
+       285: if_icmpgt     391
+       288: iload         5
+       290: ldc           #76                 // int 55232
+       292: isub
+       293: bipush        10
+       295: ishl
+       296: iload         11
+       298: sipush        1023
+       301: iand
+       302: iadd
+       303: istore        12
+       305: iinc          7, 1
+       308: aload         8
+       310: iload         6
+       312: iconst_1
+       313: iadd
+       314: dup
+       315: aload         8
+       317: iload         6
+       319: sipush        240
+       322: iload         12
+       324: bipush        18
+       326: ishr
+       327: ior
+       328: i2b
+       329: bastore
+       330: iconst_1
+       331: iadd
+       332: istore        13
+       334: sipush        128
+       337: iload         12
+       339: bipush        12
+       341: ishr
+       342: bipush        63
+       344: iand
+       345: ior
+       346: i2b
+       347: bastore
+       348: aload         8
+       350: iload         13
+       352: iconst_1
+       353: iadd
+       354: dup
+       355: aload         8
+       357: iload         13
+       359: sipush        128
+       362: iload         12
+       364: bipush        6
+       366: ishr
+       367: bipush        63
+       369: iand
+       370: ior
+       371: i2b
+       372: bastore
+       373: iconst_1
+       374: iadd
+       375: istore        6
+       377: sipush        128
+       380: iload         12
+       382: bipush        63
+       384: iand
+       385: ior
+       386: i2b
+       387: bastore
+       388: goto          17
+       391: aload         8
+       393: iload         6
+       395: iconst_1
+       396: iadd
+       397: dup
+       398: aload         8
+       400: iload         6
+       402: bipush        -17
+       404: bastore
+       405: iconst_1
+       406: iadd
+       407: istore        14
+       409: bipush        -65
+       411: bastore
+       412: iload         14
+       414: iconst_1
+       415: iadd
+       416: istore        6
+       418: aload         8
+       420: iload         14
+       422: bipush        -67
+       424: bastore
+       425: goto          17
+       428: aload_3
+       429: iload         6
+       431: putfield      #79                 // Field org/apache/lucene/util/UnicodeUtil$UTF8Result.length:I
+       434: return
+      StackMapTable: number_of_entries = 10
+        frame_type = 255 /* full_frame */
+          offset_delta = 17
+          locals = [ class "[C", int, int, class org/apache/lucene/util/UnicodeUtil$UTF8Result, int, top, int, int, class "[B" ]
+          stack = []
+        frame_type = 255 /* full_frame */
+          offset_delta = 58
+          locals = [ class "[C", int, int, class org/apache/lucene/util/UnicodeUtil$UTF8Result, int, int, int, int, class "[B", class "[B" ]
+          stack = []
+        frame_type = 250 /* chop */
+          offset_delta = 20
+        frame_type = 21 /* same */
+        frame_type = 47 /* same */
+        frame_type = 13 /* same */
+        frame_type = 63 /* same */
+        frame_type = 251 /* same_frame_extended */
+          offset_delta = 145
+        frame_type = 33 /* same */
+        frame_type = 255 /* full_frame */
+          offset_delta = 2
+          locals = [ class "[C", int, int, class org/apache/lucene/util/UnicodeUtil$UTF8Result, int, top, int, int, class "[B" ]
+          stack = []
+      LineNumberTable:
+        line 172: 0
+        line 172: 1
+        line 173: 3
+        line 173: 4
+        line 174: 6
+        line 174: 7
+        line 174: 8
+        line 174: 9
+        line 175: 11
+        line 175: 12
+        line 175: 15
+        line 177: 17
+        line 177: 19
+        line 177: 21
+        line 179: 24
+        line 179: 25
+        line 179: 27
+        line 179: 30
+        line 179: 31
+        line 181: 33
+        line 181: 35
+        line 181: 36
+        line 181: 37
+        line 181: 39
+        line 181: 40
+        line 182: 43
+        line 182: 44
+        line 182: 46
+        line 182: 47
+        line 182: 48
+        line 182: 50
+        line 183: 52
+        line 183: 55
+        line 183: 58
+        line 183: 60
+        line 183: 61
+        line 183: 63
+        line 183: 64
+        line 183: 65
+        line 183: 68
+        line 183: 71
+        line 183: 72
+        line 183: 75
+        line 184: 76
+        line 184: 78
+        line 184: 79
+        line 184: 81
+        line 184: 82
+        line 184: 84
+        line 185: 87
+        line 185: 89
+        line 185: 91
+        line 185: 92
+        line 185: 94
+        line 187: 97
+        line 187: 99
+        line 187: 102
+        line 188: 105
+        line 188: 107
+        line 188: 109
+        line 188: 112
+        line 188: 114
+        line 188: 115
+        line 188: 116
+        line 189: 119
+        line 189: 121
+        line 189: 124
+        line 191: 127
+        line 190: 129
+        line 190: 131
+        line 190: 132
+        line 190: 133
+        line 190: 134
+        line 190: 136
+        line 190: 138
+        line 190: 141
+        line 190: 143
+        line 190: 145
+        line 190: 146
+        line 190: 147
+        line 190: 148
+        line 191: 149
+        line 191: 150
+        line 191: 151
+        line 191: 153
+        line 191: 156
+        line 191: 158
+        line 191: 160
+        line 191: 161
+        line 191: 162
+        line 191: 163
+        line 191: 164
+        line 192: 167
+        line 192: 169
+        line 192: 171
+        line 192: 174
+        line 192: 176
+        line 192: 178
+        line 194: 181
+        line 193: 183
+        line 193: 185
+        line 193: 186
+        line 193: 187
+        line 193: 188
+        line 193: 190
+        line 193: 192
+        line 193: 195
+        line 193: 197
+        line 193: 199
+        line 193: 200
+        line 193: 201
+        line 193: 202
+        line 194: 203
+        line 194: 204
+        line 194: 205
+        line 194: 207
+        line 194: 210
+        line 194: 212
+        line 194: 214
+        line 194: 215
+        line 194: 217
+        line 194: 218
+        line 194: 219
+        line 194: 220
+        line 195: 221
+        line 195: 223
+        line 195: 224
+        line 195: 225
+        line 195: 227
+        line 195: 229
+        line 195: 231
+        line 195: 234
+        line 195: 236
+        line 195: 238
+        line 195: 239
+        line 195: 240
+        line 195: 241
+        line 195: 242
+        line 199: 245
+        line 199: 247
+        line 199: 249
+        line 199: 252
+        line 199: 254
+        line 199: 256
+        line 199: 259
+        line 199: 260
+        line 199: 262
+        line 199: 263
+        line 199: 265
+        line 200: 268
+        line 200: 269
+        line 200: 271
+        line 200: 272
+        line 202: 274
+        line 202: 276
+        line 202: 278
+        line 202: 281
+        line 202: 283
+        line 202: 285
+        line 203: 288
+        line 203: 290
+        line 203: 292
+        line 203: 293
+        line 203: 295
+        line 203: 296
+        line 203: 298
+        line 203: 301
+        line 203: 302
+        line 203: 303
+        line 204: 305
+        line 206: 308
+        line 205: 310
+        line 205: 312
+        line 205: 313
+        line 205: 314
+        line 205: 315
+        line 205: 317
+        line 205: 319
+        line 205: 322
+        line 205: 324
+        line 205: 326
+        line 205: 327
+        line 205: 328
+        line 205: 329
+        line 206: 330
+        line 206: 331
+        line 206: 332
+        line 206: 334
+        line 206: 337
+        line 206: 339
+        line 206: 341
+        line 206: 342
+        line 206: 344
+        line 206: 345
+        line 206: 346
+        line 206: 347
+        line 208: 348
+        line 207: 350
+        line 207: 352
+        line 207: 353
+        line 207: 354
+        line 207: 355
+        line 207: 357
+        line 207: 359
+        line 207: 362
+        line 207: 364
+        line 207: 366
+        line 207: 367
+        line 207: 369
+        line 207: 370
+        line 207: 371
+        line 207: 372
+        line 208: 373
+        line 208: 374
+        line 208: 375
+        line 208: 377
+        line 208: 380
+        line 208: 382
+        line 208: 384
+        line 208: 385
+        line 208: 386
+        line 208: 387
+        line 209: 388
+        line 215: 391
+        line 214: 393
+        line 214: 395
+        line 214: 396
+        line 214: 397
+        line 214: 398
+        line 214: 400
+        line 214: 402
+        line 214: 404
+        line 215: 405
+        line 215: 406
+        line 215: 407
+        line 215: 409
+        line 215: 411
+        line 216: 412
+        line 216: 414
+        line 216: 415
+        line 216: 416
+        line 216: 418
+        line 216: 420
+        line 216: 422
+        line 216: 424
+        line 218: 425
+        line 220: 428
+        line 220: 429
+        line 220: 431
+        line 221: 434
+
+  public static void UTF16toUTF8(java.lang.String, int, int, org.apache.lucene.util.UnicodeUtil$UTF8Result);
+    descriptor: (Ljava/lang/String;IILorg/apache/lucene/util/UnicodeUtil$UTF8Result;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=8, locals=15, args_size=4
+         0: iload_1
+         1: iload_2
+         2: iadd
+         3: istore        4
+         5: aload_3
+         6: getfield      #65                 // Field org/apache/lucene/util/UnicodeUtil$UTF8Result.result:[B
+         9: astore        7
+        11: iconst_0
+        12: istore        8
+        14: iload_1
+        15: istore        9
+        17: iload         9
+        19: iload         4
+        21: if_icmpge     427
+        24: aload_0
+        25: iload         9
+        27: invokevirtual #90                 // Method java/lang/String.charAt:(I)C
+        30: istore        5
+        32: iload         8
+        34: iconst_4
+        35: iadd
+        36: aload         7
+        38: arraylength
+        39: if_icmple     96
+        42: iconst_2
+        43: aload         7
+        45: arraylength
+        46: imul
+        47: newarray       byte
+        49: astore        10
+        51: getstatic     #56                 // Field $assertionsDisabled:Z
+        54: ifne          75
+        57: aload         10
+        59: arraylength
+        60: iload         8
+        62: iconst_4
+        63: iadd
+        64: if_icmpge     75
+        67: new           #67                 // class java/lang/AssertionError
+        70: dup
+        71: invokespecial #68                 // Method java/lang/AssertionError."<init>":()V
+        74: athrow
+        75: aload         7
+        77: iconst_0
+        78: aload         10
+        80: iconst_0
+        81: iload         8
+        83: invokestatic  #74                 // Method java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+        86: aload         10
+        88: astore        7
+        90: aload_3
+        91: aload         10
+        93: putfield      #65                 // Field org/apache/lucene/util/UnicodeUtil$UTF8Result.result:[B
+        96: iload         5
+        98: sipush        128
+       101: if_icmpge     118
+       104: aload         7
+       106: iload         8
+       108: iinc          8, 1
+       111: iload         5
+       113: i2b
+       114: bastore
+       115: goto          421
+       118: iload         5
+       120: sipush        2048
+       123: if_icmpge     166
+       126: aload         7
+       128: iload         8
+       130: iconst_1
+       131: iadd
+       132: dup
+       133: aload         7
+       135: iload         8
+       137: sipush        192
+       140: iload         5
+       142: bipush        6
+       144: ishr
+       145: ior
+       146: i2b
+       147: bastore
+       148: iconst_1
+       149: iadd
+       150: istore        8
+       152: sipush        128
+       155: iload         5
+       157: bipush        63
+       159: iand
+       160: ior
+       161: i2b
+       162: bastore
+       163: goto          421
+       166: iload         5
+       168: ldc           #14                 // int 55296
+       170: if_icmplt     180
+       173: iload         5
+       175: ldc           #20                 // int 57343
+       177: if_icmple     244
+       180: aload         7
+       182: iload         8
+       184: iconst_1
+       185: iadd
+       186: dup
+       187: aload         7
+       189: iload         8
+       191: sipush        224
+       194: iload         5
+       196: bipush        12
+       198: ishr
+       199: ior
+       200: i2b
+       201: bastore
+       202: iconst_1
+       203: iadd
+       204: istore        11
+       206: sipush        128
+       209: iload         5
+       211: bipush        6
+       213: ishr
+       214: bipush        63
+       216: iand
+       217: ior
+       218: i2b
+       219: bastore
+       220: iload         11
+       222: iconst_1
+       223: iadd
+       224: istore        8
+       226: aload         7
+       228: iload         11
+       230: sipush        128
+       233: iload         5
+       235: bipush        63
+       237: iand
+       238: ior
+       239: i2b
+       240: bastore
+       241: goto          421
+       244: iload         5
+       246: ldc           #18                 // int 56320
+       248: if_icmpge     387
+       251: iload         9
+       253: iload         4
+       255: iconst_1
+       256: isub
+       257: if_icmpge     387
+       260: aload_0
+       261: iload         9
+       263: iconst_1
+       264: iadd
+       265: invokevirtual #90                 // Method java/lang/String.charAt:(I)C
+       268: istore        6
+       270: iload         6
+       272: ldc           #18                 // int 56320
+       274: if_icmplt     387
+       277: iload         6
+       279: ldc           #20                 // int 57343
+       281: if_icmpgt     387
+       284: iload         5
+       286: ldc           #76                 // int 55232
+       288: isub
+       289: bipush        10
+       291: ishl
+       292: iload         6
+       294: sipush        1023
+       297: iand
+       298: iadd
+       299: istore        12
+       301: iinc          9, 1
+       304: aload         7
+       306: iload         8
+       308: iconst_1
+       309: iadd
+       310: dup
+       311: aload         7
+       313: iload         8
+       315: sipush        240
+       318: iload         12
+       320: bipush        18
+       322: ishr
+       323: ior
+       324: i2b
+       325: bastore
+       326: iconst_1
+       327: iadd
+       328: istore        13
+       330: sipush        128
+       333: iload         12
+       335: bipush        12
+       337: ishr
+       338: bipush        63
+       340: iand
+       341: ior
+       342: i2b
+       343: bastore
+       344: aload         7
+       346: iload         13
+       348: iconst_1
+       349: iadd
+       350: dup
+       351: aload         7
+       353: iload         13
+       355: sipush        128
+       358: iload         12
+       360: bipush        6
+       362: ishr
+       363: bipush        63
+       365: iand
+       366: ior
+       367: i2b
+       368: bastore
+       369: iconst_1
+       370: iadd
+       371: istore        8
+       373: sipush        128
+       376: iload         12
+       378: bipush        63
+       380: iand
+       381: ior
+       382: i2b
+       383: bastore
+       384: goto          421
+       387: aload         7
+       389: iload         8
+       391: iconst_1
+       392: iadd
+       393: dup
+       394: aload         7
+       396: iload         8
+       398: bipush        -17
+       400: bastore
+       401: iconst_1
+       402: iadd
+       403: istore        14
+       405: bipush        -65
+       407: bastore
+       408: iload         14
+       410: iconst_1
+       411: iadd
+       412: istore        8
+       414: aload         7
+       416: iload         14
+       418: bipush        -67
+       420: bastore
+       421: iinc          9, 1
+       424: goto          17
+       427: aload_3
+       428: iload         8
+       430: putfield      #79                 // Field org/apache/lucene/util/UnicodeUtil$UTF8Result.length:I
+       433: return
+      StackMapTable: number_of_entries = 10
+        frame_type = 255 /* full_frame */
+          offset_delta = 17
+          locals = [ class java/lang/String, int, int, class org/apache/lucene/util/UnicodeUtil$UTF8Result, int, top, top, class "[B", int, int ]
+          stack = []
+        frame_type = 255 /* full_frame */
+          offset_delta = 57
+          locals = [ class java/lang/String, int, int, class org/apache/lucene/util/UnicodeUtil$UTF8Result, int, int, top, class "[B", int, int, class "[B" ]
+          stack = []
+        frame_type = 250 /* chop */
+          offset_delta = 20
+        frame_type = 21 /* same */
+        frame_type = 47 /* same */
+        frame_type = 13 /* same */
+        frame_type = 63 /* same */
+        frame_type = 251 /* same_frame_extended */
+          offset_delta = 142
+        frame_type = 33 /* same */
+        frame_type = 255 /* full_frame */
+          offset_delta = 5
+          locals = [ class java/lang/String, int, int, class org/apache/lucene/util/UnicodeUtil$UTF8Result, int, top, top, class "[B", int, int ]
+          stack = []
+      LineNumberTable:
+        line 227: 0
+        line 227: 1
+        line 227: 2
+        line 227: 3
+        line 229: 5
+        line 229: 6
+        line 229: 9
+        line 231: 11
+        line 231: 12
+        line 232: 14
+        line 232: 15
+        line 232: 17
+        line 232: 19
+        line 232: 21
+        line 233: 24
+        line 233: 25
+        line 233: 27
+        line 233: 30
+        line 235: 32
+        line 235: 34
+        line 235: 35
+        line 235: 36
+        line 235: 38
+        line 235: 39
+        line 236: 42
+        line 236: 43
+        line 236: 45
+        line 236: 46
+        line 236: 47
+        line 236: 49
+        line 237: 51
+        line 237: 54
+        line 237: 57
+        line 237: 59
+        line 237: 60
+        line 237: 62
+        line 237: 63
+        line 237: 64
+        line 237: 67
+        line 237: 70
+        line 237: 71
+        line 237: 74
+        line 238: 75
+        line 238: 77
+        line 238: 78
+        line 238: 80
+        line 238: 81
+        line 238: 83
+        line 239: 86
+        line 239: 88
+        line 239: 90
+        line 239: 91
+        line 239: 93
+        line 241: 96
+        line 241: 98
+        line 241: 101
+        line 242: 104
+        line 242: 106
+        line 242: 108
+        line 242: 111
+        line 242: 113
+        line 242: 114
+        line 242: 115
+        line 243: 118
+        line 243: 120
+        line 243: 123
+        line 245: 126
+        line 244: 128
+        line 244: 130
+        line 244: 131
+        line 244: 132
+        line 244: 133
+        line 244: 135
+        line 244: 137
+        line 244: 140
+        line 244: 142
+        line 244: 144
+        line 244: 145
+        line 244: 146
+        line 244: 147
+        line 245: 148
+        line 245: 149
+        line 245: 150
+        line 245: 152
+        line 245: 155
+        line 245: 157
+        line 245: 159
+        line 245: 160
+        line 245: 161
+        line 245: 162
+        line 245: 163
+        line 246: 166
+        line 246: 168
+        line 246: 170
+        line 246: 173
+        line 246: 175
+        line 246: 177
+        line 248: 180
+        line 247: 182
+        line 247: 184
+        line 247: 185
+        line 247: 186
+        line 247: 187
+        line 247: 189
+        line 247: 191
+        line 247: 194
+        line 247: 196
+        line 247: 198
+        line 247: 199
+        line 247: 200
+        line 247: 201
+        line 248: 202
+        line 248: 203
+        line 248: 204
+        line 248: 206
+        line 248: 209
+        line 248: 211
+        line 248: 213
+        line 248: 214
+        line 248: 216
+        line 248: 217
+        line 248: 218
+        line 248: 219
+        line 249: 220
+        line 249: 222
+        line 249: 223
+        line 249: 224
+        line 249: 226
+        line 249: 228
+        line 249: 230
+        line 249: 233
+        line 249: 235
+        line 249: 237
+        line 249: 238
+        line 249: 239
+        line 249: 240
+        line 249: 241
+        line 253: 244
+        line 253: 246
+        line 253: 248
+        line 253: 251
+        line 253: 253
+        line 253: 255
+        line 253: 256
+        line 253: 257
+        line 254: 260
+        line 254: 261
+        line 254: 263
+        line 254: 264
+        line 254: 265
+        line 254: 268
+        line 256: 270
+        line 256: 272
+        line 256: 274
+        line 256: 277
+        line 256: 279
+        line 256: 281
+        line 257: 284
+        line 257: 286
+        line 257: 288
+        line 257: 289
+        line 257: 291
+        line 257: 292
+        line 257: 294
+        line 257: 297
+        line 257: 298
+        line 257: 299
+        line 258: 301
+        line 260: 304
+        line 259: 306
+        line 259: 308
+        line 259: 309
+        line 259: 310
+        line 259: 311
+        line 259: 313
+        line 259: 315
+        line 259: 318
+        line 259: 320
+        line 259: 322
+        line 259: 323
+        line 259: 324
+        line 259: 325
+        line 260: 326
+        line 260: 327
+        line 260: 328
+        line 260: 330
+        line 260: 333
+        line 260: 335
+        line 260: 337
+        line 260: 338
+        line 260: 340
+        line 260: 341
+        line 260: 342
+        line 260: 343
+        line 262: 344
+        line 261: 346
+        line 261: 348
+        line 261: 349
+        line 261: 350
+        line 261: 351
+        line 261: 353
+        line 261: 355
+        line 261: 358
+        line 261: 360
+        line 261: 362
+        line 261: 363
+        line 261: 365
+        line 261: 366
+        line 261: 367
+        line 261: 368
+        line 262: 369
+        line 262: 370
+        line 262: 371
+        line 262: 373
+        line 262: 376
+        line 262: 378
+        line 262: 380
+        line 262: 381
+        line 262: 382
+        line 262: 383
+        line 263: 384
+        line 269: 387
+        line 268: 389
+        line 268: 391
+        line 268: 392
+        line 268: 393
+        line 268: 394
+        line 268: 396
+        line 268: 398
+        line 268: 400
+        line 269: 401
+        line 269: 402
+        line 269: 403
+        line 269: 405
+        line 269: 407
+        line 270: 408
+        line 270: 410
+        line 270: 411
+        line 270: 412
+        line 270: 414
+        line 270: 416
+        line 270: 418
+        line 270: 420
+        line 232: 421
+        line 232: 424
+        line 274: 427
+        line 274: 428
+        line 274: 430
+        line 275: 433
+
+  public static void UTF8toUTF16(byte[], int, int, org.apache.lucene.util.UnicodeUtil$UTF16Result);
+    descriptor: ([BIILorg/apache/lucene/util/UnicodeUtil$UTF16Result;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=6, locals=17, args_size=4
+         0: iload_1
+         1: iload_2
+         2: iadd
+         3: istore        4
+         5: aload_3
+         6: getfield      #94                 // Field org/apache/lucene/util/UnicodeUtil$UTF16Result.result:[C
+         9: astore        8
+        11: aload_3
+        12: getfield      #98                 // Field org/apache/lucene/util/UnicodeUtil$UTF16Result.offsets:[I
+        15: arraylength
+        16: iload         4
+        18: if_icmpgt     51
+        21: aload_3
+        22: getfield      #98                 // Field org/apache/lucene/util/UnicodeUtil$UTF16Result.offsets:[I
+        25: iconst_0
+        26: iconst_2
+        27: iload         4
+        29: imul
+        30: newarray       int
+        32: astore        9
+        34: aload         9
+        36: iconst_0
+        37: aload_3
+        38: getfield      #98                 // Field org/apache/lucene/util/UnicodeUtil$UTF16Result.offsets:[I
+        41: arraylength
+        42: invokestatic  #74                 // Method java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+        45: aload_3
+        46: aload         9
+        48: putfield      #98                 // Field org/apache/lucene/util/UnicodeUtil$UTF16Result.offsets:[I
+        51: aload_3
+        52: getfield      #98                 // Field org/apache/lucene/util/UnicodeUtil$UTF16Result.offsets:[I
+        55: astore        7
+        57: iload_1
+        58: istore        10
+        60: aload         7
+        62: iload         10
+        64: iaload
+        65: iconst_m1
+        66: if_icmpne     75
+        69: iinc          10, -1
+        72: goto          60
+        75: aload         7
+        77: iload         10
+        79: iaload
+        80: istore        11
+        82: iload         11
+        84: iload_2
+        85: iadd
+        86: aload         8
+        88: arraylength
+        89: if_icmplt     123
+        92: iconst_2
+        93: iload         11
+        95: iload_2
+        96: iadd
+        97: imul
+        98: newarray       char
+       100: astore        12
+       102: aload         8
+       104: iconst_0
+       105: aload         12
+       107: iconst_0
+       108: iload         11
+       110: invokestatic  #74                 // Method java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+       113: aload         12
+       115: astore        8
+       117: aload_3
+       118: aload         12
+       120: putfield      #94                 // Field org/apache/lucene/util/UnicodeUtil$UTF16Result.result:[C
+       123: iload         10
+       125: iload         4
+       127: if_icmpge     464
+       130: aload_0
+       131: iload         10
+       133: baload
+       134: sipush        255
+       137: iand
+       138: istore        13
+       140: aload         7
+       142: iload         10
+       144: iinc          10, 1
+       147: iload         11
+       149: iastore
+       150: iload         13
+       152: sipush        192
+       155: if_icmpge     187
+       158: getstatic     #56                 // Field $assertionsDisabled:Z
+       161: ifne          180
+       164: iload         13
+       166: sipush        128
+       169: if_icmplt     180
+       172: new           #67                 // class java/lang/AssertionError
+       175: dup
+       176: invokespecial #68                 // Method java/lang/AssertionError."<init>":()V
+       179: athrow
+       180: iload         13
+       182: istore        14
+       184: goto          383
+       187: iload         13
+       189: sipush        224
+       192: if_icmpge     225
+       195: iload         13
+       197: bipush        31
+       199: iand
+       200: bipush        6
+       202: ishl
+       203: aload_0
+       204: iload         10
+       206: baload
+       207: bipush        63
+       209: iand
+       210: iadd
+       211: istore        14
+       213: aload         7
+       215: iload         10
+       217: iinc          10, 1
+       220: iconst_m1
+       221: iastore
+       222: goto          383
+       225: iload         13
+       227: sipush        240
+       230: if_icmpge     286
+       233: iload         13
+       235: bipush        15
+       237: iand
+       238: bipush        12
+       240: ishl
+       241: aload_0
+       242: iload         10
+       244: baload
+       245: bipush        63
+       247: iand
+       248: bipush        6
+       250: ishl
+       251: iadd
+       252: aload_0
+       253: iload         10
+       255: iconst_1
+       256: iadd
+       257: baload
+       258: bipush        63
+       260: iand
+       261: iadd
+       262: istore        14
+       264: aload         7
+       266: iload         10
+       268: iconst_1
+       269: iadd
+       270: dup
+       271: aload         7
+       273: iload         10
+       275: iconst_m1
+       276: iastore
+       277: iconst_1
+       278: iadd
+       279: istore        10
+       281: iconst_m1
+       282: iastore
+       283: goto          383
+       286: getstatic     #56                 // Field $assertionsDisabled:Z
+       289: ifne          308
+       292: iload         13
+       294: sipush        248
+       297: if_icmplt     308
+       300: new           #67                 // class java/lang/AssertionError
+       303: dup
+       304: invokespecial #68                 // Method java/lang/AssertionError."<init>":()V
+       307: athrow
+       308: iload         13
+       310: bipush        7
+       312: iand
+       313: bipush        18
+       315: ishl
+       316: aload_0
+       317: iload         10
+       319: baload
+       320: bipush        63
+       322: iand
+       323: bipush        12
+       325: ishl
+       326: iadd
+       327: aload_0
+       328: iload         10
+       330: iconst_1
+       331: iadd
+       332: baload
+       333: bipush        63
+       335: iand
+       336: bipush        6
+       338: ishl
+       339: iadd
+       340: aload_0
+       341: iload         10
+       343: iconst_2
+       344: iadd
+       345: baload
+       346: bipush        63
+       348: iand
+       349: iadd
+       350: istore        14
+       352: aload         7
+       354: iload         10
+       356: iconst_1
+       357: iadd
+       358: dup
+       359: aload         7
+       361: iload         10
+       363: iconst_m1
+       364: iastore
+       365: iconst_1
+       366: iadd
+       367: istore        15
+       369: iconst_m1
+       370: iastore
+       371: iload         15
+       373: iconst_1
+       374: iadd
+       375: istore        10
+       377: aload         7
+       379: iload         15
+       381: iconst_m1
+       382: iastore
+       383: iload         14
+       385: i2l
+       386: ldc2_w        #25                 // long 65535l
+       389: lcmp
+       390: ifgt          407
+       393: aload         8
+       395: iload         11
+       397: iinc          11, 1
+       400: iload         14
+       402: i2c
+       403: castore
+       404: goto          461
+       407: aload         8
+       409: iload         14
+       411: ldc           #28                 // int 65536
+       413: isub
+       414: dup
+       415: bipush        10
+       417: ishr
+       418: ldc           #14                 // int 55296
+       420: iadd
+       421: i2c
+       422: istore        5
+       424: aload         8
+       426: iload         11
+       428: iload         5
+       430: castore
+       431: iload         11
+       433: iconst_1
+       434: iadd
+       435: istore        16
+       437: iload         16
+       439: iconst_1
+       440: iadd
+       441: istore        11
+       443: i2l
+       444: ldc2_w        #33                 // long 1023l
+       447: land
+       448: ldc2_w        #99                 // long 56320l
+       451: ladd
+       452: l2i
+       453: i2c
+       454: istore        6
+       456: iload         16
+       458: iload         6
+       460: castore
+       461: goto          123
+       464: aload         7
+       466: iload         10
+       468: iload         11
+       470: iastore
+       471: aload_3
+       472: iload         11
+       474: putfield      #101                // Field org/apache/lucene/util/UnicodeUtil$UTF16Result.length:I
+       477: return
+      StackMapTable: number_of_entries = 13
+        frame_type = 255 /* full_frame */
+          offset_delta = 51
+          locals = [ class "[B", int, int, class org/apache/lucene/util/UnicodeUtil$UTF16Result, int, top, top, top, class "[C" ]
+          stack = []
+        frame_type = 255 /* full_frame */
+          offset_delta = 8
+          locals = [ class "[B", int, int, class org/apache/lucene/util/UnicodeUtil$UTF16Result, int, top, top, class "[I", class "[C", top, int ]
+          stack = []
+        frame_type = 14 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 47
+          locals = [ int ]
+        frame_type = 253 /* append */
+          offset_delta = 56
+          locals = [ top, int ]
+        frame_type = 6 /* same */
+        frame_type = 37 /* same */
+        frame_type = 60 /* same */
+        frame_type = 21 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 74
+          locals = [ int ]
+        frame_type = 23 /* same */
+        frame_type = 53 /* same */
+        frame_type = 248 /* chop */
+          offset_delta = 2
+      LineNumberTable:
+        line 283: 0
+        line 283: 1
+        line 283: 2
+        line 283: 3
+        line 284: 5
+        line 284: 6
+        line 284: 9
+        line 285: 11
+        line 285: 12
+        line 285: 15
+        line 285: 16
+        line 285: 18
+        line 287: 21
+        line 287: 22
+        line 287: 25
+        line 286: 26
+        line 286: 27
+        line 286: 29
+        line 286: 30
+        line 286: 32
+        line 287: 34
+        line 287: 36
+        line 287: 37
+        line 287: 38
+        line 287: 41
+        line 287: 42
+        line 288: 45
+        line 288: 46
+        line 288: 48
+        line 290: 51
+        line 290: 52
+        line 290: 55
+        line 294: 57
+        line 294: 58
+        line 295: 60
+        line 295: 62
+        line 295: 64
+        line 295: 65
+        line 295: 66
+        line 296: 69
+        line 296: 72
+        line 298: 75
+        line 298: 77
+        line 298: 79
+        line 298: 80
+        line 301: 82
+        line 301: 84
+        line 301: 85
+        line 301: 86
+        line 301: 88
+        line 301: 89
+        line 302: 92
+        line 302: 93
+        line 302: 95
+        line 302: 96
+        line 302: 97
+        line 302: 98
+        line 302: 100
+        line 303: 102
+        line 303: 104
+        line 303: 105
+        line 303: 107
+        line 303: 108
+        line 303: 110
+        line 304: 113
+        line 304: 115
+        line 304: 117
+        line 304: 118
+        line 304: 120
+        line 307: 123
+        line 307: 125
+        line 307: 127
+        line 309: 130
+        line 309: 131
+        line 309: 133
+        line 309: 134
+        line 309: 137
+        line 309: 138
+        line 312: 140
+        line 312: 142
+        line 312: 144
+        line 312: 147
+        line 312: 149
+        line 314: 150
+        line 314: 152
+        line 314: 155
+        line 315: 158
+        line 315: 161
+        line 315: 164
+        line 315: 166
+        line 315: 169
+        line 315: 172
+        line 315: 175
+        line 315: 176
+        line 315: 179
+        line 316: 180
+        line 316: 182
+        line 316: 184
+        line 317: 187
+        line 317: 189
+        line 317: 192
+        line 318: 195
+        line 318: 197
+        line 318: 199
+        line 318: 200
+        line 318: 202
+        line 318: 203
+        line 318: 204
+        line 318: 206
+        line 318: 207
+        line 318: 209
+        line 318: 210
+        line 318: 211
+        line 319: 213
+        line 319: 215
+        line 319: 217
+        line 319: 220
+        line 319: 221
+        line 319: 222
+        line 320: 225
+        line 320: 227
+        line 320: 230
+        line 321: 233
+        line 321: 235
+        line 321: 237
+        line 321: 238
+        line 321: 240
+        line 321: 241
+        line 321: 242
+        line 321: 244
+        line 321: 245
+        line 321: 247
+        line 321: 248
+        line 321: 250
+        line 321: 251
+        line 321: 252
+        line 321: 253
+        line 321: 255
+        line 321: 256
+        line 321: 257
+        line 321: 258
+        line 321: 260
+        line 321: 261
+        line 321: 262
+        line 323: 264
+        line 322: 266
+        line 322: 268
+        line 322: 269
+        line 322: 270
+        line 322: 271
+        line 322: 273
+        line 322: 275
+        line 322: 276
+        line 323: 277
+        line 323: 278
+        line 323: 279
+        line 323: 281
+        line 323: 282
+        line 323: 283
+        line 325: 286
+        line 325: 289
+        line 325: 292
+        line 325: 294
+        line 325: 297
+        line 325: 300
+        line 325: 303
+        line 325: 304
+        line 325: 307
+        line 326: 308
+        line 326: 310
+        line 326: 312
+        line 326: 313
+        line 326: 315
+        line 326: 316
+        line 326: 317
+        line 326: 319
+        line 326: 320
+        line 326: 322
+        line 326: 323
+        line 326: 325
+        line 326: 326
+        line 326: 327
+        line 326: 328
+        line 326: 330
+        line 326: 331
+        line 326: 332
+        line 326: 333
+        line 326: 335
+        line 326: 336
+        line 326: 338
+        line 326: 339
+        line 326: 340
+        line 326: 341
+        line 326: 343
+        line 326: 344
+        line 326: 345
+        line 326: 346
+        line 326: 348
+        line 326: 349
+        line 326: 350
+        line 328: 352
+        line 327: 354
+        line 327: 356
+        line 327: 357
+        line 327: 358
+        line 327: 359
+        line 327: 361
+        line 327: 363
+        line 327: 364
+        line 328: 365
+        line 328: 366
+        line 328: 367
+        line 328: 369
+        line 328: 370
+        line 329: 371
+        line 329: 373
+        line 329: 374
+        line 329: 375
+        line 329: 377
+        line 329: 379
+        line 329: 381
+        line 329: 382
+        line 332: 383
+        line 332: 385
+        line 332: 386
+        line 332: 389
+        line 332: 390
+        line 334: 393
+        line 334: 395
+        line 334: 397
+        line 334: 400
+        line 334: 402
+        line 334: 403
+        line 334: 404
+        line 339: 407
+        line 337: 409
+        line 337: 411
+        line 337: 413
+        line 337: 414
+        line 338: 415
+        line 338: 417
+        line 338: 418
+        line 338: 420
+        line 338: 421
+        line 338: 422
+        line 338: 424
+        line 338: 426
+        line 338: 428
+        line 338: 430
+        line 338: 431
+        line 338: 433
+        line 338: 434
+        line 338: 435
+        line 339: 437
+        line 339: 439
+        line 339: 440
+        line 339: 441
+        line 339: 443
+        line 339: 444
+        line 339: 447
+        line 339: 448
+        line 339: 451
+        line 339: 452
+        line 339: 453
+        line 339: 454
+        line 339: 456
+        line 339: 458
+        line 339: 460
+        line 341: 461
+        line 343: 464
+        line 343: 466
+        line 343: 468
+        line 343: 470
+        line 344: 471
+        line 344: 472
+        line 344: 474
+        line 345: 477
+
+  static java.lang.Class class$(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/Class;
+    flags: ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=2, locals=3, args_size=1
+         0: bipush        18
+         2: aload_0
+         3: invokestatic  #110                // Method soot/rtlib/tamiflex/ReflectiveCalls.knownClassForName:(ILjava/lang/String;)V
+         6: invokestatic  #115                // Method soot/rtlib/tamiflex/OpaquePredicate.getFalse:()Z
+         9: ifeq          19
+        12: invokestatic  #121                // Method soot/rtlib/tamiflex/ReflectiveCallsWrapper.reflectiveCall27:()Ljava/lang/Class;
+        15: astore_1
+        16: goto          24
+        19: aload_0
+        20: invokestatic  #124                // Method java/lang/Class.forName:(Ljava/lang/String;)Ljava/lang/Class;
+        23: astore_1
+        24: aload_1
+        25: areturn
+        26: astore_2
+        27: new           #126                // class java/lang/NoClassDefFoundError
+        30: dup
+        31: invokespecial #127                // Method java/lang/NoClassDefFoundError."<init>":()V
+        34: aload_2
+        35: invokevirtual #131                // Method java/lang/NoClassDefFoundError.initCause:(Ljava/lang/Throwable;)Ljava/lang/Throwable;
+        38: athrow
+      Exception table:
+         from    to  target type
+             0    24    26   Class java/lang/ClassNotFoundException
+      StackMapTable: number_of_entries = 3
+        frame_type = 19 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 4
+          locals = [ class java/lang/Class ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 1
+          locals = [ class java/lang/String ]
+          stack = [ class java/lang/ClassNotFoundException ]
+      LineNumberTable:
+        line 61: 19
+        line 61: 20
+        line 61: 23
+        line 61: 24
+        line 61: 25
+        line 61: 26
+        line 61: 27
+        line 61: 30
+        line 61: 31
+        line 61: 34
+        line 61: 35
+        line 61: 38
+}
+InnerClasses:
+     public static final #8= #7 of #2; //UTF16Result=class org/apache/lucene/util/UnicodeUtil$UTF16Result of class org/apache/lucene/util/UnicodeUtil
+     public static final #11= #10 of #2; //UTF8Result=class org/apache/lucene/util/UnicodeUtil$UTF8Result of class org/apache/lucene/util/UnicodeUtil
+SourceFile: "UnicodeUtil.java"

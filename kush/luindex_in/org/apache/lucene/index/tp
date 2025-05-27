@@ -1,0 +1,469 @@
+Classfile /home/omkar/personal/tokyo_escape/escapeAnalysis/benchmark_dump/luindex_in/org/apache/lucene/index/SegmentReader$Norm.class
+  Last modified 30 Jul, 2023; size 3934 bytes
+  MD5 checksum be50a6a6840e344e7d1551f001133694
+  Compiled from "SegmentReader.java"
+class org.apache.lucene.index.SegmentReader$Norm
+  minor version: 0
+  major version: 48
+  flags: ACC_SUPER
+Constant pool:
+    #1 = Fieldref           #28.#91       // org/apache/lucene/index/SegmentReader$Norm.rollbackDirty:Z
+    #2 = Fieldref           #28.#92       // org/apache/lucene/index/SegmentReader$Norm.normSeek:J
+    #3 = Fieldref           #28.#93       // org/apache/lucene/index/SegmentReader$Norm.in:Lorg/apache/lucene/store/IndexInput;
+    #4 = Methodref          #28.#94       // org/apache/lucene/index/SegmentReader$Norm.close:()V
+    #5 = Fieldref           #28.#95       // org/apache/lucene/index/SegmentReader$Norm.bytes:[B
+    #6 = Methodref          #28.#96       // org/apache/lucene/index/SegmentReader$Norm.reWrite:(Lorg/apache/lucene/index/SegmentInfo;)V
+    #7 = Fieldref           #28.#97       // org/apache/lucene/index/SegmentReader$Norm.dirty:Z
+    #8 = Fieldref           #28.#98       // org/apache/lucene/index/SegmentReader$Norm.$assertionsDisabled:Z
+    #9 = Fieldref           #28.#99       // org/apache/lucene/index/SegmentReader$Norm.refCount:I
+   #10 = Class              #100          // java/lang/AssertionError
+   #11 = Methodref          #10.#101      // java/lang/AssertionError."<init>":()V
+   #12 = Fieldref           #28.#102      // org/apache/lucene/index/SegmentReader$Norm.this$0:Lorg/apache/lucene/index/SegmentReader;
+   #13 = Methodref          #29.#101      // java/lang/Object."<init>":()V
+   #14 = Fieldref           #28.#103      // org/apache/lucene/index/SegmentReader$Norm.number:I
+   #15 = Fieldref           #28.#104      // org/apache/lucene/index/SegmentReader$Norm.useSingleNormStream:Z
+   #16 = Methodref          #105.#106     // org/apache/lucene/index/SegmentInfo.advanceNormGen:(I)V
+   #17 = Methodref          #107.#108     // org/apache/lucene/index/SegmentReader.directory:()Lorg/apache/lucene/store/Directory;
+   #18 = Methodref          #105.#109     // org/apache/lucene/index/SegmentInfo.getNormFileName:(I)Ljava/lang/String;
+   #19 = Methodref          #110.#111     // org/apache/lucene/store/Directory.createOutput:(Ljava/lang/String;)Lorg/apache/lucene/store/IndexOutput;
+   #20 = Methodref          #107.#112     // org/apache/lucene/index/SegmentReader.maxDoc:()I
+   #21 = Methodref          #113.#114     // org/apache/lucene/store/IndexOutput.writeBytes:([BI)V
+   #22 = Methodref          #113.#94      // org/apache/lucene/store/IndexOutput.close:()V
+   #23 = Methodref          #115.#94      // org/apache/lucene/store/IndexInput.close:()V
+   #24 = Fieldref           #107.#116     // org/apache/lucene/index/SegmentReader.class$org$apache$lucene$index$SegmentReader:Ljava/lang/Class;
+   #25 = String             #117          // org.apache.lucene.index.SegmentReader
+   #26 = Methodref          #107.#118     // org/apache/lucene/index/SegmentReader.class$:(Ljava/lang/String;)Ljava/lang/Class;
+   #27 = Methodref          #119.#120     // java/lang/Class.desiredAssertionStatus:()Z
+   #28 = Class              #121          // org/apache/lucene/index/SegmentReader$Norm
+   #29 = Class              #122          // java/lang/Object
+   #30 = Utf8               refCount
+   #31 = Utf8               I
+   #32 = Utf8               useSingleNormStream
+   #33 = Utf8               Z
+   #34 = Utf8               in
+   #35 = Utf8               Lorg/apache/lucene/store/IndexInput;
+   #36 = Utf8               bytes
+   #37 = Utf8               [B
+   #38 = Utf8               dirty
+   #39 = Utf8               number
+   #40 = Utf8               normSeek
+   #41 = Utf8               J
+   #42 = Utf8               rollbackDirty
+   #43 = Utf8               $assertionsDisabled
+   #44 = Utf8               Synthetic
+   #45 = Utf8               this$0
+   #46 = Utf8               Lorg/apache/lucene/index/SegmentReader;
+   #47 = Utf8               incRef
+   #48 = Utf8               ()V
+   #49 = Utf8               Code
+   #50 = Utf8               LineNumberTable
+   #51 = Utf8               LocalVariableTable
+   #52 = Utf8               this
+   #53 = Utf8               Norm
+   #54 = Utf8               InnerClasses
+   #55 = Utf8               Lorg/apache/lucene/index/SegmentReader$Norm;
+   #56 = Utf8               decRef
+   #57 = Utf8               Exceptions
+   #58 = Class              #123          // java/io/IOException
+   #59 = Utf8               <init>
+   #60 = Utf8               (Lorg/apache/lucene/index/SegmentReader;Lorg/apache/lucene/store/IndexInput;ZIJ)V
+   #61 = Utf8               reWrite
+   #62 = Utf8               (Lorg/apache/lucene/index/SegmentInfo;)V
+   #63 = Utf8               si
+   #64 = Utf8               Lorg/apache/lucene/index/SegmentInfo;
+   #65 = Utf8               out
+   #66 = Utf8               Lorg/apache/lucene/store/IndexOutput;
+   #67 = Utf8               close
+   #68 = Utf8               access$000
+   #69 = Utf8               (Lorg/apache/lucene/index/SegmentReader$Norm;)Z
+   #70 = Utf8               x0
+   #71 = Utf8               access$100
+   #72 = Utf8               (Lorg/apache/lucene/index/SegmentReader$Norm;Lorg/apache/lucene/index/SegmentInfo;)V
+   #73 = Utf8               x1
+   #74 = Utf8               access$200
+   #75 = Utf8               (Lorg/apache/lucene/index/SegmentReader$Norm;)[B
+   #76 = Utf8               access$202
+   #77 = Utf8               (Lorg/apache/lucene/index/SegmentReader$Norm;[B)[B
+   #78 = Utf8               access$300
+   #79 = Utf8               (Lorg/apache/lucene/index/SegmentReader$Norm;)V
+   #80 = Utf8               access$002
+   #81 = Utf8               (Lorg/apache/lucene/index/SegmentReader$Norm;Z)Z
+   #82 = Utf8               access$400
+   #83 = Utf8               (Lorg/apache/lucene/index/SegmentReader$Norm;)Lorg/apache/lucene/store/IndexInput;
+   #84 = Utf8               access$500
+   #85 = Utf8               (Lorg/apache/lucene/index/SegmentReader$Norm;)J
+   #86 = Utf8               access$602
+   #87 = Utf8               access$600
+   #88 = Utf8               <clinit>
+   #89 = Utf8               SourceFile
+   #90 = Utf8               SegmentReader.java
+   #91 = NameAndType        #42:#33       // rollbackDirty:Z
+   #92 = NameAndType        #40:#41       // normSeek:J
+   #93 = NameAndType        #34:#35       // in:Lorg/apache/lucene/store/IndexInput;
+   #94 = NameAndType        #67:#48       // close:()V
+   #95 = NameAndType        #36:#37       // bytes:[B
+   #96 = NameAndType        #61:#62       // reWrite:(Lorg/apache/lucene/index/SegmentInfo;)V
+   #97 = NameAndType        #38:#33       // dirty:Z
+   #98 = NameAndType        #43:#33       // $assertionsDisabled:Z
+   #99 = NameAndType        #30:#31       // refCount:I
+  #100 = Utf8               java/lang/AssertionError
+  #101 = NameAndType        #59:#48       // "<init>":()V
+  #102 = NameAndType        #45:#46       // this$0:Lorg/apache/lucene/index/SegmentReader;
+  #103 = NameAndType        #39:#31       // number:I
+  #104 = NameAndType        #32:#33       // useSingleNormStream:Z
+  #105 = Class              #124          // org/apache/lucene/index/SegmentInfo
+  #106 = NameAndType        #125:#126     // advanceNormGen:(I)V
+  #107 = Class              #127          // org/apache/lucene/index/SegmentReader
+  #108 = NameAndType        #128:#129     // directory:()Lorg/apache/lucene/store/Directory;
+  #109 = NameAndType        #130:#131     // getNormFileName:(I)Ljava/lang/String;
+  #110 = Class              #132          // org/apache/lucene/store/Directory
+  #111 = NameAndType        #133:#134     // createOutput:(Ljava/lang/String;)Lorg/apache/lucene/store/IndexOutput;
+  #112 = NameAndType        #135:#136     // maxDoc:()I
+  #113 = Class              #137          // org/apache/lucene/store/IndexOutput
+  #114 = NameAndType        #138:#139     // writeBytes:([BI)V
+  #115 = Class              #140          // org/apache/lucene/store/IndexInput
+  #116 = NameAndType        #141:#142     // class$org$apache$lucene$index$SegmentReader:Ljava/lang/Class;
+  #117 = Utf8               org.apache.lucene.index.SegmentReader
+  #118 = NameAndType        #143:#144     // class$:(Ljava/lang/String;)Ljava/lang/Class;
+  #119 = Class              #145          // java/lang/Class
+  #120 = NameAndType        #146:#147     // desiredAssertionStatus:()Z
+  #121 = Utf8               org/apache/lucene/index/SegmentReader$Norm
+  #122 = Utf8               java/lang/Object
+  #123 = Utf8               java/io/IOException
+  #124 = Utf8               org/apache/lucene/index/SegmentInfo
+  #125 = Utf8               advanceNormGen
+  #126 = Utf8               (I)V
+  #127 = Utf8               org/apache/lucene/index/SegmentReader
+  #128 = Utf8               directory
+  #129 = Utf8               ()Lorg/apache/lucene/store/Directory;
+  #130 = Utf8               getNormFileName
+  #131 = Utf8               (I)Ljava/lang/String;
+  #132 = Utf8               org/apache/lucene/store/Directory
+  #133 = Utf8               createOutput
+  #134 = Utf8               (Ljava/lang/String;)Lorg/apache/lucene/store/IndexOutput;
+  #135 = Utf8               maxDoc
+  #136 = Utf8               ()I
+  #137 = Utf8               org/apache/lucene/store/IndexOutput
+  #138 = Utf8               writeBytes
+  #139 = Utf8               ([BI)V
+  #140 = Utf8               org/apache/lucene/store/IndexInput
+  #141 = Utf8               class$org$apache$lucene$index$SegmentReader
+  #142 = Utf8               Ljava/lang/Class;
+  #143 = Utf8               class$
+  #144 = Utf8               (Ljava/lang/String;)Ljava/lang/Class;
+  #145 = Utf8               java/lang/Class
+  #146 = Utf8               desiredAssertionStatus
+  #147 = Utf8               ()Z
+{
+  volatile int refCount;
+    descriptor: I
+    flags: ACC_VOLATILE
+
+  boolean useSingleNormStream;
+    descriptor: Z
+    flags:
+
+  static final boolean $assertionsDisabled;
+    descriptor: Z
+    flags: ACC_STATIC, ACC_FINAL
+    Synthetic: true
+
+  public synchronized void incRef();
+    descriptor: ()V
+    flags: ACC_PUBLIC, ACC_SYNCHRONIZED
+    Code:
+      stack=3, locals=1, args_size=1
+         0: getstatic     #8                  // Field $assertionsDisabled:Z
+         3: ifne          21
+         6: aload_0
+         7: getfield      #9                  // Field refCount:I
+        10: ifgt          21
+        13: new           #10                 // class java/lang/AssertionError
+        16: dup
+        17: invokespecial #11                 // Method java/lang/AssertionError."<init>":()V
+        20: athrow
+        21: aload_0
+        22: dup
+        23: getfield      #9                  // Field refCount:I
+        26: iconst_1
+        27: iadd
+        28: putfield      #9                  // Field refCount:I
+        31: return
+      LineNumberTable:
+        line 87: 0
+        line 88: 21
+        line 89: 31
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      32     0  this   Lorg/apache/lucene/index/SegmentReader$Norm;
+
+  public synchronized void decRef() throws java.io.IOException;
+    descriptor: ()V
+    flags: ACC_PUBLIC, ACC_SYNCHRONIZED
+    Code:
+      stack=3, locals=1, args_size=1
+         0: getstatic     #8                  // Field $assertionsDisabled:Z
+         3: ifne          21
+         6: aload_0
+         7: getfield      #9                  // Field refCount:I
+        10: ifgt          21
+        13: new           #10                 // class java/lang/AssertionError
+        16: dup
+        17: invokespecial #11                 // Method java/lang/AssertionError."<init>":()V
+        20: athrow
+        21: aload_0
+        22: getfield      #9                  // Field refCount:I
+        25: iconst_1
+        26: if_icmpne     33
+        29: aload_0
+        30: invokespecial #4                  // Method close:()V
+        33: aload_0
+        34: dup
+        35: getfield      #9                  // Field refCount:I
+        38: iconst_1
+        39: isub
+        40: putfield      #9                  // Field refCount:I
+        43: return
+      LineNumberTable:
+        line 92: 0
+        line 93: 21
+        line 94: 29
+        line 96: 33
+        line 98: 43
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      44     0  this   Lorg/apache/lucene/index/SegmentReader$Norm;
+    Exceptions:
+      throws java.io.IOException
+
+  public org.apache.lucene.index.SegmentReader$Norm(org.apache.lucene.index.SegmentReader, org.apache.lucene.store.IndexInput, boolean, int, long);
+    descriptor: (Lorg/apache/lucene/index/SegmentReader;Lorg/apache/lucene/store/IndexInput;ZIJ)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=3, locals=7, args_size=6
+         0: aload_0
+         1: aload_1
+         2: putfield      #12                 // Field this$0:Lorg/apache/lucene/index/SegmentReader;
+         5: aload_0
+         6: invokespecial #13                 // Method java/lang/Object."<init>":()V
+         9: aload_0
+        10: iconst_1
+        11: putfield      #9                  // Field refCount:I
+        14: aload_0
+        15: aload_2
+        16: putfield      #3                  // Field in:Lorg/apache/lucene/store/IndexInput;
+        19: aload_0
+        20: iload         4
+        22: putfield      #14                 // Field number:I
+        25: aload_0
+        26: lload         5
+        28: putfield      #2                  // Field normSeek:J
+        31: aload_0
+        32: iload_3
+        33: putfield      #15                 // Field useSingleNormStream:Z
+        36: return
+      LineNumberTable:
+        line 101: 0
+        line 102: 9
+        line 103: 14
+        line 104: 19
+        line 105: 25
+        line 106: 31
+        line 107: 36
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      37     0  this   Lorg/apache/lucene/index/SegmentReader$Norm;
+            0      37     2    in   Lorg/apache/lucene/store/IndexInput;
+            0      37     3 useSingleNormStream   Z
+            0      37     4 number   I
+            0      37     5 normSeek   J
+
+  static boolean access$000(org.apache.lucene.index.SegmentReader$Norm);
+    descriptor: (Lorg/apache/lucene/index/SegmentReader$Norm;)Z
+    flags: ACC_STATIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #7                  // Field dirty:Z
+         4: ireturn
+      LineNumberTable:
+        line 82: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0    x0   Lorg/apache/lucene/index/SegmentReader$Norm;
+    Synthetic: true
+
+  static void access$100(org.apache.lucene.index.SegmentReader$Norm, org.apache.lucene.index.SegmentInfo) throws java.io.IOException;
+    descriptor: (Lorg/apache/lucene/index/SegmentReader$Norm;Lorg/apache/lucene/index/SegmentInfo;)V
+    flags: ACC_STATIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: invokespecial #6                  // Method reWrite:(Lorg/apache/lucene/index/SegmentInfo;)V
+         5: return
+      LineNumberTable:
+        line 82: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0    x0   Lorg/apache/lucene/index/SegmentReader$Norm;
+            0       6     1    x1   Lorg/apache/lucene/index/SegmentInfo;
+    Exceptions:
+      throws java.io.IOException
+    Synthetic: true
+
+  static byte[] access$200(org.apache.lucene.index.SegmentReader$Norm);
+    descriptor: (Lorg/apache/lucene/index/SegmentReader$Norm;)[B
+    flags: ACC_STATIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #5                  // Field bytes:[B
+         4: areturn
+      LineNumberTable:
+        line 82: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0    x0   Lorg/apache/lucene/index/SegmentReader$Norm;
+    Synthetic: true
+
+  static byte[] access$202(org.apache.lucene.index.SegmentReader$Norm, byte[]);
+    descriptor: (Lorg/apache/lucene/index/SegmentReader$Norm;[B)[B
+    flags: ACC_STATIC
+    Code:
+      stack=3, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: dup_x1
+         3: putfield      #5                  // Field bytes:[B
+         6: areturn
+      LineNumberTable:
+        line 82: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       7     0    x0   Lorg/apache/lucene/index/SegmentReader$Norm;
+            0       7     1    x1   [B
+    Synthetic: true
+
+  static void access$300(org.apache.lucene.index.SegmentReader$Norm) throws java.io.IOException;
+    descriptor: (Lorg/apache/lucene/index/SegmentReader$Norm;)V
+    flags: ACC_STATIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #4                  // Method close:()V
+         4: return
+      LineNumberTable:
+        line 82: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0    x0   Lorg/apache/lucene/index/SegmentReader$Norm;
+    Exceptions:
+      throws java.io.IOException
+    Synthetic: true
+
+  static boolean access$002(org.apache.lucene.index.SegmentReader$Norm, boolean);
+    descriptor: (Lorg/apache/lucene/index/SegmentReader$Norm;Z)Z
+    flags: ACC_STATIC
+    Code:
+      stack=3, locals=2, args_size=2
+         0: aload_0
+         1: iload_1
+         2: dup_x1
+         3: putfield      #7                  // Field dirty:Z
+         6: ireturn
+      LineNumberTable:
+        line 82: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       7     0    x0   Lorg/apache/lucene/index/SegmentReader$Norm;
+            0       7     1    x1   Z
+    Synthetic: true
+
+  static org.apache.lucene.store.IndexInput access$400(org.apache.lucene.index.SegmentReader$Norm);
+    descriptor: (Lorg/apache/lucene/index/SegmentReader$Norm;)Lorg/apache/lucene/store/IndexInput;
+    flags: ACC_STATIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #3                  // Field in:Lorg/apache/lucene/store/IndexInput;
+         4: areturn
+      LineNumberTable:
+        line 82: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0    x0   Lorg/apache/lucene/index/SegmentReader$Norm;
+    Synthetic: true
+
+  static long access$500(org.apache.lucene.index.SegmentReader$Norm);
+    descriptor: (Lorg/apache/lucene/index/SegmentReader$Norm;)J
+    flags: ACC_STATIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #2                  // Field normSeek:J
+         4: lreturn
+      LineNumberTable:
+        line 82: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0    x0   Lorg/apache/lucene/index/SegmentReader$Norm;
+    Synthetic: true
+
+  static boolean access$602(org.apache.lucene.index.SegmentReader$Norm, boolean);
+    descriptor: (Lorg/apache/lucene/index/SegmentReader$Norm;Z)Z
+    flags: ACC_STATIC
+    Code:
+      stack=3, locals=2, args_size=2
+         0: aload_0
+         1: iload_1
+         2: dup_x1
+         3: putfield      #1                  // Field rollbackDirty:Z
+         6: ireturn
+      LineNumberTable:
+        line 82: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       7     0    x0   Lorg/apache/lucene/index/SegmentReader$Norm;
+            0       7     1    x1   Z
+    Synthetic: true
+
+  static boolean access$600(org.apache.lucene.index.SegmentReader$Norm);
+    descriptor: (Lorg/apache/lucene/index/SegmentReader$Norm;)Z
+    flags: ACC_STATIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #1                  // Field rollbackDirty:Z
+         4: ireturn
+      LineNumberTable:
+        line 82: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0    x0   Lorg/apache/lucene/index/SegmentReader$Norm;
+    Synthetic: true
+
+  static {};
+    descriptor: ()V
+    flags: ACC_STATIC
+    Code:
+      stack=2, locals=0, args_size=0
+         0: getstatic     #24                 // Field org/apache/lucene/index/SegmentReader.class$org$apache$lucene$index$SegmentReader:Ljava/lang/Class;
+         3: ifnonnull     18
+         6: ldc           #25                 // String org.apache.lucene.index.SegmentReader
+         8: invokestatic  #26                 // Method org/apache/lucene/index/SegmentReader.class$:(Ljava/lang/String;)Ljava/lang/Class;
+        11: dup
+        12: putstatic     #24                 // Field org/apache/lucene/index/SegmentReader.class$org$apache$lucene$index$SegmentReader:Ljava/lang/Class;
+        15: goto          21
+        18: getstatic     #24                 // Field org/apache/lucene/index/SegmentReader.class$org$apache$lucene$index$SegmentReader:Ljava/lang/Class;
+        21: invokevirtual #27                 // Method java/lang/Class.desiredAssertionStatus:()Z
+        24: ifne          31
+        27: iconst_1
+        28: goto          32
+        31: iconst_0
+        32: putstatic     #8                  // Field $assertionsDisabled:Z
+        35: return
+      LineNumberTable:
+        line 82: 0
+}
+SourceFile: "SegmentReader.java"

@@ -1,0 +1,333 @@
+Classfile /home/omkar/personal/tokyo_escape/escapeAnalysis/benchmark_dump/avrora_in/avrora/sim/SimulatorThread.class
+  Last modified 11-Sept-2023; size 2274 bytes
+  SHA-256 checksum 143d1099922b9b9ab73c89f438a5feaf646194fa11895df1a7361cf9bbac21d7
+  Compiled from "SimulatorThread.java"
+public class avrora.sim.SimulatorThread extends java.lang.Thread
+  minor version: 0
+  major version: 49
+  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
+  this_class: #25                         // avrora/sim/SimulatorThread
+  super_class: #26                        // java/lang/Thread
+  interfaces: 0, fields: 2, methods: 5, attributes: 2
+Constant pool:
+    #1 = Class              #60           // java/lang/StringBuilder
+    #2 = Methodref          #1.#61        // java/lang/StringBuilder."<init>":()V
+    #3 = String             #62           // node-
+    #4 = Methodref          #1.#63        // java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    #5 = Fieldref           #28.#64       // avrora/sim/Simulation$Node.id:I
+    #6 = Methodref          #1.#65        // java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+    #7 = Methodref          #1.#66        // java/lang/StringBuilder.toString:()Ljava/lang/String;
+    #8 = Methodref          #26.#67       // java/lang/Thread."<init>":(Ljava/lang/String;)V
+    #9 = Fieldref           #25.#68       // avrora/sim/SimulatorThread.node:Lavrora/sim/Simulation$Node;
+   #10 = Methodref          #28.#69       // avrora/sim/Simulation$Node.getSimulator:()Lavrora/sim/Simulator;
+   #11 = Methodref          #70.#71       // avrora/sim/Simulator.start:()V
+   #12 = Fieldref           #25.#72       // avrora/sim/SimulatorThread.synchronizer:Lavrora/sim/clock/Synchronizer;
+   #13 = Methodref          #73.#74       // avrora/sim/clock/Synchronizer.removeNode:(Lavrora/sim/Simulation$Node;)V
+   #14 = Class              #76           // avrora/actions/SimAction$TimeoutException
+   #15 = Class              #78           // avrora/actions/SimAction$BreakPointException
+   #16 = String             #79           // Simulation terminated
+   #17 = Methodref          #80.#81       // cck/text/Terminal.printYellow:(Ljava/lang/String;)V
+   #18 = String             #82           // : breakpoint at
+   #19 = Fieldref           #15.#83       // avrora/actions/SimAction$BreakPointException.address:I
+   #20 = Methodref          #84.#85       // cck/text/StringUtil.addrToString:(I)Ljava/lang/String;
+   #21 = String             #86           //  reached.
+   #22 = Methodref          #80.#87       // cck/text/Terminal.println:(Ljava/lang/String;)V
+   #23 = Class              #89           // cck/util/Util$Error
+   #24 = Methodref          #23.#90       // cck/util/Util$Error.report:()V
+   #25 = Class              #91           // avrora/sim/SimulatorThread
+   #26 = Class              #92           // java/lang/Thread
+   #27 = Utf8               node
+   #28 = Class              #94           // avrora/sim/Simulation$Node
+   #29 = Utf8               Node
+   #30 = Utf8               InnerClasses
+   #31 = Utf8               Lavrora/sim/Simulation$Node;
+   #32 = Utf8               synchronizer
+   #33 = Utf8               Lavrora/sim/clock/Synchronizer;
+   #34 = Utf8               <init>
+   #35 = Utf8               (Lavrora/sim/Simulation$Node;)V
+   #36 = Utf8               Code
+   #37 = Utf8               LineNumberTable
+   #38 = Utf8               LocalVariableTable
+   #39 = Utf8               this
+   #40 = Utf8               Lavrora/sim/SimulatorThread;
+   #41 = Utf8               n
+   #42 = Utf8               getNode
+   #43 = Utf8               ()Lavrora/sim/Simulation$Node;
+   #44 = Utf8               getSimulator
+   #45 = Utf8               ()Lavrora/sim/Simulator;
+   #46 = Utf8               run
+   #47 = Utf8               ()V
+   #48 = Utf8               simulator
+   #49 = Utf8               Lavrora/sim/Simulator;
+   #50 = Utf8               e
+   #51 = Utf8               BreakPointException
+   #52 = Utf8               Lavrora/actions/SimAction$BreakPointException;
+   #53 = Utf8               Error
+   #54 = Utf8               Lcck/util/Util$Error;
+   #55 = Utf8               setSynchronizer
+   #56 = Utf8               (Lavrora/sim/clock/Synchronizer;)V
+   #57 = Utf8               s
+   #58 = Utf8               SourceFile
+   #59 = Utf8               SimulatorThread.java
+   #60 = Utf8               java/lang/StringBuilder
+   #61 = NameAndType        #34:#47       // "<init>":()V
+   #62 = Utf8               node-
+   #63 = NameAndType        #95:#96       // append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+   #64 = NameAndType        #97:#98       // id:I
+   #65 = NameAndType        #95:#99       // append:(I)Ljava/lang/StringBuilder;
+   #66 = NameAndType        #100:#101     // toString:()Ljava/lang/String;
+   #67 = NameAndType        #34:#102      // "<init>":(Ljava/lang/String;)V
+   #68 = NameAndType        #27:#31       // node:Lavrora/sim/Simulation$Node;
+   #69 = NameAndType        #44:#45       // getSimulator:()Lavrora/sim/Simulator;
+   #70 = Class              #103          // avrora/sim/Simulator
+   #71 = NameAndType        #104:#47      // start:()V
+   #72 = NameAndType        #32:#33       // synchronizer:Lavrora/sim/clock/Synchronizer;
+   #73 = Class              #105          // avrora/sim/clock/Synchronizer
+   #74 = NameAndType        #106:#35      // removeNode:(Lavrora/sim/Simulation$Node;)V
+   #75 = Class              #107          // avrora/actions/SimAction
+   #76 = Utf8               avrora/actions/SimAction$TimeoutException
+   #77 = Utf8               TimeoutException
+   #78 = Utf8               avrora/actions/SimAction$BreakPointException
+   #79 = Utf8               Simulation terminated
+   #80 = Class              #108          // cck/text/Terminal
+   #81 = NameAndType        #109:#102     // printYellow:(Ljava/lang/String;)V
+   #82 = Utf8               : breakpoint at
+   #83 = NameAndType        #110:#98      // address:I
+   #84 = Class              #111          // cck/text/StringUtil
+   #85 = NameAndType        #112:#113     // addrToString:(I)Ljava/lang/String;
+   #86 = Utf8                reached.
+   #87 = NameAndType        #114:#102     // println:(Ljava/lang/String;)V
+   #88 = Class              #115          // cck/util/Util
+   #89 = Utf8               cck/util/Util$Error
+   #90 = NameAndType        #116:#47      // report:()V
+   #91 = Utf8               avrora/sim/SimulatorThread
+   #92 = Utf8               java/lang/Thread
+   #93 = Class              #117          // avrora/sim/Simulation
+   #94 = Utf8               avrora/sim/Simulation$Node
+   #95 = Utf8               append
+   #96 = Utf8               (Ljava/lang/String;)Ljava/lang/StringBuilder;
+   #97 = Utf8               id
+   #98 = Utf8               I
+   #99 = Utf8               (I)Ljava/lang/StringBuilder;
+  #100 = Utf8               toString
+  #101 = Utf8               ()Ljava/lang/String;
+  #102 = Utf8               (Ljava/lang/String;)V
+  #103 = Utf8               avrora/sim/Simulator
+  #104 = Utf8               start
+  #105 = Utf8               avrora/sim/clock/Synchronizer
+  #106 = Utf8               removeNode
+  #107 = Utf8               avrora/actions/SimAction
+  #108 = Utf8               cck/text/Terminal
+  #109 = Utf8               printYellow
+  #110 = Utf8               address
+  #111 = Utf8               cck/text/StringUtil
+  #112 = Utf8               addrToString
+  #113 = Utf8               (I)Ljava/lang/String;
+  #114 = Utf8               println
+  #115 = Utf8               cck/util/Util
+  #116 = Utf8               report
+  #117 = Utf8               avrora/sim/Simulation
+{
+  protected final avrora.sim.Simulation$Node node;
+    descriptor: Lavrora/sim/Simulation$Node;
+    flags: (0x0014) ACC_PROTECTED, ACC_FINAL
+
+  protected avrora.sim.clock.Synchronizer synchronizer;
+    descriptor: Lavrora/sim/clock/Synchronizer;
+    flags: (0x0004) ACC_PROTECTED
+
+  public avrora.sim.SimulatorThread(avrora.sim.Simulation$Node);
+    descriptor: (Lavrora/sim/Simulation$Node;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=3, locals=2, args_size=2
+         0: aload_0
+         1: new           #1                  // class java/lang/StringBuilder
+         4: dup
+         5: invokespecial #2                  // Method java/lang/StringBuilder."<init>":()V
+         8: ldc           #3                  // String node-
+        10: invokevirtual #4                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        13: aload_1
+        14: getfield      #5                  // Field avrora/sim/Simulation$Node.id:I
+        17: invokevirtual #6                  // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+        20: invokevirtual #7                  // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        23: invokespecial #8                  // Method java/lang/Thread."<init>":(Ljava/lang/String;)V
+        26: aload_0
+        27: aload_1
+        28: putfield      #9                  // Field node:Lavrora/sim/Simulation$Node;
+        31: return
+      LineNumberTable:
+        line 69: 0
+        line 70: 26
+        line 71: 31
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      32     0  this   Lavrora/sim/SimulatorThread;
+            0      32     1     n   Lavrora/sim/Simulation$Node;
+
+  public avrora.sim.Simulation$Node getNode();
+    descriptor: ()Lavrora/sim/Simulation$Node;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #9                  // Field node:Lavrora/sim/Simulation$Node;
+         4: areturn
+      LineNumberTable:
+        line 79: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lavrora/sim/SimulatorThread;
+
+  public avrora.sim.Simulator getSimulator();
+    descriptor: ()Lavrora/sim/Simulator;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #9                  // Field node:Lavrora/sim/Simulation$Node;
+         4: invokevirtual #10                 // Method avrora/sim/Simulation$Node.getSimulator:()Lavrora/sim/Simulator;
+         7: areturn
+      LineNumberTable:
+        line 89: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       8     0  this   Lavrora/sim/SimulatorThread;
+
+  public void run();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=3, args_size=1
+         0: aload_0
+         1: getfield      #9                  // Field node:Lavrora/sim/Simulation$Node;
+         4: invokevirtual #10                 // Method avrora/sim/Simulation$Node.getSimulator:()Lavrora/sim/Simulator;
+         7: astore_1
+         8: aload_1
+         9: invokevirtual #11                 // Method avrora/sim/Simulator.start:()V
+        12: aload_0
+        13: getfield      #12                 // Field synchronizer:Lavrora/sim/clock/Synchronizer;
+        16: ifnull        162
+        19: aload_0
+        20: getfield      #12                 // Field synchronizer:Lavrora/sim/clock/Synchronizer;
+        23: aload_0
+        24: getfield      #9                  // Field node:Lavrora/sim/Simulation$Node;
+        27: invokevirtual #13                 // Method avrora/sim/clock/Synchronizer.removeNode:(Lavrora/sim/Simulation$Node;)V
+        30: goto          162
+        33: astore_1
+        34: aload_0
+        35: getfield      #12                 // Field synchronizer:Lavrora/sim/clock/Synchronizer;
+        38: ifnull        162
+        41: aload_0
+        42: getfield      #12                 // Field synchronizer:Lavrora/sim/clock/Synchronizer;
+        45: aload_0
+        46: getfield      #9                  // Field node:Lavrora/sim/Simulation$Node;
+        49: invokevirtual #13                 // Method avrora/sim/clock/Synchronizer.removeNode:(Lavrora/sim/Simulation$Node;)V
+        52: goto          162
+        55: astore_1
+        56: ldc           #16                 // String Simulation terminated
+        58: invokestatic  #17                 // Method cck/text/Terminal.printYellow:(Ljava/lang/String;)V
+        61: new           #1                  // class java/lang/StringBuilder
+        64: dup
+        65: invokespecial #2                  // Method java/lang/StringBuilder."<init>":()V
+        68: ldc           #18                 // String : breakpoint at
+        70: invokevirtual #4                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        73: aload_1
+        74: getfield      #19                 // Field avrora/actions/SimAction$BreakPointException.address:I
+        77: invokestatic  #20                 // Method cck/text/StringUtil.addrToString:(I)Ljava/lang/String;
+        80: invokevirtual #4                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        83: ldc           #21                 // String  reached.
+        85: invokevirtual #4                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        88: invokevirtual #7                  // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        91: invokestatic  #22                 // Method cck/text/Terminal.println:(Ljava/lang/String;)V
+        94: aload_0
+        95: getfield      #12                 // Field synchronizer:Lavrora/sim/clock/Synchronizer;
+        98: ifnull        162
+       101: aload_0
+       102: getfield      #12                 // Field synchronizer:Lavrora/sim/clock/Synchronizer;
+       105: aload_0
+       106: getfield      #9                  // Field node:Lavrora/sim/Simulation$Node;
+       109: invokevirtual #13                 // Method avrora/sim/clock/Synchronizer.removeNode:(Lavrora/sim/Simulation$Node;)V
+       112: goto          162
+       115: astore_1
+       116: aload_1
+       117: invokevirtual #24                 // Method cck/util/Util$Error.report:()V
+       120: aload_0
+       121: getfield      #12                 // Field synchronizer:Lavrora/sim/clock/Synchronizer;
+       124: ifnull        162
+       127: aload_0
+       128: getfield      #12                 // Field synchronizer:Lavrora/sim/clock/Synchronizer;
+       131: aload_0
+       132: getfield      #9                  // Field node:Lavrora/sim/Simulation$Node;
+       135: invokevirtual #13                 // Method avrora/sim/clock/Synchronizer.removeNode:(Lavrora/sim/Simulation$Node;)V
+       138: goto          162
+       141: astore_2
+       142: aload_0
+       143: getfield      #12                 // Field synchronizer:Lavrora/sim/clock/Synchronizer;
+       146: ifnull        160
+       149: aload_0
+       150: getfield      #12                 // Field synchronizer:Lavrora/sim/clock/Synchronizer;
+       153: aload_0
+       154: getfield      #9                  // Field node:Lavrora/sim/Simulation$Node;
+       157: invokevirtual #13                 // Method avrora/sim/clock/Synchronizer.removeNode:(Lavrora/sim/Simulation$Node;)V
+       160: aload_2
+       161: athrow
+       162: return
+      Exception table:
+         from    to  target type
+             0    12    33   Class avrora/actions/SimAction$TimeoutException
+             0    12    55   Class avrora/actions/SimAction$BreakPointException
+             0    12   115   Class cck/util/Util$Error
+             0    12   141   any
+            55    94   141   any
+           115   120   141   any
+      LineNumberTable:
+        line 98: 0
+        line 99: 8
+        line 108: 12
+        line 109: 19
+        line 100: 33
+        line 108: 34
+        line 109: 41
+        line 102: 55
+        line 103: 56
+        line 104: 61
+        line 108: 94
+        line 109: 101
+        line 105: 115
+        line 106: 116
+        line 108: 120
+        line 109: 127
+        line 108: 141
+        line 109: 149
+        line 111: 162
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            8       4     1 simulator   Lavrora/sim/Simulator;
+           56      38     1     e   Lavrora/actions/SimAction$BreakPointException;
+          116       4     1     e   Lcck/util/Util$Error;
+            0     163     0  this   Lavrora/sim/SimulatorThread;
+
+  public void setSynchronizer(avrora.sim.clock.Synchronizer);
+    descriptor: (Lavrora/sim/clock/Synchronizer;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #12                 // Field synchronizer:Lavrora/sim/clock/Synchronizer;
+         5: return
+      LineNumberTable:
+        line 118: 0
+        line 119: 5
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lavrora/sim/SimulatorThread;
+            0       6     1     s   Lavrora/sim/clock/Synchronizer;
+}
+SourceFile: "SimulatorThread.java"
+InnerClasses:
+  public #29= #28 of #93;                 // Node=class avrora/sim/Simulation$Node of class avrora/sim/Simulation
+  public static #51= #15 of #75;          // BreakPointException=class avrora/actions/SimAction$BreakPointException of class avrora/actions/SimAction
+  public static #53= #23 of #88;          // Error=class cck/util/Util$Error of class cck/util/Util
+  public static #77= #14 of #75;          // TimeoutException=class avrora/actions/SimAction$TimeoutException of class avrora/actions/SimAction

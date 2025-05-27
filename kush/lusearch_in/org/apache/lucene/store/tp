@@ -1,0 +1,1169 @@
+Classfile /home/omkar/personal/tokyo_escape/escapeAnalysis/benchmark_dump/lusearch_in/org/apache/lucene/store/BufferedIndexInput.class
+  Last modified 11 Sep, 2023; size 5746 bytes
+  MD5 checksum 3502ea815964246642844a058272cc5a
+  Compiled from "BufferedIndexInput.java"
+public abstract class org.apache.lucene.store.BufferedIndexInput extends org.apache.lucene.store.IndexInput
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER, ACC_ABSTRACT
+Constant pool:
+    #1 = Utf8               org/apache/lucene/store/BufferedIndexInput
+    #2 = Class              #1            // org/apache/lucene/store/BufferedIndexInput
+    #3 = Utf8               org/apache/lucene/store/IndexInput
+    #4 = Class              #3            // org/apache/lucene/store/IndexInput
+    #5 = Utf8               BufferedIndexInput.java
+    #6 = Utf8               BUFFER_SIZE
+    #7 = Utf8               I
+    #8 = Integer            1024
+    #9 = Utf8               bufferSize
+   #10 = Utf8               buffer
+   #11 = Utf8               [B
+   #12 = Utf8               bufferStart
+   #13 = Utf8               J
+   #14 = Utf8               bufferLength
+   #15 = Utf8               bufferPosition
+   #16 = Utf8               $assertionsDisabled
+   #17 = Utf8               Z
+   #18 = Utf8               class$org$apache$lucene$store$BufferedIndexInput
+   #19 = Utf8               Ljava/lang/Class;
+   #20 = Utf8               <clinit>
+   #21 = Utf8               ()V
+   #22 = NameAndType        #18:#19       // class$org$apache$lucene$store$BufferedIndexInput:Ljava/lang/Class;
+   #23 = Fieldref           #2.#22        // org/apache/lucene/store/BufferedIndexInput.class$org$apache$lucene$store$BufferedIndexInput:Ljava/lang/Class;
+   #24 = Utf8               org.apache.lucene.store.BufferedIndexInput
+   #25 = String             #24           // org.apache.lucene.store.BufferedIndexInput
+   #26 = Utf8               class$
+   #27 = Utf8               (Ljava/lang/String;)Ljava/lang/Class;
+   #28 = NameAndType        #26:#27       // class$:(Ljava/lang/String;)Ljava/lang/Class;
+   #29 = Methodref          #2.#28        // org/apache/lucene/store/BufferedIndexInput.class$:(Ljava/lang/String;)Ljava/lang/Class;
+   #30 = Utf8               java/lang/Class
+   #31 = Class              #30           // java/lang/Class
+   #32 = Utf8               desiredAssertionStatus
+   #33 = Utf8               ()Z
+   #34 = NameAndType        #32:#33       // desiredAssertionStatus:()Z
+   #35 = Methodref          #31.#34       // java/lang/Class.desiredAssertionStatus:()Z
+   #36 = NameAndType        #16:#17       // $assertionsDisabled:Z
+   #37 = Fieldref           #2.#36        // org/apache/lucene/store/BufferedIndexInput.$assertionsDisabled:Z
+   #38 = Utf8               <init>
+   #39 = NameAndType        #38:#21       // "<init>":()V
+   #40 = Methodref          #4.#39        // org/apache/lucene/store/IndexInput."<init>":()V
+   #41 = NameAndType        #9:#7         // bufferSize:I
+   #42 = Fieldref           #2.#41        // org/apache/lucene/store/BufferedIndexInput.bufferSize:I
+   #43 = NameAndType        #12:#13       // bufferStart:J
+   #44 = Fieldref           #2.#43        // org/apache/lucene/store/BufferedIndexInput.bufferStart:J
+   #45 = NameAndType        #14:#7        // bufferLength:I
+   #46 = Fieldref           #2.#45        // org/apache/lucene/store/BufferedIndexInput.bufferLength:I
+   #47 = NameAndType        #15:#7        // bufferPosition:I
+   #48 = Fieldref           #2.#47        // org/apache/lucene/store/BufferedIndexInput.bufferPosition:I
+   #49 = Utf8               (I)V
+   #50 = Utf8               checkBufferSize
+   #51 = NameAndType        #50:#49       // checkBufferSize:(I)V
+   #52 = Methodref          #2.#51        // org/apache/lucene/store/BufferedIndexInput.checkBufferSize:(I)V
+   #53 = Utf8               java/lang/IllegalArgumentException
+   #54 = Class              #53           // java/lang/IllegalArgumentException
+   #55 = Utf8               java/lang/StringBuffer
+   #56 = Class              #55           // java/lang/StringBuffer
+   #57 = Methodref          #56.#39       // java/lang/StringBuffer."<init>":()V
+   #58 = Utf8               bufferSize must be greater than 0 (got
+   #59 = String             #58           // bufferSize must be greater than 0 (got
+   #60 = Utf8               append
+   #61 = Utf8               (Ljava/lang/String;)Ljava/lang/StringBuffer;
+   #62 = NameAndType        #60:#61       // append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+   #63 = Methodref          #56.#62       // java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+   #64 = Utf8               (I)Ljava/lang/StringBuffer;
+   #65 = NameAndType        #60:#64       // append:(I)Ljava/lang/StringBuffer;
+   #66 = Methodref          #56.#65       // java/lang/StringBuffer.append:(I)Ljava/lang/StringBuffer;
+   #67 = Utf8               )
+   #68 = String             #67           // )
+   #69 = Utf8               toString
+   #70 = Utf8               ()Ljava/lang/String;
+   #71 = NameAndType        #69:#70       // toString:()Ljava/lang/String;
+   #72 = Methodref          #56.#71       // java/lang/StringBuffer.toString:()Ljava/lang/String;
+   #73 = Utf8               (Ljava/lang/String;)V
+   #74 = NameAndType        #38:#73       // "<init>":(Ljava/lang/String;)V
+   #75 = Methodref          #54.#74       // java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+   #76 = Utf8               java/lang/ClassNotFoundException
+   #77 = Class              #76           // java/lang/ClassNotFoundException
+   #78 = Utf8               soot/rtlib/tamiflex/ReflectiveCalls
+   #79 = Class              #78           // soot/rtlib/tamiflex/ReflectiveCalls
+   #80 = Utf8               knownClassForName
+   #81 = Utf8               (ILjava/lang/String;)V
+   #82 = NameAndType        #80:#81       // knownClassForName:(ILjava/lang/String;)V
+   #83 = Methodref          #79.#82       // soot/rtlib/tamiflex/ReflectiveCalls.knownClassForName:(ILjava/lang/String;)V
+   #84 = Utf8               soot/rtlib/tamiflex/OpaquePredicate
+   #85 = Class              #84           // soot/rtlib/tamiflex/OpaquePredicate
+   #86 = Utf8               getFalse
+   #87 = NameAndType        #86:#33       // getFalse:()Z
+   #88 = Methodref          #85.#87       // soot/rtlib/tamiflex/OpaquePredicate.getFalse:()Z
+   #89 = Utf8               soot/rtlib/tamiflex/ReflectiveCallsWrapper
+   #90 = Class              #89           // soot/rtlib/tamiflex/ReflectiveCallsWrapper
+   #91 = Utf8               reflectiveCall22
+   #92 = Utf8               ()Ljava/lang/Class;
+   #93 = NameAndType        #91:#92       // reflectiveCall22:()Ljava/lang/Class;
+   #94 = Methodref          #90.#93       // soot/rtlib/tamiflex/ReflectiveCallsWrapper.reflectiveCall22:()Ljava/lang/Class;
+   #95 = Utf8               forName
+   #96 = NameAndType        #95:#27       // forName:(Ljava/lang/String;)Ljava/lang/Class;
+   #97 = Methodref          #31.#96       // java/lang/Class.forName:(Ljava/lang/String;)Ljava/lang/Class;
+   #98 = Utf8               java/lang/NoClassDefFoundError
+   #99 = Class              #98           // java/lang/NoClassDefFoundError
+  #100 = Methodref          #99.#39       // java/lang/NoClassDefFoundError."<init>":()V
+  #101 = Utf8               initCause
+  #102 = Utf8               (Ljava/lang/Throwable;)Ljava/lang/Throwable;
+  #103 = NameAndType        #101:#102     // initCause:(Ljava/lang/Throwable;)Ljava/lang/Throwable;
+  #104 = Methodref          #99.#103      // java/lang/NoClassDefFoundError.initCause:(Ljava/lang/Throwable;)Ljava/lang/Throwable;
+  #105 = Utf8               java/lang/String
+  #106 = Class              #105          // java/lang/String
+  #107 = Utf8               clone
+  #108 = Utf8               ()Ljava/lang/Object;
+  #109 = NameAndType        #107:#108     // clone:()Ljava/lang/Object;
+  #110 = Methodref          #4.#109       // org/apache/lucene/store/IndexInput.clone:()Ljava/lang/Object;
+  #111 = NameAndType        #10:#11       // buffer:[B
+  #112 = Fieldref           #2.#111       // org/apache/lucene/store/BufferedIndexInput.buffer:[B
+  #113 = Utf8               getFilePointer
+  #114 = Utf8               ()J
+  #115 = NameAndType        #113:#114     // getFilePointer:()J
+  #116 = Methodref          #2.#115       // org/apache/lucene/store/BufferedIndexInput.getFilePointer:()J
+  #117 = Utf8               getBufferSize
+  #118 = Utf8               ()I
+  #119 = Utf8               newBuffer
+  #120 = Utf8               ([B)V
+  #121 = Utf8               readByte
+  #122 = Utf8               ()B
+  #123 = Utf8               java/io/IOException
+  #124 = Class              #123          // java/io/IOException
+  #125 = Utf8               refill
+  #126 = NameAndType        #125:#21      // refill:()V
+  #127 = Methodref          #2.#126       // org/apache/lucene/store/BufferedIndexInput.refill:()V
+  #128 = Utf8               readBytes
+  #129 = Utf8               ([BII)V
+  #130 = Utf8               ([BIIZ)V
+  #131 = NameAndType        #128:#130     // readBytes:([BIIZ)V
+  #132 = Methodref          #2.#131       // org/apache/lucene/store/BufferedIndexInput.readBytes:([BIIZ)V
+  #133 = Utf8               java/lang/System
+  #134 = Class              #133          // java/lang/System
+  #135 = Utf8               arraycopy
+  #136 = Utf8               (Ljava/lang/Object;ILjava/lang/Object;II)V
+  #137 = NameAndType        #135:#136     // arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+  #138 = Methodref          #134.#137     // java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+  #139 = Utf8               read past EOF
+  #140 = String             #139          // read past EOF
+  #141 = Methodref          #124.#74      // java/io/IOException."<init>":(Ljava/lang/String;)V
+  #142 = Utf8               length
+  #143 = NameAndType        #142:#114     // length:()J
+  #144 = Methodref          #2.#143       // org/apache/lucene/store/BufferedIndexInput.length:()J
+  #145 = Utf8               readInternal
+  #146 = NameAndType        #145:#129     // readInternal:([BII)V
+  #147 = Methodref          #2.#146       // org/apache/lucene/store/BufferedIndexInput.readInternal:([BII)V
+  #148 = NameAndType        #119:#120     // newBuffer:([B)V
+  #149 = Methodref          #2.#148       // org/apache/lucene/store/BufferedIndexInput.newBuffer:([B)V
+  #150 = Utf8               seekInternal
+  #151 = Utf8               (J)V
+  #152 = NameAndType        #150:#151     // seekInternal:(J)V
+  #153 = Methodref          #2.#152       // org/apache/lucene/store/BufferedIndexInput.seekInternal:(J)V
+  #154 = Utf8               seek
+  #155 = Utf8               setBufferSize
+  #156 = Utf8               java/lang/AssertionError
+  #157 = Class              #156          // java/lang/AssertionError
+  #158 = Utf8               buffer=
+  #159 = String             #158          // buffer=
+  #160 = Utf8               (Ljava/lang/Object;)Ljava/lang/StringBuffer;
+  #161 = NameAndType        #60:#160      // append:(Ljava/lang/Object;)Ljava/lang/StringBuffer;
+  #162 = Methodref          #56.#161      // java/lang/StringBuffer.append:(Ljava/lang/Object;)Ljava/lang/StringBuffer;
+  #163 = Utf8                bufferSize=
+  #164 = String             #163          //  bufferSize=
+  #165 = Utf8                buffer.length=
+  #166 = String             #165          //  buffer.length=
+  #167 = Utf8               (Ljava/lang/Object;)V
+  #168 = NameAndType        #38:#167      // "<init>":(Ljava/lang/Object;)V
+  #169 = Methodref          #157.#168     // java/lang/AssertionError."<init>":(Ljava/lang/Object;)V
+  #170 = Class              #11           // "[B"
+  #171 = Utf8               ConstantValue
+  #172 = Utf8               Code
+  #173 = Utf8               StackMapTable
+  #174 = Utf8               LineNumberTable
+  #175 = Utf8               Exceptions
+  #176 = Utf8               SourceFile
+{
+  public static final int BUFFER_SIZE;
+    descriptor: I
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+    ConstantValue: int 1024
+
+  protected byte[] buffer;
+    descriptor: [B
+    flags: ACC_PROTECTED
+
+  static final boolean $assertionsDisabled;
+    descriptor: Z
+    flags: ACC_STATIC, ACC_FINAL, ACC_SYNTHETIC
+
+  static java.lang.Class class$org$apache$lucene$store$BufferedIndexInput;
+    descriptor: Ljava/lang/Class;
+    flags: ACC_STATIC, ACC_SYNTHETIC
+
+  static {};
+    descriptor: ()V
+    flags: ACC_STATIC
+    Code:
+      stack=1, locals=2, args_size=0
+         0: getstatic     #23                 // Field class$org$apache$lucene$store$BufferedIndexInput:Ljava/lang/Class;
+         3: ifnonnull     19
+         6: ldc           #25                 // String org.apache.lucene.store.BufferedIndexInput
+         8: invokestatic  #29                 // Method class$:(Ljava/lang/String;)Ljava/lang/Class;
+        11: astore_0
+        12: aload_0
+        13: putstatic     #23                 // Field class$org$apache$lucene$store$BufferedIndexInput:Ljava/lang/Class;
+        16: goto          23
+        19: getstatic     #23                 // Field class$org$apache$lucene$store$BufferedIndexInput:Ljava/lang/Class;
+        22: astore_0
+        23: aload_0
+        24: invokevirtual #35                 // Method java/lang/Class.desiredAssertionStatus:()Z
+        27: ifne          35
+        30: iconst_1
+        31: istore_1
+        32: goto          37
+        35: iconst_0
+        36: istore_1
+        37: iload_1
+        38: putstatic     #37                 // Field $assertionsDisabled:Z
+        41: return
+      StackMapTable: number_of_entries = 4
+        frame_type = 19 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 3
+          locals = [ class java/lang/Class ]
+        frame_type = 11 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 1
+          locals = [ int ]
+      LineNumberTable:
+        line 23: 0
+        line 23: 3
+        line 23: 6
+        line 23: 8
+        line 23: 11
+        line 23: 12
+        line 23: 13
+        line 23: 16
+        line 23: 19
+        line 23: 22
+        line 23: 23
+        line 23: 24
+        line 23: 27
+        line 23: 30
+        line 23: 31
+        line 23: 32
+        line 23: 35
+        line 23: 36
+        line 23: 37
+        line 23: 38
+        line 23: 41
+
+  public org.apache.lucene.store.BufferedIndexInput();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=3, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #40                 // Method org/apache/lucene/store/IndexInput."<init>":()V
+         4: aload_0
+         5: sipush        1024
+         8: putfield      #42                 // Field bufferSize:I
+        11: aload_0
+        12: lconst_0
+        13: putfield      #44                 // Field bufferStart:J
+        16: aload_0
+        17: iconst_0
+        18: putfield      #46                 // Field bufferLength:I
+        21: aload_0
+        22: iconst_0
+        23: putfield      #48                 // Field bufferPosition:I
+        26: return
+      LineNumberTable:
+        line 42: 0
+        line 42: 1
+        line 28: 4
+        line 28: 5
+        line 28: 8
+        line 32: 11
+        line 32: 12
+        line 32: 13
+        line 33: 16
+        line 33: 17
+        line 33: 18
+        line 34: 21
+        line 34: 22
+        line 34: 23
+        line 42: 26
+
+  public org.apache.lucene.store.BufferedIndexInput(int);
+    descriptor: (I)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=3, locals=2, args_size=2
+         0: aload_0
+         1: invokespecial #40                 // Method org/apache/lucene/store/IndexInput."<init>":()V
+         4: aload_0
+         5: sipush        1024
+         8: putfield      #42                 // Field bufferSize:I
+        11: aload_0
+        12: lconst_0
+        13: putfield      #44                 // Field bufferStart:J
+        16: aload_0
+        17: iconst_0
+        18: putfield      #46                 // Field bufferLength:I
+        21: aload_0
+        22: iconst_0
+        23: putfield      #48                 // Field bufferPosition:I
+        26: aload_0
+        27: iload_1
+        28: invokespecial #52                 // Method checkBufferSize:(I)V
+        31: aload_0
+        32: iload_1
+        33: putfield      #42                 // Field bufferSize:I
+        36: return
+      LineNumberTable:
+        line 45: 0
+        line 45: 1
+        line 28: 4
+        line 28: 5
+        line 28: 8
+        line 32: 11
+        line 32: 12
+        line 32: 13
+        line 33: 16
+        line 33: 17
+        line 33: 18
+        line 34: 21
+        line 34: 22
+        line 34: 23
+        line 46: 26
+        line 46: 27
+        line 46: 28
+        line 47: 31
+        line 47: 32
+        line 47: 33
+        line 48: 36
+
+  static java.lang.Class class$(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/Class;
+    flags: ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=2, locals=3, args_size=1
+         0: bipush        14
+         2: aload_0
+         3: invokestatic  #83                 // Method soot/rtlib/tamiflex/ReflectiveCalls.knownClassForName:(ILjava/lang/String;)V
+         6: invokestatic  #88                 // Method soot/rtlib/tamiflex/OpaquePredicate.getFalse:()Z
+         9: ifeq          19
+        12: invokestatic  #94                 // Method soot/rtlib/tamiflex/ReflectiveCallsWrapper.reflectiveCall22:()Ljava/lang/Class;
+        15: astore_1
+        16: goto          24
+        19: aload_0
+        20: invokestatic  #97                 // Method java/lang/Class.forName:(Ljava/lang/String;)Ljava/lang/Class;
+        23: astore_1
+        24: aload_1
+        25: areturn
+        26: astore_2
+        27: new           #99                 // class java/lang/NoClassDefFoundError
+        30: dup
+        31: invokespecial #100                // Method java/lang/NoClassDefFoundError."<init>":()V
+        34: aload_2
+        35: invokevirtual #104                // Method java/lang/NoClassDefFoundError.initCause:(Ljava/lang/Throwable;)Ljava/lang/Throwable;
+        38: athrow
+      Exception table:
+         from    to  target type
+             0    24    26   Class java/lang/ClassNotFoundException
+      StackMapTable: number_of_entries = 3
+        frame_type = 19 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 4
+          locals = [ class java/lang/Class ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 1
+          locals = [ class java/lang/String ]
+          stack = [ class java/lang/ClassNotFoundException ]
+      LineNumberTable:
+        line 23: 19
+        line 23: 20
+        line 23: 23
+        line 23: 24
+        line 23: 25
+        line 23: 26
+        line 23: 27
+        line 23: 30
+        line 23: 31
+        line 23: 34
+        line 23: 35
+        line 23: 38
+
+  public java.lang.Object clone();
+    descriptor: ()Ljava/lang/Object;
+    flags: ACC_PUBLIC
+    Code:
+      stack=3, locals=2, args_size=1
+         0: aload_0
+         1: invokespecial #110                // Method org/apache/lucene/store/IndexInput.clone:()Ljava/lang/Object;
+         4: checkcast     #2                  // class org/apache/lucene/store/BufferedIndexInput
+         7: astore_1
+         8: aload_1
+         9: aconst_null
+        10: putfield      #112                // Field buffer:[B
+        13: aload_1
+        14: iconst_0
+        15: putfield      #46                 // Field bufferLength:I
+        18: aload_1
+        19: iconst_0
+        20: putfield      #48                 // Field bufferPosition:I
+        23: aload_1
+        24: aload_0
+        25: invokevirtual #116                // Method getFilePointer:()J
+        28: putfield      #44                 // Field bufferStart:J
+        31: aload_1
+        32: areturn
+      LineNumberTable:
+        line 192: 0
+        line 192: 1
+        line 192: 4
+        line 192: 7
+        line 194: 8
+        line 194: 9
+        line 194: 10
+        line 195: 13
+        line 195: 14
+        line 195: 15
+        line 196: 18
+        line 196: 19
+        line 196: 20
+        line 197: 23
+        line 197: 24
+        line 197: 25
+        line 197: 28
+        line 199: 31
+        line 199: 32
+
+  public int getBufferSize();
+    descriptor: ()I
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #42                 // Field bufferSize:I
+         4: ireturn
+      LineNumberTable:
+        line 83: 0
+        line 83: 1
+        line 83: 4
+
+  public long getFilePointer();
+    descriptor: ()J
+    flags: ACC_PUBLIC
+    Code:
+      stack=4, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #44                 // Field bufferStart:J
+         4: aload_0
+         5: getfield      #48                 // Field bufferPosition:I
+         8: i2l
+         9: ladd
+        10: lreturn
+      LineNumberTable:
+        line 172: 0
+        line 172: 1
+        line 172: 4
+        line 172: 5
+        line 172: 8
+        line 172: 9
+        line 172: 10
+
+  protected void newBuffer(byte[]);
+    descriptor: ([B)V
+    flags: ACC_PROTECTED
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #112                // Field buffer:[B
+         5: return
+      LineNumberTable:
+        line 78: 0
+        line 78: 1
+        line 78: 2
+        line 79: 5
+
+  public byte readByte() throws java.io.IOException;
+    descriptor: ()B
+    flags: ACC_PUBLIC
+    Code:
+      stack=4, locals=2, args_size=1
+         0: aload_0
+         1: getfield      #48                 // Field bufferPosition:I
+         4: aload_0
+         5: getfield      #46                 // Field bufferLength:I
+         8: if_icmplt     15
+        11: aload_0
+        12: invokespecial #127                // Method refill:()V
+        15: aload_0
+        16: getfield      #112                // Field buffer:[B
+        19: aload_0
+        20: getfield      #48                 // Field bufferPosition:I
+        23: dup
+        24: iconst_1
+        25: iadd
+        26: istore_1
+        27: aload_0
+        28: iload_1
+        29: putfield      #48                 // Field bufferPosition:I
+        32: baload
+        33: ireturn
+      StackMapTable: number_of_entries = 1
+        frame_type = 15 /* same */
+      LineNumberTable:
+        line 37: 0
+        line 37: 1
+        line 37: 4
+        line 37: 5
+        line 37: 8
+        line 38: 11
+        line 38: 12
+        line 39: 15
+        line 39: 16
+        line 39: 19
+        line 39: 20
+        line 39: 23
+        line 39: 24
+        line 39: 25
+        line 39: 26
+        line 39: 27
+        line 39: 28
+        line 39: 29
+        line 39: 32
+        line 39: 33
+    Exceptions:
+      throws java.io.IOException
+
+  public void readBytes(byte[], int, int) throws java.io.IOException;
+    descriptor: ([BII)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=5, locals=4, args_size=4
+         0: aload_0
+         1: aload_1
+         2: iload_2
+         3: iload_3
+         4: iconst_1
+         5: invokevirtual #132                // Method readBytes:([BIIZ)V
+         8: return
+      LineNumberTable:
+        line 92: 0
+        line 92: 1
+        line 92: 2
+        line 92: 3
+        line 92: 4
+        line 92: 5
+        line 93: 8
+    Exceptions:
+      throws java.io.IOException
+
+  public void readBytes(byte[], int, int, boolean) throws java.io.IOException;
+    descriptor: ([BIIZ)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=5, locals=8, args_size=5
+         0: iload_3
+         1: aload_0
+         2: getfield      #46                 // Field bufferLength:I
+         5: aload_0
+         6: getfield      #48                 // Field bufferPosition:I
+         9: isub
+        10: if_icmpgt     44
+        13: iload_3
+        14: ifle          31
+        17: aload_0
+        18: getfield      #112                // Field buffer:[B
+        21: aload_0
+        22: getfield      #48                 // Field bufferPosition:I
+        25: aload_1
+        26: iload_2
+        27: iload_3
+        28: invokestatic  #138                // Method java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+        31: aload_0
+        32: aload_0
+        33: getfield      #48                 // Field bufferPosition:I
+        36: iload_3
+        37: iadd
+        38: putfield      #48                 // Field bufferPosition:I
+        41: goto          222
+        44: aload_0
+        45: getfield      #46                 // Field bufferLength:I
+        48: aload_0
+        49: getfield      #48                 // Field bufferPosition:I
+        52: isub
+        53: istore        5
+        55: iload         5
+        57: ifle          96
+        60: aload_0
+        61: getfield      #112                // Field buffer:[B
+        64: aload_0
+        65: getfield      #48                 // Field bufferPosition:I
+        68: aload_1
+        69: iload_2
+        70: iload         5
+        72: invokestatic  #138                // Method java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+        75: iload_2
+        76: iload         5
+        78: iadd
+        79: istore_2
+        80: iload_3
+        81: iload         5
+        83: isub
+        84: istore_3
+        85: aload_0
+        86: aload_0
+        87: getfield      #48                 // Field bufferPosition:I
+        90: iload         5
+        92: iadd
+        93: putfield      #48                 // Field bufferPosition:I
+        96: iload         4
+        98: ifeq          164
+       101: iload_3
+       102: aload_0
+       103: getfield      #42                 // Field bufferSize:I
+       106: if_icmpge     164
+       109: aload_0
+       110: invokespecial #127                // Method refill:()V
+       113: aload_0
+       114: getfield      #46                 // Field bufferLength:I
+       117: iload_3
+       118: if_icmpge     145
+       121: aload_0
+       122: getfield      #112                // Field buffer:[B
+       125: iconst_0
+       126: aload_1
+       127: iload_2
+       128: aload_0
+       129: getfield      #46                 // Field bufferLength:I
+       132: invokestatic  #138                // Method java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+       135: new           #124                // class java/io/IOException
+       138: dup
+       139: ldc           #140                // String read past EOF
+       141: invokespecial #141                // Method java/io/IOException."<init>":(Ljava/lang/String;)V
+       144: athrow
+       145: aload_0
+       146: getfield      #112                // Field buffer:[B
+       149: iconst_0
+       150: aload_1
+       151: iload_2
+       152: iload_3
+       153: invokestatic  #138                // Method java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+       156: aload_0
+       157: iload_3
+       158: putfield      #48                 // Field bufferPosition:I
+       161: goto          222
+       164: aload_0
+       165: getfield      #44                 // Field bufferStart:J
+       168: aload_0
+       169: getfield      #48                 // Field bufferPosition:I
+       172: i2l
+       173: ladd
+       174: iload_3
+       175: i2l
+       176: ladd
+       177: lstore        6
+       179: lload         6
+       181: aload_0
+       182: invokevirtual #144                // Method length:()J
+       185: lcmp
+       186: ifle          199
+       189: new           #124                // class java/io/IOException
+       192: dup
+       193: ldc           #140                // String read past EOF
+       195: invokespecial #141                // Method java/io/IOException."<init>":(Ljava/lang/String;)V
+       198: athrow
+       199: aload_0
+       200: aload_1
+       201: iload_2
+       202: iload_3
+       203: invokevirtual #147                // Method readInternal:([BII)V
+       206: aload_0
+       207: lload         6
+       209: putfield      #44                 // Field bufferStart:J
+       212: aload_0
+       213: iconst_0
+       214: putfield      #48                 // Field bufferPosition:I
+       217: aload_0
+       218: iconst_0
+       219: putfield      #46                 // Field bufferLength:I
+       222: return
+      StackMapTable: number_of_entries = 7
+        frame_type = 31 /* same */
+        frame_type = 12 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 51
+          locals = [ int ]
+        frame_type = 48 /* same */
+        frame_type = 18 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 34
+          locals = [ long ]
+        frame_type = 249 /* chop */
+          offset_delta = 22
+      LineNumberTable:
+        line 97: 0
+        line 97: 1
+        line 97: 2
+        line 97: 5
+        line 97: 6
+        line 97: 9
+        line 97: 10
+        line 99: 13
+        line 99: 14
+        line 100: 17
+        line 100: 18
+        line 100: 21
+        line 100: 22
+        line 100: 25
+        line 100: 26
+        line 100: 27
+        line 100: 28
+        line 101: 31
+        line 101: 32
+        line 101: 33
+        line 101: 36
+        line 101: 37
+        line 101: 38
+        line 101: 41
+        line 104: 44
+        line 104: 45
+        line 104: 48
+        line 104: 49
+        line 104: 52
+        line 104: 53
+        line 105: 55
+        line 105: 57
+        line 106: 60
+        line 106: 61
+        line 106: 64
+        line 106: 65
+        line 106: 68
+        line 106: 69
+        line 106: 70
+        line 106: 72
+        line 107: 75
+        line 107: 76
+        line 107: 78
+        line 107: 79
+        line 108: 80
+        line 108: 81
+        line 108: 83
+        line 108: 84
+        line 109: 85
+        line 109: 86
+        line 109: 87
+        line 109: 90
+        line 109: 92
+        line 109: 93
+        line 112: 96
+        line 112: 98
+        line 112: 101
+        line 112: 102
+        line 112: 103
+        line 112: 106
+        line 116: 109
+        line 116: 110
+        line 117: 113
+        line 117: 114
+        line 117: 117
+        line 117: 118
+        line 119: 121
+        line 119: 122
+        line 119: 125
+        line 119: 126
+        line 119: 127
+        line 119: 128
+        line 119: 129
+        line 119: 132
+        line 120: 135
+        line 120: 138
+        line 120: 139
+        line 120: 141
+        line 120: 144
+        line 122: 145
+        line 122: 146
+        line 122: 149
+        line 122: 150
+        line 122: 151
+        line 122: 152
+        line 122: 153
+        line 123: 156
+        line 123: 157
+        line 123: 158
+        line 123: 161
+        line 133: 164
+        line 133: 165
+        line 133: 168
+        line 133: 169
+        line 133: 172
+        line 133: 173
+        line 133: 174
+        line 133: 175
+        line 133: 176
+        line 133: 177
+        line 134: 179
+        line 134: 181
+        line 134: 182
+        line 134: 185
+        line 134: 186
+        line 135: 189
+        line 135: 192
+        line 135: 193
+        line 135: 195
+        line 135: 198
+        line 136: 199
+        line 136: 200
+        line 136: 201
+        line 136: 202
+        line 136: 203
+        line 137: 206
+        line 137: 207
+        line 137: 209
+        line 138: 212
+        line 138: 213
+        line 138: 214
+        line 139: 217
+        line 139: 218
+        line 139: 219
+        line 142: 222
+    Exceptions:
+      throws java.io.IOException
+
+  protected abstract void readInternal(byte[], int, int) throws java.io.IOException;
+    descriptor: ([BII)V
+    flags: ACC_PROTECTED, ACC_ABSTRACT
+    Exceptions:
+      throws java.io.IOException
+
+  public void seek(long) throws java.io.IOException;
+    descriptor: (J)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=6, locals=3, args_size=2
+         0: lload_1
+         1: aload_0
+         2: getfield      #44                 // Field bufferStart:J
+         5: lcmp
+         6: iflt          38
+         9: lload_1
+        10: aload_0
+        11: getfield      #44                 // Field bufferStart:J
+        14: aload_0
+        15: getfield      #46                 // Field bufferLength:I
+        18: i2l
+        19: ladd
+        20: lcmp
+        21: ifge          38
+        24: aload_0
+        25: lload_1
+        26: aload_0
+        27: getfield      #44                 // Field bufferStart:J
+        30: lsub
+        31: l2i
+        32: putfield      #48                 // Field bufferPosition:I
+        35: goto          58
+        38: aload_0
+        39: lload_1
+        40: putfield      #44                 // Field bufferStart:J
+        43: aload_0
+        44: iconst_0
+        45: putfield      #48                 // Field bufferPosition:I
+        48: aload_0
+        49: iconst_0
+        50: putfield      #46                 // Field bufferLength:I
+        53: aload_0
+        54: lload_1
+        55: invokevirtual #153                // Method seekInternal:(J)V
+        58: return
+      StackMapTable: number_of_entries = 2
+        frame_type = 38 /* same */
+        frame_type = 19 /* same */
+      LineNumberTable:
+        line 175: 0
+        line 175: 1
+        line 175: 2
+        line 175: 5
+        line 175: 6
+        line 175: 9
+        line 175: 10
+        line 175: 11
+        line 175: 14
+        line 175: 15
+        line 175: 18
+        line 175: 19
+        line 175: 20
+        line 175: 21
+        line 176: 24
+        line 176: 25
+        line 176: 26
+        line 176: 27
+        line 176: 30
+        line 176: 31
+        line 176: 32
+        line 176: 35
+        line 178: 38
+        line 178: 39
+        line 178: 40
+        line 179: 43
+        line 179: 44
+        line 179: 45
+        line 180: 48
+        line 180: 49
+        line 180: 50
+        line 181: 53
+        line 181: 54
+        line 181: 55
+        line 183: 58
+    Exceptions:
+      throws java.io.IOException
+
+  protected abstract void seekInternal(long) throws java.io.IOException;
+    descriptor: (J)V
+    flags: ACC_PROTECTED, ACC_ABSTRACT
+    Exceptions:
+      throws java.io.IOException
+
+  public void setBufferSize(int);
+    descriptor: (I)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=5, locals=8, args_size=2
+         0: getstatic     #37                 // Field $assertionsDisabled:Z
+         3: ifne          106
+         6: aload_0
+         7: getfield      #112                // Field buffer:[B
+        10: ifnull        106
+        13: aload_0
+        14: getfield      #42                 // Field bufferSize:I
+        17: aload_0
+        18: getfield      #112                // Field buffer:[B
+        21: arraylength
+        22: if_icmpeq     106
+        25: new           #157                // class java/lang/AssertionError
+        28: astore        4
+        30: new           #56                 // class java/lang/StringBuffer
+        33: dup
+        34: invokespecial #57                 // Method java/lang/StringBuffer."<init>":()V
+        37: ldc           #159                // String buffer=
+        39: invokevirtual #63                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+        42: aload_0
+        43: getfield      #112                // Field buffer:[B
+        46: invokevirtual #162                // Method java/lang/StringBuffer.append:(Ljava/lang/Object;)Ljava/lang/StringBuffer;
+        49: ldc           #164                // String  bufferSize=
+        51: invokevirtual #63                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+        54: aload_0
+        55: getfield      #42                 // Field bufferSize:I
+        58: invokevirtual #66                 // Method java/lang/StringBuffer.append:(I)Ljava/lang/StringBuffer;
+        61: ldc           #166                // String  buffer.length=
+        63: invokevirtual #63                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+        66: astore        5
+        68: aload_0
+        69: getfield      #112                // Field buffer:[B
+        72: ifnull        85
+        75: aload_0
+        76: getfield      #112                // Field buffer:[B
+        79: arraylength
+        80: istore        6
+        82: goto          88
+        85: iconst_0
+        86: istore        6
+        88: aload         4
+        90: aload         5
+        92: iload         6
+        94: invokevirtual #66                 // Method java/lang/StringBuffer.append:(I)Ljava/lang/StringBuffer;
+        97: invokevirtual #72                 // Method java/lang/StringBuffer.toString:()Ljava/lang/String;
+       100: invokespecial #169                // Method java/lang/AssertionError."<init>":(Ljava/lang/Object;)V
+       103: aload         4
+       105: athrow
+       106: iload_1
+       107: aload_0
+       108: getfield      #42                 // Field bufferSize:I
+       111: if_icmpeq     204
+       114: aload_0
+       115: iload_1
+       116: invokespecial #52                 // Method checkBufferSize:(I)V
+       119: aload_0
+       120: iload_1
+       121: putfield      #42                 // Field bufferSize:I
+       124: aload_0
+       125: getfield      #112                // Field buffer:[B
+       128: ifnull        204
+       131: iload_1
+       132: newarray       byte
+       134: astore_2
+       135: aload_0
+       136: getfield      #46                 // Field bufferLength:I
+       139: aload_0
+       140: getfield      #48                 // Field bufferPosition:I
+       143: isub
+       144: istore_3
+       145: iload_3
+       146: iload_1
+       147: if_icmple     156
+       150: iload_1
+       151: istore        7
+       153: goto          159
+       156: iload_3
+       157: istore        7
+       159: aload_0
+       160: getfield      #112                // Field buffer:[B
+       163: aload_0
+       164: getfield      #48                 // Field bufferPosition:I
+       167: aload_2
+       168: iconst_0
+       169: iload         7
+       171: invokestatic  #138                // Method java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+       174: aload_0
+       175: aload_0
+       176: getfield      #44                 // Field bufferStart:J
+       179: aload_0
+       180: getfield      #48                 // Field bufferPosition:I
+       183: i2l
+       184: ladd
+       185: putfield      #44                 // Field bufferStart:J
+       188: aload_0
+       189: iconst_0
+       190: putfield      #48                 // Field bufferPosition:I
+       193: aload_0
+       194: iload         7
+       196: putfield      #46                 // Field bufferLength:I
+       199: aload_0
+       200: aload_2
+       201: invokevirtual #149                // Method newBuffer:([B)V
+       204: return
+      StackMapTable: number_of_entries = 6
+        frame_type = 255 /* full_frame */
+          offset_delta = 85
+          locals = [ class org/apache/lucene/store/BufferedIndexInput, int, top, top, uninitialized 25, class java/lang/StringBuffer ]
+          stack = []
+        frame_type = 252 /* append */
+          offset_delta = 2
+          locals = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 17
+          locals = [ class org/apache/lucene/store/BufferedIndexInput, int ]
+          stack = []
+        frame_type = 253 /* append */
+          offset_delta = 49
+          locals = [ class "[B", int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 2
+          locals = [ class org/apache/lucene/store/BufferedIndexInput, int, class "[B", int, top, top, top, int ]
+          stack = []
+        frame_type = 255 /* full_frame */
+          offset_delta = 44
+          locals = [ class org/apache/lucene/store/BufferedIndexInput, int ]
+          stack = []
+      LineNumberTable:
+        line 52: 0
+        line 52: 3
+        line 52: 6
+        line 52: 7
+        line 52: 10
+        line 52: 13
+        line 52: 14
+        line 52: 17
+        line 52: 18
+        line 52: 21
+        line 52: 22
+        line 52: 25
+        line 52: 28
+        line 52: 30
+        line 52: 33
+        line 52: 34
+        line 52: 37
+        line 52: 39
+        line 52: 42
+        line 52: 43
+        line 52: 46
+        line 52: 49
+        line 52: 51
+        line 52: 54
+        line 52: 55
+        line 52: 58
+        line 52: 61
+        line 52: 63
+        line 52: 66
+        line 52: 68
+        line 52: 69
+        line 52: 72
+        line 52: 75
+        line 52: 76
+        line 52: 79
+        line 52: 80
+        line 52: 82
+        line 52: 85
+        line 52: 86
+        line 52: 88
+        line 52: 90
+        line 52: 92
+        line 52: 94
+        line 52: 97
+        line 52: 100
+        line 52: 103
+        line 52: 105
+        line 53: 106
+        line 53: 107
+        line 53: 108
+        line 53: 111
+        line 54: 114
+        line 54: 115
+        line 54: 116
+        line 55: 119
+        line 55: 120
+        line 55: 121
+        line 56: 124
+        line 56: 125
+        line 56: 128
+        line 60: 131
+        line 60: 132
+        line 60: 134
+        line 61: 135
+        line 61: 136
+        line 61: 139
+        line 61: 140
+        line 61: 143
+        line 61: 144
+        line 63: 145
+        line 63: 146
+        line 63: 147
+        line 64: 150
+        line 64: 151
+        line 64: 153
+        line 66: 156
+        line 66: 157
+        line 67: 159
+        line 67: 160
+        line 67: 163
+        line 67: 164
+        line 67: 167
+        line 67: 168
+        line 67: 169
+        line 67: 171
+        line 68: 174
+        line 68: 175
+        line 68: 176
+        line 68: 179
+        line 68: 180
+        line 68: 183
+        line 68: 184
+        line 68: 185
+        line 69: 188
+        line 69: 189
+        line 69: 190
+        line 70: 193
+        line 70: 194
+        line 70: 196
+        line 71: 199
+        line 71: 200
+        line 71: 201
+        line 74: 204
+}
+SourceFile: "BufferedIndexInput.java"
