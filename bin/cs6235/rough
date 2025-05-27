@@ -1,0 +1,254 @@
+List<Type> parameterTypes = new ArrayList<>(sootMethod.getParameterTypes());
+		List<Value> newArgs = new ArrayList<>();
+
+//        parameterTypes.add(BooleanType.v());
+		
+		SootMethod dummyConstructor = new SootMethod(
+		        "dummyConstructor"+sootClass.toString()+String.valueOf(constructorCount),
+		        parameterTypes,
+		        sootClass.getType(),
+		        Modifier.PUBLIC | Modifier.STATIC
+		);
+		
+		sootClass.addMethod(dummyConstructor);
+		
+		JimpleBody dummyConstructorBody = Jimple.v().newBody(dummyConstructor);
+	    dummyConstructor.setActiveBody(dummyConstructorBody);
+	    PatchingChain<Unit> dummyConstructorUnits = dummyConstructorBody.getUnits();
+	    
+	    JimpleBody mainConstructorBody = (JimpleBody) sootMethod.retrieveActiveBody();
+	    PatchingChain<Unit> mainConstructorUnits = mainConstructorBody.getUnits();
+	    
+	    
+	    for (Local local : mainConstructorBody.getLocals()) {
+	    	dummyConstructorBody.getLocals().add(local);
+        }
+	    
+	    for (int i = 0; i < parameterTypes.size()-1; ++i) {
+	        
+	        Local parameterLocal = mainConstructorBody.getParameterLocal(i);
+	        dummyConstructorBody.getLocals().add(parameterLocal);
+	        newArgs.add((Value)parameterLocal);
+	        Stmt stmt = Jimple.v().newIdentityStmt(parameterLocal, Jimple.v().newParameterRef(parameterTypes.get(i), i));
+	        dummyConstructorUnits.add(stmt);
+	    }
+	    
+	    Local flag = Jimple.v().newLocal("flag", BooleanType.v());
+	    dummyConstructorBody.getLocals().add(flag);
+	    Stmt stmtflag = Jimple.v().newIdentityStmt(flag, Jimple.v().newParameterRef(BooleanType.v(), parameterTypes.size()-1));
+        dummyConstructorUnits.add(stmtflag);
+        
+        Local temp$8 = Jimple.v().newLocal("temp$100",sootClass.getType());
+        dummyConstructorBody.getLocals().add(temp$8);
+		Stmt newObjStmt = Jimple.v().newAssignStmt(temp$8,Jimple.v().newNewExpr(sootClass.getType()));
+
+
+
+		EqExpr eqExpr = Jimple.v().newEqExpr(flag, IntConstant.v(0));
+		IfStmt ifStmt = Jimple.v().newIfStmt(eqExpr, newObjStmt);
+		dummyConstructorUnits.add(ifStmt);
+        
+        
+	    
+	    HashMap<String,Local> LocalInfo = new HashMap<>();
+	    List<Value> arguments = new ArrayList<>();
+	    List<Type> argumentsType = new ArrayList<>();
+	    int x = 200;
+	    
+	    for(SootField sootfield:sootClass.getFields())
+	    {
+	    	if(sootfield.isStatic()) continue;
+	    	
+			Local temp = Jimple.v().newLocal("this_"+sootfield.getName(), sootfield.getType());
+			arguments.add((Value)temp);
+			argumentsType.add(sootfield.getType());
+            dummyConstructorBody.getLocals().add(temp);
+            LocalInfo.put("this_"+sootfield.getName(),temp);
+	    }
+	    
+	    
+//	    List<Local> parameterLocals = mainConstructorBody.getParameterLocals();
+	    for (Local local : mainConstructorBody.getLocals()) {
+	    	dummyConstructorBody.getLocals().add(local);
+        }
+	    
+//	    for (Local local : mainConstructorBody.getLocals()) {
+//	        if (!parameterLocals.contains(local)) { // Exclude parameter locals
+//	            dummyConstructorBody.getLocals().add(local);
+//	        }
+//	    }
+	    
+	    
+
+
+	    
+//	    Local thisLocal = Jimple.v().newLocal("this", sootClass.getType());
+//	    dummyConstructorBody.getLocals().add(thisLocal);
+//	    dummyConstructorUnits.add(Jimple.v().newIdentityStmt(thisLocal, Jimple.v().newThisRef(sootClass.getType())));
+        
+	    
+	    for(Unit unit:mainConstructorUnits){
+	    	Stmt stmt = (Stmt) unit;
+	    	if (stmt instanceof AssignStmt) {
+	    		
+	    		
+	    		
+	    		AssignStmt assignStmt = (AssignStmt) stmt;
+	    		Value lhs = assignStmt.getLeftOp();
+	    		Value rhs = assignStmt.getRightOp();
+	    		
+	    		if (lhs instanceof InstanceFieldRef ) {
+	    			InstanceFieldRef instanceFieldRef = (InstanceFieldRef) lhs;
+	    			String fieldName = instanceFieldRef.getField().getName();
+	    			Local temp = LocalInfo.get("this_"+fieldName);
+	                Stmt newAssignStmt = Jimple.v().newAssignStmt(temp,rhs );
+	                dummyConstructorUnits.add(newAssignStmt);
+	    		}
+	    		else
+		    	{
+	    			dummyConstructorUnits.add((Stmt) unit.clone());
+		    	}
+	    		
+	    		
+	    	}
+	    	else if(stmt instanceof ReturnVoidStmt)
+    		{
+	    		System.out.println(argumentsType);
+        	    createCreateObject(sootMethod,sootClass,constructorCount,argumentsType);
+        	    
+        	    SootMethodRef createObjectRef = Scene.v()
+                        .getSootClass(sootClass.toString())
+                        .getMethod("createObject"+sootClass.toString()+String.valueOf(constructorCount), argumentsType)
+                        .makeRef();
+    			
+    			InvokeExpr invokeExpr = Jimple.v().newStaticInvokeExpr(createObjectRef, arguments);
+    			
+    			
+    			
+    			Local temp = Jimple.v().newLocal("temp$"+x++, sootClass.getType());
+                dummyConstructorBody.getLocals().add(temp);
+                Local temp1 = Jimple.v().newLocal("ans", sootClass.getType());
+                dummyConstructorBody.getLocals().add(temp1);
+                AssignStmt newAssignStmt = Jimple.v().newAssignStmt(temp, invokeExpr);
+                dummyConstructorUnits.add(newAssignStmt);
+                
+                newAssignStmt = Jimple.v().newAssignStmt(temp1, temp);
+                dummyConstructorUnits.add(newAssignStmt);
+                ReturnStmt returnStmt = Jimple.v().newReturnStmt(temp1);
+        	    dummyConstructorUnits.add(returnStmt);
+        	    
+
+    			
+    		}
+	    	else if(stmt instanceof IdentityStmt)
+	    	{
+	    		continue;
+	    	}
+	    	else if(stmt instanceof InvokeStmt)
+	    	{
+	    		InvokeExpr invokeExpr = ((InvokeStmt) unit).getInvokeExpr();
+	    		if(invokeExpr instanceof SpecialInvokeExpr){
+                	SpecialInvokeExpr specialInvoke = (SpecialInvokeExpr) invokeExpr;
+                	
+                	
+                    SootMethod invokedMethod = specialInvoke.getMethod();
+                    
+                    if (invokedMethod.getSignature().equals("<java.lang.Object: void <init>()>")) {
+                        continue;
+                    }
+                    
+                    
+                    List<Type> parametersTypeCons = new ArrayList<>();
+                    for(Type type:invokedMethod.getParameterTypes())
+                    {
+                    	parametersTypeCons.add(type);
+                    }
+                    
+                    parametersTypeCons.add(BooleanType.v());
+                    
+                    
+                    SootClass parentClass = sootClass.getSuperclass();
+                    Local temp = Jimple.v().newLocal("obj", parentClass.getType());
+        	    	dummyConstructorBody.getLocals().add(temp);
+        	    	
+        	    	Local temp1 = Jimple.v().newLocal("temp$"+x++, parentClass.getType());
+                    dummyConstructorBody.getLocals().add(temp1);
+        	    	
+//        	    	arguments.add((Value)temp);
+//        	    	argumentsType.add(parentClass.getType());
+        	    	
+        	    	List<Value> dummyargu = new ArrayList<>();
+                     
+                    for(int i=0;i<parametersTypeCons.size()-1;++i)
+                    {
+                    	Value arg = specialInvoke.getArg(i);
+                    	dummyargu.add(arg);
+//                    	argumentsType.add(invokedMethod.getParameterType(i));
+//                    	arguments.add(arg);
+                    }
+                    
+                    Local temp2 = Jimple.v().newLocal("temp$"+x++,BooleanType.v());
+                    dummyConstructorBody.getLocals().add(temp2);
+                    AssignStmt AssStmt = Jimple.v().newAssignStmt(temp2,IntConstant.v(0));
+                    dummyConstructorUnits.add(AssStmt);
+                    
+                    dummyargu.add((Value)temp2);
+                    
+                    String parentDummyConstName = constructorMapping.get(invokedMethod);
+                    
+                    SootMethodRef dummyConstRef = parentClass
+                            .getMethod(parentDummyConstName, parametersTypeCons)
+                            .makeRef();
+        			
+        			InvokeExpr InvokeExpr = Jimple.v().newStaticInvokeExpr(dummyConstRef, dummyargu);
+        			AssignStmt newAssignStmt = Jimple.v().newAssignStmt(temp1, InvokeExpr);
+                    dummyConstructorUnits.add(newAssignStmt);
+                    
+                    newAssignStmt = Jimple.v().newAssignStmt(temp, temp1);
+                    dummyConstructorUnits.add(newAssignStmt);
+                    
+                    
+                    Local hashV = Jimple.v().newLocal("hashV", IntType.v());
+                    dummyConstructorBody.getLocals().add(hashV);
+                    
+                    temp2 = Jimple.v().newLocal("temp$"+x++,IntType.v());
+                    dummyConstructorBody.getLocals().add(temp2);
+                    
+                    dummyConstRef = parentClass
+                            .getMethod("int hashCode()")
+                            .makeRef();
+                    InvokeExpr = Jimple.v().newVirtualInvokeExpr(temp,dummyConstRef);
+            		AssStmt = Jimple.v().newAssignStmt(temp2,InvokeExpr);
+            		dummyConstructorUnits.add(AssStmt);
+            		
+            		AssStmt = Jimple.v().newAssignStmt(hashV,temp2);
+            		dummyConstructorUnits.add(AssStmt);
+            		
+            		arguments.add((Value)hashV);
+        	    	argumentsType.add(IntType.v());
+                     
+                    for(int i=0;i<parametersTypeCons.size()-1;++i)
+                    {
+                    	Value arg = specialInvoke.getArg(i);
+                    	argumentsType.add(invokedMethod.getParameterType(i));
+                    	arguments.add(arg);
+                    }
+                    
+                    
+                    
+                }
+	    	}
+	    }
+	    
+	    
+	    
+	    dummyConstructorUnits.add(newObjStmt);
+	    SpecialInvokeExpr specialInvokeExpr1 = Jimple.v().newSpecialInvokeExpr(temp$8, sootMethod.makeRef(), newArgs);
+	    InvokeStmt invokeStmt1 = Jimple.v().newInvokeStmt(specialInvokeExpr1);
+	    dummyConstructorUnits.add(invokeStmt1);
+	    
+	    ReturnStmt returnStmt = Jimple.v().newReturnStmt(temp$8);
+	    dummyConstructorUnits.add(returnStmt);
+//	    System.out.println(dummyConstructorUnits);
+	    
+	    
