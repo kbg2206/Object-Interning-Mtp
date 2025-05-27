@@ -1,0 +1,65 @@
+class jdk.internal.module.ArchivedBootLayer extends java.lang.Object
+{
+    private static jdk.internal.module.ArchivedBootLayer archivedBootLayer;
+    private final java.lang.ModuleLayer bootLayer;
+
+    private void <init>(java.lang.ModuleLayer)
+    {
+        java.lang.ModuleLayer bootLayer;
+        jdk.internal.module.ArchivedBootLayer this;
+
+        this := @this: jdk.internal.module.ArchivedBootLayer;
+
+        bootLayer := @parameter0: java.lang.ModuleLayer;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<jdk.internal.module.ArchivedBootLayer: java.lang.ModuleLayer bootLayer> = bootLayer;
+
+        return;
+    }
+
+    java.lang.ModuleLayer bootLayer()
+    {
+        java.lang.ModuleLayer $stack1;
+        jdk.internal.module.ArchivedBootLayer this;
+
+        this := @this: jdk.internal.module.ArchivedBootLayer;
+
+        $stack1 = this.<jdk.internal.module.ArchivedBootLayer: java.lang.ModuleLayer bootLayer>;
+
+        return $stack1;
+    }
+
+    static jdk.internal.module.ArchivedBootLayer get()
+    {
+        jdk.internal.module.ArchivedBootLayer $stack0;
+
+        $stack0 = <jdk.internal.module.ArchivedBootLayer: jdk.internal.module.ArchivedBootLayer archivedBootLayer>;
+
+        return $stack0;
+    }
+
+    static void archive(java.lang.ModuleLayer)
+    {
+        java.lang.ModuleLayer layer;
+        jdk.internal.module.ArchivedBootLayer $stack1;
+
+        layer := @parameter0: java.lang.ModuleLayer;
+
+        $stack1 = new jdk.internal.module.ArchivedBootLayer;
+
+        specialinvoke $stack1.<jdk.internal.module.ArchivedBootLayer: void <init>(java.lang.ModuleLayer)>(layer);
+
+        <jdk.internal.module.ArchivedBootLayer: jdk.internal.module.ArchivedBootLayer archivedBootLayer> = $stack1;
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        staticinvoke <jdk.internal.misc.CDS: void initializeFromArchive(java.lang.Class)>(class "Ljdk/internal/module/ArchivedBootLayer;");
+
+        return;
+    }
+}

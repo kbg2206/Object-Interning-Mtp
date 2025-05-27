@@ -1,0 +1,349 @@
+public class jdk.internal.module.ModuleReferenceImpl extends java.lang.module.ModuleReference
+{
+    private final java.net.URI location;
+    private final java.util.function.Supplier readerSupplier;
+    private final jdk.internal.module.ModulePatcher patcher;
+    private final jdk.internal.module.ModuleTarget target;
+    private final jdk.internal.module.ModuleHashes recordedHashes;
+    private final jdk.internal.module.ModuleHashes$HashSupplier hasher;
+    private final jdk.internal.module.ModuleResolution moduleResolution;
+    private byte[] cachedHash;
+    private int hash;
+
+    public void <init>(java.lang.module.ModuleDescriptor, java.net.URI, java.util.function.Supplier, jdk.internal.module.ModulePatcher, jdk.internal.module.ModuleTarget, jdk.internal.module.ModuleHashes, jdk.internal.module.ModuleHashes$HashSupplier, jdk.internal.module.ModuleResolution)
+    {
+        jdk.internal.module.ModulePatcher patcher;
+        jdk.internal.module.ModuleResolution moduleResolution;
+        java.lang.module.ModuleDescriptor descriptor;
+        jdk.internal.module.ModuleReferenceImpl this;
+        jdk.internal.module.ModuleTarget target;
+        java.util.function.Supplier readerSupplier;
+        jdk.internal.module.ModuleHashes$HashSupplier hasher;
+        java.lang.Object $stack9;
+        java.net.URI location, $stack10;
+        jdk.internal.module.ModuleHashes recordedHashes;
+
+        this := @this: jdk.internal.module.ModuleReferenceImpl;
+
+        descriptor := @parameter0: java.lang.module.ModuleDescriptor;
+
+        location := @parameter1: java.net.URI;
+
+        readerSupplier := @parameter2: java.util.function.Supplier;
+
+        patcher := @parameter3: jdk.internal.module.ModulePatcher;
+
+        target := @parameter4: jdk.internal.module.ModuleTarget;
+
+        recordedHashes := @parameter5: jdk.internal.module.ModuleHashes;
+
+        hasher := @parameter6: jdk.internal.module.ModuleHashes$HashSupplier;
+
+        moduleResolution := @parameter7: jdk.internal.module.ModuleResolution;
+
+        $stack9 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(location);
+
+        $stack10 = (java.net.URI) $stack9;
+
+        specialinvoke this.<java.lang.module.ModuleReference: void <init>(java.lang.module.ModuleDescriptor,java.net.URI)>(descriptor, $stack10);
+
+        this.<jdk.internal.module.ModuleReferenceImpl: java.net.URI location> = location;
+
+        this.<jdk.internal.module.ModuleReferenceImpl: java.util.function.Supplier readerSupplier> = readerSupplier;
+
+        this.<jdk.internal.module.ModuleReferenceImpl: jdk.internal.module.ModulePatcher patcher> = patcher;
+
+        this.<jdk.internal.module.ModuleReferenceImpl: jdk.internal.module.ModuleTarget target> = target;
+
+        this.<jdk.internal.module.ModuleReferenceImpl: jdk.internal.module.ModuleHashes recordedHashes> = recordedHashes;
+
+        this.<jdk.internal.module.ModuleReferenceImpl: jdk.internal.module.ModuleHashes$HashSupplier hasher> = hasher;
+
+        this.<jdk.internal.module.ModuleReferenceImpl: jdk.internal.module.ModuleResolution moduleResolution> = moduleResolution;
+
+        return;
+    }
+
+    public java.lang.module.ModuleReader open() throws java.io.IOException
+    {
+        java.io.UncheckedIOException $stack5;
+        jdk.internal.module.ModuleReferenceImpl this;
+        java.lang.Object $stack3;
+        java.io.IOException $stack6;
+        java.lang.module.ModuleReader $stack4;
+        java.util.function.Supplier $stack2;
+
+        this := @this: jdk.internal.module.ModuleReferenceImpl;
+
+     label1:
+        $stack2 = this.<jdk.internal.module.ModuleReferenceImpl: java.util.function.Supplier readerSupplier>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.function.Supplier: java.lang.Object get()>();
+
+        $stack4 = (java.lang.module.ModuleReader) $stack3;
+
+     label2:
+        return $stack4;
+
+     label3:
+        $stack5 := @caughtexception;
+
+        $stack6 = virtualinvoke $stack5.<java.io.UncheckedIOException: java.io.IOException getCause()>();
+
+        throw $stack6;
+
+        catch java.io.UncheckedIOException from label1 to label2 with label3;
+    }
+
+    public boolean isPatched()
+    {
+        jdk.internal.module.ModuleReferenceImpl this;
+        jdk.internal.module.ModulePatcher $stack1;
+        boolean $stack2;
+
+        this := @this: jdk.internal.module.ModuleReferenceImpl;
+
+        $stack1 = this.<jdk.internal.module.ModuleReferenceImpl: jdk.internal.module.ModulePatcher patcher>;
+
+        if $stack1 == null goto label1;
+
+        $stack2 = 1;
+
+        goto label2;
+
+     label1:
+        $stack2 = 0;
+
+     label2:
+        return $stack2;
+    }
+
+    public jdk.internal.module.ModuleTarget moduleTarget()
+    {
+        jdk.internal.module.ModuleReferenceImpl this;
+        jdk.internal.module.ModuleTarget $stack1;
+
+        this := @this: jdk.internal.module.ModuleReferenceImpl;
+
+        $stack1 = this.<jdk.internal.module.ModuleReferenceImpl: jdk.internal.module.ModuleTarget target>;
+
+        return $stack1;
+    }
+
+    public jdk.internal.module.ModuleHashes recordedHashes()
+    {
+        jdk.internal.module.ModuleReferenceImpl this;
+        jdk.internal.module.ModuleHashes $stack1;
+
+        this := @this: jdk.internal.module.ModuleReferenceImpl;
+
+        $stack1 = this.<jdk.internal.module.ModuleReferenceImpl: jdk.internal.module.ModuleHashes recordedHashes>;
+
+        return $stack1;
+    }
+
+    jdk.internal.module.ModuleHashes$HashSupplier hasher()
+    {
+        jdk.internal.module.ModuleHashes$HashSupplier $stack1;
+        jdk.internal.module.ModuleReferenceImpl this;
+
+        this := @this: jdk.internal.module.ModuleReferenceImpl;
+
+        $stack1 = this.<jdk.internal.module.ModuleReferenceImpl: jdk.internal.module.ModuleHashes$HashSupplier hasher>;
+
+        return $stack1;
+    }
+
+    public jdk.internal.module.ModuleResolution moduleResolution()
+    {
+        jdk.internal.module.ModuleResolution $stack1;
+        jdk.internal.module.ModuleReferenceImpl this;
+
+        this := @this: jdk.internal.module.ModuleReferenceImpl;
+
+        $stack1 = this.<jdk.internal.module.ModuleReferenceImpl: jdk.internal.module.ModuleResolution moduleResolution>;
+
+        return $stack1;
+    }
+
+    public byte[] computeHash(java.lang.String)
+    {
+        jdk.internal.module.ModuleHashes$HashSupplier $stack3, $stack4;
+        byte[] $stack5, result;
+        jdk.internal.module.ModuleReferenceImpl this;
+        java.lang.String algorithm;
+
+        this := @this: jdk.internal.module.ModuleReferenceImpl;
+
+        algorithm := @parameter0: java.lang.String;
+
+        result = this.<jdk.internal.module.ModuleReferenceImpl: byte[] cachedHash>;
+
+        if result == null goto label1;
+
+        return result;
+
+     label1:
+        $stack3 = this.<jdk.internal.module.ModuleReferenceImpl: jdk.internal.module.ModuleHashes$HashSupplier hasher>;
+
+        if $stack3 != null goto label2;
+
+        return null;
+
+     label2:
+        $stack4 = this.<jdk.internal.module.ModuleReferenceImpl: jdk.internal.module.ModuleHashes$HashSupplier hasher>;
+
+        $stack5 = interfaceinvoke $stack4.<jdk.internal.module.ModuleHashes$HashSupplier: byte[] generate(java.lang.String)>(algorithm);
+
+        this.<jdk.internal.module.ModuleReferenceImpl: byte[] cachedHash> = $stack5;
+
+        return $stack5;
+    }
+
+    public int hashCode()
+    {
+        jdk.internal.module.ModulePatcher $stack7;
+        java.lang.module.ModuleDescriptor $stack2;
+        jdk.internal.module.ModuleReferenceImpl this;
+        int $stack3, $stack5, $stack6, $stack8, $stack9, hc, $i0;
+        java.net.URI $stack4;
+
+        this := @this: jdk.internal.module.ModuleReferenceImpl;
+
+        hc = this.<jdk.internal.module.ModuleReferenceImpl: int hash>;
+
+        if hc != 0 goto label2;
+
+        $stack2 = virtualinvoke this.<jdk.internal.module.ModuleReferenceImpl: java.lang.module.ModuleDescriptor descriptor()>();
+
+        $stack3 = virtualinvoke $stack2.<java.lang.module.ModuleDescriptor: int hashCode()>();
+
+        $stack5 = 43 * $stack3;
+
+        $stack4 = this.<jdk.internal.module.ModuleReferenceImpl: java.net.URI location>;
+
+        $stack6 = staticinvoke <java.util.Objects: int hashCode(java.lang.Object)>($stack4);
+
+        hc = $stack5 + $stack6;
+
+        $stack8 = 43 * hc;
+
+        $stack7 = this.<jdk.internal.module.ModuleReferenceImpl: jdk.internal.module.ModulePatcher patcher>;
+
+        $stack9 = staticinvoke <java.util.Objects: int hashCode(java.lang.Object)>($stack7);
+
+        hc = $stack8 + $stack9;
+
+        if hc != 0 goto label1;
+
+        $i0 = (int) -1;
+
+        hc = $i0;
+
+     label1:
+        this.<jdk.internal.module.ModuleReferenceImpl: int hash> = hc;
+
+     label2:
+        return hc;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        jdk.internal.module.ModulePatcher $stack11, $stack12;
+        java.lang.module.ModuleDescriptor $stack4, $stack5;
+        jdk.internal.module.ModuleReferenceImpl that, this;
+        java.lang.Object ob;
+        java.net.URI $stack7, $stack8;
+        boolean $stack3, $stack6, $stack9, $stack13, $stack10;
+
+        this := @this: jdk.internal.module.ModuleReferenceImpl;
+
+        ob := @parameter0: java.lang.Object;
+
+        $stack3 = ob instanceof jdk.internal.module.ModuleReferenceImpl;
+
+        if $stack3 != 0 goto label1;
+
+        return 0;
+
+     label1:
+        that = (jdk.internal.module.ModuleReferenceImpl) ob;
+
+        $stack4 = virtualinvoke this.<jdk.internal.module.ModuleReferenceImpl: java.lang.module.ModuleDescriptor descriptor()>();
+
+        $stack5 = virtualinvoke that.<jdk.internal.module.ModuleReferenceImpl: java.lang.module.ModuleDescriptor descriptor()>();
+
+        $stack6 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack4, $stack5);
+
+        if $stack6 == 0 goto label2;
+
+        $stack8 = this.<jdk.internal.module.ModuleReferenceImpl: java.net.URI location>;
+
+        $stack7 = that.<jdk.internal.module.ModuleReferenceImpl: java.net.URI location>;
+
+        $stack9 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+
+        if $stack9 == 0 goto label2;
+
+        $stack12 = this.<jdk.internal.module.ModuleReferenceImpl: jdk.internal.module.ModulePatcher patcher>;
+
+        $stack11 = that.<jdk.internal.module.ModuleReferenceImpl: jdk.internal.module.ModulePatcher patcher>;
+
+        $stack13 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack12, $stack11);
+
+        if $stack13 == 0 goto label2;
+
+        $stack10 = 1;
+
+        goto label3;
+
+     label2:
+        $stack10 = 0;
+
+     label3:
+        return $stack10;
+    }
+
+    public java.lang.String toString()
+    {
+        java.lang.module.ModuleDescriptor $stack4;
+        java.lang.StringBuilder $stack2;
+        jdk.internal.module.ModuleReferenceImpl this;
+        java.lang.String $stack5, $stack12;
+        java.net.URI $stack8;
+        boolean $stack10;
+
+        this := @this: jdk.internal.module.ModuleReferenceImpl;
+
+        $stack2 = new java.lang.StringBuilder;
+
+        specialinvoke $stack2.<java.lang.StringBuilder: void <init>()>();
+
+        virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("[module ");
+
+        $stack4 = virtualinvoke this.<jdk.internal.module.ModuleReferenceImpl: java.lang.module.ModuleDescriptor descriptor()>();
+
+        $stack5 = virtualinvoke $stack4.<java.lang.module.ModuleDescriptor: java.lang.String name()>();
+
+        virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack5);
+
+        virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(", location=");
+
+        $stack8 = this.<jdk.internal.module.ModuleReferenceImpl: java.net.URI location>;
+
+        virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack8);
+
+        $stack10 = virtualinvoke this.<jdk.internal.module.ModuleReferenceImpl: boolean isPatched()>();
+
+        if $stack10 == 0 goto label1;
+
+        virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" (patched)");
+
+     label1:
+        virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("]");
+
+        $stack12 = virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack12;
+    }
+}

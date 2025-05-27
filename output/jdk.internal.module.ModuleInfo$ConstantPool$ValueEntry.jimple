@@ -1,0 +1,23 @@
+class jdk.internal.module.ModuleInfo$ConstantPool$ValueEntry extends jdk.internal.module.ModuleInfo$ConstantPool$Entry
+{
+    final java.lang.Object value;
+
+    void <init>(int, java.lang.Object)
+    {
+        jdk.internal.module.ModuleInfo$ConstantPool$ValueEntry this;
+        int tag;
+        java.lang.Object value;
+
+        this := @this: jdk.internal.module.ModuleInfo$ConstantPool$ValueEntry;
+
+        tag := @parameter0: int;
+
+        value := @parameter1: java.lang.Object;
+
+        specialinvoke this.<jdk.internal.module.ModuleInfo$ConstantPool$Entry: void <init>(int)>(tag);
+
+        this.<jdk.internal.module.ModuleInfo$ConstantPool$ValueEntry: java.lang.Object value> = value;
+
+        return;
+    }
+}

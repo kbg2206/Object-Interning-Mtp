@@ -1,0 +1,49 @@
+class jdk.internal.reflect.ClassDefiner$1 extends java.lang.Object implements java.security.PrivilegedAction
+{
+    final java.lang.ClassLoader val$parentClassLoader;
+
+    void <init>(java.lang.ClassLoader)
+    {
+        java.lang.ClassLoader l1;
+        jdk.internal.reflect.ClassDefiner$1 this;
+
+        this := @this: jdk.internal.reflect.ClassDefiner$1;
+
+        l1 := @parameter0: java.lang.ClassLoader;
+
+        this.<jdk.internal.reflect.ClassDefiner$1: java.lang.ClassLoader val$parentClassLoader> = l1;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.ClassLoader run()
+    {
+        java.lang.ClassLoader $stack2;
+        jdk.internal.reflect.DelegatingClassLoader $stack1;
+        jdk.internal.reflect.ClassDefiner$1 this;
+
+        this := @this: jdk.internal.reflect.ClassDefiner$1;
+
+        $stack1 = new jdk.internal.reflect.DelegatingClassLoader;
+
+        $stack2 = this.<jdk.internal.reflect.ClassDefiner$1: java.lang.ClassLoader val$parentClassLoader>;
+
+        specialinvoke $stack1.<jdk.internal.reflect.DelegatingClassLoader: void <init>(java.lang.ClassLoader)>($stack2);
+
+        return $stack1;
+    }
+
+    public volatile java.lang.Object run()
+    {
+        java.lang.ClassLoader $stack1;
+        jdk.internal.reflect.ClassDefiner$1 this;
+
+        this := @this: jdk.internal.reflect.ClassDefiner$1;
+
+        $stack1 = virtualinvoke this.<jdk.internal.reflect.ClassDefiner$1: java.lang.ClassLoader run()>();
+
+        return $stack1;
+    }
+}

@@ -1,0 +1,58 @@
+public final class jdk.internal.module.ModuleLoaderMap extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        jdk.internal.module.ModuleLoaderMap this;
+
+        this := @this: jdk.internal.module.ModuleLoaderMap;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static java.util.Set bootModules()
+    {
+        java.util.Set $stack0;
+
+        $stack0 = <jdk.internal.module.ModuleLoaderMap$Modules: java.util.Set bootModules>;
+
+        return $stack0;
+    }
+
+    public static java.util.Set platformModules()
+    {
+        java.util.Set $stack0;
+
+        $stack0 = <jdk.internal.module.ModuleLoaderMap$Modules: java.util.Set platformModules>;
+
+        return $stack0;
+    }
+
+    static java.util.function.Function mappingFunction(java.lang.module.Configuration)
+    {
+        java.lang.module.Configuration cf;
+        jdk.internal.module.ModuleLoaderMap$Mapper $stack1;
+
+        cf := @parameter0: java.lang.module.Configuration;
+
+        $stack1 = new jdk.internal.module.ModuleLoaderMap$Mapper;
+
+        specialinvoke $stack1.<jdk.internal.module.ModuleLoaderMap$Mapper: void <init>(java.lang.module.Configuration)>(cf);
+
+        return $stack1;
+    }
+
+    public static boolean isBuiltinMapper(java.util.function.Function)
+    {
+        java.util.function.Function clf;
+        boolean $stack1;
+
+        clf := @parameter0: java.util.function.Function;
+
+        $stack1 = clf instanceof jdk.internal.module.ModuleLoaderMap$Mapper;
+
+        return $stack1;
+    }
+}

@@ -1,0 +1,34 @@
+public abstract class jdk.internal.jimage.decompressor.ResourceDecompressorFactory extends java.lang.Object
+{
+    private final java.lang.String name;
+
+    protected void <init>(java.lang.String)
+    {
+        jdk.internal.jimage.decompressor.ResourceDecompressorFactory this;
+        java.lang.String name;
+
+        this := @this: jdk.internal.jimage.decompressor.ResourceDecompressorFactory;
+
+        name := @parameter0: java.lang.String;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<jdk.internal.jimage.decompressor.ResourceDecompressorFactory: java.lang.String name> = name;
+
+        return;
+    }
+
+    public java.lang.String getName()
+    {
+        jdk.internal.jimage.decompressor.ResourceDecompressorFactory this;
+        java.lang.String $stack1;
+
+        this := @this: jdk.internal.jimage.decompressor.ResourceDecompressorFactory;
+
+        $stack1 = this.<jdk.internal.jimage.decompressor.ResourceDecompressorFactory: java.lang.String name>;
+
+        return $stack1;
+    }
+
+    public abstract jdk.internal.jimage.decompressor.ResourceDecompressor newDecompressor(java.util.Properties) throws java.io.IOException;
+}

@@ -1,0 +1,239 @@
+class jdk.internal.module.ModuleReferences$JarModuleReader extends jdk.internal.module.ModuleReferences$SafeCloseModuleReader
+{
+    private final java.util.jar.JarFile jf;
+    private final java.net.URI uri;
+
+    static java.util.jar.JarFile newJarFile(java.nio.file.Path)
+    {
+        java.io.UncheckedIOException $stack9;
+        java.lang.Runtime$Version $stack7;
+        java.util.jar.JarFile $stack2;
+        java.io.IOException $stack8;
+        java.lang.String $stack4;
+        java.nio.file.Path path;
+        java.io.File $stack3;
+
+        path := @parameter0: java.nio.file.Path;
+
+     label1:
+        $stack2 = new java.util.jar.JarFile;
+
+        $stack3 = new java.io.File;
+
+        $stack4 = interfaceinvoke path.<java.nio.file.Path: java.lang.String toString()>();
+
+        specialinvoke $stack3.<java.io.File: void <init>(java.lang.String)>($stack4);
+
+        $stack7 = staticinvoke <java.util.jar.JarFile: java.lang.Runtime$Version runtimeVersion()>();
+
+        specialinvoke $stack2.<java.util.jar.JarFile: void <init>(java.io.File,boolean,int,java.lang.Runtime$Version)>($stack3, 1, 1, $stack7);
+
+     label2:
+        return $stack2;
+
+     label3:
+        $stack8 := @caughtexception;
+
+        $stack9 = new java.io.UncheckedIOException;
+
+        specialinvoke $stack9.<java.io.UncheckedIOException: void <init>(java.io.IOException)>($stack8);
+
+        throw $stack9;
+
+        catch java.io.IOException from label1 to label2 with label3;
+    }
+
+    void <init>(java.nio.file.Path, java.net.URI)
+    {
+        java.util.jar.JarFile $stack3;
+        java.net.URI uri;
+        java.nio.file.Path path;
+        jdk.internal.module.ModuleReferences$JarModuleReader this;
+
+        this := @this: jdk.internal.module.ModuleReferences$JarModuleReader;
+
+        path := @parameter0: java.nio.file.Path;
+
+        uri := @parameter1: java.net.URI;
+
+        specialinvoke this.<jdk.internal.module.ModuleReferences$SafeCloseModuleReader: void <init>()>();
+
+        $stack3 = staticinvoke <jdk.internal.module.ModuleReferences$JarModuleReader: java.util.jar.JarFile newJarFile(java.nio.file.Path)>(path);
+
+        this.<jdk.internal.module.ModuleReferences$JarModuleReader: java.util.jar.JarFile jf> = $stack3;
+
+        this.<jdk.internal.module.ModuleReferences$JarModuleReader: java.net.URI uri> = uri;
+
+        return;
+    }
+
+    private java.util.jar.JarEntry getEntry(java.lang.String)
+    {
+        java.util.jar.JarEntry $stack5;
+        java.util.jar.JarFile $stack2;
+        java.lang.Object $stack3;
+        java.lang.String name, $stack4;
+        jdk.internal.module.ModuleReferences$JarModuleReader this;
+
+        this := @this: jdk.internal.module.ModuleReferences$JarModuleReader;
+
+        name := @parameter0: java.lang.String;
+
+        $stack2 = this.<jdk.internal.module.ModuleReferences$JarModuleReader: java.util.jar.JarFile jf>;
+
+        $stack3 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(name);
+
+        $stack4 = (java.lang.String) $stack3;
+
+        $stack5 = virtualinvoke $stack2.<java.util.jar.JarFile: java.util.jar.JarEntry getJarEntry(java.lang.String)>($stack4);
+
+        return $stack5;
+    }
+
+    java.util.Optional implFind(java.lang.String) throws java.io.IOException
+    {
+        java.util.jar.JarFile $stack7;
+        java.util.jar.JarEntry $stack5;
+        java.lang.String name, $stack10, $stack17;
+        java.net.URI $stack13, $stack18;
+        jdk.internal.module.ModuleReferences$JarModuleReader this;
+        boolean $stack8, $stack9, $stack20;
+        java.util.Optional $stack6, $stack19;
+        java.lang.StringBuilder $stack28, $stack29, $stack30, $stack11, $stack12, $stack14, $stack15, $stack16;
+
+        this := @this: jdk.internal.module.ModuleReferences$JarModuleReader;
+
+        name := @parameter0: java.lang.String;
+
+        $stack5 = virtualinvoke this.<jdk.internal.module.ModuleReferences$JarModuleReader: java.util.jar.JarEntry getEntry(java.lang.String)>(name);
+
+        if $stack5 == null goto label3;
+
+        $stack7 = this.<jdk.internal.module.ModuleReferences$JarModuleReader: java.util.jar.JarFile jf>;
+
+        $stack8 = virtualinvoke $stack7.<java.util.jar.JarFile: boolean isMultiRelease()>();
+
+        if $stack8 == 0 goto label1;
+
+        name = virtualinvoke $stack5.<java.util.jar.JarEntry: java.lang.String getRealName()>();
+
+     label1:
+        $stack9 = virtualinvoke $stack5.<java.util.jar.JarEntry: boolean isDirectory()>();
+
+        if $stack9 == 0 goto label2;
+
+        $stack20 = virtualinvoke name.<java.lang.String: boolean endsWith(java.lang.String)>("/");
+
+        if $stack20 != 0 goto label2;
+
+        $stack28 = new java.lang.StringBuilder;
+
+        specialinvoke $stack28.<java.lang.StringBuilder: void <init>()>();
+
+        $stack29 = virtualinvoke $stack28.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+
+        $stack30 = virtualinvoke $stack29.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("/");
+
+        name = virtualinvoke $stack30.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label2:
+        $stack10 = staticinvoke <sun.net.www.ParseUtil: java.lang.String encodePath(java.lang.String,boolean)>(name, 0);
+
+        $stack11 = new java.lang.StringBuilder;
+
+        specialinvoke $stack11.<java.lang.StringBuilder: void <init>()>();
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("jar:");
+
+        $stack13 = this.<jdk.internal.module.ModuleReferences$JarModuleReader: java.net.URI uri>;
+
+        $stack14 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack13);
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("!/");
+
+        $stack16 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack10);
+
+        $stack17 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack18 = staticinvoke <java.net.URI: java.net.URI create(java.lang.String)>($stack17);
+
+        $stack19 = staticinvoke <java.util.Optional: java.util.Optional of(java.lang.Object)>($stack18);
+
+        return $stack19;
+
+     label3:
+        $stack6 = staticinvoke <java.util.Optional: java.util.Optional empty()>();
+
+        return $stack6;
+    }
+
+    java.util.Optional implOpen(java.lang.String) throws java.io.IOException
+    {
+        java.util.jar.JarEntry $stack3;
+        java.util.Optional $stack4, $stack7;
+        java.util.jar.JarFile $stack5;
+        java.lang.String name;
+        jdk.internal.module.ModuleReferences$JarModuleReader this;
+        java.io.InputStream $stack6;
+
+        this := @this: jdk.internal.module.ModuleReferences$JarModuleReader;
+
+        name := @parameter0: java.lang.String;
+
+        $stack3 = virtualinvoke this.<jdk.internal.module.ModuleReferences$JarModuleReader: java.util.jar.JarEntry getEntry(java.lang.String)>(name);
+
+        if $stack3 == null goto label1;
+
+        $stack5 = this.<jdk.internal.module.ModuleReferences$JarModuleReader: java.util.jar.JarFile jf>;
+
+        $stack6 = virtualinvoke $stack5.<java.util.jar.JarFile: java.io.InputStream getInputStream(java.util.zip.ZipEntry)>($stack3);
+
+        $stack7 = staticinvoke <java.util.Optional: java.util.Optional of(java.lang.Object)>($stack6);
+
+        return $stack7;
+
+     label1:
+        $stack4 = staticinvoke <java.util.Optional: java.util.Optional empty()>();
+
+        return $stack4;
+    }
+
+    java.util.stream.Stream implList() throws java.io.IOException
+    {
+        java.util.List $stack6;
+        java.util.stream.Stream $stack3, $stack5, $stack7;
+        java.util.jar.JarFile $stack2;
+        java.util.function.Function $stack4;
+        jdk.internal.module.ModuleReferences$JarModuleReader this;
+
+        this := @this: jdk.internal.module.ModuleReferences$JarModuleReader;
+
+        $stack2 = this.<jdk.internal.module.ModuleReferences$JarModuleReader: java.util.jar.JarFile jf>;
+
+        $stack3 = virtualinvoke $stack2.<java.util.jar.JarFile: java.util.stream.Stream versionedStream()>();
+
+        $stack4 = staticinvoke <jdk.internal.module.ModuleReferences$JarModuleReader$getName__128: java.util.function.Function bootstrap$()>();
+
+        $stack5 = interfaceinvoke $stack3.<java.util.stream.Stream: java.util.stream.Stream map(java.util.function.Function)>($stack4);
+
+        $stack6 = interfaceinvoke $stack5.<java.util.stream.Stream: java.util.List toList()>();
+
+        $stack7 = interfaceinvoke $stack6.<java.util.List: java.util.stream.Stream stream()>();
+
+        return $stack7;
+    }
+
+    void implClose() throws java.io.IOException
+    {
+        java.util.jar.JarFile $stack1;
+        jdk.internal.module.ModuleReferences$JarModuleReader this;
+
+        this := @this: jdk.internal.module.ModuleReferences$JarModuleReader;
+
+        $stack1 = this.<jdk.internal.module.ModuleReferences$JarModuleReader: java.util.jar.JarFile jf>;
+
+        virtualinvoke $stack1.<java.util.jar.JarFile: void close()>();
+
+        return;
+    }
+}

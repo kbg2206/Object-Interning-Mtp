@@ -1,0 +1,70 @@
+class jdk.internal.loader.URLClassPath$JarLoader$3 extends java.lang.Object implements java.security.PrivilegedExceptionAction
+{
+    final java.net.URL val$url;
+    final jdk.internal.loader.URLClassPath$JarLoader this$0;
+
+    void <init>(jdk.internal.loader.URLClassPath$JarLoader, java.net.URL)
+    {
+        jdk.internal.loader.URLClassPath$JarLoader this$0;
+        jdk.internal.loader.URLClassPath$JarLoader$3 this;
+        java.net.URL l2;
+
+        this := @this: jdk.internal.loader.URLClassPath$JarLoader$3;
+
+        this$0 := @parameter0: jdk.internal.loader.URLClassPath$JarLoader;
+
+        l2 := @parameter1: java.net.URL;
+
+        this.<jdk.internal.loader.URLClassPath$JarLoader$3: jdk.internal.loader.URLClassPath$JarLoader this$0> = this$0;
+
+        this.<jdk.internal.loader.URLClassPath$JarLoader$3: java.net.URL val$url> = l2;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public jdk.internal.loader.URLClassPath$JarLoader run() throws java.io.IOException
+    {
+        java.security.AccessControlContext $stack5;
+        jdk.internal.loader.URLClassPath$JarLoader $stack1, $stack2, $stack3, $stack4;
+        java.net.URL $stack8;
+        java.util.HashMap $stack6;
+        java.net.URLStreamHandler $stack7;
+        jdk.internal.loader.URLClassPath$JarLoader$3 this;
+
+        this := @this: jdk.internal.loader.URLClassPath$JarLoader$3;
+
+        $stack1 = new jdk.internal.loader.URLClassPath$JarLoader;
+
+        $stack8 = this.<jdk.internal.loader.URLClassPath$JarLoader$3: java.net.URL val$url>;
+
+        $stack2 = this.<jdk.internal.loader.URLClassPath$JarLoader$3: jdk.internal.loader.URLClassPath$JarLoader this$0>;
+
+        $stack7 = $stack2.<jdk.internal.loader.URLClassPath$JarLoader: java.net.URLStreamHandler handler>;
+
+        $stack3 = this.<jdk.internal.loader.URLClassPath$JarLoader$3: jdk.internal.loader.URLClassPath$JarLoader this$0>;
+
+        $stack6 = $stack3.<jdk.internal.loader.URLClassPath$JarLoader: java.util.HashMap lmap>;
+
+        $stack4 = this.<jdk.internal.loader.URLClassPath$JarLoader$3: jdk.internal.loader.URLClassPath$JarLoader this$0>;
+
+        $stack5 = $stack4.<jdk.internal.loader.URLClassPath$JarLoader: java.security.AccessControlContext acc>;
+
+        specialinvoke $stack1.<jdk.internal.loader.URLClassPath$JarLoader: void <init>(java.net.URL,java.net.URLStreamHandler,java.util.HashMap,java.security.AccessControlContext)>($stack8, $stack7, $stack6, $stack5);
+
+        return $stack1;
+    }
+
+    public volatile java.lang.Object run() throws java.lang.Exception
+    {
+        jdk.internal.loader.URLClassPath$JarLoader $stack1;
+        jdk.internal.loader.URLClassPath$JarLoader$3 this;
+
+        this := @this: jdk.internal.loader.URLClassPath$JarLoader$3;
+
+        $stack1 = virtualinvoke this.<jdk.internal.loader.URLClassPath$JarLoader$3: jdk.internal.loader.URLClassPath$JarLoader run()>();
+
+        return $stack1;
+    }
+}

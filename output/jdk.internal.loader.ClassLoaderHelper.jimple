@@ -1,0 +1,186 @@
+class jdk.internal.loader.ClassLoaderHelper extends java.lang.Object
+{
+
+    private void <init>()
+    {
+        jdk.internal.loader.ClassLoaderHelper this;
+
+        this := @this: jdk.internal.loader.ClassLoaderHelper;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    static boolean loadLibraryOnlyIfPresent()
+    {
+        return 1;
+    }
+
+    static java.io.File mapAlternativeName(java.io.File)
+    {
+        java.io.File lib;
+
+        lib := @parameter0: java.io.File;
+
+        return null;
+    }
+
+    static java.lang.String[] parsePath(java.lang.String)
+    {
+        java.lang.String[] $stack31;
+        int $stack8, $stack9, $stack11, $stack13, $stack16, $stack20, $stack25, $stack35, $stack41, ldLen, ps, psCount, bufLen, i, buf#10, $i0, $i1, $i2;
+        java.lang.String ldPath, $stack19, $stack12, $u0;
+        char $stack34, $stack40, ch;
+        char[] buf;
+
+        ldPath := @parameter0: java.lang.String;
+
+        $stack8 = virtualinvoke ldPath.<java.lang.String: int length()>();
+
+        ldLen = $stack8;
+
+        ps = <java.io.File: char pathSeparatorChar>;
+
+        psCount = 0;
+
+        $stack9 = virtualinvoke ldPath.<java.lang.String: int indexOf(int)>(34);
+
+        if $stack9 < 0 goto label07;
+
+        buf = newarray (char)[$stack8];
+
+        bufLen = 0;
+
+        i = 0;
+
+     label01:
+        if i >= $stack8 goto label06;
+
+        $stack34 = virtualinvoke ldPath.<java.lang.String: char charAt(int)>(i);
+
+        ch = $stack34;
+
+        $i0 = (int) $stack34;
+
+        if $i0 != 34 goto label03;
+
+     label02:
+        i = i + 1;
+
+        if i >= $stack8 goto label05;
+
+        $stack40 = virtualinvoke ldPath.<java.lang.String: char charAt(int)>(i);
+
+        $i1 = (int) $stack40;
+
+        if $i1 == 34 goto label05;
+
+        $stack41 = bufLen;
+
+        bufLen = bufLen + 1;
+
+        buf[$stack41] = $stack40;
+
+        goto label02;
+
+     label03:
+        $i2 = (int) $stack34;
+
+        if $i2 != ps goto label04;
+
+        psCount = psCount + 1;
+
+        ch = 34;
+
+     label04:
+        $stack35 = bufLen;
+
+        bufLen = bufLen + 1;
+
+        buf[$stack35] = ch;
+
+     label05:
+        i = i + 1;
+
+        goto label01;
+
+     label06:
+        $u0 = new java.lang.String;
+
+        specialinvoke $u0.<java.lang.String: void <init>(char[],int,int)>(buf, 0, bufLen);
+
+        ldPath = $u0;
+
+        ldLen = bufLen;
+
+        ps = 34;
+
+        goto label09;
+
+     label07:
+        buf#10 = virtualinvoke ldPath.<java.lang.String: int indexOf(int)>(ps);
+
+     label08:
+        if buf#10 < 0 goto label09;
+
+        psCount = psCount + 1;
+
+        $stack25 = buf#10 + 1;
+
+        buf#10 = virtualinvoke ldPath.<java.lang.String: int indexOf(int,int)>(ps, $stack25);
+
+        goto label08;
+
+     label09:
+        $stack11 = psCount + 1;
+
+        $stack31 = newarray (java.lang.String)[$stack11];
+
+        bufLen = 0;
+
+        i = 0;
+
+     label10:
+        if i >= psCount goto label13;
+
+        $stack16 = virtualinvoke ldPath.<java.lang.String: int indexOf(int,int)>(ps, bufLen);
+
+        $stack20 = i;
+
+        if bufLen >= $stack16 goto label11;
+
+        $stack19 = virtualinvoke ldPath.<java.lang.String: java.lang.String substring(int,int)>(bufLen, $stack16);
+
+        goto label12;
+
+     label11:
+        $stack19 = ".";
+
+     label12:
+        $stack31[$stack20] = $stack19;
+
+        bufLen = $stack16 + 1;
+
+        i = i + 1;
+
+        goto label10;
+
+     label13:
+        $stack13 = psCount;
+
+        if bufLen >= ldLen goto label14;
+
+        $stack12 = virtualinvoke ldPath.<java.lang.String: java.lang.String substring(int,int)>(bufLen, ldLen);
+
+        goto label15;
+
+     label14:
+        $stack12 = ".";
+
+     label15:
+        $stack31[$stack13] = $stack12;
+
+        return $stack31;
+    }
+}

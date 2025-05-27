@@ -1,0 +1,223 @@
+class jdk.internal.reflect.UTF8 extends java.lang.Object
+{
+
+    void <init>()
+    {
+        jdk.internal.reflect.UTF8 this;
+
+        this := @this: jdk.internal.reflect.UTF8;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    static byte[] encode(java.lang.String)
+    {
+        byte[] res;
+        byte $stack12, $stack16, $stack22, $stack27, $stack31, $stack55;
+        java.lang.InternalError $u0;
+        int $stack6, $stack7, $stack10, $stack11, $stack15, $stack20, $stack21, $stack24, $stack25, $stack26, $stack30, $stack54, utf8Idx, i, utf8Idx#3, utf8Idx#5, $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8;
+        java.lang.String str;
+        char $stack8, c, $stack14, $stack29;
+        java.lang.ArrayIndexOutOfBoundsException $stack56;
+
+        str := @parameter0: java.lang.String;
+
+        $stack6 = virtualinvoke str.<java.lang.String: int length()>();
+
+        $stack7 = staticinvoke <jdk.internal.reflect.UTF8: int utf8Length(java.lang.String)>(str);
+
+        res = newarray (byte)[$stack7];
+
+        utf8Idx = 0;
+
+     label1:
+        i = 0;
+
+     label2:
+        if i >= $stack6 goto label7;
+
+        $stack8 = virtualinvoke str.<java.lang.String: char charAt(int)>(i);
+
+        c = $stack8 & 65535;
+
+        $i0 = (int) c;
+
+        if $i0 < 1 goto label3;
+
+        $i1 = (int) c;
+
+        if $i1 > 127 goto label3;
+
+        $stack54 = utf8Idx;
+
+        utf8Idx = utf8Idx + 1;
+
+        $stack55 = (byte) c;
+
+        res[$stack54] = $stack55;
+
+        goto label6;
+
+     label3:
+        if c == 0 goto label4;
+
+        $i2 = (int) c;
+
+        if $i2 < 128 goto label5;
+
+        $i3 = (int) c;
+
+        if $i3 > 2047 goto label5;
+
+     label4:
+        utf8Idx#3 = utf8Idx + 1;
+
+        $i4 = (int) c;
+
+        $stack10 = $i4 >> 6;
+
+        $stack11 = 192 + $stack10;
+
+        $stack12 = (byte) $stack11;
+
+        res[utf8Idx] = $stack12;
+
+        utf8Idx = utf8Idx#3 + 1;
+
+        $stack14 = c & 63;
+
+        $i5 = (int) $stack14;
+
+        $stack15 = 128 + $i5;
+
+        $stack16 = (byte) $stack15;
+
+        res[utf8Idx#3] = $stack16;
+
+        goto label6;
+
+     label5:
+        utf8Idx#3 = utf8Idx + 1;
+
+        $i6 = (int) c;
+
+        $stack20 = $i6 >> 12;
+
+        $stack21 = 224 + $stack20;
+
+        $stack22 = (byte) $stack21;
+
+        res[utf8Idx] = $stack22;
+
+        utf8Idx#5 = utf8Idx#3 + 1;
+
+        $i7 = (int) c;
+
+        $stack24 = $i7 >> 6;
+
+        $stack25 = $stack24 & 63;
+
+        $stack26 = 128 + $stack25;
+
+        $stack27 = (byte) $stack26;
+
+        res[utf8Idx#3] = $stack27;
+
+        utf8Idx = utf8Idx#5 + 1;
+
+        $stack29 = c & 63;
+
+        $i8 = (int) $stack29;
+
+        $stack30 = 128 + $i8;
+
+        $stack31 = (byte) $stack30;
+
+        res[utf8Idx#5] = $stack31;
+
+     label6:
+        i = i + 1;
+
+        goto label2;
+
+     label7:
+        goto label9;
+
+     label8:
+        $stack56 := @caughtexception;
+
+        $u0 = new java.lang.InternalError;
+
+        specialinvoke $u0.<java.lang.InternalError: void <init>(java.lang.String,java.lang.Throwable)>("Bug in sun.reflect bootstrap UTF-8 encoder", $stack56);
+
+        throw $u0;
+
+     label9:
+        return res;
+
+        catch java.lang.ArrayIndexOutOfBoundsException from label1 to label7 with label8;
+    }
+
+    private static int utf8Length(java.lang.String)
+    {
+        char $stack6, c;
+        int $stack5, utf8Len, i, $i0, $i1, $i2, $i3;
+        java.lang.String str;
+
+        str := @parameter0: java.lang.String;
+
+        $stack5 = virtualinvoke str.<java.lang.String: int length()>();
+
+        utf8Len = 0;
+
+        i = 0;
+
+     label1:
+        if i >= $stack5 goto label6;
+
+        $stack6 = virtualinvoke str.<java.lang.String: char charAt(int)>(i);
+
+        c = $stack6 & 65535;
+
+        $i0 = (int) c;
+
+        if $i0 < 1 goto label2;
+
+        $i1 = (int) c;
+
+        if $i1 > 127 goto label2;
+
+        utf8Len = utf8Len + 1;
+
+        goto label5;
+
+     label2:
+        if c == 0 goto label3;
+
+        $i2 = (int) c;
+
+        if $i2 < 128 goto label4;
+
+        $i3 = (int) c;
+
+        if $i3 > 2047 goto label4;
+
+     label3:
+        utf8Len = utf8Len + 2;
+
+        goto label5;
+
+     label4:
+        utf8Len = utf8Len + 3;
+
+     label5:
+        i = i + 1;
+
+        goto label1;
+
+     label6:
+        return utf8Len;
+    }
+}

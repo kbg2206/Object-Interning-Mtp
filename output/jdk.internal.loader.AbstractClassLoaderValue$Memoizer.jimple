@@ -1,0 +1,181 @@
+final class jdk.internal.loader.AbstractClassLoaderValue$Memoizer extends java.lang.Object implements java.util.function.Supplier
+{
+    private final java.lang.ClassLoader cl;
+    private final jdk.internal.loader.AbstractClassLoaderValue clv;
+    private final java.util.function.BiFunction mappingFunction;
+    private volatile java.lang.Object v;
+    private volatile java.lang.Throwable t;
+    private boolean inCall;
+
+    void <init>(java.lang.ClassLoader, jdk.internal.loader.AbstractClassLoaderValue, java.util.function.BiFunction)
+    {
+        java.util.function.BiFunction mappingFunction;
+        jdk.internal.loader.AbstractClassLoaderValue$Memoizer this;
+        java.lang.ClassLoader cl;
+        jdk.internal.loader.AbstractClassLoaderValue clv;
+
+        this := @this: jdk.internal.loader.AbstractClassLoaderValue$Memoizer;
+
+        cl := @parameter0: java.lang.ClassLoader;
+
+        clv := @parameter1: jdk.internal.loader.AbstractClassLoaderValue;
+
+        mappingFunction := @parameter2: java.util.function.BiFunction;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: java.lang.ClassLoader cl> = cl;
+
+        this.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: jdk.internal.loader.AbstractClassLoaderValue clv> = clv;
+
+        this.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: java.util.function.BiFunction mappingFunction> = mappingFunction;
+
+        return;
+    }
+
+    public java.lang.Object get() throws jdk.internal.loader.AbstractClassLoaderValue$Memoizer$RecursiveInvocationException
+    {
+        java.lang.Throwable $stack16, $stack24, $stack26, $stack27, t;
+        java.util.function.BiFunction $stack20;
+        java.lang.Error $stack11;
+        jdk.internal.loader.AbstractClassLoaderValue$Memoizer$RecursiveInvocationException $stack23;
+        boolean $stack7, $stack8, $stack17;
+        jdk.internal.loader.AbstractClassLoaderValue$Memoizer this;
+        java.lang.RuntimeException $stack10;
+        java.lang.reflect.UndeclaredThrowableException $stack9;
+        java.lang.Object $stack13, $stack21, $stack22, v;
+        java.lang.ClassLoader $stack19;
+        jdk.internal.loader.AbstractClassLoaderValue $stack18;
+
+        this := @this: jdk.internal.loader.AbstractClassLoaderValue$Memoizer;
+
+        v = this.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: java.lang.Object v>;
+
+        if v == null goto label01;
+
+        return v;
+
+     label01:
+        t = this.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: java.lang.Throwable t>;
+
+        if t != null goto label14;
+
+        entermonitor this;
+
+     label02:
+        $stack13 = this.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: java.lang.Object v>;
+
+        v = $stack13;
+
+        if $stack13 != null goto label10;
+
+        $stack16 = this.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: java.lang.Throwable t>;
+
+        t = $stack16;
+
+        if $stack16 != null goto label10;
+
+        $stack17 = this.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: boolean inCall>;
+
+        if $stack17 == 0 goto label03;
+
+        $stack23 = new jdk.internal.loader.AbstractClassLoaderValue$Memoizer$RecursiveInvocationException;
+
+        specialinvoke $stack23.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer$RecursiveInvocationException: void <init>()>();
+
+        throw $stack23;
+
+     label03:
+        this.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: boolean inCall> = 1;
+
+     label04:
+        $stack20 = this.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: java.util.function.BiFunction mappingFunction>;
+
+        $stack19 = this.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: java.lang.ClassLoader cl>;
+
+        $stack18 = this.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: jdk.internal.loader.AbstractClassLoaderValue clv>;
+
+        $stack21 = interfaceinvoke $stack20.<java.util.function.BiFunction: java.lang.Object apply(java.lang.Object,java.lang.Object)>($stack19, $stack18);
+
+        $stack22 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>($stack21);
+
+        v = $stack22;
+
+        this.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: java.lang.Object v> = $stack22;
+
+     label05:
+        this.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: boolean inCall> = 0;
+
+        goto label10;
+
+     label06:
+        $stack27 := @caughtexception;
+
+        t = $stack27;
+
+        this.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: java.lang.Throwable t> = $stack27;
+
+     label07:
+        this.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: boolean inCall> = 0;
+
+        goto label10;
+
+     label08:
+        $stack26 := @caughtexception;
+
+     label09:
+        this.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: boolean inCall> = 0;
+
+        throw $stack26;
+
+     label10:
+        exitmonitor this;
+
+     label11:
+        goto label14;
+
+     label12:
+        $stack24 := @caughtexception;
+
+        exitmonitor this;
+
+     label13:
+        throw $stack24;
+
+     label14:
+        if v == null goto label15;
+
+        return v;
+
+     label15:
+        $stack7 = t instanceof java.lang.Error;
+
+        if $stack7 == 0 goto label16;
+
+        $stack11 = (java.lang.Error) t;
+
+        throw $stack11;
+
+     label16:
+        $stack8 = t instanceof java.lang.RuntimeException;
+
+        if $stack8 == 0 goto label17;
+
+        $stack10 = (java.lang.RuntimeException) t;
+
+        throw $stack10;
+
+     label17:
+        $stack9 = new java.lang.reflect.UndeclaredThrowableException;
+
+        specialinvoke $stack9.<java.lang.reflect.UndeclaredThrowableException: void <init>(java.lang.Throwable)>(t);
+
+        throw $stack9;
+
+        catch java.lang.Throwable from label04 to label05 with label06;
+        catch java.lang.Throwable from label06 to label07 with label08;
+        catch java.lang.Throwable from label08 to label09 with label08;
+        catch java.lang.Throwable from label02 to label11 with label12;
+        catch java.lang.Throwable from label12 to label13 with label12;
+    }
+}

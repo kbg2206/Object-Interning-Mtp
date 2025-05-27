@@ -1,0 +1,836 @@
+class jdk.internal.module.ModuleInfo$ConstantPool extends java.lang.Object
+{
+    static final int CONSTANT_Utf8;
+    static final int CONSTANT_Integer;
+    static final int CONSTANT_Float;
+    static final int CONSTANT_Long;
+    static final int CONSTANT_Double;
+    static final int CONSTANT_Class;
+    static final int CONSTANT_String;
+    static final int CONSTANT_Fieldref;
+    static final int CONSTANT_Methodref;
+    static final int CONSTANT_InterfaceMethodref;
+    static final int CONSTANT_NameAndType;
+    static final int CONSTANT_MethodHandle;
+    static final int CONSTANT_MethodType;
+    static final int CONSTANT_InvokeDynamic;
+    static final int CONSTANT_Module;
+    static final int CONSTANT_Package;
+    final jdk.internal.module.ModuleInfo$ConstantPool$Entry[] pool;
+
+    void <init>(java.io.DataInput) throws java.io.IOException
+    {
+        jdk.internal.module.ModuleInfo$ConstantPool$ValueEntry $stack36, $stack40, $stack44, $stack48, $stack52;
+        java.lang.Float $stack46;
+        java.lang.Integer $stack50;
+        jdk.internal.module.ModuleInfo$ConstantPool$IndexEntry $stack20, $stack33;
+        java.lang.Long $stack42;
+        jdk.internal.module.ModuleInfo$ConstantPool this;
+        java.io.DataInput in;
+        float $stack43;
+        java.lang.module.InvalidModuleDescriptorException $stack58;
+        java.lang.StringBuilder $stack54, $stack55, $stack56;
+        jdk.internal.module.ModuleInfo$ConstantPool$Entry[] $stack17, $stack21, $stack27, $stack31, $stack34, $stack37, $stack41, $stack45, $stack49, $stack53;
+        jdk.internal.module.ModuleInfo$ConstantPool$Index2Entry $stack26, $stack30;
+        java.lang.Double $stack38;
+        long $stack39;
+        int $stack16, $stack18, $stack19, $stack24, $stack25, $stack28, $stack29, $stack32, $stack47, i;
+        java.lang.String $stack51, $stack57;
+        double $stack35;
+
+        this := @this: jdk.internal.module.ModuleInfo$ConstantPool;
+
+        in := @parameter0: java.io.DataInput;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack16 = interfaceinvoke in.<java.io.DataInput: int readUnsignedShort()>();
+
+        $stack17 = newarray (jdk.internal.module.ModuleInfo$ConstantPool$Entry)[$stack16];
+
+        this.<jdk.internal.module.ModuleInfo$ConstantPool: jdk.internal.module.ModuleInfo$ConstantPool$Entry[] pool> = $stack17;
+
+        i = 1;
+
+     label01:
+        if i >= $stack16 goto label13;
+
+        $stack18 = interfaceinvoke in.<java.io.DataInput: int readUnsignedByte()>();
+
+        tableswitch($stack18)
+        {
+            case 1: goto label02;
+            case 2: goto label11;
+            case 3: goto label09;
+            case 4: goto label08;
+            case 5: goto label10;
+            case 6: goto label04;
+            case 7: goto label03;
+            case 8: goto label03;
+            case 9: goto label05;
+            case 10: goto label05;
+            case 11: goto label05;
+            case 12: goto label05;
+            case 13: goto label11;
+            case 14: goto label11;
+            case 15: goto label06;
+            case 16: goto label07;
+            case 17: goto label11;
+            case 18: goto label05;
+            case 19: goto label03;
+            case 20: goto label03;
+            default: goto label11;
+        };
+
+     label02:
+        $stack51 = interfaceinvoke in.<java.io.DataInput: java.lang.String readUTF()>();
+
+        $stack53 = this.<jdk.internal.module.ModuleInfo$ConstantPool: jdk.internal.module.ModuleInfo$ConstantPool$Entry[] pool>;
+
+        $stack52 = new jdk.internal.module.ModuleInfo$ConstantPool$ValueEntry;
+
+        specialinvoke $stack52.<jdk.internal.module.ModuleInfo$ConstantPool$ValueEntry: void <init>(int,java.lang.Object)>($stack18, $stack51);
+
+        $stack53[i] = $stack52;
+
+        goto label12;
+
+     label03:
+        $stack32 = interfaceinvoke in.<java.io.DataInput: int readUnsignedShort()>();
+
+        $stack34 = this.<jdk.internal.module.ModuleInfo$ConstantPool: jdk.internal.module.ModuleInfo$ConstantPool$Entry[] pool>;
+
+        $stack33 = new jdk.internal.module.ModuleInfo$ConstantPool$IndexEntry;
+
+        specialinvoke $stack33.<jdk.internal.module.ModuleInfo$ConstantPool$IndexEntry: void <init>(int,int)>($stack18, $stack32);
+
+        $stack34[i] = $stack33;
+
+        goto label12;
+
+     label04:
+        $stack35 = interfaceinvoke in.<java.io.DataInput: double readDouble()>();
+
+        $stack37 = this.<jdk.internal.module.ModuleInfo$ConstantPool: jdk.internal.module.ModuleInfo$ConstantPool$Entry[] pool>;
+
+        $stack36 = new jdk.internal.module.ModuleInfo$ConstantPool$ValueEntry;
+
+        $stack38 = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>($stack35);
+
+        specialinvoke $stack36.<jdk.internal.module.ModuleInfo$ConstantPool$ValueEntry: void <init>(int,java.lang.Object)>($stack18, $stack38);
+
+        $stack37[i] = $stack36;
+
+        i = i + 1;
+
+        goto label12;
+
+     label05:
+        $stack28 = interfaceinvoke in.<java.io.DataInput: int readUnsignedShort()>();
+
+        $stack29 = interfaceinvoke in.<java.io.DataInput: int readUnsignedShort()>();
+
+        $stack31 = this.<jdk.internal.module.ModuleInfo$ConstantPool: jdk.internal.module.ModuleInfo$ConstantPool$Entry[] pool>;
+
+        $stack30 = new jdk.internal.module.ModuleInfo$ConstantPool$Index2Entry;
+
+        specialinvoke $stack30.<jdk.internal.module.ModuleInfo$ConstantPool$Index2Entry: void <init>(int,int,int)>($stack18, $stack28, $stack29);
+
+        $stack31[i] = $stack30;
+
+        goto label12;
+
+     label06:
+        $stack24 = interfaceinvoke in.<java.io.DataInput: int readUnsignedByte()>();
+
+        $stack25 = interfaceinvoke in.<java.io.DataInput: int readUnsignedShort()>();
+
+        $stack27 = this.<jdk.internal.module.ModuleInfo$ConstantPool: jdk.internal.module.ModuleInfo$ConstantPool$Entry[] pool>;
+
+        $stack26 = new jdk.internal.module.ModuleInfo$ConstantPool$Index2Entry;
+
+        specialinvoke $stack26.<jdk.internal.module.ModuleInfo$ConstantPool$Index2Entry: void <init>(int,int,int)>($stack18, $stack24, $stack25);
+
+        $stack27[i] = $stack26;
+
+        goto label12;
+
+     label07:
+        $stack19 = interfaceinvoke in.<java.io.DataInput: int readUnsignedShort()>();
+
+        $stack21 = this.<jdk.internal.module.ModuleInfo$ConstantPool: jdk.internal.module.ModuleInfo$ConstantPool$Entry[] pool>;
+
+        $stack20 = new jdk.internal.module.ModuleInfo$ConstantPool$IndexEntry;
+
+        specialinvoke $stack20.<jdk.internal.module.ModuleInfo$ConstantPool$IndexEntry: void <init>(int,int)>($stack18, $stack19);
+
+        $stack21[i] = $stack20;
+
+        goto label12;
+
+     label08:
+        $stack43 = interfaceinvoke in.<java.io.DataInput: float readFloat()>();
+
+        $stack45 = this.<jdk.internal.module.ModuleInfo$ConstantPool: jdk.internal.module.ModuleInfo$ConstantPool$Entry[] pool>;
+
+        $stack44 = new jdk.internal.module.ModuleInfo$ConstantPool$ValueEntry;
+
+        $stack46 = staticinvoke <java.lang.Float: java.lang.Float valueOf(float)>($stack43);
+
+        specialinvoke $stack44.<jdk.internal.module.ModuleInfo$ConstantPool$ValueEntry: void <init>(int,java.lang.Object)>($stack18, $stack46);
+
+        $stack45[i] = $stack44;
+
+        goto label12;
+
+     label09:
+        $stack47 = interfaceinvoke in.<java.io.DataInput: int readInt()>();
+
+        $stack49 = this.<jdk.internal.module.ModuleInfo$ConstantPool: jdk.internal.module.ModuleInfo$ConstantPool$Entry[] pool>;
+
+        $stack48 = new jdk.internal.module.ModuleInfo$ConstantPool$ValueEntry;
+
+        $stack50 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack47);
+
+        specialinvoke $stack48.<jdk.internal.module.ModuleInfo$ConstantPool$ValueEntry: void <init>(int,java.lang.Object)>($stack18, $stack50);
+
+        $stack49[i] = $stack48;
+
+        goto label12;
+
+     label10:
+        $stack39 = interfaceinvoke in.<java.io.DataInput: long readLong()>();
+
+        $stack41 = this.<jdk.internal.module.ModuleInfo$ConstantPool: jdk.internal.module.ModuleInfo$ConstantPool$Entry[] pool>;
+
+        $stack40 = new jdk.internal.module.ModuleInfo$ConstantPool$ValueEntry;
+
+        $stack42 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($stack39);
+
+        specialinvoke $stack40.<jdk.internal.module.ModuleInfo$ConstantPool$ValueEntry: void <init>(int,java.lang.Object)>($stack18, $stack42);
+
+        $stack41[i] = $stack40;
+
+        i = i + 1;
+
+        goto label12;
+
+     label11:
+        $stack54 = new java.lang.StringBuilder;
+
+        specialinvoke $stack54.<java.lang.StringBuilder: void <init>()>();
+
+        $stack55 = virtualinvoke $stack54.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Bad constant pool entry: ");
+
+        $stack56 = virtualinvoke $stack55.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(i);
+
+        $stack57 = virtualinvoke $stack56.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack58 = staticinvoke <jdk.internal.module.ModuleInfo: java.lang.module.InvalidModuleDescriptorException invalidModuleDescriptor(java.lang.String)>($stack57);
+
+        throw $stack58;
+
+     label12:
+        i = i + 1;
+
+        goto label01;
+
+     label13:
+        return;
+    }
+
+    java.lang.String getClassName(int)
+    {
+        jdk.internal.module.ModuleInfo$ConstantPool$Entry e;
+        jdk.internal.module.ModuleInfo$ConstantPool this;
+        jdk.internal.module.ModuleInfo$ConstantPool$IndexEntry $stack6;
+        int index, $stack5, $stack7;
+        java.lang.module.InvalidModuleDescriptorException $stack14;
+        java.lang.StringBuilder $stack10, $stack11, $stack12;
+        java.lang.String $stack8, $stack9, $stack13;
+        jdk.internal.module.ModuleInfo$ConstantPool$Entry[] $stack4;
+
+        this := @this: jdk.internal.module.ModuleInfo$ConstantPool;
+
+        index := @parameter0: int;
+
+        virtualinvoke this.<jdk.internal.module.ModuleInfo$ConstantPool: void checkIndex(int)>(index);
+
+        $stack4 = this.<jdk.internal.module.ModuleInfo$ConstantPool: jdk.internal.module.ModuleInfo$ConstantPool$Entry[] pool>;
+
+        e = $stack4[index];
+
+        $stack5 = e.<jdk.internal.module.ModuleInfo$ConstantPool$Entry: int tag>;
+
+        if $stack5 == 7 goto label1;
+
+        $stack10 = new java.lang.StringBuilder;
+
+        specialinvoke $stack10.<java.lang.StringBuilder: void <init>()>();
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("CONSTANT_Class expected at entry: ");
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack14 = staticinvoke <jdk.internal.module.ModuleInfo: java.lang.module.InvalidModuleDescriptorException invalidModuleDescriptor(java.lang.String)>($stack13);
+
+        throw $stack14;
+
+     label1:
+        $stack6 = (jdk.internal.module.ModuleInfo$ConstantPool$IndexEntry) e;
+
+        $stack7 = $stack6.<jdk.internal.module.ModuleInfo$ConstantPool$IndexEntry: int index>;
+
+        $stack8 = virtualinvoke this.<jdk.internal.module.ModuleInfo$ConstantPool: java.lang.String getUtf8(int)>($stack7);
+
+        virtualinvoke this.<jdk.internal.module.ModuleInfo$ConstantPool: void checkUnqualifiedName(java.lang.String,int,java.lang.String)>("CONSTANT_Class", index, $stack8);
+
+        $stack9 = virtualinvoke $stack8.<java.lang.String: java.lang.String replace(char,char)>(47, 46);
+
+        return $stack9;
+    }
+
+    java.lang.String getPackageName(int)
+    {
+        jdk.internal.module.ModuleInfo$ConstantPool$Entry e;
+        jdk.internal.module.ModuleInfo$ConstantPool this;
+        jdk.internal.module.ModuleInfo$ConstantPool$IndexEntry $stack6;
+        int index, $stack5, $stack7;
+        java.lang.module.InvalidModuleDescriptorException $stack14;
+        java.lang.StringBuilder $stack10, $stack11, $stack12;
+        java.lang.String $stack8, $stack9, $stack13;
+        jdk.internal.module.ModuleInfo$ConstantPool$Entry[] $stack4;
+
+        this := @this: jdk.internal.module.ModuleInfo$ConstantPool;
+
+        index := @parameter0: int;
+
+        virtualinvoke this.<jdk.internal.module.ModuleInfo$ConstantPool: void checkIndex(int)>(index);
+
+        $stack4 = this.<jdk.internal.module.ModuleInfo$ConstantPool: jdk.internal.module.ModuleInfo$ConstantPool$Entry[] pool>;
+
+        e = $stack4[index];
+
+        $stack5 = e.<jdk.internal.module.ModuleInfo$ConstantPool$Entry: int tag>;
+
+        if $stack5 == 20 goto label1;
+
+        $stack10 = new java.lang.StringBuilder;
+
+        specialinvoke $stack10.<java.lang.StringBuilder: void <init>()>();
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("CONSTANT_Package expected at entry: ");
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack14 = staticinvoke <jdk.internal.module.ModuleInfo: java.lang.module.InvalidModuleDescriptorException invalidModuleDescriptor(java.lang.String)>($stack13);
+
+        throw $stack14;
+
+     label1:
+        $stack6 = (jdk.internal.module.ModuleInfo$ConstantPool$IndexEntry) e;
+
+        $stack7 = $stack6.<jdk.internal.module.ModuleInfo$ConstantPool$IndexEntry: int index>;
+
+        $stack8 = virtualinvoke this.<jdk.internal.module.ModuleInfo$ConstantPool: java.lang.String getUtf8(int)>($stack7);
+
+        virtualinvoke this.<jdk.internal.module.ModuleInfo$ConstantPool: void checkUnqualifiedName(java.lang.String,int,java.lang.String)>("CONSTANT_Package", index, $stack8);
+
+        $stack9 = virtualinvoke $stack8.<java.lang.String: java.lang.String replace(char,char)>(47, 46);
+
+        return $stack9;
+    }
+
+    java.lang.String getModuleName(int)
+    {
+        jdk.internal.module.ModuleInfo$ConstantPool$Entry e;
+        jdk.internal.module.ModuleInfo$ConstantPool this;
+        jdk.internal.module.ModuleInfo$ConstantPool$IndexEntry $stack6;
+        int index, $stack5, $stack7;
+        java.lang.module.InvalidModuleDescriptorException $stack14;
+        java.lang.StringBuilder $stack10, $stack11, $stack12;
+        java.lang.String $stack8, $stack9, $stack13;
+        jdk.internal.module.ModuleInfo$ConstantPool$Entry[] $stack4;
+
+        this := @this: jdk.internal.module.ModuleInfo$ConstantPool;
+
+        index := @parameter0: int;
+
+        virtualinvoke this.<jdk.internal.module.ModuleInfo$ConstantPool: void checkIndex(int)>(index);
+
+        $stack4 = this.<jdk.internal.module.ModuleInfo$ConstantPool: jdk.internal.module.ModuleInfo$ConstantPool$Entry[] pool>;
+
+        e = $stack4[index];
+
+        $stack5 = e.<jdk.internal.module.ModuleInfo$ConstantPool$Entry: int tag>;
+
+        if $stack5 == 19 goto label1;
+
+        $stack10 = new java.lang.StringBuilder;
+
+        specialinvoke $stack10.<java.lang.StringBuilder: void <init>()>();
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("CONSTANT_Module expected at entry: ");
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack14 = staticinvoke <jdk.internal.module.ModuleInfo: java.lang.module.InvalidModuleDescriptorException invalidModuleDescriptor(java.lang.String)>($stack13);
+
+        throw $stack14;
+
+     label1:
+        $stack6 = (jdk.internal.module.ModuleInfo$ConstantPool$IndexEntry) e;
+
+        $stack7 = $stack6.<jdk.internal.module.ModuleInfo$ConstantPool$IndexEntry: int index>;
+
+        $stack8 = virtualinvoke this.<jdk.internal.module.ModuleInfo$ConstantPool: java.lang.String getUtf8(int)>($stack7);
+
+        $stack9 = virtualinvoke this.<jdk.internal.module.ModuleInfo$ConstantPool: java.lang.String decodeModuleName(int,java.lang.String)>(index, $stack8);
+
+        return $stack9;
+    }
+
+    java.lang.String getUtf8(int)
+    {
+        jdk.internal.module.ModuleInfo$ConstantPool$ValueEntry $stack5;
+        jdk.internal.module.ModuleInfo$ConstantPool$Entry e;
+        jdk.internal.module.ModuleInfo$ConstantPool this;
+        int index, $stack4;
+        java.lang.module.InvalidModuleDescriptorException $stack12;
+        java.lang.Object $stack6;
+        java.lang.StringBuilder $stack8, $stack9, $stack10;
+        java.lang.String $stack7, $stack11;
+        jdk.internal.module.ModuleInfo$ConstantPool$Entry[] $stack3;
+
+        this := @this: jdk.internal.module.ModuleInfo$ConstantPool;
+
+        index := @parameter0: int;
+
+        virtualinvoke this.<jdk.internal.module.ModuleInfo$ConstantPool: void checkIndex(int)>(index);
+
+        $stack3 = this.<jdk.internal.module.ModuleInfo$ConstantPool: jdk.internal.module.ModuleInfo$ConstantPool$Entry[] pool>;
+
+        e = $stack3[index];
+
+        $stack4 = e.<jdk.internal.module.ModuleInfo$ConstantPool$Entry: int tag>;
+
+        if $stack4 == 1 goto label1;
+
+        $stack8 = new java.lang.StringBuilder;
+
+        specialinvoke $stack8.<java.lang.StringBuilder: void <init>()>();
+
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("CONSTANT_Utf8 expected at entry: ");
+
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack12 = staticinvoke <jdk.internal.module.ModuleInfo: java.lang.module.InvalidModuleDescriptorException invalidModuleDescriptor(java.lang.String)>($stack11);
+
+        throw $stack12;
+
+     label1:
+        $stack5 = (jdk.internal.module.ModuleInfo$ConstantPool$ValueEntry) e;
+
+        $stack6 = $stack5.<jdk.internal.module.ModuleInfo$ConstantPool$ValueEntry: java.lang.Object value>;
+
+        $stack7 = (java.lang.String) $stack6;
+
+        return $stack7;
+    }
+
+    void checkIndex(int)
+    {
+        int index, $stack4;
+        java.lang.module.InvalidModuleDescriptorException $stack2;
+        jdk.internal.module.ModuleInfo$ConstantPool this;
+        jdk.internal.module.ModuleInfo$ConstantPool$Entry[] $stack3;
+
+        this := @this: jdk.internal.module.ModuleInfo$ConstantPool;
+
+        index := @parameter0: int;
+
+        if index < 1 goto label1;
+
+        $stack3 = this.<jdk.internal.module.ModuleInfo$ConstantPool: jdk.internal.module.ModuleInfo$ConstantPool$Entry[] pool>;
+
+        $stack4 = lengthof $stack3;
+
+        if index < $stack4 goto label2;
+
+     label1:
+        $stack2 = staticinvoke <jdk.internal.module.ModuleInfo: java.lang.module.InvalidModuleDescriptorException invalidModuleDescriptor(java.lang.String)>("Index into constant pool out of range");
+
+        throw $stack2;
+
+     label2:
+        return;
+    }
+
+    void checkUnqualifiedName(java.lang.String, int, java.lang.String)
+    {
+        int $stack7, index, i, $i0, $i1, $i2;
+        java.lang.String value, what, $stack31, $stack16;
+        jdk.internal.module.ModuleInfo$ConstantPool this;
+        char $stack8;
+        java.lang.module.InvalidModuleDescriptorException $stack32, $stack17;
+        java.lang.StringBuilder $stack27, $stack28, $stack29, $stack30, $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $u0, $u1;
+
+        this := @this: jdk.internal.module.ModuleInfo$ConstantPool;
+
+        what := @parameter0: java.lang.String;
+
+        index := @parameter1: int;
+
+        value := @parameter2: java.lang.String;
+
+        $stack7 = virtualinvoke value.<java.lang.String: int length()>();
+
+        if $stack7 != 0 goto label1;
+
+        $u0 = new java.lang.StringBuilder;
+
+        specialinvoke $u0.<java.lang.StringBuilder: void <init>()>();
+
+        $stack27 = virtualinvoke $u0.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(what);
+
+        $stack28 = virtualinvoke $stack27.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" at entry ");
+
+        $stack29 = virtualinvoke $stack28.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+
+        $stack30 = virtualinvoke $stack29.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" has zero length");
+
+        $stack31 = virtualinvoke $stack30.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack32 = staticinvoke <jdk.internal.module.ModuleInfo: java.lang.module.InvalidModuleDescriptorException invalidModuleDescriptor(java.lang.String)>($stack31);
+
+        throw $stack32;
+
+     label1:
+        i = 0;
+
+     label2:
+        if i >= $stack7 goto label5;
+
+        $stack8 = virtualinvoke value.<java.lang.String: char charAt(int)>(i);
+
+        $i0 = (int) $stack8;
+
+        if $i0 == 46 goto label3;
+
+        $i1 = (int) $stack8;
+
+        if $i1 == 59 goto label3;
+
+        $i2 = (int) $stack8;
+
+        if $i2 != 91 goto label4;
+
+     label3:
+        $u1 = new java.lang.StringBuilder;
+
+        specialinvoke $u1.<java.lang.StringBuilder: void <init>()>();
+
+        $stack10 = virtualinvoke $u1.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(what);
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" at entry ");
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" has illegal character: \'");
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>($stack8);
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\'");
+
+        $stack16 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack17 = staticinvoke <jdk.internal.module.ModuleInfo: java.lang.module.InvalidModuleDescriptorException invalidModuleDescriptor(java.lang.String)>($stack16);
+
+        throw $stack17;
+
+     label4:
+        i = i + 1;
+
+        goto label2;
+
+     label5:
+        return;
+    }
+
+    java.lang.String decodeModuleName(int, java.lang.String)
+    {
+        int $stack6, $stack7, index, $stack20, i;
+        java.lang.String value, $stack23, $stack28, $stack12, $stack14;
+        jdk.internal.module.ModuleInfo$ConstantPool this;
+        java.lang.module.InvalidModuleDescriptorException $stack29, $stack15;
+        java.lang.StringBuilder $stack24, $stack25, $stack26, $stack27, $stack8, $stack9, $stack10, $stack11, $stack13;
+
+        this := @this: jdk.internal.module.ModuleInfo$ConstantPool;
+
+        index := @parameter0: int;
+
+        value := @parameter1: java.lang.String;
+
+        $stack6 = virtualinvoke value.<java.lang.String: int length()>();
+
+        if $stack6 != 0 goto label1;
+
+        $stack24 = new java.lang.StringBuilder;
+
+        specialinvoke $stack24.<java.lang.StringBuilder: void <init>()>();
+
+        $stack25 = virtualinvoke $stack24.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("CONSTANT_Module at entry ");
+
+        $stack26 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+
+        $stack27 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" is zero length");
+
+        $stack28 = virtualinvoke $stack27.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack29 = staticinvoke <jdk.internal.module.ModuleInfo: java.lang.module.InvalidModuleDescriptorException invalidModuleDescriptor(java.lang.String)>($stack28);
+
+        throw $stack29;
+
+     label1:
+        i = 0;
+
+     label2:
+        if i >= $stack6 goto label6;
+
+        $stack7 = virtualinvoke value.<java.lang.String: int codePointAt(int)>(i);
+
+        if $stack7 == 58 goto label3;
+
+        if $stack7 == 64 goto label3;
+
+        if $stack7 >= 32 goto label4;
+
+     label3:
+        $stack8 = new java.lang.StringBuilder;
+
+        specialinvoke $stack8.<java.lang.StringBuilder: void <init>()>();
+
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("CONSTANT_Module at entry ");
+
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" has illegal character: ");
+
+        $stack12 = staticinvoke <java.lang.Character: java.lang.String getName(int)>($stack7);
+
+        $stack13 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack12);
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack15 = staticinvoke <jdk.internal.module.ModuleInfo: java.lang.module.InvalidModuleDescriptorException invalidModuleDescriptor(java.lang.String)>($stack14);
+
+        throw $stack15;
+
+     label4:
+        if $stack7 != 92 goto label5;
+
+        $stack23 = virtualinvoke this.<jdk.internal.module.ModuleInfo$ConstantPool: java.lang.String decodeModuleName(int,int,java.lang.String)>(index, i, value);
+
+        return $stack23;
+
+     label5:
+        $stack20 = staticinvoke <java.lang.Character: int charCount(int)>($stack7);
+
+        i = i + $stack20;
+
+        goto label2;
+
+     label6:
+        return value;
+    }
+
+    java.lang.String decodeModuleName(int, int, java.lang.String)
+    {
+        jdk.internal.module.ModuleInfo$ConstantPool this;
+        java.lang.module.InvalidModuleDescriptorException $stack46, $stack52, $stack20;
+        java.lang.StringBuilder $stack9, $stack41, $stack42, $stack43, $stack44, $stack47, $stack48, $stack49, $stack50, $stack13, $stack14, $stack15, $stack16, $stack18;
+        int $stack10, $stack12, index, $stack26, $stack29, $stack30, $stack53, $stack55, i, j, $stack32;
+        java.lang.String value, $stack11, $stack45, $stack51, $stack17, $stack19;
+
+        this := @this: jdk.internal.module.ModuleInfo$ConstantPool;
+
+        index := @parameter0: int;
+
+        i := @parameter1: int;
+
+        value := @parameter2: java.lang.String;
+
+        $stack9 = new java.lang.StringBuilder;
+
+        specialinvoke $stack9.<java.lang.StringBuilder: void <init>()>();
+
+        j = 0;
+
+     label01:
+        if j >= i goto label02;
+
+        $stack53 = virtualinvoke value.<java.lang.String: int codePointAt(int)>(j);
+
+        virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder appendCodePoint(int)>($stack53);
+
+        $stack55 = staticinvoke <java.lang.Character: int charCount(int)>($stack53);
+
+        j = j + $stack55;
+
+        goto label01;
+
+     label02:
+        $stack10 = virtualinvoke value.<java.lang.String: int length()>();
+
+     label03:
+        if i >= $stack10 goto label10;
+
+        $stack12 = virtualinvoke value.<java.lang.String: int codePointAt(int)>(i);
+
+        if $stack12 == 58 goto label04;
+
+        if $stack12 == 64 goto label04;
+
+        if $stack12 >= 32 goto label05;
+
+     label04:
+        $stack13 = new java.lang.StringBuilder;
+
+        specialinvoke $stack13.<java.lang.StringBuilder: void <init>()>();
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("CONSTANT_Module at entry ");
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+
+        $stack16 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" has illegal character: ");
+
+        $stack17 = staticinvoke <java.lang.Character: java.lang.String getName(int)>($stack12);
+
+        $stack18 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack17);
+
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack20 = staticinvoke <jdk.internal.module.ModuleInfo: java.lang.module.InvalidModuleDescriptorException invalidModuleDescriptor(java.lang.String)>($stack19);
+
+        throw $stack20;
+
+     label05:
+        if $stack12 != 92 goto label08;
+
+        $stack29 = staticinvoke <java.lang.Character: int charCount(int)>($stack12);
+
+        j = i + $stack29;
+
+        if j < $stack10 goto label06;
+
+        $stack47 = new java.lang.StringBuilder;
+
+        specialinvoke $stack47.<java.lang.StringBuilder: void <init>()>();
+
+        $stack48 = virtualinvoke $stack47.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("CONSTANT_Module at entry ");
+
+        $stack49 = virtualinvoke $stack48.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+
+        $stack50 = virtualinvoke $stack49.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" has illegal escape sequence");
+
+        $stack51 = virtualinvoke $stack50.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack52 = staticinvoke <jdk.internal.module.ModuleInfo: java.lang.module.InvalidModuleDescriptorException invalidModuleDescriptor(java.lang.String)>($stack51);
+
+        throw $stack52;
+
+     label06:
+        $stack30 = virtualinvoke value.<java.lang.String: int codePointAt(int)>(j);
+
+        if $stack30 == 92 goto label07;
+
+        if $stack30 == 58 goto label07;
+
+        if $stack30 == 64 goto label07;
+
+        $stack41 = new java.lang.StringBuilder;
+
+        specialinvoke $stack41.<java.lang.StringBuilder: void <init>()>();
+
+        $stack42 = virtualinvoke $stack41.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("CONSTANT_Module at entry ");
+
+        $stack43 = virtualinvoke $stack42.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+
+        $stack44 = virtualinvoke $stack43.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" has illegal escape sequence");
+
+        $stack45 = virtualinvoke $stack44.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack46 = staticinvoke <jdk.internal.module.ModuleInfo: java.lang.module.InvalidModuleDescriptorException invalidModuleDescriptor(java.lang.String)>($stack45);
+
+        throw $stack46;
+
+     label07:
+        virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder appendCodePoint(int)>($stack30);
+
+        $stack32 = staticinvoke <java.lang.Character: int charCount(int)>($stack30);
+
+        i = i + $stack32;
+
+        goto label09;
+
+     label08:
+        virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder appendCodePoint(int)>($stack12);
+
+     label09:
+        $stack26 = staticinvoke <java.lang.Character: int charCount(int)>($stack12);
+
+        i = i + $stack26;
+
+        goto label03;
+
+     label10:
+        $stack11 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack11;
+    }
+
+    public static void <clinit>()
+    {
+        <jdk.internal.module.ModuleInfo$ConstantPool: int CONSTANT_Package> = 20;
+
+        <jdk.internal.module.ModuleInfo$ConstantPool: int CONSTANT_Module> = 19;
+
+        <jdk.internal.module.ModuleInfo$ConstantPool: int CONSTANT_InvokeDynamic> = 18;
+
+        <jdk.internal.module.ModuleInfo$ConstantPool: int CONSTANT_MethodType> = 16;
+
+        <jdk.internal.module.ModuleInfo$ConstantPool: int CONSTANT_MethodHandle> = 15;
+
+        <jdk.internal.module.ModuleInfo$ConstantPool: int CONSTANT_NameAndType> = 12;
+
+        <jdk.internal.module.ModuleInfo$ConstantPool: int CONSTANT_InterfaceMethodref> = 11;
+
+        <jdk.internal.module.ModuleInfo$ConstantPool: int CONSTANT_Methodref> = 10;
+
+        <jdk.internal.module.ModuleInfo$ConstantPool: int CONSTANT_Fieldref> = 9;
+
+        <jdk.internal.module.ModuleInfo$ConstantPool: int CONSTANT_String> = 8;
+
+        <jdk.internal.module.ModuleInfo$ConstantPool: int CONSTANT_Class> = 7;
+
+        <jdk.internal.module.ModuleInfo$ConstantPool: int CONSTANT_Double> = 6;
+
+        <jdk.internal.module.ModuleInfo$ConstantPool: int CONSTANT_Long> = 5;
+
+        <jdk.internal.module.ModuleInfo$ConstantPool: int CONSTANT_Float> = 4;
+
+        <jdk.internal.module.ModuleInfo$ConstantPool: int CONSTANT_Integer> = 3;
+
+        <jdk.internal.module.ModuleInfo$ConstantPool: int CONSTANT_Utf8> = 1;
+
+        return;
+    }
+}

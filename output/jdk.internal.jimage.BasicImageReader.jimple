@@ -1,0 +1,1556 @@
+public class jdk.internal.jimage.BasicImageReader extends java.lang.Object implements java.lang.AutoCloseable
+{
+    private static final boolean IS_64_BIT;
+    private static final boolean USE_JVM_MAP;
+    private static final boolean MAP_ALL;
+    private final java.nio.file.Path imagePath;
+    private final java.nio.ByteOrder byteOrder;
+    private final java.lang.String name;
+    private final java.nio.ByteBuffer memoryMap;
+    private final java.nio.channels.FileChannel channel;
+    private final jdk.internal.jimage.ImageHeader header;
+    private final long indexSize;
+    private final java.nio.IntBuffer redirect;
+    private final java.nio.IntBuffer offsets;
+    private final java.nio.ByteBuffer locations;
+    private final java.nio.ByteBuffer strings;
+    private final jdk.internal.jimage.ImageStringsReader stringsReader;
+    private final jdk.internal.jimage.decompressor.Decompressor decompressor;
+
+    private static boolean isSystemProperty(java.lang.String, java.lang.String, java.lang.String)
+    {
+        jdk.internal.jimage.BasicImageReader$1 $stack3;
+        java.lang.Boolean $stack5;
+        java.lang.Object $stack4;
+        java.lang.String value, key, def;
+        boolean $stack6;
+
+        key := @parameter0: java.lang.String;
+
+        value := @parameter1: java.lang.String;
+
+        def := @parameter2: java.lang.String;
+
+        $stack3 = new jdk.internal.jimage.BasicImageReader$1;
+
+        specialinvoke $stack3.<jdk.internal.jimage.BasicImageReader$1: void <init>(java.lang.String,java.lang.String,java.lang.String)>(value, key, def);
+
+        $stack4 = staticinvoke <java.security.AccessController: java.lang.Object doPrivileged(java.security.PrivilegedAction)>($stack3);
+
+        $stack5 = (java.lang.Boolean) $stack4;
+
+        $stack6 = virtualinvoke $stack5.<java.lang.Boolean: boolean booleanValue()>();
+
+        return $stack6;
+    }
+
+    protected void <init>(java.nio.file.Path, java.nio.ByteOrder) throws java.io.IOException
+    {
+        java.nio.channels.FileChannel$MapMode $stack67, $stack105;
+        byte $stack32;
+        java.nio.file.Path path, $stack7, $stack10, $stack15;
+        jdk.internal.jimage.decompressor.Decompressor $u8;
+        java.nio.ByteOrder byteOrder, $stack9;
+        java.lang.StringBuilder $stack61, $stack63, $stack64, $stack76, $stack78, $stack79, $stack86, $stack88, $stack89, $u1, $u3, $u5;
+        java.lang.ClassLoader $stack116;
+        long $stack26, $stack30, $stack31, $stack66, $stack107;
+        java.nio.file.OpenOption[] $stack13;
+        java.lang.String $stack11, $stack62, $stack65, $stack77, $stack80, $stack87, $stack90, $stack119;
+        jdk.internal.jimage.ImageStringsReader $u7;
+        java.io.IOException $u2, $u4, $u6;
+        jdk.internal.jimage.BasicImageReader$2 $u0;
+        java.nio.ByteBuffer $stack27, $stack28, $stack34, $stack40, $stack46, $stack50, $stack52, $stack56, $stack81, map, headerBuffer;
+        java.nio.IntBuffer $stack22, $stack38, $stack44;
+        boolean $stack12, $stack109, $stack19;
+        java.nio.file.StandardOpenOption $stack14;
+        jdk.internal.jimage.ImageHeader $stack23, $stack24, $stack33, $stack36, $stack39, $stack42, $stack45, $stack48, $stack51, $stack54;
+        int $stack21, $stack25, $stack29, $stack35, $stack37, $stack41, $stack43, $stack47, $stack49, $stack53, $stack55, $stack83, $stack20, $i0;
+        jdk.internal.jimage.BasicImageReader this;
+        java.lang.Object $stack6, $stack8;
+        java.lang.Class $stack115;
+        java.nio.channels.FileChannel $stack16, $stack68, $stack82, $stack103, $stack104;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        path := @parameter0: java.nio.file.Path;
+
+        byteOrder := @parameter1: java.nio.ByteOrder;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack6 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(path);
+
+        $stack7 = (java.nio.file.Path) $stack6;
+
+        this.<jdk.internal.jimage.BasicImageReader: java.nio.file.Path imagePath> = $stack7;
+
+        $stack8 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(byteOrder);
+
+        $stack9 = (java.nio.ByteOrder) $stack8;
+
+        this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteOrder byteOrder> = $stack9;
+
+        $stack10 = this.<jdk.internal.jimage.BasicImageReader: java.nio.file.Path imagePath>;
+
+        $stack11 = interfaceinvoke $stack10.<java.nio.file.Path: java.lang.String toString()>();
+
+        this.<jdk.internal.jimage.BasicImageReader: java.lang.String name> = $stack11;
+
+        $stack12 = <jdk.internal.jimage.BasicImageReader: boolean USE_JVM_MAP>;
+
+        if $stack12 == 0 goto label01;
+
+        $stack115 = class "Ljdk/internal/jimage/BasicImageReader;";
+
+        $stack116 = virtualinvoke $stack115.<java.lang.Class: java.lang.ClassLoader getClassLoader()>();
+
+        if $stack116 != null goto label01;
+
+        $stack119 = this.<jdk.internal.jimage.BasicImageReader: java.lang.String name>;
+
+        map = staticinvoke <jdk.internal.jimage.NativeImageBuffer: java.nio.ByteBuffer getNativeMap(java.lang.String)>($stack119);
+
+        goto label02;
+
+     label01:
+        map = null;
+
+     label02:
+        if map == null goto label03;
+
+        $stack109 = <jdk.internal.jimage.BasicImageReader: boolean MAP_ALL>;
+
+        if $stack109 == 0 goto label03;
+
+        this.<jdk.internal.jimage.BasicImageReader: java.nio.channels.FileChannel channel> = null;
+
+        goto label04;
+
+     label03:
+        $stack15 = this.<jdk.internal.jimage.BasicImageReader: java.nio.file.Path imagePath>;
+
+        $stack13 = newarray (java.nio.file.OpenOption)[1];
+
+        $stack14 = <java.nio.file.StandardOpenOption: java.nio.file.StandardOpenOption READ>;
+
+        $stack13[0] = $stack14;
+
+        $stack16 = staticinvoke <java.nio.channels.FileChannel: java.nio.channels.FileChannel open(java.nio.file.Path,java.nio.file.OpenOption[])>($stack15, $stack13);
+
+        this.<jdk.internal.jimage.BasicImageReader: java.nio.channels.FileChannel channel> = $stack16;
+
+        $u0 = new jdk.internal.jimage.BasicImageReader$2;
+
+        specialinvoke $u0.<jdk.internal.jimage.BasicImageReader$2: void <init>(jdk.internal.jimage.BasicImageReader)>(this);
+
+        staticinvoke <java.security.AccessController: java.lang.Object doPrivileged(java.security.PrivilegedAction)>($u0);
+
+     label04:
+        $stack19 = <jdk.internal.jimage.BasicImageReader: boolean MAP_ALL>;
+
+        if $stack19 == 0 goto label05;
+
+        if map != null goto label05;
+
+        $stack104 = this.<jdk.internal.jimage.BasicImageReader: java.nio.channels.FileChannel channel>;
+
+        $stack105 = <java.nio.channels.FileChannel$MapMode: java.nio.channels.FileChannel$MapMode READ_ONLY>;
+
+        $stack103 = this.<jdk.internal.jimage.BasicImageReader: java.nio.channels.FileChannel channel>;
+
+        $stack107 = virtualinvoke $stack103.<java.nio.channels.FileChannel: long size()>();
+
+        map = virtualinvoke $stack104.<java.nio.channels.FileChannel: java.nio.MappedByteBuffer map(java.nio.channels.FileChannel$MapMode,long,long)>($stack105, 0L, $stack107);
+
+     label05:
+        headerBuffer = map;
+
+        $stack20 = staticinvoke <jdk.internal.jimage.ImageHeader: int getHeaderSize()>();
+
+        if map != null goto label07;
+
+        $stack81 = staticinvoke <java.nio.ByteBuffer: java.nio.ByteBuffer allocateDirect(int)>($stack20);
+
+        headerBuffer = $stack81;
+
+        $stack82 = this.<jdk.internal.jimage.BasicImageReader: java.nio.channels.FileChannel channel>;
+
+        $stack83 = virtualinvoke $stack82.<java.nio.channels.FileChannel: int read(java.nio.ByteBuffer,long)>($stack81, 0L);
+
+        if $stack83 != $stack20 goto label06;
+
+        virtualinvoke $stack81.<java.nio.ByteBuffer: java.nio.ByteBuffer rewind()>();
+
+        goto label08;
+
+     label06:
+        $u2 = new java.io.IOException;
+
+        $u1 = new java.lang.StringBuilder;
+
+        specialinvoke $u1.<java.lang.StringBuilder: void <init>()>();
+
+        $stack86 = virtualinvoke $u1.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\"");
+
+        $stack87 = this.<jdk.internal.jimage.BasicImageReader: java.lang.String name>;
+
+        $stack88 = virtualinvoke $stack86.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack87);
+
+        $stack89 = virtualinvoke $stack88.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\" is not an image file");
+
+        $stack90 = virtualinvoke $stack89.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u2.<java.io.IOException: void <init>(java.lang.String)>($stack90);
+
+        throw $u2;
+
+     label07:
+        $stack21 = virtualinvoke map.<java.nio.ByteBuffer: int capacity()>();
+
+        if $stack21 >= $stack20 goto label08;
+
+        $u4 = new java.io.IOException;
+
+        $u3 = new java.lang.StringBuilder;
+
+        specialinvoke $u3.<java.lang.StringBuilder: void <init>()>();
+
+        $stack76 = virtualinvoke $u3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\"");
+
+        $stack77 = this.<jdk.internal.jimage.BasicImageReader: java.lang.String name>;
+
+        $stack78 = virtualinvoke $stack76.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack77);
+
+        $stack79 = virtualinvoke $stack78.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\" is not an image file");
+
+        $stack80 = virtualinvoke $stack79.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u4.<java.io.IOException: void <init>(java.lang.String)>($stack80);
+
+        throw $u4;
+
+     label08:
+        $stack22 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader: java.nio.IntBuffer intBuffer(java.nio.ByteBuffer,int,int)>(headerBuffer, 0, $stack20);
+
+        $stack23 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageHeader readHeader(java.nio.IntBuffer)>($stack22);
+
+        this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageHeader header> = $stack23;
+
+        $stack24 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageHeader header>;
+
+        $stack25 = virtualinvoke $stack24.<jdk.internal.jimage.ImageHeader: int getIndexSize()>();
+
+        $stack26 = (long) $stack25;
+
+        this.<jdk.internal.jimage.BasicImageReader: long indexSize> = $stack26;
+
+        if map != null goto label09;
+
+        $stack68 = this.<jdk.internal.jimage.BasicImageReader: java.nio.channels.FileChannel channel>;
+
+        $stack67 = <java.nio.channels.FileChannel$MapMode: java.nio.channels.FileChannel$MapMode READ_ONLY>;
+
+        $stack66 = this.<jdk.internal.jimage.BasicImageReader: long indexSize>;
+
+        map = virtualinvoke $stack68.<java.nio.channels.FileChannel: java.nio.MappedByteBuffer map(java.nio.channels.FileChannel$MapMode,long,long)>($stack67, 0L, $stack66);
+
+     label09:
+        $stack27 = virtualinvoke map.<java.nio.ByteBuffer: java.nio.ByteBuffer asReadOnlyBuffer()>();
+
+        this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer memoryMap> = $stack27;
+
+        $stack28 = this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer memoryMap>;
+
+        $stack29 = virtualinvoke $stack28.<java.nio.ByteBuffer: int capacity()>();
+
+        $stack31 = (long) $stack29;
+
+        $stack30 = this.<jdk.internal.jimage.BasicImageReader: long indexSize>;
+
+        $stack32 = $stack31 cmp $stack30;
+
+        $i0 = (int) $stack32;
+
+        if $i0 >= 0 goto label10;
+
+        $u6 = new java.io.IOException;
+
+        $u5 = new java.lang.StringBuilder;
+
+        specialinvoke $u5.<java.lang.StringBuilder: void <init>()>();
+
+        $stack61 = virtualinvoke $u5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("The image file \"");
+
+        $stack62 = this.<jdk.internal.jimage.BasicImageReader: java.lang.String name>;
+
+        $stack63 = virtualinvoke $stack61.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack62);
+
+        $stack64 = virtualinvoke $stack63.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\" is corrupted");
+
+        $stack65 = virtualinvoke $stack64.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u6.<java.io.IOException: void <init>(java.lang.String)>($stack65);
+
+        throw $u6;
+
+     label10:
+        $stack34 = this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer memoryMap>;
+
+        $stack33 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageHeader header>;
+
+        $stack35 = virtualinvoke $stack33.<jdk.internal.jimage.ImageHeader: int getRedirectOffset()>();
+
+        $stack36 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageHeader header>;
+
+        $stack37 = virtualinvoke $stack36.<jdk.internal.jimage.ImageHeader: int getRedirectSize()>();
+
+        $stack38 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader: java.nio.IntBuffer intBuffer(java.nio.ByteBuffer,int,int)>($stack34, $stack35, $stack37);
+
+        this.<jdk.internal.jimage.BasicImageReader: java.nio.IntBuffer redirect> = $stack38;
+
+        $stack40 = this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer memoryMap>;
+
+        $stack39 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageHeader header>;
+
+        $stack41 = virtualinvoke $stack39.<jdk.internal.jimage.ImageHeader: int getOffsetsOffset()>();
+
+        $stack42 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageHeader header>;
+
+        $stack43 = virtualinvoke $stack42.<jdk.internal.jimage.ImageHeader: int getOffsetsSize()>();
+
+        $stack44 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader: java.nio.IntBuffer intBuffer(java.nio.ByteBuffer,int,int)>($stack40, $stack41, $stack43);
+
+        this.<jdk.internal.jimage.BasicImageReader: java.nio.IntBuffer offsets> = $stack44;
+
+        $stack46 = this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer memoryMap>;
+
+        $stack45 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageHeader header>;
+
+        $stack47 = virtualinvoke $stack45.<jdk.internal.jimage.ImageHeader: int getLocationsOffset()>();
+
+        $stack48 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageHeader header>;
+
+        $stack49 = virtualinvoke $stack48.<jdk.internal.jimage.ImageHeader: int getLocationsSize()>();
+
+        $stack50 = staticinvoke <jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer slice(java.nio.ByteBuffer,int,int)>($stack46, $stack47, $stack49);
+
+        this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer locations> = $stack50;
+
+        $stack52 = this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer memoryMap>;
+
+        $stack51 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageHeader header>;
+
+        $stack53 = virtualinvoke $stack51.<jdk.internal.jimage.ImageHeader: int getStringsOffset()>();
+
+        $stack54 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageHeader header>;
+
+        $stack55 = virtualinvoke $stack54.<jdk.internal.jimage.ImageHeader: int getStringsSize()>();
+
+        $stack56 = staticinvoke <jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer slice(java.nio.ByteBuffer,int,int)>($stack52, $stack53, $stack55);
+
+        this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer strings> = $stack56;
+
+        $u7 = new jdk.internal.jimage.ImageStringsReader;
+
+        specialinvoke $u7.<jdk.internal.jimage.ImageStringsReader: void <init>(jdk.internal.jimage.BasicImageReader)>(this);
+
+        this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageStringsReader stringsReader> = $u7;
+
+        $u8 = new jdk.internal.jimage.decompressor.Decompressor;
+
+        specialinvoke $u8.<jdk.internal.jimage.decompressor.Decompressor: void <init>()>();
+
+        this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.decompressor.Decompressor decompressor> = $u8;
+
+        return;
+    }
+
+    protected void <init>(java.nio.file.Path) throws java.io.IOException
+    {
+        java.nio.ByteOrder $stack2;
+        jdk.internal.jimage.BasicImageReader this;
+        java.nio.file.Path imagePath;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        imagePath := @parameter0: java.nio.file.Path;
+
+        $stack2 = staticinvoke <java.nio.ByteOrder: java.nio.ByteOrder nativeOrder()>();
+
+        specialinvoke this.<jdk.internal.jimage.BasicImageReader: void <init>(java.nio.file.Path,java.nio.ByteOrder)>(imagePath, $stack2);
+
+        return;
+    }
+
+    public static jdk.internal.jimage.BasicImageReader open(java.nio.file.Path) throws java.io.IOException
+    {
+        java.nio.ByteOrder $stack2;
+        jdk.internal.jimage.BasicImageReader $stack1;
+        java.nio.file.Path imagePath;
+
+        imagePath := @parameter0: java.nio.file.Path;
+
+        $stack1 = new jdk.internal.jimage.BasicImageReader;
+
+        $stack2 = staticinvoke <java.nio.ByteOrder: java.nio.ByteOrder nativeOrder()>();
+
+        specialinvoke $stack1.<jdk.internal.jimage.BasicImageReader: void <init>(java.nio.file.Path,java.nio.ByteOrder)>(imagePath, $stack2);
+
+        return $stack1;
+    }
+
+    public jdk.internal.jimage.ImageHeader getHeader()
+    {
+        jdk.internal.jimage.ImageHeader $stack1;
+        jdk.internal.jimage.BasicImageReader this;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        $stack1 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageHeader header>;
+
+        return $stack1;
+    }
+
+    private jdk.internal.jimage.ImageHeader readHeader(java.nio.IntBuffer) throws java.io.IOException
+    {
+        jdk.internal.jimage.ImageHeader $stack3;
+        java.nio.IntBuffer buffer;
+        int $stack4, $stack5, $stack12, $stack15, $stack18;
+        java.lang.String $stack9, $stack17, $stack28, $stack31;
+        java.io.IOException $stack6, $stack25;
+        jdk.internal.jimage.BasicImageReader this;
+        java.lang.StringBuilder $stack7, $stack8, $stack10, $stack11, $stack13, $stack14, $stack16, $stack26, $stack27, $stack29, $stack30;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        buffer := @parameter0: java.nio.IntBuffer;
+
+        $stack3 = staticinvoke <jdk.internal.jimage.ImageHeader: jdk.internal.jimage.ImageHeader readFrom(java.nio.IntBuffer)>(buffer);
+
+        $stack4 = virtualinvoke $stack3.<jdk.internal.jimage.ImageHeader: int getMagic()>();
+
+        if $stack4 == -889267494 goto label1;
+
+        $stack25 = new java.io.IOException;
+
+        $stack26 = new java.lang.StringBuilder;
+
+        specialinvoke $stack26.<java.lang.StringBuilder: void <init>()>();
+
+        $stack27 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\"");
+
+        $stack28 = this.<jdk.internal.jimage.BasicImageReader: java.lang.String name>;
+
+        $stack29 = virtualinvoke $stack27.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack28);
+
+        $stack30 = virtualinvoke $stack29.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\" is not an image file");
+
+        $stack31 = virtualinvoke $stack30.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack25.<java.io.IOException: void <init>(java.lang.String)>($stack31);
+
+        throw $stack25;
+
+     label1:
+        $stack5 = virtualinvoke $stack3.<jdk.internal.jimage.ImageHeader: int getMajorVersion()>();
+
+        if $stack5 != 1 goto label2;
+
+        $stack18 = virtualinvoke $stack3.<jdk.internal.jimage.ImageHeader: int getMinorVersion()>();
+
+        if $stack18 == 0 goto label3;
+
+     label2:
+        $stack6 = new java.io.IOException;
+
+        $stack7 = new java.lang.StringBuilder;
+
+        specialinvoke $stack7.<java.lang.StringBuilder: void <init>()>();
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("The image file \"");
+
+        $stack9 = this.<jdk.internal.jimage.BasicImageReader: java.lang.String name>;
+
+        $stack10 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack9);
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\" is not the correct version. Major: ");
+
+        $stack12 = virtualinvoke $stack3.<jdk.internal.jimage.ImageHeader: int getMajorVersion()>();
+
+        $stack13 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack12);
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(". Minor: ");
+
+        $stack15 = virtualinvoke $stack3.<jdk.internal.jimage.ImageHeader: int getMinorVersion()>();
+
+        $stack16 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack15);
+
+        $stack17 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack6.<java.io.IOException: void <init>(java.lang.String)>($stack17);
+
+        throw $stack6;
+
+     label3:
+        return $stack3;
+    }
+
+    private static java.nio.ByteBuffer slice(java.nio.ByteBuffer, int, int)
+    {
+        java.lang.Throwable $stack11;
+        int position, capacity, $stack6;
+        java.nio.ByteBuffer buffer, $stack9;
+
+        buffer := @parameter0: java.nio.ByteBuffer;
+
+        position := @parameter1: int;
+
+        capacity := @parameter2: int;
+
+        entermonitor buffer;
+
+     label1:
+        $stack6 = position + capacity;
+
+        virtualinvoke buffer.<java.nio.ByteBuffer: java.nio.ByteBuffer limit(int)>($stack6);
+
+        virtualinvoke buffer.<java.nio.ByteBuffer: java.nio.ByteBuffer position(int)>(position);
+
+        $stack9 = virtualinvoke buffer.<java.nio.ByteBuffer: java.nio.ByteBuffer slice()>();
+
+        exitmonitor buffer;
+
+     label2:
+        return $stack9;
+
+     label3:
+        $stack11 := @caughtexception;
+
+        exitmonitor buffer;
+
+     label4:
+        throw $stack11;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+
+    private java.nio.IntBuffer intBuffer(java.nio.ByteBuffer, int, int)
+    {
+        java.nio.ByteBuffer buffer, $stack4, $stack6;
+        java.nio.ByteOrder $stack5;
+        jdk.internal.jimage.BasicImageReader this;
+        java.nio.IntBuffer $stack7;
+        int offset, size;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        buffer := @parameter0: java.nio.ByteBuffer;
+
+        offset := @parameter1: int;
+
+        size := @parameter2: int;
+
+        $stack4 = staticinvoke <jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer slice(java.nio.ByteBuffer,int,int)>(buffer, offset, size);
+
+        $stack5 = this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteOrder byteOrder>;
+
+        $stack6 = virtualinvoke $stack4.<java.nio.ByteBuffer: java.nio.ByteBuffer order(java.nio.ByteOrder)>($stack5);
+
+        $stack7 = virtualinvoke $stack6.<java.nio.ByteBuffer: java.nio.IntBuffer asIntBuffer()>();
+
+        return $stack7;
+    }
+
+    public static void releaseByteBuffer(java.nio.ByteBuffer)
+    {
+        java.nio.ByteBuffer buffer;
+        boolean $stack2;
+
+        buffer := @parameter0: java.nio.ByteBuffer;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(buffer);
+
+        $stack2 = <jdk.internal.jimage.BasicImageReader: boolean MAP_ALL>;
+
+        if $stack2 != 0 goto label1;
+
+        staticinvoke <jdk.internal.jimage.ImageBufferCache: void releaseBuffer(java.nio.ByteBuffer)>(buffer);
+
+     label1:
+        return;
+    }
+
+    public java.lang.String getName()
+    {
+        java.lang.String $stack1;
+        jdk.internal.jimage.BasicImageReader this;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        $stack1 = this.<jdk.internal.jimage.BasicImageReader: java.lang.String name>;
+
+        return $stack1;
+    }
+
+    public java.nio.ByteOrder getByteOrder()
+    {
+        java.nio.ByteOrder $stack1;
+        jdk.internal.jimage.BasicImageReader this;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        $stack1 = this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteOrder byteOrder>;
+
+        return $stack1;
+    }
+
+    public java.nio.file.Path getImagePath()
+    {
+        jdk.internal.jimage.BasicImageReader this;
+        java.nio.file.Path $stack1;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        $stack1 = this.<jdk.internal.jimage.BasicImageReader: java.nio.file.Path imagePath>;
+
+        return $stack1;
+    }
+
+    public void close() throws java.io.IOException
+    {
+        jdk.internal.jimage.BasicImageReader this;
+        java.nio.channels.FileChannel $stack1, $stack2;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        $stack1 = this.<jdk.internal.jimage.BasicImageReader: java.nio.channels.FileChannel channel>;
+
+        if $stack1 == null goto label1;
+
+        $stack2 = this.<jdk.internal.jimage.BasicImageReader: java.nio.channels.FileChannel channel>;
+
+        virtualinvoke $stack2.<java.nio.channels.FileChannel: void close()>();
+
+     label1:
+        return;
+    }
+
+    public jdk.internal.jimage.ImageStringsReader getStrings()
+    {
+        jdk.internal.jimage.ImageStringsReader $stack1;
+        jdk.internal.jimage.BasicImageReader this;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        $stack1 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageStringsReader stringsReader>;
+
+        return $stack1;
+    }
+
+    public jdk.internal.jimage.ImageLocation findLocation(java.lang.String, java.lang.String)
+    {
+        jdk.internal.jimage.ImageLocation $stack11;
+        long[] $stack8;
+        jdk.internal.jimage.BasicImageReader this;
+        java.nio.IntBuffer $stack6;
+        int $stack5, $stack7;
+        java.lang.String module, name;
+        jdk.internal.jimage.ImageStringsReader $stack9, $stack12;
+        boolean $stack10;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        module := @parameter0: java.lang.String;
+
+        name := @parameter1: java.lang.String;
+
+        $stack5 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader: int getLocationIndex(java.lang.String,java.lang.String)>(module, name);
+
+        if $stack5 >= 0 goto label1;
+
+        return null;
+
+     label1:
+        $stack6 = this.<jdk.internal.jimage.BasicImageReader: java.nio.IntBuffer offsets>;
+
+        $stack7 = virtualinvoke $stack6.<java.nio.IntBuffer: int get(int)>($stack5);
+
+        $stack8 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader: long[] getAttributes(int)>($stack7);
+
+        $stack9 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageStringsReader stringsReader>;
+
+        $stack10 = staticinvoke <jdk.internal.jimage.ImageLocation: boolean verify(java.lang.String,java.lang.String,long[],jdk.internal.jimage.ImageStrings)>(module, name, $stack8, $stack9);
+
+        if $stack10 != 0 goto label2;
+
+        return null;
+
+     label2:
+        $stack11 = new jdk.internal.jimage.ImageLocation;
+
+        $stack12 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageStringsReader stringsReader>;
+
+        specialinvoke $stack11.<jdk.internal.jimage.ImageLocation: void <init>(long[],jdk.internal.jimage.ImageStrings)>($stack8, $stack12);
+
+        return $stack11;
+    }
+
+    public jdk.internal.jimage.ImageLocation findLocation(java.lang.String)
+    {
+        jdk.internal.jimage.ImageLocation $stack10;
+        long[] $stack7;
+        jdk.internal.jimage.BasicImageReader this;
+        java.nio.IntBuffer $stack5;
+        int $stack4, $stack6;
+        java.lang.String name;
+        jdk.internal.jimage.ImageStringsReader $stack8, $stack11;
+        boolean $stack9;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        name := @parameter0: java.lang.String;
+
+        $stack4 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader: int getLocationIndex(java.lang.String)>(name);
+
+        if $stack4 >= 0 goto label1;
+
+        return null;
+
+     label1:
+        $stack5 = this.<jdk.internal.jimage.BasicImageReader: java.nio.IntBuffer offsets>;
+
+        $stack6 = virtualinvoke $stack5.<java.nio.IntBuffer: int get(int)>($stack4);
+
+        $stack7 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader: long[] getAttributes(int)>($stack6);
+
+        $stack8 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageStringsReader stringsReader>;
+
+        $stack9 = staticinvoke <jdk.internal.jimage.ImageLocation: boolean verify(java.lang.String,long[],jdk.internal.jimage.ImageStrings)>(name, $stack7, $stack8);
+
+        if $stack9 != 0 goto label2;
+
+        return null;
+
+     label2:
+        $stack10 = new jdk.internal.jimage.ImageLocation;
+
+        $stack11 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageStringsReader stringsReader>;
+
+        specialinvoke $stack10.<jdk.internal.jimage.ImageLocation: void <init>(long[],jdk.internal.jimage.ImageStrings)>($stack7, $stack11);
+
+        return $stack10;
+    }
+
+    public boolean verifyLocation(java.lang.String, java.lang.String)
+    {
+        java.nio.ByteBuffer $stack9;
+        jdk.internal.jimage.BasicImageReader this;
+        java.nio.IntBuffer $stack6;
+        int $stack5, $stack7;
+        java.lang.String module, name;
+        jdk.internal.jimage.ImageStringsReader $stack8;
+        boolean $stack10;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        module := @parameter0: java.lang.String;
+
+        name := @parameter1: java.lang.String;
+
+        $stack5 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader: int getLocationIndex(java.lang.String,java.lang.String)>(module, name);
+
+        if $stack5 >= 0 goto label1;
+
+        return 0;
+
+     label1:
+        $stack6 = this.<jdk.internal.jimage.BasicImageReader: java.nio.IntBuffer offsets>;
+
+        $stack7 = virtualinvoke $stack6.<java.nio.IntBuffer: int get(int)>($stack5);
+
+        $stack9 = this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer locations>;
+
+        $stack8 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageStringsReader stringsReader>;
+
+        $stack10 = staticinvoke <jdk.internal.jimage.ImageLocation: boolean verify(java.lang.String,java.lang.String,java.nio.ByteBuffer,int,jdk.internal.jimage.ImageStrings)>(module, name, $stack9, $stack7, $stack8);
+
+        return $stack10;
+    }
+
+    public int getLocationIndex(java.lang.String)
+    {
+        jdk.internal.jimage.ImageHeader $stack4;
+        jdk.internal.jimage.BasicImageReader this;
+        java.nio.IntBuffer $stack6;
+        int $stack5, $stack7, $stack8, $stack9, $stack10, $stack11, $stack12, $stack13, $i0;
+        java.lang.String name;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        name := @parameter0: java.lang.String;
+
+        $stack4 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageHeader header>;
+
+        $stack5 = virtualinvoke $stack4.<jdk.internal.jimage.ImageHeader: int getTableLength()>();
+
+        $stack6 = this.<jdk.internal.jimage.BasicImageReader: java.nio.IntBuffer redirect>;
+
+        $stack7 = staticinvoke <jdk.internal.jimage.ImageStringsReader: int hashCode(java.lang.String)>(name);
+
+        $stack8 = $stack7 % $stack5;
+
+        $stack9 = virtualinvoke $stack6.<java.nio.IntBuffer: int get(int)>($stack8);
+
+        if $stack9 >= 0 goto label1;
+
+        $stack12 = neg $stack9;
+
+        $stack13 = $stack12 - 1;
+
+        return $stack13;
+
+     label1:
+        if $stack9 <= 0 goto label2;
+
+        $stack10 = staticinvoke <jdk.internal.jimage.ImageStringsReader: int hashCode(java.lang.String,int)>(name, $stack9);
+
+        $stack11 = $stack10 % $stack5;
+
+        return $stack11;
+
+     label2:
+        $i0 = (int) -1;
+
+        return $i0;
+    }
+
+    private int getLocationIndex(java.lang.String, java.lang.String)
+    {
+        jdk.internal.jimage.ImageHeader $stack5;
+        jdk.internal.jimage.BasicImageReader this;
+        java.nio.IntBuffer $stack7;
+        int $stack6, $stack8, $stack9, $stack10, $stack11, $stack12, $stack13, $stack14, $i0;
+        java.lang.String module, name;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        module := @parameter0: java.lang.String;
+
+        name := @parameter1: java.lang.String;
+
+        $stack5 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageHeader header>;
+
+        $stack6 = virtualinvoke $stack5.<jdk.internal.jimage.ImageHeader: int getTableLength()>();
+
+        $stack7 = this.<jdk.internal.jimage.BasicImageReader: java.nio.IntBuffer redirect>;
+
+        $stack8 = staticinvoke <jdk.internal.jimage.ImageStringsReader: int hashCode(java.lang.String,java.lang.String)>(module, name);
+
+        $stack9 = $stack8 % $stack6;
+
+        $stack10 = virtualinvoke $stack7.<java.nio.IntBuffer: int get(int)>($stack9);
+
+        if $stack10 >= 0 goto label1;
+
+        $stack13 = neg $stack10;
+
+        $stack14 = $stack13 - 1;
+
+        return $stack14;
+
+     label1:
+        if $stack10 <= 0 goto label2;
+
+        $stack11 = staticinvoke <jdk.internal.jimage.ImageStringsReader: int hashCode(java.lang.String,java.lang.String,int)>(module, name, $stack10);
+
+        $stack12 = $stack11 % $stack6;
+
+        return $stack12;
+
+     label2:
+        $i0 = (int) -1;
+
+        return $i0;
+    }
+
+    public java.lang.String[] getEntryNames()
+    {
+        java.util.stream.IntStream $stack6, $stack8;
+        java.lang.Object[] $stack13;
+        java.lang.String[] $stack14;
+        java.util.function.IntPredicate $stack7;
+        java.util.stream.Stream $stack10, $stack11;
+        jdk.internal.jimage.BasicImageReader this;
+        java.nio.IntBuffer $stack2, $stack4;
+        int[] attributeOffsets;
+        int $stack3;
+        java.util.function.IntFunction $stack9, $stack12;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        $stack2 = this.<jdk.internal.jimage.BasicImageReader: java.nio.IntBuffer offsets>;
+
+        $stack3 = virtualinvoke $stack2.<java.nio.IntBuffer: int capacity()>();
+
+        attributeOffsets = newarray (int)[$stack3];
+
+        $stack4 = this.<jdk.internal.jimage.BasicImageReader: java.nio.IntBuffer offsets>;
+
+        virtualinvoke $stack4.<java.nio.IntBuffer: java.nio.IntBuffer get(int[])>(attributeOffsets);
+
+        $stack6 = staticinvoke <java.util.stream.IntStream: java.util.stream.IntStream of(int[])>(attributeOffsets);
+
+        $stack7 = staticinvoke <jdk.internal.jimage.BasicImageReader$lambda_getEntryNames_0__120: java.util.function.IntPredicate bootstrap$()>();
+
+        $stack8 = interfaceinvoke $stack6.<java.util.stream.IntStream: java.util.stream.IntStream filter(java.util.function.IntPredicate)>($stack7);
+
+        $stack9 = staticinvoke <jdk.internal.jimage.BasicImageReader$lambda_getEntryNames_1__121: java.util.function.IntFunction bootstrap$(jdk.internal.jimage.BasicImageReader)>(this);
+
+        $stack10 = interfaceinvoke $stack8.<java.util.stream.IntStream: java.util.stream.Stream mapToObj(java.util.function.IntFunction)>($stack9);
+
+        $stack11 = interfaceinvoke $stack10.<java.util.stream.Stream: java.util.stream.Stream sorted()>();
+
+        $stack12 = staticinvoke <jdk.internal.jimage.BasicImageReader$lambda_getEntryNames_2__122: java.util.function.IntFunction bootstrap$()>();
+
+        $stack13 = interfaceinvoke $stack11.<java.util.stream.Stream: java.lang.Object[] toArray(java.util.function.IntFunction)>($stack12);
+
+        $stack14 = (java.lang.String[]) $stack13;
+
+        return $stack14;
+    }
+
+    jdk.internal.jimage.ImageLocation getLocation(int)
+    {
+        int offset;
+        jdk.internal.jimage.ImageLocation $stack2;
+        jdk.internal.jimage.BasicImageReader this;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        offset := @parameter0: int;
+
+        $stack2 = staticinvoke <jdk.internal.jimage.ImageLocation: jdk.internal.jimage.ImageLocation readFrom(jdk.internal.jimage.BasicImageReader,int)>(this, offset);
+
+        return $stack2;
+    }
+
+    public long[] getAttributes(int)
+    {
+        java.lang.IndexOutOfBoundsException $stack2;
+        long[] $stack6;
+        jdk.internal.jimage.BasicImageReader this;
+        int offset, $stack4;
+        java.nio.ByteBuffer $stack3, $stack5;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        offset := @parameter0: int;
+
+        if offset < 0 goto label1;
+
+        $stack3 = this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer locations>;
+
+        $stack4 = virtualinvoke $stack3.<java.nio.ByteBuffer: int limit()>();
+
+        if offset < $stack4 goto label2;
+
+     label1:
+        $stack2 = new java.lang.IndexOutOfBoundsException;
+
+        specialinvoke $stack2.<java.lang.IndexOutOfBoundsException: void <init>(java.lang.String)>("offset");
+
+        throw $stack2;
+
+     label2:
+        $stack5 = this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer locations>;
+
+        $stack6 = staticinvoke <jdk.internal.jimage.ImageLocation: long[] decompress(java.nio.ByteBuffer,int)>($stack5, offset);
+
+        return $stack6;
+    }
+
+    public java.lang.String getString(int)
+    {
+        java.lang.IndexOutOfBoundsException $stack2;
+        jdk.internal.jimage.BasicImageReader this;
+        int offset, $stack4;
+        java.lang.String $stack6;
+        java.nio.ByteBuffer $stack3, $stack5;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        offset := @parameter0: int;
+
+        if offset < 0 goto label1;
+
+        $stack3 = this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer strings>;
+
+        $stack4 = virtualinvoke $stack3.<java.nio.ByteBuffer: int limit()>();
+
+        if offset < $stack4 goto label2;
+
+     label1:
+        $stack2 = new java.lang.IndexOutOfBoundsException;
+
+        specialinvoke $stack2.<java.lang.IndexOutOfBoundsException: void <init>(java.lang.String)>("offset");
+
+        throw $stack2;
+
+     label2:
+        $stack5 = this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer strings>;
+
+        $stack6 = staticinvoke <jdk.internal.jimage.ImageStringsReader: java.lang.String stringFromByteBuffer(java.nio.ByteBuffer,int)>($stack5, offset);
+
+        return $stack6;
+    }
+
+    public int match(int, java.lang.String, int)
+    {
+        java.lang.IndexOutOfBoundsException $stack4;
+        java.nio.ByteBuffer $stack5, $stack7;
+        jdk.internal.jimage.BasicImageReader this;
+        int offset, $stack6, stringOffset, $stack8;
+        java.lang.String string;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        offset := @parameter0: int;
+
+        string := @parameter1: java.lang.String;
+
+        stringOffset := @parameter2: int;
+
+        if offset < 0 goto label1;
+
+        $stack5 = this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer strings>;
+
+        $stack6 = virtualinvoke $stack5.<java.nio.ByteBuffer: int limit()>();
+
+        if offset < $stack6 goto label2;
+
+     label1:
+        $stack4 = new java.lang.IndexOutOfBoundsException;
+
+        specialinvoke $stack4.<java.lang.IndexOutOfBoundsException: void <init>(java.lang.String)>("offset");
+
+        throw $stack4;
+
+     label2:
+        $stack7 = this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer strings>;
+
+        $stack8 = staticinvoke <jdk.internal.jimage.ImageStringsReader: int stringFromByteBufferMatches(java.nio.ByteBuffer,int,java.lang.String,int)>($stack7, offset, string, stringOffset);
+
+        return $stack8;
+    }
+
+    private byte[] getBufferBytes(java.nio.ByteBuffer)
+    {
+        byte[] bytes;
+        jdk.internal.jimage.BasicImageReader this;
+        int $stack4;
+        java.nio.ByteBuffer buffer;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        buffer := @parameter0: java.nio.ByteBuffer;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(buffer);
+
+        $stack4 = virtualinvoke buffer.<java.nio.ByteBuffer: int limit()>();
+
+        bytes = newarray (byte)[$stack4];
+
+        virtualinvoke buffer.<java.nio.ByteBuffer: java.nio.ByteBuffer get(byte[])>(bytes);
+
+        return bytes;
+    }
+
+    private java.nio.ByteBuffer readBuffer(long, long)
+    {
+        java.lang.IndexOutOfBoundsException $u1, $u3;
+        java.nio.ByteBuffer $stack24, $stack41, $stack42;
+        byte $stack8, $stack14, $stack15, $stack21, $stack29;
+        java.lang.InternalError $u4;
+        boolean $stack22;
+        java.nio.ByteOrder $stack43;
+        java.lang.StringBuilder $stack11, $stack12, $stack18, $stack19, $stack32, $stack33, $stack34, $stack35, $stack36, $u0, $u2, $u6;
+        long offset, size, $stack28;
+        int $stack26, $stack39, $stack40, $i0, $i1, $i2, $i3;
+        java.lang.String $stack13, $stack20, $stack37;
+        java.io.IOException $stack49;
+        java.lang.RuntimeException $u5, $u7;
+        jdk.internal.jimage.BasicImageReader this;
+        java.nio.channels.FileChannel $stack23, $stack25;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        offset := @parameter0: long;
+
+        size := @parameter1: long;
+
+        $stack8 = offset cmp 0L;
+
+        $i0 = (int) $stack8;
+
+        if $i0 < 0 goto label01;
+
+        $stack14 = 2147483647L cmp offset;
+
+        $i1 = (int) $stack14;
+
+        if $i1 > 0 goto label02;
+
+     label01:
+        $u1 = new java.lang.IndexOutOfBoundsException;
+
+        $u0 = new java.lang.StringBuilder;
+
+        specialinvoke $u0.<java.lang.StringBuilder: void <init>()>();
+
+        $stack11 = virtualinvoke $u0.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Bad offset: ");
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(long)>(offset);
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u1.<java.lang.IndexOutOfBoundsException: void <init>(java.lang.String)>($stack13);
+
+        throw $u1;
+
+     label02:
+        $stack15 = size cmp 0L;
+
+        $i2 = (int) $stack15;
+
+        if $i2 < 0 goto label03;
+
+        $stack21 = 2147483647L cmp size;
+
+        $i3 = (int) $stack21;
+
+        if $i3 > 0 goto label04;
+
+     label03:
+        $u3 = new java.lang.IndexOutOfBoundsException;
+
+        $u2 = new java.lang.StringBuilder;
+
+        specialinvoke $u2.<java.lang.StringBuilder: void <init>()>();
+
+        $stack18 = virtualinvoke $u2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Bad size: ");
+
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(long)>(size);
+
+        $stack20 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u3.<java.lang.IndexOutOfBoundsException: void <init>(java.lang.String)>($stack20);
+
+        throw $u3;
+
+     label04:
+        $stack22 = <jdk.internal.jimage.BasicImageReader: boolean MAP_ALL>;
+
+        if $stack22 == 0 goto label05;
+
+        $stack41 = this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer memoryMap>;
+
+        $stack40 = (int) offset;
+
+        $stack39 = (int) size;
+
+        $stack42 = staticinvoke <jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer slice(java.nio.ByteBuffer,int,int)>($stack41, $stack40, $stack39);
+
+        $stack43 = <java.nio.ByteOrder: java.nio.ByteOrder BIG_ENDIAN>;
+
+        virtualinvoke $stack42.<java.nio.ByteBuffer: java.nio.ByteBuffer order(java.nio.ByteOrder)>($stack43);
+
+        return $stack42;
+
+     label05:
+        $stack23 = this.<jdk.internal.jimage.BasicImageReader: java.nio.channels.FileChannel channel>;
+
+        if $stack23 != null goto label06;
+
+        $u4 = new java.lang.InternalError;
+
+        specialinvoke $u4.<java.lang.InternalError: void <init>(java.lang.String)>("Image file channel not open");
+
+        throw $u4;
+
+     label06:
+        $stack24 = staticinvoke <jdk.internal.jimage.ImageBufferCache: java.nio.ByteBuffer getBuffer(long)>(size);
+
+     label07:
+        $stack25 = this.<jdk.internal.jimage.BasicImageReader: java.nio.channels.FileChannel channel>;
+
+        $stack26 = virtualinvoke $stack25.<java.nio.channels.FileChannel: int read(java.nio.ByteBuffer,long)>($stack24, offset);
+
+        virtualinvoke $stack24.<java.nio.ByteBuffer: java.nio.ByteBuffer rewind()>();
+
+     label08:
+        goto label10;
+
+     label09:
+        $stack49 := @caughtexception;
+
+        staticinvoke <jdk.internal.jimage.ImageBufferCache: void releaseBuffer(java.nio.ByteBuffer)>($stack24);
+
+        $u5 = new java.lang.RuntimeException;
+
+        specialinvoke $u5.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack49);
+
+        throw $u5;
+
+     label10:
+        $stack28 = (long) $stack26;
+
+        $stack29 = $stack28 cmp size;
+
+        if $stack29 == 0 goto label11;
+
+        staticinvoke <jdk.internal.jimage.ImageBufferCache: void releaseBuffer(java.nio.ByteBuffer)>($stack24);
+
+        $u7 = new java.lang.RuntimeException;
+
+        $u6 = new java.lang.StringBuilder;
+
+        specialinvoke $u6.<java.lang.StringBuilder: void <init>()>();
+
+        $stack32 = virtualinvoke $u6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Short read: ");
+
+        $stack33 = virtualinvoke $stack32.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack26);
+
+        $stack34 = virtualinvoke $stack33.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" instead of ");
+
+        $stack35 = virtualinvoke $stack34.<java.lang.StringBuilder: java.lang.StringBuilder append(long)>(size);
+
+        $stack36 = virtualinvoke $stack35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" bytes");
+
+        $stack37 = virtualinvoke $stack36.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u7.<java.lang.RuntimeException: void <init>(java.lang.String)>($stack37);
+
+        throw $u7;
+
+     label11:
+        return $stack24;
+
+        catch java.io.IOException from label07 to label08 with label09;
+    }
+
+    public byte[] getResource(java.lang.String)
+    {
+        jdk.internal.jimage.ImageLocation $stack4;
+        byte[] $stack5;
+        jdk.internal.jimage.BasicImageReader this;
+        java.lang.String name;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        name := @parameter0: java.lang.String;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(name);
+
+        $stack4 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageLocation findLocation(java.lang.String)>(name);
+
+        if $stack4 == null goto label1;
+
+        $stack5 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader: byte[] getResource(jdk.internal.jimage.ImageLocation)>($stack4);
+
+        goto label2;
+
+     label1:
+        $stack5 = null;
+
+     label2:
+        return $stack5;
+    }
+
+    public byte[] getResource(jdk.internal.jimage.ImageLocation)
+    {
+        jdk.internal.jimage.ImageLocation loc;
+        byte[] $stack5;
+        jdk.internal.jimage.BasicImageReader this;
+        java.nio.ByteBuffer $stack4;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        loc := @parameter0: jdk.internal.jimage.ImageLocation;
+
+        $stack4 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer getResourceBuffer(jdk.internal.jimage.ImageLocation)>(loc);
+
+        if $stack4 == null goto label1;
+
+        $stack5 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader: byte[] getBufferBytes(java.nio.ByteBuffer)>($stack4);
+
+        staticinvoke <jdk.internal.jimage.ImageBufferCache: void releaseBuffer(java.nio.ByteBuffer)>($stack4);
+
+        return $stack5;
+
+     label1:
+        return null;
+    }
+
+    public java.nio.ByteBuffer getResourceBuffer(jdk.internal.jimage.ImageLocation)
+    {
+        byte[] $stack33, $stack37;
+        java.lang.IndexOutOfBoundsException $u1, $u3;
+        java.nio.ByteBuffer $stack32, $stack38, $stack39;
+        byte $stack17, $stack23, $stack24, $stack30, $stack31;
+        jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider $stack36;
+        jdk.internal.jimage.ImageLocation loc;
+        jdk.internal.jimage.decompressor.Decompressor $stack34;
+        java.nio.ByteOrder $stack35;
+        java.lang.StringBuilder $stack20, $stack21, $stack27, $stack28, $u0, $u2;
+        long $stack13, $stack14, offset, $stack15, $stack16;
+        int $i0, $i1, $i2, $i3;
+        java.lang.String $stack22, $stack29;
+        java.io.IOException $stack44;
+        java.lang.RuntimeException $u4;
+        jdk.internal.jimage.BasicImageReader this;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        loc := @parameter0: jdk.internal.jimage.ImageLocation;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(loc);
+
+        $stack13 = virtualinvoke loc.<jdk.internal.jimage.ImageLocation: long getContentOffset()>();
+
+        $stack14 = this.<jdk.internal.jimage.BasicImageReader: long indexSize>;
+
+        offset = $stack13 + $stack14;
+
+        $stack15 = virtualinvoke loc.<jdk.internal.jimage.ImageLocation: long getCompressedSize()>();
+
+        $stack16 = virtualinvoke loc.<jdk.internal.jimage.ImageLocation: long getUncompressedSize()>();
+
+        $stack17 = $stack15 cmp 0L;
+
+        $i0 = (int) $stack17;
+
+        if $i0 < 0 goto label01;
+
+        $stack23 = 2147483647L cmp $stack15;
+
+        $i1 = (int) $stack23;
+
+        if $i1 >= 0 goto label02;
+
+     label01:
+        $u1 = new java.lang.IndexOutOfBoundsException;
+
+        $u0 = new java.lang.StringBuilder;
+
+        specialinvoke $u0.<java.lang.StringBuilder: void <init>()>();
+
+        $stack20 = virtualinvoke $u0.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Bad compressed size: ");
+
+        $stack21 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.StringBuilder append(long)>($stack15);
+
+        $stack22 = virtualinvoke $stack21.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u1.<java.lang.IndexOutOfBoundsException: void <init>(java.lang.String)>($stack22);
+
+        throw $u1;
+
+     label02:
+        $stack24 = $stack16 cmp 0L;
+
+        $i2 = (int) $stack24;
+
+        if $i2 < 0 goto label03;
+
+        $stack30 = 2147483647L cmp $stack16;
+
+        $i3 = (int) $stack30;
+
+        if $i3 >= 0 goto label04;
+
+     label03:
+        $u3 = new java.lang.IndexOutOfBoundsException;
+
+        $u2 = new java.lang.StringBuilder;
+
+        specialinvoke $u2.<java.lang.StringBuilder: void <init>()>();
+
+        $stack27 = virtualinvoke $u2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Bad uncompressed size: ");
+
+        $stack28 = virtualinvoke $stack27.<java.lang.StringBuilder: java.lang.StringBuilder append(long)>($stack16);
+
+        $stack29 = virtualinvoke $stack28.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u3.<java.lang.IndexOutOfBoundsException: void <init>(java.lang.String)>($stack29);
+
+        throw $u3;
+
+     label04:
+        $stack31 = $stack15 cmp 0L;
+
+        if $stack31 != 0 goto label05;
+
+        $stack39 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer readBuffer(long,long)>(offset, $stack16);
+
+        return $stack39;
+
+     label05:
+        $stack32 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteBuffer readBuffer(long,long)>(offset, $stack15);
+
+        if $stack32 == null goto label10;
+
+        $stack33 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader: byte[] getBufferBytes(java.nio.ByteBuffer)>($stack32);
+
+        staticinvoke <jdk.internal.jimage.ImageBufferCache: void releaseBuffer(java.nio.ByteBuffer)>($stack32);
+
+     label06:
+        $stack34 = this.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.decompressor.Decompressor decompressor>;
+
+        $stack35 = this.<jdk.internal.jimage.BasicImageReader: java.nio.ByteOrder byteOrder>;
+
+        $stack36 = staticinvoke <jdk.internal.jimage.BasicImageReader$lambda_getResourceBuffer_3__123: jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider bootstrap$(jdk.internal.jimage.BasicImageReader)>(this);
+
+        $stack37 = virtualinvoke $stack34.<jdk.internal.jimage.decompressor.Decompressor: byte[] decompressResource(java.nio.ByteOrder,jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider,byte[])>($stack35, $stack36, $stack33);
+
+     label07:
+        goto label09;
+
+     label08:
+        $stack44 := @caughtexception;
+
+        $u4 = new java.lang.RuntimeException;
+
+        specialinvoke $u4.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack44);
+
+        throw $u4;
+
+     label09:
+        $stack38 = staticinvoke <java.nio.ByteBuffer: java.nio.ByteBuffer wrap(byte[])>($stack37);
+
+        return $stack38;
+
+     label10:
+        return null;
+
+        catch java.io.IOException from label06 to label07 with label08;
+    }
+
+    public java.io.InputStream getResourceStream(jdk.internal.jimage.ImageLocation)
+    {
+        jdk.internal.jimage.ImageLocation loc;
+        byte[] $stack4;
+        java.io.ByteArrayInputStream $stack5;
+        jdk.internal.jimage.BasicImageReader this;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        loc := @parameter0: jdk.internal.jimage.ImageLocation;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(loc);
+
+        $stack4 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader: byte[] getResource(jdk.internal.jimage.ImageLocation)>(loc);
+
+        $stack5 = new java.io.ByteArrayInputStream;
+
+        specialinvoke $stack5.<java.io.ByteArrayInputStream: void <init>(byte[])>($stack4);
+
+        return $stack5;
+    }
+
+    private java.lang.String lambda$getResourceBuffer$3(int)
+    {
+        int strOffset;
+        java.lang.String $stack2;
+        jdk.internal.jimage.BasicImageReader this;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        strOffset := @parameter0: int;
+
+        $stack2 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader: java.lang.String getString(int)>(strOffset);
+
+        return $stack2;
+    }
+
+    public static java.lang.String[] lambda$getEntryNames$2(int)
+    {
+        int x$0;
+        java.lang.String[] $stack1;
+
+        x$0 := @parameter0: int;
+
+        $stack1 = newarray (java.lang.String)[x$0];
+
+        return $stack1;
+    }
+
+    private java.lang.String lambda$getEntryNames$1(int)
+    {
+        jdk.internal.jimage.ImageLocation $stack2;
+        jdk.internal.jimage.BasicImageReader this;
+        int o;
+        java.lang.String $stack3;
+
+        this := @this: jdk.internal.jimage.BasicImageReader;
+
+        o := @parameter0: int;
+
+        $stack2 = staticinvoke <jdk.internal.jimage.ImageLocation: jdk.internal.jimage.ImageLocation readFrom(jdk.internal.jimage.BasicImageReader,int)>(this, o);
+
+        $stack3 = virtualinvoke $stack2.<jdk.internal.jimage.ImageLocation: java.lang.String getFullName()>();
+
+        return $stack3;
+    }
+
+    public static boolean lambda$getEntryNames$0(int)
+    {
+        int o;
+        boolean $stack1;
+
+        o := @parameter0: int;
+
+        if o == 0 goto label1;
+
+        $stack1 = 1;
+
+        goto label2;
+
+     label1:
+        $stack1 = 0;
+
+     label2:
+        return $stack1;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.String $stack6;
+        boolean $stack0, $stack1, $stack2, $stack3;
+
+        $stack0 = staticinvoke <jdk.internal.jimage.BasicImageReader: boolean isSystemProperty(java.lang.String,java.lang.String,java.lang.String)>("sun.arch.data.model", "64", "32");
+
+        <jdk.internal.jimage.BasicImageReader: boolean IS_64_BIT> = $stack0;
+
+        $stack1 = staticinvoke <jdk.internal.jimage.BasicImageReader: boolean isSystemProperty(java.lang.String,java.lang.String,java.lang.String)>("jdk.image.use.jvm.map", "true", "true");
+
+        <jdk.internal.jimage.BasicImageReader: boolean USE_JVM_MAP> = $stack1;
+
+        $stack2 = <jdk.internal.jimage.BasicImageReader: boolean IS_64_BIT>;
+
+        if $stack2 == 0 goto label1;
+
+        $stack6 = "true";
+
+        goto label2;
+
+     label1:
+        $stack6 = "false";
+
+     label2:
+        $stack3 = staticinvoke <jdk.internal.jimage.BasicImageReader: boolean isSystemProperty(java.lang.String,java.lang.String,java.lang.String)>("jdk.image.map.all", "true", $stack6);
+
+        <jdk.internal.jimage.BasicImageReader: boolean MAP_ALL> = $stack3;
+
+        return;
+    }
+}

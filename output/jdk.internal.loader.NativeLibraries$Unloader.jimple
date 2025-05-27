@@ -1,0 +1,212 @@
+class jdk.internal.loader.NativeLibraries$Unloader extends java.lang.Object implements java.lang.Runnable
+{
+    static final jdk.internal.loader.NativeLibraries$NativeLibraryImpl UNLOADER;
+    final java.lang.String name;
+    final long handle;
+    final boolean isBuiltin;
+    final boolean isJNI;
+    static final boolean $assertionsDisabled;
+
+    void <init>(java.lang.String, long, boolean, boolean)
+    {
+        long handle;
+        java.lang.AssertionError $stack15;
+        java.lang.IllegalArgumentException $stack8;
+        byte $stack7;
+        jdk.internal.loader.NativeLibraries$Unloader this;
+        java.lang.StringBuilder $stack9, $stack10, $stack11;
+        java.lang.String name, $stack12;
+        boolean $stack6, isBuiltin, isJNI;
+
+        this := @this: jdk.internal.loader.NativeLibraries$Unloader;
+
+        name := @parameter0: java.lang.String;
+
+        handle := @parameter1: long;
+
+        isBuiltin := @parameter2: boolean;
+
+        isJNI := @parameter3: boolean;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack6 = <jdk.internal.loader.NativeLibraries$Unloader: boolean $assertionsDisabled>;
+
+        if $stack6 != 0 goto label1;
+
+        if isBuiltin == 0 goto label1;
+
+        if isJNI != 0 goto label1;
+
+        $stack15 = new java.lang.AssertionError;
+
+        specialinvoke $stack15.<java.lang.AssertionError: void <init>(java.lang.Object)>("a builtin native library must be JNI library");
+
+        throw $stack15;
+
+     label1:
+        $stack7 = handle cmp 0L;
+
+        if $stack7 != 0 goto label2;
+
+        $stack8 = new java.lang.IllegalArgumentException;
+
+        $stack9 = new java.lang.StringBuilder;
+
+        specialinvoke $stack9.<java.lang.StringBuilder: void <init>()>();
+
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Invalid handle for native library ");
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack8.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack12);
+
+        throw $stack8;
+
+     label2:
+        this.<jdk.internal.loader.NativeLibraries$Unloader: java.lang.String name> = name;
+
+        this.<jdk.internal.loader.NativeLibraries$Unloader: long handle> = handle;
+
+        this.<jdk.internal.loader.NativeLibraries$Unloader: boolean isBuiltin> = isBuiltin;
+
+        this.<jdk.internal.loader.NativeLibraries$Unloader: boolean isJNI> = isJNI;
+
+        return;
+    }
+
+    public void run()
+    {
+        java.lang.Throwable $stack23, $stack25;
+        java.lang.IllegalStateException $stack17;
+        long $stack10;
+        java.util.Deque $stack9, $stack14, $stack26;
+        jdk.internal.loader.NativeLibraries$Unloader this;
+        java.lang.String $stack5, $stack13, $stack19, $stack22;
+        boolean $stack7, $stack11, $stack12;
+        java.util.Set $stack4, $stack6;
+        java.lang.StringBuilder $stack18, $stack20, $stack21;
+        jdk.internal.loader.NativeLibraries$NativeLibraryImpl $stack8;
+
+        this := @this: jdk.internal.loader.NativeLibraries$Unloader;
+
+        $stack4 = <jdk.internal.loader.NativeLibraries: java.util.Set loadedLibraryNames>;
+
+        entermonitor $stack4;
+
+     label01:
+        $stack6 = <jdk.internal.loader.NativeLibraries: java.util.Set loadedLibraryNames>;
+
+        $stack5 = this.<jdk.internal.loader.NativeLibraries$Unloader: java.lang.String name>;
+
+        $stack7 = interfaceinvoke $stack6.<java.util.Set: boolean remove(java.lang.Object)>($stack5);
+
+        if $stack7 != 0 goto label02;
+
+        $stack17 = new java.lang.IllegalStateException;
+
+        $stack18 = new java.lang.StringBuilder;
+
+        specialinvoke $stack18.<java.lang.StringBuilder: void <init>()>();
+
+        $stack19 = this.<jdk.internal.loader.NativeLibraries$Unloader: java.lang.String name>;
+
+        $stack20 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack19);
+
+        $stack21 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" has already been unloaded");
+
+        $stack22 = virtualinvoke $stack21.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack17.<java.lang.IllegalStateException: void <init>(java.lang.String)>($stack22);
+
+        throw $stack17;
+
+     label02:
+        $stack9 = <jdk.internal.loader.NativeLibraries: java.util.Deque nativeLibraryContext>;
+
+        $stack8 = <jdk.internal.loader.NativeLibraries$Unloader: jdk.internal.loader.NativeLibraries$NativeLibraryImpl UNLOADER>;
+
+        interfaceinvoke $stack9.<java.util.Deque: void push(java.lang.Object)>($stack8);
+
+     label03:
+        $stack13 = this.<jdk.internal.loader.NativeLibraries$Unloader: java.lang.String name>;
+
+        $stack12 = this.<jdk.internal.loader.NativeLibraries$Unloader: boolean isBuiltin>;
+
+        $stack11 = this.<jdk.internal.loader.NativeLibraries$Unloader: boolean isJNI>;
+
+        $stack10 = this.<jdk.internal.loader.NativeLibraries$Unloader: long handle>;
+
+        staticinvoke <jdk.internal.loader.NativeLibraries: void unload(java.lang.String,boolean,boolean,long)>($stack13, $stack12, $stack11, $stack10);
+
+     label04:
+        $stack14 = <jdk.internal.loader.NativeLibraries: java.util.Deque nativeLibraryContext>;
+
+        interfaceinvoke $stack14.<java.util.Deque: java.lang.Object pop()>();
+
+        goto label06;
+
+     label05:
+        $stack25 := @caughtexception;
+
+        $stack26 = <jdk.internal.loader.NativeLibraries: java.util.Deque nativeLibraryContext>;
+
+        interfaceinvoke $stack26.<java.util.Deque: java.lang.Object pop()>();
+
+        throw $stack25;
+
+     label06:
+        exitmonitor $stack4;
+
+     label07:
+        goto label10;
+
+     label08:
+        $stack23 := @caughtexception;
+
+        exitmonitor $stack4;
+
+     label09:
+        throw $stack23;
+
+     label10:
+        return;
+
+        catch java.lang.Throwable from label03 to label04 with label05;
+        catch java.lang.Throwable from label01 to label07 with label08;
+        catch java.lang.Throwable from label08 to label09 with label08;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.Class $stack0;
+        jdk.internal.loader.NativeLibraries$NativeLibraryImpl $stack2;
+        boolean $stack1, $stack3;
+
+        $stack0 = class "Ljdk/internal/loader/NativeLibraries;";
+
+        $stack1 = virtualinvoke $stack0.<java.lang.Class: boolean desiredAssertionStatus()>();
+
+        if $stack1 != 0 goto label1;
+
+        $stack3 = 1;
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        <jdk.internal.loader.NativeLibraries$Unloader: boolean $assertionsDisabled> = $stack3;
+
+        $stack2 = new jdk.internal.loader.NativeLibraries$NativeLibraryImpl;
+
+        specialinvoke $stack2.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl: void <init>(java.lang.Class,java.lang.String,boolean,boolean)>(null, "dummy", 0, 0);
+
+        <jdk.internal.loader.NativeLibraries$Unloader: jdk.internal.loader.NativeLibraries$NativeLibraryImpl UNLOADER> = $stack2;
+
+        return;
+    }
+}

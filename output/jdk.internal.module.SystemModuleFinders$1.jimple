@@ -1,0 +1,82 @@
+class jdk.internal.module.SystemModuleFinders$1 extends java.lang.Object implements java.lang.module.ModuleFinder
+{
+    final java.lang.module.ModuleFinder val$f;
+
+    void <init>(java.lang.module.ModuleFinder)
+    {
+        java.lang.module.ModuleFinder l1;
+        jdk.internal.module.SystemModuleFinders$1 this;
+
+        this := @this: jdk.internal.module.SystemModuleFinders$1;
+
+        l1 := @parameter0: java.lang.module.ModuleFinder;
+
+        this.<jdk.internal.module.SystemModuleFinders$1: java.lang.module.ModuleFinder val$f> = l1;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public java.util.Optional find(java.lang.String)
+    {
+        java.lang.module.ModuleFinder $stack3;
+        jdk.internal.module.SystemModuleFinders$1 this;
+        java.util.Optional $stack6;
+        java.lang.Object $stack5;
+        java.lang.String name;
+        java.security.PrivilegedAction $stack4;
+
+        this := @this: jdk.internal.module.SystemModuleFinders$1;
+
+        name := @parameter0: java.lang.String;
+
+        $stack3 = this.<jdk.internal.module.SystemModuleFinders$1: java.lang.module.ModuleFinder val$f>;
+
+        $stack4 = staticinvoke <jdk.internal.module.SystemModuleFinders$1$lambda_find_0__112: java.security.PrivilegedAction bootstrap$(java.lang.module.ModuleFinder,java.lang.String)>($stack3, name);
+
+        $stack5 = staticinvoke <java.security.AccessController: java.lang.Object doPrivileged(java.security.PrivilegedAction)>($stack4);
+
+        $stack6 = (java.util.Optional) $stack5;
+
+        return $stack6;
+    }
+
+    public java.util.Set findAll()
+    {
+        java.lang.module.ModuleFinder $stack2;
+        jdk.internal.module.SystemModuleFinders$1 this;
+        java.util.Set $stack6;
+        java.lang.Object $stack5;
+        java.security.PrivilegedAction $stack4;
+
+        this := @this: jdk.internal.module.SystemModuleFinders$1;
+
+        $stack2 = this.<jdk.internal.module.SystemModuleFinders$1: java.lang.module.ModuleFinder val$f>;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>($stack2);
+
+        $stack4 = staticinvoke <jdk.internal.module.SystemModuleFinders$1$findAll__113: java.security.PrivilegedAction bootstrap$(java.lang.module.ModuleFinder)>($stack2);
+
+        $stack5 = staticinvoke <java.security.AccessController: java.lang.Object doPrivileged(java.security.PrivilegedAction)>($stack4);
+
+        $stack6 = (java.util.Set) $stack5;
+
+        return $stack6;
+    }
+
+    public static java.util.Optional lambda$find$0(java.lang.module.ModuleFinder, java.lang.String)
+    {
+        java.util.Optional $stack2;
+        java.lang.String name;
+        java.lang.module.ModuleFinder f;
+
+        f := @parameter0: java.lang.module.ModuleFinder;
+
+        name := @parameter1: java.lang.String;
+
+        $stack2 = interfaceinvoke f.<java.lang.module.ModuleFinder: java.util.Optional find(java.lang.String)>(name);
+
+        return $stack2;
+    }
+}

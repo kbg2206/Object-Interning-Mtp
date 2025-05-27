@@ -1,0 +1,65 @@
+class jdk.internal.ref.Cleaner$1 extends java.lang.Object implements java.security.PrivilegedAction
+{
+    final java.lang.Throwable val$x;
+    final jdk.internal.ref.Cleaner this$0;
+
+    void <init>(jdk.internal.ref.Cleaner, java.lang.Throwable)
+    {
+        java.lang.Throwable l2;
+        jdk.internal.ref.Cleaner$1 this;
+        jdk.internal.ref.Cleaner this$0;
+
+        this := @this: jdk.internal.ref.Cleaner$1;
+
+        this$0 := @parameter0: jdk.internal.ref.Cleaner;
+
+        l2 := @parameter1: java.lang.Throwable;
+
+        this.<jdk.internal.ref.Cleaner$1: jdk.internal.ref.Cleaner this$0> = this$0;
+
+        this.<jdk.internal.ref.Cleaner$1: java.lang.Throwable val$x> = l2;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.Void run()
+    {
+        java.io.PrintStream $stack1;
+        java.lang.Throwable $stack3;
+        jdk.internal.ref.Cleaner$1 this;
+        java.lang.Error $stack2;
+
+        this := @this: jdk.internal.ref.Cleaner$1;
+
+        $stack1 = <java.lang.System: java.io.PrintStream err>;
+
+        if $stack1 == null goto label1;
+
+        $stack2 = new java.lang.Error;
+
+        $stack3 = this.<jdk.internal.ref.Cleaner$1: java.lang.Throwable val$x>;
+
+        specialinvoke $stack2.<java.lang.Error: void <init>(java.lang.String,java.lang.Throwable)>("Cleaner terminated abnormally", $stack3);
+
+        virtualinvoke $stack2.<java.lang.Error: void printStackTrace()>();
+
+     label1:
+        staticinvoke <java.lang.System: void exit(int)>(1);
+
+        return null;
+    }
+
+    public volatile java.lang.Object run()
+    {
+        java.lang.Void $stack1;
+        jdk.internal.ref.Cleaner$1 this;
+
+        this := @this: jdk.internal.ref.Cleaner$1;
+
+        $stack1 = virtualinvoke this.<jdk.internal.ref.Cleaner$1: java.lang.Void run()>();
+
+        return $stack1;
+    }
+}

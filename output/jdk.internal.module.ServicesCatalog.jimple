@@ -1,0 +1,321 @@
+public final class jdk.internal.module.ServicesCatalog extends java.lang.Object
+{
+    private final java.util.Map map;
+    private static final jdk.internal.loader.ClassLoaderValue CLV;
+
+    private void <init>()
+    {
+        java.util.concurrent.ConcurrentHashMap $stack1;
+        jdk.internal.module.ServicesCatalog this;
+
+        this := @this: jdk.internal.module.ServicesCatalog;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = new java.util.concurrent.ConcurrentHashMap;
+
+        specialinvoke $stack1.<java.util.concurrent.ConcurrentHashMap: void <init>(int)>(32);
+
+        this.<jdk.internal.module.ServicesCatalog: java.util.Map map> = $stack1;
+
+        return;
+    }
+
+    public static jdk.internal.module.ServicesCatalog create()
+    {
+        jdk.internal.module.ServicesCatalog $stack0;
+
+        $stack0 = new jdk.internal.module.ServicesCatalog;
+
+        specialinvoke $stack0.<jdk.internal.module.ServicesCatalog: void <init>()>();
+
+        return $stack0;
+    }
+
+    private transient void addProviders(java.lang.String, jdk.internal.module.ServicesCatalog$ServiceProvider[])
+    {
+        jdk.internal.module.ServicesCatalog$ServiceProvider $stack10;
+        jdk.internal.module.ServicesCatalog$ServiceProvider[] providers;
+        jdk.internal.module.ServicesCatalog this;
+        java.util.List $stack8, prev, list;
+        java.util.Map $stack5, $stack13;
+        int $stack7;
+        java.lang.Object $stack6, $stack14;
+        java.lang.String service;
+        java.util.concurrent.CopyOnWriteArrayList $stack12;
+
+        this := @this: jdk.internal.module.ServicesCatalog;
+
+        service := @parameter0: java.lang.String;
+
+        providers := @parameter1: jdk.internal.module.ServicesCatalog$ServiceProvider[];
+
+        $stack5 = this.<jdk.internal.module.ServicesCatalog: java.util.Map map>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.Map: java.lang.Object get(java.lang.Object)>(service);
+
+        list = (java.util.List) $stack6;
+
+        if list != null goto label2;
+
+        $stack12 = new java.util.concurrent.CopyOnWriteArrayList;
+
+        specialinvoke $stack12.<java.util.concurrent.CopyOnWriteArrayList: void <init>(java.lang.Object[])>(providers);
+
+        $stack13 = this.<jdk.internal.module.ServicesCatalog: java.util.Map map>;
+
+        $stack14 = interfaceinvoke $stack13.<java.util.Map: java.lang.Object putIfAbsent(java.lang.Object,java.lang.Object)>(service, $stack12);
+
+        prev = (java.util.List) $stack14;
+
+        if prev == null goto label1;
+
+        interfaceinvoke prev.<java.util.List: boolean addAll(java.util.Collection)>($stack12);
+
+     label1:
+        goto label4;
+
+     label2:
+        $stack7 = lengthof providers;
+
+        if $stack7 != 1 goto label3;
+
+        $stack10 = providers[0];
+
+        interfaceinvoke list.<java.util.List: boolean add(java.lang.Object)>($stack10);
+
+        goto label4;
+
+     label3:
+        $stack8 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>(providers);
+
+        interfaceinvoke list.<java.util.List: boolean addAll(java.util.Collection)>($stack8);
+
+     label4:
+        return;
+    }
+
+    public void register(java.lang.Module)
+    {
+        jdk.internal.module.ServicesCatalog$ServiceProvider $stack19;
+        java.lang.module.ModuleDescriptor $stack10;
+        int $stack17, i;
+        java.lang.String $stack15, $stack21;
+        boolean $stack13;
+        java.util.Iterator $stack12;
+        java.lang.module.ModuleDescriptor$Provides provides;
+        java.util.Set $stack11;
+        jdk.internal.module.ServicesCatalog$ServiceProvider[] providers;
+        jdk.internal.module.ServicesCatalog this;
+        java.util.List $stack16;
+        java.lang.Module module;
+        java.lang.Object $stack14, $stack20;
+
+        this := @this: jdk.internal.module.ServicesCatalog;
+
+        module := @parameter0: java.lang.Module;
+
+        $stack10 = virtualinvoke module.<java.lang.Module: java.lang.module.ModuleDescriptor getDescriptor()>();
+
+        $stack11 = virtualinvoke $stack10.<java.lang.module.ModuleDescriptor: java.util.Set provides()>();
+
+        $stack12 = interfaceinvoke $stack11.<java.util.Set: java.util.Iterator iterator()>();
+
+     label1:
+        $stack13 = interfaceinvoke $stack12.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack13 == 0 goto label4;
+
+        $stack14 = interfaceinvoke $stack12.<java.util.Iterator: java.lang.Object next()>();
+
+        provides = (java.lang.module.ModuleDescriptor$Provides) $stack14;
+
+        $stack15 = virtualinvoke provides.<java.lang.module.ModuleDescriptor$Provides: java.lang.String service()>();
+
+        $stack16 = virtualinvoke provides.<java.lang.module.ModuleDescriptor$Provides: java.util.List providers()>();
+
+        $stack17 = interfaceinvoke $stack16.<java.util.List: int size()>();
+
+        providers = newarray (jdk.internal.module.ServicesCatalog$ServiceProvider)[$stack17];
+
+        i = 0;
+
+     label2:
+        if i >= $stack17 goto label3;
+
+        $stack19 = new jdk.internal.module.ServicesCatalog$ServiceProvider;
+
+        $stack20 = interfaceinvoke $stack16.<java.util.List: java.lang.Object get(int)>(i);
+
+        $stack21 = (java.lang.String) $stack20;
+
+        specialinvoke $stack19.<jdk.internal.module.ServicesCatalog$ServiceProvider: void <init>(java.lang.Module,java.lang.String)>(module, $stack21);
+
+        providers[i] = $stack19;
+
+        i = i + 1;
+
+        goto label2;
+
+     label3:
+        virtualinvoke this.<jdk.internal.module.ServicesCatalog: void addProviders(java.lang.String,jdk.internal.module.ServicesCatalog$ServiceProvider[])>($stack15, providers);
+
+        goto label1;
+
+     label4:
+        return;
+    }
+
+    public void addProvider(java.lang.Module, java.lang.Class, java.lang.Class)
+    {
+        jdk.internal.module.ServicesCatalog$ServiceProvider $stack6;
+        jdk.internal.module.ServicesCatalog$ServiceProvider[] $stack5;
+        jdk.internal.module.ServicesCatalog this;
+        java.lang.Module module;
+        java.lang.Class service, impl;
+        java.lang.String $stack4, $stack8;
+
+        this := @this: jdk.internal.module.ServicesCatalog;
+
+        module := @parameter0: java.lang.Module;
+
+        service := @parameter1: java.lang.Class;
+
+        impl := @parameter2: java.lang.Class;
+
+        $stack4 = virtualinvoke service.<java.lang.Class: java.lang.String getName()>();
+
+        $stack5 = newarray (jdk.internal.module.ServicesCatalog$ServiceProvider)[1];
+
+        $stack6 = new jdk.internal.module.ServicesCatalog$ServiceProvider;
+
+        $stack8 = virtualinvoke impl.<java.lang.Class: java.lang.String getName()>();
+
+        specialinvoke $stack6.<jdk.internal.module.ServicesCatalog$ServiceProvider: void <init>(java.lang.Module,java.lang.String)>(module, $stack8);
+
+        $stack5[0] = $stack6;
+
+        virtualinvoke this.<jdk.internal.module.ServicesCatalog: void addProviders(java.lang.String,jdk.internal.module.ServicesCatalog$ServiceProvider[])>($stack4, $stack5);
+
+        return;
+    }
+
+    public java.util.List findServices(java.lang.String)
+    {
+        java.util.List $stack3, $stack5;
+        java.util.Map $stack2;
+        java.lang.Object $stack4;
+        java.lang.String service;
+        jdk.internal.module.ServicesCatalog this;
+
+        this := @this: jdk.internal.module.ServicesCatalog;
+
+        service := @parameter0: java.lang.String;
+
+        $stack2 = this.<jdk.internal.module.ServicesCatalog: java.util.Map map>;
+
+        $stack3 = staticinvoke <java.util.List: java.util.List of()>();
+
+        $stack4 = interfaceinvoke $stack2.<java.util.Map: java.lang.Object getOrDefault(java.lang.Object,java.lang.Object)>(service, $stack3);
+
+        $stack5 = (java.util.List) $stack4;
+
+        return $stack5;
+    }
+
+    public static jdk.internal.module.ServicesCatalog getServicesCatalogOrNull(java.lang.ClassLoader)
+    {
+        jdk.internal.loader.ClassLoaderValue $stack1;
+        java.lang.Object $stack2;
+        java.lang.ClassLoader loader;
+        jdk.internal.module.ServicesCatalog $stack3;
+
+        loader := @parameter0: java.lang.ClassLoader;
+
+        $stack1 = <jdk.internal.module.ServicesCatalog: jdk.internal.loader.ClassLoaderValue CLV>;
+
+        $stack2 = virtualinvoke $stack1.<jdk.internal.loader.ClassLoaderValue: java.lang.Object get(java.lang.ClassLoader)>(loader);
+
+        $stack3 = (jdk.internal.module.ServicesCatalog) $stack2;
+
+        return $stack3;
+    }
+
+    public static jdk.internal.module.ServicesCatalog getServicesCatalog(java.lang.ClassLoader)
+    {
+        jdk.internal.loader.ClassLoaderValue $stack3, $stack6;
+        jdk.internal.module.ServicesCatalog $stack5, previous, catalog;
+        java.lang.Object $stack4, $stack7;
+        java.lang.ClassLoader loader;
+
+        loader := @parameter0: java.lang.ClassLoader;
+
+        $stack3 = <jdk.internal.module.ServicesCatalog: jdk.internal.loader.ClassLoaderValue CLV>;
+
+        $stack4 = virtualinvoke $stack3.<jdk.internal.loader.ClassLoaderValue: java.lang.Object get(java.lang.ClassLoader)>(loader);
+
+        catalog = (jdk.internal.module.ServicesCatalog) $stack4;
+
+        if catalog != null goto label1;
+
+        $stack5 = staticinvoke <jdk.internal.module.ServicesCatalog: jdk.internal.module.ServicesCatalog create()>();
+
+        catalog = $stack5;
+
+        $stack6 = <jdk.internal.module.ServicesCatalog: jdk.internal.loader.ClassLoaderValue CLV>;
+
+        $stack7 = virtualinvoke $stack6.<jdk.internal.loader.ClassLoaderValue: java.lang.Object putIfAbsent(java.lang.ClassLoader,java.lang.Object)>(loader, $stack5);
+
+        previous = (jdk.internal.module.ServicesCatalog) $stack7;
+
+        if previous == null goto label1;
+
+        catalog = previous;
+
+     label1:
+        return catalog;
+    }
+
+    public static void putServicesCatalog(java.lang.ClassLoader, jdk.internal.module.ServicesCatalog)
+    {
+        jdk.internal.loader.ClassLoaderValue $stack3;
+        java.lang.InternalError $stack5;
+        java.lang.Object $stack4;
+        java.lang.ClassLoader loader;
+        jdk.internal.module.ServicesCatalog catalog, previous;
+
+        loader := @parameter0: java.lang.ClassLoader;
+
+        catalog := @parameter1: jdk.internal.module.ServicesCatalog;
+
+        $stack3 = <jdk.internal.module.ServicesCatalog: jdk.internal.loader.ClassLoaderValue CLV>;
+
+        $stack4 = virtualinvoke $stack3.<jdk.internal.loader.ClassLoaderValue: java.lang.Object putIfAbsent(java.lang.ClassLoader,java.lang.Object)>(loader, catalog);
+
+        previous = (jdk.internal.module.ServicesCatalog) $stack4;
+
+        if previous == null goto label1;
+
+        $stack5 = new java.lang.InternalError;
+
+        specialinvoke $stack5.<java.lang.InternalError: void <init>()>();
+
+        throw $stack5;
+
+     label1:
+        return;
+    }
+
+    static void <clinit>()
+    {
+        jdk.internal.loader.ClassLoaderValue $stack0;
+
+        $stack0 = new jdk.internal.loader.ClassLoaderValue;
+
+        specialinvoke $stack0.<jdk.internal.loader.ClassLoaderValue: void <init>()>();
+
+        <jdk.internal.module.ServicesCatalog: jdk.internal.loader.ClassLoaderValue CLV> = $stack0;
+
+        return;
+    }
+}

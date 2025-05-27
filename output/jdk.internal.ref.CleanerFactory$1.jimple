@@ -1,0 +1,29 @@
+class jdk.internal.ref.CleanerFactory$1 extends java.lang.Object implements java.util.concurrent.ThreadFactory
+{
+
+    void <init>()
+    {
+        jdk.internal.ref.CleanerFactory$1 this;
+
+        this := @this: jdk.internal.ref.CleanerFactory$1;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.Thread newThread(java.lang.Runnable)
+    {
+        jdk.internal.ref.CleanerFactory$1 this;
+        java.lang.Runnable r;
+        java.lang.Thread $stack2;
+
+        this := @this: jdk.internal.ref.CleanerFactory$1;
+
+        r := @parameter0: java.lang.Runnable;
+
+        $stack2 = staticinvoke <jdk.internal.misc.InnocuousThread: java.lang.Thread newSystemThread(java.lang.String,java.lang.Runnable,int)>("Common-Cleaner", r, 8);
+
+        return $stack2;
+    }
+}

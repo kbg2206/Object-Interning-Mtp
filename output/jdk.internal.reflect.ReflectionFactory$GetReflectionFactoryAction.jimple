@@ -1,0 +1,38 @@
+public final class jdk.internal.reflect.ReflectionFactory$GetReflectionFactoryAction extends java.lang.Object implements java.security.PrivilegedAction
+{
+
+    public void <init>()
+    {
+        jdk.internal.reflect.ReflectionFactory$GetReflectionFactoryAction this;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory$GetReflectionFactoryAction;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public jdk.internal.reflect.ReflectionFactory run()
+    {
+        jdk.internal.reflect.ReflectionFactory$GetReflectionFactoryAction this;
+        jdk.internal.reflect.ReflectionFactory $stack1;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory$GetReflectionFactoryAction;
+
+        $stack1 = staticinvoke <jdk.internal.reflect.ReflectionFactory: jdk.internal.reflect.ReflectionFactory getReflectionFactory()>();
+
+        return $stack1;
+    }
+
+    public volatile java.lang.Object run()
+    {
+        jdk.internal.reflect.ReflectionFactory$GetReflectionFactoryAction this;
+        jdk.internal.reflect.ReflectionFactory $stack1;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory$GetReflectionFactoryAction;
+
+        $stack1 = virtualinvoke this.<jdk.internal.reflect.ReflectionFactory$GetReflectionFactoryAction: jdk.internal.reflect.ReflectionFactory run()>();
+
+        return $stack1;
+    }
+}

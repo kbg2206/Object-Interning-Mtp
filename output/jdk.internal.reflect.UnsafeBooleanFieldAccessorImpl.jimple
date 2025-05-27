@@ -1,0 +1,365 @@
+class jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl extends jdk.internal.reflect.UnsafeFieldAccessorImpl
+{
+
+    void <init>(java.lang.reflect.Field)
+    {
+        java.lang.reflect.Field field;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        field := @parameter0: java.lang.reflect.Field;
+
+        specialinvoke this.<jdk.internal.reflect.UnsafeFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return;
+    }
+
+    public java.lang.Object get(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        java.lang.Boolean $stack3;
+        java.lang.Object obj;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+        boolean $stack2;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: boolean getBoolean(java.lang.Object)>(obj);
+
+        $stack3 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($stack2);
+
+        return $stack3;
+    }
+
+    public boolean getBoolean(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.misc.Unsafe $stack3;
+        java.lang.Object obj;
+        long $stack2;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+        boolean $stack4;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: void ensureObj(java.lang.Object)>(obj);
+
+        $stack3 = <jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: jdk.internal.misc.Unsafe unsafe>;
+
+        $stack2 = this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: long fieldOffset>;
+
+        $stack4 = virtualinvoke $stack3.<jdk.internal.misc.Unsafe: boolean getBoolean(java.lang.Object,long)>(obj, $stack2);
+
+        return $stack4;
+    }
+
+    public byte getByte(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        java.lang.Object obj;
+        java.lang.IllegalArgumentException $stack2;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: java.lang.IllegalArgumentException newGetByteIllegalArgumentException()>();
+
+        throw $stack2;
+    }
+
+    public char getChar(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        java.lang.Object obj;
+        java.lang.IllegalArgumentException $stack2;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: java.lang.IllegalArgumentException newGetCharIllegalArgumentException()>();
+
+        throw $stack2;
+    }
+
+    public short getShort(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        java.lang.Object obj;
+        java.lang.IllegalArgumentException $stack2;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: java.lang.IllegalArgumentException newGetShortIllegalArgumentException()>();
+
+        throw $stack2;
+    }
+
+    public int getInt(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        java.lang.Object obj;
+        java.lang.IllegalArgumentException $stack2;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: java.lang.IllegalArgumentException newGetIntIllegalArgumentException()>();
+
+        throw $stack2;
+    }
+
+    public long getLong(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        java.lang.Object obj;
+        java.lang.IllegalArgumentException $stack2;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: java.lang.IllegalArgumentException newGetLongIllegalArgumentException()>();
+
+        throw $stack2;
+    }
+
+    public float getFloat(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        java.lang.Object obj;
+        java.lang.IllegalArgumentException $stack2;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: java.lang.IllegalArgumentException newGetFloatIllegalArgumentException()>();
+
+        throw $stack2;
+    }
+
+    public double getDouble(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        java.lang.Object obj;
+        java.lang.IllegalArgumentException $stack2;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: java.lang.IllegalArgumentException newGetDoubleIllegalArgumentException()>();
+
+        throw $stack2;
+    }
+
+    public void set(java.lang.Object, java.lang.Object) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.misc.Unsafe $stack6;
+        long $stack7;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+        java.lang.Boolean $stack5;
+        java.lang.Object obj, value;
+        boolean $stack3, $stack4, $stack8;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        value := @parameter1: java.lang.Object;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: void ensureObj(java.lang.Object)>(obj);
+
+        $stack3 = this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: boolean isFinal>;
+
+        if $stack3 == 0 goto label1;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: void throwFinalFieldIllegalAccessException(java.lang.Object)>(value);
+
+     label1:
+        if value != null goto label2;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: void throwSetIllegalArgumentException(java.lang.Object)>(value);
+
+     label2:
+        $stack4 = value instanceof java.lang.Boolean;
+
+        if $stack4 == 0 goto label3;
+
+        $stack6 = <jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: jdk.internal.misc.Unsafe unsafe>;
+
+        $stack7 = this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: long fieldOffset>;
+
+        $stack5 = (java.lang.Boolean) value;
+
+        $stack8 = virtualinvoke $stack5.<java.lang.Boolean: boolean booleanValue()>();
+
+        virtualinvoke $stack6.<jdk.internal.misc.Unsafe: void putBoolean(java.lang.Object,long,boolean)>(obj, $stack7, $stack8);
+
+        return;
+
+     label3:
+        virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: void throwSetIllegalArgumentException(java.lang.Object)>(value);
+
+        return;
+    }
+
+    public void setBoolean(java.lang.Object, boolean) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.misc.Unsafe $stack5;
+        java.lang.Object obj;
+        long $stack4;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+        boolean $stack3, z;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        z := @parameter1: boolean;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: void ensureObj(java.lang.Object)>(obj);
+
+        $stack3 = this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: boolean isFinal>;
+
+        if $stack3 == 0 goto label1;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: void throwFinalFieldIllegalAccessException(boolean)>(z);
+
+     label1:
+        $stack5 = <jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: jdk.internal.misc.Unsafe unsafe>;
+
+        $stack4 = this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: long fieldOffset>;
+
+        virtualinvoke $stack5.<jdk.internal.misc.Unsafe: void putBoolean(java.lang.Object,long,boolean)>(obj, $stack4, z);
+
+        return;
+    }
+
+    public void setByte(java.lang.Object, byte) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        java.lang.Object obj;
+        byte b;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        b := @parameter1: byte;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: void throwSetIllegalArgumentException(byte)>(b);
+
+        return;
+    }
+
+    public void setChar(java.lang.Object, char) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        char c;
+        java.lang.Object obj;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        c := @parameter1: char;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: void throwSetIllegalArgumentException(char)>(c);
+
+        return;
+    }
+
+    public void setShort(java.lang.Object, short) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        short s;
+        java.lang.Object obj;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        s := @parameter1: short;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: void throwSetIllegalArgumentException(short)>(s);
+
+        return;
+    }
+
+    public void setInt(java.lang.Object, int) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        int i;
+        java.lang.Object obj;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        i := @parameter1: int;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: void throwSetIllegalArgumentException(int)>(i);
+
+        return;
+    }
+
+    public void setLong(java.lang.Object, long) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        long l;
+        java.lang.Object obj;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        l := @parameter1: long;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: void throwSetIllegalArgumentException(long)>(l);
+
+        return;
+    }
+
+    public void setFloat(java.lang.Object, float) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        float f;
+        java.lang.Object obj;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        f := @parameter1: float;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: void throwSetIllegalArgumentException(float)>(f);
+
+        return;
+    }
+
+    public void setDouble(java.lang.Object, double) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        java.lang.Object obj;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl this;
+        double d;
+
+        this := @this: jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        d := @parameter1: double;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: void throwSetIllegalArgumentException(double)>(d);
+
+        return;
+    }
+}

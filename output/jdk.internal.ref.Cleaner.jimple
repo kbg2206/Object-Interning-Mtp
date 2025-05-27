@@ -1,0 +1,198 @@
+public class jdk.internal.ref.Cleaner extends java.lang.ref.PhantomReference
+{
+    private static final java.lang.ref.ReferenceQueue dummyQueue;
+    private static jdk.internal.ref.Cleaner first;
+    private jdk.internal.ref.Cleaner next;
+    private jdk.internal.ref.Cleaner prev;
+    private final java.lang.Runnable thunk;
+
+    private static synchronized jdk.internal.ref.Cleaner add(jdk.internal.ref.Cleaner)
+    {
+        jdk.internal.ref.Cleaner $stack1, cl, $stack2, $stack3;
+
+        cl := @parameter0: jdk.internal.ref.Cleaner;
+
+        $stack1 = <jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner first>;
+
+        if $stack1 == null goto label1;
+
+        $stack2 = <jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner first>;
+
+        cl.<jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner next> = $stack2;
+
+        $stack3 = <jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner first>;
+
+        $stack3.<jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner prev> = cl;
+
+     label1:
+        <jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner first> = cl;
+
+        return cl;
+    }
+
+    private static synchronized boolean remove(jdk.internal.ref.Cleaner)
+    {
+        jdk.internal.ref.Cleaner cl, $stack1, $stack2, $stack4, $stack5, $stack6, $stack12, $stack13, $stack15, $stack16, $stack18, $stack3;
+
+        cl := @parameter0: jdk.internal.ref.Cleaner;
+
+        $stack1 = cl.<jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner next>;
+
+        if $stack1 != cl goto label1;
+
+        return 0;
+
+     label1:
+        $stack2 = <jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner first>;
+
+        if $stack2 != cl goto label3;
+
+        $stack15 = cl.<jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner next>;
+
+        if $stack15 == null goto label2;
+
+        $stack18 = cl.<jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner next>;
+
+        <jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner first> = $stack18;
+
+        goto label3;
+
+     label2:
+        $stack16 = cl.<jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner prev>;
+
+        <jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner first> = $stack16;
+
+     label3:
+        $stack3 = cl.<jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner next>;
+
+        if $stack3 == null goto label4;
+
+        $stack13 = cl.<jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner next>;
+
+        $stack12 = cl.<jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner prev>;
+
+        $stack13.<jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner prev> = $stack12;
+
+     label4:
+        $stack4 = cl.<jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner prev>;
+
+        if $stack4 == null goto label5;
+
+        $stack6 = cl.<jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner prev>;
+
+        $stack5 = cl.<jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner next>;
+
+        $stack6.<jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner next> = $stack5;
+
+     label5:
+        cl.<jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner next> = cl;
+
+        cl.<jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner prev> = cl;
+
+        return 1;
+    }
+
+    private void <init>(java.lang.Object, java.lang.Runnable)
+    {
+        java.lang.Object referent;
+        java.lang.Runnable thunk;
+        jdk.internal.ref.Cleaner this;
+        java.lang.ref.ReferenceQueue $stack3;
+
+        this := @this: jdk.internal.ref.Cleaner;
+
+        referent := @parameter0: java.lang.Object;
+
+        thunk := @parameter1: java.lang.Runnable;
+
+        $stack3 = <jdk.internal.ref.Cleaner: java.lang.ref.ReferenceQueue dummyQueue>;
+
+        specialinvoke this.<java.lang.ref.PhantomReference: void <init>(java.lang.Object,java.lang.ref.ReferenceQueue)>(referent, $stack3);
+
+        this.<jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner next> = null;
+
+        this.<jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner prev> = null;
+
+        this.<jdk.internal.ref.Cleaner: java.lang.Runnable thunk> = thunk;
+
+        return;
+    }
+
+    public static jdk.internal.ref.Cleaner create(java.lang.Object, java.lang.Runnable)
+    {
+        java.lang.Object ob;
+        java.lang.Runnable thunk;
+        jdk.internal.ref.Cleaner $stack2, $stack3;
+
+        ob := @parameter0: java.lang.Object;
+
+        thunk := @parameter1: java.lang.Runnable;
+
+        if thunk != null goto label1;
+
+        return null;
+
+     label1:
+        $stack2 = new jdk.internal.ref.Cleaner;
+
+        specialinvoke $stack2.<jdk.internal.ref.Cleaner: void <init>(java.lang.Object,java.lang.Runnable)>(ob, thunk);
+
+        $stack3 = staticinvoke <jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner add(jdk.internal.ref.Cleaner)>($stack2);
+
+        return $stack3;
+    }
+
+    public void clean()
+    {
+        java.lang.Throwable $stack4;
+        jdk.internal.ref.Cleaner$1 $stack5;
+        java.lang.Runnable $stack3;
+        jdk.internal.ref.Cleaner this;
+        boolean $stack2;
+
+        this := @this: jdk.internal.ref.Cleaner;
+
+        $stack2 = staticinvoke <jdk.internal.ref.Cleaner: boolean remove(jdk.internal.ref.Cleaner)>(this);
+
+        if $stack2 != 0 goto label1;
+
+        return;
+
+     label1:
+        $stack3 = this.<jdk.internal.ref.Cleaner: java.lang.Runnable thunk>;
+
+        interfaceinvoke $stack3.<java.lang.Runnable: void run()>();
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack4 := @caughtexception;
+
+        $stack5 = new jdk.internal.ref.Cleaner$1;
+
+        specialinvoke $stack5.<jdk.internal.ref.Cleaner$1: void <init>(jdk.internal.ref.Cleaner,java.lang.Throwable)>(this, $stack4);
+
+        staticinvoke <java.security.AccessController: java.lang.Object doPrivileged(java.security.PrivilegedAction)>($stack5);
+
+     label4:
+        return;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.ref.ReferenceQueue $stack0;
+
+        $stack0 = new java.lang.ref.ReferenceQueue;
+
+        specialinvoke $stack0.<java.lang.ref.ReferenceQueue: void <init>()>();
+
+        <jdk.internal.ref.Cleaner: java.lang.ref.ReferenceQueue dummyQueue> = $stack0;
+
+        <jdk.internal.ref.Cleaner: jdk.internal.ref.Cleaner first> = null;
+
+        return;
+    }
+}

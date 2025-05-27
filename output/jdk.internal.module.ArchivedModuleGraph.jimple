@@ -1,0 +1,155 @@
+class jdk.internal.module.ArchivedModuleGraph extends java.lang.Object
+{
+    private static jdk.internal.module.ArchivedModuleGraph archivedModuleGraph;
+    private final boolean hasSplitPackages;
+    private final boolean hasIncubatorModules;
+    private final java.lang.module.ModuleFinder finder;
+    private final java.lang.module.Configuration configuration;
+    private final java.util.function.Function classLoaderFunction;
+
+    private void <init>(boolean, boolean, java.lang.module.ModuleFinder, java.lang.module.Configuration, java.util.function.Function)
+    {
+        java.lang.module.ModuleFinder finder;
+        jdk.internal.module.ArchivedModuleGraph this;
+        java.lang.module.Configuration configuration;
+        java.util.function.Function classLoaderFunction;
+        boolean hasSplitPackages, hasIncubatorModules;
+
+        this := @this: jdk.internal.module.ArchivedModuleGraph;
+
+        hasSplitPackages := @parameter0: boolean;
+
+        hasIncubatorModules := @parameter1: boolean;
+
+        finder := @parameter2: java.lang.module.ModuleFinder;
+
+        configuration := @parameter3: java.lang.module.Configuration;
+
+        classLoaderFunction := @parameter4: java.util.function.Function;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<jdk.internal.module.ArchivedModuleGraph: boolean hasSplitPackages> = hasSplitPackages;
+
+        this.<jdk.internal.module.ArchivedModuleGraph: boolean hasIncubatorModules> = hasIncubatorModules;
+
+        this.<jdk.internal.module.ArchivedModuleGraph: java.lang.module.ModuleFinder finder> = finder;
+
+        this.<jdk.internal.module.ArchivedModuleGraph: java.lang.module.Configuration configuration> = configuration;
+
+        this.<jdk.internal.module.ArchivedModuleGraph: java.util.function.Function classLoaderFunction> = classLoaderFunction;
+
+        return;
+    }
+
+    java.lang.module.ModuleFinder finder()
+    {
+        jdk.internal.module.ArchivedModuleGraph this;
+        java.lang.module.ModuleFinder $stack1;
+
+        this := @this: jdk.internal.module.ArchivedModuleGraph;
+
+        $stack1 = this.<jdk.internal.module.ArchivedModuleGraph: java.lang.module.ModuleFinder finder>;
+
+        return $stack1;
+    }
+
+    java.lang.module.Configuration configuration()
+    {
+        jdk.internal.module.ArchivedModuleGraph this;
+        java.lang.module.Configuration $stack1;
+
+        this := @this: jdk.internal.module.ArchivedModuleGraph;
+
+        $stack1 = this.<jdk.internal.module.ArchivedModuleGraph: java.lang.module.Configuration configuration>;
+
+        return $stack1;
+    }
+
+    java.util.function.Function classLoaderFunction()
+    {
+        jdk.internal.module.ArchivedModuleGraph this;
+        java.util.function.Function $stack1;
+
+        this := @this: jdk.internal.module.ArchivedModuleGraph;
+
+        $stack1 = this.<jdk.internal.module.ArchivedModuleGraph: java.util.function.Function classLoaderFunction>;
+
+        return $stack1;
+    }
+
+    boolean hasSplitPackages()
+    {
+        jdk.internal.module.ArchivedModuleGraph this;
+        boolean $stack1;
+
+        this := @this: jdk.internal.module.ArchivedModuleGraph;
+
+        $stack1 = this.<jdk.internal.module.ArchivedModuleGraph: boolean hasSplitPackages>;
+
+        return $stack1;
+    }
+
+    boolean hasIncubatorModules()
+    {
+        jdk.internal.module.ArchivedModuleGraph this;
+        boolean $stack1;
+
+        this := @this: jdk.internal.module.ArchivedModuleGraph;
+
+        $stack1 = this.<jdk.internal.module.ArchivedModuleGraph: boolean hasIncubatorModules>;
+
+        return $stack1;
+    }
+
+    static jdk.internal.module.ArchivedModuleGraph get(java.lang.String)
+    {
+        jdk.internal.module.ArchivedModuleGraph graph;
+        java.lang.String mainModule;
+
+        mainModule := @parameter0: java.lang.String;
+
+        graph = <jdk.internal.module.ArchivedModuleGraph: jdk.internal.module.ArchivedModuleGraph archivedModuleGraph>;
+
+        if mainModule != null goto label1;
+
+        return graph;
+
+     label1:
+        return null;
+    }
+
+    static void archive(boolean, boolean, java.lang.module.ModuleFinder, java.lang.module.Configuration, java.util.function.Function)
+    {
+        java.lang.module.ModuleFinder finder;
+        jdk.internal.module.ArchivedModuleGraph $stack5;
+        java.lang.module.Configuration configuration;
+        java.util.function.Function classLoaderFunction;
+        boolean hasSplitPackages, hasIncubatorModules;
+
+        hasSplitPackages := @parameter0: boolean;
+
+        hasIncubatorModules := @parameter1: boolean;
+
+        finder := @parameter2: java.lang.module.ModuleFinder;
+
+        configuration := @parameter3: java.lang.module.Configuration;
+
+        classLoaderFunction := @parameter4: java.util.function.Function;
+
+        $stack5 = new jdk.internal.module.ArchivedModuleGraph;
+
+        specialinvoke $stack5.<jdk.internal.module.ArchivedModuleGraph: void <init>(boolean,boolean,java.lang.module.ModuleFinder,java.lang.module.Configuration,java.util.function.Function)>(hasSplitPackages, hasIncubatorModules, finder, configuration, classLoaderFunction);
+
+        <jdk.internal.module.ArchivedModuleGraph: jdk.internal.module.ArchivedModuleGraph archivedModuleGraph> = $stack5;
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        staticinvoke <jdk.internal.misc.CDS: void initializeFromArchive(java.lang.Class)>(class "Ljdk/internal/module/ArchivedModuleGraph;");
+
+        return;
+    }
+}

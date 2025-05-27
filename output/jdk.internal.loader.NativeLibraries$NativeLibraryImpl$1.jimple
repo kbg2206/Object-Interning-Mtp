@@ -1,0 +1,58 @@
+class jdk.internal.loader.NativeLibraries$NativeLibraryImpl$1 extends java.lang.Object implements java.security.PrivilegedAction
+{
+    final jdk.internal.loader.NativeLibraries$NativeLibraryImpl this$0;
+
+    void <init>(jdk.internal.loader.NativeLibraries$NativeLibraryImpl)
+    {
+        jdk.internal.loader.NativeLibraries$NativeLibraryImpl this$0;
+        jdk.internal.loader.NativeLibraries$NativeLibraryImpl$1 this;
+
+        this := @this: jdk.internal.loader.NativeLibraries$NativeLibraryImpl$1;
+
+        this$0 := @parameter0: jdk.internal.loader.NativeLibraries$NativeLibraryImpl;
+
+        this.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl$1: jdk.internal.loader.NativeLibraries$NativeLibraryImpl this$0> = this$0;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.Boolean run()
+    {
+        java.lang.Boolean $stack6;
+        java.lang.String $stack4;
+        java.io.File $stack2;
+        jdk.internal.loader.NativeLibraries$NativeLibraryImpl $stack3;
+        jdk.internal.loader.NativeLibraries$NativeLibraryImpl$1 this;
+        boolean $stack5;
+
+        this := @this: jdk.internal.loader.NativeLibraries$NativeLibraryImpl$1;
+
+        $stack2 = new java.io.File;
+
+        $stack3 = this.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl$1: jdk.internal.loader.NativeLibraries$NativeLibraryImpl this$0>;
+
+        $stack4 = $stack3.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl: java.lang.String name>;
+
+        specialinvoke $stack2.<java.io.File: void <init>(java.lang.String)>($stack4);
+
+        $stack5 = virtualinvoke $stack2.<java.io.File: boolean exists()>();
+
+        $stack6 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($stack5);
+
+        return $stack6;
+    }
+
+    public volatile java.lang.Object run()
+    {
+        java.lang.Boolean $stack1;
+        jdk.internal.loader.NativeLibraries$NativeLibraryImpl$1 this;
+
+        this := @this: jdk.internal.loader.NativeLibraries$NativeLibraryImpl$1;
+
+        $stack1 = virtualinvoke this.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl$1: java.lang.Boolean run()>();
+
+        return $stack1;
+    }
+}

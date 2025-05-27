@@ -1,0 +1,403 @@
+class jdk.internal.reflect.UnsafeShortFieldAccessorImpl extends jdk.internal.reflect.UnsafeFieldAccessorImpl
+{
+
+    void <init>(java.lang.reflect.Field)
+    {
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        java.lang.reflect.Field field;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        field := @parameter0: java.lang.reflect.Field;
+
+        specialinvoke this.<jdk.internal.reflect.UnsafeFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return;
+    }
+
+    public java.lang.Object get(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        short $stack2;
+        java.lang.Short $stack3;
+        java.lang.Object obj;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: short getShort(java.lang.Object)>(obj);
+
+        $stack3 = staticinvoke <java.lang.Short: java.lang.Short valueOf(short)>($stack2);
+
+        return $stack3;
+    }
+
+    public boolean getBoolean(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        java.lang.Object obj;
+        java.lang.IllegalArgumentException $stack2;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: java.lang.IllegalArgumentException newGetBooleanIllegalArgumentException()>();
+
+        throw $stack2;
+    }
+
+    public byte getByte(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        java.lang.Object obj;
+        java.lang.IllegalArgumentException $stack2;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: java.lang.IllegalArgumentException newGetByteIllegalArgumentException()>();
+
+        throw $stack2;
+    }
+
+    public char getChar(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        java.lang.Object obj;
+        java.lang.IllegalArgumentException $stack2;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: java.lang.IllegalArgumentException newGetCharIllegalArgumentException()>();
+
+        throw $stack2;
+    }
+
+    public short getShort(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.misc.Unsafe $stack3;
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        short $stack4;
+        java.lang.Object obj;
+        long $stack2;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: void ensureObj(java.lang.Object)>(obj);
+
+        $stack3 = <jdk.internal.reflect.UnsafeShortFieldAccessorImpl: jdk.internal.misc.Unsafe unsafe>;
+
+        $stack2 = this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: long fieldOffset>;
+
+        $stack4 = virtualinvoke $stack3.<jdk.internal.misc.Unsafe: short getShort(java.lang.Object,long)>(obj, $stack2);
+
+        return $stack4;
+    }
+
+    public int getInt(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        short $stack2;
+        int $i0;
+        java.lang.Object obj;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: short getShort(java.lang.Object)>(obj);
+
+        $i0 = (int) $stack2;
+
+        return $i0;
+    }
+
+    public long getLong(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        short $stack2;
+        java.lang.Object obj;
+        long $stack3;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: short getShort(java.lang.Object)>(obj);
+
+        $stack3 = (long) $stack2;
+
+        return $stack3;
+    }
+
+    public float getFloat(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        short $stack2;
+        float $stack3;
+        java.lang.Object obj;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: short getShort(java.lang.Object)>(obj);
+
+        $stack3 = (float) $stack2;
+
+        return $stack3;
+    }
+
+    public double getDouble(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        short $stack2;
+        java.lang.Object obj;
+        double $stack3;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: short getShort(java.lang.Object)>(obj);
+
+        $stack3 = (double) $stack2;
+
+        return $stack3;
+    }
+
+    public void set(java.lang.Object, java.lang.Object) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.misc.Unsafe $stack7, $stack11;
+        long $stack8, $stack12;
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        short $stack9, $stack14;
+        byte $stack13;
+        java.lang.Short $stack6;
+        java.lang.Object obj, value;
+        java.lang.Byte $stack10;
+        boolean $stack3, $stack4, $stack5;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        value := @parameter1: java.lang.Object;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: void ensureObj(java.lang.Object)>(obj);
+
+        $stack3 = this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: boolean isFinal>;
+
+        if $stack3 == 0 goto label1;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: void throwFinalFieldIllegalAccessException(java.lang.Object)>(value);
+
+     label1:
+        if value != null goto label2;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: void throwSetIllegalArgumentException(java.lang.Object)>(value);
+
+     label2:
+        $stack4 = value instanceof java.lang.Byte;
+
+        if $stack4 == 0 goto label3;
+
+        $stack11 = <jdk.internal.reflect.UnsafeShortFieldAccessorImpl: jdk.internal.misc.Unsafe unsafe>;
+
+        $stack12 = this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: long fieldOffset>;
+
+        $stack10 = (java.lang.Byte) value;
+
+        $stack13 = virtualinvoke $stack10.<java.lang.Byte: byte byteValue()>();
+
+        $stack14 = (short) $stack13;
+
+        virtualinvoke $stack11.<jdk.internal.misc.Unsafe: void putShort(java.lang.Object,long,short)>(obj, $stack12, $stack14);
+
+        return;
+
+     label3:
+        $stack5 = value instanceof java.lang.Short;
+
+        if $stack5 == 0 goto label4;
+
+        $stack7 = <jdk.internal.reflect.UnsafeShortFieldAccessorImpl: jdk.internal.misc.Unsafe unsafe>;
+
+        $stack8 = this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: long fieldOffset>;
+
+        $stack6 = (java.lang.Short) value;
+
+        $stack9 = virtualinvoke $stack6.<java.lang.Short: short shortValue()>();
+
+        virtualinvoke $stack7.<jdk.internal.misc.Unsafe: void putShort(java.lang.Object,long,short)>(obj, $stack8, $stack9);
+
+        return;
+
+     label4:
+        virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: void throwSetIllegalArgumentException(java.lang.Object)>(value);
+
+        return;
+    }
+
+    public void setBoolean(java.lang.Object, boolean) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        java.lang.Object obj;
+        boolean z;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        z := @parameter1: boolean;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: void throwSetIllegalArgumentException(boolean)>(z);
+
+        return;
+    }
+
+    public void setByte(java.lang.Object, byte) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        short $stack3;
+        byte b;
+        java.lang.Object obj;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        b := @parameter1: byte;
+
+        $stack3 = (short) b;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: void setShort(java.lang.Object,short)>(obj, $stack3);
+
+        return;
+    }
+
+    public void setChar(java.lang.Object, char) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        char c;
+        java.lang.Object obj;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        c := @parameter1: char;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: void throwSetIllegalArgumentException(char)>(c);
+
+        return;
+    }
+
+    public void setShort(java.lang.Object, short) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.misc.Unsafe $stack5;
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        short s;
+        java.lang.Object obj;
+        long $stack4;
+        boolean $stack3;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        s := @parameter1: short;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: void ensureObj(java.lang.Object)>(obj);
+
+        $stack3 = this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: boolean isFinal>;
+
+        if $stack3 == 0 goto label1;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: void throwFinalFieldIllegalAccessException(short)>(s);
+
+     label1:
+        $stack5 = <jdk.internal.reflect.UnsafeShortFieldAccessorImpl: jdk.internal.misc.Unsafe unsafe>;
+
+        $stack4 = this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: long fieldOffset>;
+
+        virtualinvoke $stack5.<jdk.internal.misc.Unsafe: void putShort(java.lang.Object,long,short)>(obj, $stack4, s);
+
+        return;
+    }
+
+    public void setInt(java.lang.Object, int) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        int i;
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        java.lang.Object obj;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        i := @parameter1: int;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: void throwSetIllegalArgumentException(int)>(i);
+
+        return;
+    }
+
+    public void setLong(java.lang.Object, long) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        long l;
+        java.lang.Object obj;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        l := @parameter1: long;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: void throwSetIllegalArgumentException(long)>(l);
+
+        return;
+    }
+
+    public void setFloat(java.lang.Object, float) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        float f;
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        java.lang.Object obj;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        f := @parameter1: float;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: void throwSetIllegalArgumentException(float)>(f);
+
+        return;
+    }
+
+    public void setDouble(java.lang.Object, double) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl this;
+        java.lang.Object obj;
+        double d;
+
+        this := @this: jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        d := @parameter1: double;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: void throwSetIllegalArgumentException(double)>(d);
+
+        return;
+    }
+}

@@ -1,0 +1,36 @@
+class jdk.internal.loader.NativeLibraries$LibraryPaths extends java.lang.Object
+{
+    static final java.lang.String[] SYS_PATHS;
+    static final java.lang.String[] USER_PATHS;
+
+    void <init>()
+    {
+        jdk.internal.loader.NativeLibraries$LibraryPaths this;
+
+        this := @this: jdk.internal.loader.NativeLibraries$LibraryPaths;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.String[] $stack1, $stack3;
+        java.lang.String $stack0, $stack2;
+
+        $stack0 = staticinvoke <jdk.internal.util.StaticProperty: java.lang.String sunBootLibraryPath()>();
+
+        $stack1 = staticinvoke <jdk.internal.loader.ClassLoaderHelper: java.lang.String[] parsePath(java.lang.String)>($stack0);
+
+        <jdk.internal.loader.NativeLibraries$LibraryPaths: java.lang.String[] SYS_PATHS> = $stack1;
+
+        $stack2 = staticinvoke <jdk.internal.util.StaticProperty: java.lang.String javaLibraryPath()>();
+
+        $stack3 = staticinvoke <jdk.internal.loader.ClassLoaderHelper: java.lang.String[] parsePath(java.lang.String)>($stack2);
+
+        <jdk.internal.loader.NativeLibraries$LibraryPaths: java.lang.String[] USER_PATHS> = $stack3;
+
+        return;
+    }
+}

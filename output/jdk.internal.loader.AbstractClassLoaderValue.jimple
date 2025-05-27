@@ -1,0 +1,313 @@
+public abstract class jdk.internal.loader.AbstractClassLoaderValue extends java.lang.Object
+{
+    private static final jdk.internal.access.JavaLangAccess JLA;
+
+    void <init>()
+    {
+        jdk.internal.loader.AbstractClassLoaderValue this;
+
+        this := @this: jdk.internal.loader.AbstractClassLoaderValue;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public abstract java.lang.Object key();
+
+    public jdk.internal.loader.AbstractClassLoaderValue$Sub sub(java.lang.Object)
+    {
+        java.lang.Object key;
+        jdk.internal.loader.AbstractClassLoaderValue$Sub $stack2;
+        jdk.internal.loader.AbstractClassLoaderValue this;
+
+        this := @this: jdk.internal.loader.AbstractClassLoaderValue;
+
+        key := @parameter0: java.lang.Object;
+
+        $stack2 = new jdk.internal.loader.AbstractClassLoaderValue$Sub;
+
+        specialinvoke $stack2.<jdk.internal.loader.AbstractClassLoaderValue$Sub: void <init>(jdk.internal.loader.AbstractClassLoaderValue,java.lang.Object)>(this, key);
+
+        return $stack2;
+    }
+
+    public abstract boolean isEqualOrDescendantOf(jdk.internal.loader.AbstractClassLoaderValue);
+
+    public java.lang.Object get(java.lang.ClassLoader)
+    {
+        java.lang.Throwable $stack7;
+        java.util.concurrent.ConcurrentHashMap $stack4;
+        java.lang.Object $stack5, $stack6;
+        jdk.internal.loader.AbstractClassLoaderValue$Memoizer$RecursiveInvocationException $stack8;
+        java.lang.ClassLoader cl;
+        jdk.internal.loader.AbstractClassLoaderValue this;
+
+        this := @this: jdk.internal.loader.AbstractClassLoaderValue;
+
+        cl := @parameter0: java.lang.ClassLoader;
+
+        $stack4 = staticinvoke <jdk.internal.loader.AbstractClassLoaderValue: java.util.concurrent.ConcurrentHashMap map(java.lang.ClassLoader)>(cl);
+
+        $stack5 = virtualinvoke $stack4.<java.util.concurrent.ConcurrentHashMap: java.lang.Object get(java.lang.Object)>(this);
+
+     label1:
+        $stack6 = virtualinvoke this.<jdk.internal.loader.AbstractClassLoaderValue: java.lang.Object extractValue(java.lang.Object)>($stack5);
+
+     label2:
+        return $stack6;
+
+     label3:
+        $stack8 := @caughtexception;
+
+        throw $stack8;
+
+     label4:
+        $stack7 := @caughtexception;
+
+        return null;
+
+        catch jdk.internal.loader.AbstractClassLoaderValue$Memoizer$RecursiveInvocationException from label1 to label2 with label3;
+        catch java.lang.Throwable from label1 to label2 with label4;
+    }
+
+    public java.lang.Object putIfAbsent(java.lang.ClassLoader, java.lang.Object)
+    {
+        java.lang.Throwable $stack9;
+        java.util.concurrent.ConcurrentHashMap $stack6;
+        jdk.internal.loader.AbstractClassLoaderValue$Memoizer$RecursiveInvocationException $stack15;
+        java.lang.Object v, $stack7, $stack8;
+        java.lang.ClassLoader cl;
+        jdk.internal.loader.AbstractClassLoaderValue this;
+
+        this := @this: jdk.internal.loader.AbstractClassLoaderValue;
+
+        cl := @parameter0: java.lang.ClassLoader;
+
+        v := @parameter1: java.lang.Object;
+
+        $stack6 = staticinvoke <jdk.internal.loader.AbstractClassLoaderValue: java.util.concurrent.ConcurrentHashMap map(java.lang.ClassLoader)>(cl);
+
+     label1:
+        $stack7 = virtualinvoke $stack6.<java.util.concurrent.ConcurrentHashMap: java.lang.Object putIfAbsent(java.lang.Object,java.lang.Object)>(this, v);
+
+        $stack8 = virtualinvoke this.<jdk.internal.loader.AbstractClassLoaderValue: java.lang.Object extractValue(java.lang.Object)>($stack7);
+
+     label2:
+        return $stack8;
+
+     label3:
+        $stack15 := @caughtexception;
+
+        throw $stack15;
+
+     label4:
+        $stack9 := @caughtexception;
+
+        goto label1;
+
+        catch jdk.internal.loader.AbstractClassLoaderValue$Memoizer$RecursiveInvocationException from label1 to label2 with label3;
+        catch java.lang.Throwable from label1 to label2 with label4;
+    }
+
+    public boolean remove(java.lang.ClassLoader, java.lang.Object)
+    {
+        java.util.concurrent.ConcurrentHashMap $stack3;
+        java.lang.Object v;
+        java.lang.ClassLoader cl;
+        jdk.internal.loader.AbstractClassLoaderValue this;
+        boolean $stack4;
+
+        this := @this: jdk.internal.loader.AbstractClassLoaderValue;
+
+        cl := @parameter0: java.lang.ClassLoader;
+
+        v := @parameter1: java.lang.Object;
+
+        $stack3 = staticinvoke <jdk.internal.loader.AbstractClassLoaderValue: java.util.concurrent.ConcurrentHashMap map(java.lang.ClassLoader)>(cl);
+
+        $stack4 = virtualinvoke $stack3.<java.util.concurrent.ConcurrentHashMap: boolean remove(java.lang.Object,java.lang.Object)>(this, v);
+
+        return $stack4;
+    }
+
+    public java.lang.Object computeIfAbsent(java.lang.ClassLoader, java.util.function.BiFunction) throws java.lang.IllegalStateException
+    {
+        java.lang.Throwable $stack17, $stack19;
+        java.util.function.BiFunction mappingFunction;
+        java.util.concurrent.ConcurrentHashMap $stack8;
+        jdk.internal.loader.AbstractClassLoaderValue$Memoizer $stack13, mv;
+        jdk.internal.loader.AbstractClassLoaderValue$Memoizer$RecursiveInvocationException $stack18;
+        java.lang.Object $stack10, $stack11, $stack9;
+        java.lang.ClassLoader cl;
+        jdk.internal.loader.AbstractClassLoaderValue this;
+
+        this := @this: jdk.internal.loader.AbstractClassLoaderValue;
+
+        cl := @parameter0: java.lang.ClassLoader;
+
+        mappingFunction := @parameter1: java.util.function.BiFunction;
+
+        $stack8 = staticinvoke <jdk.internal.loader.AbstractClassLoaderValue: java.util.concurrent.ConcurrentHashMap map(java.lang.ClassLoader)>(cl);
+
+        mv = null;
+
+     label01:
+        if mv != null goto label02;
+
+        $stack9 = virtualinvoke $stack8.<java.util.concurrent.ConcurrentHashMap: java.lang.Object get(java.lang.Object)>(this);
+
+        goto label03;
+
+     label02:
+        $stack9 = virtualinvoke $stack8.<java.util.concurrent.ConcurrentHashMap: java.lang.Object putIfAbsent(java.lang.Object,java.lang.Object)>(this, mv);
+
+     label03:
+        if $stack9 != null goto label07;
+
+        if mv != null goto label04;
+
+        $stack13 = new jdk.internal.loader.AbstractClassLoaderValue$Memoizer;
+
+        specialinvoke $stack13.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: void <init>(java.lang.ClassLoader,jdk.internal.loader.AbstractClassLoaderValue,java.util.function.BiFunction)>(cl, this, mappingFunction);
+
+        mv = $stack13;
+
+        goto label01;
+
+     label04:
+        $stack11 = virtualinvoke mv.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: java.lang.Object get()>();
+
+        virtualinvoke $stack8.<java.util.concurrent.ConcurrentHashMap: boolean replace(java.lang.Object,java.lang.Object,java.lang.Object)>(this, mv, $stack11);
+
+     label05:
+        return $stack11;
+
+     label06:
+        $stack19 := @caughtexception;
+
+        virtualinvoke $stack8.<java.util.concurrent.ConcurrentHashMap: boolean remove(java.lang.Object,java.lang.Object)>(this, mv);
+
+        throw $stack19;
+
+     label07:
+        $stack10 = virtualinvoke this.<jdk.internal.loader.AbstractClassLoaderValue: java.lang.Object extractValue(java.lang.Object)>($stack9);
+
+     label08:
+        return $stack10;
+
+     label09:
+        $stack18 := @caughtexception;
+
+        throw $stack18;
+
+     label10:
+        $stack17 := @caughtexception;
+
+        goto label01;
+
+        catch java.lang.Throwable from label04 to label05 with label06;
+        catch jdk.internal.loader.AbstractClassLoaderValue$Memoizer$RecursiveInvocationException from label07 to label08 with label09;
+        catch java.lang.Throwable from label07 to label08 with label10;
+    }
+
+    public void removeAll(java.lang.ClassLoader)
+    {
+        java.util.Iterator $stack6;
+        java.util.concurrent.ConcurrentHashMap $stack4;
+        java.util.concurrent.ConcurrentHashMap$KeySetView $stack5;
+        java.lang.Object $stack8;
+        java.lang.ClassLoader cl;
+        jdk.internal.loader.AbstractClassLoaderValue this, $stack9;
+        boolean $stack10, $stack7;
+
+        this := @this: jdk.internal.loader.AbstractClassLoaderValue;
+
+        cl := @parameter0: java.lang.ClassLoader;
+
+        $stack4 = staticinvoke <jdk.internal.loader.AbstractClassLoaderValue: java.util.concurrent.ConcurrentHashMap map(java.lang.ClassLoader)>(cl);
+
+        $stack5 = virtualinvoke $stack4.<java.util.concurrent.ConcurrentHashMap: java.util.concurrent.ConcurrentHashMap$KeySetView keySet()>();
+
+        $stack6 = virtualinvoke $stack5.<java.util.concurrent.ConcurrentHashMap$KeySetView: java.util.Iterator iterator()>();
+
+     label1:
+        $stack7 = interfaceinvoke $stack6.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack7 == 0 goto label2;
+
+        $stack8 = interfaceinvoke $stack6.<java.util.Iterator: java.lang.Object next()>();
+
+        $stack9 = (jdk.internal.loader.AbstractClassLoaderValue) $stack8;
+
+        $stack10 = virtualinvoke $stack9.<jdk.internal.loader.AbstractClassLoaderValue: boolean isEqualOrDescendantOf(jdk.internal.loader.AbstractClassLoaderValue)>(this);
+
+        if $stack10 == 0 goto label1;
+
+        interfaceinvoke $stack6.<java.util.Iterator: void remove()>();
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    private static java.util.concurrent.ConcurrentHashMap map(java.lang.ClassLoader)
+    {
+        java.util.concurrent.ConcurrentHashMap $stack2;
+        java.lang.ClassLoader cl;
+        jdk.internal.access.JavaLangAccess $stack1;
+
+        cl := @parameter0: java.lang.ClassLoader;
+
+        if cl != null goto label1;
+
+        $stack2 = staticinvoke <jdk.internal.loader.BootLoader: java.util.concurrent.ConcurrentHashMap getClassLoaderValueMap()>();
+
+        goto label2;
+
+     label1:
+        $stack1 = <jdk.internal.loader.AbstractClassLoaderValue: jdk.internal.access.JavaLangAccess JLA>;
+
+        $stack2 = interfaceinvoke $stack1.<jdk.internal.access.JavaLangAccess: java.util.concurrent.ConcurrentHashMap createOrGetClassLoaderValueMap(java.lang.ClassLoader)>(cl);
+
+     label2:
+        return $stack2;
+    }
+
+    private java.lang.Object extractValue(java.lang.Object)
+    {
+        jdk.internal.loader.AbstractClassLoaderValue$Memoizer $stack3;
+        java.lang.Object memoizerOrValue, $stack4;
+        boolean $stack2;
+        jdk.internal.loader.AbstractClassLoaderValue this;
+
+        this := @this: jdk.internal.loader.AbstractClassLoaderValue;
+
+        memoizerOrValue := @parameter0: java.lang.Object;
+
+        $stack2 = memoizerOrValue instanceof jdk.internal.loader.AbstractClassLoaderValue$Memoizer;
+
+        if $stack2 == 0 goto label1;
+
+        $stack3 = (jdk.internal.loader.AbstractClassLoaderValue$Memoizer) memoizerOrValue;
+
+        $stack4 = virtualinvoke $stack3.<jdk.internal.loader.AbstractClassLoaderValue$Memoizer: java.lang.Object get()>();
+
+        return $stack4;
+
+     label1:
+        return memoizerOrValue;
+    }
+
+    static void <clinit>()
+    {
+        jdk.internal.access.JavaLangAccess $stack0;
+
+        $stack0 = staticinvoke <jdk.internal.access.SharedSecrets: jdk.internal.access.JavaLangAccess getJavaLangAccess()>();
+
+        <jdk.internal.loader.AbstractClassLoaderValue: jdk.internal.access.JavaLangAccess JLA> = $stack0;
+
+        return;
+    }
+}

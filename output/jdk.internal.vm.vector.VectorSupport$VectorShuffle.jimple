@@ -1,0 +1,17 @@
+public class jdk.internal.vm.vector.VectorSupport$VectorShuffle extends jdk.internal.vm.vector.VectorSupport$VectorPayload
+{
+
+    public void <init>(java.lang.Object)
+    {
+        jdk.internal.vm.vector.VectorSupport$VectorShuffle this;
+        java.lang.Object payload;
+
+        this := @this: jdk.internal.vm.vector.VectorSupport$VectorShuffle;
+
+        payload := @parameter0: java.lang.Object;
+
+        specialinvoke this.<jdk.internal.vm.vector.VectorSupport$VectorPayload: void <init>(java.lang.Object)>(payload);
+
+        return;
+    }
+}

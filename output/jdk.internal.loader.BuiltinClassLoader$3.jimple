@@ -1,0 +1,74 @@
+class jdk.internal.loader.BuiltinClassLoader$3 extends java.lang.Object implements java.security.PrivilegedExceptionAction
+{
+    final java.lang.module.ModuleReference val$mref;
+    final java.lang.String val$name;
+    final jdk.internal.loader.BuiltinClassLoader this$0;
+
+    void <init>(jdk.internal.loader.BuiltinClassLoader, java.lang.module.ModuleReference, java.lang.String)
+    {
+        jdk.internal.loader.BuiltinClassLoader$3 this;
+        java.lang.module.ModuleReference l2;
+        java.lang.String l3;
+        jdk.internal.loader.BuiltinClassLoader this$0;
+
+        this := @this: jdk.internal.loader.BuiltinClassLoader$3;
+
+        this$0 := @parameter0: jdk.internal.loader.BuiltinClassLoader;
+
+        l2 := @parameter1: java.lang.module.ModuleReference;
+
+        l3 := @parameter2: java.lang.String;
+
+        this.<jdk.internal.loader.BuiltinClassLoader$3: jdk.internal.loader.BuiltinClassLoader this$0> = this$0;
+
+        this.<jdk.internal.loader.BuiltinClassLoader$3: java.lang.module.ModuleReference val$mref> = l2;
+
+        this.<jdk.internal.loader.BuiltinClassLoader$3: java.lang.String val$name> = l3;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public java.net.URI run() throws java.io.IOException
+    {
+        java.lang.module.ModuleReference $stack1;
+        java.lang.module.ModuleReader $stack3;
+        jdk.internal.loader.BuiltinClassLoader $stack2;
+        jdk.internal.loader.BuiltinClassLoader$3 this;
+        java.util.Optional $stack5;
+        java.lang.Object $stack6;
+        java.lang.String $stack4;
+        java.net.URI $stack7;
+
+        this := @this: jdk.internal.loader.BuiltinClassLoader$3;
+
+        $stack2 = this.<jdk.internal.loader.BuiltinClassLoader$3: jdk.internal.loader.BuiltinClassLoader this$0>;
+
+        $stack1 = this.<jdk.internal.loader.BuiltinClassLoader$3: java.lang.module.ModuleReference val$mref>;
+
+        $stack3 = virtualinvoke $stack2.<jdk.internal.loader.BuiltinClassLoader: java.lang.module.ModuleReader moduleReaderFor(java.lang.module.ModuleReference)>($stack1);
+
+        $stack4 = this.<jdk.internal.loader.BuiltinClassLoader$3: java.lang.String val$name>;
+
+        $stack5 = interfaceinvoke $stack3.<java.lang.module.ModuleReader: java.util.Optional find(java.lang.String)>($stack4);
+
+        $stack6 = virtualinvoke $stack5.<java.util.Optional: java.lang.Object orElse(java.lang.Object)>(null);
+
+        $stack7 = (java.net.URI) $stack6;
+
+        return $stack7;
+    }
+
+    public volatile java.lang.Object run() throws java.lang.Exception
+    {
+        jdk.internal.loader.BuiltinClassLoader$3 this;
+        java.net.URI $stack1;
+
+        this := @this: jdk.internal.loader.BuiltinClassLoader$3;
+
+        $stack1 = virtualinvoke this.<jdk.internal.loader.BuiltinClassLoader$3: java.net.URI run()>();
+
+        return $stack1;
+    }
+}

@@ -1,0 +1,383 @@
+public final class jdk.internal.module.ModuleResolution extends java.lang.Object
+{
+    final int value;
+
+    void <init>(int)
+    {
+        jdk.internal.module.ModuleResolution this;
+        int value;
+
+        this := @this: jdk.internal.module.ModuleResolution;
+
+        value := @parameter0: int;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<jdk.internal.module.ModuleResolution: int value> = value;
+
+        return;
+    }
+
+    public int value()
+    {
+        jdk.internal.module.ModuleResolution this;
+        int $stack1;
+
+        this := @this: jdk.internal.module.ModuleResolution;
+
+        $stack1 = this.<jdk.internal.module.ModuleResolution: int value>;
+
+        return $stack1;
+    }
+
+    public static jdk.internal.module.ModuleResolution empty()
+    {
+        jdk.internal.module.ModuleResolution $stack0;
+
+        $stack0 = new jdk.internal.module.ModuleResolution;
+
+        specialinvoke $stack0.<jdk.internal.module.ModuleResolution: void <init>(int)>(0);
+
+        return $stack0;
+    }
+
+    public boolean doNotResolveByDefault()
+    {
+        jdk.internal.module.ModuleResolution this;
+        int $stack1, $stack2;
+        boolean $stack3;
+
+        this := @this: jdk.internal.module.ModuleResolution;
+
+        $stack1 = this.<jdk.internal.module.ModuleResolution: int value>;
+
+        $stack2 = $stack1 & 1;
+
+        if $stack2 == 0 goto label1;
+
+        $stack3 = 1;
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    public boolean hasDeprecatedWarning()
+    {
+        jdk.internal.module.ModuleResolution this;
+        int $stack1, $stack2;
+        boolean $stack3;
+
+        this := @this: jdk.internal.module.ModuleResolution;
+
+        $stack1 = this.<jdk.internal.module.ModuleResolution: int value>;
+
+        $stack2 = $stack1 & 2;
+
+        if $stack2 == 0 goto label1;
+
+        $stack3 = 1;
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    public boolean hasDeprecatedForRemovalWarning()
+    {
+        jdk.internal.module.ModuleResolution this;
+        int $stack1, $stack2;
+        boolean $stack3;
+
+        this := @this: jdk.internal.module.ModuleResolution;
+
+        $stack1 = this.<jdk.internal.module.ModuleResolution: int value>;
+
+        $stack2 = $stack1 & 4;
+
+        if $stack2 == 0 goto label1;
+
+        $stack3 = 1;
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    public boolean hasIncubatingWarning()
+    {
+        jdk.internal.module.ModuleResolution this;
+        int $stack1, $stack2;
+        boolean $stack3;
+
+        this := @this: jdk.internal.module.ModuleResolution;
+
+        $stack1 = this.<jdk.internal.module.ModuleResolution: int value>;
+
+        $stack2 = $stack1 & 8;
+
+        if $stack2 == 0 goto label1;
+
+        $stack3 = 1;
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    public jdk.internal.module.ModuleResolution withDoNotResolveByDefault()
+    {
+        jdk.internal.module.ModuleResolution $stack1, this;
+        int $stack2, $stack3;
+
+        this := @this: jdk.internal.module.ModuleResolution;
+
+        $stack1 = new jdk.internal.module.ModuleResolution;
+
+        $stack2 = this.<jdk.internal.module.ModuleResolution: int value>;
+
+        $stack3 = $stack2 | 1;
+
+        specialinvoke $stack1.<jdk.internal.module.ModuleResolution: void <init>(int)>($stack3);
+
+        return $stack1;
+    }
+
+    public jdk.internal.module.ModuleResolution withDeprecated()
+    {
+        jdk.internal.module.ModuleResolution this, $stack3;
+        int $stack1, $stack2, $stack4, $stack5, $stack9;
+        java.lang.InternalError $stack6;
+        java.lang.StringBuilder $stack7, $stack8, $stack10;
+        java.lang.String $stack11;
+
+        this := @this: jdk.internal.module.ModuleResolution;
+
+        $stack1 = this.<jdk.internal.module.ModuleResolution: int value>;
+
+        $stack2 = $stack1 & 12;
+
+        if $stack2 == 0 goto label1;
+
+        $stack6 = new java.lang.InternalError;
+
+        $stack7 = new java.lang.StringBuilder;
+
+        specialinvoke $stack7.<java.lang.StringBuilder: void <init>()>();
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("cannot add deprecated to ");
+
+        $stack9 = this.<jdk.internal.module.ModuleResolution: int value>;
+
+        $stack10 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack9);
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack6.<java.lang.InternalError: void <init>(java.lang.String)>($stack11);
+
+        throw $stack6;
+
+     label1:
+        $stack3 = new jdk.internal.module.ModuleResolution;
+
+        $stack4 = this.<jdk.internal.module.ModuleResolution: int value>;
+
+        $stack5 = $stack4 | 2;
+
+        specialinvoke $stack3.<jdk.internal.module.ModuleResolution: void <init>(int)>($stack5);
+
+        return $stack3;
+    }
+
+    public jdk.internal.module.ModuleResolution withDeprecatedForRemoval()
+    {
+        jdk.internal.module.ModuleResolution this, $stack3;
+        int $stack1, $stack2, $stack4, $stack5, $stack9;
+        java.lang.InternalError $stack6;
+        java.lang.StringBuilder $stack7, $stack8, $stack10;
+        java.lang.String $stack11;
+
+        this := @this: jdk.internal.module.ModuleResolution;
+
+        $stack1 = this.<jdk.internal.module.ModuleResolution: int value>;
+
+        $stack2 = $stack1 & 10;
+
+        if $stack2 == 0 goto label1;
+
+        $stack6 = new java.lang.InternalError;
+
+        $stack7 = new java.lang.StringBuilder;
+
+        specialinvoke $stack7.<java.lang.StringBuilder: void <init>()>();
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("cannot add deprecated for removal to ");
+
+        $stack9 = this.<jdk.internal.module.ModuleResolution: int value>;
+
+        $stack10 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack9);
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack6.<java.lang.InternalError: void <init>(java.lang.String)>($stack11);
+
+        throw $stack6;
+
+     label1:
+        $stack3 = new jdk.internal.module.ModuleResolution;
+
+        $stack4 = this.<jdk.internal.module.ModuleResolution: int value>;
+
+        $stack5 = $stack4 | 4;
+
+        specialinvoke $stack3.<jdk.internal.module.ModuleResolution: void <init>(int)>($stack5);
+
+        return $stack3;
+    }
+
+    public jdk.internal.module.ModuleResolution withIncubating()
+    {
+        jdk.internal.module.ModuleResolution this, $stack3;
+        int $stack1, $stack2, $stack4, $stack5, $stack9;
+        java.lang.InternalError $stack6;
+        java.lang.StringBuilder $stack7, $stack8, $stack10;
+        java.lang.String $stack11;
+
+        this := @this: jdk.internal.module.ModuleResolution;
+
+        $stack1 = this.<jdk.internal.module.ModuleResolution: int value>;
+
+        $stack2 = $stack1 & 6;
+
+        if $stack2 == 0 goto label1;
+
+        $stack6 = new java.lang.InternalError;
+
+        $stack7 = new java.lang.StringBuilder;
+
+        specialinvoke $stack7.<java.lang.StringBuilder: void <init>()>();
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("cannot add incubating to ");
+
+        $stack9 = this.<jdk.internal.module.ModuleResolution: int value>;
+
+        $stack10 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack9);
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack6.<java.lang.InternalError: void <init>(java.lang.String)>($stack11);
+
+        throw $stack6;
+
+     label1:
+        $stack3 = new jdk.internal.module.ModuleResolution;
+
+        $stack4 = this.<jdk.internal.module.ModuleResolution: int value>;
+
+        $stack5 = $stack4 | 8;
+
+        specialinvoke $stack3.<jdk.internal.module.ModuleResolution: void <init>(int)>($stack5);
+
+        return $stack3;
+    }
+
+    public static boolean doNotResolveByDefault(java.lang.module.ModuleReference)
+    {
+        jdk.internal.module.ModuleResolution $stack4;
+        java.lang.module.ModuleReference mref;
+        jdk.internal.module.ModuleReferenceImpl $stack3;
+        boolean $stack2, $stack6;
+
+        mref := @parameter0: java.lang.module.ModuleReference;
+
+        $stack2 = mref instanceof jdk.internal.module.ModuleReferenceImpl;
+
+        if $stack2 == 0 goto label1;
+
+        $stack3 = (jdk.internal.module.ModuleReferenceImpl) mref;
+
+        $stack4 = virtualinvoke $stack3.<jdk.internal.module.ModuleReferenceImpl: jdk.internal.module.ModuleResolution moduleResolution()>();
+
+        if $stack4 == null goto label1;
+
+        $stack6 = virtualinvoke $stack4.<jdk.internal.module.ModuleResolution: boolean doNotResolveByDefault()>();
+
+        return $stack6;
+
+     label1:
+        return 0;
+    }
+
+    public static boolean hasIncubatingWarning(java.lang.module.ModuleReference)
+    {
+        jdk.internal.module.ModuleResolution $stack4;
+        java.lang.module.ModuleReference mref;
+        jdk.internal.module.ModuleReferenceImpl $stack3;
+        boolean $stack2, $stack6;
+
+        mref := @parameter0: java.lang.module.ModuleReference;
+
+        $stack2 = mref instanceof jdk.internal.module.ModuleReferenceImpl;
+
+        if $stack2 == 0 goto label1;
+
+        $stack3 = (jdk.internal.module.ModuleReferenceImpl) mref;
+
+        $stack4 = virtualinvoke $stack3.<jdk.internal.module.ModuleReferenceImpl: jdk.internal.module.ModuleResolution moduleResolution()>();
+
+        if $stack4 == null goto label1;
+
+        $stack6 = virtualinvoke $stack4.<jdk.internal.module.ModuleResolution: boolean hasIncubatingWarning()>();
+
+        return $stack6;
+
+     label1:
+        return 0;
+    }
+
+    public java.lang.String toString()
+    {
+        jdk.internal.module.ModuleResolution this;
+        int $stack5;
+        java.lang.StringBuilder $stack1, $stack3, $stack4, $stack6, $stack7;
+        java.lang.String $stack2, $stack8;
+
+        this := @this: jdk.internal.module.ModuleResolution;
+
+        $stack1 = new java.lang.StringBuilder;
+
+        specialinvoke $stack1.<java.lang.StringBuilder: void <init>()>();
+
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.String toString()>();
+
+        $stack3 = virtualinvoke $stack1.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack2);
+
+        $stack4 = virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("[value=");
+
+        $stack5 = this.<jdk.internal.module.ModuleResolution: int value>;
+
+        $stack6 = virtualinvoke $stack4.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack5);
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("]");
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack8;
+    }
+}

@@ -1,0 +1,57 @@
+class jdk.internal.jimage.ImageBufferCache$2 extends java.lang.Object implements java.util.Comparator
+{
+
+    void <init>()
+    {
+        jdk.internal.jimage.ImageBufferCache$2 this;
+
+        this := @this: jdk.internal.jimage.ImageBufferCache$2;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public int compare(java.util.Map$Entry, java.util.Map$Entry)
+    {
+        java.util.Map$Entry br1, br2;
+        int $stack3, $stack4, $stack5;
+        jdk.internal.jimage.ImageBufferCache$2 this;
+
+        this := @this: jdk.internal.jimage.ImageBufferCache$2;
+
+        br1 := @parameter0: java.util.Map$Entry;
+
+        br2 := @parameter1: java.util.Map$Entry;
+
+        $stack3 = staticinvoke <jdk.internal.jimage.ImageBufferCache: int getCapacity(java.util.Map$Entry)>(br1);
+
+        $stack4 = staticinvoke <jdk.internal.jimage.ImageBufferCache: int getCapacity(java.util.Map$Entry)>(br2);
+
+        $stack5 = staticinvoke <java.lang.Integer: int compare(int,int)>($stack3, $stack4);
+
+        return $stack5;
+    }
+
+    public volatile int compare(java.lang.Object, java.lang.Object)
+    {
+        java.util.Map$Entry $stack3, $stack4;
+        int $stack5;
+        java.lang.Object l1, l2;
+        jdk.internal.jimage.ImageBufferCache$2 this;
+
+        this := @this: jdk.internal.jimage.ImageBufferCache$2;
+
+        l1 := @parameter0: java.lang.Object;
+
+        l2 := @parameter1: java.lang.Object;
+
+        $stack4 = (java.util.Map$Entry) l1;
+
+        $stack3 = (java.util.Map$Entry) l2;
+
+        $stack5 = virtualinvoke this.<jdk.internal.jimage.ImageBufferCache$2: int compare(java.util.Map$Entry,java.util.Map$Entry)>($stack4, $stack3);
+
+        return $stack5;
+    }
+}

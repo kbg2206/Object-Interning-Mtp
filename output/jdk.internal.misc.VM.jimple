@@ -1,0 +1,771 @@
+public class jdk.internal.misc.VM extends java.lang.Object
+{
+    private static final int JAVA_LANG_SYSTEM_INITED;
+    private static final int MODULE_SYSTEM_INITED;
+    private static final int SYSTEM_LOADER_INITIALIZING;
+    private static final int SYSTEM_BOOTED;
+    private static final int SYSTEM_SHUTDOWN;
+    private static volatile int initLevel;
+    private static final java.lang.Object lock;
+    private static long directMemory;
+    private static boolean pageAlignDirectMemory;
+    private static int classFileMajorVersion;
+    private static int classFileMinorVersion;
+    private static final int PREVIEW_MINOR_VERSION;
+    private static java.util.Map savedProps;
+    private static volatile int finalRefCount;
+    private static volatile int peakFinalRefCount;
+    private static final int JVMTI_THREAD_STATE_ALIVE;
+    private static final int JVMTI_THREAD_STATE_TERMINATED;
+    private static final int JVMTI_THREAD_STATE_RUNNABLE;
+    private static final int JVMTI_THREAD_STATE_BLOCKED_ON_MONITOR_ENTER;
+    private static final int JVMTI_THREAD_STATE_WAITING_INDEFINITELY;
+    private static final int JVMTI_THREAD_STATE_WAITING_WITH_TIMEOUT;
+
+    public void <init>()
+    {
+        jdk.internal.misc.VM this;
+
+        this := @this: jdk.internal.misc.VM;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static void initLevel(int)
+    {
+        java.lang.Throwable $stack14;
+        int value, $stack4;
+        java.lang.InternalError $stack5;
+        java.lang.Object $stack3, $stack10;
+        java.lang.StringBuilder $stack6, $stack7, $stack8;
+        java.lang.String $stack9;
+
+        value := @parameter0: int;
+
+        $stack3 = <jdk.internal.misc.VM: java.lang.Object lock>;
+
+        entermonitor $stack3;
+
+     label1:
+        $stack4 = <jdk.internal.misc.VM: int initLevel>;
+
+        if value <= $stack4 goto label2;
+
+        if value <= 5 goto label3;
+
+     label2:
+        $stack5 = new java.lang.InternalError;
+
+        $stack6 = new java.lang.StringBuilder;
+
+        specialinvoke $stack6.<java.lang.StringBuilder: void <init>()>();
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Bad level: ");
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(value);
+
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack5.<java.lang.InternalError: void <init>(java.lang.String)>($stack9);
+
+        throw $stack5;
+
+     label3:
+        <jdk.internal.misc.VM: int initLevel> = value;
+
+        $stack10 = <jdk.internal.misc.VM: java.lang.Object lock>;
+
+        virtualinvoke $stack10.<java.lang.Object: void notifyAll()>();
+
+        exitmonitor $stack3;
+
+     label4:
+        goto label7;
+
+     label5:
+        $stack14 := @caughtexception;
+
+        exitmonitor $stack3;
+
+     label6:
+        throw $stack14;
+
+     label7:
+        return;
+
+        catch java.lang.Throwable from label1 to label4 with label5;
+        catch java.lang.Throwable from label5 to label6 with label5;
+    }
+
+    public static int initLevel()
+    {
+        int $stack0;
+
+        $stack0 = <jdk.internal.misc.VM: int initLevel>;
+
+        return $stack0;
+    }
+
+    public static void awaitInitLevel(int) throws java.lang.InterruptedException
+    {
+        java.lang.Throwable $stack8;
+        int value, $stack4;
+        java.lang.Object $stack3, $stack6;
+
+        value := @parameter0: int;
+
+        $stack3 = <jdk.internal.misc.VM: java.lang.Object lock>;
+
+        entermonitor $stack3;
+
+     label1:
+        $stack4 = <jdk.internal.misc.VM: int initLevel>;
+
+        if $stack4 >= value goto label2;
+
+        $stack6 = <jdk.internal.misc.VM: java.lang.Object lock>;
+
+        virtualinvoke $stack6.<java.lang.Object: void wait()>();
+
+        goto label1;
+
+     label2:
+        exitmonitor $stack3;
+
+     label3:
+        goto label6;
+
+     label4:
+        $stack8 := @caughtexception;
+
+        exitmonitor $stack3;
+
+     label5:
+        throw $stack8;
+
+     label6:
+        return;
+
+        catch java.lang.Throwable from label1 to label3 with label4;
+        catch java.lang.Throwable from label4 to label5 with label4;
+    }
+
+    public static boolean isModuleSystemInited()
+    {
+        int $stack0;
+        boolean $stack1;
+
+        $stack0 = staticinvoke <jdk.internal.misc.VM: int initLevel()>();
+
+        if $stack0 < 2 goto label1;
+
+        $stack1 = 1;
+
+        goto label2;
+
+     label1:
+        $stack1 = 0;
+
+     label2:
+        return $stack1;
+    }
+
+    public static boolean isBooted()
+    {
+        int $stack0;
+        boolean $stack1;
+
+        $stack0 = <jdk.internal.misc.VM: int initLevel>;
+
+        if $stack0 < 4 goto label1;
+
+        $stack1 = 1;
+
+        goto label2;
+
+     label1:
+        $stack1 = 0;
+
+     label2:
+        return $stack1;
+    }
+
+    public static void shutdown()
+    {
+        staticinvoke <jdk.internal.misc.VM: void initLevel(int)>(5);
+
+        return;
+    }
+
+    public static boolean isShutdown()
+    {
+        int $stack0;
+        boolean $stack1;
+
+        $stack0 = <jdk.internal.misc.VM: int initLevel>;
+
+        if $stack0 != 5 goto label1;
+
+        $stack1 = 1;
+
+        goto label2;
+
+     label1:
+        $stack1 = 0;
+
+     label2:
+        return $stack1;
+    }
+
+    public static long maxDirectMemory()
+    {
+        long $stack0;
+
+        $stack0 = <jdk.internal.misc.VM: long directMemory>;
+
+        return $stack0;
+    }
+
+    public static boolean isDirectMemoryPageAligned()
+    {
+        boolean $stack0;
+
+        $stack0 = <jdk.internal.misc.VM: boolean pageAlignDirectMemory>;
+
+        return $stack0;
+    }
+
+    public static boolean isSupportedClassFileVersion(int, int)
+    {
+        int major, $stack2, minor, $i0;
+        boolean $stack3;
+
+        major := @parameter0: int;
+
+        minor := @parameter1: int;
+
+        if major < 45 goto label1;
+
+        $stack2 = <jdk.internal.misc.VM: int classFileMajorVersion>;
+
+        if major <= $stack2 goto label2;
+
+     label1:
+        return 0;
+
+     label2:
+        if major >= 56 goto label3;
+
+        return 1;
+
+     label3:
+        if minor == 0 goto label4;
+
+        $i0 = (int) 65535;
+
+        if minor != $i0 goto label5;
+
+     label4:
+        $stack3 = 1;
+
+        goto label6;
+
+     label5:
+        $stack3 = 0;
+
+     label6:
+        return $stack3;
+    }
+
+    public static boolean isSupportedModuleDescriptorVersion(int, int)
+    {
+        int major, $stack2, minor, $i0;
+        boolean $stack3;
+
+        major := @parameter0: int;
+
+        minor := @parameter1: int;
+
+        if major < 53 goto label1;
+
+        $stack2 = <jdk.internal.misc.VM: int classFileMajorVersion>;
+
+        if major <= $stack2 goto label2;
+
+     label1:
+        return 0;
+
+     label2:
+        if major >= 56 goto label3;
+
+        return 1;
+
+     label3:
+        if minor == 0 goto label4;
+
+        $i0 = (int) 65535;
+
+        if minor != $i0 goto label5;
+
+     label4:
+        $stack3 = 1;
+
+        goto label6;
+
+     label5:
+        $stack3 = 0;
+
+     label6:
+        return $stack3;
+    }
+
+    public static boolean isSystemDomainLoader(java.lang.ClassLoader)
+    {
+        java.lang.ClassLoader loader, $stack1;
+        boolean $stack2;
+
+        loader := @parameter0: java.lang.ClassLoader;
+
+        if loader == null goto label1;
+
+        $stack1 = staticinvoke <java.lang.ClassLoader: java.lang.ClassLoader getPlatformClassLoader()>();
+
+        if loader != $stack1 goto label2;
+
+     label1:
+        $stack2 = 1;
+
+        goto label3;
+
+     label2:
+        $stack2 = 0;
+
+     label3:
+        return $stack2;
+    }
+
+    public static java.lang.String getSavedProperty(java.lang.String)
+    {
+        java.lang.IllegalStateException $stack5;
+        java.util.Map $stack1, $stack2;
+        java.lang.Object $stack3;
+        java.lang.String key, $stack4;
+
+        key := @parameter0: java.lang.String;
+
+        $stack1 = <jdk.internal.misc.VM: java.util.Map savedProps>;
+
+        if $stack1 != null goto label1;
+
+        $stack5 = new java.lang.IllegalStateException;
+
+        specialinvoke $stack5.<java.lang.IllegalStateException: void <init>(java.lang.String)>("Not yet initialized");
+
+        throw $stack5;
+
+     label1:
+        $stack2 = <jdk.internal.misc.VM: java.util.Map savedProps>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.Map: java.lang.Object get(java.lang.Object)>(key);
+
+        $stack4 = (java.lang.String) $stack3;
+
+        return $stack4;
+    }
+
+    public static java.util.Map getSavedProperties()
+    {
+        java.lang.IllegalStateException $stack3;
+        java.util.Map $stack0, $stack1, $stack2;
+
+        $stack0 = <jdk.internal.misc.VM: java.util.Map savedProps>;
+
+        if $stack0 != null goto label1;
+
+        $stack3 = new java.lang.IllegalStateException;
+
+        specialinvoke $stack3.<java.lang.IllegalStateException: void <init>(java.lang.String)>("Not yet initialized");
+
+        throw $stack3;
+
+     label1:
+        $stack1 = <jdk.internal.misc.VM: java.util.Map savedProps>;
+
+        $stack2 = staticinvoke <java.util.Collections: java.util.Map unmodifiableMap(java.util.Map)>($stack1);
+
+        return $stack2;
+    }
+
+    public static void saveProperties(java.util.Map)
+    {
+        java.lang.IllegalStateException $u0;
+        long $stack36, $stack8;
+        java.lang.Integer $stack15, $stack20;
+        byte $stack37;
+        java.util.Map $stack5, props;
+        int $stack4, $stack13, $stack16, $stack17, $stack18, $stack21, $i0;
+        java.lang.InternalError $u1;
+        java.lang.String $stack14, $stack19, $stack24, $stack44, $stack40, $stack10;
+        boolean $stack34, $stack35, $stack11;
+        java.lang.Runtime $stack7;
+        java.lang.NumberFormatException $stack47;
+        java.lang.Object $stack6, $stack12, $stack9;
+
+        props := @parameter0: java.util.Map;
+
+        $stack4 = staticinvoke <jdk.internal.misc.VM: int initLevel()>();
+
+        if $stack4 == 0 goto label01;
+
+        $u0 = new java.lang.IllegalStateException;
+
+        specialinvoke $u0.<java.lang.IllegalStateException: void <init>(java.lang.String)>("Wrong init level");
+
+        throw $u0;
+
+     label01:
+        $stack5 = <jdk.internal.misc.VM: java.util.Map savedProps>;
+
+        if $stack5 != null goto label02;
+
+        <jdk.internal.misc.VM: java.util.Map savedProps> = props;
+
+     label02:
+        $stack6 = interfaceinvoke props.<java.util.Map: java.lang.Object get(java.lang.Object)>("sun.nio.MaxDirectMemorySize");
+
+        $stack44 = (java.lang.String) $stack6;
+
+        if $stack44 == null goto label03;
+
+        $stack34 = virtualinvoke $stack44.<java.lang.String: boolean isEmpty()>();
+
+        if $stack34 != 0 goto label03;
+
+        $stack35 = virtualinvoke $stack44.<java.lang.String: boolean equals(java.lang.Object)>("-1");
+
+        if $stack35 == 0 goto label04;
+
+     label03:
+        $stack7 = staticinvoke <java.lang.Runtime: java.lang.Runtime getRuntime()>();
+
+        $stack8 = virtualinvoke $stack7.<java.lang.Runtime: long maxMemory()>();
+
+        <jdk.internal.misc.VM: long directMemory> = $stack8;
+
+        goto label05;
+
+     label04:
+        $stack36 = staticinvoke <java.lang.Long: long parseLong(java.lang.String)>($stack44);
+
+        $stack37 = $stack36 cmp -1L;
+
+        $i0 = (int) $stack37;
+
+        if $i0 <= 0 goto label05;
+
+        <jdk.internal.misc.VM: long directMemory> = $stack36;
+
+     label05:
+        $stack9 = interfaceinvoke props.<java.util.Map: java.lang.Object get(java.lang.Object)>("sun.nio.PageAlignDirectMemory");
+
+        $stack40 = (java.lang.String) $stack9;
+
+        $stack10 = "true";
+
+        $stack11 = virtualinvoke $stack10.<java.lang.String: boolean equals(java.lang.Object)>($stack40);
+
+        if $stack11 == 0 goto label06;
+
+        <jdk.internal.misc.VM: boolean pageAlignDirectMemory> = 1;
+
+     label06:
+        $stack12 = interfaceinvoke props.<java.util.Map: java.lang.Object get(java.lang.Object)>("java.class.version");
+
+        $stack24 = (java.lang.String) $stack12;
+
+        $stack13 = virtualinvoke $stack24.<java.lang.String: int indexOf(int)>(46);
+
+     label07:
+        $stack14 = virtualinvoke $stack24.<java.lang.String: java.lang.String substring(int,int)>(0, $stack13);
+
+        $stack15 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(java.lang.String)>($stack14);
+
+        $stack16 = virtualinvoke $stack15.<java.lang.Integer: int intValue()>();
+
+        <jdk.internal.misc.VM: int classFileMajorVersion> = $stack16;
+
+        $stack17 = $stack13 + 1;
+
+        $stack18 = virtualinvoke $stack24.<java.lang.String: int length()>();
+
+        $stack19 = virtualinvoke $stack24.<java.lang.String: java.lang.String substring(int,int)>($stack17, $stack18);
+
+        $stack20 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(java.lang.String)>($stack19);
+
+        $stack21 = virtualinvoke $stack20.<java.lang.Integer: int intValue()>();
+
+        <jdk.internal.misc.VM: int classFileMinorVersion> = $stack21;
+
+     label08:
+        goto label10;
+
+     label09:
+        $stack47 := @caughtexception;
+
+        $u1 = new java.lang.InternalError;
+
+        specialinvoke $u1.<java.lang.InternalError: void <init>(java.lang.Throwable)>($stack47);
+
+        throw $u1;
+
+     label10:
+        return;
+
+        catch java.lang.NumberFormatException from label07 to label08 with label09;
+    }
+
+    public static void initializeOSEnvironment()
+    {
+        int $stack0;
+
+        $stack0 = staticinvoke <jdk.internal.misc.VM: int initLevel()>();
+
+        if $stack0 != 0 goto label1;
+
+        staticinvoke <jdk.internal.misc.OSEnvironment: void initialize()>();
+
+     label1:
+        return;
+    }
+
+    public static int getFinalRefCount()
+    {
+        int $stack0;
+
+        $stack0 = <jdk.internal.misc.VM: int finalRefCount>;
+
+        return $stack0;
+    }
+
+    public static int getPeakFinalRefCount()
+    {
+        int $stack0;
+
+        $stack0 = <jdk.internal.misc.VM: int peakFinalRefCount>;
+
+        return $stack0;
+    }
+
+    public static void addFinalRefCount(int)
+    {
+        int n, $stack1, $stack2, $stack3, $stack4, $stack5;
+
+        n := @parameter0: int;
+
+        $stack1 = <jdk.internal.misc.VM: int finalRefCount>;
+
+        $stack2 = $stack1 + n;
+
+        <jdk.internal.misc.VM: int finalRefCount> = $stack2;
+
+        $stack4 = <jdk.internal.misc.VM: int finalRefCount>;
+
+        $stack3 = <jdk.internal.misc.VM: int peakFinalRefCount>;
+
+        if $stack4 <= $stack3 goto label1;
+
+        $stack5 = <jdk.internal.misc.VM: int finalRefCount>;
+
+        <jdk.internal.misc.VM: int peakFinalRefCount> = $stack5;
+
+     label1:
+        return;
+    }
+
+    public static java.lang.Thread$State toThreadState(int)
+    {
+        java.lang.Thread$State $stack7, $stack8, $stack9, $stack10, $stack11, $stack12, $stack13;
+        int threadStatus, $stack1, $stack2, $stack3, $stack4, $stack5, $stack6;
+
+        threadStatus := @parameter0: int;
+
+        $stack1 = threadStatus & 4;
+
+        if $stack1 == 0 goto label1;
+
+        $stack13 = <java.lang.Thread$State: java.lang.Thread$State RUNNABLE>;
+
+        return $stack13;
+
+     label1:
+        $stack2 = threadStatus & 1024;
+
+        if $stack2 == 0 goto label2;
+
+        $stack12 = <java.lang.Thread$State: java.lang.Thread$State BLOCKED>;
+
+        return $stack12;
+
+     label2:
+        $stack3 = threadStatus & 16;
+
+        if $stack3 == 0 goto label3;
+
+        $stack11 = <java.lang.Thread$State: java.lang.Thread$State WAITING>;
+
+        return $stack11;
+
+     label3:
+        $stack4 = threadStatus & 32;
+
+        if $stack4 == 0 goto label4;
+
+        $stack10 = <java.lang.Thread$State: java.lang.Thread$State TIMED_WAITING>;
+
+        return $stack10;
+
+     label4:
+        $stack5 = threadStatus & 2;
+
+        if $stack5 == 0 goto label5;
+
+        $stack9 = <java.lang.Thread$State: java.lang.Thread$State TERMINATED>;
+
+        return $stack9;
+
+     label5:
+        $stack6 = threadStatus & 1;
+
+        if $stack6 != 0 goto label6;
+
+        $stack8 = <java.lang.Thread$State: java.lang.Thread$State NEW>;
+
+        return $stack8;
+
+     label6:
+        $stack7 = <java.lang.Thread$State: java.lang.Thread$State RUNNABLE>;
+
+        return $stack7;
+    }
+
+    public static java.lang.ClassLoader latestUserDefinedLoader()
+    {
+        java.lang.ClassLoader $stack1, $stack2;
+
+        $stack1 = staticinvoke <jdk.internal.misc.VM: java.lang.ClassLoader latestUserDefinedLoader0()>();
+
+        if $stack1 == null goto label1;
+
+        $stack2 = $stack1;
+
+        goto label2;
+
+     label1:
+        $stack2 = staticinvoke <java.lang.ClassLoader: java.lang.ClassLoader getPlatformClassLoader()>();
+
+     label2:
+        return $stack2;
+    }
+
+    private static native java.lang.ClassLoader latestUserDefinedLoader0();
+
+    public static boolean isSetUID()
+    {
+        byte $stack12, $stack13;
+        long $stack8, $stack9, $stack10, $stack11;
+        boolean $stack14;
+
+        $stack8 = staticinvoke <jdk.internal.misc.VM: long getuid()>();
+
+        $stack9 = staticinvoke <jdk.internal.misc.VM: long geteuid()>();
+
+        $stack10 = staticinvoke <jdk.internal.misc.VM: long getgid()>();
+
+        $stack11 = staticinvoke <jdk.internal.misc.VM: long getegid()>();
+
+        $stack12 = $stack8 cmp $stack9;
+
+        if $stack12 != 0 goto label1;
+
+        $stack13 = $stack10 cmp $stack11;
+
+        if $stack13 == 0 goto label2;
+
+     label1:
+        $stack14 = 1;
+
+        goto label3;
+
+     label2:
+        $stack14 = 0;
+
+     label3:
+        return $stack14;
+    }
+
+    public static native long getuid();
+
+    public static native long geteuid();
+
+    public static native long getgid();
+
+    public static native long getegid();
+
+    public static native long getNanoTimeAdjustment(long);
+
+    public static native java.lang.String[] getRuntimeArguments();
+
+    private static native void initialize();
+
+    public static java.util.List getBufferPools()
+    {
+        java.util.List $stack0;
+
+        $stack0 = <jdk.internal.misc.VM$BufferPoolsHolder: java.util.List BUFFER_POOLS>;
+
+        return $stack0;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.Object $stack0;
+
+        <jdk.internal.misc.VM: int JVMTI_THREAD_STATE_WAITING_WITH_TIMEOUT> = 32;
+
+        <jdk.internal.misc.VM: int JVMTI_THREAD_STATE_WAITING_INDEFINITELY> = 16;
+
+        <jdk.internal.misc.VM: int JVMTI_THREAD_STATE_BLOCKED_ON_MONITOR_ENTER> = 1024;
+
+        <jdk.internal.misc.VM: int JVMTI_THREAD_STATE_RUNNABLE> = 4;
+
+        <jdk.internal.misc.VM: int JVMTI_THREAD_STATE_TERMINATED> = 2;
+
+        <jdk.internal.misc.VM: int JVMTI_THREAD_STATE_ALIVE> = 1;
+
+        <jdk.internal.misc.VM: int PREVIEW_MINOR_VERSION> = 65535;
+
+        <jdk.internal.misc.VM: int SYSTEM_SHUTDOWN> = 5;
+
+        <jdk.internal.misc.VM: int SYSTEM_BOOTED> = 4;
+
+        <jdk.internal.misc.VM: int SYSTEM_LOADER_INITIALIZING> = 3;
+
+        <jdk.internal.misc.VM: int MODULE_SYSTEM_INITED> = 2;
+
+        <jdk.internal.misc.VM: int JAVA_LANG_SYSTEM_INITED> = 1;
+
+        $stack0 = new java.lang.Object;
+
+        specialinvoke $stack0.<java.lang.Object: void <init>()>();
+
+        <jdk.internal.misc.VM: java.lang.Object lock> = $stack0;
+
+        <jdk.internal.misc.VM: long directMemory> = 67108864L;
+
+        staticinvoke <jdk.internal.misc.VM: void initialize()>();
+
+        return;
+    }
+}

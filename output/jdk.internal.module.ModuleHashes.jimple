@@ -1,0 +1,669 @@
+public final class jdk.internal.module.ModuleHashes extends java.lang.Object
+{
+    private final java.lang.String algorithm;
+    private final java.util.Map nameToHash;
+
+    void <init>(java.lang.String, java.util.Map)
+    {
+        java.util.Map nameToHash, $stack5;
+        java.lang.Object $stack3;
+        jdk.internal.module.ModuleHashes this;
+        java.lang.String algorithm, $stack4;
+
+        this := @this: jdk.internal.module.ModuleHashes;
+
+        algorithm := @parameter0: java.lang.String;
+
+        nameToHash := @parameter1: java.util.Map;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack3 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(algorithm);
+
+        $stack4 = (java.lang.String) $stack3;
+
+        this.<jdk.internal.module.ModuleHashes: java.lang.String algorithm> = $stack4;
+
+        $stack5 = staticinvoke <java.util.Collections: java.util.Map unmodifiableMap(java.util.Map)>(nameToHash);
+
+        this.<jdk.internal.module.ModuleHashes: java.util.Map nameToHash> = $stack5;
+
+        return;
+    }
+
+    public java.lang.String algorithm()
+    {
+        jdk.internal.module.ModuleHashes this;
+        java.lang.String $stack1;
+
+        this := @this: jdk.internal.module.ModuleHashes;
+
+        $stack1 = this.<jdk.internal.module.ModuleHashes: java.lang.String algorithm>;
+
+        return $stack1;
+    }
+
+    public java.util.Set names()
+    {
+        java.util.Set $stack2;
+        jdk.internal.module.ModuleHashes this;
+        java.util.Map $stack1;
+
+        this := @this: jdk.internal.module.ModuleHashes;
+
+        $stack1 = this.<jdk.internal.module.ModuleHashes: java.util.Map nameToHash>;
+
+        $stack2 = interfaceinvoke $stack1.<java.util.Map: java.util.Set keySet()>();
+
+        return $stack2;
+    }
+
+    public byte[] hashFor(java.lang.String)
+    {
+        byte[] $stack4;
+        java.util.Map $stack2;
+        java.lang.Object $stack3;
+        jdk.internal.module.ModuleHashes this;
+        java.lang.String mn;
+
+        this := @this: jdk.internal.module.ModuleHashes;
+
+        mn := @parameter0: java.lang.String;
+
+        $stack2 = this.<jdk.internal.module.ModuleHashes: java.util.Map nameToHash>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.Map: java.lang.Object get(java.lang.Object)>(mn);
+
+        $stack4 = (byte[]) $stack3;
+
+        return $stack4;
+    }
+
+    public java.util.Map hashes()
+    {
+        jdk.internal.module.ModuleHashes this;
+        java.util.Map $stack1;
+
+        this := @this: jdk.internal.module.ModuleHashes;
+
+        $stack1 = this.<jdk.internal.module.ModuleHashes: java.util.Map nameToHash>;
+
+        return $stack1;
+    }
+
+    private static byte[] computeHash(java.lang.module.ModuleReader, java.lang.String)
+    {
+        byte[] $stack8, e;
+        java.security.MessageDigest $stack4;
+        java.io.IOException $stack9;
+        java.lang.module.ModuleReader reader;
+        java.lang.IllegalArgumentException $u0;
+        java.util.function.Consumer $stack7;
+        java.io.UncheckedIOException $u1;
+        java.util.stream.Stream $stack5, $stack6;
+        java.security.NoSuchAlgorithmException $stack11;
+        int $i0;
+        java.lang.String algorithm;
+
+        reader := @parameter0: java.lang.module.ModuleReader;
+
+        algorithm := @parameter1: java.lang.String;
+
+     label1:
+        $stack4 = staticinvoke <java.security.MessageDigest: java.security.MessageDigest getInstance(java.lang.String)>(algorithm);
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack11 := @caughtexception;
+
+        $u0 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $u0.<java.lang.IllegalArgumentException: void <init>(java.lang.Throwable)>($stack11);
+
+        throw $u0;
+
+     label4:
+        $i0 = (int) 32768;
+
+        e = newarray (byte)[$i0];
+
+        $stack5 = interfaceinvoke reader.<java.lang.module.ModuleReader: java.util.stream.Stream list()>();
+
+        $stack6 = interfaceinvoke $stack5.<java.util.stream.Stream: java.util.stream.Stream sorted()>();
+
+        $stack7 = staticinvoke <jdk.internal.module.ModuleHashes$lambda_computeHash_0__34: java.util.function.Consumer bootstrap$(java.security.MessageDigest,java.lang.module.ModuleReader,byte[])>($stack4, reader, e);
+
+        interfaceinvoke $stack6.<java.util.stream.Stream: void forEach(java.util.function.Consumer)>($stack7);
+
+     label5:
+        goto label7;
+
+     label6:
+        $stack9 := @caughtexception;
+
+        $u1 = new java.io.UncheckedIOException;
+
+        specialinvoke $u1.<java.io.UncheckedIOException: void <init>(java.io.IOException)>($stack9);
+
+        throw $u1;
+
+     label7:
+        $stack8 = virtualinvoke $stack4.<java.security.MessageDigest: byte[] digest()>();
+
+        return $stack8;
+
+        catch java.security.NoSuchAlgorithmException from label1 to label2 with label3;
+        catch java.io.IOException from label4 to label5 with label6;
+    }
+
+    static byte[] computeHash(java.util.function.Supplier, java.lang.String)
+    {
+        java.lang.Throwable $stack10, $stack11;
+        byte[] $stack6;
+        java.io.IOException $stack8;
+        java.lang.module.ModuleReader reader;
+        java.util.function.Supplier supplier;
+        java.io.UncheckedIOException $stack9;
+        java.lang.Object $stack5;
+        java.lang.String algorithm;
+
+        supplier := @parameter0: java.util.function.Supplier;
+
+        algorithm := @parameter1: java.lang.String;
+
+     label01:
+        $stack5 = interfaceinvoke supplier.<java.util.function.Supplier: java.lang.Object get()>();
+
+        reader = (java.lang.module.ModuleReader) $stack5;
+
+     label02:
+        $stack6 = staticinvoke <jdk.internal.module.ModuleHashes: byte[] computeHash(java.lang.module.ModuleReader,java.lang.String)>(reader, algorithm);
+
+     label03:
+        if reader == null goto label04;
+
+        interfaceinvoke reader.<java.lang.module.ModuleReader: void close()>();
+
+     label04:
+        return $stack6;
+
+     label05:
+        $stack11 := @caughtexception;
+
+        if reader == null goto label09;
+
+     label06:
+        interfaceinvoke reader.<java.lang.module.ModuleReader: void close()>();
+
+     label07:
+        goto label09;
+
+     label08:
+        $stack10 := @caughtexception;
+
+        virtualinvoke $stack11.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>($stack10);
+
+     label09:
+        throw $stack11;
+
+     label10:
+        $stack8 := @caughtexception;
+
+        $stack9 = new java.io.UncheckedIOException;
+
+        specialinvoke $stack9.<java.io.UncheckedIOException: void <init>(java.io.IOException)>($stack8);
+
+        throw $stack9;
+
+        catch java.lang.Throwable from label02 to label03 with label05;
+        catch java.lang.Throwable from label06 to label07 with label08;
+        catch java.io.IOException from label01 to label04 with label10;
+        catch java.io.IOException from label05 to label10 with label10;
+    }
+
+    static jdk.internal.module.ModuleHashes generate(java.util.Set, java.lang.String)
+    {
+        java.lang.Throwable $stack21, $stack22;
+        byte[] $stack14;
+        java.lang.module.ModuleDescriptor $stack15;
+        java.lang.module.ModuleReference mref;
+        java.lang.module.ModuleReader $stack13;
+        jdk.internal.module.ModuleHashes $stack11;
+        java.lang.String algorithm, $stack16;
+        boolean $stack10;
+        java.util.Iterator $stack9;
+        java.util.Set mrefs;
+        java.io.IOException $stack19;
+        java.io.UncheckedIOException $stack20;
+        java.util.TreeMap $stack8;
+        java.lang.Object $stack12;
+
+        mrefs := @parameter0: java.util.Set;
+
+        algorithm := @parameter1: java.lang.String;
+
+        $stack8 = new java.util.TreeMap;
+
+        specialinvoke $stack8.<java.util.TreeMap: void <init>()>();
+
+        $stack9 = interfaceinvoke mrefs.<java.util.Set: java.util.Iterator iterator()>();
+
+     label01:
+        $stack10 = interfaceinvoke $stack9.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack10 == 0 goto label13;
+
+        $stack12 = interfaceinvoke $stack9.<java.util.Iterator: java.lang.Object next()>();
+
+        mref = (java.lang.module.ModuleReference) $stack12;
+
+     label02:
+        $stack13 = virtualinvoke mref.<java.lang.module.ModuleReference: java.lang.module.ModuleReader open()>();
+
+     label03:
+        $stack14 = staticinvoke <jdk.internal.module.ModuleHashes: byte[] computeHash(java.lang.module.ModuleReader,java.lang.String)>($stack13, algorithm);
+
+        $stack15 = virtualinvoke mref.<java.lang.module.ModuleReference: java.lang.module.ModuleDescriptor descriptor()>();
+
+        $stack16 = virtualinvoke $stack15.<java.lang.module.ModuleDescriptor: java.lang.String name()>();
+
+        interfaceinvoke $stack8.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>($stack16, $stack14);
+
+     label04:
+        if $stack13 == null goto label10;
+
+        interfaceinvoke $stack13.<java.lang.module.ModuleReader: void close()>();
+
+        goto label10;
+
+     label05:
+        $stack22 := @caughtexception;
+
+        if $stack13 == null goto label09;
+
+     label06:
+        interfaceinvoke $stack13.<java.lang.module.ModuleReader: void close()>();
+
+     label07:
+        goto label09;
+
+     label08:
+        $stack21 := @caughtexception;
+
+        virtualinvoke $stack22.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>($stack21);
+
+     label09:
+        throw $stack22;
+
+     label10:
+        goto label12;
+
+     label11:
+        $stack19 := @caughtexception;
+
+        $stack20 = new java.io.UncheckedIOException;
+
+        specialinvoke $stack20.<java.io.UncheckedIOException: void <init>(java.io.IOException)>($stack19);
+
+        throw $stack20;
+
+     label12:
+        goto label01;
+
+     label13:
+        $stack11 = new jdk.internal.module.ModuleHashes;
+
+        specialinvoke $stack11.<jdk.internal.module.ModuleHashes: void <init>(java.lang.String,java.util.Map)>(algorithm, $stack8);
+
+        return $stack11;
+
+        catch java.lang.Throwable from label03 to label04 with label05;
+        catch java.lang.Throwable from label06 to label07 with label08;
+        catch java.io.IOException from label02 to label10 with label11;
+    }
+
+    public int hashCode()
+    {
+        byte[] $stack17;
+        java.util.Map $stack6;
+        int $stack11, $stack14, $stack15, $stack18, h;
+        jdk.internal.module.ModuleHashes this;
+        java.lang.String $stack4, $stack13;
+        boolean $stack9;
+        java.util.Map$Entry e;
+        java.util.Iterator $stack8;
+        java.util.Set $stack7;
+        java.lang.Object $stack10, $stack12, $stack16;
+
+        this := @this: jdk.internal.module.ModuleHashes;
+
+        $stack4 = this.<jdk.internal.module.ModuleHashes: java.lang.String algorithm>;
+
+        h = virtualinvoke $stack4.<java.lang.String: int hashCode()>();
+
+        $stack6 = this.<jdk.internal.module.ModuleHashes: java.util.Map nameToHash>;
+
+        $stack7 = interfaceinvoke $stack6.<java.util.Map: java.util.Set entrySet()>();
+
+        $stack8 = interfaceinvoke $stack7.<java.util.Set: java.util.Iterator iterator()>();
+
+     label1:
+        $stack9 = interfaceinvoke $stack8.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack9 == 0 goto label2;
+
+        $stack10 = interfaceinvoke $stack8.<java.util.Iterator: java.lang.Object next()>();
+
+        e = (java.util.Map$Entry) $stack10;
+
+        $stack11 = h * 31;
+
+        $stack12 = interfaceinvoke e.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        $stack13 = (java.lang.String) $stack12;
+
+        $stack14 = virtualinvoke $stack13.<java.lang.String: int hashCode()>();
+
+        h = $stack11 + $stack14;
+
+        $stack15 = h * 31;
+
+        $stack16 = interfaceinvoke e.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        $stack17 = (byte[]) $stack16;
+
+        $stack18 = staticinvoke <java.util.Arrays: int hashCode(byte[])>($stack17);
+
+        h = $stack15 + $stack18;
+
+        goto label1;
+
+     label2:
+        return h;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        byte[] hash, $stack24;
+        java.util.Map $stack11, $stack13, $stack15, $stack22;
+        int $stack12, $stack14;
+        jdk.internal.module.ModuleHashes other, this;
+        java.lang.String $stack8, $stack9, name;
+        boolean $stack7, $stack10, $stack18, $stack25;
+        java.util.Map$Entry e;
+        java.util.Iterator $stack17;
+        java.util.Set $stack16;
+        java.lang.Object obj, $stack19, $stack20, $stack21, $stack23;
+
+        this := @this: jdk.internal.module.ModuleHashes;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack7 = obj instanceof jdk.internal.module.ModuleHashes;
+
+        if $stack7 != 0 goto label1;
+
+        return 0;
+
+     label1:
+        other = (jdk.internal.module.ModuleHashes) obj;
+
+        $stack9 = this.<jdk.internal.module.ModuleHashes: java.lang.String algorithm>;
+
+        $stack8 = other.<jdk.internal.module.ModuleHashes: java.lang.String algorithm>;
+
+        $stack10 = virtualinvoke $stack9.<java.lang.String: boolean equals(java.lang.Object)>($stack8);
+
+        if $stack10 == 0 goto label2;
+
+        $stack11 = this.<jdk.internal.module.ModuleHashes: java.util.Map nameToHash>;
+
+        $stack12 = interfaceinvoke $stack11.<java.util.Map: int size()>();
+
+        $stack13 = other.<jdk.internal.module.ModuleHashes: java.util.Map nameToHash>;
+
+        $stack14 = interfaceinvoke $stack13.<java.util.Map: int size()>();
+
+        if $stack12 == $stack14 goto label3;
+
+     label2:
+        return 0;
+
+     label3:
+        $stack15 = this.<jdk.internal.module.ModuleHashes: java.util.Map nameToHash>;
+
+        $stack16 = interfaceinvoke $stack15.<java.util.Map: java.util.Set entrySet()>();
+
+        $stack17 = interfaceinvoke $stack16.<java.util.Set: java.util.Iterator iterator()>();
+
+     label4:
+        $stack18 = interfaceinvoke $stack17.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack18 == 0 goto label6;
+
+        $stack19 = interfaceinvoke $stack17.<java.util.Iterator: java.lang.Object next()>();
+
+        e = (java.util.Map$Entry) $stack19;
+
+        $stack20 = interfaceinvoke e.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        name = (java.lang.String) $stack20;
+
+        $stack21 = interfaceinvoke e.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        hash = (byte[]) $stack21;
+
+        $stack22 = other.<jdk.internal.module.ModuleHashes: java.util.Map nameToHash>;
+
+        $stack23 = interfaceinvoke $stack22.<java.util.Map: java.lang.Object get(java.lang.Object)>(name);
+
+        $stack24 = (byte[]) $stack23;
+
+        $stack25 = staticinvoke <java.util.Arrays: boolean equals(byte[],byte[])>(hash, $stack24);
+
+        if $stack25 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        goto label4;
+
+     label6:
+        return 1;
+    }
+
+    public java.lang.String toString()
+    {
+        java.util.Set $stack6;
+        java.util.function.Consumer $stack10;
+        java.util.stream.Stream $stack7, $stack9;
+        java.util.Map $stack5;
+        java.lang.StringBuilder $stack2;
+        jdk.internal.module.ModuleHashes this;
+        java.lang.String $stack3, $stack11;
+        java.util.Comparator $stack8;
+
+        this := @this: jdk.internal.module.ModuleHashes;
+
+        $stack2 = new java.lang.StringBuilder;
+
+        $stack3 = this.<jdk.internal.module.ModuleHashes: java.lang.String algorithm>;
+
+        specialinvoke $stack2.<java.lang.StringBuilder: void <init>(java.lang.String)>($stack3);
+
+        virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+
+        $stack5 = this.<jdk.internal.module.ModuleHashes: java.util.Map nameToHash>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.Map: java.util.Set entrySet()>();
+
+        $stack7 = interfaceinvoke $stack6.<java.util.Set: java.util.stream.Stream stream()>();
+
+        $stack8 = staticinvoke <java.util.Map$Entry: java.util.Comparator comparingByKey()>();
+
+        $stack9 = interfaceinvoke $stack7.<java.util.stream.Stream: java.util.stream.Stream sorted(java.util.Comparator)>($stack8);
+
+        $stack10 = staticinvoke <jdk.internal.module.ModuleHashes$lambda_toString_1__35: java.util.function.Consumer bootstrap$(java.lang.StringBuilder)>($stack2);
+
+        interfaceinvoke $stack9.<java.util.stream.Stream: void forEach(java.util.function.Consumer)>($stack10);
+
+        $stack11 = virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack11;
+    }
+
+    public static void lambda$toString$1(java.lang.StringBuilder, java.util.Map$Entry)
+    {
+        byte[] ba;
+        java.util.Map$Entry e;
+        java.lang.Object[] $stack12;
+        java.lang.Integer $stack16;
+        short $stack13, $s0;
+        byte b;
+        int l4, l5, $i0;
+        java.lang.StringBuilder sb;
+        java.lang.Object $stack7, $stack11;
+        java.lang.String $stack8, $stack17;
+
+        sb := @parameter0: java.lang.StringBuilder;
+
+        e := @parameter1: java.util.Map$Entry;
+
+        $stack7 = interfaceinvoke e.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        $stack8 = (java.lang.String) $stack7;
+
+        virtualinvoke sb.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack8);
+
+        virtualinvoke sb.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("=");
+
+        $stack11 = interfaceinvoke e.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        ba = (byte[]) $stack11;
+
+        l4 = lengthof ba;
+
+        l5 = 0;
+
+     label1:
+        if l5 >= l4 goto label2;
+
+        b = ba[l5];
+
+        $stack12 = newarray (java.lang.Object)[1];
+
+        $s0 = (short) b;
+
+        $stack13 = $s0 & 255;
+
+        $i0 = (int) $stack13;
+
+        $stack16 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($i0);
+
+        $stack12[0] = $stack16;
+
+        $stack17 = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("%02x", $stack12);
+
+        virtualinvoke sb.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack17);
+
+        l5 = l5 + 1;
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    public static void lambda$computeHash$0(java.security.MessageDigest, java.lang.module.ModuleReader, byte[], java.lang.String)
+    {
+        java.lang.Throwable $stack16, $stack17;
+        byte[] $stack8, buf;
+        java.security.MessageDigest md;
+        java.io.IOException $stack14;
+        java.lang.module.ModuleReader reader;
+        java.io.UncheckedIOException $stack15;
+        java.nio.charset.Charset $stack7;
+        int $stack11;
+        java.util.Optional $stack9;
+        java.lang.Object $stack10;
+        java.lang.String rn;
+        java.io.InputStream in;
+
+        md := @parameter0: java.security.MessageDigest;
+
+        reader := @parameter1: java.lang.module.ModuleReader;
+
+        buf := @parameter2: byte[];
+
+        rn := @parameter3: java.lang.String;
+
+        $stack7 = <java.nio.charset.StandardCharsets: java.nio.charset.Charset UTF_8>;
+
+        $stack8 = virtualinvoke rn.<java.lang.String: byte[] getBytes(java.nio.charset.Charset)>($stack7);
+
+        virtualinvoke md.<java.security.MessageDigest: void update(byte[])>($stack8);
+
+     label01:
+        $stack9 = interfaceinvoke reader.<java.lang.module.ModuleReader: java.util.Optional open(java.lang.String)>(rn);
+
+        $stack10 = virtualinvoke $stack9.<java.util.Optional: java.lang.Object orElseThrow()>();
+
+        in = (java.io.InputStream) $stack10;
+
+     label02:
+        $stack11 = virtualinvoke in.<java.io.InputStream: int read(byte[])>(buf);
+
+        if $stack11 <= 0 goto label03;
+
+        virtualinvoke md.<java.security.MessageDigest: void update(byte[],int,int)>(buf, 0, $stack11);
+
+        goto label02;
+
+     label03:
+        if in == null goto label09;
+
+        virtualinvoke in.<java.io.InputStream: void close()>();
+
+        goto label09;
+
+     label04:
+        $stack17 := @caughtexception;
+
+        if in == null goto label08;
+
+     label05:
+        virtualinvoke in.<java.io.InputStream: void close()>();
+
+     label06:
+        goto label08;
+
+     label07:
+        $stack16 := @caughtexception;
+
+        virtualinvoke $stack17.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>($stack16);
+
+     label08:
+        throw $stack17;
+
+     label09:
+        goto label11;
+
+     label10:
+        $stack14 := @caughtexception;
+
+        $stack15 = new java.io.UncheckedIOException;
+
+        specialinvoke $stack15.<java.io.UncheckedIOException: void <init>(java.io.IOException)>($stack14);
+
+        throw $stack15;
+
+     label11:
+        return;
+
+        catch java.lang.Throwable from label02 to label03 with label04;
+        catch java.lang.Throwable from label05 to label06 with label07;
+        catch java.io.IOException from label01 to label09 with label10;
+    }
+}

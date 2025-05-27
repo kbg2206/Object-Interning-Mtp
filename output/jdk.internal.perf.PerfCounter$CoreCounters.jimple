@@ -1,0 +1,51 @@
+class jdk.internal.perf.PerfCounter$CoreCounters extends java.lang.Object
+{
+    static final jdk.internal.perf.PerfCounter pdt;
+    static final jdk.internal.perf.PerfCounter lc;
+    static final jdk.internal.perf.PerfCounter lct;
+    static final jdk.internal.perf.PerfCounter rcbt;
+    static final jdk.internal.perf.PerfCounter zfc;
+    static final jdk.internal.perf.PerfCounter zfot;
+
+    void <init>()
+    {
+        jdk.internal.perf.PerfCounter$CoreCounters this;
+
+        this := @this: jdk.internal.perf.PerfCounter$CoreCounters;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        jdk.internal.perf.PerfCounter $stack0, $stack1, $stack2, $stack3, $stack4, $stack5;
+
+        $stack0 = staticinvoke <jdk.internal.perf.PerfCounter: jdk.internal.perf.PerfCounter newPerfCounter(java.lang.String)>("sun.classloader.parentDelegationTime");
+
+        <jdk.internal.perf.PerfCounter$CoreCounters: jdk.internal.perf.PerfCounter pdt> = $stack0;
+
+        $stack1 = staticinvoke <jdk.internal.perf.PerfCounter: jdk.internal.perf.PerfCounter newPerfCounter(java.lang.String)>("sun.classloader.findClasses");
+
+        <jdk.internal.perf.PerfCounter$CoreCounters: jdk.internal.perf.PerfCounter lc> = $stack1;
+
+        $stack2 = staticinvoke <jdk.internal.perf.PerfCounter: jdk.internal.perf.PerfCounter newPerfCounter(java.lang.String)>("sun.classloader.findClassTime");
+
+        <jdk.internal.perf.PerfCounter$CoreCounters: jdk.internal.perf.PerfCounter lct> = $stack2;
+
+        $stack3 = staticinvoke <jdk.internal.perf.PerfCounter: jdk.internal.perf.PerfCounter newPerfCounter(java.lang.String)>("sun.urlClassLoader.readClassBytesTime");
+
+        <jdk.internal.perf.PerfCounter$CoreCounters: jdk.internal.perf.PerfCounter rcbt> = $stack3;
+
+        $stack4 = staticinvoke <jdk.internal.perf.PerfCounter: jdk.internal.perf.PerfCounter newPerfCounter(java.lang.String)>("sun.zip.zipFiles");
+
+        <jdk.internal.perf.PerfCounter$CoreCounters: jdk.internal.perf.PerfCounter zfc> = $stack4;
+
+        $stack5 = staticinvoke <jdk.internal.perf.PerfCounter: jdk.internal.perf.PerfCounter newPerfCounter(java.lang.String)>("sun.zip.zipFile.openTime");
+
+        <jdk.internal.perf.PerfCounter$CoreCounters: jdk.internal.perf.PerfCounter zfot> = $stack5;
+
+        return;
+    }
+}

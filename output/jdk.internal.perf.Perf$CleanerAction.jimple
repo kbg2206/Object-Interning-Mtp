@@ -1,0 +1,94 @@
+class jdk.internal.perf.Perf$CleanerAction extends java.lang.Object implements java.lang.Runnable
+{
+    private final java.nio.ByteBuffer bb;
+    private final jdk.internal.perf.Perf perf;
+    static final boolean $assertionsDisabled;
+
+    void <init>(jdk.internal.perf.Perf, java.nio.ByteBuffer)
+    {
+        jdk.internal.perf.Perf$CleanerAction this;
+        java.nio.ByteBuffer bb;
+        jdk.internal.perf.Perf perf;
+
+        this := @this: jdk.internal.perf.Perf$CleanerAction;
+
+        perf := @parameter0: jdk.internal.perf.Perf;
+
+        bb := @parameter1: java.nio.ByteBuffer;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<jdk.internal.perf.Perf$CleanerAction: jdk.internal.perf.Perf perf> = perf;
+
+        this.<jdk.internal.perf.Perf$CleanerAction: java.nio.ByteBuffer bb> = bb;
+
+        return;
+    }
+
+    public void run()
+    {
+        java.lang.Throwable $stack4;
+        java.lang.AssertionError $stack6;
+        java.lang.String $stack7;
+        jdk.internal.perf.Perf$CleanerAction this;
+        java.nio.ByteBuffer $stack2;
+        jdk.internal.perf.Perf $stack3;
+        boolean $stack5;
+
+        this := @this: jdk.internal.perf.Perf$CleanerAction;
+
+     label1:
+        $stack3 = this.<jdk.internal.perf.Perf$CleanerAction: jdk.internal.perf.Perf perf>;
+
+        $stack2 = this.<jdk.internal.perf.Perf$CleanerAction: java.nio.ByteBuffer bb>;
+
+        virtualinvoke $stack3.<jdk.internal.perf.Perf: void detach(java.nio.ByteBuffer)>($stack2);
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack4 := @caughtexception;
+
+        $stack5 = <jdk.internal.perf.Perf$CleanerAction: boolean $assertionsDisabled>;
+
+        if $stack5 != 0 goto label4;
+
+        $stack6 = new java.lang.AssertionError;
+
+        $stack7 = virtualinvoke $stack4.<java.lang.Throwable: java.lang.String toString()>();
+
+        specialinvoke $stack6.<java.lang.AssertionError: void <init>(java.lang.Object)>($stack7);
+
+        throw $stack6;
+
+     label4:
+        return;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.Class $stack0;
+        boolean $stack1, $stack2;
+
+        $stack0 = class "Ljdk/internal/perf/Perf;";
+
+        $stack1 = virtualinvoke $stack0.<java.lang.Class: boolean desiredAssertionStatus()>();
+
+        if $stack1 != 0 goto label1;
+
+        $stack2 = 1;
+
+        goto label2;
+
+     label1:
+        $stack2 = 0;
+
+     label2:
+        <jdk.internal.perf.Perf$CleanerAction: boolean $assertionsDisabled> = $stack2;
+
+        return;
+    }
+}

@@ -1,0 +1,46 @@
+class jdk.internal.module.ModulePath$Patterns extends java.lang.Object
+{
+    static final java.util.regex.Pattern DASH_VERSION;
+    static final java.util.regex.Pattern NON_ALPHANUM;
+    static final java.util.regex.Pattern REPEATING_DOTS;
+    static final java.util.regex.Pattern LEADING_DOTS;
+    static final java.util.regex.Pattern TRAILING_DOTS;
+
+    private void <init>()
+    {
+        jdk.internal.module.ModulePath$Patterns this;
+
+        this := @this: jdk.internal.module.ModulePath$Patterns;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.util.regex.Pattern $stack0, $stack1, $stack2, $stack3, $stack4;
+
+        $stack0 = staticinvoke <java.util.regex.Pattern: java.util.regex.Pattern compile(java.lang.String)>("-(\\d+(\\.|$))");
+
+        <jdk.internal.module.ModulePath$Patterns: java.util.regex.Pattern DASH_VERSION> = $stack0;
+
+        $stack1 = staticinvoke <java.util.regex.Pattern: java.util.regex.Pattern compile(java.lang.String)>("[^A-Za-z0-9]");
+
+        <jdk.internal.module.ModulePath$Patterns: java.util.regex.Pattern NON_ALPHANUM> = $stack1;
+
+        $stack2 = staticinvoke <java.util.regex.Pattern: java.util.regex.Pattern compile(java.lang.String)>("(\\.)(\\1)+");
+
+        <jdk.internal.module.ModulePath$Patterns: java.util.regex.Pattern REPEATING_DOTS> = $stack2;
+
+        $stack3 = staticinvoke <java.util.regex.Pattern: java.util.regex.Pattern compile(java.lang.String)>("^\\.");
+
+        <jdk.internal.module.ModulePath$Patterns: java.util.regex.Pattern LEADING_DOTS> = $stack3;
+
+        $stack4 = staticinvoke <java.util.regex.Pattern: java.util.regex.Pattern compile(java.lang.String)>("\\.$");
+
+        <jdk.internal.module.ModulePath$Patterns: java.util.regex.Pattern TRAILING_DOTS> = $stack4;
+
+        return;
+    }
+}

@@ -1,0 +1,633 @@
+public class jdk.internal.util.jar.JarIndex extends java.lang.Object
+{
+    private java.util.HashMap indexMap;
+    private java.util.HashMap jarMap;
+    private java.lang.String[] jarFiles;
+    public static final java.lang.String INDEX_NAME;
+    private static final boolean metaInfFilenames;
+
+    public void <init>()
+    {
+        java.util.HashMap $stack1, $stack2;
+        jdk.internal.util.jar.JarIndex this;
+
+        this := @this: jdk.internal.util.jar.JarIndex;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = new java.util.HashMap;
+
+        specialinvoke $stack1.<java.util.HashMap: void <init>()>();
+
+        this.<jdk.internal.util.jar.JarIndex: java.util.HashMap indexMap> = $stack1;
+
+        $stack2 = new java.util.HashMap;
+
+        specialinvoke $stack2.<java.util.HashMap: void <init>()>();
+
+        this.<jdk.internal.util.jar.JarIndex: java.util.HashMap jarMap> = $stack2;
+
+        return;
+    }
+
+    public void <init>(java.io.InputStream) throws java.io.IOException
+    {
+        jdk.internal.util.jar.JarIndex this;
+        java.io.InputStream is;
+
+        this := @this: jdk.internal.util.jar.JarIndex;
+
+        is := @parameter0: java.io.InputStream;
+
+        specialinvoke this.<jdk.internal.util.jar.JarIndex: void <init>()>();
+
+        virtualinvoke this.<jdk.internal.util.jar.JarIndex: void read(java.io.InputStream)>(is);
+
+        return;
+    }
+
+    public void <init>(java.lang.String[]) throws java.io.IOException
+    {
+        java.lang.String[] files;
+        jdk.internal.util.jar.JarIndex this;
+
+        this := @this: jdk.internal.util.jar.JarIndex;
+
+        files := @parameter0: java.lang.String[];
+
+        specialinvoke this.<jdk.internal.util.jar.JarIndex: void <init>()>();
+
+        this.<jdk.internal.util.jar.JarIndex: java.lang.String[] jarFiles> = files;
+
+        virtualinvoke this.<jdk.internal.util.jar.JarIndex: void parseJars(java.lang.String[])>(files);
+
+        return;
+    }
+
+    public static jdk.internal.util.jar.JarIndex getJarIndex(java.util.jar.JarFile) throws java.io.IOException
+    {
+        java.util.jar.JarEntry $stack3;
+        java.util.jar.JarFile jar;
+        jdk.internal.util.jar.JarIndex $stack4, index;
+        java.io.InputStream $stack5;
+
+        jar := @parameter0: java.util.jar.JarFile;
+
+        index = null;
+
+        $stack3 = virtualinvoke jar.<java.util.jar.JarFile: java.util.jar.JarEntry getJarEntry(java.lang.String)>("META-INF/INDEX.LIST");
+
+        if $stack3 == null goto label1;
+
+        $stack4 = new jdk.internal.util.jar.JarIndex;
+
+        $stack5 = virtualinvoke jar.<java.util.jar.JarFile: java.io.InputStream getInputStream(java.util.zip.ZipEntry)>($stack3);
+
+        specialinvoke $stack4.<jdk.internal.util.jar.JarIndex: void <init>(java.io.InputStream)>($stack5);
+
+        index = $stack4;
+
+     label1:
+        return index;
+    }
+
+    public java.lang.String[] getJarFiles()
+    {
+        java.lang.String[] $stack1;
+        jdk.internal.util.jar.JarIndex this;
+
+        this := @this: jdk.internal.util.jar.JarIndex;
+
+        $stack1 = this.<jdk.internal.util.jar.JarIndex: java.lang.String[] jarFiles>;
+
+        return $stack1;
+    }
+
+    private void addToList(java.lang.String, java.lang.String, java.util.HashMap)
+    {
+        java.util.HashMap t;
+        java.lang.Object $stack5;
+        java.lang.String key, value;
+        java.util.LinkedList $stack8, list;
+        jdk.internal.util.jar.JarIndex this;
+        boolean $stack6;
+
+        this := @this: jdk.internal.util.jar.JarIndex;
+
+        key := @parameter0: java.lang.String;
+
+        value := @parameter1: java.lang.String;
+
+        t := @parameter2: java.util.HashMap;
+
+        $stack5 = virtualinvoke t.<java.util.HashMap: java.lang.Object get(java.lang.Object)>(key);
+
+        list = (java.util.LinkedList) $stack5;
+
+        if list != null goto label1;
+
+        $stack8 = new java.util.LinkedList;
+
+        specialinvoke $stack8.<java.util.LinkedList: void <init>()>();
+
+        virtualinvoke $stack8.<java.util.LinkedList: boolean add(java.lang.Object)>(value);
+
+        virtualinvoke t.<java.util.HashMap: java.lang.Object put(java.lang.Object,java.lang.Object)>(key, $stack8);
+
+        goto label2;
+
+     label1:
+        $stack6 = virtualinvoke list.<java.util.LinkedList: boolean contains(java.lang.Object)>(value);
+
+        if $stack6 != 0 goto label2;
+
+        virtualinvoke list.<java.util.LinkedList: boolean add(java.lang.Object)>(value);
+
+     label2:
+        return;
+    }
+
+    public java.util.LinkedList get(java.lang.String)
+    {
+        java.util.HashMap $stack4, $stack9;
+        int $stack7, $i0;
+        java.lang.Object $stack5, $stack11;
+        java.lang.String fileName, $stack10;
+        jdk.internal.util.jar.JarIndex this;
+        java.util.LinkedList $stack6, jarFiles;
+
+        this := @this: jdk.internal.util.jar.JarIndex;
+
+        fileName := @parameter0: java.lang.String;
+
+        $stack4 = this.<jdk.internal.util.jar.JarIndex: java.util.HashMap indexMap>;
+
+        $stack5 = virtualinvoke $stack4.<java.util.HashMap: java.lang.Object get(java.lang.Object)>(fileName);
+
+        $stack6 = (java.util.LinkedList) $stack5;
+
+        jarFiles = $stack6;
+
+        if $stack6 != null goto label1;
+
+        $stack7 = virtualinvoke fileName.<java.lang.String: int lastIndexOf(int)>(47);
+
+        $i0 = (int) -1;
+
+        if $stack7 == $i0 goto label1;
+
+        $stack9 = this.<jdk.internal.util.jar.JarIndex: java.util.HashMap indexMap>;
+
+        $stack10 = virtualinvoke fileName.<java.lang.String: java.lang.String substring(int,int)>(0, $stack7);
+
+        $stack11 = virtualinvoke $stack9.<java.util.HashMap: java.lang.Object get(java.lang.Object)>($stack10);
+
+        jarFiles = (java.util.LinkedList) $stack11;
+
+     label1:
+        return jarFiles;
+    }
+
+    public void add(java.lang.String, java.lang.String)
+    {
+        int $stack5, $i0;
+        java.lang.String fileName, jarName, packageName;
+        jdk.internal.util.jar.JarIndex this;
+
+        this := @this: jdk.internal.util.jar.JarIndex;
+
+        fileName := @parameter0: java.lang.String;
+
+        jarName := @parameter1: java.lang.String;
+
+        $stack5 = virtualinvoke fileName.<java.lang.String: int lastIndexOf(int)>(47);
+
+        $i0 = (int) -1;
+
+        if $stack5 == $i0 goto label1;
+
+        packageName = virtualinvoke fileName.<java.lang.String: java.lang.String substring(int,int)>(0, $stack5);
+
+        goto label2;
+
+     label1:
+        packageName = fileName;
+
+     label2:
+        virtualinvoke this.<jdk.internal.util.jar.JarIndex: void addMapping(java.lang.String,java.lang.String)>(packageName, jarName);
+
+        return;
+    }
+
+    private void addMapping(java.lang.String, java.lang.String)
+    {
+        java.util.HashMap $stack3, $stack4;
+        java.lang.String jarItem, jarName;
+        jdk.internal.util.jar.JarIndex this;
+
+        this := @this: jdk.internal.util.jar.JarIndex;
+
+        jarItem := @parameter0: java.lang.String;
+
+        jarName := @parameter1: java.lang.String;
+
+        $stack3 = this.<jdk.internal.util.jar.JarIndex: java.util.HashMap indexMap>;
+
+        virtualinvoke this.<jdk.internal.util.jar.JarIndex: void addToList(java.lang.String,java.lang.String,java.util.HashMap)>(jarItem, jarName, $stack3);
+
+        $stack4 = this.<jdk.internal.util.jar.JarIndex: java.util.HashMap jarMap>;
+
+        virtualinvoke this.<jdk.internal.util.jar.JarIndex: void addToList(java.lang.String,java.lang.String,java.util.HashMap)>(jarName, jarItem, $stack4);
+
+        return;
+    }
+
+    private void parseJars(java.lang.String[]) throws java.io.IOException
+    {
+        java.util.Enumeration $stack12;
+        java.lang.String[] files;
+        int $stack8, i;
+        java.util.zip.ZipFile $stack9;
+        java.lang.String $stack11, $stack17, currentJar;
+        java.util.zip.ZipEntry entry;
+        boolean $stack18, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack13;
+        char $stack10;
+        java.lang.Object $stack16;
+        jdk.internal.util.jar.JarIndex this;
+
+        this := @this: jdk.internal.util.jar.JarIndex;
+
+        files := @parameter0: java.lang.String[];
+
+        if files != null goto label1;
+
+        return;
+
+     label1:
+        i = 0;
+
+     label2:
+        $stack8 = lengthof files;
+
+        if i >= $stack8 goto label9;
+
+        currentJar = files[i];
+
+        $stack9 = new java.util.zip.ZipFile;
+
+        $stack10 = <java.io.File: char separatorChar>;
+
+        $stack11 = virtualinvoke currentJar.<java.lang.String: java.lang.String replace(char,char)>(47, $stack10);
+
+        specialinvoke $stack9.<java.util.zip.ZipFile: void <init>(java.lang.String)>($stack11);
+
+        $stack12 = virtualinvoke $stack9.<java.util.zip.ZipFile: java.util.Enumeration entries()>();
+
+     label3:
+        $stack13 = interfaceinvoke $stack12.<java.util.Enumeration: boolean hasMoreElements()>();
+
+        if $stack13 == 0 goto label8;
+
+        $stack16 = interfaceinvoke $stack12.<java.util.Enumeration: java.lang.Object nextElement()>();
+
+        entry = (java.util.zip.ZipEntry) $stack16;
+
+        $stack17 = virtualinvoke entry.<java.util.zip.ZipEntry: java.lang.String getName()>();
+
+        $stack18 = virtualinvoke $stack17.<java.lang.String: boolean equals(java.lang.Object)>("META-INF/");
+
+        if $stack18 != 0 goto label3;
+
+        $stack20 = virtualinvoke $stack17.<java.lang.String: boolean equals(java.lang.Object)>("META-INF/INDEX.LIST");
+
+        if $stack20 != 0 goto label3;
+
+        $stack21 = virtualinvoke $stack17.<java.lang.String: boolean equals(java.lang.Object)>("META-INF/MANIFEST.MF");
+
+        if $stack21 != 0 goto label3;
+
+        $stack22 = virtualinvoke $stack17.<java.lang.String: boolean startsWith(java.lang.String)>("META-INF/versions/");
+
+        if $stack22 == 0 goto label4;
+
+        goto label3;
+
+     label4:
+        $stack23 = <jdk.internal.util.jar.JarIndex: boolean metaInfFilenames>;
+
+        if $stack23 == 0 goto label5;
+
+        $stack24 = virtualinvoke $stack17.<java.lang.String: boolean startsWith(java.lang.String)>("META-INF/");
+
+        if $stack24 != 0 goto label6;
+
+     label5:
+        virtualinvoke this.<jdk.internal.util.jar.JarIndex: void add(java.lang.String,java.lang.String)>($stack17, currentJar);
+
+        goto label7;
+
+     label6:
+        $stack25 = virtualinvoke entry.<java.util.zip.ZipEntry: boolean isDirectory()>();
+
+        if $stack25 != 0 goto label7;
+
+        virtualinvoke this.<jdk.internal.util.jar.JarIndex: void addMapping(java.lang.String,java.lang.String)>($stack17, currentJar);
+
+     label7:
+        goto label3;
+
+     label8:
+        virtualinvoke $stack9.<java.util.zip.ZipFile: void close()>();
+
+        i = i + 1;
+
+        goto label2;
+
+     label9:
+        return;
+    }
+
+    public void write(java.io.OutputStream) throws java.io.IOException
+    {
+        java.lang.String[] $stack10, $stack11, $stack13;
+        java.util.HashMap $stack18;
+        int $stack12, i;
+        java.io.OutputStreamWriter $stack8;
+        java.lang.String jar, $stack17, $stack28, $stack31;
+        java.util.LinkedList jarlist;
+        boolean $stack23;
+        java.io.OutputStream out;
+        java.util.Iterator $stack22;
+        java.io.BufferedWriter $stack7;
+        java.lang.StringBuilder $stack14, $stack15, $stack16, $stack26, $stack29, $stack30;
+        java.lang.Object $stack19, $stack27;
+        jdk.internal.util.jar.JarIndex this;
+        sun.nio.cs.UTF_8 $stack9;
+
+        this := @this: jdk.internal.util.jar.JarIndex;
+
+        out := @parameter0: java.io.OutputStream;
+
+        $stack7 = new java.io.BufferedWriter;
+
+        $stack8 = new java.io.OutputStreamWriter;
+
+        $stack9 = <sun.nio.cs.UTF_8: sun.nio.cs.UTF_8 INSTANCE>;
+
+        specialinvoke $stack8.<java.io.OutputStreamWriter: void <init>(java.io.OutputStream,java.nio.charset.Charset)>(out, $stack9);
+
+        specialinvoke $stack7.<java.io.BufferedWriter: void <init>(java.io.Writer)>($stack8);
+
+        virtualinvoke $stack7.<java.io.BufferedWriter: void write(java.lang.String)>("JarIndex-Version: 1.0\n\n");
+
+        $stack10 = this.<jdk.internal.util.jar.JarIndex: java.lang.String[] jarFiles>;
+
+        if $stack10 == null goto label5;
+
+        i = 0;
+
+     label1:
+        $stack11 = this.<jdk.internal.util.jar.JarIndex: java.lang.String[] jarFiles>;
+
+        $stack12 = lengthof $stack11;
+
+        if i >= $stack12 goto label4;
+
+        $stack13 = this.<jdk.internal.util.jar.JarIndex: java.lang.String[] jarFiles>;
+
+        jar = $stack13[i];
+
+        $stack14 = new java.lang.StringBuilder;
+
+        specialinvoke $stack14.<java.lang.StringBuilder: void <init>()>();
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(jar);
+
+        $stack16 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\n");
+
+        $stack17 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        virtualinvoke $stack7.<java.io.BufferedWriter: void write(java.lang.String)>($stack17);
+
+        $stack18 = this.<jdk.internal.util.jar.JarIndex: java.util.HashMap jarMap>;
+
+        $stack19 = virtualinvoke $stack18.<java.util.HashMap: java.lang.Object get(java.lang.Object)>(jar);
+
+        jarlist = (java.util.LinkedList) $stack19;
+
+        if jarlist == null goto label3;
+
+        $stack22 = virtualinvoke jarlist.<java.util.LinkedList: java.util.Iterator iterator()>();
+
+     label2:
+        $stack23 = interfaceinvoke $stack22.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack23 == 0 goto label3;
+
+        $stack26 = new java.lang.StringBuilder;
+
+        specialinvoke $stack26.<java.lang.StringBuilder: void <init>()>();
+
+        $stack27 = interfaceinvoke $stack22.<java.util.Iterator: java.lang.Object next()>();
+
+        $stack28 = (java.lang.String) $stack27;
+
+        $stack29 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack28);
+
+        $stack30 = virtualinvoke $stack29.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\n");
+
+        $stack31 = virtualinvoke $stack30.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        virtualinvoke $stack7.<java.io.BufferedWriter: void write(java.lang.String)>($stack31);
+
+        goto label2;
+
+     label3:
+        virtualinvoke $stack7.<java.io.BufferedWriter: void write(java.lang.String)>("\n");
+
+        i = i + 1;
+
+        goto label1;
+
+     label4:
+        virtualinvoke $stack7.<java.io.BufferedWriter: void flush()>();
+
+     label5:
+        return;
+    }
+
+    public void read(java.io.InputStream) throws java.io.IOException
+    {
+        java.lang.Object[] $stack14;
+        java.lang.String[] $stack13, $stack15;
+        java.util.Vector $stack10;
+        int $stack12;
+        java.lang.String $stack11, currentJar, line;
+        boolean $stack16, $stack17, $stack22;
+        java.io.InputStreamReader $stack8;
+        java.io.BufferedReader $stack7;
+        jdk.internal.util.jar.JarIndex this;
+        java.io.InputStream is;
+        sun.nio.cs.UTF_8 $stack9;
+
+        this := @this: jdk.internal.util.jar.JarIndex;
+
+        is := @parameter0: java.io.InputStream;
+
+        $stack7 = new java.io.BufferedReader;
+
+        $stack8 = new java.io.InputStreamReader;
+
+        $stack9 = <sun.nio.cs.UTF_8: sun.nio.cs.UTF_8 INSTANCE>;
+
+        specialinvoke $stack8.<java.io.InputStreamReader: void <init>(java.io.InputStream,java.nio.charset.Charset)>(is, $stack9);
+
+        specialinvoke $stack7.<java.io.BufferedReader: void <init>(java.io.Reader)>($stack8);
+
+        currentJar = null;
+
+        $stack10 = new java.util.Vector;
+
+        specialinvoke $stack10.<java.util.Vector: void <init>()>();
+
+     label1:
+        $stack11 = virtualinvoke $stack7.<java.io.BufferedReader: java.lang.String readLine()>();
+
+        line = $stack11;
+
+        if $stack11 == null goto label2;
+
+        $stack22 = virtualinvoke $stack11.<java.lang.String: boolean endsWith(java.lang.String)>(".jar");
+
+        if $stack22 != 0 goto label2;
+
+        goto label1;
+
+     label2:
+        if line == null goto label6;
+
+        $stack16 = virtualinvoke line.<java.lang.String: boolean isEmpty()>();
+
+        if $stack16 == 0 goto label3;
+
+        goto label5;
+
+     label3:
+        $stack17 = virtualinvoke line.<java.lang.String: boolean endsWith(java.lang.String)>(".jar");
+
+        if $stack17 == 0 goto label4;
+
+        currentJar = line;
+
+        virtualinvoke $stack10.<java.util.Vector: boolean add(java.lang.Object)>(line);
+
+        goto label5;
+
+     label4:
+        virtualinvoke this.<jdk.internal.util.jar.JarIndex: void addMapping(java.lang.String,java.lang.String)>(line, currentJar);
+
+     label5:
+        line = virtualinvoke $stack7.<java.io.BufferedReader: java.lang.String readLine()>();
+
+        goto label2;
+
+     label6:
+        $stack12 = virtualinvoke $stack10.<java.util.Vector: int size()>();
+
+        $stack13 = newarray (java.lang.String)[$stack12];
+
+        $stack14 = virtualinvoke $stack10.<java.util.Vector: java.lang.Object[] toArray(java.lang.Object[])>($stack13);
+
+        $stack15 = (java.lang.String[]) $stack14;
+
+        this.<jdk.internal.util.jar.JarIndex: java.lang.String[] jarFiles> = $stack15;
+
+        return;
+    }
+
+    public void merge(jdk.internal.util.jar.JarIndex, java.lang.String)
+    {
+        java.util.HashMap $stack9;
+        java.lang.String packageName, path, jarName;
+        java.util.LinkedList from_list;
+        boolean $stack12, $stack17;
+        java.util.Map$Entry e;
+        java.util.Iterator $stack11, $stack16;
+        java.util.Set $stack10;
+        java.lang.Object $stack13, $stack14, $stack15, $stack19;
+        jdk.internal.util.jar.JarIndex this, toIndex;
+
+        this := @this: jdk.internal.util.jar.JarIndex;
+
+        toIndex := @parameter0: jdk.internal.util.jar.JarIndex;
+
+        path := @parameter1: java.lang.String;
+
+        $stack9 = this.<jdk.internal.util.jar.JarIndex: java.util.HashMap indexMap>;
+
+        $stack10 = virtualinvoke $stack9.<java.util.HashMap: java.util.Set entrySet()>();
+
+        $stack11 = interfaceinvoke $stack10.<java.util.Set: java.util.Iterator iterator()>();
+
+     label1:
+        $stack12 = interfaceinvoke $stack11.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack12 == 0 goto label5;
+
+        $stack13 = interfaceinvoke $stack11.<java.util.Iterator: java.lang.Object next()>();
+
+        e = (java.util.Map$Entry) $stack13;
+
+        $stack14 = interfaceinvoke e.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        packageName = (java.lang.String) $stack14;
+
+        $stack15 = interfaceinvoke e.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        from_list = (java.util.LinkedList) $stack15;
+
+        $stack16 = virtualinvoke from_list.<java.util.LinkedList: java.util.Iterator iterator()>();
+
+     label2:
+        $stack17 = interfaceinvoke $stack16.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack17 == 0 goto label4;
+
+        $stack19 = interfaceinvoke $stack16.<java.util.Iterator: java.lang.Object next()>();
+
+        jarName = (java.lang.String) $stack19;
+
+        if path == null goto label3;
+
+        jarName = virtualinvoke path.<java.lang.String: java.lang.String concat(java.lang.String)>(jarName);
+
+     label3:
+        virtualinvoke toIndex.<jdk.internal.util.jar.JarIndex: void addMapping(java.lang.String,java.lang.String)>(packageName, jarName);
+
+        goto label2;
+
+     label4:
+        goto label1;
+
+     label5:
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.String $stack0, $stack1;
+        boolean $stack2;
+
+        <jdk.internal.util.jar.JarIndex: java.lang.String INDEX_NAME> = "META-INF/INDEX.LIST";
+
+        $stack0 = "true";
+
+        $stack1 = staticinvoke <sun.security.action.GetPropertyAction: java.lang.String privilegedGetProperty(java.lang.String)>("sun.misc.JarIndex.metaInfFilenames");
+
+        $stack2 = virtualinvoke $stack0.<java.lang.String: boolean equals(java.lang.Object)>($stack1);
+
+        <jdk.internal.util.jar.JarIndex: boolean metaInfFilenames> = $stack2;
+
+        return;
+    }
+}

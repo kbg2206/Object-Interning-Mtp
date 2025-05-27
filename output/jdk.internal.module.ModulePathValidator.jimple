@@ -1,0 +1,831 @@
+class jdk.internal.module.ModulePathValidator extends java.lang.Object
+{
+    private static final java.lang.String MODULE_INFO;
+    private static final java.lang.String INDENT;
+    private final java.util.Map nameToModule;
+    private final java.util.Map packageToModule;
+    private final java.io.PrintStream out;
+    private int errorCount;
+
+    private void <init>(java.io.PrintStream)
+    {
+        java.io.PrintStream out;
+        jdk.internal.module.ModulePathValidator this;
+        java.util.HashMap $stack2, $stack3;
+
+        this := @this: jdk.internal.module.ModulePathValidator;
+
+        out := @parameter0: java.io.PrintStream;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack2 = new java.util.HashMap;
+
+        specialinvoke $stack2.<java.util.HashMap: void <init>()>();
+
+        this.<jdk.internal.module.ModulePathValidator: java.util.Map nameToModule> = $stack2;
+
+        $stack3 = new java.util.HashMap;
+
+        specialinvoke $stack3.<java.util.HashMap: void <init>()>();
+
+        this.<jdk.internal.module.ModulePathValidator: java.util.Map packageToModule> = $stack3;
+
+        this.<jdk.internal.module.ModulePathValidator: java.io.PrintStream out> = out;
+
+        return;
+    }
+
+    static int scanAllModules(java.io.PrintStream)
+    {
+        jdk.internal.module.ModulePathValidator $stack3;
+        java.lang.String[] $stack16, $stack24;
+        java.util.function.Function $stack8, $stack18, $stack26;
+        java.lang.module.ModuleFinder $stack5;
+        int $stack14;
+        java.lang.String $stack4, $stack13, $stack15, $stack23;
+        java.io.PrintStream out;
+        java.util.Set $stack6;
+        java.util.function.Consumer $stack12, $stack21, $stack29;
+        java.util.stream.Stream $stack7, $stack10, $stack17, $stack19, $stack25, $stack27;
+        java.util.Comparator $stack9;
+
+        out := @parameter0: java.io.PrintStream;
+
+        $stack3 = new jdk.internal.module.ModulePathValidator;
+
+        specialinvoke $stack3.<jdk.internal.module.ModulePathValidator: void <init>(java.io.PrintStream)>(out);
+
+        $stack4 = staticinvoke <java.lang.System: java.lang.String getProperty(java.lang.String)>("jdk.module.upgrade.path");
+
+        if $stack4 == null goto label1;
+
+        $stack23 = <java.io.File: java.lang.String pathSeparator>;
+
+        $stack24 = virtualinvoke $stack4.<java.lang.String: java.lang.String[] split(java.lang.String)>($stack23);
+
+        $stack25 = staticinvoke <java.util.stream.Stream: java.util.stream.Stream of(java.lang.Object[])>($stack24);
+
+        $stack26 = staticinvoke <jdk.internal.module.ModulePathValidator$lambda_scanAllModules_0__103: java.util.function.Function bootstrap$()>();
+
+        $stack27 = interfaceinvoke $stack25.<java.util.stream.Stream: java.util.stream.Stream map(java.util.function.Function)>($stack26);
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>($stack3);
+
+        $stack29 = staticinvoke <jdk.internal.module.ModulePathValidator$scan__105: java.util.function.Consumer bootstrap$(jdk.internal.module.ModulePathValidator)>($stack3);
+
+        interfaceinvoke $stack27.<java.util.stream.Stream: void forEach(java.util.function.Consumer)>($stack29);
+
+     label1:
+        $stack5 = staticinvoke <java.lang.module.ModuleFinder: java.lang.module.ModuleFinder ofSystem()>();
+
+        $stack6 = interfaceinvoke $stack5.<java.lang.module.ModuleFinder: java.util.Set findAll()>();
+
+        $stack7 = interfaceinvoke $stack6.<java.util.Set: java.util.stream.Stream stream()>();
+
+        $stack8 = staticinvoke <jdk.internal.module.ModulePathValidator$descriptor__94: java.util.function.Function bootstrap$()>();
+
+        $stack9 = staticinvoke <java.util.Comparator: java.util.Comparator comparing(java.util.function.Function)>($stack8);
+
+        $stack10 = interfaceinvoke $stack7.<java.util.stream.Stream: java.util.stream.Stream sorted(java.util.Comparator)>($stack9);
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>($stack3);
+
+        $stack12 = staticinvoke <jdk.internal.module.ModulePathValidator$process__95: java.util.function.Consumer bootstrap$(jdk.internal.module.ModulePathValidator)>($stack3);
+
+        interfaceinvoke $stack10.<java.util.stream.Stream: void forEach(java.util.function.Consumer)>($stack12);
+
+        $stack13 = staticinvoke <java.lang.System: java.lang.String getProperty(java.lang.String)>("jdk.module.path");
+
+        if $stack13 == null goto label2;
+
+        $stack15 = <java.io.File: java.lang.String pathSeparator>;
+
+        $stack16 = virtualinvoke $stack13.<java.lang.String: java.lang.String[] split(java.lang.String)>($stack15);
+
+        $stack17 = staticinvoke <java.util.stream.Stream: java.util.stream.Stream of(java.lang.Object[])>($stack16);
+
+        $stack18 = staticinvoke <jdk.internal.module.ModulePathValidator$lambda_scanAllModules_1__100: java.util.function.Function bootstrap$()>();
+
+        $stack19 = interfaceinvoke $stack17.<java.util.stream.Stream: java.util.stream.Stream map(java.util.function.Function)>($stack18);
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>($stack3);
+
+        $stack21 = staticinvoke <jdk.internal.module.ModulePathValidator$scan__102: java.util.function.Consumer bootstrap$(jdk.internal.module.ModulePathValidator)>($stack3);
+
+        interfaceinvoke $stack19.<java.util.stream.Stream: void forEach(java.util.function.Consumer)>($stack21);
+
+     label2:
+        $stack14 = $stack3.<jdk.internal.module.ModulePathValidator: int errorCount>;
+
+        return $stack14;
+    }
+
+    private void printModule(java.lang.module.ModuleReference)
+    {
+        java.io.PrintStream $stack8, $stack11, $stack12;
+        java.util.function.Predicate $stack4;
+        java.lang.module.ModuleDescriptor $stack7;
+        java.lang.module.ModuleReference mref;
+        jdk.internal.module.ModulePathValidator this;
+        java.util.function.Consumer $stack6;
+        java.util.Optional $stack3, $stack5;
+        java.lang.String $stack9;
+        boolean $stack10;
+
+        this := @this: jdk.internal.module.ModulePathValidator;
+
+        mref := @parameter0: java.lang.module.ModuleReference;
+
+        $stack3 = virtualinvoke mref.<java.lang.module.ModuleReference: java.util.Optional location()>();
+
+        $stack4 = staticinvoke <jdk.internal.module.ModulePathValidator$lambda_printModule_2__96: java.util.function.Predicate bootstrap$()>();
+
+        $stack5 = virtualinvoke $stack3.<java.util.Optional: java.util.Optional filter(java.util.function.Predicate)>($stack4);
+
+        $stack6 = staticinvoke <jdk.internal.module.ModulePathValidator$lambda_printModule_3__101: java.util.function.Consumer bootstrap$(jdk.internal.module.ModulePathValidator)>(this);
+
+        virtualinvoke $stack5.<java.util.Optional: void ifPresent(java.util.function.Consumer)>($stack6);
+
+        $stack7 = virtualinvoke mref.<java.lang.module.ModuleReference: java.lang.module.ModuleDescriptor descriptor()>();
+
+        $stack8 = this.<jdk.internal.module.ModulePathValidator: java.io.PrintStream out>;
+
+        $stack9 = virtualinvoke $stack7.<java.lang.module.ModuleDescriptor: java.lang.String name()>();
+
+        virtualinvoke $stack8.<java.io.PrintStream: void print(java.lang.String)>($stack9);
+
+        $stack10 = virtualinvoke $stack7.<java.lang.module.ModuleDescriptor: boolean isAutomatic()>();
+
+        if $stack10 == 0 goto label1;
+
+        $stack12 = this.<jdk.internal.module.ModulePathValidator: java.io.PrintStream out>;
+
+        virtualinvoke $stack12.<java.io.PrintStream: void print(java.lang.String)>(" automatic");
+
+     label1:
+        $stack11 = this.<jdk.internal.module.ModulePathValidator: java.io.PrintStream out>;
+
+        virtualinvoke $stack11.<java.io.PrintStream: void println()>();
+
+        return;
+    }
+
+    private void process(java.lang.module.ModuleReference)
+    {
+        java.lang.module.ModuleDescriptor $stack8, $stack12, $stack20;
+        java.lang.module.ModuleReference mref, previous;
+        jdk.internal.module.ModulePathValidator this;
+        java.util.Map $stack10, $stack17;
+        int $stack29, $stack30;
+        java.lang.String $stack9, pkg, $stack21, $stack28;
+        boolean $stack15, first;
+        java.io.PrintStream $stack23, $stack37;
+        java.util.Iterator $stack14;
+        java.util.Set $stack13;
+        java.lang.Object $stack11, $stack16, $stack18;
+        java.lang.StringBuilder $stack22, $stack24, $stack25, $stack26, $stack27;
+
+        this := @this: jdk.internal.module.ModulePathValidator;
+
+        mref := @parameter0: java.lang.module.ModuleReference;
+
+        $stack8 = virtualinvoke mref.<java.lang.module.ModuleReference: java.lang.module.ModuleDescriptor descriptor()>();
+
+        $stack9 = virtualinvoke $stack8.<java.lang.module.ModuleDescriptor: java.lang.String name()>();
+
+        $stack10 = this.<jdk.internal.module.ModulePathValidator: java.util.Map nameToModule>;
+
+        $stack11 = interfaceinvoke $stack10.<java.util.Map: java.lang.Object putIfAbsent(java.lang.Object,java.lang.Object)>($stack9, mref);
+
+        previous = (java.lang.module.ModuleReference) $stack11;
+
+        if previous == null goto label1;
+
+        virtualinvoke this.<jdk.internal.module.ModulePathValidator: void printModule(java.lang.module.ModuleReference)>(mref);
+
+        $stack37 = this.<jdk.internal.module.ModulePathValidator: java.io.PrintStream out>;
+
+        virtualinvoke $stack37.<java.io.PrintStream: void print(java.lang.String)>("    shadowed by ");
+
+        virtualinvoke this.<jdk.internal.module.ModulePathValidator: void printModule(java.lang.module.ModuleReference)>(previous);
+
+        goto label5;
+
+     label1:
+        first = 1;
+
+        $stack12 = virtualinvoke mref.<java.lang.module.ModuleReference: java.lang.module.ModuleDescriptor descriptor()>();
+
+        $stack13 = virtualinvoke $stack12.<java.lang.module.ModuleDescriptor: java.util.Set packages()>();
+
+        $stack14 = interfaceinvoke $stack13.<java.util.Set: java.util.Iterator iterator()>();
+
+     label2:
+        $stack15 = interfaceinvoke $stack14.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack15 == 0 goto label5;
+
+        $stack16 = interfaceinvoke $stack14.<java.util.Iterator: java.lang.Object next()>();
+
+        pkg = (java.lang.String) $stack16;
+
+        $stack17 = this.<jdk.internal.module.ModulePathValidator: java.util.Map packageToModule>;
+
+        $stack18 = interfaceinvoke $stack17.<java.util.Map: java.lang.Object putIfAbsent(java.lang.Object,java.lang.Object)>(pkg, mref);
+
+        previous = (java.lang.module.ModuleReference) $stack18;
+
+        if previous == null goto label4;
+
+        if first == 0 goto label3;
+
+        virtualinvoke this.<jdk.internal.module.ModulePathValidator: void printModule(java.lang.module.ModuleReference)>(mref);
+
+        first = 0;
+
+        $stack29 = this.<jdk.internal.module.ModulePathValidator: int errorCount>;
+
+        $stack30 = $stack29 + 1;
+
+        this.<jdk.internal.module.ModulePathValidator: int errorCount> = $stack30;
+
+     label3:
+        $stack20 = virtualinvoke previous.<java.lang.module.ModuleReference: java.lang.module.ModuleDescriptor descriptor()>();
+
+        $stack21 = virtualinvoke $stack20.<java.lang.module.ModuleDescriptor: java.lang.String name()>();
+
+        $stack23 = this.<jdk.internal.module.ModulePathValidator: java.io.PrintStream out>;
+
+        $stack22 = new java.lang.StringBuilder;
+
+        specialinvoke $stack22.<java.lang.StringBuilder: void <init>()>();
+
+        $stack24 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("    contains ");
+
+        $stack25 = virtualinvoke $stack24.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(pkg);
+
+        $stack26 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" conflicts with module ");
+
+        $stack27 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack21);
+
+        $stack28 = virtualinvoke $stack27.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        virtualinvoke $stack23.<java.io.PrintStream: void println(java.lang.String)>($stack28);
+
+     label4:
+        goto label2;
+
+     label5:
+        return;
+    }
+
+    private void scan(java.nio.file.Path)
+    {
+        java.nio.file.NoSuchFileException $stack29;
+        jdk.internal.module.ModulePathValidator this;
+        int $stack27, $stack28;
+        java.lang.String $stack8, $stack26;
+        java.nio.file.Path entry, $stack7, $stack11;
+        boolean $stack9, $stack10, $stack13, $stack16;
+        java.io.PrintStream $stack22;
+        java.nio.file.LinkOption[] $stack5, $stack12;
+        java.io.IOException $stack20;
+        java.nio.file.attribute.BasicFileAttributes $stack6;
+        java.util.function.Consumer $stack15, $stack19;
+        java.util.Optional $stack14, $stack18;
+        java.lang.StringBuilder $stack21, $stack23, $stack24, $stack25;
+
+        this := @this: jdk.internal.module.ModulePathValidator;
+
+        entry := @parameter0: java.nio.file.Path;
+
+     label1:
+        $stack5 = newarray (java.nio.file.LinkOption)[0];
+
+        $stack6 = staticinvoke <java.nio.file.Files: java.nio.file.attribute.BasicFileAttributes readAttributes(java.nio.file.Path,java.lang.Class,java.nio.file.LinkOption[])>(entry, class "Ljava/nio/file/attribute/BasicFileAttributes;", $stack5);
+
+     label2:
+        goto label5;
+
+     label3:
+        $stack29 := @caughtexception;
+
+        return;
+
+     label4:
+        $stack20 := @caughtexception;
+
+        $stack22 = this.<jdk.internal.module.ModulePathValidator: java.io.PrintStream out>;
+
+        $stack21 = new java.lang.StringBuilder;
+
+        specialinvoke $stack21.<java.lang.StringBuilder: void <init>()>();
+
+        $stack23 = virtualinvoke $stack21.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(entry);
+
+        $stack24 = virtualinvoke $stack23.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+
+        $stack25 = virtualinvoke $stack24.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack20);
+
+        $stack26 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        virtualinvoke $stack22.<java.io.PrintStream: void println(java.lang.String)>($stack26);
+
+        $stack27 = this.<jdk.internal.module.ModulePathValidator: int errorCount>;
+
+        $stack28 = $stack27 + 1;
+
+        this.<jdk.internal.module.ModulePathValidator: int errorCount> = $stack28;
+
+        return;
+
+     label5:
+        $stack7 = interfaceinvoke entry.<java.nio.file.Path: java.nio.file.Path getFileName()>();
+
+        $stack8 = interfaceinvoke $stack7.<java.nio.file.Path: java.lang.String toString()>();
+
+        $stack9 = interfaceinvoke $stack6.<java.nio.file.attribute.BasicFileAttributes: boolean isRegularFile()>();
+
+        if $stack9 == 0 goto label6;
+
+        $stack16 = virtualinvoke $stack8.<java.lang.String: boolean endsWith(java.lang.String)>(".jar");
+
+        if $stack16 == 0 goto label6;
+
+        $stack18 = virtualinvoke this.<jdk.internal.module.ModulePathValidator: java.util.Optional scanModule(java.nio.file.Path)>(entry);
+
+        $stack19 = staticinvoke <jdk.internal.module.ModulePathValidator$process__98: java.util.function.Consumer bootstrap$(jdk.internal.module.ModulePathValidator)>(this);
+
+        virtualinvoke $stack18.<java.util.Optional: void ifPresent(java.util.function.Consumer)>($stack19);
+
+        goto label8;
+
+     label6:
+        $stack10 = interfaceinvoke $stack6.<java.nio.file.attribute.BasicFileAttributes: boolean isDirectory()>();
+
+        if $stack10 == 0 goto label8;
+
+        $stack11 = interfaceinvoke entry.<java.nio.file.Path: java.nio.file.Path resolve(java.lang.String)>("module-info.class");
+
+        $stack12 = newarray (java.nio.file.LinkOption)[0];
+
+        $stack13 = staticinvoke <java.nio.file.Files: boolean exists(java.nio.file.Path,java.nio.file.LinkOption[])>($stack11, $stack12);
+
+        if $stack13 == 0 goto label7;
+
+        $stack14 = virtualinvoke this.<jdk.internal.module.ModulePathValidator: java.util.Optional scanModule(java.nio.file.Path)>(entry);
+
+        $stack15 = staticinvoke <jdk.internal.module.ModulePathValidator$process__97: java.util.function.Consumer bootstrap$(jdk.internal.module.ModulePathValidator)>(this);
+
+        virtualinvoke $stack14.<java.util.Optional: void ifPresent(java.util.function.Consumer)>($stack15);
+
+        goto label8;
+
+     label7:
+        virtualinvoke this.<jdk.internal.module.ModulePathValidator: void scanDirectory(java.nio.file.Path)>(entry);
+
+     label8:
+        return;
+
+        catch java.nio.file.NoSuchFileException from label1 to label2 with label3;
+        catch java.io.IOException from label1 to label2 with label4;
+    }
+
+    private void scanDirectory(java.nio.file.Path)
+    {
+        java.lang.module.ModuleReference ioe;
+        java.nio.file.DirectoryStream $stack11;
+        java.nio.file.Path dir, entry, $stack18, previous, $stack29, $stack34;
+        boolean $stack20, $stack21, $stack36, $stack40, $stack14;
+        java.util.Optional $stack38, $stack42;
+        java.lang.StringBuilder $stack26, $stack28, $stack30, $stack45, $stack47, $stack48, $stack49, $stack57, $stack59, $stack60, $stack61;
+        java.lang.Throwable $stack53, $stack54;
+        java.lang.module.ModuleDescriptor $stack23;
+        java.util.HashMap $stack12;
+        jdk.internal.module.ModulePathValidator this;
+        int $stack32, $stack33, $stack51, $stack52, $stack63, $stack64;
+        java.lang.String $stack19, $stack24, $stack31, $stack50, $stack62;
+        java.io.PrintStream $stack27, $stack46, $stack58;
+        java.util.Iterator $stack13;
+        java.nio.file.LinkOption[] $stack16, $stack35;
+        java.io.IOException $stack44, $stack56;
+        java.nio.file.attribute.BasicFileAttributes $stack17;
+        java.lang.Object $stack15, $stack25, $stack39, $stack43;
+
+        this := @this: jdk.internal.module.ModulePathValidator;
+
+        dir := @parameter0: java.nio.file.Path;
+
+     label01:
+        $stack11 = staticinvoke <java.nio.file.Files: java.nio.file.DirectoryStream newDirectoryStream(java.nio.file.Path)>(dir);
+
+     label02:
+        $stack12 = new java.util.HashMap;
+
+        specialinvoke $stack12.<java.util.HashMap: void <init>()>();
+
+        $stack13 = interfaceinvoke $stack11.<java.nio.file.DirectoryStream: java.util.Iterator iterator()>();
+
+     label03:
+        $stack14 = interfaceinvoke $stack13.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack14 == 0 goto label12;
+
+        $stack15 = interfaceinvoke $stack13.<java.util.Iterator: java.lang.Object next()>();
+
+        entry = (java.nio.file.Path) $stack15;
+
+     label04:
+        $stack16 = newarray (java.nio.file.LinkOption)[0];
+
+        $stack17 = staticinvoke <java.nio.file.Files: java.nio.file.attribute.BasicFileAttributes readAttributes(java.nio.file.Path,java.lang.Class,java.nio.file.LinkOption[])>(entry, class "Ljava/nio/file/attribute/BasicFileAttributes;", $stack16);
+
+     label05:
+        goto label07;
+
+     label06:
+        $stack56 := @caughtexception;
+
+        $stack58 = this.<jdk.internal.module.ModulePathValidator: java.io.PrintStream out>;
+
+        $stack57 = new java.lang.StringBuilder;
+
+        specialinvoke $stack57.<java.lang.StringBuilder: void <init>()>();
+
+        $stack59 = virtualinvoke $stack57.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(entry);
+
+        $stack60 = virtualinvoke $stack59.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+
+        $stack61 = virtualinvoke $stack60.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack56);
+
+        $stack62 = virtualinvoke $stack61.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        virtualinvoke $stack58.<java.io.PrintStream: void println(java.lang.String)>($stack62);
+
+        $stack63 = this.<jdk.internal.module.ModulePathValidator: int errorCount>;
+
+        $stack64 = $stack63 + 1;
+
+        this.<jdk.internal.module.ModulePathValidator: int errorCount> = $stack64;
+
+        goto label03;
+
+     label07:
+        ioe = null;
+
+        $stack18 = interfaceinvoke entry.<java.nio.file.Path: java.nio.file.Path getFileName()>();
+
+        $stack19 = interfaceinvoke $stack18.<java.nio.file.Path: java.lang.String toString()>();
+
+        $stack20 = interfaceinvoke $stack17.<java.nio.file.attribute.BasicFileAttributes: boolean isRegularFile()>();
+
+        if $stack20 == 0 goto label08;
+
+        $stack40 = virtualinvoke $stack19.<java.lang.String: boolean endsWith(java.lang.String)>(".jar");
+
+        if $stack40 == 0 goto label08;
+
+        $stack42 = virtualinvoke this.<jdk.internal.module.ModulePathValidator: java.util.Optional scanModule(java.nio.file.Path)>(entry);
+
+        $stack43 = virtualinvoke $stack42.<java.util.Optional: java.lang.Object orElse(java.lang.Object)>(null);
+
+        ioe = (java.lang.module.ModuleReference) $stack43;
+
+        goto label09;
+
+     label08:
+        $stack21 = interfaceinvoke $stack17.<java.nio.file.attribute.BasicFileAttributes: boolean isDirectory()>();
+
+        if $stack21 == 0 goto label09;
+
+        $stack34 = interfaceinvoke entry.<java.nio.file.Path: java.nio.file.Path resolve(java.lang.String)>("module-info.class");
+
+        $stack35 = newarray (java.nio.file.LinkOption)[0];
+
+        $stack36 = staticinvoke <java.nio.file.Files: boolean exists(java.nio.file.Path,java.nio.file.LinkOption[])>($stack34, $stack35);
+
+        if $stack36 == 0 goto label09;
+
+        $stack38 = virtualinvoke this.<jdk.internal.module.ModulePathValidator: java.util.Optional scanModule(java.nio.file.Path)>(entry);
+
+        $stack39 = virtualinvoke $stack38.<java.util.Optional: java.lang.Object orElse(java.lang.Object)>(null);
+
+        ioe = (java.lang.module.ModuleReference) $stack39;
+
+     label09:
+        if ioe == null goto label11;
+
+        $stack23 = virtualinvoke ioe.<java.lang.module.ModuleReference: java.lang.module.ModuleDescriptor descriptor()>();
+
+        $stack24 = virtualinvoke $stack23.<java.lang.module.ModuleDescriptor: java.lang.String name()>();
+
+        $stack25 = interfaceinvoke $stack12.<java.util.Map: java.lang.Object putIfAbsent(java.lang.Object,java.lang.Object)>($stack24, entry);
+
+        previous = (java.nio.file.Path) $stack25;
+
+        if previous == null goto label10;
+
+        virtualinvoke this.<jdk.internal.module.ModulePathValidator: void printModule(java.lang.module.ModuleReference)>(ioe);
+
+        $stack27 = this.<jdk.internal.module.ModulePathValidator: java.io.PrintStream out>;
+
+        $stack26 = new java.lang.StringBuilder;
+
+        specialinvoke $stack26.<java.lang.StringBuilder: void <init>()>();
+
+        $stack28 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("    contains same module as ");
+
+        $stack29 = interfaceinvoke previous.<java.nio.file.Path: java.nio.file.Path getFileName()>();
+
+        $stack30 = virtualinvoke $stack28.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack29);
+
+        $stack31 = virtualinvoke $stack30.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        virtualinvoke $stack27.<java.io.PrintStream: void println(java.lang.String)>($stack31);
+
+        $stack32 = this.<jdk.internal.module.ModulePathValidator: int errorCount>;
+
+        $stack33 = $stack32 + 1;
+
+        this.<jdk.internal.module.ModulePathValidator: int errorCount> = $stack33;
+
+        goto label11;
+
+     label10:
+        virtualinvoke this.<jdk.internal.module.ModulePathValidator: void process(java.lang.module.ModuleReference)>(ioe);
+
+     label11:
+        goto label03;
+
+     label12:
+        if $stack11 == null goto label18;
+
+        interfaceinvoke $stack11.<java.nio.file.DirectoryStream: void close()>();
+
+        goto label18;
+
+     label13:
+        $stack54 := @caughtexception;
+
+        if $stack11 == null goto label17;
+
+     label14:
+        interfaceinvoke $stack11.<java.nio.file.DirectoryStream: void close()>();
+
+     label15:
+        goto label17;
+
+     label16:
+        $stack53 := @caughtexception;
+
+        virtualinvoke $stack54.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>($stack53);
+
+     label17:
+        throw $stack54;
+
+     label18:
+        goto label20;
+
+     label19:
+        $stack44 := @caughtexception;
+
+        $stack46 = this.<jdk.internal.module.ModulePathValidator: java.io.PrintStream out>;
+
+        $stack45 = new java.lang.StringBuilder;
+
+        specialinvoke $stack45.<java.lang.StringBuilder: void <init>()>();
+
+        $stack47 = virtualinvoke $stack45.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(dir);
+
+        $stack48 = virtualinvoke $stack47.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+
+        $stack49 = virtualinvoke $stack48.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack44);
+
+        $stack50 = virtualinvoke $stack49.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        virtualinvoke $stack46.<java.io.PrintStream: void println(java.lang.String)>($stack50);
+
+        $stack51 = this.<jdk.internal.module.ModulePathValidator: int errorCount>;
+
+        $stack52 = $stack51 + 1;
+
+        this.<jdk.internal.module.ModulePathValidator: int errorCount> = $stack52;
+
+     label20:
+        return;
+
+        catch java.io.IOException from label04 to label05 with label06;
+        catch java.lang.Throwable from label02 to label12 with label13;
+        catch java.lang.Throwable from label14 to label15 with label16;
+        catch java.io.IOException from label01 to label18 with label19;
+    }
+
+    private java.util.Optional scanModule(java.nio.file.Path)
+    {
+        java.lang.Throwable $stack18;
+        jdk.internal.module.ModulePathValidator this;
+        java.lang.module.ModuleFinder $stack6;
+        int $stack19, $stack20;
+        java.lang.String $stack15, $stack17, $stack26;
+        java.nio.file.Path entry;
+        java.lang.module.FindException $stack10;
+        java.io.PrintStream $stack11, $stack13, $stack23;
+        java.nio.file.Path[] $stack5;
+        java.util.Set $stack7;
+        java.util.stream.Stream $stack8;
+        java.util.Optional $stack9, $stack21;
+        java.lang.StringBuilder $stack12, $stack14, $stack16, $stack22, $stack24, $stack25;
+
+        this := @this: jdk.internal.module.ModulePathValidator;
+
+        entry := @parameter0: java.nio.file.Path;
+
+        $stack5 = newarray (java.nio.file.Path)[1];
+
+        $stack5[0] = entry;
+
+        $stack6 = staticinvoke <java.lang.module.ModuleFinder: java.lang.module.ModuleFinder of(java.nio.file.Path[])>($stack5);
+
+     label1:
+        $stack7 = interfaceinvoke $stack6.<java.lang.module.ModuleFinder: java.util.Set findAll()>();
+
+        $stack8 = interfaceinvoke $stack7.<java.util.Set: java.util.stream.Stream stream()>();
+
+        $stack9 = interfaceinvoke $stack8.<java.util.stream.Stream: java.util.Optional findFirst()>();
+
+     label2:
+        return $stack9;
+
+     label3:
+        $stack10 := @caughtexception;
+
+        $stack11 = this.<jdk.internal.module.ModulePathValidator: java.io.PrintStream out>;
+
+        virtualinvoke $stack11.<java.io.PrintStream: void println(java.lang.Object)>(entry);
+
+        $stack13 = this.<jdk.internal.module.ModulePathValidator: java.io.PrintStream out>;
+
+        $stack12 = new java.lang.StringBuilder;
+
+        specialinvoke $stack12.<java.lang.StringBuilder: void <init>()>();
+
+        $stack14 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("    ");
+
+        $stack15 = virtualinvoke $stack10.<java.lang.module.FindException: java.lang.String getMessage()>();
+
+        $stack16 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack15);
+
+        $stack17 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        virtualinvoke $stack13.<java.io.PrintStream: void println(java.lang.String)>($stack17);
+
+        $stack18 = virtualinvoke $stack10.<java.lang.module.FindException: java.lang.Throwable getCause()>();
+
+        if $stack18 == null goto label4;
+
+        $stack23 = this.<jdk.internal.module.ModulePathValidator: java.io.PrintStream out>;
+
+        $stack22 = new java.lang.StringBuilder;
+
+        specialinvoke $stack22.<java.lang.StringBuilder: void <init>()>();
+
+        $stack24 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("    ");
+
+        $stack25 = virtualinvoke $stack24.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack18);
+
+        $stack26 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        virtualinvoke $stack23.<java.io.PrintStream: void println(java.lang.String)>($stack26);
+
+     label4:
+        $stack19 = this.<jdk.internal.module.ModulePathValidator: int errorCount>;
+
+        $stack20 = $stack19 + 1;
+
+        this.<jdk.internal.module.ModulePathValidator: int errorCount> = $stack20;
+
+        $stack21 = staticinvoke <java.util.Optional: java.util.Optional empty()>();
+
+        return $stack21;
+
+        catch java.lang.module.FindException from label1 to label2 with label3;
+    }
+
+    private static boolean isJrt(java.net.URI)
+    {
+        java.net.URI uri;
+        java.lang.String $stack1;
+        boolean $stack2, $stack3;
+
+        uri := @parameter0: java.net.URI;
+
+        if uri == null goto label1;
+
+        $stack1 = virtualinvoke uri.<java.net.URI: java.lang.String getScheme()>();
+
+        $stack2 = virtualinvoke $stack1.<java.lang.String: boolean equalsIgnoreCase(java.lang.String)>("jrt");
+
+        if $stack2 == 0 goto label1;
+
+        $stack3 = 1;
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    private void lambda$printModule$3(java.net.URI)
+    {
+        java.io.PrintStream $stack3;
+        jdk.internal.module.ModulePathValidator this;
+        java.lang.StringBuilder $stack2, $stack4, $stack5;
+        java.net.URI uri;
+        java.lang.String $stack6;
+
+        this := @this: jdk.internal.module.ModulePathValidator;
+
+        uri := @parameter0: java.net.URI;
+
+        $stack3 = this.<jdk.internal.module.ModulePathValidator: java.io.PrintStream out>;
+
+        $stack2 = new java.lang.StringBuilder;
+
+        specialinvoke $stack2.<java.lang.StringBuilder: void <init>()>();
+
+        $stack4 = virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(uri);
+
+        $stack5 = virtualinvoke $stack4.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        virtualinvoke $stack3.<java.io.PrintStream: void print(java.lang.String)>($stack6);
+
+        return;
+    }
+
+    public static boolean lambda$printModule$2(java.net.URI)
+    {
+        java.net.URI uri;
+        boolean $stack1, $stack2;
+
+        uri := @parameter0: java.net.URI;
+
+        $stack1 = staticinvoke <jdk.internal.module.ModulePathValidator: boolean isJrt(java.net.URI)>(uri);
+
+        if $stack1 != 0 goto label1;
+
+        $stack2 = 1;
+
+        goto label2;
+
+     label1:
+        $stack2 = 0;
+
+     label2:
+        return $stack2;
+    }
+
+    public static java.nio.file.Path lambda$scanAllModules$1(java.lang.String)
+    {
+        java.lang.String[] $stack1;
+        java.lang.String x$0;
+        java.nio.file.Path $stack2;
+
+        x$0 := @parameter0: java.lang.String;
+
+        $stack1 = newarray (java.lang.String)[0];
+
+        $stack2 = staticinvoke <java.nio.file.Path: java.nio.file.Path of(java.lang.String,java.lang.String[])>(x$0, $stack1);
+
+        return $stack2;
+    }
+
+    public static java.nio.file.Path lambda$scanAllModules$0(java.lang.String)
+    {
+        java.lang.String[] $stack1;
+        java.lang.String x$0;
+        java.nio.file.Path $stack2;
+
+        x$0 := @parameter0: java.lang.String;
+
+        $stack1 = newarray (java.lang.String)[0];
+
+        $stack2 = staticinvoke <java.nio.file.Path: java.nio.file.Path of(java.lang.String,java.lang.String[])>(x$0, $stack1);
+
+        return $stack2;
+    }
+
+    public static void <clinit>()
+    {
+        <jdk.internal.module.ModulePathValidator: java.lang.String INDENT> = "    ";
+
+        <jdk.internal.module.ModulePathValidator: java.lang.String MODULE_INFO> = "module-info.class";
+
+        return;
+    }
+}

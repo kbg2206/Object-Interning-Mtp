@@ -1,0 +1,1619 @@
+public class jdk.internal.util.ArraysSupport extends java.lang.Object
+{
+    static final jdk.internal.misc.Unsafe U;
+    private static final boolean BIG_ENDIAN;
+    public static final int LOG2_ARRAY_BOOLEAN_INDEX_SCALE;
+    public static final int LOG2_ARRAY_BYTE_INDEX_SCALE;
+    public static final int LOG2_ARRAY_CHAR_INDEX_SCALE;
+    public static final int LOG2_ARRAY_SHORT_INDEX_SCALE;
+    public static final int LOG2_ARRAY_INT_INDEX_SCALE;
+    public static final int LOG2_ARRAY_LONG_INDEX_SCALE;
+    public static final int LOG2_ARRAY_FLOAT_INDEX_SCALE;
+    public static final int LOG2_ARRAY_DOUBLE_INDEX_SCALE;
+    private static final int LOG2_BYTE_BIT_SIZE;
+    public static final int SOFT_MAX_ARRAY_LENGTH;
+
+    private static int exactLog2(int)
+    {
+        int scale, $stack1, $stack2, $stack3;
+        java.lang.Error $stack4;
+
+        scale := @parameter0: int;
+
+        $stack1 = scale - 1;
+
+        $stack2 = scale & $stack1;
+
+        if $stack2 == 0 goto label1;
+
+        $stack4 = new java.lang.Error;
+
+        specialinvoke $stack4.<java.lang.Error: void <init>(java.lang.String)>("data type scale not a power of two");
+
+        throw $stack4;
+
+     label1:
+        $stack3 = staticinvoke <java.lang.Integer: int numberOfTrailingZeros(int)>(scale);
+
+        return $stack3;
+    }
+
+    private void <init>()
+    {
+        jdk.internal.util.ArraysSupport this;
+
+        this := @this: jdk.internal.util.ArraysSupport;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static int vectorizedMismatch(java.lang.Object, long, java.lang.Object, long, int, int)
+    {
+        byte $stack58;
+        boolean $stack37, $stack62;
+        jdk.internal.misc.Unsafe $stack30, $stack33, $stack53, $stack56;
+        long $stack28, aOffset, $stack29, bOffset, $stack32, $stack51, $stack52, $stack54, $stack55, $stack57, bi, x, av;
+        int log2ArrayIndexScale, $stack19, log2ValuesPerWidth, length, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, wordTail, $stack26, $stack27, $stack31, $stack34, $stack38, $stack39, $stack40, $stack41, $stack42, $stack43, $stack44, $stack45, $stack50, $stack63, $stack64, $stack65, $stack66, $stack67, $stack68, $stack69, $stack70, wi, $stack71, bi#7, x#10, $stack46, $i0, $i1;
+        java.lang.Object a, b;
+
+        a := @parameter0: java.lang.Object;
+
+        aOffset := @parameter1: long;
+
+        b := @parameter2: java.lang.Object;
+
+        bOffset := @parameter3: long;
+
+        length := @parameter4: int;
+
+        log2ArrayIndexScale := @parameter5: int;
+
+        $stack19 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_LONG_INDEX_SCALE>;
+
+        log2ValuesPerWidth = $stack19 - log2ArrayIndexScale;
+
+        wi = 0;
+
+     label01:
+        $stack20 = length >> log2ValuesPerWidth;
+
+        if wi >= $stack20 goto label05;
+
+        $stack51 = (long) wi;
+
+        $stack50 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_LONG_INDEX_SCALE>;
+
+        bi = $stack51 << $stack50;
+
+        $stack53 = <jdk.internal.util.ArraysSupport: jdk.internal.misc.Unsafe U>;
+
+        $stack52 = aOffset + bi;
+
+        $stack54 = virtualinvoke $stack53.<jdk.internal.misc.Unsafe: long getLongUnaligned(java.lang.Object,long)>(a, $stack52);
+
+        $stack56 = <jdk.internal.util.ArraysSupport: jdk.internal.misc.Unsafe U>;
+
+        $stack55 = bOffset + bi;
+
+        $stack57 = virtualinvoke $stack56.<jdk.internal.misc.Unsafe: long getLongUnaligned(java.lang.Object,long)>(b, $stack55);
+
+        $stack58 = $stack54 cmp $stack57;
+
+        if $stack58 == 0 goto label04;
+
+        x = $stack54 ^ $stack57;
+
+        $stack62 = <jdk.internal.util.ArraysSupport: boolean BIG_ENDIAN>;
+
+        if $stack62 == 0 goto label02;
+
+        $stack68 = staticinvoke <java.lang.Long: int numberOfLeadingZeros(long)>(x);
+
+        $stack69 = <jdk.internal.util.ArraysSupport: int LOG2_BYTE_BIT_SIZE>;
+
+        $stack70 = $stack69 + log2ArrayIndexScale;
+
+        $stack71 = $stack68 >> $stack70;
+
+        goto label03;
+
+     label02:
+        $stack63 = staticinvoke <java.lang.Long: int numberOfTrailingZeros(long)>(x);
+
+        $stack64 = <jdk.internal.util.ArraysSupport: int LOG2_BYTE_BIT_SIZE>;
+
+        $stack65 = $stack64 + log2ArrayIndexScale;
+
+        $stack71 = $stack63 >> $stack65;
+
+     label03:
+        $stack66 = wi << log2ValuesPerWidth;
+
+        $stack67 = $stack66 + $stack71;
+
+        return $stack67;
+
+     label04:
+        wi = wi + 1;
+
+        goto label01;
+
+     label05:
+        $stack21 = wi << log2ValuesPerWidth;
+
+        bi#7 = length - $stack21;
+
+        $stack22 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_INT_INDEX_SCALE>;
+
+        if log2ArrayIndexScale >= $stack22 goto label10;
+
+        $stack24 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_INT_INDEX_SCALE>;
+
+        $stack25 = $stack24 - log2ArrayIndexScale;
+
+        wordTail = 1 << $stack25;
+
+        if bi#7 < wordTail goto label09;
+
+        $stack28 = (long) wi;
+
+        $stack27 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_LONG_INDEX_SCALE>;
+
+        av = $stack28 << $stack27;
+
+        $stack30 = <jdk.internal.util.ArraysSupport: jdk.internal.misc.Unsafe U>;
+
+        $stack29 = aOffset + av;
+
+        $stack31 = virtualinvoke $stack30.<jdk.internal.misc.Unsafe: int getIntUnaligned(java.lang.Object,long)>(a, $stack29);
+
+        $stack33 = <jdk.internal.util.ArraysSupport: jdk.internal.misc.Unsafe U>;
+
+        $stack32 = bOffset + av;
+
+        $stack34 = virtualinvoke $stack33.<jdk.internal.misc.Unsafe: int getIntUnaligned(java.lang.Object,long)>(b, $stack32);
+
+        if $stack31 == $stack34 goto label08;
+
+        x#10 = $stack31 ^ $stack34;
+
+        $stack37 = <jdk.internal.util.ArraysSupport: boolean BIG_ENDIAN>;
+
+        if $stack37 == 0 goto label06;
+
+        $stack43 = staticinvoke <java.lang.Integer: int numberOfLeadingZeros(int)>(x#10);
+
+        $stack44 = <jdk.internal.util.ArraysSupport: int LOG2_BYTE_BIT_SIZE>;
+
+        $stack45 = $stack44 + log2ArrayIndexScale;
+
+        $stack46 = $stack43 >> $stack45;
+
+        goto label07;
+
+     label06:
+        $stack38 = staticinvoke <java.lang.Integer: int numberOfTrailingZeros(int)>(x#10);
+
+        $stack39 = <jdk.internal.util.ArraysSupport: int LOG2_BYTE_BIT_SIZE>;
+
+        $stack40 = $stack39 + log2ArrayIndexScale;
+
+        $stack46 = $stack38 >> $stack40;
+
+     label07:
+        $stack41 = wi << log2ValuesPerWidth;
+
+        $stack42 = $stack41 + $stack46;
+
+        return $stack42;
+
+     label08:
+        bi#7 = bi#7 - wordTail;
+
+     label09:
+        $i0 = (int) -1;
+
+        $stack26 = bi#7 ^ $i0;
+
+        return $stack26;
+
+     label10:
+        $i1 = (int) -1;
+
+        $stack23 = bi#7 ^ $i1;
+
+        return $stack23;
+    }
+
+    public static int mismatch(boolean[], boolean[], int)
+    {
+        long $stack13, $stack14;
+        int length, $stack10, $stack11, $stack12, $stack15, $stack16, i, $i0, $i1;
+        boolean $stack4, $stack5, $stack8, $stack9;
+        boolean[] a, b;
+
+        a := @parameter0: boolean[];
+
+        b := @parameter1: boolean[];
+
+        length := @parameter2: int;
+
+        i = 0;
+
+        if length <= 7 goto label3;
+
+        $stack9 = a[0];
+
+        $stack8 = b[0];
+
+        if $stack9 == $stack8 goto label1;
+
+        return 0;
+
+     label1:
+        $stack10 = <jdk.internal.misc.Unsafe: int ARRAY_BOOLEAN_BASE_OFFSET>;
+
+        $stack14 = (long) $stack10;
+
+        $stack11 = <jdk.internal.misc.Unsafe: int ARRAY_BOOLEAN_BASE_OFFSET>;
+
+        $stack13 = (long) $stack11;
+
+        $stack12 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_BOOLEAN_INDEX_SCALE>;
+
+        $stack15 = staticinvoke <jdk.internal.util.ArraysSupport: int vectorizedMismatch(java.lang.Object,long,java.lang.Object,long,int,int)>(a, $stack14, b, $stack13, length, $stack12);
+
+        if $stack15 < 0 goto label2;
+
+        return $stack15;
+
+     label2:
+        $i0 = (int) -1;
+
+        $stack16 = $stack15 ^ $i0;
+
+        i = length - $stack16;
+
+     label3:
+        if i >= length goto label5;
+
+        $stack5 = a[i];
+
+        $stack4 = b[i];
+
+        if $stack5 == $stack4 goto label4;
+
+        return i;
+
+     label4:
+        i = i + 1;
+
+        goto label3;
+
+     label5:
+        $i1 = (int) -1;
+
+        return $i1;
+    }
+
+    public static int mismatch(boolean[], int, boolean[], int, int)
+    {
+        long $stack19, $stack20;
+        int length, aFromIndex, $stack8, bFromIndex, $stack9, $stack16, aOffset, $stack17, bOffset, $stack18, $stack21, $stack22, i, $i0, $i1;
+        boolean $stack10, $stack11, $stack14, $stack15;
+        boolean[] a, b;
+
+        a := @parameter0: boolean[];
+
+        aFromIndex := @parameter1: int;
+
+        b := @parameter2: boolean[];
+
+        bFromIndex := @parameter3: int;
+
+        length := @parameter4: int;
+
+        i = 0;
+
+        if length <= 7 goto label3;
+
+        $stack15 = a[aFromIndex];
+
+        $stack14 = b[bFromIndex];
+
+        if $stack15 == $stack14 goto label1;
+
+        return 0;
+
+     label1:
+        $stack16 = <jdk.internal.misc.Unsafe: int ARRAY_BOOLEAN_BASE_OFFSET>;
+
+        aOffset = $stack16 + aFromIndex;
+
+        $stack17 = <jdk.internal.misc.Unsafe: int ARRAY_BOOLEAN_BASE_OFFSET>;
+
+        bOffset = $stack17 + bFromIndex;
+
+        $stack20 = (long) aOffset;
+
+        $stack19 = (long) bOffset;
+
+        $stack18 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_BOOLEAN_INDEX_SCALE>;
+
+        $stack21 = staticinvoke <jdk.internal.util.ArraysSupport: int vectorizedMismatch(java.lang.Object,long,java.lang.Object,long,int,int)>(a, $stack20, b, $stack19, length, $stack18);
+
+        if $stack21 < 0 goto label2;
+
+        return $stack21;
+
+     label2:
+        $i0 = (int) -1;
+
+        $stack22 = $stack21 ^ $i0;
+
+        i = length - $stack22;
+
+     label3:
+        if i >= length goto label5;
+
+        $stack8 = aFromIndex + i;
+
+        $stack11 = a[$stack8];
+
+        $stack9 = bFromIndex + i;
+
+        $stack10 = b[$stack9];
+
+        if $stack11 == $stack10 goto label4;
+
+        return i;
+
+     label4:
+        i = i + 1;
+
+        goto label3;
+
+     label5:
+        $i1 = (int) -1;
+
+        return $i1;
+    }
+
+    public static int mismatch(byte[], byte[], int)
+    {
+        byte[] a, b;
+        long $stack13, $stack14;
+        byte $stack4, $stack5, $stack8, $stack9;
+        int length, $stack10, $stack11, $stack12, $stack15, $stack16, i, $i0, $i1, $i2, $i3, $i4, $i5;
+
+        a := @parameter0: byte[];
+
+        b := @parameter1: byte[];
+
+        length := @parameter2: int;
+
+        i = 0;
+
+        if length <= 7 goto label3;
+
+        $stack9 = a[0];
+
+        $stack8 = b[0];
+
+        $i0 = (int) $stack9;
+
+        $i1 = (int) $stack8;
+
+        if $i0 == $i1 goto label1;
+
+        return 0;
+
+     label1:
+        $stack10 = <jdk.internal.misc.Unsafe: int ARRAY_BYTE_BASE_OFFSET>;
+
+        $stack14 = (long) $stack10;
+
+        $stack11 = <jdk.internal.misc.Unsafe: int ARRAY_BYTE_BASE_OFFSET>;
+
+        $stack13 = (long) $stack11;
+
+        $stack12 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_BYTE_INDEX_SCALE>;
+
+        $stack15 = staticinvoke <jdk.internal.util.ArraysSupport: int vectorizedMismatch(java.lang.Object,long,java.lang.Object,long,int,int)>(a, $stack14, b, $stack13, length, $stack12);
+
+        if $stack15 < 0 goto label2;
+
+        return $stack15;
+
+     label2:
+        $i2 = (int) -1;
+
+        $stack16 = $stack15 ^ $i2;
+
+        i = length - $stack16;
+
+     label3:
+        if i >= length goto label5;
+
+        $stack5 = a[i];
+
+        $stack4 = b[i];
+
+        $i3 = (int) $stack5;
+
+        $i4 = (int) $stack4;
+
+        if $i3 == $i4 goto label4;
+
+        return i;
+
+     label4:
+        i = i + 1;
+
+        goto label3;
+
+     label5:
+        $i5 = (int) -1;
+
+        return $i5;
+    }
+
+    public static int mismatch(byte[], int, byte[], int, int)
+    {
+        byte[] a, b;
+        long $stack19, $stack20;
+        byte $stack10, $stack11, $stack14, $stack15;
+        int length, aFromIndex, $stack8, bFromIndex, $stack9, $stack16, aOffset, $stack17, bOffset, $stack18, $stack21, $stack22, i, $i0, $i1, $i2, $i3, $i4, $i5;
+
+        a := @parameter0: byte[];
+
+        aFromIndex := @parameter1: int;
+
+        b := @parameter2: byte[];
+
+        bFromIndex := @parameter3: int;
+
+        length := @parameter4: int;
+
+        i = 0;
+
+        if length <= 7 goto label3;
+
+        $stack15 = a[aFromIndex];
+
+        $stack14 = b[bFromIndex];
+
+        $i0 = (int) $stack15;
+
+        $i1 = (int) $stack14;
+
+        if $i0 == $i1 goto label1;
+
+        return 0;
+
+     label1:
+        $stack16 = <jdk.internal.misc.Unsafe: int ARRAY_BYTE_BASE_OFFSET>;
+
+        aOffset = $stack16 + aFromIndex;
+
+        $stack17 = <jdk.internal.misc.Unsafe: int ARRAY_BYTE_BASE_OFFSET>;
+
+        bOffset = $stack17 + bFromIndex;
+
+        $stack20 = (long) aOffset;
+
+        $stack19 = (long) bOffset;
+
+        $stack18 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_BYTE_INDEX_SCALE>;
+
+        $stack21 = staticinvoke <jdk.internal.util.ArraysSupport: int vectorizedMismatch(java.lang.Object,long,java.lang.Object,long,int,int)>(a, $stack20, b, $stack19, length, $stack18);
+
+        if $stack21 < 0 goto label2;
+
+        return $stack21;
+
+     label2:
+        $i2 = (int) -1;
+
+        $stack22 = $stack21 ^ $i2;
+
+        i = length - $stack22;
+
+     label3:
+        if i >= length goto label5;
+
+        $stack8 = aFromIndex + i;
+
+        $stack11 = a[$stack8];
+
+        $stack9 = bFromIndex + i;
+
+        $stack10 = b[$stack9];
+
+        $i3 = (int) $stack11;
+
+        $i4 = (int) $stack10;
+
+        if $i3 == $i4 goto label4;
+
+        return i;
+
+     label4:
+        i = i + 1;
+
+        goto label3;
+
+     label5:
+        $i5 = (int) -1;
+
+        return $i5;
+    }
+
+    public static int mismatch(char[], char[], int)
+    {
+        long $stack13, $stack14;
+        int length, $stack10, $stack11, $stack12, $stack15, $stack16, i, $i0, $i1, $i2, $i3, $i4, $i5;
+        char $stack4, $stack5, $stack8, $stack9;
+        char[] a, b;
+
+        a := @parameter0: char[];
+
+        b := @parameter1: char[];
+
+        length := @parameter2: int;
+
+        i = 0;
+
+        if length <= 3 goto label3;
+
+        $stack9 = a[0];
+
+        $stack8 = b[0];
+
+        $i0 = (int) $stack9;
+
+        $i1 = (int) $stack8;
+
+        if $i0 == $i1 goto label1;
+
+        return 0;
+
+     label1:
+        $stack10 = <jdk.internal.misc.Unsafe: int ARRAY_CHAR_BASE_OFFSET>;
+
+        $stack14 = (long) $stack10;
+
+        $stack11 = <jdk.internal.misc.Unsafe: int ARRAY_CHAR_BASE_OFFSET>;
+
+        $stack13 = (long) $stack11;
+
+        $stack12 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_CHAR_INDEX_SCALE>;
+
+        $stack15 = staticinvoke <jdk.internal.util.ArraysSupport: int vectorizedMismatch(java.lang.Object,long,java.lang.Object,long,int,int)>(a, $stack14, b, $stack13, length, $stack12);
+
+        if $stack15 < 0 goto label2;
+
+        return $stack15;
+
+     label2:
+        $i2 = (int) -1;
+
+        $stack16 = $stack15 ^ $i2;
+
+        i = length - $stack16;
+
+     label3:
+        if i >= length goto label5;
+
+        $stack5 = a[i];
+
+        $stack4 = b[i];
+
+        $i3 = (int) $stack5;
+
+        $i4 = (int) $stack4;
+
+        if $i3 == $i4 goto label4;
+
+        return i;
+
+     label4:
+        i = i + 1;
+
+        goto label3;
+
+     label5:
+        $i5 = (int) -1;
+
+        return $i5;
+    }
+
+    public static int mismatch(char[], int, char[], int, int)
+    {
+        long $stack23, $stack24;
+        int length, aFromIndex, $stack8, bFromIndex, $stack9, $stack16, $stack17, $stack18, aOffset, $stack19, $stack20, $stack21, bOffset, $stack22, $stack25, $stack26, i, $i0, $i1, $i2, $i3, $i4, $i5;
+        char $stack10, $stack11, $stack14, $stack15;
+        char[] a, b;
+
+        a := @parameter0: char[];
+
+        aFromIndex := @parameter1: int;
+
+        b := @parameter2: char[];
+
+        bFromIndex := @parameter3: int;
+
+        length := @parameter4: int;
+
+        i = 0;
+
+        if length <= 3 goto label3;
+
+        $stack15 = a[aFromIndex];
+
+        $stack14 = b[bFromIndex];
+
+        $i0 = (int) $stack15;
+
+        $i1 = (int) $stack14;
+
+        if $i0 == $i1 goto label1;
+
+        return 0;
+
+     label1:
+        $stack18 = <jdk.internal.misc.Unsafe: int ARRAY_CHAR_BASE_OFFSET>;
+
+        $stack16 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_CHAR_INDEX_SCALE>;
+
+        $stack17 = aFromIndex << $stack16;
+
+        aOffset = $stack18 + $stack17;
+
+        $stack21 = <jdk.internal.misc.Unsafe: int ARRAY_CHAR_BASE_OFFSET>;
+
+        $stack19 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_CHAR_INDEX_SCALE>;
+
+        $stack20 = bFromIndex << $stack19;
+
+        bOffset = $stack21 + $stack20;
+
+        $stack24 = (long) aOffset;
+
+        $stack23 = (long) bOffset;
+
+        $stack22 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_CHAR_INDEX_SCALE>;
+
+        $stack25 = staticinvoke <jdk.internal.util.ArraysSupport: int vectorizedMismatch(java.lang.Object,long,java.lang.Object,long,int,int)>(a, $stack24, b, $stack23, length, $stack22);
+
+        if $stack25 < 0 goto label2;
+
+        return $stack25;
+
+     label2:
+        $i2 = (int) -1;
+
+        $stack26 = $stack25 ^ $i2;
+
+        i = length - $stack26;
+
+     label3:
+        if i >= length goto label5;
+
+        $stack8 = aFromIndex + i;
+
+        $stack11 = a[$stack8];
+
+        $stack9 = bFromIndex + i;
+
+        $stack10 = b[$stack9];
+
+        $i3 = (int) $stack11;
+
+        $i4 = (int) $stack10;
+
+        if $i3 == $i4 goto label4;
+
+        return i;
+
+     label4:
+        i = i + 1;
+
+        goto label3;
+
+     label5:
+        $i5 = (int) -1;
+
+        return $i5;
+    }
+
+    public static int mismatch(short[], short[], int)
+    {
+        long $stack13, $stack14;
+        short $stack4, $stack5, $stack8, $stack9;
+        int length, $stack10, $stack11, $stack12, $stack15, $stack16, i, $i0, $i1, $i2, $i3, $i4, $i5;
+        short[] a, b;
+
+        a := @parameter0: short[];
+
+        b := @parameter1: short[];
+
+        length := @parameter2: int;
+
+        i = 0;
+
+        if length <= 3 goto label3;
+
+        $stack9 = a[0];
+
+        $stack8 = b[0];
+
+        $i0 = (int) $stack9;
+
+        $i1 = (int) $stack8;
+
+        if $i0 == $i1 goto label1;
+
+        return 0;
+
+     label1:
+        $stack10 = <jdk.internal.misc.Unsafe: int ARRAY_SHORT_BASE_OFFSET>;
+
+        $stack14 = (long) $stack10;
+
+        $stack11 = <jdk.internal.misc.Unsafe: int ARRAY_SHORT_BASE_OFFSET>;
+
+        $stack13 = (long) $stack11;
+
+        $stack12 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_SHORT_INDEX_SCALE>;
+
+        $stack15 = staticinvoke <jdk.internal.util.ArraysSupport: int vectorizedMismatch(java.lang.Object,long,java.lang.Object,long,int,int)>(a, $stack14, b, $stack13, length, $stack12);
+
+        if $stack15 < 0 goto label2;
+
+        return $stack15;
+
+     label2:
+        $i2 = (int) -1;
+
+        $stack16 = $stack15 ^ $i2;
+
+        i = length - $stack16;
+
+     label3:
+        if i >= length goto label5;
+
+        $stack5 = a[i];
+
+        $stack4 = b[i];
+
+        $i3 = (int) $stack5;
+
+        $i4 = (int) $stack4;
+
+        if $i3 == $i4 goto label4;
+
+        return i;
+
+     label4:
+        i = i + 1;
+
+        goto label3;
+
+     label5:
+        $i5 = (int) -1;
+
+        return $i5;
+    }
+
+    public static int mismatch(short[], int, short[], int, int)
+    {
+        long $stack23, $stack24;
+        short $stack10, $stack11, $stack14, $stack15;
+        int length, aFromIndex, $stack8, bFromIndex, $stack9, $stack16, $stack17, $stack18, aOffset, $stack19, $stack20, $stack21, bOffset, $stack22, $stack25, $stack26, i, $i0, $i1, $i2, $i3, $i4, $i5;
+        short[] a, b;
+
+        a := @parameter0: short[];
+
+        aFromIndex := @parameter1: int;
+
+        b := @parameter2: short[];
+
+        bFromIndex := @parameter3: int;
+
+        length := @parameter4: int;
+
+        i = 0;
+
+        if length <= 3 goto label3;
+
+        $stack15 = a[aFromIndex];
+
+        $stack14 = b[bFromIndex];
+
+        $i0 = (int) $stack15;
+
+        $i1 = (int) $stack14;
+
+        if $i0 == $i1 goto label1;
+
+        return 0;
+
+     label1:
+        $stack18 = <jdk.internal.misc.Unsafe: int ARRAY_SHORT_BASE_OFFSET>;
+
+        $stack16 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_SHORT_INDEX_SCALE>;
+
+        $stack17 = aFromIndex << $stack16;
+
+        aOffset = $stack18 + $stack17;
+
+        $stack21 = <jdk.internal.misc.Unsafe: int ARRAY_SHORT_BASE_OFFSET>;
+
+        $stack19 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_SHORT_INDEX_SCALE>;
+
+        $stack20 = bFromIndex << $stack19;
+
+        bOffset = $stack21 + $stack20;
+
+        $stack24 = (long) aOffset;
+
+        $stack23 = (long) bOffset;
+
+        $stack22 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_SHORT_INDEX_SCALE>;
+
+        $stack25 = staticinvoke <jdk.internal.util.ArraysSupport: int vectorizedMismatch(java.lang.Object,long,java.lang.Object,long,int,int)>(a, $stack24, b, $stack23, length, $stack22);
+
+        if $stack25 < 0 goto label2;
+
+        return $stack25;
+
+     label2:
+        $i2 = (int) -1;
+
+        $stack26 = $stack25 ^ $i2;
+
+        i = length - $stack26;
+
+     label3:
+        if i >= length goto label5;
+
+        $stack8 = aFromIndex + i;
+
+        $stack11 = a[$stack8];
+
+        $stack9 = bFromIndex + i;
+
+        $stack10 = b[$stack9];
+
+        $i3 = (int) $stack11;
+
+        $i4 = (int) $stack10;
+
+        if $i3 == $i4 goto label4;
+
+        return i;
+
+     label4:
+        i = i + 1;
+
+        goto label3;
+
+     label5:
+        $i5 = (int) -1;
+
+        return $i5;
+    }
+
+    public static int mismatch(int[], int[], int)
+    {
+        long $stack13, $stack14;
+        int[] a, b;
+        int length, $stack4, $stack5, $stack8, $stack9, $stack10, $stack11, $stack12, $stack15, $stack16, i, $i0, $i1;
+
+        a := @parameter0: int[];
+
+        b := @parameter1: int[];
+
+        length := @parameter2: int;
+
+        i = 0;
+
+        if length <= 1 goto label3;
+
+        $stack9 = a[0];
+
+        $stack8 = b[0];
+
+        if $stack9 == $stack8 goto label1;
+
+        return 0;
+
+     label1:
+        $stack10 = <jdk.internal.misc.Unsafe: int ARRAY_INT_BASE_OFFSET>;
+
+        $stack14 = (long) $stack10;
+
+        $stack11 = <jdk.internal.misc.Unsafe: int ARRAY_INT_BASE_OFFSET>;
+
+        $stack13 = (long) $stack11;
+
+        $stack12 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_INT_INDEX_SCALE>;
+
+        $stack15 = staticinvoke <jdk.internal.util.ArraysSupport: int vectorizedMismatch(java.lang.Object,long,java.lang.Object,long,int,int)>(a, $stack14, b, $stack13, length, $stack12);
+
+        if $stack15 < 0 goto label2;
+
+        return $stack15;
+
+     label2:
+        $i0 = (int) -1;
+
+        $stack16 = $stack15 ^ $i0;
+
+        i = length - $stack16;
+
+     label3:
+        if i >= length goto label5;
+
+        $stack5 = a[i];
+
+        $stack4 = b[i];
+
+        if $stack5 == $stack4 goto label4;
+
+        return i;
+
+     label4:
+        i = i + 1;
+
+        goto label3;
+
+     label5:
+        $i1 = (int) -1;
+
+        return $i1;
+    }
+
+    public static int mismatch(int[], int, int[], int, int)
+    {
+        long $stack23, $stack24;
+        int[] a, b;
+        int length, aFromIndex, $stack8, bFromIndex, $stack9, $stack10, $stack11, $stack14, $stack15, $stack16, $stack17, $stack18, aOffset, $stack19, $stack20, $stack21, bOffset, $stack22, $stack25, $stack26, i, $i0, $i1;
+
+        a := @parameter0: int[];
+
+        aFromIndex := @parameter1: int;
+
+        b := @parameter2: int[];
+
+        bFromIndex := @parameter3: int;
+
+        length := @parameter4: int;
+
+        i = 0;
+
+        if length <= 1 goto label3;
+
+        $stack15 = a[aFromIndex];
+
+        $stack14 = b[bFromIndex];
+
+        if $stack15 == $stack14 goto label1;
+
+        return 0;
+
+     label1:
+        $stack18 = <jdk.internal.misc.Unsafe: int ARRAY_INT_BASE_OFFSET>;
+
+        $stack16 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_INT_INDEX_SCALE>;
+
+        $stack17 = aFromIndex << $stack16;
+
+        aOffset = $stack18 + $stack17;
+
+        $stack21 = <jdk.internal.misc.Unsafe: int ARRAY_INT_BASE_OFFSET>;
+
+        $stack19 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_INT_INDEX_SCALE>;
+
+        $stack20 = bFromIndex << $stack19;
+
+        bOffset = $stack21 + $stack20;
+
+        $stack24 = (long) aOffset;
+
+        $stack23 = (long) bOffset;
+
+        $stack22 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_INT_INDEX_SCALE>;
+
+        $stack25 = staticinvoke <jdk.internal.util.ArraysSupport: int vectorizedMismatch(java.lang.Object,long,java.lang.Object,long,int,int)>(a, $stack24, b, $stack23, length, $stack22);
+
+        if $stack25 < 0 goto label2;
+
+        return $stack25;
+
+     label2:
+        $i0 = (int) -1;
+
+        $stack26 = $stack25 ^ $i0;
+
+        i = length - $stack26;
+
+     label3:
+        if i >= length goto label5;
+
+        $stack8 = aFromIndex + i;
+
+        $stack11 = a[$stack8];
+
+        $stack9 = bFromIndex + i;
+
+        $stack10 = b[$stack9];
+
+        if $stack11 == $stack10 goto label4;
+
+        return i;
+
+     label4:
+        i = i + 1;
+
+        goto label3;
+
+     label5:
+        $i1 = (int) -1;
+
+        return $i1;
+    }
+
+    public static int mismatch(float[], float[], int)
+    {
+        int length, $stack3;
+        float[] a, b;
+
+        a := @parameter0: float[];
+
+        b := @parameter1: float[];
+
+        length := @parameter2: int;
+
+        $stack3 = staticinvoke <jdk.internal.util.ArraysSupport: int mismatch(float[],int,float[],int,int)>(a, 0, b, 0, length);
+
+        return $stack3;
+    }
+
+    public static int mismatch(float[], int, float[], int, int)
+    {
+        boolean $stack23, $stack26;
+        float $stack9, $stack12, $stack16, $stack18, $stack22, $stack25;
+        float[] a, b;
+        long $stack35, $stack36;
+        int length, aFromIndex, $stack8, $stack10, bFromIndex, $stack11, $stack13, $stack17, $stack19, $stack20, $stack21, $stack24, $stack28, $stack29, $stack30, aOffset, $stack31, $stack32, $stack33, bOffset, $stack34, i, $i0, $i1;
+
+        a := @parameter0: float[];
+
+        aFromIndex := @parameter1: int;
+
+        b := @parameter2: float[];
+
+        bFromIndex := @parameter3: int;
+
+        length := @parameter4: int;
+
+        i = 0;
+
+        if length <= 1 goto label5;
+
+        $stack16 = a[aFromIndex];
+
+        $stack17 = staticinvoke <java.lang.Float: int floatToRawIntBits(float)>($stack16);
+
+        $stack18 = b[bFromIndex];
+
+        $stack19 = staticinvoke <java.lang.Float: int floatToRawIntBits(float)>($stack18);
+
+        if $stack17 != $stack19 goto label1;
+
+        $stack30 = <jdk.internal.misc.Unsafe: int ARRAY_FLOAT_BASE_OFFSET>;
+
+        $stack28 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_FLOAT_INDEX_SCALE>;
+
+        $stack29 = aFromIndex << $stack28;
+
+        aOffset = $stack30 + $stack29;
+
+        $stack33 = <jdk.internal.misc.Unsafe: int ARRAY_FLOAT_BASE_OFFSET>;
+
+        $stack31 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_FLOAT_INDEX_SCALE>;
+
+        $stack32 = bFromIndex << $stack31;
+
+        bOffset = $stack33 + $stack32;
+
+        $stack36 = (long) aOffset;
+
+        $stack35 = (long) bOffset;
+
+        $stack34 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_FLOAT_INDEX_SCALE>;
+
+        i = staticinvoke <jdk.internal.util.ArraysSupport: int vectorizedMismatch(java.lang.Object,long,java.lang.Object,long,int,int)>(a, $stack36, b, $stack35, length, $stack34);
+
+     label1:
+        if i < 0 goto label4;
+
+        $stack21 = aFromIndex + i;
+
+        $stack22 = a[$stack21];
+
+        $stack23 = staticinvoke <java.lang.Float: boolean isNaN(float)>($stack22);
+
+        if $stack23 == 0 goto label2;
+
+        $stack24 = bFromIndex + i;
+
+        $stack25 = b[$stack24];
+
+        $stack26 = staticinvoke <java.lang.Float: boolean isNaN(float)>($stack25);
+
+        if $stack26 != 0 goto label3;
+
+     label2:
+        return i;
+
+     label3:
+        i = i + 1;
+
+        goto label5;
+
+     label4:
+        $i0 = (int) -1;
+
+        $stack20 = i ^ $i0;
+
+        i = length - $stack20;
+
+     label5:
+        if i >= length goto label7;
+
+        $stack8 = aFromIndex + i;
+
+        $stack9 = a[$stack8];
+
+        $stack10 = staticinvoke <java.lang.Float: int floatToIntBits(float)>($stack9);
+
+        $stack11 = bFromIndex + i;
+
+        $stack12 = b[$stack11];
+
+        $stack13 = staticinvoke <java.lang.Float: int floatToIntBits(float)>($stack12);
+
+        if $stack10 == $stack13 goto label6;
+
+        return i;
+
+     label6:
+        i = i + 1;
+
+        goto label5;
+
+     label7:
+        $i1 = (int) -1;
+
+        return $i1;
+    }
+
+    public static int mismatch(long[], long[], int)
+    {
+        long $stack4, $stack5, $stack10, $stack11;
+        long[] a, b;
+        byte $stack6;
+        int length, $stack7, $stack8, $stack9, $stack12, $stack13, $i0, $i1;
+
+        a := @parameter0: long[];
+
+        b := @parameter1: long[];
+
+        length := @parameter2: int;
+
+        if length != 0 goto label1;
+
+        $i0 = (int) -1;
+
+        return $i0;
+
+     label1:
+        $stack5 = a[0];
+
+        $stack4 = b[0];
+
+        $stack6 = $stack5 cmp $stack4;
+
+        if $stack6 == 0 goto label2;
+
+        return 0;
+
+     label2:
+        $stack7 = <jdk.internal.misc.Unsafe: int ARRAY_LONG_BASE_OFFSET>;
+
+        $stack11 = (long) $stack7;
+
+        $stack8 = <jdk.internal.misc.Unsafe: int ARRAY_LONG_BASE_OFFSET>;
+
+        $stack10 = (long) $stack8;
+
+        $stack9 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_LONG_INDEX_SCALE>;
+
+        $stack12 = staticinvoke <jdk.internal.util.ArraysSupport: int vectorizedMismatch(java.lang.Object,long,java.lang.Object,long,int,int)>(a, $stack11, b, $stack10, length, $stack9);
+
+        if $stack12 < 0 goto label3;
+
+        $stack13 = $stack12;
+
+        goto label4;
+
+     label3:
+        $i1 = (int) -1;
+
+        $stack13 = $i1;
+
+     label4:
+        return $stack13;
+    }
+
+    public static int mismatch(long[], int, long[], int, int)
+    {
+        long $stack8, $stack9, $stack18, $stack19;
+        long[] a, b;
+        byte $stack10;
+        int length, aFromIndex, bFromIndex, $stack11, $stack12, $stack13, aOffset, $stack14, $stack15, $stack16, bOffset, $stack17, $stack20, $stack21, $i0, $i1;
+
+        a := @parameter0: long[];
+
+        aFromIndex := @parameter1: int;
+
+        b := @parameter2: long[];
+
+        bFromIndex := @parameter3: int;
+
+        length := @parameter4: int;
+
+        if length != 0 goto label1;
+
+        $i0 = (int) -1;
+
+        return $i0;
+
+     label1:
+        $stack9 = a[aFromIndex];
+
+        $stack8 = b[bFromIndex];
+
+        $stack10 = $stack9 cmp $stack8;
+
+        if $stack10 == 0 goto label2;
+
+        return 0;
+
+     label2:
+        $stack13 = <jdk.internal.misc.Unsafe: int ARRAY_LONG_BASE_OFFSET>;
+
+        $stack11 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_LONG_INDEX_SCALE>;
+
+        $stack12 = aFromIndex << $stack11;
+
+        aOffset = $stack13 + $stack12;
+
+        $stack16 = <jdk.internal.misc.Unsafe: int ARRAY_LONG_BASE_OFFSET>;
+
+        $stack14 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_LONG_INDEX_SCALE>;
+
+        $stack15 = bFromIndex << $stack14;
+
+        bOffset = $stack16 + $stack15;
+
+        $stack19 = (long) aOffset;
+
+        $stack18 = (long) bOffset;
+
+        $stack17 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_LONG_INDEX_SCALE>;
+
+        $stack20 = staticinvoke <jdk.internal.util.ArraysSupport: int vectorizedMismatch(java.lang.Object,long,java.lang.Object,long,int,int)>(a, $stack19, b, $stack18, length, $stack17);
+
+        if $stack20 < 0 goto label3;
+
+        $stack21 = $stack20;
+
+        goto label4;
+
+     label3:
+        $i1 = (int) -1;
+
+        $stack21 = $i1;
+
+     label4:
+        return $stack21;
+    }
+
+    public static int mismatch(double[], double[], int)
+    {
+        double[] a, b;
+        int length, $stack3;
+
+        a := @parameter0: double[];
+
+        b := @parameter1: double[];
+
+        length := @parameter2: int;
+
+        $stack3 = staticinvoke <jdk.internal.util.ArraysSupport: int mismatch(double[],int,double[],int,int)>(a, 0, b, 0, length);
+
+        return $stack3;
+    }
+
+    public static int mismatch(double[], int, double[], int, int)
+    {
+        byte $stack12, $stack26;
+        boolean $stack15, $stack18;
+        double[] a, b;
+        long $stack9, $stack11, $stack22, $stack25, $stack37, $stack38;
+        int length, aFromIndex, bFromIndex, $stack13, $stack16, $stack20, $stack23, $stack30, $stack31, $stack32, aOffset, $stack33, $stack34, $stack35, bOffset, $stack36, i, $i0, $i1;
+        double $stack8, $stack10, $stack14, $stack17, $stack21, $stack24;
+
+        a := @parameter0: double[];
+
+        aFromIndex := @parameter1: int;
+
+        b := @parameter2: double[];
+
+        bFromIndex := @parameter3: int;
+
+        length := @parameter4: int;
+
+        if length != 0 goto label1;
+
+        $i0 = (int) -1;
+
+        return $i0;
+
+     label1:
+        i = 0;
+
+        $stack8 = a[aFromIndex];
+
+        $stack9 = staticinvoke <java.lang.Double: long doubleToRawLongBits(double)>($stack8);
+
+        $stack10 = b[bFromIndex];
+
+        $stack11 = staticinvoke <java.lang.Double: long doubleToRawLongBits(double)>($stack10);
+
+        $stack12 = $stack9 cmp $stack11;
+
+        if $stack12 != 0 goto label2;
+
+        $stack32 = <jdk.internal.misc.Unsafe: int ARRAY_DOUBLE_BASE_OFFSET>;
+
+        $stack30 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_DOUBLE_INDEX_SCALE>;
+
+        $stack31 = aFromIndex << $stack30;
+
+        aOffset = $stack32 + $stack31;
+
+        $stack35 = <jdk.internal.misc.Unsafe: int ARRAY_DOUBLE_BASE_OFFSET>;
+
+        $stack33 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_DOUBLE_INDEX_SCALE>;
+
+        $stack34 = bFromIndex << $stack33;
+
+        bOffset = $stack35 + $stack34;
+
+        $stack38 = (long) aOffset;
+
+        $stack37 = (long) bOffset;
+
+        $stack36 = <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_DOUBLE_INDEX_SCALE>;
+
+        i = staticinvoke <jdk.internal.util.ArraysSupport: int vectorizedMismatch(java.lang.Object,long,java.lang.Object,long,int,int)>(a, $stack38, b, $stack37, length, $stack36);
+
+     label2:
+        if i < 0 goto label7;
+
+        $stack13 = aFromIndex + i;
+
+        $stack14 = a[$stack13];
+
+        $stack15 = staticinvoke <java.lang.Double: boolean isNaN(double)>($stack14);
+
+        if $stack15 == 0 goto label3;
+
+        $stack16 = bFromIndex + i;
+
+        $stack17 = b[$stack16];
+
+        $stack18 = staticinvoke <java.lang.Double: boolean isNaN(double)>($stack17);
+
+        if $stack18 != 0 goto label4;
+
+     label3:
+        return i;
+
+     label4:
+        i = i + 1;
+
+     label5:
+        if i >= length goto label7;
+
+        $stack20 = aFromIndex + i;
+
+        $stack21 = a[$stack20];
+
+        $stack22 = staticinvoke <java.lang.Double: long doubleToLongBits(double)>($stack21);
+
+        $stack23 = bFromIndex + i;
+
+        $stack24 = b[$stack23];
+
+        $stack25 = staticinvoke <java.lang.Double: long doubleToLongBits(double)>($stack24);
+
+        $stack26 = $stack22 cmp $stack25;
+
+        if $stack26 == 0 goto label6;
+
+        return i;
+
+     label6:
+        i = i + 1;
+
+        goto label5;
+
+     label7:
+        $i1 = (int) -1;
+
+        return $i1;
+    }
+
+    public static int newLength(int, int, int)
+    {
+        int oldLength, minGrowth, prefGrowth, $stack4, prefLength, $stack5;
+
+        oldLength := @parameter0: int;
+
+        minGrowth := @parameter1: int;
+
+        prefGrowth := @parameter2: int;
+
+        $stack4 = staticinvoke <java.lang.Math: int max(int,int)>(minGrowth, prefGrowth);
+
+        prefLength = oldLength + $stack4;
+
+        if 0 >= prefLength goto label1;
+
+        if prefLength > 2147483639 goto label1;
+
+        return prefLength;
+
+     label1:
+        $stack5 = staticinvoke <jdk.internal.util.ArraysSupport: int hugeLength(int,int)>(oldLength, minGrowth);
+
+        return $stack5;
+    }
+
+    private static int hugeLength(int, int)
+    {
+        int oldLength, minGrowth, minLength;
+        java.lang.StringBuilder $stack4, $stack5, $stack6, $stack7, $stack8, $stack9;
+        java.lang.String $stack10;
+        java.lang.OutOfMemoryError $stack3;
+
+        oldLength := @parameter0: int;
+
+        minGrowth := @parameter1: int;
+
+        minLength = oldLength + minGrowth;
+
+        if minLength >= 0 goto label1;
+
+        $stack3 = new java.lang.OutOfMemoryError;
+
+        $stack4 = new java.lang.StringBuilder;
+
+        specialinvoke $stack4.<java.lang.StringBuilder: void <init>()>();
+
+        $stack5 = virtualinvoke $stack4.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Required array length ");
+
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(oldLength);
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" + ");
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(minGrowth);
+
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" is too large");
+
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack3.<java.lang.OutOfMemoryError: void <init>(java.lang.String)>($stack10);
+
+        throw $stack3;
+
+     label1:
+        if minLength > 2147483639 goto label2;
+
+        return 2147483639;
+
+     label2:
+        return minLength;
+    }
+
+    static void <clinit>()
+    {
+        int $stack3, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9, $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19;
+        boolean $stack2;
+        jdk.internal.misc.Unsafe $stack0, $stack1;
+
+        <jdk.internal.util.ArraysSupport: int SOFT_MAX_ARRAY_LENGTH> = 2147483639;
+
+        $stack0 = staticinvoke <jdk.internal.misc.Unsafe: jdk.internal.misc.Unsafe getUnsafe()>();
+
+        <jdk.internal.util.ArraysSupport: jdk.internal.misc.Unsafe U> = $stack0;
+
+        $stack1 = <jdk.internal.util.ArraysSupport: jdk.internal.misc.Unsafe U>;
+
+        $stack2 = virtualinvoke $stack1.<jdk.internal.misc.Unsafe: boolean isBigEndian()>();
+
+        <jdk.internal.util.ArraysSupport: boolean BIG_ENDIAN> = $stack2;
+
+        $stack3 = <jdk.internal.misc.Unsafe: int ARRAY_BOOLEAN_INDEX_SCALE>;
+
+        $stack4 = staticinvoke <jdk.internal.util.ArraysSupport: int exactLog2(int)>($stack3);
+
+        <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_BOOLEAN_INDEX_SCALE> = $stack4;
+
+        $stack5 = <jdk.internal.misc.Unsafe: int ARRAY_BYTE_INDEX_SCALE>;
+
+        $stack6 = staticinvoke <jdk.internal.util.ArraysSupport: int exactLog2(int)>($stack5);
+
+        <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_BYTE_INDEX_SCALE> = $stack6;
+
+        $stack7 = <jdk.internal.misc.Unsafe: int ARRAY_CHAR_INDEX_SCALE>;
+
+        $stack8 = staticinvoke <jdk.internal.util.ArraysSupport: int exactLog2(int)>($stack7);
+
+        <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_CHAR_INDEX_SCALE> = $stack8;
+
+        $stack9 = <jdk.internal.misc.Unsafe: int ARRAY_SHORT_INDEX_SCALE>;
+
+        $stack10 = staticinvoke <jdk.internal.util.ArraysSupport: int exactLog2(int)>($stack9);
+
+        <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_SHORT_INDEX_SCALE> = $stack10;
+
+        $stack11 = <jdk.internal.misc.Unsafe: int ARRAY_INT_INDEX_SCALE>;
+
+        $stack12 = staticinvoke <jdk.internal.util.ArraysSupport: int exactLog2(int)>($stack11);
+
+        <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_INT_INDEX_SCALE> = $stack12;
+
+        $stack13 = <jdk.internal.misc.Unsafe: int ARRAY_LONG_INDEX_SCALE>;
+
+        $stack14 = staticinvoke <jdk.internal.util.ArraysSupport: int exactLog2(int)>($stack13);
+
+        <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_LONG_INDEX_SCALE> = $stack14;
+
+        $stack15 = <jdk.internal.misc.Unsafe: int ARRAY_FLOAT_INDEX_SCALE>;
+
+        $stack16 = staticinvoke <jdk.internal.util.ArraysSupport: int exactLog2(int)>($stack15);
+
+        <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_FLOAT_INDEX_SCALE> = $stack16;
+
+        $stack17 = <jdk.internal.misc.Unsafe: int ARRAY_DOUBLE_INDEX_SCALE>;
+
+        $stack18 = staticinvoke <jdk.internal.util.ArraysSupport: int exactLog2(int)>($stack17);
+
+        <jdk.internal.util.ArraysSupport: int LOG2_ARRAY_DOUBLE_INDEX_SCALE> = $stack18;
+
+        $stack19 = staticinvoke <jdk.internal.util.ArraysSupport: int exactLog2(int)>(8);
+
+        <jdk.internal.util.ArraysSupport: int LOG2_BYTE_BIT_SIZE> = $stack19;
+
+        return;
+    }
+}

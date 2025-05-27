@@ -1,0 +1,227 @@
+public abstract class jdk.internal.access.foreign.MemorySegmentProxy extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        jdk.internal.access.foreign.MemorySegmentProxy this;
+
+        this := @this: jdk.internal.access.foreign.MemorySegmentProxy;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public abstract void checkAccess(long, long, boolean);
+
+    public abstract long unsafeGetOffset();
+
+    public abstract java.lang.Object unsafeGetBase();
+
+    public abstract boolean isSmall();
+
+    public abstract jdk.internal.misc.ScopedMemoryAccess$Scope scope();
+
+    public static long addOffsets(long, long, jdk.internal.access.foreign.MemorySegmentProxy)
+    {
+        java.lang.IndexOutOfBoundsException $stack20, $stack22, $stack11;
+        long op1, op2, $stack9, $stack18;
+        byte $stack10, $stack12, $stack15, $stack16;
+        int i2, $stack17, i1, $i0, $i1, $i2, $i3;
+        java.lang.ArithmeticException $stack19, $stack21;
+        jdk.internal.access.foreign.MemorySegmentProxy segmentProxy;
+        boolean $stack8;
+
+        op1 := @parameter0: long;
+
+        op2 := @parameter1: long;
+
+        segmentProxy := @parameter2: jdk.internal.access.foreign.MemorySegmentProxy;
+
+        $stack8 = virtualinvoke segmentProxy.<jdk.internal.access.foreign.MemorySegmentProxy: boolean isSmall()>();
+
+        if $stack8 == 0 goto label6;
+
+        $stack10 = op1 cmp 2147483647L;
+
+        $i0 = (int) $stack10;
+
+        if $i0 > 0 goto label1;
+
+        $stack12 = op2 cmp 2147483647L;
+
+        $i1 = (int) $stack12;
+
+        if $i1 > 0 goto label1;
+
+        $stack15 = op1 cmp -2147483648L;
+
+        $i2 = (int) $stack15;
+
+        if $i2 < 0 goto label1;
+
+        $stack16 = op2 cmp -2147483648L;
+
+        $i3 = (int) $stack16;
+
+        if $i3 >= 0 goto label2;
+
+     label1:
+        $stack11 = staticinvoke <jdk.internal.access.foreign.MemorySegmentProxy: java.lang.IndexOutOfBoundsException overflowException(long,long)>(-2147483648L, 2147483647L);
+
+        throw $stack11;
+
+     label2:
+        i1 = (int) op1;
+
+        i2 = (int) op2;
+
+     label3:
+        $stack17 = staticinvoke <java.lang.Math: int addExact(int,int)>(i1, i2);
+
+        $stack18 = (long) $stack17;
+
+     label4:
+        return $stack18;
+
+     label5:
+        $stack21 := @caughtexception;
+
+        $stack22 = staticinvoke <jdk.internal.access.foreign.MemorySegmentProxy: java.lang.IndexOutOfBoundsException overflowException(long,long)>(-2147483648L, 2147483647L);
+
+        throw $stack22;
+
+     label6:
+        $stack9 = staticinvoke <java.lang.Math: long addExact(long,long)>(op1, op2);
+
+     label7:
+        return $stack9;
+
+     label8:
+        $stack19 := @caughtexception;
+
+        $stack20 = staticinvoke <jdk.internal.access.foreign.MemorySegmentProxy: java.lang.IndexOutOfBoundsException overflowException(long,long)>(-9223372036854775808L, 9223372036854775807L);
+
+        throw $stack20;
+
+        catch java.lang.ArithmeticException from label3 to label4 with label5;
+        catch java.lang.ArithmeticException from label6 to label7 with label8;
+    }
+
+    public static long multiplyOffsets(long, long, jdk.internal.access.foreign.MemorySegmentProxy)
+    {
+        java.lang.IndexOutOfBoundsException $stack20, $stack22, $stack11;
+        long op1, op2, $stack9, $stack18;
+        byte $stack10, $stack12, $stack15, $stack16;
+        int i2, $stack17, i1, $i0, $i1, $i2, $i3;
+        java.lang.ArithmeticException $stack19, $stack21;
+        jdk.internal.access.foreign.MemorySegmentProxy segmentProxy;
+        boolean $stack8;
+
+        op1 := @parameter0: long;
+
+        op2 := @parameter1: long;
+
+        segmentProxy := @parameter2: jdk.internal.access.foreign.MemorySegmentProxy;
+
+        $stack8 = virtualinvoke segmentProxy.<jdk.internal.access.foreign.MemorySegmentProxy: boolean isSmall()>();
+
+        if $stack8 == 0 goto label6;
+
+        $stack10 = op1 cmp 2147483647L;
+
+        $i0 = (int) $stack10;
+
+        if $i0 > 0 goto label1;
+
+        $stack12 = op2 cmp 2147483647L;
+
+        $i1 = (int) $stack12;
+
+        if $i1 > 0 goto label1;
+
+        $stack15 = op1 cmp -2147483648L;
+
+        $i2 = (int) $stack15;
+
+        if $i2 < 0 goto label1;
+
+        $stack16 = op2 cmp -2147483648L;
+
+        $i3 = (int) $stack16;
+
+        if $i3 >= 0 goto label2;
+
+     label1:
+        $stack11 = staticinvoke <jdk.internal.access.foreign.MemorySegmentProxy: java.lang.IndexOutOfBoundsException overflowException(long,long)>(-2147483648L, 2147483647L);
+
+        throw $stack11;
+
+     label2:
+        i1 = (int) op1;
+
+        i2 = (int) op2;
+
+     label3:
+        $stack17 = staticinvoke <java.lang.Math: int multiplyExact(int,int)>(i1, i2);
+
+        $stack18 = (long) $stack17;
+
+     label4:
+        return $stack18;
+
+     label5:
+        $stack21 := @caughtexception;
+
+        $stack22 = staticinvoke <jdk.internal.access.foreign.MemorySegmentProxy: java.lang.IndexOutOfBoundsException overflowException(long,long)>(-2147483648L, 2147483647L);
+
+        throw $stack22;
+
+     label6:
+        $stack9 = staticinvoke <java.lang.Math: long multiplyExact(long,long)>(op1, op2);
+
+     label7:
+        return $stack9;
+
+     label8:
+        $stack19 := @caughtexception;
+
+        $stack20 = staticinvoke <jdk.internal.access.foreign.MemorySegmentProxy: java.lang.IndexOutOfBoundsException overflowException(long,long)>(-9223372036854775808L, 9223372036854775807L);
+
+        throw $stack20;
+
+        catch java.lang.ArithmeticException from label3 to label4 with label5;
+        catch java.lang.ArithmeticException from label6 to label7 with label8;
+    }
+
+    private static java.lang.IndexOutOfBoundsException overflowException(long, long)
+    {
+        java.lang.IndexOutOfBoundsException $stack4;
+        java.lang.Object[] $stack5;
+        java.lang.Long $stack8, $stack10;
+        long min, max;
+        java.lang.String $stack11;
+
+        min := @parameter0: long;
+
+        max := @parameter1: long;
+
+        $stack4 = new java.lang.IndexOutOfBoundsException;
+
+        $stack5 = newarray (java.lang.Object)[2];
+
+        $stack8 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(min);
+
+        $stack5[0] = $stack8;
+
+        $stack10 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(max);
+
+        $stack5[1] = $stack10;
+
+        $stack11 = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("Overflow occurred during offset computation ; offset exceeded range { %d .. %d }", $stack5);
+
+        specialinvoke $stack4.<java.lang.IndexOutOfBoundsException: void <init>(java.lang.String)>($stack11);
+
+        return $stack4;
+    }
+}

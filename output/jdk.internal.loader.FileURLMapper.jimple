@@ -1,0 +1,130 @@
+public class jdk.internal.loader.FileURLMapper extends java.lang.Object
+{
+    java.net.URL url;
+    java.lang.String file;
+
+    public void <init>(java.net.URL)
+    {
+        jdk.internal.loader.FileURLMapper this;
+        java.net.URL url;
+
+        this := @this: jdk.internal.loader.FileURLMapper;
+
+        url := @parameter0: java.net.URL;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<jdk.internal.loader.FileURLMapper: java.net.URL url> = url;
+
+        return;
+    }
+
+    public java.lang.String getPath()
+    {
+        java.net.URL $stack5, $stack21, $stack25, $stack7;
+        jdk.internal.loader.FileURLMapper this;
+        java.lang.String $stack4, $stack6, $stack19, $stack26, $stack27, $stack29, $stack32, $stack34, $stack35, $stack36, $stack8, $stack9, $stack10, $stack11;
+        boolean $stack12, $stack20;
+        java.lang.StringBuilder $stack23, $stack24, $stack28, $stack30, $stack31, $stack33;
+
+        this := @this: jdk.internal.loader.FileURLMapper;
+
+        $stack4 = this.<jdk.internal.loader.FileURLMapper: java.lang.String file>;
+
+        if $stack4 == null goto label1;
+
+        $stack36 = this.<jdk.internal.loader.FileURLMapper: java.lang.String file>;
+
+        return $stack36;
+
+     label1:
+        $stack5 = this.<jdk.internal.loader.FileURLMapper: java.net.URL url>;
+
+        $stack6 = virtualinvoke $stack5.<java.net.URL: java.lang.String getHost()>();
+
+        if $stack6 == null goto label2;
+
+        $stack12 = virtualinvoke $stack6.<java.lang.String: boolean isEmpty()>();
+
+        if $stack12 != 0 goto label2;
+
+        $stack19 = "localhost";
+
+        $stack20 = virtualinvoke $stack19.<java.lang.String: boolean equalsIgnoreCase(java.lang.String)>($stack6);
+
+        if $stack20 != 0 goto label2;
+
+        $stack21 = this.<jdk.internal.loader.FileURLMapper: java.net.URL url>;
+
+        virtualinvoke $stack21.<java.net.URL: java.lang.String getFile()>();
+
+        $stack23 = new java.lang.StringBuilder;
+
+        specialinvoke $stack23.<java.lang.StringBuilder: void <init>()>();
+
+        $stack24 = virtualinvoke $stack23.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack6);
+
+        $stack25 = this.<jdk.internal.loader.FileURLMapper: java.net.URL url>;
+
+        $stack26 = virtualinvoke $stack25.<java.net.URL: java.lang.String getFile()>();
+
+        $stack27 = staticinvoke <sun.net.www.ParseUtil: java.lang.String decode(java.lang.String)>($stack26);
+
+        $stack28 = virtualinvoke $stack24.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack27);
+
+        $stack29 = virtualinvoke $stack28.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack30 = new java.lang.StringBuilder;
+
+        specialinvoke $stack30.<java.lang.StringBuilder: void <init>()>();
+
+        $stack31 = virtualinvoke $stack30.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\\\\");
+
+        $stack32 = virtualinvoke $stack29.<java.lang.String: java.lang.String replace(char,char)>(47, 92);
+
+        $stack33 = virtualinvoke $stack31.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack32);
+
+        $stack34 = virtualinvoke $stack33.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        this.<jdk.internal.loader.FileURLMapper: java.lang.String file> = $stack34;
+
+        $stack35 = this.<jdk.internal.loader.FileURLMapper: java.lang.String file>;
+
+        return $stack35;
+
+     label2:
+        $stack7 = this.<jdk.internal.loader.FileURLMapper: java.net.URL url>;
+
+        $stack8 = virtualinvoke $stack7.<java.net.URL: java.lang.String getFile()>();
+
+        $stack9 = virtualinvoke $stack8.<java.lang.String: java.lang.String replace(char,char)>(47, 92);
+
+        $stack10 = staticinvoke <sun.net.www.ParseUtil: java.lang.String decode(java.lang.String)>($stack9);
+
+        this.<jdk.internal.loader.FileURLMapper: java.lang.String file> = $stack10;
+
+        $stack11 = this.<jdk.internal.loader.FileURLMapper: java.lang.String file>;
+
+        return $stack11;
+    }
+
+    public boolean exists()
+    {
+        jdk.internal.loader.FileURLMapper this;
+        java.lang.String $stack3;
+        java.io.File $stack4;
+        boolean $stack5;
+
+        this := @this: jdk.internal.loader.FileURLMapper;
+
+        $stack3 = virtualinvoke this.<jdk.internal.loader.FileURLMapper: java.lang.String getPath()>();
+
+        $stack4 = new java.io.File;
+
+        specialinvoke $stack4.<java.io.File: void <init>(java.lang.String)>($stack3);
+
+        $stack5 = virtualinvoke $stack4.<java.io.File: boolean exists()>();
+
+        return $stack5;
+    }
+}

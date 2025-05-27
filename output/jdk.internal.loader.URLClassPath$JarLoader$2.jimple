@@ -1,0 +1,228 @@
+class jdk.internal.loader.URLClassPath$JarLoader$2 extends jdk.internal.loader.Resource
+{
+    private java.lang.Exception dataError;
+    final java.lang.String val$name;
+    final java.net.URL val$url;
+    final java.util.jar.JarEntry val$entry;
+    final jdk.internal.loader.URLClassPath$JarLoader this$0;
+
+    void <init>(jdk.internal.loader.URLClassPath$JarLoader, java.lang.String, java.net.URL, java.util.jar.JarEntry)
+    {
+        java.util.jar.JarEntry l4;
+        jdk.internal.loader.URLClassPath$JarLoader this$0;
+        jdk.internal.loader.URLClassPath$JarLoader$2 this;
+        java.net.URL l3;
+        java.lang.String l2;
+
+        this := @this: jdk.internal.loader.URLClassPath$JarLoader$2;
+
+        this$0 := @parameter0: jdk.internal.loader.URLClassPath$JarLoader;
+
+        l2 := @parameter1: java.lang.String;
+
+        l3 := @parameter2: java.net.URL;
+
+        l4 := @parameter3: java.util.jar.JarEntry;
+
+        this.<jdk.internal.loader.URLClassPath$JarLoader$2: jdk.internal.loader.URLClassPath$JarLoader this$0> = this$0;
+
+        this.<jdk.internal.loader.URLClassPath$JarLoader$2: java.lang.String val$name> = l2;
+
+        this.<jdk.internal.loader.URLClassPath$JarLoader$2: java.net.URL val$url> = l3;
+
+        this.<jdk.internal.loader.URLClassPath$JarLoader$2: java.util.jar.JarEntry val$entry> = l4;
+
+        specialinvoke this.<jdk.internal.loader.Resource: void <init>()>();
+
+        this.<jdk.internal.loader.URLClassPath$JarLoader$2: java.lang.Exception dataError> = null;
+
+        return;
+    }
+
+    public java.lang.String getName()
+    {
+        java.lang.String $stack1;
+        jdk.internal.loader.URLClassPath$JarLoader$2 this;
+
+        this := @this: jdk.internal.loader.URLClassPath$JarLoader$2;
+
+        $stack1 = this.<jdk.internal.loader.URLClassPath$JarLoader$2: java.lang.String val$name>;
+
+        return $stack1;
+    }
+
+    public java.net.URL getURL()
+    {
+        jdk.internal.loader.URLClassPath$JarLoader$2 this;
+        java.net.URL $stack1;
+
+        this := @this: jdk.internal.loader.URLClassPath$JarLoader$2;
+
+        $stack1 = this.<jdk.internal.loader.URLClassPath$JarLoader$2: java.net.URL val$url>;
+
+        return $stack1;
+    }
+
+    public java.net.URL getCodeSourceURL()
+    {
+        jdk.internal.loader.URLClassPath$JarLoader $stack1;
+        jdk.internal.loader.URLClassPath$JarLoader$2 this;
+        java.net.URL $stack2;
+
+        this := @this: jdk.internal.loader.URLClassPath$JarLoader$2;
+
+        $stack1 = this.<jdk.internal.loader.URLClassPath$JarLoader$2: jdk.internal.loader.URLClassPath$JarLoader this$0>;
+
+        $stack2 = $stack1.<jdk.internal.loader.URLClassPath$JarLoader: java.net.URL csu>;
+
+        return $stack2;
+    }
+
+    public java.io.InputStream getInputStream() throws java.io.IOException
+    {
+        java.util.jar.JarEntry $stack2;
+        jdk.internal.loader.URLClassPath$JarLoader $stack1;
+        jdk.internal.loader.URLClassPath$JarLoader$2 this;
+        java.util.jar.JarFile $stack3;
+        java.io.InputStream $stack4;
+
+        this := @this: jdk.internal.loader.URLClassPath$JarLoader$2;
+
+        $stack1 = this.<jdk.internal.loader.URLClassPath$JarLoader$2: jdk.internal.loader.URLClassPath$JarLoader this$0>;
+
+        $stack3 = $stack1.<jdk.internal.loader.URLClassPath$JarLoader: java.util.jar.JarFile jar>;
+
+        $stack2 = this.<jdk.internal.loader.URLClassPath$JarLoader$2: java.util.jar.JarEntry val$entry>;
+
+        $stack4 = virtualinvoke $stack3.<java.util.jar.JarFile: java.io.InputStream getInputStream(java.util.zip.ZipEntry)>($stack2);
+
+        return $stack4;
+    }
+
+    public int getContentLength()
+    {
+        java.util.jar.JarEntry $stack1;
+        jdk.internal.loader.URLClassPath$JarLoader$2 this;
+        int $stack3;
+        long $stack2;
+
+        this := @this: jdk.internal.loader.URLClassPath$JarLoader$2;
+
+        $stack1 = this.<jdk.internal.loader.URLClassPath$JarLoader$2: java.util.jar.JarEntry val$entry>;
+
+        $stack2 = virtualinvoke $stack1.<java.util.jar.JarEntry: long getSize()>();
+
+        $stack3 = (int) $stack2;
+
+        return $stack3;
+    }
+
+    public java.util.jar.Manifest getManifest() throws java.io.IOException
+    {
+        java.util.jar.Manifest $stack6;
+        jdk.internal.loader.URLClassPath$JarLoader $stack2, $stack4;
+        jdk.internal.access.JavaUtilJarAccess $stack1;
+        jdk.internal.loader.URLClassPath$JarLoader$2 this;
+        java.util.jar.JarFile $stack3, $stack5;
+
+        this := @this: jdk.internal.loader.URLClassPath$JarLoader$2;
+
+        $stack1 = staticinvoke <jdk.internal.access.SharedSecrets: jdk.internal.access.JavaUtilJarAccess javaUtilJarAccess()>();
+
+        $stack2 = this.<jdk.internal.loader.URLClassPath$JarLoader$2: jdk.internal.loader.URLClassPath$JarLoader this$0>;
+
+        $stack3 = $stack2.<jdk.internal.loader.URLClassPath$JarLoader: java.util.jar.JarFile jar>;
+
+        interfaceinvoke $stack1.<jdk.internal.access.JavaUtilJarAccess: void ensureInitialization(java.util.jar.JarFile)>($stack3);
+
+        $stack4 = this.<jdk.internal.loader.URLClassPath$JarLoader$2: jdk.internal.loader.URLClassPath$JarLoader this$0>;
+
+        $stack5 = $stack4.<jdk.internal.loader.URLClassPath$JarLoader: java.util.jar.JarFile jar>;
+
+        $stack6 = virtualinvoke $stack5.<java.util.jar.JarFile: java.util.jar.Manifest getManifest()>();
+
+        return $stack6;
+    }
+
+    public java.security.cert.Certificate[] getCertificates()
+    {
+        java.util.jar.JarEntry $stack1;
+        java.security.cert.Certificate[] $stack2;
+        jdk.internal.loader.URLClassPath$JarLoader$2 this;
+
+        this := @this: jdk.internal.loader.URLClassPath$JarLoader$2;
+
+        $stack1 = this.<jdk.internal.loader.URLClassPath$JarLoader$2: java.util.jar.JarEntry val$entry>;
+
+        $stack2 = virtualinvoke $stack1.<java.util.jar.JarEntry: java.security.cert.Certificate[] getCertificates()>();
+
+        return $stack2;
+    }
+
+    public java.security.CodeSigner[] getCodeSigners()
+    {
+        java.util.jar.JarEntry $stack1;
+        jdk.internal.loader.URLClassPath$JarLoader$2 this;
+        java.security.CodeSigner[] $stack2;
+
+        this := @this: jdk.internal.loader.URLClassPath$JarLoader$2;
+
+        $stack1 = this.<jdk.internal.loader.URLClassPath$JarLoader$2: java.util.jar.JarEntry val$entry>;
+
+        $stack2 = virtualinvoke $stack1.<java.util.jar.JarEntry: java.security.CodeSigner[] getCodeSigners()>();
+
+        return $stack2;
+    }
+
+    public java.lang.Exception getDataError()
+    {
+        jdk.internal.loader.URLClassPath$JarLoader$2 this;
+        java.lang.Exception $stack1;
+
+        this := @this: jdk.internal.loader.URLClassPath$JarLoader$2;
+
+        $stack1 = this.<jdk.internal.loader.URLClassPath$JarLoader$2: java.lang.Exception dataError>;
+
+        return $stack1;
+    }
+
+    public byte[] getBytes() throws java.io.IOException
+    {
+        byte[] $stack3;
+        long $stack5, $stack7;
+        java.io.IOException $stack9;
+        java.util.jar.JarEntry $stack6;
+        byte $stack8;
+        jdk.internal.loader.URLClassPath$JarLoader$2 this;
+        java.util.zip.CRC32 $stack4;
+
+        this := @this: jdk.internal.loader.URLClassPath$JarLoader$2;
+
+        $stack3 = specialinvoke this.<jdk.internal.loader.Resource: byte[] getBytes()>();
+
+        $stack4 = new java.util.zip.CRC32;
+
+        specialinvoke $stack4.<java.util.zip.CRC32: void <init>()>();
+
+        virtualinvoke $stack4.<java.util.zip.CRC32: void update(byte[])>($stack3);
+
+        $stack5 = virtualinvoke $stack4.<java.util.zip.CRC32: long getValue()>();
+
+        $stack6 = this.<jdk.internal.loader.URLClassPath$JarLoader$2: java.util.jar.JarEntry val$entry>;
+
+        $stack7 = virtualinvoke $stack6.<java.util.jar.JarEntry: long getCrc()>();
+
+        $stack8 = $stack5 cmp $stack7;
+
+        if $stack8 == 0 goto label1;
+
+        $stack9 = new java.io.IOException;
+
+        specialinvoke $stack9.<java.io.IOException: void <init>(java.lang.String)>("CRC error while extracting entry from JAR file");
+
+        this.<jdk.internal.loader.URLClassPath$JarLoader$2: java.lang.Exception dataError> = $stack9;
+
+     label1:
+        return $stack3;
+    }
+}

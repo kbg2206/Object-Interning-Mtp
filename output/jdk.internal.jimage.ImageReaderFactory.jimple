@@ -1,0 +1,120 @@
+public class jdk.internal.jimage.ImageReaderFactory extends java.lang.Object
+{
+    private static final java.lang.String JAVA_HOME;
+    private static final java.nio.file.Path BOOT_MODULES_JIMAGE;
+    private static final java.util.Map readers;
+    private static java.util.function.Function OPENER;
+
+    private void <init>()
+    {
+        jdk.internal.jimage.ImageReaderFactory this;
+
+        this := @this: jdk.internal.jimage.ImageReaderFactory;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static jdk.internal.jimage.ImageReader get(java.nio.file.Path) throws java.io.IOException
+    {
+        java.io.UncheckedIOException $stack7;
+        java.util.Map $stack4;
+        java.lang.Object $stack5;
+        jdk.internal.jimage.ImageReader $stack6;
+        java.io.IOException $stack8;
+        java.nio.file.Path jimage;
+        java.util.function.Function $stack3;
+
+        jimage := @parameter0: java.nio.file.Path;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(jimage);
+
+     label1:
+        $stack4 = <jdk.internal.jimage.ImageReaderFactory: java.util.Map readers>;
+
+        $stack3 = <jdk.internal.jimage.ImageReaderFactory: java.util.function.Function OPENER>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.Map: java.lang.Object computeIfAbsent(java.lang.Object,java.util.function.Function)>(jimage, $stack3);
+
+        $stack6 = (jdk.internal.jimage.ImageReader) $stack5;
+
+     label2:
+        return $stack6;
+
+     label3:
+        $stack7 := @caughtexception;
+
+        $stack8 = virtualinvoke $stack7.<java.io.UncheckedIOException: java.io.IOException getCause()>();
+
+        throw $stack8;
+
+        catch java.io.UncheckedIOException from label1 to label2 with label3;
+    }
+
+    public static jdk.internal.jimage.ImageReader getImageReader()
+    {
+        java.io.UncheckedIOException $stack4;
+        jdk.internal.jimage.ImageReader $stack2;
+        java.io.IOException $stack3;
+        java.nio.file.Path $stack1;
+
+     label1:
+        $stack1 = <jdk.internal.jimage.ImageReaderFactory: java.nio.file.Path BOOT_MODULES_JIMAGE>;
+
+        $stack2 = staticinvoke <jdk.internal.jimage.ImageReaderFactory: jdk.internal.jimage.ImageReader get(java.nio.file.Path)>($stack1);
+
+     label2:
+        return $stack2;
+
+     label3:
+        $stack3 := @caughtexception;
+
+        $stack4 = new java.io.UncheckedIOException;
+
+        specialinvoke $stack4.<java.io.UncheckedIOException: void <init>(java.io.IOException)>($stack3);
+
+        throw $stack4;
+
+        catch java.io.IOException from label1 to label2 with label3;
+    }
+
+    static void <clinit>()
+    {
+        java.util.concurrent.ConcurrentHashMap $stack4;
+        java.lang.String[] $stack1;
+        java.lang.String $stack0, $stack2;
+        jdk.internal.jimage.ImageReaderFactory$1 $stack5;
+        java.nio.file.Path $stack3;
+
+        $stack0 = staticinvoke <java.lang.System: java.lang.String getProperty(java.lang.String)>("java.home");
+
+        <jdk.internal.jimage.ImageReaderFactory: java.lang.String JAVA_HOME> = $stack0;
+
+        $stack2 = <jdk.internal.jimage.ImageReaderFactory: java.lang.String JAVA_HOME>;
+
+        $stack1 = newarray (java.lang.String)[2];
+
+        $stack1[0] = "lib";
+
+        $stack1[1] = "modules";
+
+        $stack3 = staticinvoke <java.nio.file.Paths: java.nio.file.Path get(java.lang.String,java.lang.String[])>($stack2, $stack1);
+
+        <jdk.internal.jimage.ImageReaderFactory: java.nio.file.Path BOOT_MODULES_JIMAGE> = $stack3;
+
+        $stack4 = new java.util.concurrent.ConcurrentHashMap;
+
+        specialinvoke $stack4.<java.util.concurrent.ConcurrentHashMap: void <init>()>();
+
+        <jdk.internal.jimage.ImageReaderFactory: java.util.Map readers> = $stack4;
+
+        $stack5 = new jdk.internal.jimage.ImageReaderFactory$1;
+
+        specialinvoke $stack5.<jdk.internal.jimage.ImageReaderFactory$1: void <init>()>();
+
+        <jdk.internal.jimage.ImageReaderFactory: java.util.function.Function OPENER> = $stack5;
+
+        return;
+    }
+}

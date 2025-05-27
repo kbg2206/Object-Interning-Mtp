@@ -1,0 +1,484 @@
+public abstract class jdk.internal.jimage.ImageReader$Node extends java.lang.Object
+{
+    private static final int ROOT_DIR;
+    private static final int PACKAGES_DIR;
+    private static final int MODULES_DIR;
+    private int flags;
+    private final java.lang.String name;
+    private final java.nio.file.attribute.BasicFileAttributes fileAttrs;
+    private boolean completed;
+
+    protected void <init>(java.lang.String, java.nio.file.attribute.BasicFileAttributes)
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        java.lang.Object $stack3, $stack5;
+        java.lang.String name, $stack4;
+        java.nio.file.attribute.BasicFileAttributes fileAttrs, $stack6;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        name := @parameter0: java.lang.String;
+
+        fileAttrs := @parameter1: java.nio.file.attribute.BasicFileAttributes;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack3 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(name);
+
+        $stack4 = (java.lang.String) $stack3;
+
+        this.<jdk.internal.jimage.ImageReader$Node: java.lang.String name> = $stack4;
+
+        $stack5 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(fileAttrs);
+
+        $stack6 = (java.nio.file.attribute.BasicFileAttributes) $stack5;
+
+        this.<jdk.internal.jimage.ImageReader$Node: java.nio.file.attribute.BasicFileAttributes fileAttrs> = $stack6;
+
+        return;
+    }
+
+    public boolean isCompleted()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        boolean $stack1;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        $stack1 = this.<jdk.internal.jimage.ImageReader$Node: boolean completed>;
+
+        return $stack1;
+    }
+
+    public void setCompleted(boolean)
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        boolean completed;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        completed := @parameter0: boolean;
+
+        this.<jdk.internal.jimage.ImageReader$Node: boolean completed> = completed;
+
+        return;
+    }
+
+    public final void setIsRootDir()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        int $stack1, $stack2;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        $stack1 = this.<jdk.internal.jimage.ImageReader$Node: int flags>;
+
+        $stack2 = $stack1 | 1;
+
+        this.<jdk.internal.jimage.ImageReader$Node: int flags> = $stack2;
+
+        return;
+    }
+
+    public final boolean isRootDir()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        int $stack1, $stack2;
+        boolean $stack3;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        $stack1 = this.<jdk.internal.jimage.ImageReader$Node: int flags>;
+
+        $stack2 = $stack1 & 1;
+
+        if $stack2 == 0 goto label1;
+
+        $stack3 = 1;
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    public final void setIsPackagesDir()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        int $stack1, $stack2;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        $stack1 = this.<jdk.internal.jimage.ImageReader$Node: int flags>;
+
+        $stack2 = $stack1 | 2;
+
+        this.<jdk.internal.jimage.ImageReader$Node: int flags> = $stack2;
+
+        return;
+    }
+
+    public final boolean isPackagesDir()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        int $stack1, $stack2;
+        boolean $stack3;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        $stack1 = this.<jdk.internal.jimage.ImageReader$Node: int flags>;
+
+        $stack2 = $stack1 & 2;
+
+        if $stack2 == 0 goto label1;
+
+        $stack3 = 1;
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    public final void setIsModulesDir()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        int $stack1, $stack2;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        $stack1 = this.<jdk.internal.jimage.ImageReader$Node: int flags>;
+
+        $stack2 = $stack1 | 4;
+
+        this.<jdk.internal.jimage.ImageReader$Node: int flags> = $stack2;
+
+        return;
+    }
+
+    public final boolean isModulesDir()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        int $stack1, $stack2;
+        boolean $stack3;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        $stack1 = this.<jdk.internal.jimage.ImageReader$Node: int flags>;
+
+        $stack2 = $stack1 & 4;
+
+        if $stack2 == 0 goto label1;
+
+        $stack3 = 1;
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    public final java.lang.String getName()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        java.lang.String $stack1;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        $stack1 = this.<jdk.internal.jimage.ImageReader$Node: java.lang.String name>;
+
+        return $stack1;
+    }
+
+    public final java.nio.file.attribute.BasicFileAttributes getFileAttributes()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        java.nio.file.attribute.BasicFileAttributes $stack1;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        $stack1 = this.<jdk.internal.jimage.ImageReader$Node: java.nio.file.attribute.BasicFileAttributes fileAttrs>;
+
+        return $stack1;
+    }
+
+    public final jdk.internal.jimage.ImageReader$Node resolveLink()
+    {
+        jdk.internal.jimage.ImageReader$Node this, $stack1;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        $stack1 = virtualinvoke this.<jdk.internal.jimage.ImageReader$Node: jdk.internal.jimage.ImageReader$Node resolveLink(boolean)>(0);
+
+        return $stack1;
+    }
+
+    public jdk.internal.jimage.ImageReader$Node resolveLink(boolean)
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        boolean recursive;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        recursive := @parameter0: boolean;
+
+        return this;
+    }
+
+    public boolean isLink()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        return 0;
+    }
+
+    public boolean isDirectory()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        return 0;
+    }
+
+    public java.util.List getChildren()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        java.lang.StringBuilder $stack2, $stack3, $stack5;
+        java.lang.String $stack4, $stack6;
+        java.lang.IllegalArgumentException $stack1;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        $stack1 = new java.lang.IllegalArgumentException;
+
+        $stack2 = new java.lang.StringBuilder;
+
+        specialinvoke $stack2.<java.lang.StringBuilder: void <init>()>();
+
+        $stack3 = virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("not a directory: ");
+
+        $stack4 = virtualinvoke this.<jdk.internal.jimage.ImageReader$Node: java.lang.String getNameString()>();
+
+        $stack5 = virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack4);
+
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack6);
+
+        throw $stack1;
+    }
+
+    public boolean isResource()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        return 0;
+    }
+
+    public jdk.internal.jimage.ImageLocation getLocation()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        java.lang.StringBuilder $stack2, $stack3, $stack5;
+        java.lang.String $stack4, $stack6;
+        java.lang.IllegalArgumentException $stack1;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        $stack1 = new java.lang.IllegalArgumentException;
+
+        $stack2 = new java.lang.StringBuilder;
+
+        specialinvoke $stack2.<java.lang.StringBuilder: void <init>()>();
+
+        $stack3 = virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("not a resource: ");
+
+        $stack4 = virtualinvoke this.<jdk.internal.jimage.ImageReader$Node: java.lang.String getNameString()>();
+
+        $stack5 = virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack4);
+
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack6);
+
+        throw $stack1;
+    }
+
+    public long size()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        return 0L;
+    }
+
+    public long compressedSize()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        return 0L;
+    }
+
+    public java.lang.String extension()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        return null;
+    }
+
+    public long contentOffset()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        return 0L;
+    }
+
+    public final java.nio.file.attribute.FileTime creationTime()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        java.nio.file.attribute.FileTime $stack2;
+        java.nio.file.attribute.BasicFileAttributes $stack1;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        $stack1 = this.<jdk.internal.jimage.ImageReader$Node: java.nio.file.attribute.BasicFileAttributes fileAttrs>;
+
+        $stack2 = interfaceinvoke $stack1.<java.nio.file.attribute.BasicFileAttributes: java.nio.file.attribute.FileTime creationTime()>();
+
+        return $stack2;
+    }
+
+    public final java.nio.file.attribute.FileTime lastAccessTime()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        java.nio.file.attribute.FileTime $stack2;
+        java.nio.file.attribute.BasicFileAttributes $stack1;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        $stack1 = this.<jdk.internal.jimage.ImageReader$Node: java.nio.file.attribute.BasicFileAttributes fileAttrs>;
+
+        $stack2 = interfaceinvoke $stack1.<java.nio.file.attribute.BasicFileAttributes: java.nio.file.attribute.FileTime lastAccessTime()>();
+
+        return $stack2;
+    }
+
+    public final java.nio.file.attribute.FileTime lastModifiedTime()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        java.nio.file.attribute.FileTime $stack2;
+        java.nio.file.attribute.BasicFileAttributes $stack1;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        $stack1 = this.<jdk.internal.jimage.ImageReader$Node: java.nio.file.attribute.BasicFileAttributes fileAttrs>;
+
+        $stack2 = interfaceinvoke $stack1.<java.nio.file.attribute.BasicFileAttributes: java.nio.file.attribute.FileTime lastModifiedTime()>();
+
+        return $stack2;
+    }
+
+    public final java.lang.String getNameString()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        java.lang.String $stack1;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        $stack1 = this.<jdk.internal.jimage.ImageReader$Node: java.lang.String name>;
+
+        return $stack1;
+    }
+
+    public final java.lang.String toString()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        java.lang.String $stack1;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        $stack1 = virtualinvoke this.<jdk.internal.jimage.ImageReader$Node: java.lang.String getNameString()>();
+
+        return $stack1;
+    }
+
+    public final int hashCode()
+    {
+        jdk.internal.jimage.ImageReader$Node this;
+        int $stack2;
+        java.lang.String $stack1;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        $stack1 = this.<jdk.internal.jimage.ImageReader$Node: java.lang.String name>;
+
+        $stack2 = virtualinvoke $stack1.<java.lang.String: int hashCode()>();
+
+        return $stack2;
+    }
+
+    public final boolean equals(java.lang.Object)
+    {
+        jdk.internal.jimage.ImageReader$Node this, $stack3;
+        java.lang.Object other;
+        java.lang.String $stack4, $stack5;
+        boolean $stack2, $stack6;
+
+        this := @this: jdk.internal.jimage.ImageReader$Node;
+
+        other := @parameter0: java.lang.Object;
+
+        if this != other goto label1;
+
+        return 1;
+
+     label1:
+        $stack2 = other instanceof jdk.internal.jimage.ImageReader$Node;
+
+        if $stack2 == 0 goto label2;
+
+        $stack5 = this.<jdk.internal.jimage.ImageReader$Node: java.lang.String name>;
+
+        $stack3 = (jdk.internal.jimage.ImageReader$Node) other;
+
+        $stack4 = $stack3.<jdk.internal.jimage.ImageReader$Node: java.lang.String name>;
+
+        $stack6 = virtualinvoke $stack5.<java.lang.String: boolean equals(java.lang.Object)>($stack4);
+
+        return $stack6;
+
+     label2:
+        return 0;
+    }
+
+    public static void <clinit>()
+    {
+        <jdk.internal.jimage.ImageReader$Node: int MODULES_DIR> = 4;
+
+        <jdk.internal.jimage.ImageReader$Node: int PACKAGES_DIR> = 2;
+
+        <jdk.internal.jimage.ImageReader$Node: int ROOT_DIR> = 1;
+
+        return;
+    }
+}

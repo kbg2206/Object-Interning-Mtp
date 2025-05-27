@@ -1,0 +1,211 @@
+class jdk.internal.module.ModuleBootstrap$Counters extends java.lang.Object
+{
+    private static final boolean PUBLISH_COUNTERS;
+    private static final boolean PRINT_COUNTERS;
+    private static java.util.Map counters;
+    private static long startTime;
+    private static long previousTime;
+
+    void <init>()
+    {
+        jdk.internal.module.ModuleBootstrap$Counters this;
+
+        this := @this: jdk.internal.module.ModuleBootstrap$Counters;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    static void start()
+    {
+        long $stack1;
+        boolean $stack0;
+
+        $stack0 = <jdk.internal.module.ModuleBootstrap$Counters: boolean PUBLISH_COUNTERS>;
+
+        if $stack0 == 0 goto label1;
+
+        $stack1 = staticinvoke <java.lang.System: long nanoTime()>();
+
+        <jdk.internal.module.ModuleBootstrap$Counters: long previousTime> = $stack1;
+
+        <jdk.internal.module.ModuleBootstrap$Counters: long startTime> = $stack1;
+
+     label1:
+        return;
+    }
+
+    static void add(java.lang.String)
+    {
+        java.lang.Long $stack9;
+        java.util.Map $stack8;
+        long $stack6, $stack7, elapsed;
+        java.lang.String name;
+        boolean $stack5;
+
+        name := @parameter0: java.lang.String;
+
+        $stack5 = <jdk.internal.module.ModuleBootstrap$Counters: boolean PUBLISH_COUNTERS>;
+
+        if $stack5 == 0 goto label1;
+
+        $stack6 = staticinvoke <java.lang.System: long nanoTime()>();
+
+        $stack7 = <jdk.internal.module.ModuleBootstrap$Counters: long previousTime>;
+
+        elapsed = $stack6 - $stack7;
+
+        <jdk.internal.module.ModuleBootstrap$Counters: long previousTime> = $stack6;
+
+        $stack8 = <jdk.internal.module.ModuleBootstrap$Counters: java.util.Map counters>;
+
+        $stack9 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(elapsed);
+
+        interfaceinvoke $stack8.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(name, $stack9);
+
+     label1:
+        return;
+    }
+
+    static void publish(java.lang.String)
+    {
+        java.lang.Long $stack26;
+        java.util.Map $stack10;
+        boolean $stack8, $stack13, $stack16, $stack29;
+        java.util.Set $stack11;
+        java.lang.StringBuilder $stack17, $stack19, $stack20, $stack21, $stack31, $stack33, $stack34, $stack35;
+        long $stack9, $stack14, $stack27, elapsedTotal;
+        java.lang.String totalTimeName, $stack22, name, $stack36;
+        jdk.internal.perf.PerfCounter $stack15, $stack28;
+        java.io.PrintStream $stack18, $stack32;
+        java.util.Map$Entry e;
+        java.util.Iterator $stack12;
+        java.lang.Object $stack23, $stack24, $stack25;
+
+        totalTimeName := @parameter0: java.lang.String;
+
+        $stack8 = <jdk.internal.module.ModuleBootstrap$Counters: boolean PUBLISH_COUNTERS>;
+
+        if $stack8 == 0 goto label4;
+
+        $stack9 = staticinvoke <java.lang.System: long nanoTime()>();
+
+        $stack10 = <jdk.internal.module.ModuleBootstrap$Counters: java.util.Map counters>;
+
+        $stack11 = interfaceinvoke $stack10.<java.util.Map: java.util.Set entrySet()>();
+
+        $stack12 = interfaceinvoke $stack11.<java.util.Set: java.util.Iterator iterator()>();
+
+     label1:
+        $stack13 = interfaceinvoke $stack12.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack13 == 0 goto label3;
+
+        $stack23 = interfaceinvoke $stack12.<java.util.Iterator: java.lang.Object next()>();
+
+        e = (java.util.Map$Entry) $stack23;
+
+        $stack24 = interfaceinvoke e.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        name = (java.lang.String) $stack24;
+
+        $stack25 = interfaceinvoke e.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        $stack26 = (java.lang.Long) $stack25;
+
+        $stack27 = virtualinvoke $stack26.<java.lang.Long: long longValue()>();
+
+        $stack28 = staticinvoke <jdk.internal.perf.PerfCounter: jdk.internal.perf.PerfCounter newPerfCounter(java.lang.String)>(name);
+
+        virtualinvoke $stack28.<jdk.internal.perf.PerfCounter: void set(long)>($stack27);
+
+        $stack29 = <jdk.internal.module.ModuleBootstrap$Counters: boolean PRINT_COUNTERS>;
+
+        if $stack29 == 0 goto label2;
+
+        $stack32 = <java.lang.System: java.io.PrintStream out>;
+
+        $stack31 = new java.lang.StringBuilder;
+
+        specialinvoke $stack31.<java.lang.StringBuilder: void <init>()>();
+
+        $stack33 = virtualinvoke $stack31.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+
+        $stack34 = virtualinvoke $stack33.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" = ");
+
+        $stack35 = virtualinvoke $stack34.<java.lang.StringBuilder: java.lang.StringBuilder append(long)>($stack27);
+
+        $stack36 = virtualinvoke $stack35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        virtualinvoke $stack32.<java.io.PrintStream: void println(java.lang.String)>($stack36);
+
+     label2:
+        goto label1;
+
+     label3:
+        $stack14 = <jdk.internal.module.ModuleBootstrap$Counters: long startTime>;
+
+        elapsedTotal = $stack9 - $stack14;
+
+        $stack15 = staticinvoke <jdk.internal.perf.PerfCounter: jdk.internal.perf.PerfCounter newPerfCounter(java.lang.String)>(totalTimeName);
+
+        virtualinvoke $stack15.<jdk.internal.perf.PerfCounter: void set(long)>(elapsedTotal);
+
+        $stack16 = <jdk.internal.module.ModuleBootstrap$Counters: boolean PRINT_COUNTERS>;
+
+        if $stack16 == 0 goto label4;
+
+        $stack18 = <java.lang.System: java.io.PrintStream out>;
+
+        $stack17 = new java.lang.StringBuilder;
+
+        specialinvoke $stack17.<java.lang.StringBuilder: void <init>()>();
+
+        $stack19 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(totalTimeName);
+
+        $stack20 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" = ");
+
+        $stack21 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.StringBuilder append(long)>(elapsedTotal);
+
+        $stack22 = virtualinvoke $stack21.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        virtualinvoke $stack18.<java.io.PrintStream: void println(java.lang.String)>($stack22);
+
+     label4:
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.util.LinkedHashMap $stack3;
+        java.lang.String $stack1;
+        boolean $stack2;
+
+        $stack1 = staticinvoke <java.lang.System: java.lang.String getProperty(java.lang.String)>("jdk.module.boot.usePerfData");
+
+        if $stack1 != null goto label1;
+
+        <jdk.internal.module.ModuleBootstrap$Counters: boolean PUBLISH_COUNTERS> = 0;
+
+        <jdk.internal.module.ModuleBootstrap$Counters: boolean PRINT_COUNTERS> = 0;
+
+        goto label2;
+
+     label1:
+        <jdk.internal.module.ModuleBootstrap$Counters: boolean PUBLISH_COUNTERS> = 1;
+
+        $stack2 = virtualinvoke $stack1.<java.lang.String: boolean equals(java.lang.Object)>("debug");
+
+        <jdk.internal.module.ModuleBootstrap$Counters: boolean PRINT_COUNTERS> = $stack2;
+
+        $stack3 = new java.util.LinkedHashMap;
+
+        specialinvoke $stack3.<java.util.LinkedHashMap: void <init>()>();
+
+        <jdk.internal.module.ModuleBootstrap$Counters: java.util.Map counters> = $stack3;
+
+     label2:
+        return;
+    }
+}

@@ -1,0 +1,29 @@
+public interface  jdk.internal.jimage.ImageStrings extends java.lang.Object
+{
+
+    public abstract java.lang.String get(int);
+
+    public abstract int add(java.lang.String);
+
+    public int match(int, java.lang.String, int)
+    {
+        java.lang.UnsupportedOperationException $stack4;
+        int offset, stringOffset;
+        jdk.internal.jimage.ImageStrings this;
+        java.lang.String string;
+
+        this := @this: jdk.internal.jimage.ImageStrings;
+
+        offset := @parameter0: int;
+
+        string := @parameter1: java.lang.String;
+
+        stringOffset := @parameter2: int;
+
+        $stack4 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $stack4.<java.lang.UnsupportedOperationException: void <init>()>();
+
+        throw $stack4;
+    }
+}

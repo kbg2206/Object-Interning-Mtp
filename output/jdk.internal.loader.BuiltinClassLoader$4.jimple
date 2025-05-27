@@ -1,0 +1,84 @@
+class jdk.internal.loader.BuiltinClassLoader$4 extends java.lang.Object implements java.security.PrivilegedAction
+{
+    final java.lang.String val$path;
+    final java.lang.String val$cn;
+    final jdk.internal.loader.BuiltinClassLoader this$0;
+
+    void <init>(jdk.internal.loader.BuiltinClassLoader, java.lang.String, java.lang.String)
+    {
+        jdk.internal.loader.BuiltinClassLoader$4 this;
+        java.lang.String l2, l3;
+        jdk.internal.loader.BuiltinClassLoader this$0;
+
+        this := @this: jdk.internal.loader.BuiltinClassLoader$4;
+
+        this$0 := @parameter0: jdk.internal.loader.BuiltinClassLoader;
+
+        l2 := @parameter1: java.lang.String;
+
+        l3 := @parameter2: java.lang.String;
+
+        this.<jdk.internal.loader.BuiltinClassLoader$4: jdk.internal.loader.BuiltinClassLoader this$0> = this$0;
+
+        this.<jdk.internal.loader.BuiltinClassLoader$4: java.lang.String val$path> = l2;
+
+        this.<jdk.internal.loader.BuiltinClassLoader$4: java.lang.String val$cn> = l3;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.Class run()
+    {
+        jdk.internal.loader.Resource $stack6;
+        jdk.internal.loader.URLClassPath $stack5;
+        java.io.IOException $stack10;
+        jdk.internal.loader.BuiltinClassLoader $stack3, $stack8;
+        jdk.internal.loader.BuiltinClassLoader$4 this;
+        java.lang.Class $stack9;
+        java.lang.String $stack4, $stack7;
+
+        this := @this: jdk.internal.loader.BuiltinClassLoader$4;
+
+        $stack3 = this.<jdk.internal.loader.BuiltinClassLoader$4: jdk.internal.loader.BuiltinClassLoader this$0>;
+
+        $stack5 = $stack3.<jdk.internal.loader.BuiltinClassLoader: jdk.internal.loader.URLClassPath ucp>;
+
+        $stack4 = this.<jdk.internal.loader.BuiltinClassLoader$4: java.lang.String val$path>;
+
+        $stack6 = virtualinvoke $stack5.<jdk.internal.loader.URLClassPath: jdk.internal.loader.Resource getResource(java.lang.String,boolean)>($stack4, 0);
+
+        if $stack6 == null goto label4;
+
+     label1:
+        $stack8 = this.<jdk.internal.loader.BuiltinClassLoader$4: jdk.internal.loader.BuiltinClassLoader this$0>;
+
+        $stack7 = this.<jdk.internal.loader.BuiltinClassLoader$4: java.lang.String val$cn>;
+
+        $stack9 = virtualinvoke $stack8.<jdk.internal.loader.BuiltinClassLoader: java.lang.Class defineClass(java.lang.String,jdk.internal.loader.Resource)>($stack7, $stack6);
+
+     label2:
+        return $stack9;
+
+     label3:
+        $stack10 := @caughtexception;
+
+     label4:
+        return null;
+
+        catch java.io.IOException from label1 to label2 with label3;
+    }
+
+    public volatile java.lang.Object run()
+    {
+        java.lang.Class $stack1;
+        jdk.internal.loader.BuiltinClassLoader$4 this;
+
+        this := @this: jdk.internal.loader.BuiltinClassLoader$4;
+
+        $stack1 = virtualinvoke this.<jdk.internal.loader.BuiltinClassLoader$4: java.lang.Class run()>();
+
+        return $stack1;
+    }
+}

@@ -1,0 +1,138 @@
+class jdk.internal.loader.URLClassPath$2 extends java.lang.Object implements java.util.Enumeration
+{
+    private int index;
+    private jdk.internal.loader.Resource res;
+    final java.lang.String val$name;
+    final boolean val$check;
+    final jdk.internal.loader.URLClassPath this$0;
+
+    void <init>(jdk.internal.loader.URLClassPath, java.lang.String, boolean)
+    {
+        jdk.internal.loader.URLClassPath this$0;
+        java.lang.String l2;
+        jdk.internal.loader.URLClassPath$2 this;
+        boolean l3;
+
+        this := @this: jdk.internal.loader.URLClassPath$2;
+
+        this$0 := @parameter0: jdk.internal.loader.URLClassPath;
+
+        l2 := @parameter1: java.lang.String;
+
+        l3 := @parameter2: boolean;
+
+        this.<jdk.internal.loader.URLClassPath$2: jdk.internal.loader.URLClassPath this$0> = this$0;
+
+        this.<jdk.internal.loader.URLClassPath$2: java.lang.String val$name> = l2;
+
+        this.<jdk.internal.loader.URLClassPath$2: boolean val$check> = l3;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<jdk.internal.loader.URLClassPath$2: int index> = 0;
+
+        this.<jdk.internal.loader.URLClassPath$2: jdk.internal.loader.Resource res> = null;
+
+        return;
+    }
+
+    private boolean next()
+    {
+        jdk.internal.loader.Resource $stack2, $stack9, $stack10;
+        jdk.internal.loader.URLClassPath $stack5;
+        int $stack3, $stack4;
+        java.lang.String $stack8;
+        jdk.internal.loader.URLClassPath$2 this;
+        jdk.internal.loader.URLClassPath$Loader $stack6;
+        boolean $stack7;
+
+        this := @this: jdk.internal.loader.URLClassPath$2;
+
+        $stack2 = this.<jdk.internal.loader.URLClassPath$2: jdk.internal.loader.Resource res>;
+
+        if $stack2 == null goto label1;
+
+        return 1;
+
+     label1:
+        $stack5 = this.<jdk.internal.loader.URLClassPath$2: jdk.internal.loader.URLClassPath this$0>;
+
+        $stack3 = this.<jdk.internal.loader.URLClassPath$2: int index>;
+
+        $stack4 = $stack3 + 1;
+
+        this.<jdk.internal.loader.URLClassPath$2: int index> = $stack4;
+
+        $stack6 = virtualinvoke $stack5.<jdk.internal.loader.URLClassPath: jdk.internal.loader.URLClassPath$Loader getLoader(int)>($stack3);
+
+        if $stack6 == null goto label2;
+
+        $stack8 = this.<jdk.internal.loader.URLClassPath$2: java.lang.String val$name>;
+
+        $stack7 = this.<jdk.internal.loader.URLClassPath$2: boolean val$check>;
+
+        $stack9 = virtualinvoke $stack6.<jdk.internal.loader.URLClassPath$Loader: jdk.internal.loader.Resource getResource(java.lang.String,boolean)>($stack8, $stack7);
+
+        this.<jdk.internal.loader.URLClassPath$2: jdk.internal.loader.Resource res> = $stack9;
+
+        $stack10 = this.<jdk.internal.loader.URLClassPath$2: jdk.internal.loader.Resource res>;
+
+        if $stack10 == null goto label1;
+
+        return 1;
+
+     label2:
+        return 0;
+    }
+
+    public boolean hasMoreElements()
+    {
+        jdk.internal.loader.URLClassPath$2 this;
+        boolean $stack1;
+
+        this := @this: jdk.internal.loader.URLClassPath$2;
+
+        $stack1 = virtualinvoke this.<jdk.internal.loader.URLClassPath$2: boolean next()>();
+
+        return $stack1;
+    }
+
+    public jdk.internal.loader.Resource nextElement()
+    {
+        jdk.internal.loader.Resource r;
+        jdk.internal.loader.URLClassPath$2 this;
+        java.util.NoSuchElementException $stack3;
+        boolean $stack2;
+
+        this := @this: jdk.internal.loader.URLClassPath$2;
+
+        $stack2 = virtualinvoke this.<jdk.internal.loader.URLClassPath$2: boolean next()>();
+
+        if $stack2 != 0 goto label1;
+
+        $stack3 = new java.util.NoSuchElementException;
+
+        specialinvoke $stack3.<java.util.NoSuchElementException: void <init>()>();
+
+        throw $stack3;
+
+     label1:
+        r = this.<jdk.internal.loader.URLClassPath$2: jdk.internal.loader.Resource res>;
+
+        this.<jdk.internal.loader.URLClassPath$2: jdk.internal.loader.Resource res> = null;
+
+        return r;
+    }
+
+    public volatile java.lang.Object nextElement()
+    {
+        jdk.internal.loader.Resource $stack1;
+        jdk.internal.loader.URLClassPath$2 this;
+
+        this := @this: jdk.internal.loader.URLClassPath$2;
+
+        $stack1 = virtualinvoke this.<jdk.internal.loader.URLClassPath$2: jdk.internal.loader.Resource nextElement()>();
+
+        return $stack1;
+    }
+}

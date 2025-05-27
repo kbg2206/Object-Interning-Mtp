@@ -1,0 +1,174 @@
+public final class jdk.internal.module.DefaultRoots extends java.lang.Object
+{
+
+    private void <init>()
+    {
+        jdk.internal.module.DefaultRoots this;
+
+        this := @this: jdk.internal.module.DefaultRoots;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    static java.util.Set compute(java.lang.module.ModuleFinder, java.lang.module.ModuleFinder)
+    {
+        java.util.function.Predicate $stack4, $stack8;
+        java.util.Set $stack2, $stack14;
+        java.util.function.Function $stack6, $stack10;
+        java.util.stream.Stream $stack3, $stack5, $stack7, $stack9, $stack11;
+        java.lang.module.ModuleFinder finder1, finder2;
+        java.lang.Object $stack13;
+        java.util.stream.Collector $stack12;
+
+        finder1 := @parameter0: java.lang.module.ModuleFinder;
+
+        finder2 := @parameter1: java.lang.module.ModuleFinder;
+
+        $stack2 = interfaceinvoke finder1.<java.lang.module.ModuleFinder: java.util.Set findAll()>();
+
+        $stack3 = interfaceinvoke $stack2.<java.util.Set: java.util.stream.Stream stream()>();
+
+        $stack4 = staticinvoke <jdk.internal.module.DefaultRoots$lambda_compute_0__65: java.util.function.Predicate bootstrap$()>();
+
+        $stack5 = interfaceinvoke $stack3.<java.util.stream.Stream: java.util.stream.Stream filter(java.util.function.Predicate)>($stack4);
+
+        $stack6 = staticinvoke <jdk.internal.module.DefaultRoots$descriptor__67: java.util.function.Function bootstrap$()>();
+
+        $stack7 = interfaceinvoke $stack5.<java.util.stream.Stream: java.util.stream.Stream map(java.util.function.Function)>($stack6);
+
+        $stack8 = staticinvoke <jdk.internal.module.DefaultRoots$lambda_compute_1__70: java.util.function.Predicate bootstrap$(java.lang.module.ModuleFinder)>(finder2);
+
+        $stack9 = interfaceinvoke $stack7.<java.util.stream.Stream: java.util.stream.Stream filter(java.util.function.Predicate)>($stack8);
+
+        $stack10 = staticinvoke <jdk.internal.module.DefaultRoots$name__71: java.util.function.Function bootstrap$()>();
+
+        $stack11 = interfaceinvoke $stack9.<java.util.stream.Stream: java.util.stream.Stream map(java.util.function.Function)>($stack10);
+
+        $stack12 = staticinvoke <java.util.stream.Collectors: java.util.stream.Collector toSet()>();
+
+        $stack13 = interfaceinvoke $stack11.<java.util.stream.Stream: java.lang.Object collect(java.util.stream.Collector)>($stack12);
+
+        $stack14 = (java.util.Set) $stack13;
+
+        return $stack14;
+    }
+
+    public static java.util.Set compute(java.lang.module.ModuleFinder)
+    {
+        java.util.Set $stack1;
+        java.lang.module.ModuleFinder finder;
+
+        finder := @parameter0: java.lang.module.ModuleFinder;
+
+        $stack1 = staticinvoke <jdk.internal.module.DefaultRoots: java.util.Set compute(java.lang.module.ModuleFinder,java.lang.module.ModuleFinder)>(finder, finder);
+
+        return $stack1;
+    }
+
+    private static boolean exportsAPI(java.lang.module.ModuleDescriptor)
+    {
+        java.util.stream.Stream $stack2, $stack4;
+        java.util.function.Predicate $stack3;
+        java.lang.module.ModuleDescriptor descriptor;
+        java.util.Set $stack1;
+        java.util.Optional $stack5;
+        boolean $stack6;
+
+        descriptor := @parameter0: java.lang.module.ModuleDescriptor;
+
+        $stack1 = virtualinvoke descriptor.<java.lang.module.ModuleDescriptor: java.util.Set exports()>();
+
+        $stack2 = interfaceinvoke $stack1.<java.util.Set: java.util.stream.Stream stream()>();
+
+        $stack3 = staticinvoke <jdk.internal.module.DefaultRoots$lambda_exportsAPI_2__66: java.util.function.Predicate bootstrap$()>();
+
+        $stack4 = interfaceinvoke $stack2.<java.util.stream.Stream: java.util.stream.Stream filter(java.util.function.Predicate)>($stack3);
+
+        $stack5 = interfaceinvoke $stack4.<java.util.stream.Stream: java.util.Optional findAny()>();
+
+        $stack6 = virtualinvoke $stack5.<java.util.Optional: boolean isPresent()>();
+
+        return $stack6;
+    }
+
+    public static boolean lambda$exportsAPI$2(java.lang.module.ModuleDescriptor$Exports)
+    {
+        java.lang.module.ModuleDescriptor$Exports e;
+        boolean $stack1, $stack2;
+
+        e := @parameter0: java.lang.module.ModuleDescriptor$Exports;
+
+        $stack1 = virtualinvoke e.<java.lang.module.ModuleDescriptor$Exports: boolean isQualified()>();
+
+        if $stack1 != 0 goto label1;
+
+        $stack2 = 1;
+
+        goto label2;
+
+     label1:
+        $stack2 = 0;
+
+     label2:
+        return $stack2;
+    }
+
+    public static boolean lambda$compute$1(java.lang.module.ModuleFinder, java.lang.module.ModuleDescriptor)
+    {
+        java.lang.module.ModuleFinder finder2;
+        java.lang.module.ModuleDescriptor descriptor;
+        java.util.Optional $stack3;
+        java.lang.String $stack2;
+        boolean $stack4, $stack5, $stack6;
+
+        finder2 := @parameter0: java.lang.module.ModuleFinder;
+
+        descriptor := @parameter1: java.lang.module.ModuleDescriptor;
+
+        $stack2 = virtualinvoke descriptor.<java.lang.module.ModuleDescriptor: java.lang.String name()>();
+
+        $stack3 = interfaceinvoke finder2.<java.lang.module.ModuleFinder: java.util.Optional find(java.lang.String)>($stack2);
+
+        $stack4 = virtualinvoke $stack3.<java.util.Optional: boolean isPresent()>();
+
+        if $stack4 == 0 goto label1;
+
+        $stack5 = staticinvoke <jdk.internal.module.DefaultRoots: boolean exportsAPI(java.lang.module.ModuleDescriptor)>(descriptor);
+
+        if $stack5 == 0 goto label1;
+
+        $stack6 = 1;
+
+        goto label2;
+
+     label1:
+        $stack6 = 0;
+
+     label2:
+        return $stack6;
+    }
+
+    public static boolean lambda$compute$0(java.lang.module.ModuleReference)
+    {
+        java.lang.module.ModuleReference mref;
+        boolean $stack1, $stack2;
+
+        mref := @parameter0: java.lang.module.ModuleReference;
+
+        $stack1 = staticinvoke <jdk.internal.module.ModuleResolution: boolean doNotResolveByDefault(java.lang.module.ModuleReference)>(mref);
+
+        if $stack1 != 0 goto label1;
+
+        $stack2 = 1;
+
+        goto label2;
+
+     label1:
+        $stack2 = 0;
+
+     label2:
+        return $stack2;
+    }
+}

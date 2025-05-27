@@ -1,0 +1,99 @@
+class jdk.internal.jimage.ImageReader$LinkNode extends jdk.internal.jimage.ImageReader$Node
+{
+    private final jdk.internal.jimage.ImageReader$Node link;
+
+    private void <init>(java.lang.String, jdk.internal.jimage.ImageReader$Node)
+    {
+        jdk.internal.jimage.ImageReader$Node link;
+        jdk.internal.jimage.ImageReader$LinkNode this;
+        java.lang.String name;
+        java.nio.file.attribute.BasicFileAttributes $stack3;
+
+        this := @this: jdk.internal.jimage.ImageReader$LinkNode;
+
+        name := @parameter0: java.lang.String;
+
+        link := @parameter1: jdk.internal.jimage.ImageReader$Node;
+
+        $stack3 = virtualinvoke link.<jdk.internal.jimage.ImageReader$Node: java.nio.file.attribute.BasicFileAttributes getFileAttributes()>();
+
+        specialinvoke this.<jdk.internal.jimage.ImageReader$Node: void <init>(java.lang.String,java.nio.file.attribute.BasicFileAttributes)>(name, $stack3);
+
+        this.<jdk.internal.jimage.ImageReader$LinkNode: jdk.internal.jimage.ImageReader$Node link> = link;
+
+        return;
+    }
+
+    static jdk.internal.jimage.ImageReader$LinkNode create(jdk.internal.jimage.ImageReader$Directory, java.lang.String, jdk.internal.jimage.ImageReader$Node)
+    {
+        jdk.internal.jimage.ImageReader$Node link;
+        jdk.internal.jimage.ImageReader$LinkNode $stack4;
+        jdk.internal.jimage.ImageReader$Directory parent;
+        java.lang.String name;
+
+        parent := @parameter0: jdk.internal.jimage.ImageReader$Directory;
+
+        name := @parameter1: java.lang.String;
+
+        link := @parameter2: jdk.internal.jimage.ImageReader$Node;
+
+        $stack4 = new jdk.internal.jimage.ImageReader$LinkNode;
+
+        specialinvoke $stack4.<jdk.internal.jimage.ImageReader$LinkNode: void <init>(java.lang.String,jdk.internal.jimage.ImageReader$Node)>(name, link);
+
+        virtualinvoke parent.<jdk.internal.jimage.ImageReader$Directory: void addChild(jdk.internal.jimage.ImageReader$Node)>($stack4);
+
+        return $stack4;
+    }
+
+    public boolean isCompleted()
+    {
+        jdk.internal.jimage.ImageReader$LinkNode this;
+
+        this := @this: jdk.internal.jimage.ImageReader$LinkNode;
+
+        return 1;
+    }
+
+    public jdk.internal.jimage.ImageReader$Node resolveLink(boolean)
+    {
+        jdk.internal.jimage.ImageReader$Node $stack3, $stack6, $stack2;
+        jdk.internal.jimage.ImageReader$LinkNode this, $stack7;
+        boolean recursive, $stack4;
+
+        this := @this: jdk.internal.jimage.ImageReader$LinkNode;
+
+        recursive := @parameter0: boolean;
+
+        if recursive == 0 goto label1;
+
+        $stack3 = this.<jdk.internal.jimage.ImageReader$LinkNode: jdk.internal.jimage.ImageReader$Node link>;
+
+        $stack4 = $stack3 instanceof jdk.internal.jimage.ImageReader$LinkNode;
+
+        if $stack4 == 0 goto label1;
+
+        $stack6 = this.<jdk.internal.jimage.ImageReader$LinkNode: jdk.internal.jimage.ImageReader$Node link>;
+
+        $stack7 = (jdk.internal.jimage.ImageReader$LinkNode) $stack6;
+
+        $stack2 = virtualinvoke $stack7.<jdk.internal.jimage.ImageReader$LinkNode: jdk.internal.jimage.ImageReader$Node resolveLink(boolean)>(1);
+
+        goto label2;
+
+     label1:
+        $stack2 = this.<jdk.internal.jimage.ImageReader$LinkNode: jdk.internal.jimage.ImageReader$Node link>;
+
+     label2:
+        return $stack2;
+    }
+
+    public boolean isLink()
+    {
+        jdk.internal.jimage.ImageReader$LinkNode this;
+
+        this := @this: jdk.internal.jimage.ImageReader$LinkNode;
+
+        return 1;
+    }
+}

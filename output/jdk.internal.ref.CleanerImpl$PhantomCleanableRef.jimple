@@ -1,0 +1,81 @@
+public final class jdk.internal.ref.CleanerImpl$PhantomCleanableRef extends jdk.internal.ref.PhantomCleanable
+{
+    private final java.lang.Runnable action;
+
+    public void <init>(java.lang.Object, java.lang.ref.Cleaner, java.lang.Runnable)
+    {
+        jdk.internal.ref.CleanerImpl$PhantomCleanableRef this;
+        java.lang.ref.Cleaner cleaner;
+        java.lang.Object obj;
+        java.lang.Runnable action;
+
+        this := @this: jdk.internal.ref.CleanerImpl$PhantomCleanableRef;
+
+        obj := @parameter0: java.lang.Object;
+
+        cleaner := @parameter1: java.lang.ref.Cleaner;
+
+        action := @parameter2: java.lang.Runnable;
+
+        specialinvoke this.<jdk.internal.ref.PhantomCleanable: void <init>(java.lang.Object,java.lang.ref.Cleaner)>(obj, cleaner);
+
+        this.<jdk.internal.ref.CleanerImpl$PhantomCleanableRef: java.lang.Runnable action> = action;
+
+        return;
+    }
+
+    void <init>()
+    {
+        jdk.internal.ref.CleanerImpl$PhantomCleanableRef this;
+
+        this := @this: jdk.internal.ref.CleanerImpl$PhantomCleanableRef;
+
+        specialinvoke this.<jdk.internal.ref.PhantomCleanable: void <init>()>();
+
+        this.<jdk.internal.ref.CleanerImpl$PhantomCleanableRef: java.lang.Runnable action> = null;
+
+        return;
+    }
+
+    protected void performCleanup()
+    {
+        java.lang.Runnable $stack1;
+        jdk.internal.ref.CleanerImpl$PhantomCleanableRef this;
+
+        this := @this: jdk.internal.ref.CleanerImpl$PhantomCleanableRef;
+
+        $stack1 = this.<jdk.internal.ref.CleanerImpl$PhantomCleanableRef: java.lang.Runnable action>;
+
+        interfaceinvoke $stack1.<java.lang.Runnable: void run()>();
+
+        return;
+    }
+
+    public java.lang.Object get()
+    {
+        java.lang.UnsupportedOperationException $stack1;
+        jdk.internal.ref.CleanerImpl$PhantomCleanableRef this;
+
+        this := @this: jdk.internal.ref.CleanerImpl$PhantomCleanableRef;
+
+        $stack1 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $stack1.<java.lang.UnsupportedOperationException: void <init>(java.lang.String)>("get");
+
+        throw $stack1;
+    }
+
+    public void clear()
+    {
+        java.lang.UnsupportedOperationException $stack1;
+        jdk.internal.ref.CleanerImpl$PhantomCleanableRef this;
+
+        this := @this: jdk.internal.ref.CleanerImpl$PhantomCleanableRef;
+
+        $stack1 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $stack1.<java.lang.UnsupportedOperationException: void <init>(java.lang.String)>("clear");
+
+        throw $stack1;
+    }
+}

@@ -1,0 +1,198 @@
+class jdk.internal.loader.ArchivedClassLoaders extends java.lang.Object
+{
+    private static jdk.internal.loader.ArchivedClassLoaders archivedClassLoaders;
+    private final java.lang.ClassLoader bootLoader;
+    private final java.lang.ClassLoader platformLoader;
+    private final java.lang.ClassLoader appLoader;
+    private final jdk.internal.module.ServicesCatalog[] servicesCatalogs;
+    private final java.util.Map packageToModule;
+
+    private void <init>()
+    {
+        jdk.internal.module.ServicesCatalog[] $stack4, $stack6, $stack10, $stack14;
+        jdk.internal.loader.ArchivedClassLoaders this;
+        jdk.internal.module.ServicesCatalog $stack8, $stack12, $stack16;
+        jdk.internal.loader.BuiltinClassLoader $stack1;
+        java.util.Map $stack17;
+        java.lang.ClassLoader $stack2, $stack3, $stack5, $stack9, $stack13;
+
+        this := @this: jdk.internal.loader.ArchivedClassLoaders;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = staticinvoke <jdk.internal.loader.ClassLoaders: jdk.internal.loader.BuiltinClassLoader bootLoader()>();
+
+        this.<jdk.internal.loader.ArchivedClassLoaders: java.lang.ClassLoader bootLoader> = $stack1;
+
+        $stack2 = staticinvoke <jdk.internal.loader.ClassLoaders: java.lang.ClassLoader platformClassLoader()>();
+
+        this.<jdk.internal.loader.ArchivedClassLoaders: java.lang.ClassLoader platformLoader> = $stack2;
+
+        $stack3 = staticinvoke <jdk.internal.loader.ClassLoaders: java.lang.ClassLoader appClassLoader()>();
+
+        this.<jdk.internal.loader.ArchivedClassLoaders: java.lang.ClassLoader appLoader> = $stack3;
+
+        $stack4 = newarray (jdk.internal.module.ServicesCatalog)[3];
+
+        this.<jdk.internal.loader.ArchivedClassLoaders: jdk.internal.module.ServicesCatalog[] servicesCatalogs> = $stack4;
+
+        $stack6 = this.<jdk.internal.loader.ArchivedClassLoaders: jdk.internal.module.ServicesCatalog[] servicesCatalogs>;
+
+        $stack5 = this.<jdk.internal.loader.ArchivedClassLoaders: java.lang.ClassLoader bootLoader>;
+
+        $stack8 = staticinvoke <jdk.internal.module.ServicesCatalog: jdk.internal.module.ServicesCatalog getServicesCatalog(java.lang.ClassLoader)>($stack5);
+
+        $stack6[0] = $stack8;
+
+        $stack10 = this.<jdk.internal.loader.ArchivedClassLoaders: jdk.internal.module.ServicesCatalog[] servicesCatalogs>;
+
+        $stack9 = this.<jdk.internal.loader.ArchivedClassLoaders: java.lang.ClassLoader platformLoader>;
+
+        $stack12 = staticinvoke <jdk.internal.module.ServicesCatalog: jdk.internal.module.ServicesCatalog getServicesCatalog(java.lang.ClassLoader)>($stack9);
+
+        $stack10[1] = $stack12;
+
+        $stack14 = this.<jdk.internal.loader.ArchivedClassLoaders: jdk.internal.module.ServicesCatalog[] servicesCatalogs>;
+
+        $stack13 = this.<jdk.internal.loader.ArchivedClassLoaders: java.lang.ClassLoader appLoader>;
+
+        $stack16 = staticinvoke <jdk.internal.module.ServicesCatalog: jdk.internal.module.ServicesCatalog getServicesCatalog(java.lang.ClassLoader)>($stack13);
+
+        $stack14[2] = $stack16;
+
+        $stack17 = staticinvoke <jdk.internal.loader.BuiltinClassLoader: java.util.Map packageToModule()>();
+
+        this.<jdk.internal.loader.ArchivedClassLoaders: java.util.Map packageToModule> = $stack17;
+
+        return;
+    }
+
+    java.lang.ClassLoader bootLoader()
+    {
+        jdk.internal.loader.ArchivedClassLoaders this;
+        java.lang.ClassLoader $stack1;
+
+        this := @this: jdk.internal.loader.ArchivedClassLoaders;
+
+        $stack1 = this.<jdk.internal.loader.ArchivedClassLoaders: java.lang.ClassLoader bootLoader>;
+
+        return $stack1;
+    }
+
+    java.lang.ClassLoader platformLoader()
+    {
+        jdk.internal.loader.ArchivedClassLoaders this;
+        java.lang.ClassLoader $stack1;
+
+        this := @this: jdk.internal.loader.ArchivedClassLoaders;
+
+        $stack1 = this.<jdk.internal.loader.ArchivedClassLoaders: java.lang.ClassLoader platformLoader>;
+
+        return $stack1;
+    }
+
+    java.lang.ClassLoader appLoader()
+    {
+        jdk.internal.loader.ArchivedClassLoaders this;
+        java.lang.ClassLoader $stack1;
+
+        this := @this: jdk.internal.loader.ArchivedClassLoaders;
+
+        $stack1 = this.<jdk.internal.loader.ArchivedClassLoaders: java.lang.ClassLoader appLoader>;
+
+        return $stack1;
+    }
+
+    jdk.internal.module.ServicesCatalog servicesCatalog(java.lang.ClassLoader)
+    {
+        jdk.internal.module.ServicesCatalog[] $stack6, $stack8, $stack10;
+        jdk.internal.loader.ArchivedClassLoaders this;
+        jdk.internal.module.ServicesCatalog $stack7, $stack9, $stack11;
+        java.lang.InternalError $stack5;
+        java.lang.ClassLoader loader, $stack2, $stack3, $stack4;
+
+        this := @this: jdk.internal.loader.ArchivedClassLoaders;
+
+        loader := @parameter0: java.lang.ClassLoader;
+
+        $stack2 = this.<jdk.internal.loader.ArchivedClassLoaders: java.lang.ClassLoader bootLoader>;
+
+        if loader != $stack2 goto label1;
+
+        $stack10 = this.<jdk.internal.loader.ArchivedClassLoaders: jdk.internal.module.ServicesCatalog[] servicesCatalogs>;
+
+        $stack11 = $stack10[0];
+
+        return $stack11;
+
+     label1:
+        $stack3 = this.<jdk.internal.loader.ArchivedClassLoaders: java.lang.ClassLoader platformLoader>;
+
+        if loader != $stack3 goto label2;
+
+        $stack8 = this.<jdk.internal.loader.ArchivedClassLoaders: jdk.internal.module.ServicesCatalog[] servicesCatalogs>;
+
+        $stack9 = $stack8[1];
+
+        return $stack9;
+
+     label2:
+        $stack4 = this.<jdk.internal.loader.ArchivedClassLoaders: java.lang.ClassLoader appLoader>;
+
+        if loader != $stack4 goto label3;
+
+        $stack6 = this.<jdk.internal.loader.ArchivedClassLoaders: jdk.internal.module.ServicesCatalog[] servicesCatalogs>;
+
+        $stack7 = $stack6[2];
+
+        return $stack7;
+
+     label3:
+        $stack5 = new java.lang.InternalError;
+
+        specialinvoke $stack5.<java.lang.InternalError: void <init>()>();
+
+        throw $stack5;
+    }
+
+    java.util.Map packageToModule()
+    {
+        jdk.internal.loader.ArchivedClassLoaders this;
+        java.util.Map $stack1;
+
+        this := @this: jdk.internal.loader.ArchivedClassLoaders;
+
+        $stack1 = this.<jdk.internal.loader.ArchivedClassLoaders: java.util.Map packageToModule>;
+
+        return $stack1;
+    }
+
+    static void archive()
+    {
+        jdk.internal.loader.ArchivedClassLoaders $stack0;
+
+        $stack0 = new jdk.internal.loader.ArchivedClassLoaders;
+
+        specialinvoke $stack0.<jdk.internal.loader.ArchivedClassLoaders: void <init>()>();
+
+        <jdk.internal.loader.ArchivedClassLoaders: jdk.internal.loader.ArchivedClassLoaders archivedClassLoaders> = $stack0;
+
+        return;
+    }
+
+    static jdk.internal.loader.ArchivedClassLoaders get()
+    {
+        jdk.internal.loader.ArchivedClassLoaders $stack0;
+
+        $stack0 = <jdk.internal.loader.ArchivedClassLoaders: jdk.internal.loader.ArchivedClassLoaders archivedClassLoaders>;
+
+        return $stack0;
+    }
+
+    static void <clinit>()
+    {
+        staticinvoke <jdk.internal.misc.CDS: void initializeFromArchive(java.lang.Class)>(class "Ljdk/internal/loader/ArchivedClassLoaders;");
+
+        return;
+    }
+}

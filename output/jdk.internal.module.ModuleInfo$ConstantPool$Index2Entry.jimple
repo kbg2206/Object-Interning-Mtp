@@ -1,0 +1,27 @@
+class jdk.internal.module.ModuleInfo$ConstantPool$Index2Entry extends jdk.internal.module.ModuleInfo$ConstantPool$Entry
+{
+    final int index1;
+    final int index2;
+
+    void <init>(int, int, int)
+    {
+        jdk.internal.module.ModuleInfo$ConstantPool$Index2Entry this;
+        int tag, index1, index2;
+
+        this := @this: jdk.internal.module.ModuleInfo$ConstantPool$Index2Entry;
+
+        tag := @parameter0: int;
+
+        index1 := @parameter1: int;
+
+        index2 := @parameter2: int;
+
+        specialinvoke this.<jdk.internal.module.ModuleInfo$ConstantPool$Entry: void <init>(int)>(tag);
+
+        this.<jdk.internal.module.ModuleInfo$ConstantPool$Index2Entry: int index1> = index1;
+
+        this.<jdk.internal.module.ModuleInfo$ConstantPool$Index2Entry: int index2> = index2;
+
+        return;
+    }
+}

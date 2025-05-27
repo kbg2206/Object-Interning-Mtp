@@ -1,0 +1,62 @@
+class jdk.internal.reflect.ClassDefiner extends java.lang.Object
+{
+    static final jdk.internal.access.JavaLangAccess JLA;
+
+    void <init>()
+    {
+        jdk.internal.reflect.ClassDefiner this;
+
+        this := @this: jdk.internal.reflect.ClassDefiner;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    static java.lang.Class defineClass(java.lang.String, byte[], int, int, java.lang.ClassLoader)
+    {
+        byte[] bytes;
+        jdk.internal.access.JavaLangAccess $stack8;
+        jdk.internal.reflect.ClassDefiner$1 $stack6;
+        int off, len;
+        java.lang.Object $stack7;
+        java.lang.Class $stack9;
+        java.lang.ClassLoader parentClassLoader, newLoader;
+        java.lang.String name;
+
+        name := @parameter0: java.lang.String;
+
+        bytes := @parameter1: byte[];
+
+        off := @parameter2: int;
+
+        len := @parameter3: int;
+
+        parentClassLoader := @parameter4: java.lang.ClassLoader;
+
+        $stack6 = new jdk.internal.reflect.ClassDefiner$1;
+
+        specialinvoke $stack6.<jdk.internal.reflect.ClassDefiner$1: void <init>(java.lang.ClassLoader)>(parentClassLoader);
+
+        $stack7 = staticinvoke <java.security.AccessController: java.lang.Object doPrivileged(java.security.PrivilegedAction)>($stack6);
+
+        newLoader = (java.lang.ClassLoader) $stack7;
+
+        $stack8 = <jdk.internal.reflect.ClassDefiner: jdk.internal.access.JavaLangAccess JLA>;
+
+        $stack9 = interfaceinvoke $stack8.<jdk.internal.access.JavaLangAccess: java.lang.Class defineClass(java.lang.ClassLoader,java.lang.String,byte[],java.security.ProtectionDomain,java.lang.String)>(newLoader, name, bytes, null, "__ClassDefiner__");
+
+        return $stack9;
+    }
+
+    static void <clinit>()
+    {
+        jdk.internal.access.JavaLangAccess $stack0;
+
+        $stack0 = staticinvoke <jdk.internal.access.SharedSecrets: jdk.internal.access.JavaLangAccess getJavaLangAccess()>();
+
+        <jdk.internal.reflect.ClassDefiner: jdk.internal.access.JavaLangAccess JLA> = $stack0;
+
+        return;
+    }
+}

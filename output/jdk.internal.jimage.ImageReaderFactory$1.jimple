@@ -1,0 +1,62 @@
+class jdk.internal.jimage.ImageReaderFactory$1 extends java.lang.Object implements java.util.function.Function
+{
+
+    void <init>()
+    {
+        jdk.internal.jimage.ImageReaderFactory$1 this;
+
+        this := @this: jdk.internal.jimage.ImageReaderFactory$1;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public jdk.internal.jimage.ImageReader apply(java.nio.file.Path)
+    {
+        java.io.UncheckedIOException $stack5;
+        jdk.internal.jimage.ImageReader $stack3;
+        java.io.IOException $stack4;
+        jdk.internal.jimage.ImageReaderFactory$1 this;
+        java.nio.file.Path path;
+
+        this := @this: jdk.internal.jimage.ImageReaderFactory$1;
+
+        path := @parameter0: java.nio.file.Path;
+
+     label1:
+        $stack3 = staticinvoke <jdk.internal.jimage.ImageReader: jdk.internal.jimage.ImageReader open(java.nio.file.Path)>(path);
+
+     label2:
+        return $stack3;
+
+     label3:
+        $stack4 := @caughtexception;
+
+        $stack5 = new java.io.UncheckedIOException;
+
+        specialinvoke $stack5.<java.io.UncheckedIOException: void <init>(java.io.IOException)>($stack4);
+
+        throw $stack5;
+
+        catch java.io.IOException from label1 to label2 with label3;
+    }
+
+    public volatile java.lang.Object apply(java.lang.Object)
+    {
+        java.lang.Object l1;
+        jdk.internal.jimage.ImageReader $stack3;
+        jdk.internal.jimage.ImageReaderFactory$1 this;
+        java.nio.file.Path $stack2;
+
+        this := @this: jdk.internal.jimage.ImageReaderFactory$1;
+
+        l1 := @parameter0: java.lang.Object;
+
+        $stack2 = (java.nio.file.Path) l1;
+
+        $stack3 = virtualinvoke this.<jdk.internal.jimage.ImageReaderFactory$1: jdk.internal.jimage.ImageReader apply(java.nio.file.Path)>($stack2);
+
+        return $stack3;
+    }
+}

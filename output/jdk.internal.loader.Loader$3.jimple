@@ -1,0 +1,120 @@
+class jdk.internal.loader.Loader$3 extends java.lang.Object implements java.util.Enumeration
+{
+    final java.util.Iterator iterator;
+    final java.util.List val$urls;
+    final java.util.Enumeration val$e;
+    final jdk.internal.loader.Loader this$0;
+
+    void <init>(jdk.internal.loader.Loader, java.util.List, java.util.Enumeration)
+    {
+        java.util.List l2, $stack4;
+        java.util.Iterator $stack5;
+        java.util.Enumeration l3;
+        jdk.internal.loader.Loader$3 this;
+        jdk.internal.loader.Loader this$0;
+
+        this := @this: jdk.internal.loader.Loader$3;
+
+        this$0 := @parameter0: jdk.internal.loader.Loader;
+
+        l2 := @parameter1: java.util.List;
+
+        l3 := @parameter2: java.util.Enumeration;
+
+        this.<jdk.internal.loader.Loader$3: jdk.internal.loader.Loader this$0> = this$0;
+
+        this.<jdk.internal.loader.Loader$3: java.util.List val$urls> = l2;
+
+        this.<jdk.internal.loader.Loader$3: java.util.Enumeration val$e> = l3;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack4 = this.<jdk.internal.loader.Loader$3: java.util.List val$urls>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.util.Iterator iterator()>();
+
+        this.<jdk.internal.loader.Loader$3: java.util.Iterator iterator> = $stack5;
+
+        return;
+    }
+
+    public boolean hasMoreElements()
+    {
+        java.util.Iterator $stack1;
+        java.util.Enumeration $stack3;
+        jdk.internal.loader.Loader$3 this;
+        boolean $stack2, $stack4, $stack5;
+
+        this := @this: jdk.internal.loader.Loader$3;
+
+        $stack1 = this.<jdk.internal.loader.Loader$3: java.util.Iterator iterator>;
+
+        $stack2 = interfaceinvoke $stack1.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack2 != 0 goto label1;
+
+        $stack3 = this.<jdk.internal.loader.Loader$3: java.util.Enumeration val$e>;
+
+        $stack4 = interfaceinvoke $stack3.<java.util.Enumeration: boolean hasMoreElements()>();
+
+        if $stack4 == 0 goto label2;
+
+     label1:
+        $stack5 = 1;
+
+        goto label3;
+
+     label2:
+        $stack5 = 0;
+
+     label3:
+        return $stack5;
+    }
+
+    public java.net.URL nextElement()
+    {
+        java.util.Iterator $stack1, $stack6;
+        java.util.Enumeration $stack3;
+        java.net.URL $stack5, $stack8;
+        jdk.internal.loader.Loader$3 this;
+        java.lang.Object $stack4, $stack7;
+        boolean $stack2;
+
+        this := @this: jdk.internal.loader.Loader$3;
+
+        $stack1 = this.<jdk.internal.loader.Loader$3: java.util.Iterator iterator>;
+
+        $stack2 = interfaceinvoke $stack1.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack2 == 0 goto label1;
+
+        $stack6 = this.<jdk.internal.loader.Loader$3: java.util.Iterator iterator>;
+
+        $stack7 = interfaceinvoke $stack6.<java.util.Iterator: java.lang.Object next()>();
+
+        $stack8 = (java.net.URL) $stack7;
+
+        return $stack8;
+
+     label1:
+        $stack3 = this.<jdk.internal.loader.Loader$3: java.util.Enumeration val$e>;
+
+        $stack4 = interfaceinvoke $stack3.<java.util.Enumeration: java.lang.Object nextElement()>();
+
+        $stack5 = (java.net.URL) $stack4;
+
+        return $stack5;
+    }
+
+    public volatile java.lang.Object nextElement()
+    {
+        jdk.internal.loader.Loader$3 this;
+        java.net.URL $stack1;
+
+        this := @this: jdk.internal.loader.Loader$3;
+
+        $stack1 = virtualinvoke this.<jdk.internal.loader.Loader$3: java.net.URL nextElement()>();
+
+        return $stack1;
+    }
+}

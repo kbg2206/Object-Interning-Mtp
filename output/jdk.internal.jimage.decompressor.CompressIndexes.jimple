@@ -1,0 +1,304 @@
+public class jdk.internal.jimage.decompressor.CompressIndexes extends java.lang.Object
+{
+    private static final int COMPRESSED_FLAG;
+    private static final int HEADER_WIDTH;
+    private static final int HEADER_SHIFT;
+
+    public void <init>()
+    {
+        jdk.internal.jimage.decompressor.CompressIndexes this;
+
+        this := @this: jdk.internal.jimage.decompressor.CompressIndexes;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static java.util.List decompressFlow(byte[])
+    {
+        byte[] values;
+        java.lang.Integer $stack7;
+        java.util.ArrayList $stack4;
+        byte $stack9;
+        int $stack5, $stack6, $stack10, i;
+
+        values := @parameter0: byte[];
+
+        $stack4 = new java.util.ArrayList;
+
+        specialinvoke $stack4.<java.util.ArrayList: void <init>()>();
+
+        i = 0;
+
+     label1:
+        $stack5 = lengthof values;
+
+        if i >= $stack5 goto label2;
+
+        $stack6 = staticinvoke <jdk.internal.jimage.decompressor.CompressIndexes: int decompress(byte[],int)>(values, i);
+
+        $stack7 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack6);
+
+        interfaceinvoke $stack4.<java.util.List: boolean add(java.lang.Object)>($stack7);
+
+        $stack9 = values[i];
+
+        $stack10 = staticinvoke <jdk.internal.jimage.decompressor.CompressIndexes: int getHeaderLength(byte)>($stack9);
+
+        i = i + $stack10;
+
+        goto label1;
+
+     label2:
+        return $stack4;
+    }
+
+    public static int readInt(java.io.DataInputStream) throws java.io.IOException
+    {
+        java.io.DataInputStream cr;
+        short $stack9, $s0;
+        byte $stack5, $stack8;
+        int $stack6, result, i, $i0;
+
+        cr := @parameter0: java.io.DataInputStream;
+
+        $stack5 = virtualinvoke cr.<java.io.DataInputStream: byte readByte()>();
+
+        $stack6 = staticinvoke <jdk.internal.jimage.decompressor.CompressIndexes: int getHeaderLength(byte)>($stack5);
+
+        result = staticinvoke <jdk.internal.jimage.decompressor.CompressIndexes: int getHeaderValue(byte)>($stack5);
+
+        i = 1;
+
+     label1:
+        if i >= $stack6 goto label2;
+
+        result = result << 8;
+
+        $stack8 = virtualinvoke cr.<java.io.DataInputStream: byte readByte()>();
+
+        $s0 = (short) $stack8;
+
+        $stack9 = $s0 & 255;
+
+        $i0 = (int) $stack9;
+
+        result = result | $i0;
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        return result;
+    }
+
+    private static boolean isCompressed(byte)
+    {
+        short $stack1, $s0;
+        byte b;
+        boolean $stack2;
+
+        b := @parameter0: byte;
+
+        $s0 = (short) b;
+
+        $stack1 = $s0 & 128;
+
+        if $stack1 == 0 goto label1;
+
+        $stack2 = 1;
+
+        goto label2;
+
+     label1:
+        $stack2 = 0;
+
+     label2:
+        return $stack2;
+    }
+
+    private static int getHeaderLength(byte)
+    {
+        byte b;
+        int $stack2, $stack3, $i0;
+        boolean $stack1;
+
+        b := @parameter0: byte;
+
+        $stack1 = staticinvoke <jdk.internal.jimage.decompressor.CompressIndexes: boolean isCompressed(byte)>(b);
+
+        if $stack1 == 0 goto label1;
+
+        $i0 = (int) b;
+
+        $stack2 = $i0 >> 5;
+
+        $stack3 = $stack2 & 3;
+
+        goto label2;
+
+     label1:
+        $stack3 = 4;
+
+     label2:
+        return $stack3;
+    }
+
+    private static int getHeaderValue(byte)
+    {
+        byte b, $stack2;
+        int $i0;
+        boolean $stack1;
+
+        b := @parameter0: byte;
+
+        $stack1 = staticinvoke <jdk.internal.jimage.decompressor.CompressIndexes: boolean isCompressed(byte)>(b);
+
+        if $stack1 == 0 goto label1;
+
+        $stack2 = b & 31;
+
+        goto label2;
+
+     label1:
+        $stack2 = b;
+
+     label2:
+        $i0 = (int) $stack2;
+
+        return $i0;
+    }
+
+    public static int decompress(byte[], int)
+    {
+        byte[] value;
+        short $stack10, $s0;
+        byte header, $stack9;
+        int offset, $stack6, $stack8, result, i, $i0;
+
+        value := @parameter0: byte[];
+
+        offset := @parameter1: int;
+
+        header = value[offset];
+
+        $stack6 = staticinvoke <jdk.internal.jimage.decompressor.CompressIndexes: int getHeaderLength(byte)>(header);
+
+        result = staticinvoke <jdk.internal.jimage.decompressor.CompressIndexes: int getHeaderValue(byte)>(header);
+
+        i = 1;
+
+     label1:
+        if i >= $stack6 goto label2;
+
+        result = result << 8;
+
+        $stack8 = offset + i;
+
+        $stack9 = value[$stack8];
+
+        $s0 = (short) $stack9;
+
+        $stack10 = $s0 & 255;
+
+        $i0 = (int) $stack10;
+
+        result = result | $i0;
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        return result;
+    }
+
+    public static byte[] compress(int)
+    {
+        byte[] result;
+        byte $stack14, $stack15, $stack16, $stack17, $stack23;
+        int value, $stack6, width, $stack7, $stack8, $stack9, $stack10, $stack11, $stack12, $stack13, $stack19, $stack20, $stack21, $stack22, i;
+        java.lang.IllegalArgumentException $stack26;
+
+        value := @parameter0: int;
+
+        if value >= 0 goto label1;
+
+        $stack26 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack26.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("value < 0");
+
+        throw $stack26;
+
+     label1:
+        $stack6 = staticinvoke <java.lang.Integer: int numberOfLeadingZeros(int)>(value);
+
+        width = 32 - $stack6;
+
+        $stack7 = width + 3;
+
+        $stack8 = $stack7 - 1;
+
+        $stack9 = $stack8 >> 3;
+
+        $stack10 = $stack9 + 1;
+
+        $stack11 = staticinvoke <java.lang.Math: int min(int,int)>($stack10, 4);
+
+        result = newarray (byte)[$stack11];
+
+        i = 0;
+
+     label2:
+        if i >= $stack11 goto label3;
+
+        $stack19 = $stack11 - i;
+
+        $stack20 = $stack19 - 1;
+
+        $stack21 = $stack20 * 8;
+
+        $stack22 = value >> $stack21;
+
+        $stack23 = (byte) $stack22;
+
+        result[i] = $stack23;
+
+        i = i + 1;
+
+        goto label2;
+
+     label3:
+        if $stack11 >= 4 goto label4;
+
+        $stack15 = result[0];
+
+        $stack12 = $stack11 << 5;
+
+        $stack13 = 128 | $stack12;
+
+        $stack14 = (byte) $stack13;
+
+        $stack16 = $stack15 | $stack14;
+
+        $stack17 = (byte) $stack16;
+
+        result[0] = $stack17;
+
+     label4:
+        return result;
+    }
+
+    public static void <clinit>()
+    {
+        <jdk.internal.jimage.decompressor.CompressIndexes: int HEADER_SHIFT> = 5;
+
+        <jdk.internal.jimage.decompressor.CompressIndexes: int HEADER_WIDTH> = 3;
+
+        <jdk.internal.jimage.decompressor.CompressIndexes: int COMPRESSED_FLAG> = 128;
+
+        return;
+    }
+}

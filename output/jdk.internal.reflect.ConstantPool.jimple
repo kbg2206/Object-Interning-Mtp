@@ -1,0 +1,383 @@
+public class jdk.internal.reflect.ConstantPool extends java.lang.Object
+{
+    private java.lang.Object constantPoolOop;
+
+    public void <init>()
+    {
+        jdk.internal.reflect.ConstantPool this;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public int getSize()
+    {
+        int $stack2;
+        java.lang.Object $stack1;
+        jdk.internal.reflect.ConstantPool this;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        $stack1 = this.<jdk.internal.reflect.ConstantPool: java.lang.Object constantPoolOop>;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.ConstantPool: int getSize0(java.lang.Object)>($stack1);
+
+        return $stack2;
+    }
+
+    public java.lang.Class getClassAt(int)
+    {
+        int index;
+        java.lang.Object $stack2;
+        java.lang.Class $stack3;
+        jdk.internal.reflect.ConstantPool this;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<jdk.internal.reflect.ConstantPool: java.lang.Object constantPoolOop>;
+
+        $stack3 = virtualinvoke this.<jdk.internal.reflect.ConstantPool: java.lang.Class getClassAt0(java.lang.Object,int)>($stack2, index);
+
+        return $stack3;
+    }
+
+    public java.lang.Class getClassAtIfLoaded(int)
+    {
+        int index;
+        java.lang.Object $stack2;
+        java.lang.Class $stack3;
+        jdk.internal.reflect.ConstantPool this;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<jdk.internal.reflect.ConstantPool: java.lang.Object constantPoolOop>;
+
+        $stack3 = virtualinvoke this.<jdk.internal.reflect.ConstantPool: java.lang.Class getClassAtIfLoaded0(java.lang.Object,int)>($stack2, index);
+
+        return $stack3;
+    }
+
+    public int getClassRefIndexAt(int)
+    {
+        int index, $stack3;
+        java.lang.Object $stack2;
+        jdk.internal.reflect.ConstantPool this;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<jdk.internal.reflect.ConstantPool: java.lang.Object constantPoolOop>;
+
+        $stack3 = virtualinvoke this.<jdk.internal.reflect.ConstantPool: int getClassRefIndexAt0(java.lang.Object,int)>($stack2, index);
+
+        return $stack3;
+    }
+
+    public java.lang.reflect.Member getMethodAt(int)
+    {
+        java.lang.reflect.Member $stack3;
+        int index;
+        java.lang.Object $stack2;
+        jdk.internal.reflect.ConstantPool this;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<jdk.internal.reflect.ConstantPool: java.lang.Object constantPoolOop>;
+
+        $stack3 = virtualinvoke this.<jdk.internal.reflect.ConstantPool: java.lang.reflect.Member getMethodAt0(java.lang.Object,int)>($stack2, index);
+
+        return $stack3;
+    }
+
+    public java.lang.reflect.Member getMethodAtIfLoaded(int)
+    {
+        java.lang.reflect.Member $stack3;
+        int index;
+        java.lang.Object $stack2;
+        jdk.internal.reflect.ConstantPool this;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<jdk.internal.reflect.ConstantPool: java.lang.Object constantPoolOop>;
+
+        $stack3 = virtualinvoke this.<jdk.internal.reflect.ConstantPool: java.lang.reflect.Member getMethodAtIfLoaded0(java.lang.Object,int)>($stack2, index);
+
+        return $stack3;
+    }
+
+    public java.lang.reflect.Field getFieldAt(int)
+    {
+        int index;
+        java.lang.Object $stack2;
+        jdk.internal.reflect.ConstantPool this;
+        java.lang.reflect.Field $stack3;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<jdk.internal.reflect.ConstantPool: java.lang.Object constantPoolOop>;
+
+        $stack3 = virtualinvoke this.<jdk.internal.reflect.ConstantPool: java.lang.reflect.Field getFieldAt0(java.lang.Object,int)>($stack2, index);
+
+        return $stack3;
+    }
+
+    public java.lang.reflect.Field getFieldAtIfLoaded(int)
+    {
+        int index;
+        java.lang.Object $stack2;
+        jdk.internal.reflect.ConstantPool this;
+        java.lang.reflect.Field $stack3;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<jdk.internal.reflect.ConstantPool: java.lang.Object constantPoolOop>;
+
+        $stack3 = virtualinvoke this.<jdk.internal.reflect.ConstantPool: java.lang.reflect.Field getFieldAtIfLoaded0(java.lang.Object,int)>($stack2, index);
+
+        return $stack3;
+    }
+
+    public java.lang.String[] getMemberRefInfoAt(int)
+    {
+        int index;
+        java.lang.Object $stack2;
+        java.lang.String[] $stack3;
+        jdk.internal.reflect.ConstantPool this;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<jdk.internal.reflect.ConstantPool: java.lang.Object constantPoolOop>;
+
+        $stack3 = virtualinvoke this.<jdk.internal.reflect.ConstantPool: java.lang.String[] getMemberRefInfoAt0(java.lang.Object,int)>($stack2, index);
+
+        return $stack3;
+    }
+
+    public int getNameAndTypeRefIndexAt(int)
+    {
+        int index, $stack3;
+        java.lang.Object $stack2;
+        jdk.internal.reflect.ConstantPool this;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<jdk.internal.reflect.ConstantPool: java.lang.Object constantPoolOop>;
+
+        $stack3 = virtualinvoke this.<jdk.internal.reflect.ConstantPool: int getNameAndTypeRefIndexAt0(java.lang.Object,int)>($stack2, index);
+
+        return $stack3;
+    }
+
+    public java.lang.String[] getNameAndTypeRefInfoAt(int)
+    {
+        int index;
+        java.lang.Object $stack2;
+        java.lang.String[] $stack3;
+        jdk.internal.reflect.ConstantPool this;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<jdk.internal.reflect.ConstantPool: java.lang.Object constantPoolOop>;
+
+        $stack3 = virtualinvoke this.<jdk.internal.reflect.ConstantPool: java.lang.String[] getNameAndTypeRefInfoAt0(java.lang.Object,int)>($stack2, index);
+
+        return $stack3;
+    }
+
+    public int getIntAt(int)
+    {
+        int index, $stack3;
+        java.lang.Object $stack2;
+        jdk.internal.reflect.ConstantPool this;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<jdk.internal.reflect.ConstantPool: java.lang.Object constantPoolOop>;
+
+        $stack3 = virtualinvoke this.<jdk.internal.reflect.ConstantPool: int getIntAt0(java.lang.Object,int)>($stack2, index);
+
+        return $stack3;
+    }
+
+    public long getLongAt(int)
+    {
+        int index;
+        java.lang.Object $stack2;
+        long $stack3;
+        jdk.internal.reflect.ConstantPool this;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<jdk.internal.reflect.ConstantPool: java.lang.Object constantPoolOop>;
+
+        $stack3 = virtualinvoke this.<jdk.internal.reflect.ConstantPool: long getLongAt0(java.lang.Object,int)>($stack2, index);
+
+        return $stack3;
+    }
+
+    public float getFloatAt(int)
+    {
+        int index;
+        float $stack3;
+        java.lang.Object $stack2;
+        jdk.internal.reflect.ConstantPool this;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<jdk.internal.reflect.ConstantPool: java.lang.Object constantPoolOop>;
+
+        $stack3 = virtualinvoke this.<jdk.internal.reflect.ConstantPool: float getFloatAt0(java.lang.Object,int)>($stack2, index);
+
+        return $stack3;
+    }
+
+    public double getDoubleAt(int)
+    {
+        int index;
+        java.lang.Object $stack2;
+        jdk.internal.reflect.ConstantPool this;
+        double $stack3;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<jdk.internal.reflect.ConstantPool: java.lang.Object constantPoolOop>;
+
+        $stack3 = virtualinvoke this.<jdk.internal.reflect.ConstantPool: double getDoubleAt0(java.lang.Object,int)>($stack2, index);
+
+        return $stack3;
+    }
+
+    public java.lang.String getStringAt(int)
+    {
+        int index;
+        java.lang.Object $stack2;
+        java.lang.String $stack3;
+        jdk.internal.reflect.ConstantPool this;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<jdk.internal.reflect.ConstantPool: java.lang.Object constantPoolOop>;
+
+        $stack3 = virtualinvoke this.<jdk.internal.reflect.ConstantPool: java.lang.String getStringAt0(java.lang.Object,int)>($stack2, index);
+
+        return $stack3;
+    }
+
+    public java.lang.String getUTF8At(int)
+    {
+        int index;
+        java.lang.Object $stack2;
+        java.lang.String $stack3;
+        jdk.internal.reflect.ConstantPool this;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<jdk.internal.reflect.ConstantPool: java.lang.Object constantPoolOop>;
+
+        $stack3 = virtualinvoke this.<jdk.internal.reflect.ConstantPool: java.lang.String getUTF8At0(java.lang.Object,int)>($stack2, index);
+
+        return $stack3;
+    }
+
+    public jdk.internal.reflect.ConstantPool$Tag getTagAt(int)
+    {
+        jdk.internal.reflect.ConstantPool$Tag $stack4;
+        byte $stack3;
+        int index;
+        java.lang.Object $stack2;
+        jdk.internal.reflect.ConstantPool this;
+
+        this := @this: jdk.internal.reflect.ConstantPool;
+
+        index := @parameter0: int;
+
+        $stack2 = this.<jdk.internal.reflect.ConstantPool: java.lang.Object constantPoolOop>;
+
+        $stack3 = virtualinvoke this.<jdk.internal.reflect.ConstantPool: byte getTagAt0(java.lang.Object,int)>($stack2, index);
+
+        $stack4 = staticinvoke <jdk.internal.reflect.ConstantPool$Tag: jdk.internal.reflect.ConstantPool$Tag valueOf(byte)>($stack3);
+
+        return $stack4;
+    }
+
+    private native int getSize0(java.lang.Object);
+
+    private native java.lang.Class getClassAt0(java.lang.Object, int);
+
+    private native java.lang.Class getClassAtIfLoaded0(java.lang.Object, int);
+
+    private native int getClassRefIndexAt0(java.lang.Object, int);
+
+    private native java.lang.reflect.Member getMethodAt0(java.lang.Object, int);
+
+    private native java.lang.reflect.Member getMethodAtIfLoaded0(java.lang.Object, int);
+
+    private native java.lang.reflect.Field getFieldAt0(java.lang.Object, int);
+
+    private native java.lang.reflect.Field getFieldAtIfLoaded0(java.lang.Object, int);
+
+    private native java.lang.String[] getMemberRefInfoAt0(java.lang.Object, int);
+
+    private native int getNameAndTypeRefIndexAt0(java.lang.Object, int);
+
+    private native java.lang.String[] getNameAndTypeRefInfoAt0(java.lang.Object, int);
+
+    private native int getIntAt0(java.lang.Object, int);
+
+    private native long getLongAt0(java.lang.Object, int);
+
+    private native float getFloatAt0(java.lang.Object, int);
+
+    private native double getDoubleAt0(java.lang.Object, int);
+
+    private native java.lang.String getStringAt0(java.lang.Object, int);
+
+    private native java.lang.String getUTF8At0(java.lang.Object, int);
+
+    private native byte getTagAt0(java.lang.Object, int);
+
+    static void <clinit>()
+    {
+        java.util.Set $stack1;
+
+        $stack1 = staticinvoke <java.util.Set: java.util.Set of(java.lang.Object)>("constantPoolOop");
+
+        staticinvoke <jdk.internal.reflect.Reflection: void registerFieldsToFilter(java.lang.Class,java.util.Set)>(class "Ljdk/internal/reflect/ConstantPool;", $stack1);
+
+        return;
+    }
+}

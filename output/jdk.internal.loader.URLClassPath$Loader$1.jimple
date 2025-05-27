@@ -1,0 +1,107 @@
+class jdk.internal.loader.URLClassPath$Loader$1 extends jdk.internal.loader.Resource
+{
+    final java.lang.String val$name;
+    final java.net.URL val$url;
+    final java.net.URLConnection val$uc;
+    final jdk.internal.loader.URLClassPath$Loader this$0;
+
+    void <init>(jdk.internal.loader.URLClassPath$Loader, java.lang.String, java.net.URL, java.net.URLConnection)
+    {
+        jdk.internal.loader.URLClassPath$Loader$1 this;
+        java.net.URL l3;
+        java.net.URLConnection l4;
+        java.lang.String l2;
+        jdk.internal.loader.URLClassPath$Loader this$0;
+
+        this := @this: jdk.internal.loader.URLClassPath$Loader$1;
+
+        this$0 := @parameter0: jdk.internal.loader.URLClassPath$Loader;
+
+        l2 := @parameter1: java.lang.String;
+
+        l3 := @parameter2: java.net.URL;
+
+        l4 := @parameter3: java.net.URLConnection;
+
+        this.<jdk.internal.loader.URLClassPath$Loader$1: jdk.internal.loader.URLClassPath$Loader this$0> = this$0;
+
+        this.<jdk.internal.loader.URLClassPath$Loader$1: java.lang.String val$name> = l2;
+
+        this.<jdk.internal.loader.URLClassPath$Loader$1: java.net.URL val$url> = l3;
+
+        this.<jdk.internal.loader.URLClassPath$Loader$1: java.net.URLConnection val$uc> = l4;
+
+        specialinvoke this.<jdk.internal.loader.Resource: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.String getName()
+    {
+        jdk.internal.loader.URLClassPath$Loader$1 this;
+        java.lang.String $stack1;
+
+        this := @this: jdk.internal.loader.URLClassPath$Loader$1;
+
+        $stack1 = this.<jdk.internal.loader.URLClassPath$Loader$1: java.lang.String val$name>;
+
+        return $stack1;
+    }
+
+    public java.net.URL getURL()
+    {
+        jdk.internal.loader.URLClassPath$Loader$1 this;
+        java.net.URL $stack1;
+
+        this := @this: jdk.internal.loader.URLClassPath$Loader$1;
+
+        $stack1 = this.<jdk.internal.loader.URLClassPath$Loader$1: java.net.URL val$url>;
+
+        return $stack1;
+    }
+
+    public java.net.URL getCodeSourceURL()
+    {
+        jdk.internal.loader.URLClassPath$Loader$1 this;
+        jdk.internal.loader.URLClassPath$Loader $stack1;
+        java.net.URL $stack2;
+
+        this := @this: jdk.internal.loader.URLClassPath$Loader$1;
+
+        $stack1 = this.<jdk.internal.loader.URLClassPath$Loader$1: jdk.internal.loader.URLClassPath$Loader this$0>;
+
+        $stack2 = $stack1.<jdk.internal.loader.URLClassPath$Loader: java.net.URL base>;
+
+        return $stack2;
+    }
+
+    public java.io.InputStream getInputStream() throws java.io.IOException
+    {
+        jdk.internal.loader.URLClassPath$Loader$1 this;
+        java.net.URLConnection $stack1;
+        java.io.InputStream $stack2;
+
+        this := @this: jdk.internal.loader.URLClassPath$Loader$1;
+
+        $stack1 = this.<jdk.internal.loader.URLClassPath$Loader$1: java.net.URLConnection val$uc>;
+
+        $stack2 = virtualinvoke $stack1.<java.net.URLConnection: java.io.InputStream getInputStream()>();
+
+        return $stack2;
+    }
+
+    public int getContentLength() throws java.io.IOException
+    {
+        int $stack2;
+        jdk.internal.loader.URLClassPath$Loader$1 this;
+        java.net.URLConnection $stack1;
+
+        this := @this: jdk.internal.loader.URLClassPath$Loader$1;
+
+        $stack1 = this.<jdk.internal.loader.URLClassPath$Loader$1: java.net.URLConnection val$uc>;
+
+        $stack2 = virtualinvoke $stack1.<java.net.URLConnection: int getContentLength()>();
+
+        return $stack2;
+    }
+}

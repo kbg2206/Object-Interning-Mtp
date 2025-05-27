@@ -1,0 +1,190 @@
+public final class jdk.internal.jimage.decompressor.Decompressor extends java.lang.Object
+{
+    private final java.util.Map pluginsCache;
+
+    public void <init>()
+    {
+        java.util.HashMap $stack1;
+        jdk.internal.jimage.decompressor.Decompressor this;
+
+        this := @this: jdk.internal.jimage.decompressor.Decompressor;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = new java.util.HashMap;
+
+        specialinvoke $stack1.<java.util.HashMap: void <init>()>();
+
+        this.<jdk.internal.jimage.decompressor.Decompressor: java.util.Map pluginsCache> = $stack1;
+
+        return;
+    }
+
+    public byte[] decompressResource(java.nio.ByteOrder, jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider, byte[]) throws java.io.IOException
+    {
+        byte[] $stack47, content;
+        java.lang.Integer $stack21, $stack34;
+        java.io.ByteArrayInputStream $stack45;
+        jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider provider;
+        java.util.Map $stack19, $stack32;
+        jdk.internal.jimage.decompressor.Decompressor this;
+        java.lang.Exception $stack52;
+        java.nio.ByteOrder order;
+        jdk.internal.jimage.decompressor.ResourceDecompressor $stack31, decompressor;
+        java.lang.StringBuilder $stack41, $stack42, $stack43;
+        java.lang.Throwable $stack54, $stack55;
+        jdk.internal.jimage.decompressor.CompressedResourceHeader $stack15;
+        long $stack24;
+        java.nio.charset.Charset $stack46;
+        int $stack20, $stack23, $stack27, $stack33;
+        java.lang.String $stack28, $stack29, $stack44;
+        java.util.Properties $stack30;
+        java.io.IOException $stack40, $stack51, $stack53;
+        java.lang.Object $stack22;
+
+        this := @this: jdk.internal.jimage.decompressor.Decompressor;
+
+        order := @parameter0: java.nio.ByteOrder;
+
+        provider := @parameter1: jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider;
+
+        content := @parameter2: byte[];
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(order);
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(provider);
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(content);
+
+     label01:
+        $stack15 = staticinvoke <jdk.internal.jimage.decompressor.CompressedResourceHeader: jdk.internal.jimage.decompressor.CompressedResourceHeader readFromResource(java.nio.ByteOrder,byte[])>(order, content);
+
+        if $stack15 == null goto label15;
+
+        $stack19 = this.<jdk.internal.jimage.decompressor.Decompressor: java.util.Map pluginsCache>;
+
+        $stack20 = virtualinvoke $stack15.<jdk.internal.jimage.decompressor.CompressedResourceHeader: int getDecompressorNameOffset()>();
+
+        $stack21 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack20);
+
+        $stack22 = interfaceinvoke $stack19.<java.util.Map: java.lang.Object get(java.lang.Object)>($stack21);
+
+        decompressor = (jdk.internal.jimage.decompressor.ResourceDecompressor) $stack22;
+
+        if decompressor != null goto label12;
+
+        $stack27 = virtualinvoke $stack15.<jdk.internal.jimage.decompressor.CompressedResourceHeader: int getDecompressorNameOffset()>();
+
+        $stack28 = interfaceinvoke provider.<jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider: java.lang.String getString(int)>($stack27);
+
+        if $stack28 != null goto label02;
+
+        $stack51 = new java.io.IOException;
+
+        specialinvoke $stack51.<java.io.IOException: void <init>(java.lang.String)>("Plugin name not found");
+
+        throw $stack51;
+
+     label02:
+        $stack29 = virtualinvoke $stack15.<jdk.internal.jimage.decompressor.CompressedResourceHeader: java.lang.String getStoredContent(jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider)>(provider);
+
+        $stack30 = new java.util.Properties;
+
+        specialinvoke $stack30.<java.util.Properties: void <init>()>();
+
+        if $stack29 == null goto label10;
+
+        $stack45 = new java.io.ByteArrayInputStream;
+
+        $stack46 = <java.nio.charset.StandardCharsets: java.nio.charset.Charset UTF_8>;
+
+        $stack47 = virtualinvoke $stack29.<java.lang.String: byte[] getBytes(java.nio.charset.Charset)>($stack46);
+
+        specialinvoke $stack45.<java.io.ByteArrayInputStream: void <init>(byte[])>($stack47);
+
+     label03:
+        virtualinvoke $stack30.<java.util.Properties: void loadFromXML(java.io.InputStream)>($stack45);
+
+     label04:
+        virtualinvoke $stack45.<java.io.ByteArrayInputStream: void close()>();
+
+        goto label10;
+
+     label05:
+        $stack55 := @caughtexception;
+
+     label06:
+        virtualinvoke $stack45.<java.io.ByteArrayInputStream: void close()>();
+
+     label07:
+        goto label09;
+
+     label08:
+        $stack54 := @caughtexception;
+
+        virtualinvoke $stack55.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>($stack54);
+
+     label09:
+        throw $stack55;
+
+     label10:
+        $stack31 = staticinvoke <jdk.internal.jimage.decompressor.ResourceDecompressorRepository: jdk.internal.jimage.decompressor.ResourceDecompressor newResourceDecompressor(java.util.Properties,java.lang.String)>($stack30, $stack28);
+
+        decompressor = $stack31;
+
+        if $stack31 != null goto label11;
+
+        $stack40 = new java.io.IOException;
+
+        $stack41 = new java.lang.StringBuilder;
+
+        specialinvoke $stack41.<java.lang.StringBuilder: void <init>()>();
+
+        $stack42 = virtualinvoke $stack41.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Plugin not found: ");
+
+        $stack43 = virtualinvoke $stack42.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack28);
+
+        $stack44 = virtualinvoke $stack43.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack40.<java.io.IOException: void <init>(java.lang.String)>($stack44);
+
+        throw $stack40;
+
+     label11:
+        $stack32 = this.<jdk.internal.jimage.decompressor.Decompressor: java.util.Map pluginsCache>;
+
+        $stack33 = virtualinvoke $stack15.<jdk.internal.jimage.decompressor.CompressedResourceHeader: int getDecompressorNameOffset()>();
+
+        $stack34 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack33);
+
+        interfaceinvoke $stack32.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>($stack34, $stack31);
+
+     label12:
+        $stack23 = staticinvoke <jdk.internal.jimage.decompressor.CompressedResourceHeader: int getSize()>();
+
+        $stack24 = virtualinvoke $stack15.<jdk.internal.jimage.decompressor.CompressedResourceHeader: long getUncompressedSize()>();
+
+        content = interfaceinvoke decompressor.<jdk.internal.jimage.decompressor.ResourceDecompressor: byte[] decompress(jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider,byte[],int,long)>(provider, content, $stack23, $stack24);
+
+     label13:
+        goto label15;
+
+     label14:
+        $stack52 := @caughtexception;
+
+        $stack53 = new java.io.IOException;
+
+        specialinvoke $stack53.<java.io.IOException: void <init>(java.lang.Throwable)>($stack52);
+
+        throw $stack53;
+
+     label15:
+        if $stack15 != null goto label01;
+
+        return content;
+
+        catch java.lang.Throwable from label03 to label04 with label05;
+        catch java.lang.Throwable from label06 to label07 with label08;
+        catch java.lang.Exception from label12 to label13 with label14;
+    }
+}

@@ -1,0 +1,104 @@
+class jdk.internal.module.ModuleBootstrap$SafeModuleFinder extends java.lang.Object implements java.lang.module.ModuleFinder
+{
+    private final java.util.Set mrefs;
+    private volatile java.util.Map nameToModule;
+
+    void <init>(java.lang.module.ModuleFinder)
+    {
+        java.lang.module.ModuleFinder finder;
+        java.util.Set $stack2, $stack3;
+        jdk.internal.module.ModuleBootstrap$SafeModuleFinder this;
+
+        this := @this: jdk.internal.module.ModuleBootstrap$SafeModuleFinder;
+
+        finder := @parameter0: java.lang.module.ModuleFinder;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack2 = interfaceinvoke finder.<java.lang.module.ModuleFinder: java.util.Set findAll()>();
+
+        $stack3 = staticinvoke <java.util.Collections: java.util.Set unmodifiableSet(java.util.Set)>($stack2);
+
+        this.<jdk.internal.module.ModuleBootstrap$SafeModuleFinder: java.util.Set mrefs> = $stack3;
+
+        return;
+    }
+
+    public java.util.Optional find(java.lang.String)
+    {
+        java.util.Set $stack7;
+        java.lang.module.ModuleReference $stack5;
+        java.util.function.Function $stack9, $stack10;
+        java.util.stream.Stream $stack8;
+        java.util.Map $stack13, nameToModule;
+        java.util.Optional $stack6;
+        java.lang.Object $stack4, $stack12;
+        java.lang.String name;
+        java.util.stream.Collector $stack11;
+        jdk.internal.module.ModuleBootstrap$SafeModuleFinder this;
+
+        this := @this: jdk.internal.module.ModuleBootstrap$SafeModuleFinder;
+
+        name := @parameter0: java.lang.String;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(name);
+
+        nameToModule = this.<jdk.internal.module.ModuleBootstrap$SafeModuleFinder: java.util.Map nameToModule>;
+
+        if nameToModule != null goto label1;
+
+        $stack7 = this.<jdk.internal.module.ModuleBootstrap$SafeModuleFinder: java.util.Set mrefs>;
+
+        $stack8 = interfaceinvoke $stack7.<java.util.Set: java.util.stream.Stream stream()>();
+
+        $stack9 = staticinvoke <jdk.internal.module.ModuleBootstrap$SafeModuleFinder$lambda_find_0__92: java.util.function.Function bootstrap$()>();
+
+        $stack10 = staticinvoke <java.util.function.Function: java.util.function.Function identity()>();
+
+        $stack11 = staticinvoke <java.util.stream.Collectors: java.util.stream.Collector toMap(java.util.function.Function,java.util.function.Function)>($stack9, $stack10);
+
+        $stack12 = interfaceinvoke $stack8.<java.util.stream.Stream: java.lang.Object collect(java.util.stream.Collector)>($stack11);
+
+        $stack13 = (java.util.Map) $stack12;
+
+        nameToModule = $stack13;
+
+        this.<jdk.internal.module.ModuleBootstrap$SafeModuleFinder: java.util.Map nameToModule> = $stack13;
+
+     label1:
+        $stack4 = interfaceinvoke nameToModule.<java.util.Map: java.lang.Object get(java.lang.Object)>(name);
+
+        $stack5 = (java.lang.module.ModuleReference) $stack4;
+
+        $stack6 = staticinvoke <java.util.Optional: java.util.Optional ofNullable(java.lang.Object)>($stack5);
+
+        return $stack6;
+    }
+
+    public java.util.Set findAll()
+    {
+        java.util.Set $stack1;
+        jdk.internal.module.ModuleBootstrap$SafeModuleFinder this;
+
+        this := @this: jdk.internal.module.ModuleBootstrap$SafeModuleFinder;
+
+        $stack1 = this.<jdk.internal.module.ModuleBootstrap$SafeModuleFinder: java.util.Set mrefs>;
+
+        return $stack1;
+    }
+
+    public static java.lang.String lambda$find$0(java.lang.module.ModuleReference)
+    {
+        java.lang.module.ModuleDescriptor $stack1;
+        java.lang.module.ModuleReference m;
+        java.lang.String $stack2;
+
+        m := @parameter0: java.lang.module.ModuleReference;
+
+        $stack1 = virtualinvoke m.<java.lang.module.ModuleReference: java.lang.module.ModuleDescriptor descriptor()>();
+
+        $stack2 = virtualinvoke $stack1.<java.lang.module.ModuleDescriptor: java.lang.String name()>();
+
+        return $stack2;
+    }
+}

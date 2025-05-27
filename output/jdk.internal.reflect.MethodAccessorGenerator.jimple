@@ -1,0 +1,1338 @@
+class jdk.internal.reflect.MethodAccessorGenerator extends jdk.internal.reflect.AccessorGenerator
+{
+    private static final short NUM_BASE_CPOOL_ENTRIES;
+    private static final short NUM_METHODS;
+    private static final short NUM_SERIALIZATION_CPOOL_ENTRIES;
+    private static volatile int methodSymnum;
+    private static volatile int constructorSymnum;
+    private static volatile int serializationConstructorSymnum;
+    private java.lang.Class declaringClass;
+    private java.lang.Class[] parameterTypes;
+    private java.lang.Class returnType;
+    private boolean isConstructor;
+    private boolean forSerialization;
+    private short targetMethodRef;
+    private short invokeIdx;
+    private short invokeDescriptorIdx;
+    private short nonPrimitiveParametersBaseIdx;
+
+    void <init>()
+    {
+        jdk.internal.reflect.MethodAccessorGenerator this;
+
+        this := @this: jdk.internal.reflect.MethodAccessorGenerator;
+
+        specialinvoke this.<jdk.internal.reflect.AccessorGenerator: void <init>()>();
+
+        return;
+    }
+
+    public jdk.internal.reflect.MethodAccessor generateMethod(java.lang.Class, java.lang.String, java.lang.Class[], java.lang.Class, java.lang.Class[], int)
+    {
+        java.lang.Class[] parameterTypes, checkedExceptions;
+        jdk.internal.reflect.MethodAccessor $stack8;
+        jdk.internal.reflect.MagicAccessorImpl $stack7;
+        jdk.internal.reflect.MethodAccessorGenerator this;
+        int modifiers;
+        java.lang.Class declaringClass, returnType;
+        java.lang.String name;
+
+        this := @this: jdk.internal.reflect.MethodAccessorGenerator;
+
+        declaringClass := @parameter0: java.lang.Class;
+
+        name := @parameter1: java.lang.String;
+
+        parameterTypes := @parameter2: java.lang.Class[];
+
+        returnType := @parameter3: java.lang.Class;
+
+        checkedExceptions := @parameter4: java.lang.Class[];
+
+        modifiers := @parameter5: int;
+
+        $stack7 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.MagicAccessorImpl generate(java.lang.Class,java.lang.String,java.lang.Class[],java.lang.Class,java.lang.Class[],int,boolean,boolean,java.lang.Class)>(declaringClass, name, parameterTypes, returnType, checkedExceptions, modifiers, 0, 0, null);
+
+        $stack8 = (jdk.internal.reflect.MethodAccessor) $stack7;
+
+        return $stack8;
+    }
+
+    public jdk.internal.reflect.ConstructorAccessor generateConstructor(java.lang.Class, java.lang.Class[], java.lang.Class[], int)
+    {
+        java.lang.Class[] parameterTypes, checkedExceptions;
+        jdk.internal.reflect.MagicAccessorImpl $stack6;
+        jdk.internal.reflect.MethodAccessorGenerator this;
+        int modifiers;
+        jdk.internal.reflect.ConstructorAccessor $stack7;
+        java.lang.Class declaringClass, $stack5;
+
+        this := @this: jdk.internal.reflect.MethodAccessorGenerator;
+
+        declaringClass := @parameter0: java.lang.Class;
+
+        parameterTypes := @parameter1: java.lang.Class[];
+
+        checkedExceptions := @parameter2: java.lang.Class[];
+
+        modifiers := @parameter3: int;
+
+        $stack5 = <java.lang.Void: java.lang.Class TYPE>;
+
+        $stack6 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.MagicAccessorImpl generate(java.lang.Class,java.lang.String,java.lang.Class[],java.lang.Class,java.lang.Class[],int,boolean,boolean,java.lang.Class)>(declaringClass, "<init>", parameterTypes, $stack5, checkedExceptions, modifiers, 1, 0, null);
+
+        $stack7 = (jdk.internal.reflect.ConstructorAccessor) $stack6;
+
+        return $stack7;
+    }
+
+    public jdk.internal.reflect.SerializationConstructorAccessorImpl generateSerializationConstructor(java.lang.Class, java.lang.Class[], java.lang.Class[], int, java.lang.Class)
+    {
+        java.lang.Class[] parameterTypes, checkedExceptions;
+        jdk.internal.reflect.MagicAccessorImpl $stack7;
+        jdk.internal.reflect.MethodAccessorGenerator this;
+        jdk.internal.reflect.SerializationConstructorAccessorImpl $stack8;
+        int modifiers;
+        java.lang.Class declaringClass, targetConstructorClass, $stack6;
+
+        this := @this: jdk.internal.reflect.MethodAccessorGenerator;
+
+        declaringClass := @parameter0: java.lang.Class;
+
+        parameterTypes := @parameter1: java.lang.Class[];
+
+        checkedExceptions := @parameter2: java.lang.Class[];
+
+        modifiers := @parameter3: int;
+
+        targetConstructorClass := @parameter4: java.lang.Class;
+
+        $stack6 = <java.lang.Void: java.lang.Class TYPE>;
+
+        $stack7 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.MagicAccessorImpl generate(java.lang.Class,java.lang.String,java.lang.Class[],java.lang.Class,java.lang.Class[],int,boolean,boolean,java.lang.Class)>(declaringClass, "<init>", parameterTypes, $stack6, checkedExceptions, modifiers, 1, 1, targetConstructorClass);
+
+        $stack8 = (jdk.internal.reflect.SerializationConstructorAccessorImpl) $stack7;
+
+        return $stack8;
+    }
+
+    private jdk.internal.reflect.MagicAccessorImpl generate(java.lang.Class, java.lang.String, java.lang.Class[], java.lang.Class, java.lang.Class[], int, boolean, boolean, java.lang.Class)
+    {
+        byte[] $stack85;
+        jdk.internal.reflect.MethodAccessorGenerator$1 $u3;
+        java.lang.InternalError $u2;
+        java.lang.StringBuilder $stack91, $stack94, $stack95, $stack96, $stack97, $u1;
+        jdk.internal.reflect.ByteVector $stack17;
+        short $stack24, $stack27, $stack32, $stack34, $stack53, $stack54, $stack56, $stack60, $stack61, $stack66, $stack69, $stack71, $stack72, $stack75, $stack77, $stack79, $stack93, $stack108, $stack122, $stack128, $stack129, $stack134, $stack164, numCPEntries, $stack38, $stack40, $stack45, $stack47, serializationTargetClassIdx, $stack63;
+        java.lang.String $stack28, name, $stack50, $stack98, $stack105, $stack131, $stack42;
+        jdk.internal.reflect.ClassFileAssembler $stack19, $stack26, $stack29, $stack30, $stack31, $stack33, $stack35, $stack48, $stack49, $stack51, $stack52, $stack55, $stack58, $stack59, $stack64, $stack65, $stack67, $stack68, $stack70, $stack74, $stack76, $stack78, $stack80, $stack81, $stack82, $stack83, $stack84, $stack92, $stack104, $stack106, $stack107, $stack109, $stack116, $stack120, $stack121, $stack126, $stack127, $stack130, $stack132, $stack133, $stack135, $stack146, $stack160, $stack37, $stack36, $stack39, $stack41, $stack44, $stack43, $stack46, $stack62, $u0;
+        java.lang.Class[] parameterTypes, checkedExceptions;
+        jdk.internal.reflect.MagicAccessorImpl $stack88;
+        boolean isConstructor, forSerialization, $stack20, $stack57, $stack101;
+        jdk.internal.reflect.MethodAccessorGenerator this;
+        int modifiers, $stack22, $stack23, $stack25, $stack161, i, $stack73, $i0, $i1, $i2, $i3, $i4;
+        java.lang.Class declaringClass, returnType, c, serializationTargetClass;
+        java.lang.Object $stack87;
+
+        this := @this: jdk.internal.reflect.MethodAccessorGenerator;
+
+        declaringClass := @parameter0: java.lang.Class;
+
+        name := @parameter1: java.lang.String;
+
+        parameterTypes := @parameter2: java.lang.Class[];
+
+        returnType := @parameter3: java.lang.Class;
+
+        checkedExceptions := @parameter4: java.lang.Class[];
+
+        modifiers := @parameter5: int;
+
+        isConstructor := @parameter6: boolean;
+
+        forSerialization := @parameter7: boolean;
+
+        serializationTargetClass := @parameter8: java.lang.Class;
+
+        $stack17 = staticinvoke <jdk.internal.reflect.ByteVectorFactory: jdk.internal.reflect.ByteVector create()>();
+
+        $u0 = new jdk.internal.reflect.ClassFileAssembler;
+
+        specialinvoke $u0.<jdk.internal.reflect.ClassFileAssembler: void <init>(jdk.internal.reflect.ByteVector)>($stack17);
+
+        this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm> = $u0;
+
+        this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class declaringClass> = declaringClass;
+
+        this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class[] parameterTypes> = parameterTypes;
+
+        this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class returnType> = returnType;
+
+        this.<jdk.internal.reflect.MethodAccessorGenerator: int modifiers> = modifiers;
+
+        this.<jdk.internal.reflect.MethodAccessorGenerator: boolean isConstructor> = isConstructor;
+
+        this.<jdk.internal.reflect.MethodAccessorGenerator: boolean forSerialization> = forSerialization;
+
+        $stack19 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        virtualinvoke $stack19.<jdk.internal.reflect.ClassFileAssembler: void emitMagicAndVersion()>();
+
+        numCPEntries = 42;
+
+        $stack20 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: boolean usesPrimitiveTypes()>();
+
+        if $stack20 == 0 goto label01;
+
+        numCPEntries = (short) 115;
+
+     label01:
+        if forSerialization == 0 goto label02;
+
+        $stack161 = numCPEntries + 2;
+
+        numCPEntries = (short) $stack161;
+
+     label02:
+        $stack22 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: int numNonPrimitiveParameterTypes()>();
+
+        $stack23 = 2 * $stack22;
+
+        $stack24 = (short) $stack23;
+
+        $i0 = (int) $stack24;
+
+        $stack25 = numCPEntries + $i0;
+
+        $stack164 = (short) $stack25;
+
+        $stack26 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack27 = staticinvoke <jdk.internal.reflect.MethodAccessorGenerator: short add(short,short)>($stack164, 1);
+
+        virtualinvoke $stack26.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>($stack27);
+
+        $stack28 = staticinvoke <jdk.internal.reflect.MethodAccessorGenerator: java.lang.String generateName(boolean,boolean)>(isConstructor, forSerialization);
+
+        $stack29 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        virtualinvoke $stack29.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolUTF8(java.lang.String)>($stack28);
+
+        $stack31 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack30 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack32 = virtualinvoke $stack30.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        virtualinvoke $stack31.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolClass(short)>($stack32);
+
+        $stack33 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack34 = virtualinvoke $stack33.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        this.<jdk.internal.reflect.MethodAccessorGenerator: short thisClass> = $stack34;
+
+        if isConstructor == 0 goto label04;
+
+        if forSerialization == 0 goto label03;
+
+        $stack160 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        virtualinvoke $stack160.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolUTF8(java.lang.String)>("jdk/internal/reflect/SerializationConstructorAccessorImpl");
+
+        goto label05;
+
+     label03:
+        $stack146 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        virtualinvoke $stack146.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolUTF8(java.lang.String)>("jdk/internal/reflect/ConstructorAccessorImpl");
+
+        goto label05;
+
+     label04:
+        $stack35 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        virtualinvoke $stack35.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolUTF8(java.lang.String)>("jdk/internal/reflect/MethodAccessorImpl");
+
+     label05:
+        $stack37 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack36 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack38 = virtualinvoke $stack36.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        virtualinvoke $stack37.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolClass(short)>($stack38);
+
+        $stack39 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack40 = virtualinvoke $stack39.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        this.<jdk.internal.reflect.MethodAccessorGenerator: short superClass> = $stack40;
+
+        $stack41 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack42 = staticinvoke <jdk.internal.reflect.MethodAccessorGenerator: java.lang.String getClassName(java.lang.Class,boolean)>(declaringClass, 0);
+
+        virtualinvoke $stack41.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolUTF8(java.lang.String)>($stack42);
+
+        $stack44 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack43 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack45 = virtualinvoke $stack43.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        virtualinvoke $stack44.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolClass(short)>($stack45);
+
+        $stack46 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack47 = virtualinvoke $stack46.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        this.<jdk.internal.reflect.MethodAccessorGenerator: short targetClass> = $stack47;
+
+        serializationTargetClassIdx = 0;
+
+        if forSerialization == 0 goto label06;
+
+        $stack130 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack131 = staticinvoke <jdk.internal.reflect.MethodAccessorGenerator: java.lang.String getClassName(java.lang.Class,boolean)>(serializationTargetClass, 0);
+
+        virtualinvoke $stack130.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolUTF8(java.lang.String)>($stack131);
+
+        $stack133 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack132 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack134 = virtualinvoke $stack132.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        virtualinvoke $stack133.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolClass(short)>($stack134);
+
+        $stack135 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        serializationTargetClassIdx = virtualinvoke $stack135.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+     label06:
+        $stack48 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        virtualinvoke $stack48.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolUTF8(java.lang.String)>(name);
+
+        $stack49 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack50 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.String buildInternalSignature()>();
+
+        virtualinvoke $stack49.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolUTF8(java.lang.String)>($stack50);
+
+        $stack52 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack51 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack53 = virtualinvoke $stack51.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        $stack54 = staticinvoke <jdk.internal.reflect.MethodAccessorGenerator: short sub(short,short)>($stack53, 1);
+
+        $stack55 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack56 = virtualinvoke $stack55.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        virtualinvoke $stack52.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolNameAndType(short,short)>($stack54, $stack56);
+
+        $stack57 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: boolean isInterface()>();
+
+        if $stack57 == 0 goto label07;
+
+        $stack127 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack128 = this.<jdk.internal.reflect.MethodAccessorGenerator: short targetClass>;
+
+        $stack126 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack129 = virtualinvoke $stack126.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        virtualinvoke $stack127.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolInterfaceMethodref(short,short)>($stack128, $stack129);
+
+        goto label09;
+
+     label07:
+        if forSerialization == 0 goto label08;
+
+        $stack121 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack120 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack122 = virtualinvoke $stack120.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        virtualinvoke $stack121.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolMethodref(short,short)>(serializationTargetClassIdx, $stack122);
+
+        goto label09;
+
+     label08:
+        $stack59 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack60 = this.<jdk.internal.reflect.MethodAccessorGenerator: short targetClass>;
+
+        $stack58 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack61 = virtualinvoke $stack58.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        virtualinvoke $stack59.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolMethodref(short,short)>($stack60, $stack61);
+
+     label09:
+        $stack62 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack63 = virtualinvoke $stack62.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        this.<jdk.internal.reflect.MethodAccessorGenerator: short targetMethodRef> = $stack63;
+
+        if isConstructor == 0 goto label10;
+
+        $stack116 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        virtualinvoke $stack116.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolUTF8(java.lang.String)>("newInstance");
+
+        goto label11;
+
+     label10:
+        $stack64 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        virtualinvoke $stack64.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolUTF8(java.lang.String)>("invoke");
+
+     label11:
+        $stack65 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack66 = virtualinvoke $stack65.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        this.<jdk.internal.reflect.MethodAccessorGenerator: short invokeIdx> = $stack66;
+
+        if isConstructor == 0 goto label12;
+
+        $stack109 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        virtualinvoke $stack109.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolUTF8(java.lang.String)>("([Ljava/lang/Object;)Ljava/lang/Object;");
+
+        goto label13;
+
+     label12:
+        $stack67 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        virtualinvoke $stack67.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolUTF8(java.lang.String)>("(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;");
+
+     label13:
+        $stack68 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack69 = virtualinvoke $stack68.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        this.<jdk.internal.reflect.MethodAccessorGenerator: short invokeDescriptorIdx> = $stack69;
+
+        $stack70 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack71 = virtualinvoke $stack70.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        $stack72 = staticinvoke <jdk.internal.reflect.MethodAccessorGenerator: short add(short,short)>($stack71, 2);
+
+        this.<jdk.internal.reflect.MethodAccessorGenerator: short nonPrimitiveParametersBaseIdx> = $stack72;
+
+        i = 0;
+
+     label14:
+        $stack73 = lengthof parameterTypes;
+
+        if i >= $stack73 goto label16;
+
+        c = parameterTypes[i];
+
+        $stack101 = staticinvoke <jdk.internal.reflect.MethodAccessorGenerator: boolean isPrimitive(java.lang.Class)>(c);
+
+        if $stack101 != 0 goto label15;
+
+        $stack104 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack105 = staticinvoke <jdk.internal.reflect.MethodAccessorGenerator: java.lang.String getClassName(java.lang.Class,boolean)>(c, 0);
+
+        virtualinvoke $stack104.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolUTF8(java.lang.String)>($stack105);
+
+        $stack107 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack106 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack108 = virtualinvoke $stack106.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        virtualinvoke $stack107.<jdk.internal.reflect.ClassFileAssembler: void emitConstantPoolClass(short)>($stack108);
+
+     label15:
+        i = i + 1;
+
+        goto label14;
+
+     label16:
+        virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: void emitCommonConstantPoolEntries()>();
+
+        if $stack20 == 0 goto label17;
+
+        virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: void emitBoxingContantPoolEntries()>();
+
+     label17:
+        $stack74 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack75 = virtualinvoke $stack74.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        $i1 = (int) $stack75;
+
+        $i2 = (int) $stack164;
+
+        if $i1 == $i2 goto label18;
+
+        $u2 = new java.lang.InternalError;
+
+        $u1 = new java.lang.StringBuilder;
+
+        specialinvoke $u1.<java.lang.StringBuilder: void <init>()>();
+
+        $stack91 = virtualinvoke $u1.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Adjust this code (cpi = ");
+
+        $stack92 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack93 = virtualinvoke $stack92.<jdk.internal.reflect.ClassFileAssembler: short cpi()>();
+
+        $i3 = (int) $stack93;
+
+        $stack94 = virtualinvoke $stack91.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($i3);
+
+        $stack95 = virtualinvoke $stack94.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(", numCPEntries = ");
+
+        $i4 = (int) $stack164;
+
+        $stack96 = virtualinvoke $stack95.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($i4);
+
+        $stack97 = virtualinvoke $stack96.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(")");
+
+        $stack98 = virtualinvoke $stack97.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u2.<java.lang.InternalError: void <init>(java.lang.String)>($stack98);
+
+        throw $u2;
+
+     label18:
+        $stack76 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        virtualinvoke $stack76.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>(1);
+
+        $stack78 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack77 = this.<jdk.internal.reflect.MethodAccessorGenerator: short thisClass>;
+
+        virtualinvoke $stack78.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>($stack77);
+
+        $stack80 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack79 = this.<jdk.internal.reflect.MethodAccessorGenerator: short superClass>;
+
+        virtualinvoke $stack80.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>($stack79);
+
+        $stack81 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        virtualinvoke $stack81.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>(0);
+
+        $stack82 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        virtualinvoke $stack82.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>(0);
+
+        $stack83 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        virtualinvoke $stack83.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>(2);
+
+        virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: void emitConstructor()>();
+
+        virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: void emitInvoke()>();
+
+        $stack84 = this.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        virtualinvoke $stack84.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>(0);
+
+        interfaceinvoke $stack17.<jdk.internal.reflect.ByteVector: void trim()>();
+
+        $stack85 = interfaceinvoke $stack17.<jdk.internal.reflect.ByteVector: byte[] getData()>();
+
+        $u3 = new jdk.internal.reflect.MethodAccessorGenerator$1;
+
+        specialinvoke $u3.<jdk.internal.reflect.MethodAccessorGenerator$1: void <init>(jdk.internal.reflect.MethodAccessorGenerator,java.lang.String,byte[],java.lang.Class)>(this, $stack28, $stack85, declaringClass);
+
+        $stack87 = staticinvoke <java.security.AccessController: java.lang.Object doPrivileged(java.security.PrivilegedAction)>($u3);
+
+        $stack88 = (jdk.internal.reflect.MagicAccessorImpl) $stack87;
+
+        return $stack88;
+    }
+
+    private void emitInvoke()
+    {
+        byte $stack135, count;
+        java.lang.InternalError $u0, $u6;
+        short $stack24, $stack25, $stack26, $stack29, $stack34, $stack119, $stack123, $stack128, $stack130, $stack138, $stack147, $stack148, $stack154, $stack157, $stack158, $stack212, $stack213, $stack215, $stack217, illegalArgStartPC, paramTypeCPIdx, $stack36, $stack38, $stack39, $stack40, $stack41, $stack42, $stack43, $stack44, $stack46, $stack47, $stack48, $stack49, $stack50, $stack52;
+        jdk.internal.reflect.ClassFileAssembler $u1, $u7;
+        java.lang.Class[] $stack12, $stack22, $stack133, $stack150, $stack19, $stack27, $stack145;
+        boolean $stack15, $stack16, $stack17, $stack30, $stack31, $stack32, $stack54, $stack137, $stack139, $stack143, $stack151, $stack153, $stack156, $stack207, $stack21, $stack37;
+        jdk.internal.reflect.MethodAccessorGenerator this;
+        short[] $stack51;
+        int $stack13, $stack23, $stack35, $stack121, $stack124, $stack129, $stack134, $stack136, $stack160, $stack20, i, $stack28, j, $stack146, $i0, $i1, $i2;
+        jdk.internal.reflect.Label nextParamLabel, l_2, $u2, $u3, $u4, $u5;
+        java.lang.Class $stack33, $stack53, $stack55, $stack56, $stack118, $stack120, $stack122, $stack127, paramType, c;
+
+        this := @this: jdk.internal.reflect.MethodAccessorGenerator;
+
+        $stack12 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class[] parameterTypes>;
+
+        $stack13 = lengthof $stack12;
+
+        $i0 = (int) 65535;
+
+        if $stack13 <= $i0 goto label01;
+
+        $u0 = new java.lang.InternalError;
+
+        specialinvoke $u0.<java.lang.InternalError: void <init>(java.lang.String)>("Can\'t handle more than 65535 parameters");
+
+        throw $u0;
+
+     label01:
+        $u1 = new jdk.internal.reflect.ClassFileAssembler;
+
+        specialinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void <init>()>();
+
+        $stack15 = this.<jdk.internal.reflect.MethodAccessorGenerator: boolean isConstructor>;
+
+        if $stack15 == 0 goto label02;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void setMaxLocals(int)>(2);
+
+        goto label03;
+
+     label02:
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void setMaxLocals(int)>(3);
+
+     label03:
+        illegalArgStartPC = 0;
+
+        $stack16 = this.<jdk.internal.reflect.MethodAccessorGenerator: boolean isConstructor>;
+
+        if $stack16 == 0 goto label04;
+
+        $stack217 = this.<jdk.internal.reflect.MethodAccessorGenerator: short targetClass>;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_new(short)>($stack217);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_dup()>();
+
+        goto label05;
+
+     label04:
+        $stack17 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: boolean isStatic()>();
+
+        if $stack17 != 0 goto label05;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_aload_1()>();
+
+        $u2 = new jdk.internal.reflect.Label;
+
+        specialinvoke $u2.<jdk.internal.reflect.Label: void <init>()>();
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_ifnonnull(jdk.internal.reflect.Label)>($u2);
+
+        $stack212 = this.<jdk.internal.reflect.MethodAccessorGenerator: short nullPointerClass>;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_new(short)>($stack212);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_dup()>();
+
+        $stack213 = this.<jdk.internal.reflect.MethodAccessorGenerator: short nullPointerCtorIdx>;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_invokespecial(short,int,int)>($stack213, 0, 0);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_athrow()>();
+
+        virtualinvoke $u2.<jdk.internal.reflect.Label: void bind()>();
+
+        illegalArgStartPC = virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: short getLength()>();
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_aload_1()>();
+
+        $stack215 = this.<jdk.internal.reflect.MethodAccessorGenerator: short targetClass>;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_checkcast(short)>($stack215);
+
+     label05:
+        $u3 = new jdk.internal.reflect.Label;
+
+        specialinvoke $u3.<jdk.internal.reflect.Label: void <init>()>();
+
+        $stack19 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class[] parameterTypes>;
+
+        $stack20 = lengthof $stack19;
+
+        if $stack20 != 0 goto label08;
+
+        $stack207 = this.<jdk.internal.reflect.MethodAccessorGenerator: boolean isConstructor>;
+
+        if $stack207 == 0 goto label06;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_aload_1()>();
+
+        goto label07;
+
+     label06:
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_aload_2()>();
+
+     label07:
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_ifnull(jdk.internal.reflect.Label)>($u3);
+
+     label08:
+        $stack21 = this.<jdk.internal.reflect.MethodAccessorGenerator: boolean isConstructor>;
+
+        if $stack21 == 0 goto label09;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_aload_1()>();
+
+        goto label10;
+
+     label09:
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_aload_2()>();
+
+     label10:
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_arraylength()>();
+
+        $stack22 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class[] parameterTypes>;
+
+        $stack23 = lengthof $stack22;
+
+        $stack24 = (short) $stack23;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_sipush(short)>($stack24);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_if_icmpeq(jdk.internal.reflect.Label)>($u3);
+
+        $stack25 = this.<jdk.internal.reflect.MethodAccessorGenerator: short illegalArgumentClass>;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_new(short)>($stack25);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_dup()>();
+
+        $stack26 = this.<jdk.internal.reflect.MethodAccessorGenerator: short illegalArgumentCtorIdx>;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_invokespecial(short,int,int)>($stack26, 0, 0);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_athrow()>();
+
+        virtualinvoke $u3.<jdk.internal.reflect.Label: void bind()>();
+
+        paramTypeCPIdx = this.<jdk.internal.reflect.MethodAccessorGenerator: short nonPrimitiveParametersBaseIdx>;
+
+        nextParamLabel = null;
+
+        count = 1;
+
+        i = 0;
+
+     label11:
+        $stack27 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class[] parameterTypes>;
+
+        $stack28 = lengthof $stack27;
+
+        if i >= $stack28 goto label28;
+
+        $stack133 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class[] parameterTypes>;
+
+        paramType = $stack133[i];
+
+        $stack134 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: int typeSizeInStackSlots(java.lang.Class)>(paramType);
+
+        $stack135 = (byte) $stack134;
+
+        $i1 = (int) $stack135;
+
+        $stack136 = count + $i1;
+
+        count = (byte) $stack136;
+
+        if nextParamLabel == null goto label12;
+
+        virtualinvoke nextParamLabel.<jdk.internal.reflect.Label: void bind()>();
+
+        nextParamLabel = null;
+
+     label12:
+        $stack137 = this.<jdk.internal.reflect.MethodAccessorGenerator: boolean isConstructor>;
+
+        if $stack137 == 0 goto label13;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_aload_1()>();
+
+        goto label14;
+
+     label13:
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_aload_2()>();
+
+     label14:
+        $stack138 = (short) i;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_sipush(short)>($stack138);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_aaload()>();
+
+        $stack139 = staticinvoke <jdk.internal.reflect.MethodAccessorGenerator: boolean isPrimitive(java.lang.Class)>(paramType);
+
+        if $stack139 == 0 goto label26;
+
+        $stack143 = this.<jdk.internal.reflect.MethodAccessorGenerator: boolean isConstructor>;
+
+        if $stack143 == 0 goto label15;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_astore_2()>();
+
+        goto label16;
+
+     label15:
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_astore_3()>();
+
+     label16:
+        l_2 = null;
+
+        $u4 = new jdk.internal.reflect.Label;
+
+        specialinvoke $u4.<jdk.internal.reflect.Label: void <init>()>();
+
+        nextParamLabel = $u4;
+
+        j = 0;
+
+     label17:
+        $stack145 = <jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class[] primitiveTypes>;
+
+        $stack146 = lengthof $stack145;
+
+        if j >= $stack146 goto label24;
+
+        $stack150 = <jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class[] primitiveTypes>;
+
+        c = $stack150[j];
+
+        $stack151 = staticinvoke <jdk.internal.reflect.MethodAccessorGenerator: boolean canWidenTo(java.lang.Class,java.lang.Class)>(c, paramType);
+
+        if $stack151 == 0 goto label23;
+
+        if l_2 == null goto label18;
+
+        virtualinvoke l_2.<jdk.internal.reflect.Label: void bind()>();
+
+     label18:
+        $stack153 = this.<jdk.internal.reflect.MethodAccessorGenerator: boolean isConstructor>;
+
+        if $stack153 == 0 goto label19;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_aload_2()>();
+
+        goto label20;
+
+     label19:
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_aload_3()>();
+
+     label20:
+        $stack154 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: short indexForPrimitiveType(java.lang.Class)>(c);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_instanceof(short)>($stack154);
+
+        $u5 = new jdk.internal.reflect.Label;
+
+        specialinvoke $u5.<jdk.internal.reflect.Label: void <init>()>();
+
+        l_2 = $u5;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_ifeq(jdk.internal.reflect.Label)>($u5);
+
+        $stack156 = this.<jdk.internal.reflect.MethodAccessorGenerator: boolean isConstructor>;
+
+        if $stack156 == 0 goto label21;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_aload_2()>();
+
+        goto label22;
+
+     label21:
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_aload_3()>();
+
+     label22:
+        $stack157 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: short indexForPrimitiveType(java.lang.Class)>(c);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_checkcast(short)>($stack157);
+
+        $stack158 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: short unboxingMethodForPrimitiveType(java.lang.Class)>(c);
+
+        $stack160 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: int typeSizeInStackSlots(java.lang.Class)>(c);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_invokevirtual(short,int,int)>($stack158, 0, $stack160);
+
+        staticinvoke <jdk.internal.reflect.MethodAccessorGenerator: void emitWideningBytecodeForPrimitiveConversion(jdk.internal.reflect.ClassFileAssembler,java.lang.Class,java.lang.Class)>($u1, c, paramType);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_goto(jdk.internal.reflect.Label)>($u4);
+
+     label23:
+        j = j + 1;
+
+        goto label17;
+
+     label24:
+        if l_2 != null goto label25;
+
+        $u6 = new java.lang.InternalError;
+
+        specialinvoke $u6.<java.lang.InternalError: void <init>(java.lang.String)>("Must have found at least identity conversion");
+
+        throw $u6;
+
+     label25:
+        virtualinvoke l_2.<jdk.internal.reflect.Label: void bind()>();
+
+        $stack147 = this.<jdk.internal.reflect.MethodAccessorGenerator: short illegalArgumentClass>;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_new(short)>($stack147);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_dup()>();
+
+        $stack148 = this.<jdk.internal.reflect.MethodAccessorGenerator: short illegalArgumentCtorIdx>;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_invokespecial(short,int,int)>($stack148, 0, 0);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_athrow()>();
+
+        goto label27;
+
+     label26:
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_checkcast(short)>(paramTypeCPIdx);
+
+        paramTypeCPIdx = staticinvoke <jdk.internal.reflect.MethodAccessorGenerator: short add(short,short)>(paramTypeCPIdx, 2);
+
+     label27:
+        i = i + 1;
+
+        goto label11;
+
+     label28:
+        if nextParamLabel == null goto label29;
+
+        virtualinvoke nextParamLabel.<jdk.internal.reflect.Label: void bind()>();
+
+     label29:
+        $stack29 = virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: short getLength()>();
+
+        $stack30 = this.<jdk.internal.reflect.MethodAccessorGenerator: boolean isConstructor>;
+
+        if $stack30 == 0 goto label30;
+
+        $stack130 = this.<jdk.internal.reflect.MethodAccessorGenerator: short targetMethodRef>;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_invokespecial(short,int,int)>($stack130, count, 0);
+
+        goto label33;
+
+     label30:
+        $stack31 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: boolean isStatic()>();
+
+        if $stack31 == 0 goto label31;
+
+        $stack128 = this.<jdk.internal.reflect.MethodAccessorGenerator: short targetMethodRef>;
+
+        $stack127 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class returnType>;
+
+        $stack129 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: int typeSizeInStackSlots(java.lang.Class)>($stack127);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_invokestatic(short,int,int)>($stack128, count, $stack129);
+
+        goto label33;
+
+     label31:
+        $stack32 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: boolean isInterface()>();
+
+        if $stack32 == 0 goto label32;
+
+        $stack123 = this.<jdk.internal.reflect.MethodAccessorGenerator: short targetMethodRef>;
+
+        $stack122 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class returnType>;
+
+        $stack124 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: int typeSizeInStackSlots(java.lang.Class)>($stack122);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_invokeinterface(short,int,byte,int)>($stack123, count, count, $stack124);
+
+        goto label33;
+
+     label32:
+        $stack34 = this.<jdk.internal.reflect.MethodAccessorGenerator: short targetMethodRef>;
+
+        $stack33 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class returnType>;
+
+        $stack35 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: int typeSizeInStackSlots(java.lang.Class)>($stack33);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_invokevirtual(short,int,int)>($stack34, count, $stack35);
+
+     label33:
+        $stack36 = virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: short getLength()>();
+
+        $stack37 = this.<jdk.internal.reflect.MethodAccessorGenerator: boolean isConstructor>;
+
+        if $stack37 != 0 goto label35;
+
+        $stack53 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class returnType>;
+
+        $stack54 = staticinvoke <jdk.internal.reflect.MethodAccessorGenerator: boolean isPrimitive(java.lang.Class)>($stack53);
+
+        if $stack54 == 0 goto label34;
+
+        $stack118 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class returnType>;
+
+        $stack119 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: short boxingMethodForPrimitiveType(java.lang.Class)>($stack118);
+
+        $stack120 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class returnType>;
+
+        $stack121 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: int typeSizeInStackSlots(java.lang.Class)>($stack120);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_invokestatic(short,int,int)>($stack119, $stack121, 0);
+
+        goto label35;
+
+     label34:
+        $stack56 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class returnType>;
+
+        $stack55 = <java.lang.Void: java.lang.Class TYPE>;
+
+        if $stack56 != $stack55 goto label35;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_aconst_null()>();
+
+     label35:
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_areturn()>();
+
+        $stack38 = virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: short getLength()>();
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void setStack(int)>(1);
+
+        $stack39 = this.<jdk.internal.reflect.MethodAccessorGenerator: short toStringIdx>;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_invokespecial(short,int,int)>($stack39, 0, 1);
+
+        $stack40 = this.<jdk.internal.reflect.MethodAccessorGenerator: short illegalArgumentClass>;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_new(short)>($stack40);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_dup_x1()>();
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_swap()>();
+
+        $stack41 = this.<jdk.internal.reflect.MethodAccessorGenerator: short illegalArgumentStringCtorIdx>;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_invokespecial(short,int,int)>($stack41, 1, 0);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_athrow()>();
+
+        $stack42 = virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: short getLength()>();
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void setStack(int)>(1);
+
+        $stack43 = this.<jdk.internal.reflect.MethodAccessorGenerator: short invocationTargetClass>;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_new(short)>($stack43);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_dup_x1()>();
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_swap()>();
+
+        $stack44 = this.<jdk.internal.reflect.MethodAccessorGenerator: short invocationTargetCtorIdx>;
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_invokespecial(short,int,int)>($stack44, 1, 0);
+
+        virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: void opc_athrow()>();
+
+        $u7 = new jdk.internal.reflect.ClassFileAssembler;
+
+        specialinvoke $u7.<jdk.internal.reflect.ClassFileAssembler: void <init>()>();
+
+        virtualinvoke $u7.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>(illegalArgStartPC);
+
+        virtualinvoke $u7.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>($stack29);
+
+        virtualinvoke $u7.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>($stack38);
+
+        $stack46 = this.<jdk.internal.reflect.MethodAccessorGenerator: short classCastClass>;
+
+        virtualinvoke $u7.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>($stack46);
+
+        virtualinvoke $u7.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>(illegalArgStartPC);
+
+        virtualinvoke $u7.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>($stack29);
+
+        virtualinvoke $u7.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>($stack38);
+
+        $stack47 = this.<jdk.internal.reflect.MethodAccessorGenerator: short nullPointerClass>;
+
+        virtualinvoke $u7.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>($stack47);
+
+        virtualinvoke $u7.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>($stack29);
+
+        virtualinvoke $u7.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>($stack36);
+
+        virtualinvoke $u7.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>($stack42);
+
+        $stack48 = this.<jdk.internal.reflect.MethodAccessorGenerator: short throwableClass>;
+
+        virtualinvoke $u7.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short)>($stack48);
+
+        $stack49 = this.<jdk.internal.reflect.MethodAccessorGenerator: short invokeIdx>;
+
+        $stack50 = virtualinvoke $u1.<jdk.internal.reflect.ClassFileAssembler: short getMaxLocals()>();
+
+        $stack51 = newarray (short)[1];
+
+        $stack52 = this.<jdk.internal.reflect.MethodAccessorGenerator: short invocationTargetClass>;
+
+        $stack51[0] = $stack52;
+
+        $i2 = (int) $stack50;
+
+        virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator: void emitMethod(short,int,jdk.internal.reflect.ClassFileAssembler,jdk.internal.reflect.ClassFileAssembler,short[])>($stack49, $i2, $u1, $u7, $stack51);
+
+        return;
+    }
+
+    private boolean usesPrimitiveTypes()
+    {
+        java.lang.Class[] $stack4, $stack6;
+        jdk.internal.reflect.MethodAccessorGenerator this;
+        int $stack5, i;
+        java.lang.Class $stack2, $stack7;
+        boolean $stack3, $stack8;
+
+        this := @this: jdk.internal.reflect.MethodAccessorGenerator;
+
+        $stack2 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class returnType>;
+
+        $stack3 = virtualinvoke $stack2.<java.lang.Class: boolean isPrimitive()>();
+
+        if $stack3 == 0 goto label1;
+
+        return 1;
+
+     label1:
+        i = 0;
+
+     label2:
+        $stack4 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class[] parameterTypes>;
+
+        $stack5 = lengthof $stack4;
+
+        if i >= $stack5 goto label4;
+
+        $stack6 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class[] parameterTypes>;
+
+        $stack7 = $stack6[i];
+
+        $stack8 = virtualinvoke $stack7.<java.lang.Class: boolean isPrimitive()>();
+
+        if $stack8 == 0 goto label3;
+
+        return 1;
+
+     label3:
+        i = i + 1;
+
+        goto label2;
+
+     label4:
+        return 0;
+    }
+
+    private int numNonPrimitiveParameterTypes()
+    {
+        java.lang.Class[] $stack3, $stack5;
+        jdk.internal.reflect.MethodAccessorGenerator this;
+        int $stack4, num, i;
+        java.lang.Class $stack6;
+        boolean $stack7;
+
+        this := @this: jdk.internal.reflect.MethodAccessorGenerator;
+
+        num = 0;
+
+        i = 0;
+
+     label1:
+        $stack3 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class[] parameterTypes>;
+
+        $stack4 = lengthof $stack3;
+
+        if i >= $stack4 goto label3;
+
+        $stack5 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class[] parameterTypes>;
+
+        $stack6 = $stack5[i];
+
+        $stack7 = virtualinvoke $stack6.<java.lang.Class: boolean isPrimitive()>();
+
+        if $stack7 != 0 goto label2;
+
+        num = num + 1;
+
+     label2:
+        i = i + 1;
+
+        goto label1;
+
+     label3:
+        return num;
+    }
+
+    private boolean isInterface()
+    {
+        java.lang.Class $stack1;
+        jdk.internal.reflect.MethodAccessorGenerator this;
+        boolean $stack2;
+
+        this := @this: jdk.internal.reflect.MethodAccessorGenerator;
+
+        $stack1 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class declaringClass>;
+
+        $stack2 = virtualinvoke $stack1.<java.lang.Class: boolean isInterface()>();
+
+        return $stack2;
+    }
+
+    private java.lang.String buildInternalSignature()
+    {
+        java.lang.Class[] $stack5, $stack12;
+        jdk.internal.reflect.MethodAccessorGenerator this;
+        int $stack6, i;
+        java.lang.StringBuilder $stack3;
+        java.lang.Class $stack8, $stack13;
+        java.lang.String $stack9, $stack11, $stack14;
+
+        this := @this: jdk.internal.reflect.MethodAccessorGenerator;
+
+        $stack3 = new java.lang.StringBuilder;
+
+        specialinvoke $stack3.<java.lang.StringBuilder: void <init>()>();
+
+        virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("(");
+
+        i = 0;
+
+     label1:
+        $stack5 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class[] parameterTypes>;
+
+        $stack6 = lengthof $stack5;
+
+        if i >= $stack6 goto label2;
+
+        $stack12 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class[] parameterTypes>;
+
+        $stack13 = $stack12[i];
+
+        $stack14 = staticinvoke <jdk.internal.reflect.MethodAccessorGenerator: java.lang.String getClassName(java.lang.Class,boolean)>($stack13, 1);
+
+        virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack14);
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(")");
+
+        $stack8 = this.<jdk.internal.reflect.MethodAccessorGenerator: java.lang.Class returnType>;
+
+        $stack9 = staticinvoke <jdk.internal.reflect.MethodAccessorGenerator: java.lang.String getClassName(java.lang.Class,boolean)>($stack8, 1);
+
+        virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack9);
+
+        $stack11 = virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack11;
+    }
+
+    private static synchronized java.lang.String generateName(boolean, boolean)
+    {
+        int $stack3, $stack4, $stack9, $stack10, $stack15, $stack16;
+        java.lang.String $stack8, $stack14, $stack20;
+        boolean isConstructor, forSerialization;
+        java.lang.StringBuilder $stack5, $stack6, $stack7, $stack11, $stack12, $stack13, $stack17, $stack18, $stack19;
+
+        isConstructor := @parameter0: boolean;
+
+        forSerialization := @parameter1: boolean;
+
+        if isConstructor == 0 goto label2;
+
+        if forSerialization == 0 goto label1;
+
+        $stack15 = <jdk.internal.reflect.MethodAccessorGenerator: int serializationConstructorSymnum>;
+
+        $stack16 = $stack15 + 1;
+
+        <jdk.internal.reflect.MethodAccessorGenerator: int serializationConstructorSymnum> = $stack16;
+
+        $stack17 = new java.lang.StringBuilder;
+
+        specialinvoke $stack17.<java.lang.StringBuilder: void <init>()>();
+
+        $stack18 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("jdk/internal/reflect/GeneratedSerializationConstructorAccessor");
+
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack16);
+
+        $stack20 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack20;
+
+     label1:
+        $stack9 = <jdk.internal.reflect.MethodAccessorGenerator: int constructorSymnum>;
+
+        $stack10 = $stack9 + 1;
+
+        <jdk.internal.reflect.MethodAccessorGenerator: int constructorSymnum> = $stack10;
+
+        $stack11 = new java.lang.StringBuilder;
+
+        specialinvoke $stack11.<java.lang.StringBuilder: void <init>()>();
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("jdk/internal/reflect/GeneratedConstructorAccessor");
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack10);
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack14;
+
+     label2:
+        $stack3 = <jdk.internal.reflect.MethodAccessorGenerator: int methodSymnum>;
+
+        $stack4 = $stack3 + 1;
+
+        <jdk.internal.reflect.MethodAccessorGenerator: int methodSymnum> = $stack4;
+
+        $stack5 = new java.lang.StringBuilder;
+
+        specialinvoke $stack5.<java.lang.StringBuilder: void <init>()>();
+
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("jdk/internal/reflect/GeneratedMethodAccessor");
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack4);
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack8;
+    }
+
+    public static void <clinit>()
+    {
+        <jdk.internal.reflect.MethodAccessorGenerator: short NUM_SERIALIZATION_CPOOL_ENTRIES> = 2;
+
+        <jdk.internal.reflect.MethodAccessorGenerator: short NUM_METHODS> = 2;
+
+        <jdk.internal.reflect.MethodAccessorGenerator: short NUM_BASE_CPOOL_ENTRIES> = 12;
+
+        return;
+    }
+}

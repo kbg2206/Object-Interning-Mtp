@@ -1,0 +1,385 @@
+class jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl extends jdk.internal.reflect.UnsafeQualifiedStaticFieldAccessorImpl
+{
+
+    void <init>(java.lang.reflect.Field, boolean)
+    {
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        java.lang.reflect.Field field;
+        boolean isReadOnly;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        field := @parameter0: java.lang.reflect.Field;
+
+        isReadOnly := @parameter1: boolean;
+
+        specialinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return;
+    }
+
+    public java.lang.Object get(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        byte $stack2;
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        java.lang.Object obj;
+        java.lang.Byte $stack3;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: byte getByte(java.lang.Object)>(obj);
+
+        $stack3 = staticinvoke <java.lang.Byte: java.lang.Byte valueOf(byte)>($stack2);
+
+        return $stack3;
+    }
+
+    public boolean getBoolean(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        java.lang.Object obj;
+        java.lang.IllegalArgumentException $stack2;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: java.lang.IllegalArgumentException newGetBooleanIllegalArgumentException()>();
+
+        throw $stack2;
+    }
+
+    public byte getByte(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.misc.Unsafe $stack4;
+        byte $stack5;
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        long $stack2;
+        java.lang.Object $stack3, obj;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack4 = <jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: jdk.internal.misc.Unsafe unsafe>;
+
+        $stack3 = this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: java.lang.Object base>;
+
+        $stack2 = this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: long fieldOffset>;
+
+        $stack5 = virtualinvoke $stack4.<jdk.internal.misc.Unsafe: byte getByteVolatile(java.lang.Object,long)>($stack3, $stack2);
+
+        return $stack5;
+    }
+
+    public char getChar(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        java.lang.Object obj;
+        java.lang.IllegalArgumentException $stack2;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: java.lang.IllegalArgumentException newGetCharIllegalArgumentException()>();
+
+        throw $stack2;
+    }
+
+    public short getShort(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        short $stack3;
+        byte $stack2;
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        java.lang.Object obj;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: byte getByte(java.lang.Object)>(obj);
+
+        $stack3 = (short) $stack2;
+
+        return $stack3;
+    }
+
+    public int getInt(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        byte $stack2;
+        int $i0;
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        java.lang.Object obj;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: byte getByte(java.lang.Object)>(obj);
+
+        $i0 = (int) $stack2;
+
+        return $i0;
+    }
+
+    public long getLong(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        byte $stack2;
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        java.lang.Object obj;
+        long $stack3;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: byte getByte(java.lang.Object)>(obj);
+
+        $stack3 = (long) $stack2;
+
+        return $stack3;
+    }
+
+    public float getFloat(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        byte $stack2;
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        float $stack3;
+        java.lang.Object obj;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: byte getByte(java.lang.Object)>(obj);
+
+        $stack3 = (float) $stack2;
+
+        return $stack3;
+    }
+
+    public double getDouble(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        byte $stack2;
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        java.lang.Object obj;
+        double $stack3;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: byte getByte(java.lang.Object)>(obj);
+
+        $stack3 = (double) $stack2;
+
+        return $stack3;
+    }
+
+    public void set(java.lang.Object, java.lang.Object) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.misc.Unsafe $stack6;
+        long $stack8;
+        byte $stack9;
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        java.lang.Object value, $stack7, obj;
+        java.lang.Byte $stack5;
+        boolean $stack3, $stack4;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        value := @parameter1: java.lang.Object;
+
+        $stack3 = this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: boolean isReadOnly>;
+
+        if $stack3 == 0 goto label1;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: void throwFinalFieldIllegalAccessException(java.lang.Object)>(value);
+
+     label1:
+        if value != null goto label2;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: void throwSetIllegalArgumentException(java.lang.Object)>(value);
+
+     label2:
+        $stack4 = value instanceof java.lang.Byte;
+
+        if $stack4 == 0 goto label3;
+
+        $stack6 = <jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: jdk.internal.misc.Unsafe unsafe>;
+
+        $stack7 = this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: java.lang.Object base>;
+
+        $stack8 = this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: long fieldOffset>;
+
+        $stack5 = (java.lang.Byte) value;
+
+        $stack9 = virtualinvoke $stack5.<java.lang.Byte: byte byteValue()>();
+
+        virtualinvoke $stack6.<jdk.internal.misc.Unsafe: void putByteVolatile(java.lang.Object,long,byte)>($stack7, $stack8, $stack9);
+
+        return;
+
+     label3:
+        virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: void throwSetIllegalArgumentException(java.lang.Object)>(value);
+
+        return;
+    }
+
+    public void setBoolean(java.lang.Object, boolean) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        java.lang.Object obj;
+        boolean z;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        z := @parameter1: boolean;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: void throwSetIllegalArgumentException(boolean)>(z);
+
+        return;
+    }
+
+    public void setByte(java.lang.Object, byte) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.misc.Unsafe $stack6;
+        byte b;
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        long $stack4;
+        java.lang.Object $stack5, obj;
+        boolean $stack3;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        b := @parameter1: byte;
+
+        $stack3 = this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: boolean isReadOnly>;
+
+        if $stack3 == 0 goto label1;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: void throwFinalFieldIllegalAccessException(byte)>(b);
+
+     label1:
+        $stack6 = <jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: jdk.internal.misc.Unsafe unsafe>;
+
+        $stack5 = this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: java.lang.Object base>;
+
+        $stack4 = this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: long fieldOffset>;
+
+        virtualinvoke $stack6.<jdk.internal.misc.Unsafe: void putByteVolatile(java.lang.Object,long,byte)>($stack5, $stack4, b);
+
+        return;
+    }
+
+    public void setChar(java.lang.Object, char) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        char c;
+        java.lang.Object obj;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        c := @parameter1: char;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: void throwSetIllegalArgumentException(char)>(c);
+
+        return;
+    }
+
+    public void setShort(java.lang.Object, short) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        short s;
+        java.lang.Object obj;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        s := @parameter1: short;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: void throwSetIllegalArgumentException(short)>(s);
+
+        return;
+    }
+
+    public void setInt(java.lang.Object, int) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        int i;
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        java.lang.Object obj;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        i := @parameter1: int;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: void throwSetIllegalArgumentException(int)>(i);
+
+        return;
+    }
+
+    public void setLong(java.lang.Object, long) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        long l;
+        java.lang.Object obj;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        l := @parameter1: long;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: void throwSetIllegalArgumentException(long)>(l);
+
+        return;
+    }
+
+    public void setFloat(java.lang.Object, float) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        float f;
+        java.lang.Object obj;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        f := @parameter1: float;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: void throwSetIllegalArgumentException(float)>(f);
+
+        return;
+    }
+
+    public void setDouble(java.lang.Object, double) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl this;
+        java.lang.Object obj;
+        double d;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        d := @parameter1: double;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: void throwSetIllegalArgumentException(double)>(d);
+
+        return;
+    }
+}

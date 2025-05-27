@@ -1,0 +1,37 @@
+class jdk.internal.reflect.Label$PatchInfo extends java.lang.Object
+{
+    final jdk.internal.reflect.ClassFileAssembler asm;
+    final short instrBCI;
+    final short patchBCI;
+    final int stackDepth;
+
+    void <init>(jdk.internal.reflect.ClassFileAssembler, short, short, int)
+    {
+        short instrBCI, patchBCI;
+        jdk.internal.reflect.Label$PatchInfo this;
+        jdk.internal.reflect.ClassFileAssembler asm;
+        int stackDepth;
+
+        this := @this: jdk.internal.reflect.Label$PatchInfo;
+
+        asm := @parameter0: jdk.internal.reflect.ClassFileAssembler;
+
+        instrBCI := @parameter1: short;
+
+        patchBCI := @parameter2: short;
+
+        stackDepth := @parameter3: int;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<jdk.internal.reflect.Label$PatchInfo: jdk.internal.reflect.ClassFileAssembler asm> = asm;
+
+        this.<jdk.internal.reflect.Label$PatchInfo: short instrBCI> = instrBCI;
+
+        this.<jdk.internal.reflect.Label$PatchInfo: short patchBCI> = patchBCI;
+
+        this.<jdk.internal.reflect.Label$PatchInfo: int stackDepth> = stackDepth;
+
+        return;
+    }
+}

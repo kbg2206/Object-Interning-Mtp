@@ -1,0 +1,54 @@
+class jdk.internal.reflect.DelegatingMethodAccessorImpl extends jdk.internal.reflect.MethodAccessorImpl
+{
+    private jdk.internal.reflect.MethodAccessorImpl delegate;
+
+    void <init>(jdk.internal.reflect.MethodAccessorImpl)
+    {
+        jdk.internal.reflect.DelegatingMethodAccessorImpl this;
+        jdk.internal.reflect.MethodAccessorImpl delegate;
+
+        this := @this: jdk.internal.reflect.DelegatingMethodAccessorImpl;
+
+        delegate := @parameter0: jdk.internal.reflect.MethodAccessorImpl;
+
+        specialinvoke this.<jdk.internal.reflect.MethodAccessorImpl: void <init>()>();
+
+        virtualinvoke this.<jdk.internal.reflect.DelegatingMethodAccessorImpl: void setDelegate(jdk.internal.reflect.MethodAccessorImpl)>(delegate);
+
+        return;
+    }
+
+    public java.lang.Object invoke(java.lang.Object, java.lang.Object[]) throws java.lang.IllegalArgumentException, java.lang.reflect.InvocationTargetException
+    {
+        jdk.internal.reflect.DelegatingMethodAccessorImpl this;
+        java.lang.Object[] args;
+        java.lang.Object obj, $stack4;
+        jdk.internal.reflect.MethodAccessorImpl $stack3;
+
+        this := @this: jdk.internal.reflect.DelegatingMethodAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        args := @parameter1: java.lang.Object[];
+
+        $stack3 = this.<jdk.internal.reflect.DelegatingMethodAccessorImpl: jdk.internal.reflect.MethodAccessorImpl delegate>;
+
+        $stack4 = virtualinvoke $stack3.<jdk.internal.reflect.MethodAccessorImpl: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(obj, args);
+
+        return $stack4;
+    }
+
+    void setDelegate(jdk.internal.reflect.MethodAccessorImpl)
+    {
+        jdk.internal.reflect.DelegatingMethodAccessorImpl this;
+        jdk.internal.reflect.MethodAccessorImpl delegate;
+
+        this := @this: jdk.internal.reflect.DelegatingMethodAccessorImpl;
+
+        delegate := @parameter0: jdk.internal.reflect.MethodAccessorImpl;
+
+        this.<jdk.internal.reflect.DelegatingMethodAccessorImpl: jdk.internal.reflect.MethodAccessorImpl delegate> = delegate;
+
+        return;
+    }
+}

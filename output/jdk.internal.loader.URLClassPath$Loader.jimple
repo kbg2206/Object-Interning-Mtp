@@ -1,0 +1,236 @@
+class jdk.internal.loader.URLClassPath$Loader extends java.lang.Object implements java.io.Closeable
+{
+    private final java.net.URL base;
+    private java.util.jar.JarFile jarfile;
+
+    void <init>(java.net.URL)
+    {
+        jdk.internal.loader.URLClassPath$Loader this;
+        java.net.URL url;
+
+        this := @this: jdk.internal.loader.URLClassPath$Loader;
+
+        url := @parameter0: java.net.URL;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<jdk.internal.loader.URLClassPath$Loader: java.net.URL base> = url;
+
+        return;
+    }
+
+    java.net.URL getBaseURL()
+    {
+        jdk.internal.loader.URLClassPath$Loader this;
+        java.net.URL $stack1;
+
+        this := @this: jdk.internal.loader.URLClassPath$Loader;
+
+        $stack1 = this.<jdk.internal.loader.URLClassPath$Loader: java.net.URL base>;
+
+        return $stack1;
+    }
+
+    java.net.URL findResource(java.lang.String, boolean)
+    {
+        java.net.HttpURLConnection hconn;
+        java.net.MalformedURLException $stack17;
+        java.net.URL $stack6, $stack7;
+        java.lang.Exception $stack16;
+        java.net.URLConnection $stack9;
+        int $stack12;
+        java.lang.String name, $stack8;
+        jdk.internal.loader.URLClassPath$Loader this;
+        boolean check, $stack10;
+        java.io.InputStream $stack11;
+
+        this := @this: jdk.internal.loader.URLClassPath$Loader;
+
+        name := @parameter0: java.lang.String;
+
+        check := @parameter1: boolean;
+
+     label01:
+        $stack6 = new java.net.URL;
+
+        $stack7 = this.<jdk.internal.loader.URLClassPath$Loader: java.net.URL base>;
+
+        $stack8 = staticinvoke <sun.net.www.ParseUtil: java.lang.String encodePath(java.lang.String,boolean)>(name, 0);
+
+        specialinvoke $stack6.<java.net.URL: void <init>(java.net.URL,java.lang.String)>($stack7, $stack8);
+
+     label02:
+        goto label04;
+
+     label03:
+        $stack17 := @caughtexception;
+
+        return null;
+
+     label04:
+        if check == 0 goto label05;
+
+        staticinvoke <jdk.internal.loader.URLClassPath: void check(java.net.URL)>($stack6);
+
+     label05:
+        $stack9 = virtualinvoke $stack6.<java.net.URL: java.net.URLConnection openConnection()>();
+
+        $stack10 = $stack9 instanceof java.net.HttpURLConnection;
+
+        if $stack10 == 0 goto label08;
+
+        hconn = (java.net.HttpURLConnection) $stack9;
+
+        virtualinvoke hconn.<java.net.HttpURLConnection: void setRequestMethod(java.lang.String)>("HEAD");
+
+        $stack12 = virtualinvoke hconn.<java.net.HttpURLConnection: int getResponseCode()>();
+
+        if $stack12 < 400 goto label07;
+
+     label06:
+        return null;
+
+     label07:
+        goto label09;
+
+     label08:
+        virtualinvoke $stack9.<java.net.URLConnection: void setUseCaches(boolean)>(0);
+
+        $stack11 = virtualinvoke $stack9.<java.net.URLConnection: java.io.InputStream getInputStream()>();
+
+        virtualinvoke $stack11.<java.io.InputStream: void close()>();
+
+     label09:
+        return $stack6;
+
+     label10:
+        $stack16 := @caughtexception;
+
+        return null;
+
+        catch java.net.MalformedURLException from label01 to label02 with label03;
+        catch java.lang.Exception from label04 to label06 with label10;
+        catch java.lang.Exception from label07 to label09 with label10;
+    }
+
+    jdk.internal.loader.Resource getResource(java.lang.String, boolean)
+    {
+        java.net.MalformedURLException $stack19;
+        java.net.URL $stack6, $stack7;
+        java.util.jar.JarFile $stack13, $stack14;
+        java.lang.Exception $stack18;
+        jdk.internal.loader.URLClassPath$Loader$1 $stack12;
+        java.net.URLConnection $stack9;
+        java.lang.String name, $stack8;
+        jdk.internal.loader.URLClassPath$Loader this;
+        java.net.JarURLConnection juc;
+        boolean check, $stack10;
+
+        this := @this: jdk.internal.loader.URLClassPath$Loader;
+
+        name := @parameter0: java.lang.String;
+
+        check := @parameter1: boolean;
+
+     label1:
+        $stack6 = new java.net.URL;
+
+        $stack7 = this.<jdk.internal.loader.URLClassPath$Loader: java.net.URL base>;
+
+        $stack8 = staticinvoke <sun.net.www.ParseUtil: java.lang.String encodePath(java.lang.String,boolean)>(name, 0);
+
+        specialinvoke $stack6.<java.net.URL: void <init>(java.net.URL,java.lang.String)>($stack7, $stack8);
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack19 := @caughtexception;
+
+        return null;
+
+     label4:
+        if check == 0 goto label5;
+
+        staticinvoke <jdk.internal.loader.URLClassPath: void check(java.net.URL)>($stack6);
+
+     label5:
+        $stack9 = virtualinvoke $stack6.<java.net.URL: java.net.URLConnection openConnection()>();
+
+        $stack10 = $stack9 instanceof java.net.JarURLConnection;
+
+        if $stack10 == 0 goto label6;
+
+        juc = (java.net.JarURLConnection) $stack9;
+
+        $stack13 = virtualinvoke juc.<java.net.JarURLConnection: java.util.jar.JarFile getJarFile()>();
+
+        $stack14 = staticinvoke <jdk.internal.loader.URLClassPath$JarLoader: java.util.jar.JarFile checkJar(java.util.jar.JarFile)>($stack13);
+
+        this.<jdk.internal.loader.URLClassPath$Loader: java.util.jar.JarFile jarfile> = $stack14;
+
+     label6:
+        virtualinvoke $stack9.<java.net.URLConnection: java.io.InputStream getInputStream()>();
+
+     label7:
+        goto label9;
+
+     label8:
+        $stack18 := @caughtexception;
+
+        return null;
+
+     label9:
+        $stack12 = new jdk.internal.loader.URLClassPath$Loader$1;
+
+        specialinvoke $stack12.<jdk.internal.loader.URLClassPath$Loader$1: void <init>(jdk.internal.loader.URLClassPath$Loader,java.lang.String,java.net.URL,java.net.URLConnection)>(this, name, $stack6, $stack9);
+
+        return $stack12;
+
+        catch java.net.MalformedURLException from label1 to label2 with label3;
+        catch java.lang.Exception from label4 to label7 with label8;
+    }
+
+    jdk.internal.loader.Resource getResource(java.lang.String)
+    {
+        jdk.internal.loader.Resource $stack2;
+        java.lang.String name;
+        jdk.internal.loader.URLClassPath$Loader this;
+
+        this := @this: jdk.internal.loader.URLClassPath$Loader;
+
+        name := @parameter0: java.lang.String;
+
+        $stack2 = virtualinvoke this.<jdk.internal.loader.URLClassPath$Loader: jdk.internal.loader.Resource getResource(java.lang.String,boolean)>(name, 1);
+
+        return $stack2;
+    }
+
+    public void close() throws java.io.IOException
+    {
+        java.util.jar.JarFile $stack1, $stack2;
+        jdk.internal.loader.URLClassPath$Loader this;
+
+        this := @this: jdk.internal.loader.URLClassPath$Loader;
+
+        $stack1 = this.<jdk.internal.loader.URLClassPath$Loader: java.util.jar.JarFile jarfile>;
+
+        if $stack1 == null goto label1;
+
+        $stack2 = this.<jdk.internal.loader.URLClassPath$Loader: java.util.jar.JarFile jarfile>;
+
+        virtualinvoke $stack2.<java.util.jar.JarFile: void close()>();
+
+     label1:
+        return;
+    }
+
+    java.net.URL[] getClassPath() throws java.io.IOException
+    {
+        jdk.internal.loader.URLClassPath$Loader this;
+
+        this := @this: jdk.internal.loader.URLClassPath$Loader;
+
+        return null;
+    }
+}

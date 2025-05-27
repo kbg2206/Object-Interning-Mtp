@@ -1,0 +1,86 @@
+public class jdk.internal.module.ModuleHashes$Builder extends java.lang.Object
+{
+    final java.lang.String algorithm;
+    final java.util.Map nameToHash;
+
+    void <init>(java.lang.String, int)
+    {
+        jdk.internal.module.ModuleHashes$Builder this;
+        int initialCapacity;
+        java.util.HashMap $stack3;
+        java.lang.Object $stack4;
+        java.lang.String algorithm, $stack5;
+
+        this := @this: jdk.internal.module.ModuleHashes$Builder;
+
+        algorithm := @parameter0: java.lang.String;
+
+        initialCapacity := @parameter1: int;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack3 = new java.util.HashMap;
+
+        specialinvoke $stack3.<java.util.HashMap: void <init>(int)>(initialCapacity);
+
+        this.<jdk.internal.module.ModuleHashes$Builder: java.util.Map nameToHash> = $stack3;
+
+        $stack4 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(algorithm);
+
+        $stack5 = (java.lang.String) $stack4;
+
+        this.<jdk.internal.module.ModuleHashes$Builder: java.lang.String algorithm> = $stack5;
+
+        return;
+    }
+
+    public jdk.internal.module.ModuleHashes$Builder hashForModule(java.lang.String, byte[])
+    {
+        jdk.internal.module.ModuleHashes$Builder this;
+        byte[] hash;
+        java.util.Map $stack3;
+        java.lang.String mn;
+
+        this := @this: jdk.internal.module.ModuleHashes$Builder;
+
+        mn := @parameter0: java.lang.String;
+
+        hash := @parameter1: byte[];
+
+        $stack3 = this.<jdk.internal.module.ModuleHashes$Builder: java.util.Map nameToHash>;
+
+        interfaceinvoke $stack3.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(mn, hash);
+
+        return this;
+    }
+
+    public jdk.internal.module.ModuleHashes build()
+    {
+        jdk.internal.module.ModuleHashes$Builder this;
+        java.util.Map $stack1, $stack4;
+        jdk.internal.module.ModuleHashes $stack3;
+        java.lang.String $stack5;
+        boolean $stack2;
+
+        this := @this: jdk.internal.module.ModuleHashes$Builder;
+
+        $stack1 = this.<jdk.internal.module.ModuleHashes$Builder: java.util.Map nameToHash>;
+
+        $stack2 = interfaceinvoke $stack1.<java.util.Map: boolean isEmpty()>();
+
+        if $stack2 != 0 goto label1;
+
+        $stack3 = new jdk.internal.module.ModuleHashes;
+
+        $stack5 = this.<jdk.internal.module.ModuleHashes$Builder: java.lang.String algorithm>;
+
+        $stack4 = this.<jdk.internal.module.ModuleHashes$Builder: java.util.Map nameToHash>;
+
+        specialinvoke $stack3.<jdk.internal.module.ModuleHashes: void <init>(java.lang.String,java.util.Map)>($stack5, $stack4);
+
+        return $stack3;
+
+     label1:
+        return null;
+    }
+}

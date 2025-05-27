@@ -1,0 +1,123 @@
+public final class jdk.internal.module.ServicesCatalog$ServiceProvider extends java.lang.Object
+{
+    private final java.lang.Module module;
+    private final java.lang.String providerName;
+
+    public void <init>(java.lang.Module, java.lang.String)
+    {
+        jdk.internal.module.ServicesCatalog$ServiceProvider this;
+        java.lang.String providerName;
+        java.lang.Module module;
+
+        this := @this: jdk.internal.module.ServicesCatalog$ServiceProvider;
+
+        module := @parameter0: java.lang.Module;
+
+        providerName := @parameter1: java.lang.String;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<jdk.internal.module.ServicesCatalog$ServiceProvider: java.lang.Module module> = module;
+
+        this.<jdk.internal.module.ServicesCatalog$ServiceProvider: java.lang.String providerName> = providerName;
+
+        return;
+    }
+
+    public java.lang.Module module()
+    {
+        jdk.internal.module.ServicesCatalog$ServiceProvider this;
+        java.lang.Module $stack1;
+
+        this := @this: jdk.internal.module.ServicesCatalog$ServiceProvider;
+
+        $stack1 = this.<jdk.internal.module.ServicesCatalog$ServiceProvider: java.lang.Module module>;
+
+        return $stack1;
+    }
+
+    public java.lang.String providerName()
+    {
+        jdk.internal.module.ServicesCatalog$ServiceProvider this;
+        java.lang.String $stack1;
+
+        this := @this: jdk.internal.module.ServicesCatalog$ServiceProvider;
+
+        $stack1 = this.<jdk.internal.module.ServicesCatalog$ServiceProvider: java.lang.String providerName>;
+
+        return $stack1;
+    }
+
+    public int hashCode()
+    {
+        java.lang.Object[] $stack1;
+        jdk.internal.module.ServicesCatalog$ServiceProvider this;
+        java.lang.Module $stack2;
+        int $stack4;
+        java.lang.String $stack3;
+
+        this := @this: jdk.internal.module.ServicesCatalog$ServiceProvider;
+
+        $stack1 = newarray (java.lang.Object)[2];
+
+        $stack2 = this.<jdk.internal.module.ServicesCatalog$ServiceProvider: java.lang.Module module>;
+
+        $stack1[0] = $stack2;
+
+        $stack3 = this.<jdk.internal.module.ServicesCatalog$ServiceProvider: java.lang.String providerName>;
+
+        $stack1[1] = $stack3;
+
+        $stack4 = staticinvoke <java.util.Objects: int hash(java.lang.Object[])>($stack1);
+
+        return $stack4;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        jdk.internal.module.ServicesCatalog$ServiceProvider that, this;
+        java.lang.Module $stack4, $stack5;
+        java.lang.Object ob;
+        java.lang.String $stack7, $stack8;
+        boolean $stack3, $stack6, $stack9, $stack10;
+
+        this := @this: jdk.internal.module.ServicesCatalog$ServiceProvider;
+
+        ob := @parameter0: java.lang.Object;
+
+        $stack3 = ob instanceof jdk.internal.module.ServicesCatalog$ServiceProvider;
+
+        if $stack3 != 0 goto label1;
+
+        return 0;
+
+     label1:
+        that = (jdk.internal.module.ServicesCatalog$ServiceProvider) ob;
+
+        $stack5 = this.<jdk.internal.module.ServicesCatalog$ServiceProvider: java.lang.Module module>;
+
+        $stack4 = that.<jdk.internal.module.ServicesCatalog$ServiceProvider: java.lang.Module module>;
+
+        $stack6 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack5, $stack4);
+
+        if $stack6 == 0 goto label2;
+
+        $stack8 = this.<jdk.internal.module.ServicesCatalog$ServiceProvider: java.lang.String providerName>;
+
+        $stack7 = that.<jdk.internal.module.ServicesCatalog$ServiceProvider: java.lang.String providerName>;
+
+        $stack9 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+
+        if $stack9 == 0 goto label2;
+
+        $stack10 = 1;
+
+        goto label3;
+
+     label2:
+        $stack10 = 0;
+
+     label3:
+        return $stack10;
+    }
+}

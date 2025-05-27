@@ -1,0 +1,490 @@
+class jdk.internal.module.ModuleInfo$DataInputWrapper extends java.lang.Object implements java.io.DataInput
+{
+    private final java.nio.ByteBuffer bb;
+
+    void <init>(java.nio.ByteBuffer)
+    {
+        jdk.internal.module.ModuleInfo$DataInputWrapper this;
+        java.nio.ByteBuffer bb;
+
+        this := @this: jdk.internal.module.ModuleInfo$DataInputWrapper;
+
+        bb := @parameter0: java.nio.ByteBuffer;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<jdk.internal.module.ModuleInfo$DataInputWrapper: java.nio.ByteBuffer bb> = bb;
+
+        return;
+    }
+
+    public void readFully(byte[]) throws java.io.IOException
+    {
+        int $stack2;
+        jdk.internal.module.ModuleInfo$DataInputWrapper this;
+        byte[] b;
+
+        this := @this: jdk.internal.module.ModuleInfo$DataInputWrapper;
+
+        b := @parameter0: byte[];
+
+        $stack2 = lengthof b;
+
+        virtualinvoke this.<jdk.internal.module.ModuleInfo$DataInputWrapper: void readFully(byte[],int,int)>(b, 0, $stack2);
+
+        return;
+    }
+
+    public void readFully(byte[], int, int) throws java.io.IOException
+    {
+        jdk.internal.module.ModuleInfo$DataInputWrapper this;
+        byte[] b;
+        java.io.EOFException $stack8;
+        java.nio.ByteBuffer $stack5;
+        java.nio.BufferUnderflowException $stack7;
+        int off, len;
+        java.lang.String $stack9;
+
+        this := @this: jdk.internal.module.ModuleInfo$DataInputWrapper;
+
+        b := @parameter0: byte[];
+
+        off := @parameter1: int;
+
+        len := @parameter2: int;
+
+     label1:
+        $stack5 = this.<jdk.internal.module.ModuleInfo$DataInputWrapper: java.nio.ByteBuffer bb>;
+
+        virtualinvoke $stack5.<java.nio.ByteBuffer: java.nio.ByteBuffer get(byte[],int,int)>(b, off, len);
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack7 := @caughtexception;
+
+        $stack8 = new java.io.EOFException;
+
+        $stack9 = virtualinvoke $stack7.<java.nio.BufferUnderflowException: java.lang.String getMessage()>();
+
+        specialinvoke $stack8.<java.io.EOFException: void <init>(java.lang.String)>($stack9);
+
+        throw $stack8;
+
+     label4:
+        return;
+
+        catch java.nio.BufferUnderflowException from label1 to label2 with label3;
+    }
+
+    public int skipBytes(int)
+    {
+        jdk.internal.module.ModuleInfo$DataInputWrapper this;
+        java.nio.ByteBuffer $stack3, $stack6, $stack7;
+        int n, $stack4, $stack5, $stack8, $stack9;
+
+        this := @this: jdk.internal.module.ModuleInfo$DataInputWrapper;
+
+        n := @parameter0: int;
+
+        $stack3 = this.<jdk.internal.module.ModuleInfo$DataInputWrapper: java.nio.ByteBuffer bb>;
+
+        $stack4 = virtualinvoke $stack3.<java.nio.ByteBuffer: int remaining()>();
+
+        $stack5 = staticinvoke <java.lang.Math: int min(int,int)>(n, $stack4);
+
+        $stack7 = this.<jdk.internal.module.ModuleInfo$DataInputWrapper: java.nio.ByteBuffer bb>;
+
+        $stack6 = this.<jdk.internal.module.ModuleInfo$DataInputWrapper: java.nio.ByteBuffer bb>;
+
+        $stack8 = virtualinvoke $stack6.<java.nio.ByteBuffer: int position()>();
+
+        $stack9 = $stack8 + $stack5;
+
+        virtualinvoke $stack7.<java.nio.ByteBuffer: java.nio.ByteBuffer position(int)>($stack9);
+
+        return $stack5;
+    }
+
+    public boolean readBoolean() throws java.io.IOException
+    {
+        jdk.internal.module.ModuleInfo$DataInputWrapper this;
+        byte $stack3;
+        java.lang.String $stack7;
+        java.io.EOFException $stack6;
+        java.nio.ByteBuffer $stack2;
+        java.nio.BufferUnderflowException $stack5;
+        boolean $stack4;
+
+        this := @this: jdk.internal.module.ModuleInfo$DataInputWrapper;
+
+     label1:
+        $stack2 = this.<jdk.internal.module.ModuleInfo$DataInputWrapper: java.nio.ByteBuffer bb>;
+
+        $stack3 = virtualinvoke $stack2.<java.nio.ByteBuffer: byte get()>();
+
+        if $stack3 == 0 goto label2;
+
+        $stack4 = 1;
+
+        goto label3;
+
+     label2:
+        $stack4 = 0;
+
+     label3:
+        return $stack4;
+
+     label4:
+        $stack5 := @caughtexception;
+
+        $stack6 = new java.io.EOFException;
+
+        $stack7 = virtualinvoke $stack5.<java.nio.BufferUnderflowException: java.lang.String getMessage()>();
+
+        specialinvoke $stack6.<java.io.EOFException: void <init>(java.lang.String)>($stack7);
+
+        throw $stack6;
+
+        catch java.nio.BufferUnderflowException from label1 to label3 with label4;
+    }
+
+    public byte readByte() throws java.io.IOException
+    {
+        jdk.internal.module.ModuleInfo$DataInputWrapper this;
+        byte $stack3;
+        java.lang.String $stack6;
+        java.io.EOFException $stack5;
+        java.nio.ByteBuffer $stack2;
+        java.nio.BufferUnderflowException $stack4;
+
+        this := @this: jdk.internal.module.ModuleInfo$DataInputWrapper;
+
+     label1:
+        $stack2 = this.<jdk.internal.module.ModuleInfo$DataInputWrapper: java.nio.ByteBuffer bb>;
+
+        $stack3 = virtualinvoke $stack2.<java.nio.ByteBuffer: byte get()>();
+
+     label2:
+        return $stack3;
+
+     label3:
+        $stack4 := @caughtexception;
+
+        $stack5 = new java.io.EOFException;
+
+        $stack6 = virtualinvoke $stack4.<java.nio.BufferUnderflowException: java.lang.String getMessage()>();
+
+        specialinvoke $stack5.<java.io.EOFException: void <init>(java.lang.String)>($stack6);
+
+        throw $stack5;
+
+        catch java.nio.BufferUnderflowException from label1 to label2 with label3;
+    }
+
+    public int readUnsignedByte() throws java.io.IOException
+    {
+        jdk.internal.module.ModuleInfo$DataInputWrapper this;
+        java.io.EOFException $u0;
+        java.nio.ByteBuffer $stack2;
+        java.nio.BufferUnderflowException $stack5;
+        short $stack4, $s0;
+        byte $stack3;
+        int $i0;
+        java.lang.String $stack7;
+
+        this := @this: jdk.internal.module.ModuleInfo$DataInputWrapper;
+
+     label1:
+        $stack2 = this.<jdk.internal.module.ModuleInfo$DataInputWrapper: java.nio.ByteBuffer bb>;
+
+        $stack3 = virtualinvoke $stack2.<java.nio.ByteBuffer: byte get()>();
+
+        $s0 = (short) $stack3;
+
+        $stack4 = $s0 & 255;
+
+     label2:
+        $i0 = (int) $stack4;
+
+        return $i0;
+
+     label3:
+        $stack5 := @caughtexception;
+
+        $u0 = new java.io.EOFException;
+
+        $stack7 = virtualinvoke $stack5.<java.nio.BufferUnderflowException: java.lang.String getMessage()>();
+
+        specialinvoke $u0.<java.io.EOFException: void <init>(java.lang.String)>($stack7);
+
+        throw $u0;
+
+        catch java.nio.BufferUnderflowException from label1 to label2 with label3;
+    }
+
+    public short readShort() throws java.io.IOException
+    {
+        jdk.internal.module.ModuleInfo$DataInputWrapper this;
+        short $stack3;
+        java.lang.String $stack6;
+        java.io.EOFException $stack5;
+        java.nio.ByteBuffer $stack2;
+        java.nio.BufferUnderflowException $stack4;
+
+        this := @this: jdk.internal.module.ModuleInfo$DataInputWrapper;
+
+     label1:
+        $stack2 = this.<jdk.internal.module.ModuleInfo$DataInputWrapper: java.nio.ByteBuffer bb>;
+
+        $stack3 = virtualinvoke $stack2.<java.nio.ByteBuffer: short getShort()>();
+
+     label2:
+        return $stack3;
+
+     label3:
+        $stack4 := @caughtexception;
+
+        $stack5 = new java.io.EOFException;
+
+        $stack6 = virtualinvoke $stack4.<java.nio.BufferUnderflowException: java.lang.String getMessage()>();
+
+        specialinvoke $stack5.<java.io.EOFException: void <init>(java.lang.String)>($stack6);
+
+        throw $stack5;
+
+        catch java.nio.BufferUnderflowException from label1 to label2 with label3;
+    }
+
+    public int readUnsignedShort() throws java.io.IOException
+    {
+        jdk.internal.module.ModuleInfo$DataInputWrapper this;
+        java.io.EOFException $u0;
+        java.nio.ByteBuffer $stack2;
+        java.nio.BufferUnderflowException $stack5;
+        short $stack3;
+        int $stack4, $i0, $i1;
+        java.lang.String $stack7;
+
+        this := @this: jdk.internal.module.ModuleInfo$DataInputWrapper;
+
+     label1:
+        $stack2 = this.<jdk.internal.module.ModuleInfo$DataInputWrapper: java.nio.ByteBuffer bb>;
+
+        $stack3 = virtualinvoke $stack2.<java.nio.ByteBuffer: short getShort()>();
+
+        $i0 = (int) $stack3;
+
+        $i1 = (int) 65535;
+
+        $stack4 = $i0 & $i1;
+
+     label2:
+        return $stack4;
+
+     label3:
+        $stack5 := @caughtexception;
+
+        $u0 = new java.io.EOFException;
+
+        $stack7 = virtualinvoke $stack5.<java.nio.BufferUnderflowException: java.lang.String getMessage()>();
+
+        specialinvoke $u0.<java.io.EOFException: void <init>(java.lang.String)>($stack7);
+
+        throw $u0;
+
+        catch java.nio.BufferUnderflowException from label1 to label2 with label3;
+    }
+
+    public char readChar() throws java.io.IOException
+    {
+        jdk.internal.module.ModuleInfo$DataInputWrapper this;
+        char $stack3;
+        java.lang.String $stack6;
+        java.io.EOFException $stack5;
+        java.nio.ByteBuffer $stack2;
+        java.nio.BufferUnderflowException $stack4;
+
+        this := @this: jdk.internal.module.ModuleInfo$DataInputWrapper;
+
+     label1:
+        $stack2 = this.<jdk.internal.module.ModuleInfo$DataInputWrapper: java.nio.ByteBuffer bb>;
+
+        $stack3 = virtualinvoke $stack2.<java.nio.ByteBuffer: char getChar()>();
+
+     label2:
+        return $stack3;
+
+     label3:
+        $stack4 := @caughtexception;
+
+        $stack5 = new java.io.EOFException;
+
+        $stack6 = virtualinvoke $stack4.<java.nio.BufferUnderflowException: java.lang.String getMessage()>();
+
+        specialinvoke $stack5.<java.io.EOFException: void <init>(java.lang.String)>($stack6);
+
+        throw $stack5;
+
+        catch java.nio.BufferUnderflowException from label1 to label2 with label3;
+    }
+
+    public int readInt() throws java.io.IOException
+    {
+        jdk.internal.module.ModuleInfo$DataInputWrapper this;
+        int $stack3;
+        java.lang.String $stack6;
+        java.io.EOFException $stack5;
+        java.nio.ByteBuffer $stack2;
+        java.nio.BufferUnderflowException $stack4;
+
+        this := @this: jdk.internal.module.ModuleInfo$DataInputWrapper;
+
+     label1:
+        $stack2 = this.<jdk.internal.module.ModuleInfo$DataInputWrapper: java.nio.ByteBuffer bb>;
+
+        $stack3 = virtualinvoke $stack2.<java.nio.ByteBuffer: int getInt()>();
+
+     label2:
+        return $stack3;
+
+     label3:
+        $stack4 := @caughtexception;
+
+        $stack5 = new java.io.EOFException;
+
+        $stack6 = virtualinvoke $stack4.<java.nio.BufferUnderflowException: java.lang.String getMessage()>();
+
+        specialinvoke $stack5.<java.io.EOFException: void <init>(java.lang.String)>($stack6);
+
+        throw $stack5;
+
+        catch java.nio.BufferUnderflowException from label1 to label2 with label3;
+    }
+
+    public long readLong() throws java.io.IOException
+    {
+        jdk.internal.module.ModuleInfo$DataInputWrapper this;
+        long $stack3;
+        java.lang.String $stack6;
+        java.io.EOFException $stack5;
+        java.nio.ByteBuffer $stack2;
+        java.nio.BufferUnderflowException $stack4;
+
+        this := @this: jdk.internal.module.ModuleInfo$DataInputWrapper;
+
+     label1:
+        $stack2 = this.<jdk.internal.module.ModuleInfo$DataInputWrapper: java.nio.ByteBuffer bb>;
+
+        $stack3 = virtualinvoke $stack2.<java.nio.ByteBuffer: long getLong()>();
+
+     label2:
+        return $stack3;
+
+     label3:
+        $stack4 := @caughtexception;
+
+        $stack5 = new java.io.EOFException;
+
+        $stack6 = virtualinvoke $stack4.<java.nio.BufferUnderflowException: java.lang.String getMessage()>();
+
+        specialinvoke $stack5.<java.io.EOFException: void <init>(java.lang.String)>($stack6);
+
+        throw $stack5;
+
+        catch java.nio.BufferUnderflowException from label1 to label2 with label3;
+    }
+
+    public float readFloat() throws java.io.IOException
+    {
+        jdk.internal.module.ModuleInfo$DataInputWrapper this;
+        float $stack3;
+        java.lang.String $stack6;
+        java.io.EOFException $stack5;
+        java.nio.ByteBuffer $stack2;
+        java.nio.BufferUnderflowException $stack4;
+
+        this := @this: jdk.internal.module.ModuleInfo$DataInputWrapper;
+
+     label1:
+        $stack2 = this.<jdk.internal.module.ModuleInfo$DataInputWrapper: java.nio.ByteBuffer bb>;
+
+        $stack3 = virtualinvoke $stack2.<java.nio.ByteBuffer: float getFloat()>();
+
+     label2:
+        return $stack3;
+
+     label3:
+        $stack4 := @caughtexception;
+
+        $stack5 = new java.io.EOFException;
+
+        $stack6 = virtualinvoke $stack4.<java.nio.BufferUnderflowException: java.lang.String getMessage()>();
+
+        specialinvoke $stack5.<java.io.EOFException: void <init>(java.lang.String)>($stack6);
+
+        throw $stack5;
+
+        catch java.nio.BufferUnderflowException from label1 to label2 with label3;
+    }
+
+    public double readDouble() throws java.io.IOException
+    {
+        jdk.internal.module.ModuleInfo$DataInputWrapper this;
+        java.lang.String $stack6;
+        java.io.EOFException $stack5;
+        java.nio.ByteBuffer $stack2;
+        java.nio.BufferUnderflowException $stack4;
+        double $stack3;
+
+        this := @this: jdk.internal.module.ModuleInfo$DataInputWrapper;
+
+     label1:
+        $stack2 = this.<jdk.internal.module.ModuleInfo$DataInputWrapper: java.nio.ByteBuffer bb>;
+
+        $stack3 = virtualinvoke $stack2.<java.nio.ByteBuffer: double getDouble()>();
+
+     label2:
+        return $stack3;
+
+     label3:
+        $stack4 := @caughtexception;
+
+        $stack5 = new java.io.EOFException;
+
+        $stack6 = virtualinvoke $stack4.<java.nio.BufferUnderflowException: java.lang.String getMessage()>();
+
+        specialinvoke $stack5.<java.io.EOFException: void <init>(java.lang.String)>($stack6);
+
+        throw $stack5;
+
+        catch java.nio.BufferUnderflowException from label1 to label2 with label3;
+    }
+
+    public java.lang.String readLine()
+    {
+        jdk.internal.module.ModuleInfo$DataInputWrapper this;
+        java.lang.RuntimeException $stack1;
+
+        this := @this: jdk.internal.module.ModuleInfo$DataInputWrapper;
+
+        $stack1 = new java.lang.RuntimeException;
+
+        specialinvoke $stack1.<java.lang.RuntimeException: void <init>(java.lang.String)>("not implemented");
+
+        throw $stack1;
+    }
+
+    public java.lang.String readUTF() throws java.io.IOException
+    {
+        jdk.internal.module.ModuleInfo$DataInputWrapper this;
+        java.lang.String $stack1;
+
+        this := @this: jdk.internal.module.ModuleInfo$DataInputWrapper;
+
+        $stack1 = staticinvoke <java.io.DataInputStream: java.lang.String readUTF(java.io.DataInput)>(this);
+
+        return $stack1;
+    }
+}

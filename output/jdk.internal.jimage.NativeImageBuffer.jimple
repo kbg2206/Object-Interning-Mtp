@@ -1,0 +1,29 @@
+class jdk.internal.jimage.NativeImageBuffer extends java.lang.Object
+{
+
+    void <init>()
+    {
+        jdk.internal.jimage.NativeImageBuffer this;
+
+        this := @this: jdk.internal.jimage.NativeImageBuffer;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    static native java.nio.ByteBuffer getNativeMap(java.lang.String);
+
+    static void <clinit>()
+    {
+        jdk.internal.jimage.NativeImageBuffer$1 $stack0;
+
+        $stack0 = new jdk.internal.jimage.NativeImageBuffer$1;
+
+        specialinvoke $stack0.<jdk.internal.jimage.NativeImageBuffer$1: void <init>()>();
+
+        staticinvoke <java.security.AccessController: java.lang.Object doPrivileged(java.security.PrivilegedAction)>($stack0);
+
+        return;
+    }
+}

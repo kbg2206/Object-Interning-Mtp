@@ -1,0 +1,107 @@
+final class jdk.internal.misc.ScopedMemoryAccess$BufferAccess extends java.lang.Object
+{
+    static final long BUFFER_ADDRESS;
+    static final long BYTE_BUFFER_HB;
+    static final jdk.internal.access.JavaNioAccess NIO_ACCESS;
+
+    void <init>()
+    {
+        jdk.internal.misc.ScopedMemoryAccess$BufferAccess this;
+
+        this := @this: jdk.internal.misc.ScopedMemoryAccess$BufferAccess;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    static java.lang.Object bufferBase(java.nio.ByteBuffer)
+    {
+        jdk.internal.misc.Unsafe $stack2;
+        long $stack1;
+        java.lang.Object $stack3;
+        java.nio.ByteBuffer bb;
+
+        bb := @parameter0: java.nio.ByteBuffer;
+
+        $stack2 = <jdk.internal.misc.ScopedMemoryAccess: jdk.internal.misc.Unsafe UNSAFE>;
+
+        $stack1 = <jdk.internal.misc.ScopedMemoryAccess$BufferAccess: long BYTE_BUFFER_HB>;
+
+        $stack3 = virtualinvoke $stack2.<jdk.internal.misc.Unsafe: java.lang.Object getReference(java.lang.Object,long)>(bb, $stack1);
+
+        return $stack3;
+    }
+
+    static long bufferAddress(java.nio.ByteBuffer, long)
+    {
+        jdk.internal.misc.Unsafe $stack4;
+        long $stack3, $stack5, offset, $stack6;
+        java.nio.ByteBuffer bb;
+
+        bb := @parameter0: java.nio.ByteBuffer;
+
+        offset := @parameter1: long;
+
+        $stack4 = <jdk.internal.misc.ScopedMemoryAccess: jdk.internal.misc.Unsafe UNSAFE>;
+
+        $stack3 = <jdk.internal.misc.ScopedMemoryAccess$BufferAccess: long BUFFER_ADDRESS>;
+
+        $stack5 = virtualinvoke $stack4.<jdk.internal.misc.Unsafe: long getLong(java.lang.Object,long)>(bb, $stack3);
+
+        $stack6 = $stack5 + offset;
+
+        return $stack6;
+    }
+
+    static jdk.internal.misc.ScopedMemoryAccess$Scope scope(java.nio.ByteBuffer)
+    {
+        jdk.internal.access.JavaNioAccess $stack2;
+        jdk.internal.misc.ScopedMemoryAccess$Scope $stack4;
+        java.nio.ByteBuffer bb;
+        jdk.internal.access.foreign.MemorySegmentProxy $stack3;
+
+        bb := @parameter0: java.nio.ByteBuffer;
+
+        $stack2 = <jdk.internal.misc.ScopedMemoryAccess$BufferAccess: jdk.internal.access.JavaNioAccess NIO_ACCESS>;
+
+        $stack3 = interfaceinvoke $stack2.<jdk.internal.access.JavaNioAccess: jdk.internal.access.foreign.MemorySegmentProxy bufferSegment(java.nio.Buffer)>(bb);
+
+        if $stack3 == null goto label1;
+
+        $stack4 = virtualinvoke $stack3.<jdk.internal.access.foreign.MemorySegmentProxy: jdk.internal.misc.ScopedMemoryAccess$Scope scope()>();
+
+        goto label2;
+
+     label1:
+        $stack4 = null;
+
+     label2:
+        return $stack4;
+    }
+
+    static void <clinit>()
+    {
+        jdk.internal.misc.Unsafe $stack0, $stack2;
+        jdk.internal.access.JavaNioAccess $stack4;
+        long $stack1, $stack3;
+
+        $stack0 = <jdk.internal.misc.ScopedMemoryAccess: jdk.internal.misc.Unsafe UNSAFE>;
+
+        $stack1 = virtualinvoke $stack0.<jdk.internal.misc.Unsafe: long objectFieldOffset(java.lang.Class,java.lang.String)>(class "Ljava/nio/Buffer;", "address");
+
+        <jdk.internal.misc.ScopedMemoryAccess$BufferAccess: long BUFFER_ADDRESS> = $stack1;
+
+        $stack2 = <jdk.internal.misc.ScopedMemoryAccess: jdk.internal.misc.Unsafe UNSAFE>;
+
+        $stack3 = virtualinvoke $stack2.<jdk.internal.misc.Unsafe: long objectFieldOffset(java.lang.Class,java.lang.String)>(class "Ljava/nio/ByteBuffer;", "hb");
+
+        <jdk.internal.misc.ScopedMemoryAccess$BufferAccess: long BYTE_BUFFER_HB> = $stack3;
+
+        $stack4 = staticinvoke <jdk.internal.access.SharedSecrets: jdk.internal.access.JavaNioAccess getJavaNioAccess()>();
+
+        <jdk.internal.misc.ScopedMemoryAccess$BufferAccess: jdk.internal.access.JavaNioAccess NIO_ACCESS> = $stack4;
+
+        return;
+    }
+}

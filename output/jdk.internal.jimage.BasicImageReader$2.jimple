@@ -1,0 +1,82 @@
+class jdk.internal.jimage.BasicImageReader$2 extends java.lang.Object implements java.security.PrivilegedAction
+{
+    final jdk.internal.jimage.BasicImageReader this$0;
+
+    void <init>(jdk.internal.jimage.BasicImageReader)
+    {
+        jdk.internal.jimage.BasicImageReader this$0;
+        jdk.internal.jimage.BasicImageReader$2 this;
+
+        this := @this: jdk.internal.jimage.BasicImageReader$2;
+
+        this$0 := @parameter0: jdk.internal.jimage.BasicImageReader;
+
+        this.<jdk.internal.jimage.BasicImageReader$2: jdk.internal.jimage.BasicImageReader this$0> = this$0;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.Void run()
+    {
+        java.lang.Object[] $stack9;
+        java.lang.Class[] $stack6;
+        java.lang.ReflectiveOperationException $stack13;
+        jdk.internal.jimage.BasicImageReader $stack8;
+        jdk.internal.jimage.BasicImageReader$2 this;
+        java.lang.Class $stack3, $stack5;
+        java.lang.ClassLoader $stack4;
+        java.lang.reflect.Method $stack7;
+        java.nio.channels.FileChannel $stack10;
+
+        this := @this: jdk.internal.jimage.BasicImageReader$2;
+
+        $stack3 = class "Ljdk/internal/jimage/BasicImageReader;";
+
+        $stack4 = virtualinvoke $stack3.<java.lang.Class: java.lang.ClassLoader getClassLoader()>();
+
+        if $stack4 != null goto label4;
+
+     label1:
+        $stack5 = staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>("sun.nio.ch.FileChannelImpl");
+
+        $stack6 = newarray (java.lang.Class)[0];
+
+        $stack7 = virtualinvoke $stack5.<java.lang.Class: java.lang.reflect.Method getMethod(java.lang.String,java.lang.Class[])>("setUninterruptible", $stack6);
+
+        $stack8 = this.<jdk.internal.jimage.BasicImageReader$2: jdk.internal.jimage.BasicImageReader this$0>;
+
+        $stack10 = $stack8.<jdk.internal.jimage.BasicImageReader: java.nio.channels.FileChannel channel>;
+
+        $stack9 = newarray (java.lang.Object)[0];
+
+        virtualinvoke $stack7.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>($stack10, $stack9);
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack13 := @caughtexception;
+
+     label4:
+        return null;
+
+        catch java.lang.ClassNotFoundException from label1 to label2 with label3;
+        catch java.lang.NoSuchMethodException from label1 to label2 with label3;
+        catch java.lang.IllegalAccessException from label1 to label2 with label3;
+        catch java.lang.reflect.InvocationTargetException from label1 to label2 with label3;
+    }
+
+    public volatile java.lang.Object run()
+    {
+        java.lang.Void $stack1;
+        jdk.internal.jimage.BasicImageReader$2 this;
+
+        this := @this: jdk.internal.jimage.BasicImageReader$2;
+
+        $stack1 = virtualinvoke this.<jdk.internal.jimage.BasicImageReader$2: java.lang.Void run()>();
+
+        return $stack1;
+    }
+}

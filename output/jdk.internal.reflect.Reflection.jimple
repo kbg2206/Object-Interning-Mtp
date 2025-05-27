@@ -1,0 +1,947 @@
+public class jdk.internal.reflect.Reflection extends java.lang.Object
+{
+    private static volatile java.util.Map fieldFilterMap;
+    private static volatile java.util.Map methodFilterMap;
+    private static final java.lang.String WILDCARD;
+    public static final java.util.Set ALL_MEMBERS;
+
+    public void <init>()
+    {
+        jdk.internal.reflect.Reflection this;
+
+        this := @this: jdk.internal.reflect.Reflection;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static native java.lang.Class getCallerClass();
+
+    public static native int getClassAccessFlags(java.lang.Class);
+
+    public static void ensureMemberAccess(java.lang.Class, java.lang.Class, java.lang.Class, int) throws java.lang.IllegalAccessException
+    {
+        java.lang.IllegalAccessException $stack5;
+        int modifiers;
+        java.lang.Class currentClass, memberClass, targetClass;
+        boolean $stack4;
+
+        currentClass := @parameter0: java.lang.Class;
+
+        memberClass := @parameter1: java.lang.Class;
+
+        targetClass := @parameter2: java.lang.Class;
+
+        modifiers := @parameter3: int;
+
+        $stack4 = staticinvoke <jdk.internal.reflect.Reflection: boolean verifyMemberAccess(java.lang.Class,java.lang.Class,java.lang.Class,int)>(currentClass, memberClass, targetClass, modifiers);
+
+        if $stack4 != 0 goto label1;
+
+        $stack5 = staticinvoke <jdk.internal.reflect.Reflection: java.lang.IllegalAccessException newIllegalAccessException(java.lang.Class,java.lang.Class,java.lang.Class,int)>(currentClass, memberClass, targetClass, modifiers);
+
+        throw $stack5;
+
+     label1:
+        return;
+    }
+
+    public static void ensureNativeAccess(java.lang.Class)
+    {
+        jdk.internal.access.JavaLangAccess $stack3;
+        java.lang.IllegalCallerException $stack5;
+        java.lang.Module $stack2;
+        java.lang.Class currentClass;
+        java.lang.StringBuilder $stack6, $stack7, $stack8;
+        java.lang.String $stack9;
+        boolean $stack4;
+
+        currentClass := @parameter0: java.lang.Class;
+
+        $stack2 = virtualinvoke currentClass.<java.lang.Class: java.lang.Module getModule()>();
+
+        $stack3 = staticinvoke <jdk.internal.access.SharedSecrets: jdk.internal.access.JavaLangAccess getJavaLangAccess()>();
+
+        $stack4 = interfaceinvoke $stack3.<jdk.internal.access.JavaLangAccess: boolean isEnableNativeAccess(java.lang.Module)>($stack2);
+
+        if $stack4 != 0 goto label1;
+
+        $stack5 = new java.lang.IllegalCallerException;
+
+        $stack6 = new java.lang.StringBuilder;
+
+        specialinvoke $stack6.<java.lang.StringBuilder: void <init>()>();
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Illegal native access from: ");
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack2);
+
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack5.<java.lang.IllegalCallerException: void <init>(java.lang.String)>($stack9);
+
+        throw $stack5;
+
+     label1:
+        return;
+    }
+
+    public static boolean verifyMemberAccess(java.lang.Class, java.lang.Class, java.lang.Class, int)
+    {
+        int $stack11, modifiers;
+        boolean $stack10, $stack12, $stack13, $stack14, $stack15, $stack16, $stack18, $stack21, $stack25, $stack27, $stack30, gotIsSameClassPackage, isSameClassPackage, successSoFar, successSoFar#3_2, gotIsSameClassPackage#1_4;
+        java.lang.Module $stack9;
+        java.lang.Class currentClass, memberClass, targetClass;
+
+        currentClass := @parameter0: java.lang.Class;
+
+        memberClass := @parameter1: java.lang.Class;
+
+        targetClass := @parameter2: java.lang.Class;
+
+        modifiers := @parameter3: int;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(currentClass);
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(memberClass);
+
+        if currentClass != memberClass goto label01;
+
+        return 1;
+
+     label01:
+        $stack9 = virtualinvoke currentClass.<java.lang.Class: java.lang.Module getModule()>();
+
+        $stack10 = staticinvoke <jdk.internal.reflect.Reflection: boolean verifyModuleAccess(java.lang.Module,java.lang.Class)>($stack9, memberClass);
+
+        if $stack10 != 0 goto label02;
+
+        return 0;
+
+     label02:
+        gotIsSameClassPackage = 0;
+
+        gotIsSameClassPackage#1_4 = 0;
+
+        gotIsSameClassPackage = 0;
+
+        isSameClassPackage = 0;
+
+        $stack11 = staticinvoke <jdk.internal.reflect.Reflection: int getClassAccessFlags(java.lang.Class)>(memberClass);
+
+        $stack12 = staticinvoke <java.lang.reflect.Modifier: boolean isPublic(int)>($stack11);
+
+        if $stack12 != 0 goto label03;
+
+        $stack30 = staticinvoke <jdk.internal.reflect.Reflection: boolean isSameClassPackage(java.lang.Class,java.lang.Class)>(currentClass, memberClass);
+
+        isSameClassPackage = $stack30;
+
+        gotIsSameClassPackage = 1;
+
+        gotIsSameClassPackage#1_4 = 1;
+
+        gotIsSameClassPackage = 1;
+
+        if $stack30 != 0 goto label03;
+
+        return 0;
+
+     label03:
+        $stack13 = staticinvoke <java.lang.reflect.Modifier: boolean isPublic(int)>(modifiers);
+
+        if $stack13 == 0 goto label04;
+
+        return 1;
+
+     label04:
+        $stack14 = staticinvoke <java.lang.reflect.Modifier: boolean isPrivate(int)>(modifiers);
+
+        if $stack14 == 0 goto label05;
+
+        $stack27 = staticinvoke <jdk.internal.reflect.Reflection: boolean areNestMates(java.lang.Class,java.lang.Class)>(currentClass, memberClass);
+
+        if $stack27 == 0 goto label05;
+
+        return 1;
+
+     label05:
+        successSoFar = 0;
+
+        successSoFar#3_2 = 0;
+
+        successSoFar = 0;
+
+        $stack15 = staticinvoke <java.lang.reflect.Modifier: boolean isProtected(int)>(modifiers);
+
+        if $stack15 == 0 goto label06;
+
+        $stack25 = staticinvoke <jdk.internal.reflect.Reflection: boolean isSubclassOf(java.lang.Class,java.lang.Class)>(currentClass, memberClass);
+
+        if $stack25 == 0 goto label06;
+
+        successSoFar = 1;
+
+        successSoFar#3_2 = 1;
+
+        successSoFar = 1;
+
+     label06:
+        if successSoFar#3_2 != 0 goto label08;
+
+        $stack21 = staticinvoke <java.lang.reflect.Modifier: boolean isPrivate(int)>(modifiers);
+
+        if $stack21 != 0 goto label08;
+
+        if gotIsSameClassPackage != 0 goto label07;
+
+        isSameClassPackage = staticinvoke <jdk.internal.reflect.Reflection: boolean isSameClassPackage(java.lang.Class,java.lang.Class)>(currentClass, memberClass);
+
+        gotIsSameClassPackage = 1;
+
+        gotIsSameClassPackage#1_4 = 1;
+
+     label07:
+        if isSameClassPackage == 0 goto label08;
+
+        successSoFar = 1;
+
+        successSoFar = 1;
+
+     label08:
+        if successSoFar != 0 goto label09;
+
+        return 0;
+
+     label09:
+        if targetClass == null goto label11;
+
+        $stack16 = staticinvoke <java.lang.reflect.Modifier: boolean isProtected(int)>(modifiers);
+
+        if $stack16 == 0 goto label11;
+
+        if targetClass == currentClass goto label11;
+
+        if gotIsSameClassPackage#1_4 != 0 goto label10;
+
+        isSameClassPackage = staticinvoke <jdk.internal.reflect.Reflection: boolean isSameClassPackage(java.lang.Class,java.lang.Class)>(currentClass, memberClass);
+
+     label10:
+        if isSameClassPackage != 0 goto label11;
+
+        $stack18 = staticinvoke <jdk.internal.reflect.Reflection: boolean isSubclassOf(java.lang.Class,java.lang.Class)>(targetClass, currentClass);
+
+        if $stack18 != 0 goto label11;
+
+        return 0;
+
+     label11:
+        return 1;
+    }
+
+    public static boolean verifyPublicMemberAccess(java.lang.Class, int)
+    {
+        java.lang.Module $stack3;
+        int modifiers, $stack8;
+        java.lang.Class memberClass;
+        java.lang.String $stack5;
+        boolean $stack4, $stack6, $stack9, $stack7;
+
+        memberClass := @parameter0: java.lang.Class;
+
+        modifiers := @parameter1: int;
+
+        $stack3 = virtualinvoke memberClass.<java.lang.Class: java.lang.Module getModule()>();
+
+        $stack4 = staticinvoke <java.lang.reflect.Modifier: boolean isPublic(int)>(modifiers);
+
+        if $stack4 == 0 goto label1;
+
+        $stack5 = virtualinvoke memberClass.<java.lang.Class: java.lang.String getPackageName()>();
+
+        $stack6 = virtualinvoke $stack3.<java.lang.Module: boolean isExported(java.lang.String)>($stack5);
+
+        if $stack6 == 0 goto label1;
+
+        $stack8 = staticinvoke <jdk.internal.reflect.Reflection: int getClassAccessFlags(java.lang.Class)>(memberClass);
+
+        $stack9 = staticinvoke <java.lang.reflect.Modifier: boolean isPublic(int)>($stack8);
+
+        if $stack9 == 0 goto label1;
+
+        $stack7 = 1;
+
+        goto label2;
+
+     label1:
+        $stack7 = 0;
+
+     label2:
+        return $stack7;
+    }
+
+    public static boolean verifyModuleAccess(java.lang.Module, java.lang.Class)
+    {
+        java.lang.Module $stack4, currentModule;
+        java.lang.Class memberClass;
+        java.lang.String $stack5;
+        boolean $stack6;
+
+        currentModule := @parameter0: java.lang.Module;
+
+        memberClass := @parameter1: java.lang.Class;
+
+        $stack4 = virtualinvoke memberClass.<java.lang.Class: java.lang.Module getModule()>();
+
+        if currentModule != $stack4 goto label1;
+
+        return 1;
+
+     label1:
+        $stack5 = virtualinvoke memberClass.<java.lang.Class: java.lang.String getPackageName()>();
+
+        $stack6 = virtualinvoke $stack4.<java.lang.Module: boolean isExported(java.lang.String,java.lang.Module)>($stack5, currentModule);
+
+        return $stack6;
+    }
+
+    private static boolean isSameClassPackage(java.lang.Class, java.lang.Class)
+    {
+        java.lang.Class c1, c2;
+        java.lang.ClassLoader $stack2, $stack3;
+        java.lang.String $stack4, $stack5;
+        boolean $stack6;
+
+        c1 := @parameter0: java.lang.Class;
+
+        c2 := @parameter1: java.lang.Class;
+
+        $stack2 = virtualinvoke c1.<java.lang.Class: java.lang.ClassLoader getClassLoader()>();
+
+        $stack3 = virtualinvoke c2.<java.lang.Class: java.lang.ClassLoader getClassLoader()>();
+
+        if $stack2 == $stack3 goto label1;
+
+        return 0;
+
+     label1:
+        $stack4 = virtualinvoke c1.<java.lang.Class: java.lang.String getPackageName()>();
+
+        $stack5 = virtualinvoke c2.<java.lang.Class: java.lang.String getPackageName()>();
+
+        $stack6 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack4, $stack5);
+
+        return $stack6;
+    }
+
+    static boolean isSubclassOf(java.lang.Class, java.lang.Class)
+    {
+        java.lang.Class ofClass, queryClass;
+
+        queryClass := @parameter0: java.lang.Class;
+
+        ofClass := @parameter1: java.lang.Class;
+
+     label1:
+        if queryClass == null goto label3;
+
+        if queryClass != ofClass goto label2;
+
+        return 1;
+
+     label2:
+        queryClass = virtualinvoke queryClass.<java.lang.Class: java.lang.Class getSuperclass()>();
+
+        goto label1;
+
+     label3:
+        return 0;
+    }
+
+    public static synchronized void registerFieldsToFilter(java.lang.Class, java.util.Set)
+    {
+        java.util.Map $stack2, $stack3;
+        java.util.Set fieldNames;
+        java.lang.Class containingClass;
+
+        containingClass := @parameter0: java.lang.Class;
+
+        fieldNames := @parameter1: java.util.Set;
+
+        $stack2 = <jdk.internal.reflect.Reflection: java.util.Map fieldFilterMap>;
+
+        $stack3 = staticinvoke <jdk.internal.reflect.Reflection: java.util.Map registerFilter(java.util.Map,java.lang.Class,java.util.Set)>($stack2, containingClass, fieldNames);
+
+        <jdk.internal.reflect.Reflection: java.util.Map fieldFilterMap> = $stack3;
+
+        return;
+    }
+
+    public static synchronized void registerMethodsToFilter(java.lang.Class, java.util.Set)
+    {
+        java.util.Map $stack2, $stack3;
+        java.util.Set methodNames;
+        java.lang.Class containingClass;
+
+        containingClass := @parameter0: java.lang.Class;
+
+        methodNames := @parameter1: java.util.Set;
+
+        $stack2 = <jdk.internal.reflect.Reflection: java.util.Map methodFilterMap>;
+
+        $stack3 = staticinvoke <jdk.internal.reflect.Reflection: java.util.Map registerFilter(java.util.Map,java.lang.Class,java.util.Set)>($stack2, containingClass, methodNames);
+
+        <jdk.internal.reflect.Reflection: java.util.Map methodFilterMap> = $stack3;
+
+        return;
+    }
+
+    private static java.util.Map registerFilter(java.util.Map, java.lang.Class, java.util.Set)
+    {
+        java.util.Set names, $stack5;
+        java.util.HashMap $stack4;
+        java.lang.IllegalArgumentException $stack7;
+        java.util.Map map;
+        java.lang.Class containingClass;
+        java.lang.Object $stack3;
+        java.lang.StringBuilder $stack8, $stack9, $stack10;
+        java.lang.String $stack11;
+
+        map := @parameter0: java.util.Map;
+
+        containingClass := @parameter1: java.lang.Class;
+
+        names := @parameter2: java.util.Set;
+
+        $stack3 = interfaceinvoke map.<java.util.Map: java.lang.Object get(java.lang.Object)>(containingClass);
+
+        if $stack3 == null goto label1;
+
+        $stack7 = new java.lang.IllegalArgumentException;
+
+        $stack8 = new java.lang.StringBuilder;
+
+        specialinvoke $stack8.<java.lang.StringBuilder: void <init>()>();
+
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Filter already registered: ");
+
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(containingClass);
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack7.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack11);
+
+        throw $stack7;
+
+     label1:
+        $stack4 = new java.util.HashMap;
+
+        specialinvoke $stack4.<java.util.HashMap: void <init>(java.util.Map)>(map);
+
+        $stack5 = staticinvoke <java.util.Set: java.util.Set copyOf(java.util.Collection)>(names);
+
+        interfaceinvoke $stack4.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(containingClass, $stack5);
+
+        return $stack4;
+    }
+
+    public static java.lang.reflect.Field[] filterFields(java.lang.Class, java.lang.reflect.Field[])
+    {
+        java.lang.reflect.Member[] $stack6;
+        java.util.Set $stack5;
+        java.lang.reflect.Field[] fields, $stack7;
+        java.util.Map $stack2, $stack3;
+        java.lang.Class containingClass;
+        java.lang.Object $stack4;
+
+        containingClass := @parameter0: java.lang.Class;
+
+        fields := @parameter1: java.lang.reflect.Field[];
+
+        $stack2 = <jdk.internal.reflect.Reflection: java.util.Map fieldFilterMap>;
+
+        if $stack2 != null goto label1;
+
+        return fields;
+
+     label1:
+        $stack3 = <jdk.internal.reflect.Reflection: java.util.Map fieldFilterMap>;
+
+        $stack4 = interfaceinvoke $stack3.<java.util.Map: java.lang.Object get(java.lang.Object)>(containingClass);
+
+        $stack5 = (java.util.Set) $stack4;
+
+        $stack6 = staticinvoke <jdk.internal.reflect.Reflection: java.lang.reflect.Member[] filter(java.lang.reflect.Member[],java.util.Set)>(fields, $stack5);
+
+        $stack7 = (java.lang.reflect.Field[]) $stack6;
+
+        return $stack7;
+    }
+
+    public static java.lang.reflect.Method[] filterMethods(java.lang.Class, java.lang.reflect.Method[])
+    {
+        java.lang.reflect.Member[] $stack6;
+        java.util.Set $stack5;
+        java.lang.reflect.Method[] methods, $stack7;
+        java.util.Map $stack2, $stack3;
+        java.lang.Class containingClass;
+        java.lang.Object $stack4;
+
+        containingClass := @parameter0: java.lang.Class;
+
+        methods := @parameter1: java.lang.reflect.Method[];
+
+        $stack2 = <jdk.internal.reflect.Reflection: java.util.Map methodFilterMap>;
+
+        if $stack2 != null goto label1;
+
+        return methods;
+
+     label1:
+        $stack3 = <jdk.internal.reflect.Reflection: java.util.Map methodFilterMap>;
+
+        $stack4 = interfaceinvoke $stack3.<java.util.Map: java.lang.Object get(java.lang.Object)>(containingClass);
+
+        $stack5 = (java.util.Set) $stack4;
+
+        $stack6 = staticinvoke <jdk.internal.reflect.Reflection: java.lang.reflect.Member[] filter(java.lang.reflect.Member[],java.util.Set)>(methods, $stack5);
+
+        $stack7 = (java.lang.reflect.Method[]) $stack6;
+
+        return $stack7;
+    }
+
+    private static java.lang.reflect.Member[] filter(java.lang.reflect.Member[], java.util.Set)
+    {
+        java.lang.reflect.Member[] members, $stack25, newMembers;
+        int $stack10, $stack19, numNewMembers, destIdx, l6, member_1#9, l8;
+        java.lang.String $stack15, $stack20;
+        boolean $stack13, $stack16, $stack21;
+        java.lang.reflect.Member $stack11, member_2, member_1;
+        java.util.Set filteredNames;
+        java.lang.Class $stack12;
+        java.lang.Object $stack14, $stack24;
+
+        members := @parameter0: java.lang.reflect.Member[];
+
+        filteredNames := @parameter1: java.util.Set;
+
+        if filteredNames == null goto label1;
+
+        $stack10 = lengthof members;
+
+        if $stack10 != 0 goto label2;
+
+     label1:
+        return members;
+
+     label2:
+        $stack11 = members[0];
+
+        $stack12 = virtualinvoke $stack11.<java.lang.Object: java.lang.Class getClass()>();
+
+        $stack13 = interfaceinvoke filteredNames.<java.util.Set: boolean contains(java.lang.Object)>("*");
+
+        if $stack13 == 0 goto label3;
+
+        $stack24 = staticinvoke <java.lang.reflect.Array: java.lang.Object newInstance(java.lang.Class,int)>($stack12, 0);
+
+        $stack25 = (java.lang.reflect.Member[]) $stack24;
+
+        return $stack25;
+
+     label3:
+        numNewMembers = 0;
+
+        destIdx = lengthof members;
+
+        l6 = 0;
+
+     label4:
+        if l6 >= destIdx goto label6;
+
+        member_1 = members[l6];
+
+        $stack20 = interfaceinvoke member_1.<java.lang.reflect.Member: java.lang.String getName()>();
+
+        $stack21 = interfaceinvoke filteredNames.<java.util.Set: boolean contains(java.lang.Object)>($stack20);
+
+        if $stack21 != 0 goto label5;
+
+        numNewMembers = numNewMembers + 1;
+
+     label5:
+        l6 = l6 + 1;
+
+        goto label4;
+
+     label6:
+        $stack14 = staticinvoke <java.lang.reflect.Array: java.lang.Object newInstance(java.lang.Class,int)>($stack12, numNewMembers);
+
+        newMembers = (java.lang.reflect.Member[]) $stack14;
+
+        destIdx = 0;
+
+        member_1#9 = lengthof members;
+
+        l8 = 0;
+
+     label7:
+        if l8 >= member_1#9 goto label9;
+
+        member_2 = members[l8];
+
+        $stack15 = interfaceinvoke member_2.<java.lang.reflect.Member: java.lang.String getName()>();
+
+        $stack16 = interfaceinvoke filteredNames.<java.util.Set: boolean contains(java.lang.Object)>($stack15);
+
+        if $stack16 != 0 goto label8;
+
+        $stack19 = destIdx;
+
+        destIdx = destIdx + 1;
+
+        newMembers[$stack19] = member_2;
+
+     label8:
+        l8 = l8 + 1;
+
+        goto label7;
+
+     label9:
+        return newMembers;
+    }
+
+    public static boolean isCallerSensitive(java.lang.reflect.Method)
+    {
+        java.lang.Class $stack2;
+        java.lang.ClassLoader $stack3;
+        java.lang.reflect.Method m;
+        boolean $stack4, $stack5;
+
+        m := @parameter0: java.lang.reflect.Method;
+
+        $stack2 = virtualinvoke m.<java.lang.reflect.Method: java.lang.Class getDeclaringClass()>();
+
+        $stack3 = virtualinvoke $stack2.<java.lang.Class: java.lang.ClassLoader getClassLoader()>();
+
+        $stack4 = staticinvoke <jdk.internal.misc.VM: boolean isSystemDomainLoader(java.lang.ClassLoader)>($stack3);
+
+        if $stack4 == 0 goto label1;
+
+        $stack5 = virtualinvoke m.<java.lang.reflect.Method: boolean isAnnotationPresent(java.lang.Class)>(class "Ljdk/internal/reflect/CallerSensitive;");
+
+        return $stack5;
+
+     label1:
+        return 0;
+    }
+
+    public static boolean isTrustedFinalField(java.lang.reflect.Field)
+    {
+        java.lang.reflect.Field field;
+        jdk.internal.access.JavaLangReflectAccess $stack1;
+        boolean $stack2;
+
+        field := @parameter0: java.lang.reflect.Field;
+
+        $stack1 = staticinvoke <jdk.internal.access.SharedSecrets: jdk.internal.access.JavaLangReflectAccess getJavaLangReflectAccess()>();
+
+        $stack2 = interfaceinvoke $stack1.<jdk.internal.access.JavaLangReflectAccess: boolean isTrustedFinalField(java.lang.reflect.Field)>(field);
+
+        return $stack2;
+    }
+
+    public static java.lang.IllegalAccessException newIllegalAccessException(java.lang.Class, java.lang.Class, java.lang.Class, int)
+    {
+        boolean $stack11, $stack13, $stack20, $stack30;
+        java.lang.IllegalAccessException $stack67, $stack31;
+        java.lang.StringBuilder $stack15, $stack16, $stack17, $stack18, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack32, $stack33, $stack34, $stack35, $stack38, $stack39, $stack40, $stack41, $stack42, $stack43, $stack45, $stack46, $stack48, $stack49, $stack50, $stack51, $stack60, $stack61, $stack62, $stack63;
+        int modifiers;
+        java.lang.String $stack14, $stack19, $stack29, $stack44, currentSuffix, memberSuffix, msg;
+        java.lang.Module $stack10, $stack12;
+        java.lang.Class currentClass, memberClass, targetClass;
+
+        currentClass := @parameter0: java.lang.Class;
+
+        memberClass := @parameter1: java.lang.Class;
+
+        targetClass := @parameter2: java.lang.Class;
+
+        modifiers := @parameter3: int;
+
+        if currentClass != null goto label1;
+
+        $stack67 = staticinvoke <jdk.internal.reflect.Reflection: java.lang.IllegalAccessException newIllegalAccessException(java.lang.Class,int)>(memberClass, modifiers);
+
+        return $stack67;
+
+     label1:
+        currentSuffix = "";
+
+        memberSuffix = "";
+
+        $stack10 = virtualinvoke currentClass.<java.lang.Class: java.lang.Module getModule()>();
+
+        $stack11 = virtualinvoke $stack10.<java.lang.Module: boolean isNamed()>();
+
+        if $stack11 == 0 goto label2;
+
+        $stack60 = new java.lang.StringBuilder;
+
+        specialinvoke $stack60.<java.lang.StringBuilder: void <init>()>();
+
+        $stack61 = virtualinvoke $stack60.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" (in ");
+
+        $stack62 = virtualinvoke $stack61.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack10);
+
+        $stack63 = virtualinvoke $stack62.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(")");
+
+        currentSuffix = virtualinvoke $stack63.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label2:
+        $stack12 = virtualinvoke memberClass.<java.lang.Class: java.lang.Module getModule()>();
+
+        $stack13 = virtualinvoke $stack12.<java.lang.Module: boolean isNamed()>();
+
+        if $stack13 == 0 goto label3;
+
+        $stack48 = new java.lang.StringBuilder;
+
+        specialinvoke $stack48.<java.lang.StringBuilder: void <init>()>();
+
+        $stack49 = virtualinvoke $stack48.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" (in ");
+
+        $stack50 = virtualinvoke $stack49.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack12);
+
+        $stack51 = virtualinvoke $stack50.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(")");
+
+        memberSuffix = virtualinvoke $stack51.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label3:
+        $stack14 = virtualinvoke memberClass.<java.lang.Class: java.lang.String getPackageName()>();
+
+        $stack15 = new java.lang.StringBuilder;
+
+        specialinvoke $stack15.<java.lang.StringBuilder: void <init>()>();
+
+        $stack16 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(currentClass);
+
+        $stack17 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(currentSuffix);
+
+        $stack18 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" cannot access ");
+
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack20 = virtualinvoke $stack12.<java.lang.Module: boolean isExported(java.lang.String,java.lang.Module)>($stack14, $stack10);
+
+        if $stack20 == 0 goto label4;
+
+        $stack38 = new java.lang.StringBuilder;
+
+        specialinvoke $stack38.<java.lang.StringBuilder: void <init>()>();
+
+        $stack39 = virtualinvoke $stack38.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack19);
+
+        $stack40 = virtualinvoke $stack39.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("a member of ");
+
+        $stack41 = virtualinvoke $stack40.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(memberClass);
+
+        $stack42 = virtualinvoke $stack41.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(memberSuffix);
+
+        $stack43 = virtualinvoke $stack42.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" with modifiers \"");
+
+        $stack44 = staticinvoke <java.lang.reflect.Modifier: java.lang.String toString(int)>(modifiers);
+
+        $stack45 = virtualinvoke $stack43.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack44);
+
+        $stack46 = virtualinvoke $stack45.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\"");
+
+        msg = virtualinvoke $stack46.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        goto label5;
+
+     label4:
+        $stack21 = new java.lang.StringBuilder;
+
+        specialinvoke $stack21.<java.lang.StringBuilder: void <init>()>();
+
+        $stack22 = virtualinvoke $stack21.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack19);
+
+        $stack23 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(memberClass);
+
+        $stack24 = virtualinvoke $stack23.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(memberSuffix);
+
+        $stack25 = virtualinvoke $stack24.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" because ");
+
+        $stack26 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack12);
+
+        $stack27 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" does not export ");
+
+        $stack28 = virtualinvoke $stack27.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack14);
+
+        $stack29 = virtualinvoke $stack28.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        msg = $stack29;
+
+        $stack30 = virtualinvoke $stack12.<java.lang.Module: boolean isNamed()>();
+
+        if $stack30 == 0 goto label5;
+
+        $stack32 = new java.lang.StringBuilder;
+
+        specialinvoke $stack32.<java.lang.StringBuilder: void <init>()>();
+
+        $stack33 = virtualinvoke $stack32.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack29);
+
+        $stack34 = virtualinvoke $stack33.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" to ");
+
+        $stack35 = virtualinvoke $stack34.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack10);
+
+        msg = virtualinvoke $stack35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label5:
+        $stack31 = new java.lang.IllegalAccessException;
+
+        specialinvoke $stack31.<java.lang.IllegalAccessException: void <init>(java.lang.String)>(msg);
+
+        return $stack31;
+    }
+
+    private static java.lang.IllegalAccessException newIllegalAccessException(java.lang.Class, int)
+    {
+        int modifiers;
+        java.lang.String $stack8, $stack26, memberSuffix, msg;
+        boolean $stack7, $stack9;
+        java.lang.IllegalAccessException $stack19;
+        java.lang.Module $stack6;
+        java.lang.Class memberClass;
+        java.lang.StringBuilder $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack27, $stack28, $stack31, $stack32, $stack33, $stack34;
+
+        memberClass := @parameter0: java.lang.Class;
+
+        modifiers := @parameter1: int;
+
+        memberSuffix = "";
+
+        $stack6 = virtualinvoke memberClass.<java.lang.Class: java.lang.Module getModule()>();
+
+        $stack7 = virtualinvoke $stack6.<java.lang.Module: boolean isNamed()>();
+
+        if $stack7 == 0 goto label1;
+
+        $stack31 = new java.lang.StringBuilder;
+
+        specialinvoke $stack31.<java.lang.StringBuilder: void <init>()>();
+
+        $stack32 = virtualinvoke $stack31.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" (in ");
+
+        $stack33 = virtualinvoke $stack32.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack6);
+
+        $stack34 = virtualinvoke $stack33.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(")");
+
+        memberSuffix = virtualinvoke $stack34.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label1:
+        $stack8 = virtualinvoke memberClass.<java.lang.Class: java.lang.String getPackageName()>();
+
+        $stack9 = virtualinvoke $stack6.<java.lang.Module: boolean isExported(java.lang.String)>($stack8);
+
+        if $stack9 == 0 goto label2;
+
+        $stack20 = new java.lang.StringBuilder;
+
+        specialinvoke $stack20.<java.lang.StringBuilder: void <init>()>();
+
+        $stack21 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("JNI attached native thread (null caller frame) cannot access ");
+
+        $stack22 = virtualinvoke $stack21.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("a member of ");
+
+        $stack23 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(memberClass);
+
+        $stack24 = virtualinvoke $stack23.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(memberSuffix);
+
+        $stack25 = virtualinvoke $stack24.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" with modifiers \"");
+
+        $stack26 = staticinvoke <java.lang.reflect.Modifier: java.lang.String toString(int)>(modifiers);
+
+        $stack27 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack26);
+
+        $stack28 = virtualinvoke $stack27.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\"");
+
+        msg = virtualinvoke $stack28.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        goto label3;
+
+     label2:
+        $stack10 = new java.lang.StringBuilder;
+
+        specialinvoke $stack10.<java.lang.StringBuilder: void <init>()>();
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("JNI attached native thread (null caller frame) cannot access ");
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(memberClass);
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(memberSuffix);
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" because ");
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack6);
+
+        $stack16 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" does not export ");
+
+        $stack17 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack8);
+
+        msg = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label3:
+        $stack19 = new java.lang.IllegalAccessException;
+
+        specialinvoke $stack19.<java.lang.IllegalAccessException: void <init>(java.lang.String)>(msg);
+
+        return $stack19;
+    }
+
+    public static native boolean areNestMates(java.lang.Class, java.lang.Class);
+
+    static void <clinit>()
+    {
+        java.util.Set $stack0, $stack2, $stack4, $stack6, $stack8, $stack10, $stack12, $stack14, $stack16, $stack18;
+        java.util.Map $stack19, $stack20;
+
+        <jdk.internal.reflect.Reflection: java.lang.String WILDCARD> = "*";
+
+        $stack0 = staticinvoke <java.util.Set: java.util.Set of(java.lang.Object)>("*");
+
+        <jdk.internal.reflect.Reflection: java.util.Set ALL_MEMBERS> = $stack0;
+
+        $stack2 = <jdk.internal.reflect.Reflection: java.util.Set ALL_MEMBERS>;
+
+        $stack4 = <jdk.internal.reflect.Reflection: java.util.Set ALL_MEMBERS>;
+
+        $stack6 = staticinvoke <java.util.Set: java.util.Set of(java.lang.Object,java.lang.Object)>("classLoader", "classData");
+
+        $stack8 = <jdk.internal.reflect.Reflection: java.util.Set ALL_MEMBERS>;
+
+        $stack10 = <jdk.internal.reflect.Reflection: java.util.Set ALL_MEMBERS>;
+
+        $stack12 = <jdk.internal.reflect.Reflection: java.util.Set ALL_MEMBERS>;
+
+        $stack14 = <jdk.internal.reflect.Reflection: java.util.Set ALL_MEMBERS>;
+
+        $stack16 = <jdk.internal.reflect.Reflection: java.util.Set ALL_MEMBERS>;
+
+        $stack18 = staticinvoke <java.util.Set: java.util.Set of(java.lang.Object)>("security");
+
+        $stack19 = staticinvoke <java.util.Map: java.util.Map of(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object)>(class "Ljdk/internal/reflect/Reflection;", $stack2, class "Ljava/lang/reflect/AccessibleObject;", $stack4, class "Ljava/lang/Class;", $stack6, class "Ljava/lang/ClassLoader;", $stack8, class "Ljava/lang/reflect/Constructor;", $stack10, class "Ljava/lang/reflect/Field;", $stack12, class "Ljava/lang/reflect/Method;", $stack14, class "Ljava/lang/Module;", $stack16, class "Ljava/lang/System;", $stack18);
+
+        <jdk.internal.reflect.Reflection: java.util.Map fieldFilterMap> = $stack19;
+
+        $stack20 = staticinvoke <java.util.Map: java.util.Map of()>();
+
+        <jdk.internal.reflect.Reflection: java.util.Map methodFilterMap> = $stack20;
+
+        return;
+    }
+}

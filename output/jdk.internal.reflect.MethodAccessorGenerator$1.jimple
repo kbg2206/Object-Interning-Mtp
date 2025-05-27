@@ -1,0 +1,100 @@
+class jdk.internal.reflect.MethodAccessorGenerator$1 extends java.lang.Object implements java.security.PrivilegedAction
+{
+    final java.lang.String val$generatedName;
+    final byte[] val$bytes;
+    final java.lang.Class val$declaringClass;
+    final jdk.internal.reflect.MethodAccessorGenerator this$0;
+
+    void <init>(jdk.internal.reflect.MethodAccessorGenerator, java.lang.String, byte[], java.lang.Class)
+    {
+        byte[] l3;
+        jdk.internal.reflect.MethodAccessorGenerator this$0;
+        jdk.internal.reflect.MethodAccessorGenerator$1 this;
+        java.lang.Class l4;
+        java.lang.String l2;
+
+        this := @this: jdk.internal.reflect.MethodAccessorGenerator$1;
+
+        this$0 := @parameter0: jdk.internal.reflect.MethodAccessorGenerator;
+
+        l2 := @parameter1: java.lang.String;
+
+        l3 := @parameter2: byte[];
+
+        l4 := @parameter3: java.lang.Class;
+
+        this.<jdk.internal.reflect.MethodAccessorGenerator$1: jdk.internal.reflect.MethodAccessorGenerator this$0> = this$0;
+
+        this.<jdk.internal.reflect.MethodAccessorGenerator$1: java.lang.String val$generatedName> = l2;
+
+        this.<jdk.internal.reflect.MethodAccessorGenerator$1: byte[] val$bytes> = l3;
+
+        this.<jdk.internal.reflect.MethodAccessorGenerator$1: java.lang.Class val$declaringClass> = l4;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public jdk.internal.reflect.MagicAccessorImpl run()
+    {
+        byte[] $stack2, $stack5;
+        jdk.internal.reflect.MagicAccessorImpl $stack11;
+        java.lang.ReflectiveOperationException $stack12;
+        jdk.internal.reflect.MethodAccessorGenerator$1 this;
+        int $stack7;
+        java.lang.InternalError $stack13;
+        java.lang.Class $stack3, $stack9;
+        java.lang.Object $stack10;
+        java.lang.String $stack4;
+        java.lang.ClassLoader $stack8;
+
+        this := @this: jdk.internal.reflect.MethodAccessorGenerator$1;
+
+     label1:
+        $stack4 = this.<jdk.internal.reflect.MethodAccessorGenerator$1: java.lang.String val$generatedName>;
+
+        $stack5 = this.<jdk.internal.reflect.MethodAccessorGenerator$1: byte[] val$bytes>;
+
+        $stack2 = this.<jdk.internal.reflect.MethodAccessorGenerator$1: byte[] val$bytes>;
+
+        $stack7 = lengthof $stack2;
+
+        $stack3 = this.<jdk.internal.reflect.MethodAccessorGenerator$1: java.lang.Class val$declaringClass>;
+
+        $stack8 = virtualinvoke $stack3.<java.lang.Class: java.lang.ClassLoader getClassLoader()>();
+
+        $stack9 = staticinvoke <jdk.internal.reflect.ClassDefiner: java.lang.Class defineClass(java.lang.String,byte[],int,int,java.lang.ClassLoader)>($stack4, $stack5, 0, $stack7, $stack8);
+
+        $stack10 = virtualinvoke $stack9.<java.lang.Class: java.lang.Object newInstance()>();
+
+        $stack11 = (jdk.internal.reflect.MagicAccessorImpl) $stack10;
+
+     label2:
+        return $stack11;
+
+     label3:
+        $stack12 := @caughtexception;
+
+        $stack13 = new java.lang.InternalError;
+
+        specialinvoke $stack13.<java.lang.InternalError: void <init>(java.lang.Throwable)>($stack12);
+
+        throw $stack13;
+
+        catch java.lang.InstantiationException from label1 to label2 with label3;
+        catch java.lang.IllegalAccessException from label1 to label2 with label3;
+    }
+
+    public volatile java.lang.Object run()
+    {
+        jdk.internal.reflect.MethodAccessorGenerator$1 this;
+        jdk.internal.reflect.MagicAccessorImpl $stack1;
+
+        this := @this: jdk.internal.reflect.MethodAccessorGenerator$1;
+
+        $stack1 = virtualinvoke this.<jdk.internal.reflect.MethodAccessorGenerator$1: jdk.internal.reflect.MagicAccessorImpl run()>();
+
+        return $stack1;
+    }
+}

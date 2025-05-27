@@ -1,0 +1,171 @@
+class jdk.internal.reflect.NativeMethodAccessorImpl extends jdk.internal.reflect.MethodAccessorImpl
+{
+    private static final jdk.internal.misc.Unsafe U;
+    private static final long GENERATED_OFFSET;
+    private final java.lang.reflect.Method method;
+    private jdk.internal.reflect.DelegatingMethodAccessorImpl parent;
+    private int numInvocations;
+    private volatile int generated;
+
+    void <init>(java.lang.reflect.Method)
+    {
+        jdk.internal.reflect.NativeMethodAccessorImpl this;
+        java.lang.reflect.Method method;
+
+        this := @this: jdk.internal.reflect.NativeMethodAccessorImpl;
+
+        method := @parameter0: java.lang.reflect.Method;
+
+        specialinvoke this.<jdk.internal.reflect.MethodAccessorImpl: void <init>()>();
+
+        this.<jdk.internal.reflect.NativeMethodAccessorImpl: java.lang.reflect.Method method> = method;
+
+        return;
+    }
+
+    public java.lang.Object invoke(java.lang.Object, java.lang.Object[]) throws java.lang.IllegalArgumentException, java.lang.reflect.InvocationTargetException
+    {
+        jdk.internal.reflect.MethodAccessor $stack32;
+        jdk.internal.reflect.DelegatingMethodAccessorImpl $stack33;
+        java.lang.reflect.Method $stack9, $stack20, $stack22, $stack24, $stack26, $stack28, $stack30, $stack7;
+        boolean $stack11, $stack18;
+        jdk.internal.misc.Unsafe $stack17;
+        jdk.internal.reflect.MethodAccessorGenerator $stack19;
+        jdk.internal.reflect.MethodAccessorImpl acc;
+        java.lang.Throwable $stack34;
+        jdk.internal.reflect.NativeMethodAccessorImpl this;
+        java.lang.Object[] args;
+        long $stack16;
+        int $stack4, $stack5, $stack6, $stack15, $stack31;
+        java.lang.String $stack23;
+        java.lang.Class[] $stack25, $stack29;
+        java.lang.Object obj, $stack8;
+        java.lang.Class $stack10, $stack21, $stack27;
+
+        this := @this: jdk.internal.reflect.NativeMethodAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        args := @parameter1: java.lang.Object[];
+
+        $stack4 = this.<jdk.internal.reflect.NativeMethodAccessorImpl: int numInvocations>;
+
+        $stack5 = $stack4 + 1;
+
+        this.<jdk.internal.reflect.NativeMethodAccessorImpl: int numInvocations> = $stack5;
+
+        $stack6 = staticinvoke <jdk.internal.reflect.ReflectionFactory: int inflationThreshold()>();
+
+        if $stack5 <= $stack6 goto label4;
+
+        $stack9 = this.<jdk.internal.reflect.NativeMethodAccessorImpl: java.lang.reflect.Method method>;
+
+        $stack10 = virtualinvoke $stack9.<java.lang.reflect.Method: java.lang.Class getDeclaringClass()>();
+
+        $stack11 = virtualinvoke $stack10.<java.lang.Class: boolean isHidden()>();
+
+        if $stack11 != 0 goto label4;
+
+        $stack15 = this.<jdk.internal.reflect.NativeMethodAccessorImpl: int generated>;
+
+        if $stack15 != 0 goto label4;
+
+        $stack17 = <jdk.internal.reflect.NativeMethodAccessorImpl: jdk.internal.misc.Unsafe U>;
+
+        $stack16 = <jdk.internal.reflect.NativeMethodAccessorImpl: long GENERATED_OFFSET>;
+
+        $stack18 = virtualinvoke $stack17.<jdk.internal.misc.Unsafe: boolean compareAndSetInt(java.lang.Object,long,int,int)>(this, $stack16, 0, 1);
+
+        if $stack18 == 0 goto label4;
+
+     label1:
+        $stack19 = new jdk.internal.reflect.MethodAccessorGenerator;
+
+        specialinvoke $stack19.<jdk.internal.reflect.MethodAccessorGenerator: void <init>()>();
+
+        $stack20 = this.<jdk.internal.reflect.NativeMethodAccessorImpl: java.lang.reflect.Method method>;
+
+        $stack21 = virtualinvoke $stack20.<java.lang.reflect.Method: java.lang.Class getDeclaringClass()>();
+
+        $stack22 = this.<jdk.internal.reflect.NativeMethodAccessorImpl: java.lang.reflect.Method method>;
+
+        $stack23 = virtualinvoke $stack22.<java.lang.reflect.Method: java.lang.String getName()>();
+
+        $stack24 = this.<jdk.internal.reflect.NativeMethodAccessorImpl: java.lang.reflect.Method method>;
+
+        $stack25 = virtualinvoke $stack24.<java.lang.reflect.Method: java.lang.Class[] getParameterTypes()>();
+
+        $stack26 = this.<jdk.internal.reflect.NativeMethodAccessorImpl: java.lang.reflect.Method method>;
+
+        $stack27 = virtualinvoke $stack26.<java.lang.reflect.Method: java.lang.Class getReturnType()>();
+
+        $stack28 = this.<jdk.internal.reflect.NativeMethodAccessorImpl: java.lang.reflect.Method method>;
+
+        $stack29 = virtualinvoke $stack28.<java.lang.reflect.Method: java.lang.Class[] getExceptionTypes()>();
+
+        $stack30 = this.<jdk.internal.reflect.NativeMethodAccessorImpl: java.lang.reflect.Method method>;
+
+        $stack31 = virtualinvoke $stack30.<java.lang.reflect.Method: int getModifiers()>();
+
+        $stack32 = virtualinvoke $stack19.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.MethodAccessor generateMethod(java.lang.Class,java.lang.String,java.lang.Class[],java.lang.Class,java.lang.Class[],int)>($stack21, $stack23, $stack25, $stack27, $stack29, $stack31);
+
+        acc = (jdk.internal.reflect.MethodAccessorImpl) $stack32;
+
+        $stack33 = this.<jdk.internal.reflect.NativeMethodAccessorImpl: jdk.internal.reflect.DelegatingMethodAccessorImpl parent>;
+
+        virtualinvoke $stack33.<jdk.internal.reflect.DelegatingMethodAccessorImpl: void setDelegate(jdk.internal.reflect.MethodAccessorImpl)>(acc);
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack34 := @caughtexception;
+
+        this.<jdk.internal.reflect.NativeMethodAccessorImpl: int generated> = 0;
+
+        throw $stack34;
+
+     label4:
+        $stack7 = this.<jdk.internal.reflect.NativeMethodAccessorImpl: java.lang.reflect.Method method>;
+
+        $stack8 = staticinvoke <jdk.internal.reflect.NativeMethodAccessorImpl: java.lang.Object invoke0(java.lang.reflect.Method,java.lang.Object,java.lang.Object[])>($stack7, obj, args);
+
+        return $stack8;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+    }
+
+    void setParent(jdk.internal.reflect.DelegatingMethodAccessorImpl)
+    {
+        jdk.internal.reflect.NativeMethodAccessorImpl this;
+        jdk.internal.reflect.DelegatingMethodAccessorImpl parent;
+
+        this := @this: jdk.internal.reflect.NativeMethodAccessorImpl;
+
+        parent := @parameter0: jdk.internal.reflect.DelegatingMethodAccessorImpl;
+
+        this.<jdk.internal.reflect.NativeMethodAccessorImpl: jdk.internal.reflect.DelegatingMethodAccessorImpl parent> = parent;
+
+        return;
+    }
+
+    private static native java.lang.Object invoke0(java.lang.reflect.Method, java.lang.Object, java.lang.Object[]);
+
+    static void <clinit>()
+    {
+        jdk.internal.misc.Unsafe $stack0, $stack1;
+        long $stack2;
+
+        $stack0 = staticinvoke <jdk.internal.misc.Unsafe: jdk.internal.misc.Unsafe getUnsafe()>();
+
+        <jdk.internal.reflect.NativeMethodAccessorImpl: jdk.internal.misc.Unsafe U> = $stack0;
+
+        $stack1 = <jdk.internal.reflect.NativeMethodAccessorImpl: jdk.internal.misc.Unsafe U>;
+
+        $stack2 = virtualinvoke $stack1.<jdk.internal.misc.Unsafe: long objectFieldOffset(java.lang.Class,java.lang.String)>(class "Ljdk/internal/reflect/NativeMethodAccessorImpl;", "generated");
+
+        <jdk.internal.reflect.NativeMethodAccessorImpl: long GENERATED_OFFSET> = $stack2;
+
+        return;
+    }
+}

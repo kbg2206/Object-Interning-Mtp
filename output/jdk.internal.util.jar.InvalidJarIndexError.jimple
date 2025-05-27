@@ -1,0 +1,36 @@
+public class jdk.internal.util.jar.InvalidJarIndexError extends java.lang.Error
+{
+    static final long serialVersionUID;
+
+    public void <init>()
+    {
+        jdk.internal.util.jar.InvalidJarIndexError this;
+
+        this := @this: jdk.internal.util.jar.InvalidJarIndexError;
+
+        specialinvoke this.<java.lang.Error: void <init>()>();
+
+        return;
+    }
+
+    public void <init>(java.lang.String)
+    {
+        java.lang.String s;
+        jdk.internal.util.jar.InvalidJarIndexError this;
+
+        this := @this: jdk.internal.util.jar.InvalidJarIndexError;
+
+        s := @parameter0: java.lang.String;
+
+        specialinvoke this.<java.lang.Error: void <init>(java.lang.String)>(s);
+
+        return;
+    }
+
+    public static void <clinit>()
+    {
+        <jdk.internal.util.jar.InvalidJarIndexError: long serialVersionUID> = 0L;
+
+        return;
+    }
+}

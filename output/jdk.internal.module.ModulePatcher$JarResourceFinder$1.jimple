@@ -1,0 +1,180 @@
+class jdk.internal.module.ModulePatcher$JarResourceFinder$1 extends jdk.internal.loader.Resource
+{
+    final java.lang.String val$name;
+    final java.util.jar.JarEntry val$entry;
+    final jdk.internal.module.ModulePatcher$JarResourceFinder this$0;
+
+    void <init>(jdk.internal.module.ModulePatcher$JarResourceFinder, java.lang.String, java.util.jar.JarEntry)
+    {
+        java.util.jar.JarEntry l3;
+        jdk.internal.module.ModulePatcher$JarResourceFinder this$0;
+        java.lang.String l2;
+        jdk.internal.module.ModulePatcher$JarResourceFinder$1 this;
+
+        this := @this: jdk.internal.module.ModulePatcher$JarResourceFinder$1;
+
+        this$0 := @parameter0: jdk.internal.module.ModulePatcher$JarResourceFinder;
+
+        l2 := @parameter1: java.lang.String;
+
+        l3 := @parameter2: java.util.jar.JarEntry;
+
+        this.<jdk.internal.module.ModulePatcher$JarResourceFinder$1: jdk.internal.module.ModulePatcher$JarResourceFinder this$0> = this$0;
+
+        this.<jdk.internal.module.ModulePatcher$JarResourceFinder$1: java.lang.String val$name> = l2;
+
+        this.<jdk.internal.module.ModulePatcher$JarResourceFinder$1: java.util.jar.JarEntry val$entry> = l3;
+
+        specialinvoke this.<jdk.internal.loader.Resource: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.String getName()
+    {
+        java.lang.String $stack1;
+        jdk.internal.module.ModulePatcher$JarResourceFinder$1 this;
+
+        this := @this: jdk.internal.module.ModulePatcher$JarResourceFinder$1;
+
+        $stack1 = this.<jdk.internal.module.ModulePatcher$JarResourceFinder$1: java.lang.String val$name>;
+
+        return $stack1;
+    }
+
+    public java.net.URL getURL()
+    {
+        java.net.MalformedURLException $stack14;
+        java.net.URL $stack5, $stack9;
+        jdk.internal.module.ModulePatcher$JarResourceFinder $stack8;
+        java.lang.StringBuilder $stack6, $stack7, $stack10, $stack11, $stack12;
+        java.lang.String $stack3, $stack4, $stack13;
+        jdk.internal.module.ModulePatcher$JarResourceFinder$1 this;
+
+        this := @this: jdk.internal.module.ModulePatcher$JarResourceFinder$1;
+
+        $stack3 = this.<jdk.internal.module.ModulePatcher$JarResourceFinder$1: java.lang.String val$name>;
+
+        $stack4 = staticinvoke <sun.net.www.ParseUtil: java.lang.String encodePath(java.lang.String,boolean)>($stack3, 0);
+
+     label1:
+        $stack5 = new java.net.URL;
+
+        $stack6 = new java.lang.StringBuilder;
+
+        specialinvoke $stack6.<java.lang.StringBuilder: void <init>()>();
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("jar:");
+
+        $stack8 = this.<jdk.internal.module.ModulePatcher$JarResourceFinder$1: jdk.internal.module.ModulePatcher$JarResourceFinder this$0>;
+
+        $stack9 = $stack8.<jdk.internal.module.ModulePatcher$JarResourceFinder: java.net.URL csURL>;
+
+        $stack10 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack9);
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("!/");
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack4);
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack5.<java.net.URL: void <init>(java.lang.String)>($stack13);
+
+     label2:
+        return $stack5;
+
+     label3:
+        $stack14 := @caughtexception;
+
+        return null;
+
+        catch java.net.MalformedURLException from label1 to label2 with label3;
+    }
+
+    public java.net.URL getCodeSourceURL()
+    {
+        jdk.internal.module.ModulePatcher$JarResourceFinder $stack1;
+        jdk.internal.module.ModulePatcher$JarResourceFinder$1 this;
+        java.net.URL $stack2;
+
+        this := @this: jdk.internal.module.ModulePatcher$JarResourceFinder$1;
+
+        $stack1 = this.<jdk.internal.module.ModulePatcher$JarResourceFinder$1: jdk.internal.module.ModulePatcher$JarResourceFinder this$0>;
+
+        $stack2 = $stack1.<jdk.internal.module.ModulePatcher$JarResourceFinder: java.net.URL csURL>;
+
+        return $stack2;
+    }
+
+    public java.nio.ByteBuffer getByteBuffer() throws java.io.IOException
+    {
+        byte[] $stack3;
+        jdk.internal.module.ModulePatcher$JarResourceFinder$1 this;
+        java.nio.ByteBuffer $stack4;
+        java.io.InputStream $stack2;
+
+        this := @this: jdk.internal.module.ModulePatcher$JarResourceFinder$1;
+
+        $stack2 = virtualinvoke this.<jdk.internal.module.ModulePatcher$JarResourceFinder$1: java.io.InputStream getInputStream()>();
+
+        $stack3 = virtualinvoke $stack2.<java.io.InputStream: byte[] readAllBytes()>();
+
+        $stack4 = staticinvoke <java.nio.ByteBuffer: java.nio.ByteBuffer wrap(byte[])>($stack3);
+
+        return $stack4;
+    }
+
+    public java.io.InputStream getInputStream() throws java.io.IOException
+    {
+        java.util.jar.JarEntry $stack2;
+        jdk.internal.module.ModulePatcher$JarResourceFinder $stack1;
+        java.util.jar.JarFile $stack3;
+        jdk.internal.module.ModulePatcher$JarResourceFinder$1 this;
+        java.io.InputStream $stack4;
+
+        this := @this: jdk.internal.module.ModulePatcher$JarResourceFinder$1;
+
+        $stack1 = this.<jdk.internal.module.ModulePatcher$JarResourceFinder$1: jdk.internal.module.ModulePatcher$JarResourceFinder this$0>;
+
+        $stack3 = $stack1.<jdk.internal.module.ModulePatcher$JarResourceFinder: java.util.jar.JarFile jf>;
+
+        $stack2 = this.<jdk.internal.module.ModulePatcher$JarResourceFinder$1: java.util.jar.JarEntry val$entry>;
+
+        $stack4 = virtualinvoke $stack3.<java.util.jar.JarFile: java.io.InputStream getInputStream(java.util.zip.ZipEntry)>($stack2);
+
+        return $stack4;
+    }
+
+    public int getContentLength() throws java.io.IOException
+    {
+        java.util.jar.JarEntry $stack3;
+        byte $stack5;
+        int $stack6, $i0, $i1;
+        long $stack4;
+        jdk.internal.module.ModulePatcher$JarResourceFinder$1 this;
+
+        this := @this: jdk.internal.module.ModulePatcher$JarResourceFinder$1;
+
+        $stack3 = this.<jdk.internal.module.ModulePatcher$JarResourceFinder$1: java.util.jar.JarEntry val$entry>;
+
+        $stack4 = virtualinvoke $stack3.<java.util.jar.JarEntry: long getSize()>();
+
+        $stack5 = $stack4 cmp 2147483647L;
+
+        $i0 = (int) $stack5;
+
+        if $i0 <= 0 goto label1;
+
+        $i1 = (int) -1;
+
+        $stack6 = $i1;
+
+        goto label2;
+
+     label1:
+        $stack6 = (int) $stack4;
+
+     label2:
+        return $stack6;
+    }
+}

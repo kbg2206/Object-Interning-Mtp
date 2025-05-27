@@ -1,0 +1,136 @@
+class jdk.internal.module.ModuleLoaderMap$Modules extends java.lang.Object
+{
+    private static final java.util.Set bootModules;
+    private static final java.util.Set platformModules;
+
+    private void <init>()
+    {
+        jdk.internal.module.ModuleLoaderMap$Modules this;
+
+        this := @this: jdk.internal.module.ModuleLoaderMap$Modules;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.util.Set $stack1, $stack3;
+        java.lang.String[] $stack0, $stack2;
+
+        $stack0 = newarray (java.lang.String)[24];
+
+        $stack0[0] = "java.base";
+
+        $stack0[1] = "java.datatransfer";
+
+        $stack0[2] = "java.desktop";
+
+        $stack0[3] = "java.instrument";
+
+        $stack0[4] = "java.logging";
+
+        $stack0[5] = "java.management";
+
+        $stack0[6] = "java.management.rmi";
+
+        $stack0[7] = "java.naming";
+
+        $stack0[8] = "java.prefs";
+
+        $stack0[9] = "java.rmi";
+
+        $stack0[10] = "java.security.sasl";
+
+        $stack0[11] = "java.xml";
+
+        $stack0[12] = "jdk.incubator.foreign";
+
+        $stack0[13] = "jdk.incubator.vector";
+
+        $stack0[14] = "jdk.internal.vm.ci";
+
+        $stack0[15] = "jdk.jfr";
+
+        $stack0[16] = "jdk.management";
+
+        $stack0[17] = "jdk.management.agent";
+
+        $stack0[18] = "jdk.management.jfr";
+
+        $stack0[19] = "jdk.naming.rmi";
+
+        $stack0[20] = "jdk.net";
+
+        $stack0[21] = "jdk.nio.mapmode";
+
+        $stack0[22] = "jdk.sctp";
+
+        $stack0[23] = "jdk.unsupported";
+
+        $stack1 = staticinvoke <java.util.Set: java.util.Set of(java.lang.Object[])>($stack0);
+
+        <jdk.internal.module.ModuleLoaderMap$Modules: java.util.Set bootModules> = $stack1;
+
+        $stack2 = newarray (java.lang.String)[26];
+
+        $stack2[0] = "java.compiler";
+
+        $stack2[1] = "java.net.http";
+
+        $stack2[2] = "java.scripting";
+
+        $stack2[3] = "java.se";
+
+        $stack2[4] = "java.security.jgss";
+
+        $stack2[5] = "java.smartcardio";
+
+        $stack2[6] = "java.sql";
+
+        $stack2[7] = "java.sql.rowset";
+
+        $stack2[8] = "java.transaction.xa";
+
+        $stack2[9] = "java.xml.crypto";
+
+        $stack2[10] = "jdk.accessibility";
+
+        $stack2[11] = "jdk.charsets";
+
+        $stack2[12] = "jdk.crypto.cryptoki";
+
+        $stack2[13] = "jdk.crypto.ec";
+
+        $stack2[14] = "jdk.crypto.mscapi";
+
+        $stack2[15] = "jdk.dynalink";
+
+        $stack2[16] = "jdk.httpserver";
+
+        $stack2[17] = "jdk.internal.vm.compiler";
+
+        $stack2[18] = "jdk.internal.vm.compiler.management";
+
+        $stack2[19] = "jdk.jsobject";
+
+        $stack2[20] = "jdk.localedata";
+
+        $stack2[21] = "jdk.naming.dns";
+
+        $stack2[22] = "jdk.security.auth";
+
+        $stack2[23] = "jdk.security.jgss";
+
+        $stack2[24] = "jdk.xml.dom";
+
+        $stack2[25] = "jdk.zipfs";
+
+        $stack3 = staticinvoke <java.util.Set: java.util.Set of(java.lang.Object[])>($stack2);
+
+        <jdk.internal.module.ModuleLoaderMap$Modules: java.util.Set platformModules> = $stack3;
+
+        return;
+    }
+}

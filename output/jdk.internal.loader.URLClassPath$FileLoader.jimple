@@ -1,0 +1,187 @@
+class jdk.internal.loader.URLClassPath$FileLoader extends jdk.internal.loader.URLClassPath$Loader
+{
+    private java.io.File dir;
+
+    private void <init>(java.net.URL) throws java.io.IOException
+    {
+        java.net.URL url;
+        char $stack4;
+        java.io.File $stack7, $stack8;
+        java.lang.String $stack3, $stack5, $stack6;
+        jdk.internal.loader.URLClassPath$FileLoader this;
+
+        this := @this: jdk.internal.loader.URLClassPath$FileLoader;
+
+        url := @parameter0: java.net.URL;
+
+        specialinvoke this.<jdk.internal.loader.URLClassPath$Loader: void <init>(java.net.URL)>(url);
+
+        $stack3 = virtualinvoke url.<java.net.URL: java.lang.String getFile()>();
+
+        $stack4 = <java.io.File: char separatorChar>;
+
+        $stack5 = virtualinvoke $stack3.<java.lang.String: java.lang.String replace(char,char)>(47, $stack4);
+
+        $stack6 = staticinvoke <sun.net.www.ParseUtil: java.lang.String decode(java.lang.String)>($stack5);
+
+        $stack7 = new java.io.File;
+
+        specialinvoke $stack7.<java.io.File: void <init>(java.lang.String)>($stack6);
+
+        $stack8 = virtualinvoke $stack7.<java.io.File: java.io.File getCanonicalFile()>();
+
+        this.<jdk.internal.loader.URLClassPath$FileLoader: java.io.File dir> = $stack8;
+
+        return;
+    }
+
+    java.net.URL findResource(java.lang.String, boolean)
+    {
+        jdk.internal.loader.Resource $stack4;
+        java.net.URL $stack5;
+        java.lang.String name;
+        jdk.internal.loader.URLClassPath$FileLoader this;
+        boolean check;
+
+        this := @this: jdk.internal.loader.URLClassPath$FileLoader;
+
+        name := @parameter0: java.lang.String;
+
+        check := @parameter1: boolean;
+
+        $stack4 = virtualinvoke this.<jdk.internal.loader.URLClassPath$FileLoader: jdk.internal.loader.Resource getResource(java.lang.String,boolean)>(name, check);
+
+        if $stack4 == null goto label1;
+
+        $stack5 = virtualinvoke $stack4.<jdk.internal.loader.Resource: java.net.URL getURL()>();
+
+        return $stack5;
+
+     label1:
+        return null;
+    }
+
+    jdk.internal.loader.Resource getResource(java.lang.String, boolean)
+    {
+        java.net.URL $stack7, $stack9, $u0, $u1;
+        jdk.internal.loader.URLClassPath$FileLoader$1 $u4;
+        int $stack14, $i0;
+        java.lang.String name, $stack10, $stack11, $stack12, $stack18, $stack24, $stack26, $stack28;
+        jdk.internal.loader.URLClassPath$FileLoader this;
+        boolean $stack13, check, $stack19, $stack29;
+        char $stack16, $stack22;
+        java.io.File $stack17, $stack23, $stack25, $stack27, file, $u2, $u3;
+        java.lang.Exception $stack34;
+
+        this := @this: jdk.internal.loader.URLClassPath$FileLoader;
+
+        name := @parameter0: java.lang.String;
+
+        check := @parameter1: boolean;
+
+     label01:
+        $u0 = new java.net.URL;
+
+        $stack7 = virtualinvoke this.<jdk.internal.loader.URLClassPath$FileLoader: java.net.URL getBaseURL()>();
+
+        specialinvoke $u0.<java.net.URL: void <init>(java.net.URL,java.lang.String)>($stack7, ".");
+
+        $u1 = new java.net.URL;
+
+        $stack9 = virtualinvoke this.<jdk.internal.loader.URLClassPath$FileLoader: java.net.URL getBaseURL()>();
+
+        $stack10 = staticinvoke <sun.net.www.ParseUtil: java.lang.String encodePath(java.lang.String,boolean)>(name, 0);
+
+        specialinvoke $u1.<java.net.URL: void <init>(java.net.URL,java.lang.String)>($stack9, $stack10);
+
+        $stack11 = virtualinvoke $u1.<java.net.URL: java.lang.String getFile()>();
+
+        $stack12 = virtualinvoke $u0.<java.net.URL: java.lang.String getFile()>();
+
+        $stack13 = virtualinvoke $stack11.<java.lang.String: boolean startsWith(java.lang.String)>($stack12);
+
+        if $stack13 != 0 goto label03;
+
+     label02:
+        return null;
+
+     label03:
+        if check == 0 goto label04;
+
+        staticinvoke <jdk.internal.loader.URLClassPath: void check(java.net.URL)>($u1);
+
+     label04:
+        $stack14 = virtualinvoke name.<java.lang.String: int indexOf(java.lang.String)>("..");
+
+        $i0 = (int) -1;
+
+        if $stack14 == $i0 goto label06;
+
+        $u2 = new java.io.File;
+
+        $stack23 = this.<jdk.internal.loader.URLClassPath$FileLoader: java.io.File dir>;
+
+        $stack22 = <java.io.File: char separatorChar>;
+
+        $stack24 = virtualinvoke name.<java.lang.String: java.lang.String replace(char,char)>(47, $stack22);
+
+        specialinvoke $u2.<java.io.File: void <init>(java.io.File,java.lang.String)>($stack23, $stack24);
+
+        $stack25 = virtualinvoke $u2.<java.io.File: java.io.File getCanonicalFile()>();
+
+        file = $stack25;
+
+        $stack26 = virtualinvoke $stack25.<java.io.File: java.lang.String getPath()>();
+
+        $stack27 = this.<jdk.internal.loader.URLClassPath$FileLoader: java.io.File dir>;
+
+        $stack28 = virtualinvoke $stack27.<java.io.File: java.lang.String getPath()>();
+
+        $stack29 = virtualinvoke $stack26.<java.lang.String: boolean startsWith(java.lang.String)>($stack28);
+
+        if $stack29 != 0 goto label07;
+
+     label05:
+        return null;
+
+     label06:
+        $u3 = new java.io.File;
+
+        $stack17 = this.<jdk.internal.loader.URLClassPath$FileLoader: java.io.File dir>;
+
+        $stack16 = <java.io.File: char separatorChar>;
+
+        $stack18 = virtualinvoke name.<java.lang.String: java.lang.String replace(char,char)>(47, $stack16);
+
+        specialinvoke $u3.<java.io.File: void <init>(java.io.File,java.lang.String)>($stack17, $stack18);
+
+        file = $u3;
+
+     label07:
+        $stack19 = virtualinvoke file.<java.io.File: boolean exists()>();
+
+        if $stack19 == 0 goto label09;
+
+        $u4 = new jdk.internal.loader.URLClassPath$FileLoader$1;
+
+        specialinvoke $u4.<jdk.internal.loader.URLClassPath$FileLoader$1: void <init>(jdk.internal.loader.URLClassPath$FileLoader,java.lang.String,java.net.URL,java.io.File)>(this, name, $u1, file);
+
+     label08:
+        return $u4;
+
+     label09:
+        goto label11;
+
+     label10:
+        $stack34 := @caughtexception;
+
+        return null;
+
+     label11:
+        return null;
+
+        catch java.lang.Exception from label01 to label02 with label10;
+        catch java.lang.Exception from label03 to label05 with label10;
+        catch java.lang.Exception from label06 to label08 with label10;
+    }
+}

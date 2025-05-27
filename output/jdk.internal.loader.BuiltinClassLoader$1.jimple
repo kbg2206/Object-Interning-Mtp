@@ -1,0 +1,165 @@
+class jdk.internal.loader.BuiltinClassLoader$1 extends java.lang.Object implements java.util.Enumeration
+{
+    final java.util.Iterator iterator;
+    java.net.URL next;
+    final java.util.List val$checked;
+    final java.util.Enumeration val$e;
+    final jdk.internal.loader.BuiltinClassLoader this$0;
+
+    void <init>(jdk.internal.loader.BuiltinClassLoader, java.util.List, java.util.Enumeration)
+    {
+        jdk.internal.loader.BuiltinClassLoader$1 this;
+        java.util.List l2, $stack4;
+        java.util.Iterator $stack5;
+        java.util.Enumeration l3;
+        jdk.internal.loader.BuiltinClassLoader this$0;
+
+        this := @this: jdk.internal.loader.BuiltinClassLoader$1;
+
+        this$0 := @parameter0: jdk.internal.loader.BuiltinClassLoader;
+
+        l2 := @parameter1: java.util.List;
+
+        l3 := @parameter2: java.util.Enumeration;
+
+        this.<jdk.internal.loader.BuiltinClassLoader$1: jdk.internal.loader.BuiltinClassLoader this$0> = this$0;
+
+        this.<jdk.internal.loader.BuiltinClassLoader$1: java.util.List val$checked> = l2;
+
+        this.<jdk.internal.loader.BuiltinClassLoader$1: java.util.Enumeration val$e> = l3;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack4 = this.<jdk.internal.loader.BuiltinClassLoader$1: java.util.List val$checked>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.util.Iterator iterator()>();
+
+        this.<jdk.internal.loader.BuiltinClassLoader$1: java.util.Iterator iterator> = $stack5;
+
+        return;
+    }
+
+    private boolean hasNext()
+    {
+        java.util.Enumeration $stack4, $stack10;
+        java.net.URL $stack1, $stack6, $stack8, $stack12, $stack13, $stack17;
+        boolean $stack3, $stack5, $stack7;
+        java.util.Iterator $stack2, $stack15;
+        jdk.internal.loader.BuiltinClassLoader$1 this;
+        java.lang.Object $stack11, $stack16;
+
+        this := @this: jdk.internal.loader.BuiltinClassLoader$1;
+
+        $stack1 = this.<jdk.internal.loader.BuiltinClassLoader$1: java.net.URL next>;
+
+        if $stack1 == null goto label1;
+
+        return 1;
+
+     label1:
+        $stack2 = this.<jdk.internal.loader.BuiltinClassLoader$1: java.util.Iterator iterator>;
+
+        $stack3 = interfaceinvoke $stack2.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack3 == 0 goto label2;
+
+        $stack15 = this.<jdk.internal.loader.BuiltinClassLoader$1: java.util.Iterator iterator>;
+
+        $stack16 = interfaceinvoke $stack15.<java.util.Iterator: java.lang.Object next()>();
+
+        $stack17 = (java.net.URL) $stack16;
+
+        this.<jdk.internal.loader.BuiltinClassLoader$1: java.net.URL next> = $stack17;
+
+        return 1;
+
+     label2:
+        $stack4 = this.<jdk.internal.loader.BuiltinClassLoader$1: java.util.Enumeration val$e>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.Enumeration: boolean hasMoreElements()>();
+
+        if $stack5 == 0 goto label3;
+
+        $stack8 = this.<jdk.internal.loader.BuiltinClassLoader$1: java.net.URL next>;
+
+        if $stack8 != null goto label3;
+
+        $stack10 = this.<jdk.internal.loader.BuiltinClassLoader$1: java.util.Enumeration val$e>;
+
+        $stack11 = interfaceinvoke $stack10.<java.util.Enumeration: java.lang.Object nextElement()>();
+
+        $stack12 = (java.net.URL) $stack11;
+
+        $stack13 = staticinvoke <jdk.internal.loader.BuiltinClassLoader: java.net.URL checkURL(java.net.URL)>($stack12);
+
+        this.<jdk.internal.loader.BuiltinClassLoader$1: java.net.URL next> = $stack13;
+
+        goto label2;
+
+     label3:
+        $stack6 = this.<jdk.internal.loader.BuiltinClassLoader$1: java.net.URL next>;
+
+        if $stack6 == null goto label4;
+
+        $stack7 = 1;
+
+        goto label5;
+
+     label4:
+        $stack7 = 0;
+
+     label5:
+        return $stack7;
+    }
+
+    public boolean hasMoreElements()
+    {
+        jdk.internal.loader.BuiltinClassLoader$1 this;
+        boolean $stack1;
+
+        this := @this: jdk.internal.loader.BuiltinClassLoader$1;
+
+        $stack1 = virtualinvoke this.<jdk.internal.loader.BuiltinClassLoader$1: boolean hasNext()>();
+
+        return $stack1;
+    }
+
+    public java.net.URL nextElement()
+    {
+        jdk.internal.loader.BuiltinClassLoader$1 this;
+        java.net.URL result;
+        java.util.NoSuchElementException $stack3;
+        boolean $stack2;
+
+        this := @this: jdk.internal.loader.BuiltinClassLoader$1;
+
+        $stack2 = virtualinvoke this.<jdk.internal.loader.BuiltinClassLoader$1: boolean hasNext()>();
+
+        if $stack2 == 0 goto label1;
+
+        result = this.<jdk.internal.loader.BuiltinClassLoader$1: java.net.URL next>;
+
+        this.<jdk.internal.loader.BuiltinClassLoader$1: java.net.URL next> = null;
+
+        return result;
+
+     label1:
+        $stack3 = new java.util.NoSuchElementException;
+
+        specialinvoke $stack3.<java.util.NoSuchElementException: void <init>()>();
+
+        throw $stack3;
+    }
+
+    public volatile java.lang.Object nextElement()
+    {
+        jdk.internal.loader.BuiltinClassLoader$1 this;
+        java.net.URL $stack1;
+
+        this := @this: jdk.internal.loader.BuiltinClassLoader$1;
+
+        $stack1 = virtualinvoke this.<jdk.internal.loader.BuiltinClassLoader$1: java.net.URL nextElement()>();
+
+        return $stack1;
+    }
+}

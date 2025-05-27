@@ -1,0 +1,230 @@
+class jdk.internal.loader.BootLoader$PackageHelper extends java.lang.Object
+{
+    private static final jdk.internal.access.JavaLangAccess JLA;
+
+    void <init>()
+    {
+        jdk.internal.loader.BootLoader$PackageHelper this;
+
+        this := @this: jdk.internal.loader.BootLoader$PackageHelper;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    static java.lang.Package definePackage(java.lang.String, java.lang.String)
+    {
+        java.util.jar.Manifest $stack9;
+        jdk.internal.access.JavaLangAccess $stack14;
+        java.net.URL $stack6;
+        java.lang.InternalError $stack17;
+        java.lang.String location, name, $stack21;
+        boolean $stack13;
+        java.lang.Package $stack8, $stack16;
+        jdk.internal.loader.BuiltinClassLoader $stack7, $stack15;
+        java.lang.Module $stack5;
+        java.lang.StringBuilder $stack18, $stack19, $stack20;
+
+        name := @parameter0: java.lang.String;
+
+        location := @parameter1: java.lang.String;
+
+        $stack5 = staticinvoke <jdk.internal.loader.BootLoader$PackageHelper: java.lang.Module findModule(java.lang.String)>(location);
+
+        if $stack5 == null goto label2;
+
+        $stack13 = virtualinvoke name.<java.lang.String: boolean isEmpty()>();
+
+        if $stack13 == 0 goto label1;
+
+        $stack17 = new java.lang.InternalError;
+
+        $stack18 = new java.lang.StringBuilder;
+
+        specialinvoke $stack18.<java.lang.StringBuilder: void <init>()>();
+
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("empty package in ");
+
+        $stack20 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(location);
+
+        $stack21 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack17.<java.lang.InternalError: void <init>(java.lang.String)>($stack21);
+
+        throw $stack17;
+
+     label1:
+        $stack14 = <jdk.internal.loader.BootLoader$PackageHelper: jdk.internal.access.JavaLangAccess JLA>;
+
+        $stack15 = staticinvoke <jdk.internal.loader.ClassLoaders: jdk.internal.loader.BuiltinClassLoader bootLoader()>();
+
+        $stack16 = interfaceinvoke $stack14.<jdk.internal.access.JavaLangAccess: java.lang.Package definePackage(java.lang.ClassLoader,java.lang.String,java.lang.Module)>($stack15, name, $stack5);
+
+        return $stack16;
+
+     label2:
+        $stack6 = staticinvoke <jdk.internal.loader.BootLoader$PackageHelper: java.net.URL toFileURL(java.lang.String)>(location);
+
+        if $stack6 == null goto label3;
+
+        $stack9 = staticinvoke <jdk.internal.loader.BootLoader$PackageHelper: java.util.jar.Manifest getManifest(java.lang.String)>(location);
+
+        goto label4;
+
+     label3:
+        $stack9 = null;
+
+     label4:
+        $stack7 = staticinvoke <jdk.internal.loader.ClassLoaders: jdk.internal.loader.BuiltinClassLoader bootLoader()>();
+
+        $stack8 = virtualinvoke $stack7.<jdk.internal.loader.BuiltinClassLoader: java.lang.Package defineOrCheckPackage(java.lang.String,java.util.jar.Manifest,java.net.URL)>(name, $stack9, $stack6);
+
+        return $stack8;
+    }
+
+    private static java.lang.Module findModule(java.lang.String)
+    {
+        java.lang.String[] $stack12;
+        java.util.function.Supplier $stack7;
+        int $stack20;
+        java.lang.String location, $stack13, mn;
+        java.net.URI $stack10;
+        java.nio.file.Path $stack11, $stack14, $stack17;
+        boolean $stack4, $stack5, $stack15;
+        java.lang.Module $stack9;
+        java.util.Optional $stack6;
+        java.lang.Object $stack8;
+
+        location := @parameter0: java.lang.String;
+
+        mn = null;
+
+        $stack4 = virtualinvoke location.<java.lang.String: boolean startsWith(java.lang.String)>("jrt:/");
+
+        if $stack4 == 0 goto label1;
+
+        $stack20 = virtualinvoke location.<java.lang.String: int length()>();
+
+        mn = virtualinvoke location.<java.lang.String: java.lang.String substring(int,int)>(5, $stack20);
+
+        goto label2;
+
+     label1:
+        $stack5 = virtualinvoke location.<java.lang.String: boolean startsWith(java.lang.String)>("file:/");
+
+        if $stack5 == 0 goto label2;
+
+        $stack10 = staticinvoke <java.net.URI: java.net.URI create(java.lang.String)>(location);
+
+        $stack11 = staticinvoke <java.nio.file.Path: java.nio.file.Path of(java.net.URI)>($stack10);
+
+        $stack13 = <jdk.internal.loader.BootLoader: java.lang.String JAVA_HOME>;
+
+        $stack12 = newarray (java.lang.String)[1];
+
+        $stack12[0] = "modules";
+
+        $stack14 = staticinvoke <java.nio.file.Path: java.nio.file.Path of(java.lang.String,java.lang.String[])>($stack13, $stack12);
+
+        $stack15 = interfaceinvoke $stack11.<java.nio.file.Path: boolean startsWith(java.nio.file.Path)>($stack14);
+
+        if $stack15 == 0 goto label2;
+
+        $stack17 = interfaceinvoke $stack11.<java.nio.file.Path: java.nio.file.Path getFileName()>();
+
+        mn = interfaceinvoke $stack17.<java.nio.file.Path: java.lang.String toString()>();
+
+     label2:
+        if mn == null goto label3;
+
+        $stack6 = staticinvoke <jdk.internal.module.Modules: java.util.Optional findLoadedModule(java.lang.String)>(mn);
+
+        $stack7 = staticinvoke <jdk.internal.loader.BootLoader$PackageHelper$lambda_findModule_0__39: java.util.function.Supplier bootstrap$(java.lang.String)>(mn);
+
+        $stack8 = virtualinvoke $stack6.<java.util.Optional: java.lang.Object orElseThrow(java.util.function.Supplier)>($stack7);
+
+        $stack9 = (java.lang.Module) $stack8;
+
+        return $stack9;
+
+     label3:
+        return null;
+    }
+
+    private static java.net.URL toFileURL(java.lang.String)
+    {
+        java.net.URL $stack3;
+        jdk.internal.loader.BootLoader$PackageHelper$1 $stack1;
+        java.lang.Object $stack2;
+        java.lang.String location;
+
+        location := @parameter0: java.lang.String;
+
+        $stack1 = new jdk.internal.loader.BootLoader$PackageHelper$1;
+
+        specialinvoke $stack1.<jdk.internal.loader.BootLoader$PackageHelper$1: void <init>(java.lang.String)>(location);
+
+        $stack2 = staticinvoke <java.security.AccessController: java.lang.Object doPrivileged(java.security.PrivilegedAction)>($stack1);
+
+        $stack3 = (java.net.URL) $stack2;
+
+        return $stack3;
+    }
+
+    private static java.util.jar.Manifest getManifest(java.lang.String)
+    {
+        java.util.jar.Manifest $stack3;
+        jdk.internal.loader.BootLoader$PackageHelper$2 $stack1;
+        java.lang.Object $stack2;
+        java.lang.String location;
+
+        location := @parameter0: java.lang.String;
+
+        $stack1 = new jdk.internal.loader.BootLoader$PackageHelper$2;
+
+        specialinvoke $stack1.<jdk.internal.loader.BootLoader$PackageHelper$2: void <init>(java.lang.String)>(location);
+
+        $stack2 = staticinvoke <java.security.AccessController: java.lang.Object doPrivileged(java.security.PrivilegedAction)>($stack1);
+
+        $stack3 = (java.util.jar.Manifest) $stack2;
+
+        return $stack3;
+    }
+
+    public static java.lang.InternalError lambda$findModule$0(java.lang.String)
+    {
+        java.lang.InternalError $stack1;
+        java.lang.StringBuilder $stack2, $stack3, $stack4;
+        java.lang.String name, $stack5;
+
+        name := @parameter0: java.lang.String;
+
+        $stack1 = new java.lang.InternalError;
+
+        $stack2 = new java.lang.StringBuilder;
+
+        specialinvoke $stack2.<java.lang.StringBuilder: void <init>()>();
+
+        $stack3 = virtualinvoke $stack2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+
+        $stack4 = virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" not loaded");
+
+        $stack5 = virtualinvoke $stack4.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack1.<java.lang.InternalError: void <init>(java.lang.String)>($stack5);
+
+        return $stack1;
+    }
+
+    static void <clinit>()
+    {
+        jdk.internal.access.JavaLangAccess $stack0;
+
+        $stack0 = staticinvoke <jdk.internal.access.SharedSecrets: jdk.internal.access.JavaLangAccess getJavaLangAccess()>();
+
+        <jdk.internal.loader.BootLoader$PackageHelper: jdk.internal.access.JavaLangAccess JLA> = $stack0;
+
+        return;
+    }
+}

@@ -1,0 +1,52 @@
+public interface  jdk.internal.loader.NativeLibrary extends java.lang.Object
+{
+
+    public abstract java.lang.String name();
+
+    public abstract long find(java.lang.String);
+
+    public long lookup(java.lang.String) throws java.lang.NoSuchMethodException
+    {
+        java.lang.NoSuchMethodException $stack6;
+        long $stack4;
+        jdk.internal.loader.NativeLibrary this;
+        byte $stack5;
+        java.lang.StringBuilder $stack7, $stack8, $stack9, $stack10, $stack12;
+        java.lang.String name, $stack11, $stack13;
+
+        this := @this: jdk.internal.loader.NativeLibrary;
+
+        name := @parameter0: java.lang.String;
+
+        $stack4 = interfaceinvoke this.<jdk.internal.loader.NativeLibrary: long find(java.lang.String)>(name);
+
+        $stack5 = 0L cmp $stack4;
+
+        if $stack5 != 0 goto label1;
+
+        $stack6 = new java.lang.NoSuchMethodException;
+
+        $stack7 = new java.lang.StringBuilder;
+
+        specialinvoke $stack7.<java.lang.StringBuilder: void <init>()>();
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Cannot find symbol ");
+
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" in library ");
+
+        $stack11 = interfaceinvoke this.<jdk.internal.loader.NativeLibrary: java.lang.String name()>();
+
+        $stack12 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack11);
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack6.<java.lang.NoSuchMethodException: void <init>(java.lang.String)>($stack13);
+
+        throw $stack6;
+
+     label1:
+        return $stack4;
+    }
+}

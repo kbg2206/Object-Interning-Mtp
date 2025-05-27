@@ -1,0 +1,1488 @@
+public class jdk.internal.reflect.ReflectionFactory extends java.lang.Object
+{
+    private static boolean initted;
+    private static final jdk.internal.reflect.ReflectionFactory soleInstance;
+    private static volatile java.lang.reflect.Method hasStaticInitializerMethod;
+    private static boolean noInflation;
+    private static int inflationThreshold;
+    private static boolean disableSerialConstructorChecks;
+    private final jdk.internal.access.JavaLangReflectAccess langReflectAccess;
+    static final boolean $assertionsDisabled;
+
+    private void <init>()
+    {
+        jdk.internal.access.JavaLangReflectAccess $stack1;
+        jdk.internal.reflect.ReflectionFactory this;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = staticinvoke <jdk.internal.access.SharedSecrets: jdk.internal.access.JavaLangReflectAccess getJavaLangReflectAccess()>();
+
+        this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess> = $stack1;
+
+        return;
+    }
+
+    public static jdk.internal.reflect.ReflectionFactory getReflectionFactory()
+    {
+        java.lang.RuntimePermission $stack3;
+        java.lang.SecurityManager $stack1;
+        jdk.internal.reflect.ReflectionFactory $stack2;
+
+        $stack1 = staticinvoke <java.lang.System: java.lang.SecurityManager getSecurityManager()>();
+
+        if $stack1 == null goto label1;
+
+        $stack3 = <sun.security.util.SecurityConstants: java.lang.RuntimePermission REFLECTION_FACTORY_ACCESS_PERMISSION>;
+
+        virtualinvoke $stack1.<java.lang.SecurityManager: void checkPermission(java.security.Permission)>($stack3);
+
+     label1:
+        $stack2 = <jdk.internal.reflect.ReflectionFactory: jdk.internal.reflect.ReflectionFactory soleInstance>;
+
+        return $stack2;
+    }
+
+    private static java.lang.reflect.Method findMethodForReflection(java.lang.reflect.Method)
+    {
+        java.lang.NoSuchMethodException $stack11;
+        java.lang.Class[] $stack9;
+        java.lang.StringBuilder $stack3, $stack4, $stack6;
+        java.lang.Class $stack8;
+        java.lang.String $stack5, $stack7;
+        java.lang.reflect.Method method, $stack10;
+
+        method := @parameter0: java.lang.reflect.Method;
+
+        $stack3 = new java.lang.StringBuilder;
+
+        specialinvoke $stack3.<java.lang.StringBuilder: void <init>()>();
+
+        $stack4 = virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("reflected$");
+
+        $stack5 = virtualinvoke method.<java.lang.reflect.Method: java.lang.String getName()>();
+
+        $stack6 = virtualinvoke $stack4.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack5);
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label1:
+        $stack8 = virtualinvoke method.<java.lang.reflect.Method: java.lang.Class getDeclaringClass()>();
+
+        $stack9 = virtualinvoke method.<java.lang.reflect.Method: java.lang.Class[] getParameterTypes()>();
+
+        $stack10 = virtualinvoke $stack8.<java.lang.Class: java.lang.reflect.Method getDeclaredMethod(java.lang.String,java.lang.Class[])>($stack7, $stack9);
+
+     label2:
+        return $stack10;
+
+     label3:
+        $stack11 := @caughtexception;
+
+        return null;
+
+        catch java.lang.NoSuchMethodException from label1 to label2 with label3;
+    }
+
+    public jdk.internal.reflect.FieldAccessor newFieldAccessor(java.lang.reflect.Field, boolean)
+    {
+        jdk.internal.reflect.FieldAccessor $stack10;
+        java.lang.reflect.AccessibleObject $stack7;
+        java.lang.reflect.Field root, field;
+        jdk.internal.access.JavaLangReflectAccess $stack6, $stack14;
+        jdk.internal.reflect.ReflectionFactory this;
+        int $stack16, $stack17, $stack8;
+        boolean override, $stack15, $stack9, $stack11;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        field := @parameter0: java.lang.reflect.Field;
+
+        override := @parameter1: boolean;
+
+        staticinvoke <jdk.internal.reflect.ReflectionFactory: void checkInitted()>();
+
+        $stack6 = this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess>;
+
+        $stack7 = interfaceinvoke $stack6.<jdk.internal.access.JavaLangReflectAccess: java.lang.reflect.AccessibleObject getRoot(java.lang.reflect.AccessibleObject)>(field);
+
+        root = (java.lang.reflect.Field) $stack7;
+
+        if root == null goto label2;
+
+        $stack16 = virtualinvoke root.<java.lang.reflect.Field: int getModifiers()>();
+
+        $stack17 = virtualinvoke field.<java.lang.reflect.Field: int getModifiers()>();
+
+        if $stack16 == $stack17 goto label1;
+
+        if override != 0 goto label2;
+
+     label1:
+        field = root;
+
+     label2:
+        $stack8 = virtualinvoke field.<java.lang.reflect.Field: int getModifiers()>();
+
+        $stack9 = staticinvoke <java.lang.reflect.Modifier: boolean isFinal(int)>($stack8);
+
+        if $stack9 == 0 goto label4;
+
+        if override == 0 goto label3;
+
+        $stack14 = this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess>;
+
+        $stack15 = interfaceinvoke $stack14.<jdk.internal.access.JavaLangReflectAccess: boolean isTrustedFinalField(java.lang.reflect.Field)>(field);
+
+        if $stack15 == 0 goto label4;
+
+     label3:
+        $stack11 = 1;
+
+        goto label5;
+
+     label4:
+        $stack11 = 0;
+
+     label5:
+        $stack10 = staticinvoke <jdk.internal.reflect.UnsafeFieldAccessorFactory: jdk.internal.reflect.FieldAccessor newFieldAccessor(java.lang.reflect.Field,boolean)>(field, $stack11);
+
+        return $stack10;
+    }
+
+    public jdk.internal.reflect.MethodAccessor newMethodAccessor(java.lang.reflect.Method)
+    {
+        jdk.internal.reflect.NativeMethodAccessorImpl $stack9;
+        jdk.internal.reflect.MethodAccessor $stack25;
+        jdk.internal.reflect.DelegatingMethodAccessorImpl $stack10;
+        jdk.internal.access.JavaLangReflectAccess $stack6;
+        int $stack24;
+        java.lang.String $stack20;
+        java.lang.reflect.Method $stack26, method, $stack29;
+        boolean $stack5, $stack8, $stack12;
+        java.lang.reflect.AccessibleObject $stack7;
+        java.lang.Class[] $stack21, $stack23;
+        jdk.internal.reflect.MethodAccessorGenerator $stack18;
+        jdk.internal.reflect.ReflectionFactory this;
+        java.lang.Class $stack11, $stack19, $stack22;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        method := @parameter0: java.lang.reflect.Method;
+
+        staticinvoke <jdk.internal.reflect.ReflectionFactory: void checkInitted()>();
+
+        $stack5 = staticinvoke <jdk.internal.reflect.Reflection: boolean isCallerSensitive(java.lang.reflect.Method)>(method);
+
+        if $stack5 == 0 goto label1;
+
+        $stack26 = staticinvoke <jdk.internal.reflect.ReflectionFactory: java.lang.reflect.Method findMethodForReflection(java.lang.reflect.Method)>(method);
+
+        if $stack26 == null goto label1;
+
+        method = $stack26;
+
+     label1:
+        $stack6 = this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess>;
+
+        $stack7 = interfaceinvoke $stack6.<jdk.internal.access.JavaLangReflectAccess: java.lang.reflect.AccessibleObject getRoot(java.lang.reflect.AccessibleObject)>(method);
+
+        $stack29 = (java.lang.reflect.Method) $stack7;
+
+        if $stack29 == null goto label2;
+
+        method = $stack29;
+
+     label2:
+        $stack8 = <jdk.internal.reflect.ReflectionFactory: boolean noInflation>;
+
+        if $stack8 == 0 goto label3;
+
+        $stack11 = virtualinvoke method.<java.lang.reflect.Method: java.lang.Class getDeclaringClass()>();
+
+        $stack12 = virtualinvoke $stack11.<java.lang.Class: boolean isHidden()>();
+
+        if $stack12 != 0 goto label3;
+
+        $stack18 = new jdk.internal.reflect.MethodAccessorGenerator;
+
+        specialinvoke $stack18.<jdk.internal.reflect.MethodAccessorGenerator: void <init>()>();
+
+        $stack19 = virtualinvoke method.<java.lang.reflect.Method: java.lang.Class getDeclaringClass()>();
+
+        $stack20 = virtualinvoke method.<java.lang.reflect.Method: java.lang.String getName()>();
+
+        $stack21 = virtualinvoke method.<java.lang.reflect.Method: java.lang.Class[] getParameterTypes()>();
+
+        $stack22 = virtualinvoke method.<java.lang.reflect.Method: java.lang.Class getReturnType()>();
+
+        $stack23 = virtualinvoke method.<java.lang.reflect.Method: java.lang.Class[] getExceptionTypes()>();
+
+        $stack24 = virtualinvoke method.<java.lang.reflect.Method: int getModifiers()>();
+
+        $stack25 = virtualinvoke $stack18.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.MethodAccessor generateMethod(java.lang.Class,java.lang.String,java.lang.Class[],java.lang.Class,java.lang.Class[],int)>($stack19, $stack20, $stack21, $stack22, $stack23, $stack24);
+
+        return $stack25;
+
+     label3:
+        $stack9 = new jdk.internal.reflect.NativeMethodAccessorImpl;
+
+        specialinvoke $stack9.<jdk.internal.reflect.NativeMethodAccessorImpl: void <init>(java.lang.reflect.Method)>(method);
+
+        $stack10 = new jdk.internal.reflect.DelegatingMethodAccessorImpl;
+
+        specialinvoke $stack10.<jdk.internal.reflect.DelegatingMethodAccessorImpl: void <init>(jdk.internal.reflect.MethodAccessorImpl)>($stack9);
+
+        virtualinvoke $stack9.<jdk.internal.reflect.NativeMethodAccessorImpl: void setParent(jdk.internal.reflect.DelegatingMethodAccessorImpl)>($stack10);
+
+        return $stack10;
+    }
+
+    public jdk.internal.reflect.ConstructorAccessor newConstructorAccessor(java.lang.reflect.Constructor)
+    {
+        jdk.internal.reflect.DelegatingConstructorAccessorImpl $stack14;
+        java.lang.reflect.Constructor root, c;
+        jdk.internal.reflect.BootstrapConstructorAccessorImpl $stack28;
+        jdk.internal.access.JavaLangReflectAccess $stack9;
+        int $stack7, $stack26;
+        jdk.internal.reflect.ConstructorAccessor $stack27;
+        boolean $stack8, $stack11, $stack12, $stack16;
+        java.lang.reflect.AccessibleObject $stack10;
+        java.lang.Class[] $stack24, $stack25;
+        jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl $stack31, $stack32;
+        jdk.internal.reflect.NativeConstructorAccessorImpl $stack13;
+        jdk.internal.reflect.MethodAccessorGenerator $stack22;
+        jdk.internal.reflect.ReflectionFactory this;
+        java.lang.Class $stack6, $stack15, $stack23;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        c := @parameter0: java.lang.reflect.Constructor;
+
+        staticinvoke <jdk.internal.reflect.ReflectionFactory: void checkInitted()>();
+
+        $stack6 = virtualinvoke c.<java.lang.reflect.Constructor: java.lang.Class getDeclaringClass()>();
+
+        $stack7 = virtualinvoke $stack6.<java.lang.Class: int getModifiers()>();
+
+        $stack8 = staticinvoke <java.lang.reflect.Modifier: boolean isAbstract(int)>($stack7);
+
+        if $stack8 == 0 goto label1;
+
+        $stack32 = new jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl;
+
+        specialinvoke $stack32.<jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl: void <init>(java.lang.String)>(null);
+
+        return $stack32;
+
+     label1:
+        if $stack6 != class "Ljava/lang/Class;" goto label2;
+
+        $stack31 = new jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl;
+
+        specialinvoke $stack31.<jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl: void <init>(java.lang.String)>("Can not instantiate java.lang.Class");
+
+        return $stack31;
+
+     label2:
+        $stack9 = this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess>;
+
+        $stack10 = interfaceinvoke $stack9.<jdk.internal.access.JavaLangReflectAccess: java.lang.reflect.AccessibleObject getRoot(java.lang.reflect.AccessibleObject)>(c);
+
+        root = (java.lang.reflect.Constructor) $stack10;
+
+        if root == null goto label3;
+
+        c = root;
+
+     label3:
+        $stack11 = staticinvoke <jdk.internal.reflect.Reflection: boolean isSubclassOf(java.lang.Class,java.lang.Class)>($stack6, class "Ljdk/internal/reflect/ConstructorAccessorImpl;");
+
+        if $stack11 == 0 goto label4;
+
+        $stack28 = new jdk.internal.reflect.BootstrapConstructorAccessorImpl;
+
+        specialinvoke $stack28.<jdk.internal.reflect.BootstrapConstructorAccessorImpl: void <init>(java.lang.reflect.Constructor)>(c);
+
+        return $stack28;
+
+     label4:
+        $stack12 = <jdk.internal.reflect.ReflectionFactory: boolean noInflation>;
+
+        if $stack12 == 0 goto label5;
+
+        $stack15 = virtualinvoke c.<java.lang.reflect.Constructor: java.lang.Class getDeclaringClass()>();
+
+        $stack16 = virtualinvoke $stack15.<java.lang.Class: boolean isHidden()>();
+
+        if $stack16 != 0 goto label5;
+
+        $stack22 = new jdk.internal.reflect.MethodAccessorGenerator;
+
+        specialinvoke $stack22.<jdk.internal.reflect.MethodAccessorGenerator: void <init>()>();
+
+        $stack23 = virtualinvoke c.<java.lang.reflect.Constructor: java.lang.Class getDeclaringClass()>();
+
+        $stack24 = virtualinvoke c.<java.lang.reflect.Constructor: java.lang.Class[] getParameterTypes()>();
+
+        $stack25 = virtualinvoke c.<java.lang.reflect.Constructor: java.lang.Class[] getExceptionTypes()>();
+
+        $stack26 = virtualinvoke c.<java.lang.reflect.Constructor: int getModifiers()>();
+
+        $stack27 = virtualinvoke $stack22.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.ConstructorAccessor generateConstructor(java.lang.Class,java.lang.Class[],java.lang.Class[],int)>($stack23, $stack24, $stack25, $stack26);
+
+        return $stack27;
+
+     label5:
+        $stack13 = new jdk.internal.reflect.NativeConstructorAccessorImpl;
+
+        specialinvoke $stack13.<jdk.internal.reflect.NativeConstructorAccessorImpl: void <init>(java.lang.reflect.Constructor)>(c);
+
+        $stack14 = new jdk.internal.reflect.DelegatingConstructorAccessorImpl;
+
+        specialinvoke $stack14.<jdk.internal.reflect.DelegatingConstructorAccessorImpl: void <init>(jdk.internal.reflect.ConstructorAccessorImpl)>($stack13);
+
+        virtualinvoke $stack13.<jdk.internal.reflect.NativeConstructorAccessorImpl: void setParent(jdk.internal.reflect.DelegatingConstructorAccessorImpl)>($stack14);
+
+        return $stack14;
+    }
+
+    public java.lang.reflect.Constructor newConstructor(java.lang.Class, java.lang.Class[], java.lang.Class[], int, int, java.lang.String, byte[], byte[])
+    {
+        byte[] annotations, parameterAnnotations;
+        java.lang.Class[] parameterTypes, checkedExceptions;
+        java.lang.reflect.Constructor $stack10;
+        jdk.internal.access.JavaLangReflectAccess $stack9;
+        jdk.internal.reflect.ReflectionFactory this;
+        int modifiers, slot;
+        java.lang.Class declaringClass;
+        java.lang.String signature;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        declaringClass := @parameter0: java.lang.Class;
+
+        parameterTypes := @parameter1: java.lang.Class[];
+
+        checkedExceptions := @parameter2: java.lang.Class[];
+
+        modifiers := @parameter3: int;
+
+        slot := @parameter4: int;
+
+        signature := @parameter5: java.lang.String;
+
+        annotations := @parameter6: byte[];
+
+        parameterAnnotations := @parameter7: byte[];
+
+        $stack9 = this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess>;
+
+        $stack10 = interfaceinvoke $stack9.<jdk.internal.access.JavaLangReflectAccess: java.lang.reflect.Constructor newConstructor(java.lang.Class,java.lang.Class[],java.lang.Class[],int,int,java.lang.String,byte[],byte[])>(declaringClass, parameterTypes, checkedExceptions, modifiers, slot, signature, annotations, parameterAnnotations);
+
+        return $stack10;
+    }
+
+    public jdk.internal.reflect.ConstructorAccessor getConstructorAccessor(java.lang.reflect.Constructor)
+    {
+        jdk.internal.access.JavaLangReflectAccess $stack2;
+        jdk.internal.reflect.ReflectionFactory this;
+        jdk.internal.reflect.ConstructorAccessor $stack3;
+        java.lang.reflect.Constructor c;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        c := @parameter0: java.lang.reflect.Constructor;
+
+        $stack2 = this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess>;
+
+        $stack3 = interfaceinvoke $stack2.<jdk.internal.access.JavaLangReflectAccess: jdk.internal.reflect.ConstructorAccessor getConstructorAccessor(java.lang.reflect.Constructor)>(c);
+
+        return $stack3;
+    }
+
+    public void setConstructorAccessor(java.lang.reflect.Constructor, jdk.internal.reflect.ConstructorAccessor)
+    {
+        jdk.internal.access.JavaLangReflectAccess $stack3;
+        jdk.internal.reflect.ReflectionFactory this;
+        jdk.internal.reflect.ConstructorAccessor accessor;
+        java.lang.reflect.Constructor c;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        c := @parameter0: java.lang.reflect.Constructor;
+
+        accessor := @parameter1: jdk.internal.reflect.ConstructorAccessor;
+
+        $stack3 = this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess>;
+
+        interfaceinvoke $stack3.<jdk.internal.access.JavaLangReflectAccess: void setConstructorAccessor(java.lang.reflect.Constructor,jdk.internal.reflect.ConstructorAccessor)>(c, accessor);
+
+        return;
+    }
+
+    public java.lang.reflect.Method copyMethod(java.lang.reflect.Method)
+    {
+        jdk.internal.access.JavaLangReflectAccess $stack2;
+        jdk.internal.reflect.ReflectionFactory this;
+        java.lang.reflect.Method arg, $stack3;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        arg := @parameter0: java.lang.reflect.Method;
+
+        $stack2 = this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess>;
+
+        $stack3 = interfaceinvoke $stack2.<jdk.internal.access.JavaLangReflectAccess: java.lang.reflect.Method copyMethod(java.lang.reflect.Method)>(arg);
+
+        return $stack3;
+    }
+
+    public java.lang.reflect.Method leafCopyMethod(java.lang.reflect.Method)
+    {
+        jdk.internal.access.JavaLangReflectAccess $stack2;
+        jdk.internal.reflect.ReflectionFactory this;
+        java.lang.reflect.Method arg, $stack3;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        arg := @parameter0: java.lang.reflect.Method;
+
+        $stack2 = this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess>;
+
+        $stack3 = interfaceinvoke $stack2.<jdk.internal.access.JavaLangReflectAccess: java.lang.reflect.Method leafCopyMethod(java.lang.reflect.Method)>(arg);
+
+        return $stack3;
+    }
+
+    public java.lang.reflect.Field copyField(java.lang.reflect.Field)
+    {
+        jdk.internal.access.JavaLangReflectAccess $stack2;
+        jdk.internal.reflect.ReflectionFactory this;
+        java.lang.reflect.Field arg, $stack3;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        arg := @parameter0: java.lang.reflect.Field;
+
+        $stack2 = this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess>;
+
+        $stack3 = interfaceinvoke $stack2.<jdk.internal.access.JavaLangReflectAccess: java.lang.reflect.Field copyField(java.lang.reflect.Field)>(arg);
+
+        return $stack3;
+    }
+
+    public java.lang.reflect.Constructor copyConstructor(java.lang.reflect.Constructor)
+    {
+        jdk.internal.access.JavaLangReflectAccess $stack2;
+        jdk.internal.reflect.ReflectionFactory this;
+        java.lang.reflect.Constructor arg, $stack3;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        arg := @parameter0: java.lang.reflect.Constructor;
+
+        $stack2 = this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess>;
+
+        $stack3 = interfaceinvoke $stack2.<jdk.internal.access.JavaLangReflectAccess: java.lang.reflect.Constructor copyConstructor(java.lang.reflect.Constructor)>(arg);
+
+        return $stack3;
+    }
+
+    public byte[] getExecutableTypeAnnotationBytes(java.lang.reflect.Executable)
+    {
+        byte[] $stack3;
+        jdk.internal.access.JavaLangReflectAccess $stack2;
+        jdk.internal.reflect.ReflectionFactory this;
+        java.lang.reflect.Executable ex;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        ex := @parameter0: java.lang.reflect.Executable;
+
+        $stack2 = this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess>;
+
+        $stack3 = interfaceinvoke $stack2.<jdk.internal.access.JavaLangReflectAccess: byte[] getExecutableTypeAnnotationBytes(java.lang.reflect.Executable)>(ex);
+
+        return $stack3;
+    }
+
+    public java.lang.Class[] getExecutableSharedParameterTypes(java.lang.reflect.Executable)
+    {
+        jdk.internal.access.JavaLangReflectAccess $stack2;
+        jdk.internal.reflect.ReflectionFactory this;
+        java.lang.reflect.Executable ex;
+        java.lang.Class[] $stack3;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        ex := @parameter0: java.lang.reflect.Executable;
+
+        $stack2 = this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess>;
+
+        $stack3 = interfaceinvoke $stack2.<jdk.internal.access.JavaLangReflectAccess: java.lang.Class[] getExecutableSharedParameterTypes(java.lang.reflect.Executable)>(ex);
+
+        return $stack3;
+    }
+
+    public java.lang.Object newInstance(java.lang.reflect.Constructor, java.lang.Object[], java.lang.Class) throws java.lang.IllegalAccessException, java.lang.InstantiationException, java.lang.reflect.InvocationTargetException
+    {
+        java.lang.Object[] args;
+        jdk.internal.access.JavaLangReflectAccess $stack4;
+        jdk.internal.reflect.ReflectionFactory this;
+        java.lang.Class caller;
+        java.lang.Object $stack5;
+        java.lang.reflect.Constructor ctor;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        ctor := @parameter0: java.lang.reflect.Constructor;
+
+        args := @parameter1: java.lang.Object[];
+
+        caller := @parameter2: java.lang.Class;
+
+        $stack4 = this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess>;
+
+        $stack5 = interfaceinvoke $stack4.<jdk.internal.access.JavaLangReflectAccess: java.lang.Object newInstance(java.lang.reflect.Constructor,java.lang.Object[],java.lang.Class)>(ctor, args, caller);
+
+        return $stack5;
+    }
+
+    public final java.lang.reflect.Constructor newConstructorForExternalization(java.lang.Class)
+    {
+        java.lang.NoSuchMethodException $stack7;
+        jdk.internal.reflect.ReflectionFactory this;
+        java.lang.Class[] $stack5;
+        java.lang.Class cl, $stack3;
+        java.lang.reflect.Constructor $stack6;
+        boolean $stack4;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        cl := @parameter0: java.lang.Class;
+
+        $stack3 = class "Ljava/io/Externalizable;";
+
+        $stack4 = virtualinvoke $stack3.<java.lang.Class: boolean isAssignableFrom(java.lang.Class)>(cl);
+
+        if $stack4 != 0 goto label1;
+
+        return null;
+
+     label1:
+        $stack5 = newarray (java.lang.Class)[0];
+
+        $stack6 = virtualinvoke cl.<java.lang.Class: java.lang.reflect.Constructor getConstructor(java.lang.Class[])>($stack5);
+
+        virtualinvoke $stack6.<java.lang.reflect.Constructor: void setAccessible(boolean)>(1);
+
+     label2:
+        return $stack6;
+
+     label3:
+        $stack7 := @caughtexception;
+
+        return null;
+
+        catch java.lang.NoSuchMethodException from label1 to label2 with label3;
+    }
+
+    public final java.lang.reflect.Constructor newConstructorForSerialization(java.lang.Class, java.lang.reflect.Constructor)
+    {
+        jdk.internal.reflect.ReflectionFactory this;
+        java.lang.Class $stack3, cl;
+        java.lang.reflect.Constructor constructorToCall, $stack4;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        cl := @parameter0: java.lang.Class;
+
+        constructorToCall := @parameter1: java.lang.reflect.Constructor;
+
+        $stack3 = virtualinvoke constructorToCall.<java.lang.reflect.Constructor: java.lang.Class getDeclaringClass()>();
+
+        if $stack3 != cl goto label1;
+
+        virtualinvoke constructorToCall.<java.lang.reflect.Constructor: void setAccessible(boolean)>(1);
+
+        return constructorToCall;
+
+     label1:
+        $stack4 = virtualinvoke this.<jdk.internal.reflect.ReflectionFactory: java.lang.reflect.Constructor generateConstructor(java.lang.Class,java.lang.reflect.Constructor)>(cl, constructorToCall);
+
+        return $stack4;
+    }
+
+    private boolean superHasAccessibleConstructor(java.lang.Class)
+    {
+        java.lang.AssertionError $stack26, $stack29;
+        java.lang.reflect.Constructor ctor;
+        java.lang.reflect.Constructor[] $stack13, $stack18;
+        int $stack11, $stack12, $stack14, $stack15, $stack20, $stack21, l4, l5;
+        boolean $stack8, $stack9, $stack10, $stack19, $stack28;
+        jdk.internal.reflect.ReflectionFactory this;
+        java.lang.Class cl, $stack7, $stack27;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        cl := @parameter0: java.lang.Class;
+
+        $stack7 = virtualinvoke cl.<java.lang.Class: java.lang.Class getSuperclass()>();
+
+        $stack8 = <jdk.internal.reflect.ReflectionFactory: boolean $assertionsDisabled>;
+
+        if $stack8 != 0 goto label01;
+
+        $stack27 = class "Ljava/io/Serializable;";
+
+        $stack28 = virtualinvoke $stack27.<java.lang.Class: boolean isAssignableFrom(java.lang.Class)>(cl);
+
+        if $stack28 != 0 goto label01;
+
+        $stack29 = new java.lang.AssertionError;
+
+        specialinvoke $stack29.<java.lang.AssertionError: void <init>()>();
+
+        throw $stack29;
+
+     label01:
+        $stack9 = <jdk.internal.reflect.ReflectionFactory: boolean $assertionsDisabled>;
+
+        if $stack9 != 0 goto label02;
+
+        if $stack7 != null goto label02;
+
+        $stack26 = new java.lang.AssertionError;
+
+        specialinvoke $stack26.<java.lang.AssertionError: void <init>()>();
+
+        throw $stack26;
+
+     label02:
+        $stack10 = staticinvoke <jdk.internal.reflect.ReflectionFactory: boolean packageEquals(java.lang.Class,java.lang.Class)>(cl, $stack7);
+
+        if $stack10 == 0 goto label07;
+
+        $stack18 = virtualinvoke $stack7.<java.lang.Class: java.lang.reflect.Constructor[] getDeclaredConstructors()>();
+
+        l4 = lengthof $stack18;
+
+        l5 = 0;
+
+     label03:
+        if l5 >= l4 goto label05;
+
+        ctor = $stack18[l5];
+
+        $stack20 = virtualinvoke ctor.<java.lang.reflect.Constructor: int getModifiers()>();
+
+        $stack21 = $stack20 & 2;
+
+        if $stack21 != 0 goto label04;
+
+        return 1;
+
+     label04:
+        l5 = l5 + 1;
+
+        goto label03;
+
+     label05:
+        $stack19 = staticinvoke <jdk.internal.reflect.Reflection: boolean areNestMates(java.lang.Class,java.lang.Class)>(cl, $stack7);
+
+        if $stack19 == 0 goto label06;
+
+        return 1;
+
+     label06:
+        return 0;
+
+     label07:
+        $stack11 = virtualinvoke $stack7.<java.lang.Class: int getModifiers()>();
+
+        $stack12 = $stack11 & 5;
+
+        if $stack12 != 0 goto label08;
+
+        return 0;
+
+     label08:
+        $stack13 = virtualinvoke $stack7.<java.lang.Class: java.lang.reflect.Constructor[] getDeclaredConstructors()>();
+
+        l4 = lengthof $stack13;
+
+        l5 = 0;
+
+     label09:
+        if l5 >= l4 goto label11;
+
+        ctor = $stack13[l5];
+
+        $stack14 = virtualinvoke ctor.<java.lang.reflect.Constructor: int getModifiers()>();
+
+        $stack15 = $stack14 & 5;
+
+        if $stack15 == 0 goto label10;
+
+        return 1;
+
+     label10:
+        l5 = l5 + 1;
+
+        goto label09;
+
+     label11:
+        return 0;
+    }
+
+    public final java.lang.reflect.Constructor newConstructorForSerialization(java.lang.Class)
+    {
+        java.lang.NoSuchMethodException $stack20;
+        java.lang.reflect.Constructor $stack8, $stack12;
+        int $stack9, $stack10, $stack11;
+        boolean $stack6, $stack13, $stack16, $stack18;
+        java.lang.Class[] $stack7;
+        jdk.internal.reflect.ReflectionFactory this;
+        java.lang.Class cl, $stack5, $stack15, initCl, prev;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        cl := @parameter0: java.lang.Class;
+
+        initCl = cl;
+
+     label1:
+        $stack5 = class "Ljava/io/Serializable;";
+
+        $stack6 = virtualinvoke $stack5.<java.lang.Class: boolean isAssignableFrom(java.lang.Class)>(initCl);
+
+        if $stack6 == 0 goto label4;
+
+        prev = initCl;
+
+        $stack15 = virtualinvoke initCl.<java.lang.Class: java.lang.Class getSuperclass()>();
+
+        initCl = $stack15;
+
+        if $stack15 == null goto label2;
+
+        $stack16 = <jdk.internal.reflect.ReflectionFactory: boolean disableSerialConstructorChecks>;
+
+        if $stack16 != 0 goto label3;
+
+        $stack18 = virtualinvoke this.<jdk.internal.reflect.ReflectionFactory: boolean superHasAccessibleConstructor(java.lang.Class)>(prev);
+
+        if $stack18 != 0 goto label3;
+
+     label2:
+        return null;
+
+     label3:
+        goto label1;
+
+     label4:
+        $stack7 = newarray (java.lang.Class)[0];
+
+        $stack8 = virtualinvoke initCl.<java.lang.Class: java.lang.reflect.Constructor getDeclaredConstructor(java.lang.Class[])>($stack7);
+
+        $stack9 = virtualinvoke $stack8.<java.lang.reflect.Constructor: int getModifiers()>();
+
+        $stack10 = $stack9 & 2;
+
+        if $stack10 != 0 goto label5;
+
+        $stack11 = $stack9 & 5;
+
+        if $stack11 != 0 goto label6;
+
+        $stack13 = staticinvoke <jdk.internal.reflect.ReflectionFactory: boolean packageEquals(java.lang.Class,java.lang.Class)>(cl, initCl);
+
+        if $stack13 != 0 goto label6;
+
+     label5:
+        return null;
+
+     label6:
+        goto label8;
+
+     label7:
+        $stack20 := @caughtexception;
+
+        return null;
+
+     label8:
+        $stack12 = virtualinvoke this.<jdk.internal.reflect.ReflectionFactory: java.lang.reflect.Constructor generateConstructor(java.lang.Class,java.lang.reflect.Constructor)>(cl, $stack8);
+
+        return $stack12;
+
+        catch java.lang.NoSuchMethodException from label4 to label5 with label7;
+    }
+
+    private final java.lang.reflect.Constructor generateConstructor(java.lang.Class, java.lang.reflect.Constructor)
+    {
+        byte[] $stack20, $stack22;
+        java.lang.reflect.Constructor constructorToCall, $stack23;
+        jdk.internal.access.JavaLangReflectAccess $stack15, $stack17, $stack19, $stack21;
+        int $stack8, $stack14, $stack16;
+        java.lang.String $stack18;
+        java.lang.Class[] $stack6, $stack7, $stack12, $stack13;
+        jdk.internal.reflect.MethodAccessorGenerator $stack5;
+        jdk.internal.reflect.SerializationConstructorAccessorImpl $stack10;
+        jdk.internal.reflect.ReflectionFactory this;
+        java.lang.Class cl, $stack9, $stack11;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        cl := @parameter0: java.lang.Class;
+
+        constructorToCall := @parameter1: java.lang.reflect.Constructor;
+
+        $stack5 = new jdk.internal.reflect.MethodAccessorGenerator;
+
+        specialinvoke $stack5.<jdk.internal.reflect.MethodAccessorGenerator: void <init>()>();
+
+        $stack6 = virtualinvoke constructorToCall.<java.lang.reflect.Constructor: java.lang.Class[] getParameterTypes()>();
+
+        $stack7 = virtualinvoke constructorToCall.<java.lang.reflect.Constructor: java.lang.Class[] getExceptionTypes()>();
+
+        $stack8 = virtualinvoke constructorToCall.<java.lang.reflect.Constructor: int getModifiers()>();
+
+        $stack9 = virtualinvoke constructorToCall.<java.lang.reflect.Constructor: java.lang.Class getDeclaringClass()>();
+
+        $stack10 = virtualinvoke $stack5.<jdk.internal.reflect.MethodAccessorGenerator: jdk.internal.reflect.SerializationConstructorAccessorImpl generateSerializationConstructor(java.lang.Class,java.lang.Class[],java.lang.Class[],int,java.lang.Class)>(cl, $stack6, $stack7, $stack8, $stack9);
+
+        $stack11 = virtualinvoke constructorToCall.<java.lang.reflect.Constructor: java.lang.Class getDeclaringClass()>();
+
+        $stack12 = virtualinvoke constructorToCall.<java.lang.reflect.Constructor: java.lang.Class[] getParameterTypes()>();
+
+        $stack13 = virtualinvoke constructorToCall.<java.lang.reflect.Constructor: java.lang.Class[] getExceptionTypes()>();
+
+        $stack14 = virtualinvoke constructorToCall.<java.lang.reflect.Constructor: int getModifiers()>();
+
+        $stack15 = this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess>;
+
+        $stack16 = interfaceinvoke $stack15.<jdk.internal.access.JavaLangReflectAccess: int getConstructorSlot(java.lang.reflect.Constructor)>(constructorToCall);
+
+        $stack17 = this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess>;
+
+        $stack18 = interfaceinvoke $stack17.<jdk.internal.access.JavaLangReflectAccess: java.lang.String getConstructorSignature(java.lang.reflect.Constructor)>(constructorToCall);
+
+        $stack19 = this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess>;
+
+        $stack20 = interfaceinvoke $stack19.<jdk.internal.access.JavaLangReflectAccess: byte[] getConstructorAnnotations(java.lang.reflect.Constructor)>(constructorToCall);
+
+        $stack21 = this.<jdk.internal.reflect.ReflectionFactory: jdk.internal.access.JavaLangReflectAccess langReflectAccess>;
+
+        $stack22 = interfaceinvoke $stack21.<jdk.internal.access.JavaLangReflectAccess: byte[] getConstructorParameterAnnotations(java.lang.reflect.Constructor)>(constructorToCall);
+
+        $stack23 = virtualinvoke this.<jdk.internal.reflect.ReflectionFactory: java.lang.reflect.Constructor newConstructor(java.lang.Class,java.lang.Class[],java.lang.Class[],int,int,java.lang.String,byte[],byte[])>($stack11, $stack12, $stack13, $stack14, $stack16, $stack18, $stack20, $stack22);
+
+        virtualinvoke this.<jdk.internal.reflect.ReflectionFactory: void setConstructorAccessor(java.lang.reflect.Constructor,jdk.internal.reflect.ConstructorAccessor)>($stack23, $stack10);
+
+        virtualinvoke $stack23.<java.lang.reflect.Constructor: void setAccessible(boolean)>(1);
+
+        return $stack23;
+    }
+
+    public final java.lang.invoke.MethodHandle readObjectForSerialization(java.lang.Class)
+    {
+        java.lang.Class cl;
+        java.lang.invoke.MethodHandle $stack2;
+        jdk.internal.reflect.ReflectionFactory this;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        cl := @parameter0: java.lang.Class;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.ReflectionFactory: java.lang.invoke.MethodHandle findReadWriteObjectForSerialization(java.lang.Class,java.lang.String,java.lang.Class)>(cl, "readObject", class "Ljava/io/ObjectInputStream;");
+
+        return $stack2;
+    }
+
+    public final java.lang.invoke.MethodHandle readObjectNoDataForSerialization(java.lang.Class)
+    {
+        java.lang.Class cl;
+        java.lang.invoke.MethodHandle $stack2;
+        jdk.internal.reflect.ReflectionFactory this;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        cl := @parameter0: java.lang.Class;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.ReflectionFactory: java.lang.invoke.MethodHandle findReadWriteObjectForSerialization(java.lang.Class,java.lang.String,java.lang.Class)>(cl, "readObjectNoData", class "Ljava/io/ObjectInputStream;");
+
+        return $stack2;
+    }
+
+    public final java.lang.invoke.MethodHandle writeObjectForSerialization(java.lang.Class)
+    {
+        java.lang.Class cl;
+        java.lang.invoke.MethodHandle $stack2;
+        jdk.internal.reflect.ReflectionFactory this;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        cl := @parameter0: java.lang.Class;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.ReflectionFactory: java.lang.invoke.MethodHandle findReadWriteObjectForSerialization(java.lang.Class,java.lang.String,java.lang.Class)>(cl, "writeObject", class "Ljava/io/ObjectOutputStream;");
+
+        return $stack2;
+    }
+
+    private final java.lang.invoke.MethodHandle findReadWriteObjectForSerialization(java.lang.Class, java.lang.String, java.lang.Class)
+    {
+        java.lang.invoke.MethodHandle $stack17;
+        java.lang.NoSuchMethodException $stack20;
+        int $stack10;
+        java.lang.InternalError $stack19;
+        java.lang.String methodName;
+        java.lang.reflect.Method $stack9;
+        boolean $stack7, $stack13, $stack15;
+        java.lang.invoke.MethodHandles$Lookup $stack16;
+        java.lang.IllegalAccessException $stack18;
+        java.lang.Class[] $stack8;
+        jdk.internal.reflect.ReflectionFactory this;
+        java.lang.Class cl, $stack6, streamClass, $stack11, $stack12;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        cl := @parameter0: java.lang.Class;
+
+        methodName := @parameter1: java.lang.String;
+
+        streamClass := @parameter2: java.lang.Class;
+
+        $stack6 = class "Ljava/io/Serializable;";
+
+        $stack7 = virtualinvoke $stack6.<java.lang.Class: boolean isAssignableFrom(java.lang.Class)>(cl);
+
+        if $stack7 != 0 goto label1;
+
+        return null;
+
+     label1:
+        $stack8 = newarray (java.lang.Class)[1];
+
+        $stack8[0] = streamClass;
+
+        $stack9 = virtualinvoke cl.<java.lang.Class: java.lang.reflect.Method getDeclaredMethod(java.lang.String,java.lang.Class[])>(methodName, $stack8);
+
+        $stack10 = virtualinvoke $stack9.<java.lang.reflect.Method: int getModifiers()>();
+
+        $stack11 = virtualinvoke $stack9.<java.lang.reflect.Method: java.lang.Class getReturnType()>();
+
+        $stack12 = <java.lang.Void: java.lang.Class TYPE>;
+
+        if $stack11 != $stack12 goto label2;
+
+        $stack13 = staticinvoke <java.lang.reflect.Modifier: boolean isStatic(int)>($stack10);
+
+        if $stack13 != 0 goto label2;
+
+        $stack15 = staticinvoke <java.lang.reflect.Modifier: boolean isPrivate(int)>($stack10);
+
+        if $stack15 != 0 goto label3;
+
+     label2:
+        return null;
+
+     label3:
+        virtualinvoke $stack9.<java.lang.reflect.Method: void setAccessible(boolean)>(1);
+
+        $stack16 = staticinvoke <java.lang.invoke.MethodHandles: java.lang.invoke.MethodHandles$Lookup lookup()>();
+
+        $stack17 = virtualinvoke $stack16.<java.lang.invoke.MethodHandles$Lookup: java.lang.invoke.MethodHandle unreflect(java.lang.reflect.Method)>($stack9);
+
+     label4:
+        return $stack17;
+
+     label5:
+        $stack20 := @caughtexception;
+
+        return null;
+
+     label6:
+        $stack18 := @caughtexception;
+
+        $stack19 = new java.lang.InternalError;
+
+        specialinvoke $stack19.<java.lang.InternalError: void <init>(java.lang.String,java.lang.Throwable)>("Error", $stack18);
+
+        throw $stack19;
+
+        catch java.lang.NoSuchMethodException from label1 to label2 with label5;
+        catch java.lang.NoSuchMethodException from label3 to label4 with label5;
+        catch java.lang.IllegalAccessException from label1 to label2 with label6;
+        catch java.lang.IllegalAccessException from label3 to label4 with label6;
+    }
+
+    public final java.lang.invoke.MethodHandle writeReplaceForSerialization(java.lang.Class)
+    {
+        java.lang.Class cl;
+        java.lang.invoke.MethodHandle $stack2;
+        jdk.internal.reflect.ReflectionFactory this;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        cl := @parameter0: java.lang.Class;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.ReflectionFactory: java.lang.invoke.MethodHandle getReplaceResolveForSerialization(java.lang.Class,java.lang.String)>(cl, "writeReplace");
+
+        return $stack2;
+    }
+
+    public final java.lang.invoke.MethodHandle readResolveForSerialization(java.lang.Class)
+    {
+        java.lang.Class cl;
+        java.lang.invoke.MethodHandle $stack2;
+        jdk.internal.reflect.ReflectionFactory this;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        cl := @parameter0: java.lang.Class;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.ReflectionFactory: java.lang.invoke.MethodHandle getReplaceResolveForSerialization(java.lang.Class,java.lang.String)>(cl, "readResolve");
+
+        return $stack2;
+    }
+
+    private java.lang.invoke.MethodHandle getReplaceResolveForSerialization(java.lang.Class, java.lang.String)
+    {
+        java.lang.invoke.MethodHandle $stack22;
+        java.lang.NoSuchMethodException $stack28;
+        int $stack12;
+        java.lang.InternalError $stack32;
+        java.lang.String methodName;
+        java.lang.reflect.Method $stack10;
+        boolean $stack8, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20;
+        java.lang.invoke.MethodHandles$Lookup $stack21;
+        java.lang.IllegalAccessException $stack31;
+        java.lang.Class[] $stack9;
+        jdk.internal.reflect.ReflectionFactory this;
+        java.lang.Class cl, $stack7, $stack11, defCl;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        cl := @parameter0: java.lang.Class;
+
+        methodName := @parameter1: java.lang.String;
+
+        $stack7 = class "Ljava/io/Serializable;";
+
+        $stack8 = virtualinvoke $stack7.<java.lang.Class: boolean isAssignableFrom(java.lang.Class)>(cl);
+
+        if $stack8 != 0 goto label01;
+
+        return null;
+
+     label01:
+        defCl = cl;
+
+     label02:
+        if defCl == null goto label16;
+
+     label03:
+        $stack9 = newarray (java.lang.Class)[0];
+
+        $stack10 = virtualinvoke defCl.<java.lang.Class: java.lang.reflect.Method getDeclaredMethod(java.lang.String,java.lang.Class[])>(methodName, $stack9);
+
+        $stack11 = virtualinvoke $stack10.<java.lang.reflect.Method: java.lang.Class getReturnType()>();
+
+        if $stack11 == class "Ljava/lang/Object;" goto label05;
+
+     label04:
+        return null;
+
+     label05:
+        $stack12 = virtualinvoke $stack10.<java.lang.reflect.Method: int getModifiers()>();
+
+        $stack13 = staticinvoke <java.lang.reflect.Modifier: boolean isStatic(int)>($stack12);
+
+        $stack14 = staticinvoke <java.lang.reflect.Modifier: boolean isAbstract(int)>($stack12);
+
+        $stack15 = $stack13 | $stack14;
+
+        if $stack15 == 0 goto label07;
+
+     label06:
+        return null;
+
+     label07:
+        $stack16 = staticinvoke <java.lang.reflect.Modifier: boolean isPublic(int)>($stack12);
+
+        $stack17 = staticinvoke <java.lang.reflect.Modifier: boolean isProtected(int)>($stack12);
+
+        $stack18 = $stack16 | $stack17;
+
+        if $stack18 == 0 goto label08;
+
+        goto label12;
+
+     label08:
+        $stack19 = staticinvoke <java.lang.reflect.Modifier: boolean isPrivate(int)>($stack12);
+
+        if $stack19 == 0 goto label10;
+
+        if cl == defCl goto label10;
+
+     label09:
+        return null;
+
+     label10:
+        $stack20 = staticinvoke <jdk.internal.reflect.ReflectionFactory: boolean packageEquals(java.lang.Class,java.lang.Class)>(cl, defCl);
+
+        if $stack20 != 0 goto label12;
+
+     label11:
+        return null;
+
+     label12:
+        virtualinvoke $stack10.<java.lang.reflect.Method: void setAccessible(boolean)>(1);
+
+        $stack21 = staticinvoke <java.lang.invoke.MethodHandles: java.lang.invoke.MethodHandles$Lookup lookup()>();
+
+        $stack22 = virtualinvoke $stack21.<java.lang.invoke.MethodHandles$Lookup: java.lang.invoke.MethodHandle unreflect(java.lang.reflect.Method)>($stack10);
+
+     label13:
+        return $stack22;
+
+     label14:
+        $stack31 := @caughtexception;
+
+        $stack32 = new java.lang.InternalError;
+
+        specialinvoke $stack32.<java.lang.InternalError: void <init>(java.lang.String,java.lang.Throwable)>("Error", $stack31);
+
+        throw $stack32;
+
+     label15:
+        $stack28 := @caughtexception;
+
+        defCl = virtualinvoke defCl.<java.lang.Class: java.lang.Class getSuperclass()>();
+
+        goto label02;
+
+     label16:
+        return null;
+
+        catch java.lang.IllegalAccessException from label12 to label13 with label14;
+        catch java.lang.NoSuchMethodException from label03 to label04 with label15;
+        catch java.lang.NoSuchMethodException from label05 to label06 with label15;
+        catch java.lang.NoSuchMethodException from label07 to label09 with label15;
+        catch java.lang.NoSuchMethodException from label10 to label11 with label15;
+        catch java.lang.NoSuchMethodException from label12 to label13 with label15;
+        catch java.lang.NoSuchMethodException from label14 to label15 with label15;
+    }
+
+    public final boolean hasStaticInitializerForSerialization(java.lang.Class)
+    {
+        java.lang.Object[] $stack4;
+        java.lang.NoSuchMethodException $stack18;
+        java.lang.ReflectiveOperationException $stack16;
+        java.lang.Boolean $stack6;
+        java.lang.InternalError $stack17, $stack19;
+        java.lang.String $stack23;
+        java.lang.reflect.Method $stack10, m;
+        boolean $stack7;
+        java.lang.Class[] $stack8;
+        jdk.internal.reflect.ReflectionFactory this;
+        java.lang.Class cl, $stack9;
+        java.lang.Object $stack5;
+        java.lang.StringBuilder $stack20, $stack21, $stack22;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+        cl := @parameter0: java.lang.Class;
+
+        m = <jdk.internal.reflect.ReflectionFactory: java.lang.reflect.Method hasStaticInitializerMethod>;
+
+        if m != null goto label4;
+
+     label1:
+        $stack9 = class "Ljava/io/ObjectStreamClass;";
+
+        $stack8 = newarray (java.lang.Class)[1];
+
+        $stack8[0] = class "Ljava/lang/Class;";
+
+        $stack10 = virtualinvoke $stack9.<java.lang.Class: java.lang.reflect.Method getDeclaredMethod(java.lang.String,java.lang.Class[])>("hasStaticInitializer", $stack8);
+
+        m = $stack10;
+
+        virtualinvoke $stack10.<java.lang.reflect.Method: void setAccessible(boolean)>(1);
+
+        <jdk.internal.reflect.ReflectionFactory: java.lang.reflect.Method hasStaticInitializerMethod> = $stack10;
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack18 := @caughtexception;
+
+        $stack19 = new java.lang.InternalError;
+
+        $stack20 = new java.lang.StringBuilder;
+
+        specialinvoke $stack20.<java.lang.StringBuilder: void <init>()>();
+
+        $stack21 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("No such method hasStaticInitializer on ");
+
+        $stack22 = virtualinvoke $stack21.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(class "Ljava/io/ObjectStreamClass;");
+
+        $stack23 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack19.<java.lang.InternalError: void <init>(java.lang.String,java.lang.Throwable)>($stack23, $stack18);
+
+        throw $stack19;
+
+     label4:
+        $stack4 = newarray (java.lang.Object)[1];
+
+        $stack4[0] = cl;
+
+        $stack5 = virtualinvoke m.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(null, $stack4);
+
+        $stack6 = (java.lang.Boolean) $stack5;
+
+        $stack7 = virtualinvoke $stack6.<java.lang.Boolean: boolean booleanValue()>();
+
+     label5:
+        return $stack7;
+
+     label6:
+        $stack16 := @caughtexception;
+
+        $stack17 = new java.lang.InternalError;
+
+        specialinvoke $stack17.<java.lang.InternalError: void <init>(java.lang.String,java.lang.Throwable)>("Exception invoking hasStaticInitializer", $stack16);
+
+        throw $stack17;
+
+        catch java.lang.NoSuchMethodException from label1 to label2 with label3;
+        catch java.lang.reflect.InvocationTargetException from label4 to label5 with label6;
+        catch java.lang.IllegalAccessException from label4 to label5 with label6;
+    }
+
+    public final java.lang.reflect.Constructor newOptionalDataExceptionForSerialization()
+    {
+        java.lang.NoSuchMethodException $stack6;
+        jdk.internal.reflect.ReflectionFactory this;
+        java.lang.Class[] $stack2;
+        java.lang.InternalError $stack7;
+        java.lang.Class $stack3, $stack4;
+        java.lang.reflect.Constructor $stack5;
+
+        this := @this: jdk.internal.reflect.ReflectionFactory;
+
+     label1:
+        $stack4 = class "Ljava/io/OptionalDataException;";
+
+        $stack2 = newarray (java.lang.Class)[1];
+
+        $stack3 = <java.lang.Boolean: java.lang.Class TYPE>;
+
+        $stack2[0] = $stack3;
+
+        $stack5 = virtualinvoke $stack4.<java.lang.Class: java.lang.reflect.Constructor getDeclaredConstructor(java.lang.Class[])>($stack2);
+
+        virtualinvoke $stack5.<java.lang.reflect.Constructor: void setAccessible(boolean)>(1);
+
+     label2:
+        return $stack5;
+
+     label3:
+        $stack6 := @caughtexception;
+
+        $stack7 = new java.lang.InternalError;
+
+        specialinvoke $stack7.<java.lang.InternalError: void <init>(java.lang.String,java.lang.Throwable)>("Constructor not found", $stack6);
+
+        throw $stack7;
+
+        catch java.lang.NoSuchMethodException from label1 to label2 with label3;
+    }
+
+    static int inflationThreshold()
+    {
+        int $stack0;
+
+        $stack0 = <jdk.internal.reflect.ReflectionFactory: int inflationThreshold>;
+
+        return $stack0;
+    }
+
+    private static void checkInitted()
+    {
+        java.util.Properties $stack5;
+        java.lang.NumberFormatException $stack19;
+        java.lang.RuntimeException $stack20;
+        int $stack11;
+        java.lang.String $stack6, $stack8, $stack9, $stack7;
+        boolean $stack3, $stack4, $stack10, $stack15;
+
+        $stack3 = <jdk.internal.reflect.ReflectionFactory: boolean initted>;
+
+        if $stack3 == 0 goto label1;
+
+        return;
+
+     label1:
+        $stack4 = staticinvoke <jdk.internal.misc.VM: boolean isModuleSystemInited()>();
+
+        if $stack4 != 0 goto label2;
+
+        return;
+
+     label2:
+        $stack5 = staticinvoke <sun.security.action.GetPropertyAction: java.util.Properties privilegedGetProperties()>();
+
+        $stack6 = virtualinvoke $stack5.<java.util.Properties: java.lang.String getProperty(java.lang.String)>("sun.reflect.noInflation");
+
+        if $stack6 == null goto label3;
+
+        $stack15 = virtualinvoke $stack6.<java.lang.String: boolean equals(java.lang.Object)>("true");
+
+        if $stack15 == 0 goto label3;
+
+        <jdk.internal.reflect.ReflectionFactory: boolean noInflation> = 1;
+
+     label3:
+        $stack7 = virtualinvoke $stack5.<java.util.Properties: java.lang.String getProperty(java.lang.String)>("sun.reflect.inflationThreshold");
+
+        if $stack7 == null goto label7;
+
+     label4:
+        $stack11 = staticinvoke <java.lang.Integer: int parseInt(java.lang.String)>($stack7);
+
+        <jdk.internal.reflect.ReflectionFactory: int inflationThreshold> = $stack11;
+
+     label5:
+        goto label7;
+
+     label6:
+        $stack19 := @caughtexception;
+
+        $stack20 = new java.lang.RuntimeException;
+
+        specialinvoke $stack20.<java.lang.RuntimeException: void <init>(java.lang.String,java.lang.Throwable)>("Unable to parse property sun.reflect.inflationThreshold", $stack19);
+
+        throw $stack20;
+
+     label7:
+        $stack8 = "true";
+
+        $stack9 = virtualinvoke $stack5.<java.util.Properties: java.lang.String getProperty(java.lang.String)>("jdk.disableSerialConstructorChecks");
+
+        $stack10 = virtualinvoke $stack8.<java.lang.String: boolean equals(java.lang.Object)>($stack9);
+
+        <jdk.internal.reflect.ReflectionFactory: boolean disableSerialConstructorChecks> = $stack10;
+
+        <jdk.internal.reflect.ReflectionFactory: boolean initted> = 1;
+
+        return;
+
+        catch java.lang.NumberFormatException from label4 to label5 with label6;
+    }
+
+    private static boolean packageEquals(java.lang.Class, java.lang.Class)
+    {
+        java.lang.AssertionError $stack9;
+        java.lang.Class cl1, cl2;
+        java.lang.ClassLoader $stack3, $stack4;
+        java.lang.String $stack5, $stack6;
+        boolean $stack2, $stack8, $stack10, $stack7;
+
+        cl1 := @parameter0: java.lang.Class;
+
+        cl2 := @parameter1: java.lang.Class;
+
+        $stack2 = <jdk.internal.reflect.ReflectionFactory: boolean $assertionsDisabled>;
+
+        if $stack2 != 0 goto label2;
+
+        $stack8 = virtualinvoke cl1.<java.lang.Class: boolean isArray()>();
+
+        if $stack8 != 0 goto label1;
+
+        $stack10 = virtualinvoke cl2.<java.lang.Class: boolean isArray()>();
+
+        if $stack10 == 0 goto label2;
+
+     label1:
+        $stack9 = new java.lang.AssertionError;
+
+        specialinvoke $stack9.<java.lang.AssertionError: void <init>()>();
+
+        throw $stack9;
+
+     label2:
+        if cl1 != cl2 goto label3;
+
+        return 1;
+
+     label3:
+        $stack3 = virtualinvoke cl1.<java.lang.Class: java.lang.ClassLoader getClassLoader()>();
+
+        $stack4 = virtualinvoke cl2.<java.lang.Class: java.lang.ClassLoader getClassLoader()>();
+
+        if $stack3 != $stack4 goto label4;
+
+        $stack5 = virtualinvoke cl1.<java.lang.Class: java.lang.String getPackageName()>();
+
+        $stack6 = virtualinvoke cl2.<java.lang.Class: java.lang.String getPackageName()>();
+
+        if $stack5 != $stack6 goto label4;
+
+        $stack7 = 1;
+
+        goto label5;
+
+     label4:
+        $stack7 = 0;
+
+     label5:
+        return $stack7;
+    }
+
+    static void <clinit>()
+    {
+        jdk.internal.reflect.ReflectionFactory $stack2;
+        java.lang.Class $stack0;
+        boolean $stack1, $stack3;
+
+        $stack0 = class "Ljdk/internal/reflect/ReflectionFactory;";
+
+        $stack1 = virtualinvoke $stack0.<java.lang.Class: boolean desiredAssertionStatus()>();
+
+        if $stack1 != 0 goto label1;
+
+        $stack3 = 1;
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        <jdk.internal.reflect.ReflectionFactory: boolean $assertionsDisabled> = $stack3;
+
+        <jdk.internal.reflect.ReflectionFactory: boolean initted> = 0;
+
+        $stack2 = new jdk.internal.reflect.ReflectionFactory;
+
+        specialinvoke $stack2.<jdk.internal.reflect.ReflectionFactory: void <init>()>();
+
+        <jdk.internal.reflect.ReflectionFactory: jdk.internal.reflect.ReflectionFactory soleInstance> = $stack2;
+
+        <jdk.internal.reflect.ReflectionFactory: boolean noInflation> = 0;
+
+        <jdk.internal.reflect.ReflectionFactory: int inflationThreshold> = 15;
+
+        <jdk.internal.reflect.ReflectionFactory: boolean disableSerialConstructorChecks> = 0;
+
+        return;
+    }
+}

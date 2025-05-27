@@ -1,0 +1,52 @@
+public final class jdk.internal.loader.ClassLoaderValue extends jdk.internal.loader.AbstractClassLoaderValue
+{
+
+    public void <init>()
+    {
+        jdk.internal.loader.ClassLoaderValue this;
+
+        this := @this: jdk.internal.loader.ClassLoaderValue;
+
+        specialinvoke this.<jdk.internal.loader.AbstractClassLoaderValue: void <init>()>();
+
+        return;
+    }
+
+    public jdk.internal.loader.ClassLoaderValue key()
+    {
+        jdk.internal.loader.ClassLoaderValue this;
+
+        this := @this: jdk.internal.loader.ClassLoaderValue;
+
+        return this;
+    }
+
+    public boolean isEqualOrDescendantOf(jdk.internal.loader.AbstractClassLoaderValue)
+    {
+        jdk.internal.loader.ClassLoaderValue this;
+        java.lang.Object $stack2;
+        jdk.internal.loader.AbstractClassLoaderValue clv;
+        boolean $stack3;
+
+        this := @this: jdk.internal.loader.ClassLoaderValue;
+
+        clv := @parameter0: jdk.internal.loader.AbstractClassLoaderValue;
+
+        $stack2 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(clv);
+
+        $stack3 = virtualinvoke this.<java.lang.Object: boolean equals(java.lang.Object)>($stack2);
+
+        return $stack3;
+    }
+
+    public volatile java.lang.Object key()
+    {
+        jdk.internal.loader.ClassLoaderValue this, $stack1;
+
+        this := @this: jdk.internal.loader.ClassLoaderValue;
+
+        $stack1 = virtualinvoke this.<jdk.internal.loader.ClassLoaderValue: jdk.internal.loader.ClassLoaderValue key()>();
+
+        return $stack1;
+    }
+}

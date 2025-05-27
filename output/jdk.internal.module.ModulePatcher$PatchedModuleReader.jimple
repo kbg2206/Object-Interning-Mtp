@@ -1,0 +1,566 @@
+public class jdk.internal.module.ModulePatcher$PatchedModuleReader extends java.lang.Object implements java.lang.module.ModuleReader
+{
+    private final java.util.List finders;
+    private final java.lang.module.ModuleReference mref;
+    private final java.net.URL delegateCodeSourceURL;
+    private volatile java.lang.module.ModuleReader delegate;
+    static final boolean $assertionsDisabled;
+
+    void <init>(java.util.List, java.lang.module.ModuleReference)
+    {
+        java.lang.Throwable $stack26;
+        java.net.URL $stack11;
+        java.lang.module.ModuleReference mref;
+        java.util.ArrayList $stack8;
+        java.nio.file.Path file;
+        boolean $stack10, $stack20;
+        java.util.Iterator $stack9;
+        java.nio.file.LinkOption[] $stack19;
+        java.io.IOException $stack28;
+        java.io.UncheckedIOException $stack29;
+        java.util.List patches;
+        jdk.internal.module.ModulePatcher$PatchedModuleReader this;
+        jdk.internal.module.ModulePatcher$JarResourceFinder $stack24;
+        java.lang.Object $stack18;
+        jdk.internal.module.ModulePatcher$ExplodedResourceFinder $stack21;
+
+        this := @this: jdk.internal.module.ModulePatcher$PatchedModuleReader;
+
+        patches := @parameter0: java.util.List;
+
+        mref := @parameter1: java.lang.module.ModuleReference;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack8 = new java.util.ArrayList;
+
+        specialinvoke $stack8.<java.util.ArrayList: void <init>()>();
+
+     label1:
+        $stack9 = interfaceinvoke patches.<java.util.List: java.util.Iterator iterator()>();
+
+     label2:
+        $stack10 = interfaceinvoke $stack9.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack10 == 0 goto label5;
+
+        $stack18 = interfaceinvoke $stack9.<java.util.Iterator: java.lang.Object next()>();
+
+        file = (java.nio.file.Path) $stack18;
+
+        $stack19 = newarray (java.nio.file.LinkOption)[0];
+
+        $stack20 = staticinvoke <java.nio.file.Files: boolean isRegularFile(java.nio.file.Path,java.nio.file.LinkOption[])>(file, $stack19);
+
+        if $stack20 == 0 goto label3;
+
+        $stack24 = new jdk.internal.module.ModulePatcher$JarResourceFinder;
+
+        specialinvoke $stack24.<jdk.internal.module.ModulePatcher$JarResourceFinder: void <init>(java.nio.file.Path)>(file);
+
+        interfaceinvoke $stack8.<java.util.List: boolean add(java.lang.Object)>($stack24);
+
+        goto label4;
+
+     label3:
+        $stack21 = new jdk.internal.module.ModulePatcher$ExplodedResourceFinder;
+
+        specialinvoke $stack21.<jdk.internal.module.ModulePatcher$ExplodedResourceFinder: void <init>(java.nio.file.Path)>(file);
+
+        interfaceinvoke $stack8.<java.util.List: boolean add(java.lang.Object)>($stack21);
+
+     label4:
+        goto label2;
+
+     label5:
+        goto label9;
+
+     label6:
+        $stack28 := @caughtexception;
+
+        $stack29 = new java.io.UncheckedIOException;
+
+        specialinvoke $stack29.<java.io.UncheckedIOException: void <init>(java.io.IOException)>($stack28);
+
+        throw $stack29;
+
+     label7:
+        $stack26 := @caughtexception;
+
+     label8:
+        staticinvoke <jdk.internal.module.ModulePatcher$PatchedModuleReader: void closeAll(java.util.List)>($stack8);
+
+        throw $stack26;
+
+     label9:
+        this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: java.util.List finders> = $stack8;
+
+        this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: java.lang.module.ModuleReference mref> = mref;
+
+        $stack11 = staticinvoke <jdk.internal.module.ModulePatcher$PatchedModuleReader: java.net.URL codeSourceURL(java.lang.module.ModuleReference)>(mref);
+
+        this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: java.net.URL delegateCodeSourceURL> = $stack11;
+
+        return;
+
+        catch java.io.IOException from label1 to label5 with label6;
+        catch java.lang.Throwable from label1 to label5 with label7;
+        catch java.lang.Throwable from label6 to label8 with label7;
+    }
+
+    private static void closeAll(java.util.List)
+    {
+        java.util.List finders;
+        jdk.internal.module.ModulePatcher$ResourceFinder finder;
+        java.util.Iterator $stack4;
+        java.lang.Object $stack6;
+        java.io.IOException $stack8;
+        boolean $stack5;
+
+        finders := @parameter0: java.util.List;
+
+        $stack4 = interfaceinvoke finders.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack5 = interfaceinvoke $stack4.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack5 == 0 goto label6;
+
+        $stack6 = interfaceinvoke $stack4.<java.util.Iterator: java.lang.Object next()>();
+
+        finder = (jdk.internal.module.ModulePatcher$ResourceFinder) $stack6;
+
+     label2:
+        interfaceinvoke finder.<jdk.internal.module.ModulePatcher$ResourceFinder: void close()>();
+
+     label3:
+        goto label5;
+
+     label4:
+        $stack8 := @caughtexception;
+
+     label5:
+        goto label1;
+
+     label6:
+        return;
+
+        catch java.io.IOException from label2 to label3 with label4;
+    }
+
+    private static java.net.URL codeSourceURL(java.lang.module.ModuleReference)
+    {
+        java.net.MalformedURLException $stack7;
+        java.net.URL $stack6;
+        java.util.Optional $stack2;
+        java.lang.module.ModuleReference mref;
+        java.lang.Object $stack4;
+        java.net.URI $stack5;
+        boolean $stack3;
+
+        mref := @parameter0: java.lang.module.ModuleReference;
+
+     label1:
+        $stack2 = virtualinvoke mref.<java.lang.module.ModuleReference: java.util.Optional location()>();
+
+        $stack3 = virtualinvoke $stack2.<java.util.Optional: boolean isPresent()>();
+
+        if $stack3 == 0 goto label3;
+
+        $stack4 = virtualinvoke $stack2.<java.util.Optional: java.lang.Object get()>();
+
+        $stack5 = (java.net.URI) $stack4;
+
+        $stack6 = virtualinvoke $stack5.<java.net.URI: java.net.URL toURL()>();
+
+     label2:
+        return $stack6;
+
+     label3:
+        goto label5;
+
+     label4:
+        $stack7 := @caughtexception;
+
+     label5:
+        return null;
+
+        catch java.net.MalformedURLException from label1 to label2 with label4;
+    }
+
+    private java.lang.module.ModuleReader delegate() throws java.io.IOException
+    {
+        java.lang.Throwable $stack9;
+        jdk.internal.module.ModulePatcher$PatchedModuleReader this;
+        java.lang.module.ModuleReference $stack7;
+        java.lang.module.ModuleReader $stack8, r;
+
+        this := @this: jdk.internal.module.ModulePatcher$PatchedModuleReader;
+
+        r = this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: java.lang.module.ModuleReader delegate>;
+
+        if r != null goto label6;
+
+        entermonitor this;
+
+     label1:
+        r = this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: java.lang.module.ModuleReader delegate>;
+
+        if r != null goto label2;
+
+        $stack7 = this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: java.lang.module.ModuleReference mref>;
+
+        $stack8 = virtualinvoke $stack7.<java.lang.module.ModuleReference: java.lang.module.ModuleReader open()>();
+
+        r = $stack8;
+
+        this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: java.lang.module.ModuleReader delegate> = $stack8;
+
+     label2:
+        exitmonitor this;
+
+     label3:
+        goto label6;
+
+     label4:
+        $stack9 := @caughtexception;
+
+        exitmonitor this;
+
+     label5:
+        throw $stack9;
+
+     label6:
+        return r;
+
+        catch java.lang.Throwable from label1 to label3 with label4;
+        catch java.lang.Throwable from label4 to label5 with label4;
+    }
+
+    private jdk.internal.loader.Resource findResourceInPatch(java.lang.String) throws java.io.IOException
+    {
+        jdk.internal.loader.Resource $stack11;
+        jdk.internal.module.ModulePatcher$ResourceFinder finder;
+        java.util.Iterator $stack7;
+        java.util.List $stack6;
+        jdk.internal.module.ModulePatcher$PatchedModuleReader this;
+        java.lang.Object $stack10;
+        java.lang.String name;
+        boolean $stack5, $stack8;
+
+        this := @this: jdk.internal.module.ModulePatcher$PatchedModuleReader;
+
+        name := @parameter0: java.lang.String;
+
+        $stack5 = virtualinvoke name.<java.lang.String: boolean equals(java.lang.Object)>("module-info.class");
+
+        if $stack5 != 0 goto label3;
+
+        $stack6 = this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: java.util.List finders>;
+
+        $stack7 = interfaceinvoke $stack6.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack8 = interfaceinvoke $stack7.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack8 == 0 goto label3;
+
+        $stack10 = interfaceinvoke $stack7.<java.util.Iterator: java.lang.Object next()>();
+
+        finder = (jdk.internal.module.ModulePatcher$ResourceFinder) $stack10;
+
+        $stack11 = interfaceinvoke finder.<jdk.internal.module.ModulePatcher$ResourceFinder: jdk.internal.loader.Resource find(java.lang.String)>(name);
+
+        if $stack11 == null goto label2;
+
+        return $stack11;
+
+     label2:
+        goto label1;
+
+     label3:
+        return null;
+    }
+
+    public jdk.internal.loader.Resource findResource(java.lang.String) throws java.io.IOException
+    {
+        jdk.internal.loader.Resource $stack4;
+        java.lang.module.ModuleReader $stack5;
+        java.nio.ByteBuffer bb;
+        jdk.internal.module.ModulePatcher$PatchedModuleReader$1 $stack8;
+        jdk.internal.module.ModulePatcher$PatchedModuleReader this;
+        java.util.Optional $stack6;
+        java.lang.Object $stack7;
+        java.lang.String name;
+
+        this := @this: jdk.internal.module.ModulePatcher$PatchedModuleReader;
+
+        name := @parameter0: java.lang.String;
+
+        $stack4 = virtualinvoke this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: jdk.internal.loader.Resource findResourceInPatch(java.lang.String)>(name);
+
+        if $stack4 == null goto label1;
+
+        return $stack4;
+
+     label1:
+        $stack5 = virtualinvoke this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: java.lang.module.ModuleReader delegate()>();
+
+        $stack6 = interfaceinvoke $stack5.<java.lang.module.ModuleReader: java.util.Optional read(java.lang.String)>(name);
+
+        $stack7 = virtualinvoke $stack6.<java.util.Optional: java.lang.Object orElse(java.lang.Object)>(null);
+
+        bb = (java.nio.ByteBuffer) $stack7;
+
+        if bb != null goto label2;
+
+        return null;
+
+     label2:
+        $stack8 = new jdk.internal.module.ModulePatcher$PatchedModuleReader$1;
+
+        specialinvoke $stack8.<jdk.internal.module.ModulePatcher$PatchedModuleReader$1: void <init>(jdk.internal.module.ModulePatcher$PatchedModuleReader,java.nio.ByteBuffer)>(this, bb);
+
+        return $stack8;
+    }
+
+    public java.util.Optional find(java.lang.String) throws java.io.IOException
+    {
+        jdk.internal.loader.Resource $stack4;
+        java.net.URL $stack7;
+        java.lang.module.ModuleReader $stack5;
+        jdk.internal.module.ModulePatcher$PatchedModuleReader this;
+        java.util.Optional $stack6, $stack10;
+        java.lang.String name, $stack8;
+        java.net.URI $stack9;
+
+        this := @this: jdk.internal.module.ModulePatcher$PatchedModuleReader;
+
+        name := @parameter0: java.lang.String;
+
+        $stack4 = virtualinvoke this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: jdk.internal.loader.Resource findResourceInPatch(java.lang.String)>(name);
+
+        if $stack4 == null goto label1;
+
+        $stack7 = virtualinvoke $stack4.<jdk.internal.loader.Resource: java.net.URL getURL()>();
+
+        $stack8 = virtualinvoke $stack7.<java.net.URL: java.lang.String toString()>();
+
+        $stack9 = staticinvoke <java.net.URI: java.net.URI create(java.lang.String)>($stack8);
+
+        $stack10 = staticinvoke <java.util.Optional: java.util.Optional of(java.lang.Object)>($stack9);
+
+        return $stack10;
+
+     label1:
+        $stack5 = virtualinvoke this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: java.lang.module.ModuleReader delegate()>();
+
+        $stack6 = interfaceinvoke $stack5.<java.lang.module.ModuleReader: java.util.Optional find(java.lang.String)>(name);
+
+        return $stack6;
+    }
+
+    public java.util.Optional open(java.lang.String) throws java.io.IOException
+    {
+        jdk.internal.loader.Resource $stack3;
+        jdk.internal.module.ModulePatcher$PatchedModuleReader this;
+        java.util.Optional $stack5, $stack7;
+        java.lang.String name;
+        java.lang.module.ModuleReader $stack4;
+        java.io.InputStream $stack6;
+
+        this := @this: jdk.internal.module.ModulePatcher$PatchedModuleReader;
+
+        name := @parameter0: java.lang.String;
+
+        $stack3 = virtualinvoke this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: jdk.internal.loader.Resource findResourceInPatch(java.lang.String)>(name);
+
+        if $stack3 == null goto label1;
+
+        $stack6 = virtualinvoke $stack3.<jdk.internal.loader.Resource: java.io.InputStream getInputStream()>();
+
+        $stack7 = staticinvoke <java.util.Optional: java.util.Optional of(java.lang.Object)>($stack6);
+
+        return $stack7;
+
+     label1:
+        $stack4 = virtualinvoke this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: java.lang.module.ModuleReader delegate()>();
+
+        $stack5 = interfaceinvoke $stack4.<java.lang.module.ModuleReader: java.util.Optional open(java.lang.String)>(name);
+
+        return $stack5;
+    }
+
+    public java.util.Optional read(java.lang.String) throws java.io.IOException
+    {
+        jdk.internal.loader.Resource $stack4;
+        java.lang.AssertionError $stack12;
+        java.lang.module.ModuleReader $stack5;
+        java.nio.ByteBuffer $stack7;
+        jdk.internal.module.ModulePatcher$PatchedModuleReader this;
+        java.util.Optional $stack6, $stack9;
+        java.lang.String name;
+        boolean $stack8, $stack10;
+
+        this := @this: jdk.internal.module.ModulePatcher$PatchedModuleReader;
+
+        name := @parameter0: java.lang.String;
+
+        $stack4 = virtualinvoke this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: jdk.internal.loader.Resource findResourceInPatch(java.lang.String)>(name);
+
+        if $stack4 == null goto label2;
+
+        $stack7 = virtualinvoke $stack4.<jdk.internal.loader.Resource: java.nio.ByteBuffer getByteBuffer()>();
+
+        $stack8 = <jdk.internal.module.ModulePatcher$PatchedModuleReader: boolean $assertionsDisabled>;
+
+        if $stack8 != 0 goto label1;
+
+        $stack10 = virtualinvoke $stack7.<java.nio.ByteBuffer: boolean isDirect()>();
+
+        if $stack10 == 0 goto label1;
+
+        $stack12 = new java.lang.AssertionError;
+
+        specialinvoke $stack12.<java.lang.AssertionError: void <init>()>();
+
+        throw $stack12;
+
+     label1:
+        $stack9 = staticinvoke <java.util.Optional: java.util.Optional of(java.lang.Object)>($stack7);
+
+        return $stack9;
+
+     label2:
+        $stack5 = virtualinvoke this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: java.lang.module.ModuleReader delegate()>();
+
+        $stack6 = interfaceinvoke $stack5.<java.lang.module.ModuleReader: java.util.Optional read(java.lang.String)>(name);
+
+        return $stack6;
+    }
+
+    public void release(java.nio.ByteBuffer)
+    {
+        jdk.internal.module.ModulePatcher$PatchedModuleReader this;
+        java.lang.InternalError $stack6;
+        java.io.IOException $stack5;
+        java.lang.module.ModuleReader $stack4;
+        java.nio.ByteBuffer bb;
+        boolean $stack3;
+
+        this := @this: jdk.internal.module.ModulePatcher$PatchedModuleReader;
+
+        bb := @parameter0: java.nio.ByteBuffer;
+
+        $stack3 = virtualinvoke bb.<java.nio.ByteBuffer: boolean isDirect()>();
+
+        if $stack3 == 0 goto label4;
+
+     label1:
+        $stack4 = virtualinvoke this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: java.lang.module.ModuleReader delegate()>();
+
+        interfaceinvoke $stack4.<java.lang.module.ModuleReader: void release(java.nio.ByteBuffer)>(bb);
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack5 := @caughtexception;
+
+        $stack6 = new java.lang.InternalError;
+
+        specialinvoke $stack6.<java.lang.InternalError: void <init>(java.lang.Throwable)>($stack5);
+
+        throw $stack6;
+
+     label4:
+        return;
+
+        catch java.io.IOException from label1 to label2 with label3;
+    }
+
+    public java.util.stream.Stream list() throws java.io.IOException
+    {
+        jdk.internal.module.ModulePatcher$ResourceFinder finder;
+        java.util.Iterator $stack7;
+        java.lang.module.ModuleReader $stack4;
+        java.util.List $stack6;
+        java.util.stream.Stream $stack9, $stack11, s;
+        jdk.internal.module.ModulePatcher$PatchedModuleReader this;
+        java.lang.Object $stack10;
+        boolean $stack8;
+
+        this := @this: jdk.internal.module.ModulePatcher$PatchedModuleReader;
+
+        $stack4 = virtualinvoke this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: java.lang.module.ModuleReader delegate()>();
+
+        s = interfaceinvoke $stack4.<java.lang.module.ModuleReader: java.util.stream.Stream list()>();
+
+        $stack6 = this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: java.util.List finders>;
+
+        $stack7 = interfaceinvoke $stack6.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack8 = interfaceinvoke $stack7.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack8 == 0 goto label2;
+
+        $stack10 = interfaceinvoke $stack7.<java.util.Iterator: java.lang.Object next()>();
+
+        finder = (jdk.internal.module.ModulePatcher$ResourceFinder) $stack10;
+
+        $stack11 = interfaceinvoke finder.<jdk.internal.module.ModulePatcher$ResourceFinder: java.util.stream.Stream list()>();
+
+        s = staticinvoke <java.util.stream.Stream: java.util.stream.Stream concat(java.util.stream.Stream,java.util.stream.Stream)>(s, $stack11);
+
+        goto label1;
+
+     label2:
+        $stack9 = interfaceinvoke s.<java.util.stream.Stream: java.util.stream.Stream distinct()>();
+
+        return $stack9;
+    }
+
+    public void close() throws java.io.IOException
+    {
+        java.util.List $stack1;
+        java.lang.module.ModuleReader $stack2;
+        jdk.internal.module.ModulePatcher$PatchedModuleReader this;
+
+        this := @this: jdk.internal.module.ModulePatcher$PatchedModuleReader;
+
+        $stack1 = this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: java.util.List finders>;
+
+        staticinvoke <jdk.internal.module.ModulePatcher$PatchedModuleReader: void closeAll(java.util.List)>($stack1);
+
+        $stack2 = virtualinvoke this.<jdk.internal.module.ModulePatcher$PatchedModuleReader: java.lang.module.ModuleReader delegate()>();
+
+        interfaceinvoke $stack2.<java.lang.module.ModuleReader: void close()>();
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.Class $stack0;
+        boolean $stack1, $stack2;
+
+        $stack0 = class "Ljdk/internal/module/ModulePatcher;";
+
+        $stack1 = virtualinvoke $stack0.<java.lang.Class: boolean desiredAssertionStatus()>();
+
+        if $stack1 != 0 goto label1;
+
+        $stack2 = 1;
+
+        goto label2;
+
+     label1:
+        $stack2 = 0;
+
+     label2:
+        <jdk.internal.module.ModulePatcher$PatchedModuleReader: boolean $assertionsDisabled> = $stack2;
+
+        return;
+    }
+}

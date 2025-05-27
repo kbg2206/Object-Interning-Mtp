@@ -1,0 +1,65 @@
+class jdk.internal.misc.InnocuousThread$2 extends java.lang.Object implements java.security.PrivilegedAction
+{
+    final java.lang.String val$name;
+    final java.lang.Runnable val$target;
+    final int val$priority;
+
+    void <init>(java.lang.String, java.lang.Runnable, int)
+    {
+        jdk.internal.misc.InnocuousThread$2 this;
+        int l3;
+        java.lang.String l1;
+        java.lang.Runnable l2;
+
+        this := @this: jdk.internal.misc.InnocuousThread$2;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.Runnable;
+
+        l3 := @parameter2: int;
+
+        this.<jdk.internal.misc.InnocuousThread$2: java.lang.String val$name> = l1;
+
+        this.<jdk.internal.misc.InnocuousThread$2: java.lang.Runnable val$target> = l2;
+
+        this.<jdk.internal.misc.InnocuousThread$2: int val$priority> = l3;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.Thread run()
+    {
+        jdk.internal.misc.InnocuousThread$2 this;
+        java.lang.Thread $stack4;
+        int $stack1;
+        java.lang.String $stack3;
+        java.lang.Runnable $stack2;
+
+        this := @this: jdk.internal.misc.InnocuousThread$2;
+
+        $stack3 = this.<jdk.internal.misc.InnocuousThread$2: java.lang.String val$name>;
+
+        $stack2 = this.<jdk.internal.misc.InnocuousThread$2: java.lang.Runnable val$target>;
+
+        $stack1 = this.<jdk.internal.misc.InnocuousThread$2: int val$priority>;
+
+        $stack4 = staticinvoke <jdk.internal.misc.InnocuousThread: java.lang.Thread createThread(java.lang.String,java.lang.Runnable,java.lang.ClassLoader,int)>($stack3, $stack2, null, $stack1);
+
+        return $stack4;
+    }
+
+    public volatile java.lang.Object run()
+    {
+        jdk.internal.misc.InnocuousThread$2 this;
+        java.lang.Thread $stack1;
+
+        this := @this: jdk.internal.misc.InnocuousThread$2;
+
+        $stack1 = virtualinvoke this.<jdk.internal.misc.InnocuousThread$2: java.lang.Thread run()>();
+
+        return $stack1;
+    }
+}

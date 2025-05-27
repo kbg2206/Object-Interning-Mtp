@@ -1,0 +1,529 @@
+public final class jdk.internal.module.Checks extends java.lang.Object
+{
+    private static final java.util.Set RESERVED;
+
+    private void <init>()
+    {
+        jdk.internal.module.Checks this;
+
+        this := @this: jdk.internal.module.Checks;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static java.lang.String requireModuleName(java.lang.String)
+    {
+        int $stack4, off, $i0;
+        java.lang.String name, $stack5, $stack13, $stack14, $stack26;
+        boolean $stack6, $stack15;
+        java.lang.IllegalArgumentException $u0, $u2, $u4;
+        java.lang.StringBuilder $stack9, $stack10, $stack11, $stack12, $stack22, $stack23, $stack24, $stack25, $u1, $u3;
+
+        name := @parameter0: java.lang.String;
+
+        if name != null goto label1;
+
+        $u0 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $u0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null module name");
+
+        throw $u0;
+
+     label1:
+        off = 0;
+
+     label2:
+        $stack4 = virtualinvoke name.<java.lang.String: int indexOf(int,int)>(46, off);
+
+        $i0 = (int) -1;
+
+        if $stack4 == $i0 goto label4;
+
+        $stack14 = virtualinvoke name.<java.lang.String: java.lang.String substring(int,int)>(off, $stack4);
+
+        $stack15 = staticinvoke <jdk.internal.module.Checks: boolean isJavaIdentifier(java.lang.String)>($stack14);
+
+        if $stack15 != 0 goto label3;
+
+        $u2 = new java.lang.IllegalArgumentException;
+
+        $u1 = new java.lang.StringBuilder;
+
+        specialinvoke $u1.<java.lang.StringBuilder: void <init>()>();
+
+        $stack22 = virtualinvoke $u1.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+
+        $stack23 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(": Invalid module name: \'");
+
+        $stack24 = virtualinvoke $stack23.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack14);
+
+        $stack25 = virtualinvoke $stack24.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\' is not a Java identifier");
+
+        $stack26 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack26);
+
+        throw $u2;
+
+     label3:
+        off = $stack4 + 1;
+
+        goto label2;
+
+     label4:
+        $stack5 = virtualinvoke name.<java.lang.String: java.lang.String substring(int)>(off);
+
+        $stack6 = staticinvoke <jdk.internal.module.Checks: boolean isJavaIdentifier(java.lang.String)>($stack5);
+
+        if $stack6 != 0 goto label5;
+
+        $u4 = new java.lang.IllegalArgumentException;
+
+        $u3 = new java.lang.StringBuilder;
+
+        specialinvoke $u3.<java.lang.StringBuilder: void <init>()>();
+
+        $stack9 = virtualinvoke $u3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(": Invalid module name: \'");
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack5);
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\' is not a Java identifier");
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack13);
+
+        throw $u4;
+
+     label5:
+        return name;
+    }
+
+    public static java.lang.String requirePackageName(java.lang.String)
+    {
+        java.lang.String name, $stack1;
+
+        name := @parameter0: java.lang.String;
+
+        $stack1 = staticinvoke <jdk.internal.module.Checks: java.lang.String requireTypeName(java.lang.String,java.lang.String)>("package name", name);
+
+        return $stack1;
+    }
+
+    public static boolean isPackageName(java.lang.String)
+    {
+        java.lang.String name;
+        boolean $stack1;
+
+        name := @parameter0: java.lang.String;
+
+        $stack1 = staticinvoke <jdk.internal.module.Checks: boolean isTypeName(java.lang.String)>(name);
+
+        return $stack1;
+    }
+
+    public static java.lang.String requireServiceTypeName(java.lang.String)
+    {
+        java.lang.String name, $stack1;
+
+        name := @parameter0: java.lang.String;
+
+        $stack1 = staticinvoke <jdk.internal.module.Checks: java.lang.String requireQualifiedClassName(java.lang.String,java.lang.String)>("service type name", name);
+
+        return $stack1;
+    }
+
+    public static java.lang.String requireServiceProviderName(java.lang.String)
+    {
+        java.lang.String name, $stack1;
+
+        name := @parameter0: java.lang.String;
+
+        $stack1 = staticinvoke <jdk.internal.module.Checks: java.lang.String requireQualifiedClassName(java.lang.String,java.lang.String)>("service provider name", name);
+
+        return $stack1;
+    }
+
+    public static java.lang.String requireQualifiedClassName(java.lang.String, java.lang.String)
+    {
+        java.lang.IllegalArgumentException $u1;
+        int $stack3, $i0;
+        java.lang.StringBuilder $stack6, $stack7, $u0;
+        java.lang.String what, name, $stack8;
+
+        what := @parameter0: java.lang.String;
+
+        name := @parameter1: java.lang.String;
+
+        staticinvoke <jdk.internal.module.Checks: java.lang.String requireTypeName(java.lang.String,java.lang.String)>(what, name);
+
+        $stack3 = virtualinvoke name.<java.lang.String: int indexOf(int)>(46);
+
+        $i0 = (int) -1;
+
+        if $stack3 != $i0 goto label1;
+
+        $u1 = new java.lang.IllegalArgumentException;
+
+        $u0 = new java.lang.StringBuilder;
+
+        specialinvoke $u0.<java.lang.StringBuilder: void <init>()>();
+
+        $stack6 = virtualinvoke $u0.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(": is not a qualified name of a Java class in a named package");
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack8);
+
+        throw $u1;
+
+     label1:
+        return name;
+    }
+
+    public static boolean isClassName(java.lang.String)
+    {
+        java.lang.String name;
+        boolean $stack1;
+
+        name := @parameter0: java.lang.String;
+
+        $stack1 = staticinvoke <jdk.internal.module.Checks: boolean isTypeName(java.lang.String)>(name);
+
+        return $stack1;
+    }
+
+    private static boolean isTypeName(java.lang.String)
+    {
+        int $stack4, off, $i0;
+        java.lang.String name, $stack5, $stack7;
+        boolean $stack6, $stack8;
+
+        name := @parameter0: java.lang.String;
+
+        off = 0;
+
+     label1:
+        $stack4 = virtualinvoke name.<java.lang.String: int indexOf(int,int)>(46, off);
+
+        $i0 = (int) -1;
+
+        if $stack4 == $i0 goto label3;
+
+        $stack7 = virtualinvoke name.<java.lang.String: java.lang.String substring(int,int)>(off, $stack4);
+
+        $stack8 = staticinvoke <jdk.internal.module.Checks: boolean isJavaIdentifier(java.lang.String)>($stack7);
+
+        if $stack8 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        off = $stack4 + 1;
+
+        goto label1;
+
+     label3:
+        $stack5 = virtualinvoke name.<java.lang.String: java.lang.String substring(int)>(off);
+
+        $stack6 = staticinvoke <jdk.internal.module.Checks: boolean isJavaIdentifier(java.lang.String)>($stack5);
+
+        return $stack6;
+    }
+
+    private static java.lang.String requireTypeName(java.lang.String, java.lang.String)
+    {
+        boolean $stack7, $stack18;
+        java.lang.StringBuilder $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, $stack34, $stack35, $u0, $u2, $u4;
+        int $stack5, off, $i0;
+        java.lang.String name, $stack6, what, $stack16, $stack17, $stack31, $stack36;
+        java.lang.IllegalArgumentException $u1, $u3, $u5;
+
+        what := @parameter0: java.lang.String;
+
+        name := @parameter1: java.lang.String;
+
+        if name != null goto label1;
+
+        $u1 = new java.lang.IllegalArgumentException;
+
+        $u0 = new java.lang.StringBuilder;
+
+        specialinvoke $u0.<java.lang.StringBuilder: void <init>()>();
+
+        $stack34 = virtualinvoke $u0.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Null ");
+
+        $stack35 = virtualinvoke $stack34.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(what);
+
+        $stack36 = virtualinvoke $stack35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack36);
+
+        throw $u1;
+
+     label1:
+        off = 0;
+
+     label2:
+        $stack5 = virtualinvoke name.<java.lang.String: int indexOf(int,int)>(46, off);
+
+        $i0 = (int) -1;
+
+        if $stack5 == $i0 goto label4;
+
+        $stack17 = virtualinvoke name.<java.lang.String: java.lang.String substring(int,int)>(off, $stack5);
+
+        $stack18 = staticinvoke <jdk.internal.module.Checks: boolean isJavaIdentifier(java.lang.String)>($stack17);
+
+        if $stack18 != 0 goto label3;
+
+        $u3 = new java.lang.IllegalArgumentException;
+
+        $u2 = new java.lang.StringBuilder;
+
+        specialinvoke $u2.<java.lang.StringBuilder: void <init>()>();
+
+        $stack25 = virtualinvoke $u2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+
+        $stack26 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(": Invalid ");
+
+        $stack27 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(what);
+
+        $stack28 = virtualinvoke $stack27.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(": \'");
+
+        $stack29 = virtualinvoke $stack28.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack17);
+
+        $stack30 = virtualinvoke $stack29.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\' is not a Java identifier");
+
+        $stack31 = virtualinvoke $stack30.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack31);
+
+        throw $u3;
+
+     label3:
+        off = $stack5 + 1;
+
+        goto label2;
+
+     label4:
+        $stack6 = virtualinvoke name.<java.lang.String: java.lang.String substring(int)>(off);
+
+        $stack7 = staticinvoke <jdk.internal.module.Checks: boolean isJavaIdentifier(java.lang.String)>($stack6);
+
+        if $stack7 != 0 goto label5;
+
+        $u5 = new java.lang.IllegalArgumentException;
+
+        $u4 = new java.lang.StringBuilder;
+
+        specialinvoke $u4.<java.lang.StringBuilder: void <init>()>();
+
+        $stack10 = virtualinvoke $u4.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(": Invalid ");
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(what);
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(": \'");
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack6);
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\' is not a Java identifier");
+
+        $stack16 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u5.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack16);
+
+        throw $u5;
+
+     label5:
+        return name;
+    }
+
+    private static boolean isJavaIdentifier(java.lang.String)
+    {
+        java.util.Set $stack5;
+        int $stack7, $stack10, $stack11, $stack13, i;
+        java.lang.String str;
+        boolean $stack4, $stack6, $stack8, $stack12;
+
+        str := @parameter0: java.lang.String;
+
+        $stack4 = virtualinvoke str.<java.lang.String: boolean isEmpty()>();
+
+        if $stack4 != 0 goto label1;
+
+        $stack5 = <jdk.internal.module.Checks: java.util.Set RESERVED>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.Set: boolean contains(java.lang.Object)>(str);
+
+        if $stack6 == 0 goto label2;
+
+     label1:
+        return 0;
+
+     label2:
+        $stack7 = staticinvoke <java.lang.Character: int codePointAt(java.lang.CharSequence,int)>(str, 0);
+
+        $stack8 = staticinvoke <java.lang.Character: boolean isJavaIdentifierStart(int)>($stack7);
+
+        if $stack8 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        i = staticinvoke <java.lang.Character: int charCount(int)>($stack7);
+
+     label4:
+        $stack10 = virtualinvoke str.<java.lang.String: int length()>();
+
+        if i >= $stack10 goto label6;
+
+        $stack11 = staticinvoke <java.lang.Character: int codePointAt(java.lang.CharSequence,int)>(str, i);
+
+        $stack12 = staticinvoke <java.lang.Character: boolean isJavaIdentifierPart(int)>($stack11);
+
+        if $stack12 != 0 goto label5;
+
+        return 0;
+
+     label5:
+        $stack13 = staticinvoke <java.lang.Character: int charCount(int)>($stack11);
+
+        i = i + $stack13;
+
+        goto label4;
+
+     label6:
+        return 1;
+    }
+
+    static void <clinit>()
+    {
+        java.util.Set $stack1;
+        java.lang.String[] $stack0;
+
+        $stack0 = newarray (java.lang.String)[54];
+
+        $stack0[0] = "abstract";
+
+        $stack0[1] = "assert";
+
+        $stack0[2] = "boolean";
+
+        $stack0[3] = "break";
+
+        $stack0[4] = "byte";
+
+        $stack0[5] = "case";
+
+        $stack0[6] = "catch";
+
+        $stack0[7] = "char";
+
+        $stack0[8] = "class";
+
+        $stack0[9] = "const";
+
+        $stack0[10] = "continue";
+
+        $stack0[11] = "default";
+
+        $stack0[12] = "do";
+
+        $stack0[13] = "double";
+
+        $stack0[14] = "else";
+
+        $stack0[15] = "enum";
+
+        $stack0[16] = "extends";
+
+        $stack0[17] = "final";
+
+        $stack0[18] = "finally";
+
+        $stack0[19] = "float";
+
+        $stack0[20] = "for";
+
+        $stack0[21] = "goto";
+
+        $stack0[22] = "if";
+
+        $stack0[23] = "implements";
+
+        $stack0[24] = "import";
+
+        $stack0[25] = "instanceof";
+
+        $stack0[26] = "int";
+
+        $stack0[27] = "interface";
+
+        $stack0[28] = "long";
+
+        $stack0[29] = "native";
+
+        $stack0[30] = "new";
+
+        $stack0[31] = "package";
+
+        $stack0[32] = "private";
+
+        $stack0[33] = "protected";
+
+        $stack0[34] = "public";
+
+        $stack0[35] = "return";
+
+        $stack0[36] = "short";
+
+        $stack0[37] = "static";
+
+        $stack0[38] = "strictfp";
+
+        $stack0[39] = "super";
+
+        $stack0[40] = "switch";
+
+        $stack0[41] = "synchronized";
+
+        $stack0[42] = "this";
+
+        $stack0[43] = "throw";
+
+        $stack0[44] = "throws";
+
+        $stack0[45] = "transient";
+
+        $stack0[46] = "try";
+
+        $stack0[47] = "void";
+
+        $stack0[48] = "volatile";
+
+        $stack0[49] = "while";
+
+        $stack0[50] = "true";
+
+        $stack0[51] = "false";
+
+        $stack0[52] = "null";
+
+        $stack0[53] = "_";
+
+        $stack1 = staticinvoke <java.util.Set: java.util.Set of(java.lang.Object[])>($stack0);
+
+        <jdk.internal.module.Checks: java.util.Set RESERVED> = $stack1;
+
+        return;
+    }
+}

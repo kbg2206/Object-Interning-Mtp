@@ -1,0 +1,584 @@
+public class jdk.internal.jimage.decompressor.StringSharingDecompressor extends java.lang.Object implements jdk.internal.jimage.decompressor.ResourceDecompressor
+{
+    public static final int EXTERNALIZED_STRING;
+    public static final int EXTERNALIZED_STRING_DESCRIPTOR;
+    private static final int CONSTANT_Utf8;
+    private static final int CONSTANT_Integer;
+    private static final int CONSTANT_Float;
+    private static final int CONSTANT_Long;
+    private static final int CONSTANT_Double;
+    private static final int CONSTANT_Class;
+    private static final int CONSTANT_String;
+    private static final int CONSTANT_Fieldref;
+    private static final int CONSTANT_Methodref;
+    private static final int CONSTANT_InterfaceMethodref;
+    private static final int CONSTANT_NameAndType;
+    private static final int CONSTANT_MethodHandle;
+    private static final int CONSTANT_MethodType;
+    private static final int CONSTANT_InvokeDynamic;
+    private static final int CONSTANT_Module;
+    private static final int CONSTANT_Package;
+    private static final int[] SIZES;
+
+    public static int[] getSizes()
+    {
+        java.lang.Object $stack1;
+        int[] $stack0, $stack2;
+
+        $stack0 = <jdk.internal.jimage.decompressor.StringSharingDecompressor: int[] SIZES>;
+
+        $stack1 = virtualinvoke $stack0.<java.lang.Object: java.lang.Object clone()>();
+
+        $stack2 = (int[]) $stack1;
+
+        return $stack2;
+    }
+
+    public static byte[] normalize(jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider, byte[], int) throws java.io.IOException
+    {
+        java.io.DataInputStream $stack13;
+        byte[] transformed, header, $stack25, $stack39;
+        java.io.ByteArrayOutputStream $stack17;
+        java.io.ByteArrayInputStream $stack14;
+        java.io.DataOutputStream $stack19;
+        int[] $stack32;
+        jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider provider;
+        int offset, $stack15, $stack16, $stack18, $stack20, $stack21, $stack22, $stack23, $stack24, $stack26, $stack30, $stack37, i;
+        java.lang.String $stack27, $stack31, $stack33;
+
+        provider := @parameter0: jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider;
+
+        transformed := @parameter1: byte[];
+
+        offset := @parameter2: int;
+
+        $stack13 = new java.io.DataInputStream;
+
+        $stack14 = new java.io.ByteArrayInputStream;
+
+        $stack15 = lengthof transformed;
+
+        $stack16 = $stack15 - offset;
+
+        specialinvoke $stack14.<java.io.ByteArrayInputStream: void <init>(byte[],int,int)>(transformed, offset, $stack16);
+
+        specialinvoke $stack13.<java.io.DataInputStream: void <init>(java.io.InputStream)>($stack14);
+
+        $stack17 = new java.io.ByteArrayOutputStream;
+
+        $stack18 = lengthof transformed;
+
+        specialinvoke $stack17.<java.io.ByteArrayOutputStream: void <init>(int)>($stack18);
+
+        $stack19 = new java.io.DataOutputStream;
+
+        specialinvoke $stack19.<java.io.DataOutputStream: void <init>(java.io.OutputStream)>($stack17);
+
+        header = newarray (byte)[8];
+
+        virtualinvoke $stack13.<java.io.DataInputStream: void readFully(byte[])>(header);
+
+        virtualinvoke $stack19.<java.io.DataOutputStream: void write(byte[])>(header);
+
+        $stack20 = virtualinvoke $stack13.<java.io.DataInputStream: int readUnsignedShort()>();
+
+        virtualinvoke $stack19.<java.io.DataOutputStream: void writeShort(int)>($stack20);
+
+        i = 1;
+
+     label1:
+        if i >= $stack20 goto label8;
+
+        $stack26 = virtualinvoke $stack13.<java.io.DataInputStream: int readUnsignedByte()>();
+
+        lookupswitch($stack26)
+        {
+            case 1: goto label2;
+            case 5: goto label5;
+            case 6: goto label5;
+            case 23: goto label3;
+            case 25: goto label4;
+            default: goto label6;
+        };
+
+     label2:
+        virtualinvoke $stack19.<java.io.DataOutputStream: void write(int)>($stack26);
+
+        $stack33 = virtualinvoke $stack13.<java.io.DataInputStream: java.lang.String readUTF()>();
+
+        virtualinvoke $stack19.<java.io.DataOutputStream: void writeUTF(java.lang.String)>($stack33);
+
+        goto label7;
+
+     label3:
+        $stack30 = staticinvoke <jdk.internal.jimage.decompressor.CompressIndexes: int readInt(java.io.DataInputStream)>($stack13);
+
+        $stack31 = interfaceinvoke provider.<jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider: java.lang.String getString(int)>($stack30);
+
+        virtualinvoke $stack19.<java.io.DataOutputStream: void write(int)>(1);
+
+        virtualinvoke $stack19.<java.io.DataOutputStream: void writeUTF(java.lang.String)>($stack31);
+
+        goto label7;
+
+     label4:
+        $stack27 = staticinvoke <jdk.internal.jimage.decompressor.StringSharingDecompressor: java.lang.String reconstruct(jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider,java.io.DataInputStream)>(provider, $stack13);
+
+        virtualinvoke $stack19.<java.io.DataOutputStream: void write(int)>(1);
+
+        virtualinvoke $stack19.<java.io.DataOutputStream: void writeUTF(java.lang.String)>($stack27);
+
+        goto label7;
+
+     label5:
+        i = i + 1;
+
+     label6:
+        virtualinvoke $stack19.<java.io.DataOutputStream: void write(int)>($stack26);
+
+        $stack32 = <jdk.internal.jimage.decompressor.StringSharingDecompressor: int[] SIZES>;
+
+        $stack37 = $stack32[$stack26];
+
+        $stack39 = newarray (byte)[$stack37];
+
+        virtualinvoke $stack13.<java.io.DataInputStream: void readFully(byte[])>($stack39);
+
+        virtualinvoke $stack19.<java.io.DataOutputStream: void write(byte[])>($stack39);
+
+     label7:
+        i = i + 1;
+
+        goto label1;
+
+     label8:
+        $stack21 = lengthof transformed;
+
+        $stack22 = virtualinvoke $stack13.<java.io.DataInputStream: int available()>();
+
+        $stack23 = $stack21 - $stack22;
+
+        $stack24 = virtualinvoke $stack13.<java.io.DataInputStream: int available()>();
+
+        virtualinvoke $stack19.<java.io.DataOutputStream: void write(byte[],int,int)>(transformed, $stack23, $stack24);
+
+        virtualinvoke $stack19.<java.io.DataOutputStream: void flush()>();
+
+        $stack25 = virtualinvoke $stack17.<java.io.ByteArrayOutputStream: byte[] toByteArray()>();
+
+        return $stack25;
+    }
+
+    private static java.lang.String reconstruct(jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider, java.io.DataInputStream) throws java.io.IOException
+    {
+        byte[] $stack21, bytes, $stack29, $stack42, $stack58, $stack64;
+        java.lang.Integer $stack50, $stack55;
+        java.nio.ByteBuffer $stack26, $stack32, $stack48, buffer;
+        byte c;
+        java.io.ByteArrayInputStream $u1;
+        jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider reader;
+        boolean $stack53;
+        java.nio.ByteOrder $stack27, $stack33;
+        java.util.List $stack23;
+        java.lang.StringBuilder $stack61, $stack62, $u0;
+        java.io.DataInputStream cr, $u2;
+        short $stack36;
+        int $stack19, $stack22, $stack24, $stack25, $stack30, $stack31, $stack35, $stack39, $stack51, $stack56, argIndex, result, stream, $i0;
+        java.lang.String $stack20, $stack44, $stack52, $stack57, $stack63;
+        java.lang.Object $stack49, $stack54;
+
+        reader := @parameter0: jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider;
+
+        cr := @parameter1: java.io.DataInputStream;
+
+        $stack19 = staticinvoke <jdk.internal.jimage.decompressor.CompressIndexes: int readInt(java.io.DataInputStream)>(cr);
+
+        $stack20 = interfaceinvoke reader.<jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider: java.lang.String getString(int)>($stack19);
+
+        $stack21 = staticinvoke <jdk.internal.jimage.decompressor.StringSharingDecompressor: byte[] getEncoded(java.lang.String)>($stack20);
+
+        $stack22 = staticinvoke <jdk.internal.jimage.decompressor.CompressIndexes: int readInt(java.io.DataInputStream)>(cr);
+
+        bytes = newarray (byte)[$stack22];
+
+        virtualinvoke cr.<java.io.DataInputStream: void readFully(byte[])>(bytes);
+
+        $stack23 = staticinvoke <jdk.internal.jimage.decompressor.CompressIndexes: java.util.List decompressFlow(byte[])>(bytes);
+
+        $stack24 = lengthof $stack21;
+
+        $stack25 = $stack24 * 2;
+
+        $stack26 = staticinvoke <java.nio.ByteBuffer: java.nio.ByteBuffer allocate(int)>($stack25);
+
+        buffer = $stack26;
+
+        $stack27 = <java.nio.ByteOrder: java.nio.ByteOrder BIG_ENDIAN>;
+
+        virtualinvoke $stack26.<java.nio.ByteBuffer: java.nio.ByteBuffer order(java.nio.ByteOrder)>($stack27);
+
+        argIndex = 0;
+
+        result = lengthof $stack21;
+
+        stream = 0;
+
+     label1:
+        if stream >= result goto label5;
+
+        c = $stack21[stream];
+
+        $i0 = (int) c;
+
+        if $i0 != 76 goto label3;
+
+        $stack48 = staticinvoke <jdk.internal.jimage.decompressor.StringSharingDecompressor: java.nio.ByteBuffer safeAdd(java.nio.ByteBuffer,byte)>(buffer, c);
+
+        buffer = $stack48;
+
+        $stack49 = interfaceinvoke $stack23.<java.util.List: java.lang.Object get(int)>(argIndex);
+
+        $stack50 = (java.lang.Integer) $stack49;
+
+        $stack51 = virtualinvoke $stack50.<java.lang.Integer: int intValue()>();
+
+        argIndex = argIndex + 1;
+
+        $stack52 = interfaceinvoke reader.<jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider: java.lang.String getString(int)>($stack51);
+
+        $stack53 = virtualinvoke $stack52.<java.lang.String: boolean isEmpty()>();
+
+        if $stack53 != 0 goto label2;
+
+        $u0 = new java.lang.StringBuilder;
+
+        specialinvoke $u0.<java.lang.StringBuilder: void <init>()>();
+
+        $stack61 = virtualinvoke $u0.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack52);
+
+        $stack62 = virtualinvoke $stack61.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("/");
+
+        $stack63 = virtualinvoke $stack62.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack64 = staticinvoke <jdk.internal.jimage.decompressor.StringSharingDecompressor: byte[] getEncoded(java.lang.String)>($stack63);
+
+        buffer = staticinvoke <jdk.internal.jimage.decompressor.StringSharingDecompressor: java.nio.ByteBuffer safeAdd(java.nio.ByteBuffer,byte[])>($stack48, $stack64);
+
+     label2:
+        $stack54 = interfaceinvoke $stack23.<java.util.List: java.lang.Object get(int)>(argIndex);
+
+        $stack55 = (java.lang.Integer) $stack54;
+
+        $stack56 = virtualinvoke $stack55.<java.lang.Integer: int intValue()>();
+
+        argIndex = argIndex + 1;
+
+        $stack57 = interfaceinvoke reader.<jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider: java.lang.String getString(int)>($stack56);
+
+        $stack58 = staticinvoke <jdk.internal.jimage.decompressor.StringSharingDecompressor: byte[] getEncoded(java.lang.String)>($stack57);
+
+        buffer = staticinvoke <jdk.internal.jimage.decompressor.StringSharingDecompressor: java.nio.ByteBuffer safeAdd(java.nio.ByteBuffer,byte[])>(buffer, $stack58);
+
+        goto label4;
+
+     label3:
+        buffer = staticinvoke <jdk.internal.jimage.decompressor.StringSharingDecompressor: java.nio.ByteBuffer safeAdd(java.nio.ByteBuffer,byte)>(buffer, c);
+
+     label4:
+        stream = stream + 1;
+
+        goto label1;
+
+     label5:
+        $stack29 = virtualinvoke buffer.<java.nio.ByteBuffer: byte[] array()>();
+
+        $stack30 = lengthof $stack29;
+
+        $stack31 = $stack30 + 2;
+
+        $stack32 = staticinvoke <java.nio.ByteBuffer: java.nio.ByteBuffer allocate(int)>($stack31);
+
+        $stack33 = <java.nio.ByteOrder: java.nio.ByteOrder BIG_ENDIAN>;
+
+        virtualinvoke $stack32.<java.nio.ByteBuffer: java.nio.ByteBuffer order(java.nio.ByteOrder)>($stack33);
+
+        $stack35 = virtualinvoke buffer.<java.nio.ByteBuffer: int position()>();
+
+        $stack36 = (short) $stack35;
+
+        virtualinvoke $stack32.<java.nio.ByteBuffer: java.nio.ByteBuffer putShort(short)>($stack36);
+
+        $stack39 = virtualinvoke buffer.<java.nio.ByteBuffer: int position()>();
+
+        virtualinvoke $stack32.<java.nio.ByteBuffer: java.nio.ByteBuffer put(byte[],int,int)>($stack29, 0, $stack39);
+
+        $u1 = new java.io.ByteArrayInputStream;
+
+        $stack42 = virtualinvoke $stack32.<java.nio.ByteBuffer: byte[] array()>();
+
+        specialinvoke $u1.<java.io.ByteArrayInputStream: void <init>(byte[])>($stack42);
+
+        $u2 = new java.io.DataInputStream;
+
+        specialinvoke $u2.<java.io.DataInputStream: void <init>(java.io.InputStream)>($u1);
+
+        $stack44 = virtualinvoke $u2.<java.io.DataInputStream: java.lang.String readUTF()>();
+
+        return $stack44;
+    }
+
+    public static byte[] getEncoded(java.lang.String) throws java.io.IOException
+    {
+        byte[] $stack6, $stack9, $stack10;
+        java.io.ByteArrayOutputStream $stack4;
+        java.io.DataOutputStream $stack5;
+        int $stack7, $stack8;
+        java.lang.String pre;
+
+        pre := @parameter0: java.lang.String;
+
+        $stack4 = new java.io.ByteArrayOutputStream;
+
+        specialinvoke $stack4.<java.io.ByteArrayOutputStream: void <init>()>();
+
+        $stack5 = new java.io.DataOutputStream;
+
+        specialinvoke $stack5.<java.io.DataOutputStream: void <init>(java.io.OutputStream)>($stack4);
+
+        virtualinvoke $stack5.<java.io.DataOutputStream: void writeUTF(java.lang.String)>(pre);
+
+        $stack6 = virtualinvoke $stack4.<java.io.ByteArrayOutputStream: byte[] toByteArray()>();
+
+        $stack7 = lengthof $stack6;
+
+        if $stack7 > 2 goto label1;
+
+        $stack10 = newarray (byte)[0];
+
+        return $stack10;
+
+     label1:
+        $stack8 = lengthof $stack6;
+
+        $stack9 = staticinvoke <java.util.Arrays: byte[] copyOfRange(byte[],int,int)>($stack6, 2, $stack8);
+
+        return $stack9;
+    }
+
+    private static java.nio.ByteBuffer safeAdd(java.nio.ByteBuffer, byte)
+    {
+        byte[] $stack3;
+        byte b;
+        java.nio.ByteBuffer current, $stack4;
+
+        current := @parameter0: java.nio.ByteBuffer;
+
+        b := @parameter1: byte;
+
+        $stack3 = newarray (byte)[1];
+
+        $stack3[0] = b;
+
+        $stack4 = staticinvoke <jdk.internal.jimage.decompressor.StringSharingDecompressor: java.nio.ByteBuffer safeAdd(java.nio.ByteBuffer,byte[])>(current, $stack3);
+
+        return $stack4;
+    }
+
+    private static java.nio.ByteBuffer safeAdd(java.nio.ByteBuffer, byte[])
+    {
+        byte[] bytes, $stack13;
+        java.nio.ByteBuffer $stack10, current;
+        java.nio.ByteOrder $stack11;
+        int $stack3, $stack4, $stack6, $stack7, $stack8, $stack9, $stack15;
+
+        current := @parameter0: java.nio.ByteBuffer;
+
+        bytes := @parameter1: byte[];
+
+        $stack3 = virtualinvoke current.<java.nio.ByteBuffer: int remaining()>();
+
+        $stack4 = lengthof bytes;
+
+        if $stack3 >= $stack4 goto label1;
+
+        $stack6 = virtualinvoke current.<java.nio.ByteBuffer: int capacity()>();
+
+        $stack7 = lengthof bytes;
+
+        $stack8 = $stack6 + $stack7;
+
+        $stack9 = $stack8 * 2;
+
+        $stack10 = staticinvoke <java.nio.ByteBuffer: java.nio.ByteBuffer allocate(int)>($stack9);
+
+        $stack11 = <java.nio.ByteOrder: java.nio.ByteOrder BIG_ENDIAN>;
+
+        virtualinvoke $stack10.<java.nio.ByteBuffer: java.nio.ByteBuffer order(java.nio.ByteOrder)>($stack11);
+
+        $stack13 = virtualinvoke current.<java.nio.ByteBuffer: byte[] array()>();
+
+        $stack15 = virtualinvoke current.<java.nio.ByteBuffer: int position()>();
+
+        virtualinvoke $stack10.<java.nio.ByteBuffer: java.nio.ByteBuffer put(byte[],int,int)>($stack13, 0, $stack15);
+
+        current = $stack10;
+
+     label1:
+        virtualinvoke current.<java.nio.ByteBuffer: java.nio.ByteBuffer put(byte[])>(bytes);
+
+        return current;
+    }
+
+    public java.lang.String getName()
+    {
+        jdk.internal.jimage.decompressor.StringSharingDecompressor this;
+
+        this := @this: jdk.internal.jimage.decompressor.StringSharingDecompressor;
+
+        return "compact-cp";
+    }
+
+    public void <init>(java.util.Properties)
+    {
+        java.util.Properties properties;
+        jdk.internal.jimage.decompressor.StringSharingDecompressor this;
+
+        this := @this: jdk.internal.jimage.decompressor.StringSharingDecompressor;
+
+        properties := @parameter0: java.util.Properties;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public byte[] decompress(jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider, byte[], int, long) throws java.lang.Exception
+    {
+        byte[] content, $stack6;
+        jdk.internal.jimage.decompressor.StringSharingDecompressor this;
+        jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider reader;
+        int offset;
+        long originalSize;
+
+        this := @this: jdk.internal.jimage.decompressor.StringSharingDecompressor;
+
+        reader := @parameter0: jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider;
+
+        content := @parameter1: byte[];
+
+        offset := @parameter2: int;
+
+        originalSize := @parameter3: long;
+
+        $stack6 = staticinvoke <jdk.internal.jimage.decompressor.StringSharingDecompressor: byte[] normalize(jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider,byte[],int)>(reader, content, offset);
+
+        return $stack6;
+    }
+
+    static void <clinit>()
+    {
+        int[] $stack0, $stack1, $stack2, $stack3, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9, $stack10, $stack11, $stack12, $stack13, $stack14, $stack15;
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int CONSTANT_Package> = 20;
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int CONSTANT_Module> = 19;
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int CONSTANT_InvokeDynamic> = 18;
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int CONSTANT_MethodType> = 16;
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int CONSTANT_MethodHandle> = 15;
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int CONSTANT_NameAndType> = 12;
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int CONSTANT_InterfaceMethodref> = 11;
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int CONSTANT_Methodref> = 10;
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int CONSTANT_Fieldref> = 9;
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int CONSTANT_String> = 8;
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int CONSTANT_Class> = 7;
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int CONSTANT_Double> = 6;
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int CONSTANT_Long> = 5;
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int CONSTANT_Float> = 4;
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int CONSTANT_Integer> = 3;
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int CONSTANT_Utf8> = 1;
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int EXTERNALIZED_STRING_DESCRIPTOR> = 25;
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int EXTERNALIZED_STRING> = 23;
+
+        $stack0 = newarray (int)[21];
+
+        <jdk.internal.jimage.decompressor.StringSharingDecompressor: int[] SIZES> = $stack0;
+
+        $stack1 = <jdk.internal.jimage.decompressor.StringSharingDecompressor: int[] SIZES>;
+
+        $stack1[3] = 4;
+
+        $stack2 = <jdk.internal.jimage.decompressor.StringSharingDecompressor: int[] SIZES>;
+
+        $stack2[4] = 4;
+
+        $stack3 = <jdk.internal.jimage.decompressor.StringSharingDecompressor: int[] SIZES>;
+
+        $stack3[5] = 8;
+
+        $stack4 = <jdk.internal.jimage.decompressor.StringSharingDecompressor: int[] SIZES>;
+
+        $stack4[6] = 8;
+
+        $stack5 = <jdk.internal.jimage.decompressor.StringSharingDecompressor: int[] SIZES>;
+
+        $stack5[7] = 2;
+
+        $stack6 = <jdk.internal.jimage.decompressor.StringSharingDecompressor: int[] SIZES>;
+
+        $stack6[8] = 2;
+
+        $stack7 = <jdk.internal.jimage.decompressor.StringSharingDecompressor: int[] SIZES>;
+
+        $stack7[9] = 4;
+
+        $stack8 = <jdk.internal.jimage.decompressor.StringSharingDecompressor: int[] SIZES>;
+
+        $stack8[10] = 4;
+
+        $stack9 = <jdk.internal.jimage.decompressor.StringSharingDecompressor: int[] SIZES>;
+
+        $stack9[11] = 4;
+
+        $stack10 = <jdk.internal.jimage.decompressor.StringSharingDecompressor: int[] SIZES>;
+
+        $stack10[12] = 4;
+
+        $stack11 = <jdk.internal.jimage.decompressor.StringSharingDecompressor: int[] SIZES>;
+
+        $stack11[15] = 3;
+
+        $stack12 = <jdk.internal.jimage.decompressor.StringSharingDecompressor: int[] SIZES>;
+
+        $stack12[16] = 2;
+
+        $stack13 = <jdk.internal.jimage.decompressor.StringSharingDecompressor: int[] SIZES>;
+
+        $stack13[18] = 4;
+
+        $stack14 = <jdk.internal.jimage.decompressor.StringSharingDecompressor: int[] SIZES>;
+
+        $stack14[19] = 2;
+
+        $stack15 = <jdk.internal.jimage.decompressor.StringSharingDecompressor: int[] SIZES>;
+
+        $stack15[20] = 2;
+
+        return;
+    }
+}

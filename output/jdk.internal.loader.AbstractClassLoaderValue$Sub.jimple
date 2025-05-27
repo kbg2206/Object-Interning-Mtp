@@ -1,0 +1,161 @@
+public final class jdk.internal.loader.AbstractClassLoaderValue$Sub extends jdk.internal.loader.AbstractClassLoaderValue
+{
+    private final java.lang.Object key;
+    final jdk.internal.loader.AbstractClassLoaderValue this$0;
+
+    void <init>(jdk.internal.loader.AbstractClassLoaderValue, java.lang.Object)
+    {
+        java.lang.Object key;
+        jdk.internal.loader.AbstractClassLoaderValue$Sub this;
+        jdk.internal.loader.AbstractClassLoaderValue this$0;
+
+        this := @this: jdk.internal.loader.AbstractClassLoaderValue$Sub;
+
+        this$0 := @parameter0: jdk.internal.loader.AbstractClassLoaderValue;
+
+        key := @parameter1: java.lang.Object;
+
+        this.<jdk.internal.loader.AbstractClassLoaderValue$Sub: jdk.internal.loader.AbstractClassLoaderValue this$0> = this$0;
+
+        specialinvoke this.<jdk.internal.loader.AbstractClassLoaderValue: void <init>()>();
+
+        this.<jdk.internal.loader.AbstractClassLoaderValue$Sub: java.lang.Object key> = key;
+
+        return;
+    }
+
+    public jdk.internal.loader.AbstractClassLoaderValue parent()
+    {
+        jdk.internal.loader.AbstractClassLoaderValue$Sub this;
+        jdk.internal.loader.AbstractClassLoaderValue $stack1;
+
+        this := @this: jdk.internal.loader.AbstractClassLoaderValue$Sub;
+
+        $stack1 = this.<jdk.internal.loader.AbstractClassLoaderValue$Sub: jdk.internal.loader.AbstractClassLoaderValue this$0>;
+
+        return $stack1;
+    }
+
+    public java.lang.Object key()
+    {
+        java.lang.Object $stack1;
+        jdk.internal.loader.AbstractClassLoaderValue$Sub this;
+
+        this := @this: jdk.internal.loader.AbstractClassLoaderValue$Sub;
+
+        $stack1 = this.<jdk.internal.loader.AbstractClassLoaderValue$Sub: java.lang.Object key>;
+
+        return $stack1;
+    }
+
+    public boolean isEqualOrDescendantOf(jdk.internal.loader.AbstractClassLoaderValue)
+    {
+        jdk.internal.loader.AbstractClassLoaderValue$Sub this;
+        java.lang.Object $stack2;
+        jdk.internal.loader.AbstractClassLoaderValue clv, $stack4;
+        boolean $stack3, $stack5, $stack6;
+
+        this := @this: jdk.internal.loader.AbstractClassLoaderValue$Sub;
+
+        clv := @parameter0: jdk.internal.loader.AbstractClassLoaderValue;
+
+        $stack2 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(clv);
+
+        $stack3 = virtualinvoke this.<jdk.internal.loader.AbstractClassLoaderValue$Sub: boolean equals(java.lang.Object)>($stack2);
+
+        if $stack3 != 0 goto label1;
+
+        $stack4 = virtualinvoke this.<jdk.internal.loader.AbstractClassLoaderValue$Sub: jdk.internal.loader.AbstractClassLoaderValue parent()>();
+
+        $stack5 = virtualinvoke $stack4.<jdk.internal.loader.AbstractClassLoaderValue: boolean isEqualOrDescendantOf(jdk.internal.loader.AbstractClassLoaderValue)>(clv);
+
+        if $stack5 == 0 goto label2;
+
+     label1:
+        $stack6 = 1;
+
+        goto label3;
+
+     label2:
+        $stack6 = 0;
+
+     label3:
+        return $stack6;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        jdk.internal.loader.AbstractClassLoaderValue$Sub this, that;
+        java.lang.Object o, $stack7, $stack8;
+        boolean $stack3, $stack6, $stack9, $stack10;
+        jdk.internal.loader.AbstractClassLoaderValue $stack4, $stack5;
+
+        this := @this: jdk.internal.loader.AbstractClassLoaderValue$Sub;
+
+        o := @parameter0: java.lang.Object;
+
+        if this != o goto label1;
+
+        return 1;
+
+     label1:
+        $stack3 = o instanceof jdk.internal.loader.AbstractClassLoaderValue$Sub;
+
+        if $stack3 != 0 goto label2;
+
+        return 0;
+
+     label2:
+        that = (jdk.internal.loader.AbstractClassLoaderValue$Sub) o;
+
+        $stack4 = virtualinvoke this.<jdk.internal.loader.AbstractClassLoaderValue$Sub: jdk.internal.loader.AbstractClassLoaderValue parent()>();
+
+        $stack5 = virtualinvoke that.<jdk.internal.loader.AbstractClassLoaderValue$Sub: jdk.internal.loader.AbstractClassLoaderValue parent()>();
+
+        $stack6 = virtualinvoke $stack4.<java.lang.Object: boolean equals(java.lang.Object)>($stack5);
+
+        if $stack6 == 0 goto label3;
+
+        $stack8 = this.<jdk.internal.loader.AbstractClassLoaderValue$Sub: java.lang.Object key>;
+
+        $stack7 = that.<jdk.internal.loader.AbstractClassLoaderValue$Sub: java.lang.Object key>;
+
+        $stack9 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+
+        if $stack9 == 0 goto label3;
+
+        $stack10 = 1;
+
+        goto label4;
+
+     label3:
+        $stack10 = 0;
+
+     label4:
+        return $stack10;
+    }
+
+    public int hashCode()
+    {
+        jdk.internal.loader.AbstractClassLoaderValue$Sub this;
+        int $stack3, $stack5, $stack6, $stack7;
+        java.lang.Object $stack4;
+        jdk.internal.loader.AbstractClassLoaderValue $stack2;
+
+        this := @this: jdk.internal.loader.AbstractClassLoaderValue$Sub;
+
+        $stack2 = virtualinvoke this.<jdk.internal.loader.AbstractClassLoaderValue$Sub: jdk.internal.loader.AbstractClassLoaderValue parent()>();
+
+        $stack3 = virtualinvoke $stack2.<java.lang.Object: int hashCode()>();
+
+        $stack5 = 31 * $stack3;
+
+        $stack4 = this.<jdk.internal.loader.AbstractClassLoaderValue$Sub: java.lang.Object key>;
+
+        $stack6 = staticinvoke <java.util.Objects: int hashCode(java.lang.Object)>($stack4);
+
+        $stack7 = $stack5 + $stack6;
+
+        return $stack7;
+    }
+}

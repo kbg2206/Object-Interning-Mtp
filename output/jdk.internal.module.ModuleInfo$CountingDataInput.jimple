@@ -1,0 +1,366 @@
+class jdk.internal.module.ModuleInfo$CountingDataInput extends java.lang.Object implements java.io.DataInput
+{
+    private final java.io.DataInput delegate;
+    private long count;
+
+    void <init>(java.io.DataInput)
+    {
+        java.io.DataInput delegate;
+        jdk.internal.module.ModuleInfo$CountingDataInput this;
+
+        this := @this: jdk.internal.module.ModuleInfo$CountingDataInput;
+
+        delegate := @parameter0: java.io.DataInput;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<jdk.internal.module.ModuleInfo$CountingDataInput: java.io.DataInput delegate> = delegate;
+
+        return;
+    }
+
+    long count()
+    {
+        jdk.internal.module.ModuleInfo$CountingDataInput this;
+        long $stack1;
+
+        this := @this: jdk.internal.module.ModuleInfo$CountingDataInput;
+
+        $stack1 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count>;
+
+        return $stack1;
+    }
+
+    public void readFully(byte[]) throws java.io.IOException
+    {
+        byte[] b;
+        jdk.internal.module.ModuleInfo$CountingDataInput this;
+        long $stack5, $stack6, $stack7;
+        int $stack2, $stack4;
+        java.io.DataInput $stack3;
+
+        this := @this: jdk.internal.module.ModuleInfo$CountingDataInput;
+
+        b := @parameter0: byte[];
+
+        $stack3 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: java.io.DataInput delegate>;
+
+        $stack2 = lengthof b;
+
+        interfaceinvoke $stack3.<java.io.DataInput: void readFully(byte[],int,int)>(b, 0, $stack2);
+
+        $stack6 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count>;
+
+        $stack4 = lengthof b;
+
+        $stack5 = (long) $stack4;
+
+        $stack7 = $stack6 + $stack5;
+
+        this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count> = $stack7;
+
+        return;
+    }
+
+    public void readFully(byte[], int, int) throws java.io.IOException
+    {
+        byte[] b;
+        jdk.internal.module.ModuleInfo$CountingDataInput this;
+        long $stack5, $stack6, $stack7;
+        int off, len;
+        java.io.DataInput $stack4;
+
+        this := @this: jdk.internal.module.ModuleInfo$CountingDataInput;
+
+        b := @parameter0: byte[];
+
+        off := @parameter1: int;
+
+        len := @parameter2: int;
+
+        $stack4 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: java.io.DataInput delegate>;
+
+        interfaceinvoke $stack4.<java.io.DataInput: void readFully(byte[],int,int)>(b, off, len);
+
+        $stack6 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count>;
+
+        $stack5 = (long) len;
+
+        $stack7 = $stack6 + $stack5;
+
+        this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count> = $stack7;
+
+        return;
+    }
+
+    public int skipBytes(int) throws java.io.IOException
+    {
+        int n, $stack4;
+        java.io.DataInput $stack3;
+        jdk.internal.module.ModuleInfo$CountingDataInput this;
+        long $stack5, $stack6, $stack7;
+
+        this := @this: jdk.internal.module.ModuleInfo$CountingDataInput;
+
+        n := @parameter0: int;
+
+        $stack3 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: java.io.DataInput delegate>;
+
+        $stack4 = interfaceinvoke $stack3.<java.io.DataInput: int skipBytes(int)>(n);
+
+        $stack6 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count>;
+
+        $stack5 = (long) $stack4;
+
+        $stack7 = $stack6 + $stack5;
+
+        this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count> = $stack7;
+
+        return $stack4;
+    }
+
+    public boolean readBoolean() throws java.io.IOException
+    {
+        java.io.DataInput $stack2;
+        jdk.internal.module.ModuleInfo$CountingDataInput this;
+        long $stack4, $stack5;
+        boolean $stack3;
+
+        this := @this: jdk.internal.module.ModuleInfo$CountingDataInput;
+
+        $stack2 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: java.io.DataInput delegate>;
+
+        $stack3 = interfaceinvoke $stack2.<java.io.DataInput: boolean readBoolean()>();
+
+        $stack4 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count>;
+
+        $stack5 = $stack4 + 1L;
+
+        this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count> = $stack5;
+
+        return $stack3;
+    }
+
+    public byte readByte() throws java.io.IOException
+    {
+        byte $stack3;
+        java.io.DataInput $stack2;
+        jdk.internal.module.ModuleInfo$CountingDataInput this;
+        long $stack4, $stack5;
+
+        this := @this: jdk.internal.module.ModuleInfo$CountingDataInput;
+
+        $stack2 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: java.io.DataInput delegate>;
+
+        $stack3 = interfaceinvoke $stack2.<java.io.DataInput: byte readByte()>();
+
+        $stack4 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count>;
+
+        $stack5 = $stack4 + 1L;
+
+        this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count> = $stack5;
+
+        return $stack3;
+    }
+
+    public int readUnsignedByte() throws java.io.IOException
+    {
+        java.io.DataInput $stack2;
+        int $stack3;
+        jdk.internal.module.ModuleInfo$CountingDataInput this;
+        long $stack4, $stack5;
+
+        this := @this: jdk.internal.module.ModuleInfo$CountingDataInput;
+
+        $stack2 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: java.io.DataInput delegate>;
+
+        $stack3 = interfaceinvoke $stack2.<java.io.DataInput: int readUnsignedByte()>();
+
+        $stack4 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count>;
+
+        $stack5 = $stack4 + 1L;
+
+        this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count> = $stack5;
+
+        return $stack3;
+    }
+
+    public short readShort() throws java.io.IOException
+    {
+        short $stack3;
+        java.io.DataInput $stack2;
+        jdk.internal.module.ModuleInfo$CountingDataInput this;
+        long $stack4, $stack5;
+
+        this := @this: jdk.internal.module.ModuleInfo$CountingDataInput;
+
+        $stack2 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: java.io.DataInput delegate>;
+
+        $stack3 = interfaceinvoke $stack2.<java.io.DataInput: short readShort()>();
+
+        $stack4 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count>;
+
+        $stack5 = $stack4 + 2L;
+
+        this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count> = $stack5;
+
+        return $stack3;
+    }
+
+    public int readUnsignedShort() throws java.io.IOException
+    {
+        java.io.DataInput $stack2;
+        int $stack3;
+        jdk.internal.module.ModuleInfo$CountingDataInput this;
+        long $stack4, $stack5;
+
+        this := @this: jdk.internal.module.ModuleInfo$CountingDataInput;
+
+        $stack2 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: java.io.DataInput delegate>;
+
+        $stack3 = interfaceinvoke $stack2.<java.io.DataInput: int readUnsignedShort()>();
+
+        $stack4 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count>;
+
+        $stack5 = $stack4 + 2L;
+
+        this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count> = $stack5;
+
+        return $stack3;
+    }
+
+    public char readChar() throws java.io.IOException
+    {
+        java.io.DataInput $stack2;
+        jdk.internal.module.ModuleInfo$CountingDataInput this;
+        char $stack3;
+        long $stack4, $stack5;
+
+        this := @this: jdk.internal.module.ModuleInfo$CountingDataInput;
+
+        $stack2 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: java.io.DataInput delegate>;
+
+        $stack3 = interfaceinvoke $stack2.<java.io.DataInput: char readChar()>();
+
+        $stack4 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count>;
+
+        $stack5 = $stack4 + 2L;
+
+        this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count> = $stack5;
+
+        return $stack3;
+    }
+
+    public int readInt() throws java.io.IOException
+    {
+        java.io.DataInput $stack2;
+        int $stack3;
+        jdk.internal.module.ModuleInfo$CountingDataInput this;
+        long $stack4, $stack5;
+
+        this := @this: jdk.internal.module.ModuleInfo$CountingDataInput;
+
+        $stack2 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: java.io.DataInput delegate>;
+
+        $stack3 = interfaceinvoke $stack2.<java.io.DataInput: int readInt()>();
+
+        $stack4 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count>;
+
+        $stack5 = $stack4 + 4L;
+
+        this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count> = $stack5;
+
+        return $stack3;
+    }
+
+    public long readLong() throws java.io.IOException
+    {
+        java.io.DataInput $stack3;
+        jdk.internal.module.ModuleInfo$CountingDataInput this;
+        long $stack4, $stack5, $stack6;
+
+        this := @this: jdk.internal.module.ModuleInfo$CountingDataInput;
+
+        $stack3 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: java.io.DataInput delegate>;
+
+        $stack4 = interfaceinvoke $stack3.<java.io.DataInput: long readLong()>();
+
+        $stack5 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count>;
+
+        $stack6 = $stack5 + 8L;
+
+        this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count> = $stack6;
+
+        return $stack4;
+    }
+
+    public float readFloat() throws java.io.IOException
+    {
+        java.io.DataInput $stack2;
+        float $stack3;
+        jdk.internal.module.ModuleInfo$CountingDataInput this;
+        long $stack4, $stack5;
+
+        this := @this: jdk.internal.module.ModuleInfo$CountingDataInput;
+
+        $stack2 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: java.io.DataInput delegate>;
+
+        $stack3 = interfaceinvoke $stack2.<java.io.DataInput: float readFloat()>();
+
+        $stack4 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count>;
+
+        $stack5 = $stack4 + 4L;
+
+        this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count> = $stack5;
+
+        return $stack3;
+    }
+
+    public double readDouble() throws java.io.IOException
+    {
+        java.io.DataInput $stack3;
+        jdk.internal.module.ModuleInfo$CountingDataInput this;
+        long $stack5, $stack6;
+        double $stack4;
+
+        this := @this: jdk.internal.module.ModuleInfo$CountingDataInput;
+
+        $stack3 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: java.io.DataInput delegate>;
+
+        $stack4 = interfaceinvoke $stack3.<java.io.DataInput: double readDouble()>();
+
+        $stack5 = this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count>;
+
+        $stack6 = $stack5 + 8L;
+
+        this.<jdk.internal.module.ModuleInfo$CountingDataInput: long count> = $stack6;
+
+        return $stack4;
+    }
+
+    public java.lang.String readLine()
+    {
+        jdk.internal.module.ModuleInfo$CountingDataInput this;
+        java.lang.RuntimeException $stack1;
+
+        this := @this: jdk.internal.module.ModuleInfo$CountingDataInput;
+
+        $stack1 = new java.lang.RuntimeException;
+
+        specialinvoke $stack1.<java.lang.RuntimeException: void <init>(java.lang.String)>("not implemented");
+
+        throw $stack1;
+    }
+
+    public java.lang.String readUTF() throws java.io.IOException
+    {
+        jdk.internal.module.ModuleInfo$CountingDataInput this;
+        java.lang.String $stack1;
+
+        this := @this: jdk.internal.module.ModuleInfo$CountingDataInput;
+
+        $stack1 = staticinvoke <java.io.DataInputStream: java.lang.String readUTF(java.io.DataInput)>(this);
+
+        return $stack1;
+    }
+}

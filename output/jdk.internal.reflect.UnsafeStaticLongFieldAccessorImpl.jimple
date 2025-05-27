@@ -1,0 +1,474 @@
+class jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl extends jdk.internal.reflect.UnsafeStaticFieldAccessorImpl
+{
+
+    void <init>(java.lang.reflect.Field)
+    {
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        java.lang.reflect.Field field;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        field := @parameter0: java.lang.reflect.Field;
+
+        specialinvoke this.<jdk.internal.reflect.UnsafeStaticFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return;
+    }
+
+    public java.lang.Object get(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        java.lang.Long $stack3;
+        java.lang.Object obj;
+        long $stack2;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: long getLong(java.lang.Object)>(obj);
+
+        $stack3 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($stack2);
+
+        return $stack3;
+    }
+
+    public boolean getBoolean(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        java.lang.Object obj;
+        java.lang.IllegalArgumentException $stack2;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: java.lang.IllegalArgumentException newGetBooleanIllegalArgumentException()>();
+
+        throw $stack2;
+    }
+
+    public byte getByte(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        java.lang.Object obj;
+        java.lang.IllegalArgumentException $stack2;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: java.lang.IllegalArgumentException newGetByteIllegalArgumentException()>();
+
+        throw $stack2;
+    }
+
+    public char getChar(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        java.lang.Object obj;
+        java.lang.IllegalArgumentException $stack2;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: java.lang.IllegalArgumentException newGetCharIllegalArgumentException()>();
+
+        throw $stack2;
+    }
+
+    public short getShort(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        java.lang.Object obj;
+        java.lang.IllegalArgumentException $stack2;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: java.lang.IllegalArgumentException newGetShortIllegalArgumentException()>();
+
+        throw $stack2;
+    }
+
+    public int getInt(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        java.lang.Object obj;
+        java.lang.IllegalArgumentException $stack2;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: java.lang.IllegalArgumentException newGetIntIllegalArgumentException()>();
+
+        throw $stack2;
+    }
+
+    public long getLong(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        jdk.internal.misc.Unsafe $stack4;
+        long $stack2, $stack5;
+        java.lang.Object $stack3, obj;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack4 = <jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: jdk.internal.misc.Unsafe unsafe>;
+
+        $stack3 = this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: java.lang.Object base>;
+
+        $stack2 = this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: long fieldOffset>;
+
+        $stack5 = virtualinvoke $stack4.<jdk.internal.misc.Unsafe: long getLong(java.lang.Object,long)>($stack3, $stack2);
+
+        return $stack5;
+    }
+
+    public float getFloat(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        float $stack3;
+        java.lang.Object obj;
+        long $stack2;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: long getLong(java.lang.Object)>(obj);
+
+        $stack3 = (float) $stack2;
+
+        return $stack3;
+    }
+
+    public double getDouble(java.lang.Object) throws java.lang.IllegalArgumentException
+    {
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        java.lang.Object obj;
+        long $stack2;
+        double $stack3;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        $stack2 = virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: long getLong(java.lang.Object)>(obj);
+
+        $stack3 = (double) $stack2;
+
+        return $stack3;
+    }
+
+    public void set(java.lang.Object, java.lang.Object) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        java.lang.Integer $stack14;
+        java.lang.Character $stack20;
+        byte $stack36;
+        java.lang.Long $stack9;
+        java.lang.Short $stack26;
+        java.lang.Byte $stack32;
+        boolean $stack3, $stack4, $stack5, $stack6, $stack7, $stack8;
+        jdk.internal.misc.Unsafe $stack10, $stack15, $stack21, $stack27, $stack33;
+        long $stack12, $stack13, $stack17, $stack19, $stack23, $stack25, $stack29, $stack31, $stack35, $stack37;
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        short $stack30;
+        int $stack18;
+        char $stack24;
+        java.lang.Object value, $stack11, $stack16, $stack22, $stack28, $stack34, obj;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        value := @parameter1: java.lang.Object;
+
+        $stack3 = this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: boolean isFinal>;
+
+        if $stack3 == 0 goto label1;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: void throwFinalFieldIllegalAccessException(java.lang.Object)>(value);
+
+     label1:
+        if value != null goto label2;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: void throwSetIllegalArgumentException(java.lang.Object)>(value);
+
+     label2:
+        $stack4 = value instanceof java.lang.Byte;
+
+        if $stack4 == 0 goto label3;
+
+        $stack33 = <jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: jdk.internal.misc.Unsafe unsafe>;
+
+        $stack34 = this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: java.lang.Object base>;
+
+        $stack35 = this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: long fieldOffset>;
+
+        $stack32 = (java.lang.Byte) value;
+
+        $stack36 = virtualinvoke $stack32.<java.lang.Byte: byte byteValue()>();
+
+        $stack37 = (long) $stack36;
+
+        virtualinvoke $stack33.<jdk.internal.misc.Unsafe: void putLong(java.lang.Object,long,long)>($stack34, $stack35, $stack37);
+
+        return;
+
+     label3:
+        $stack5 = value instanceof java.lang.Short;
+
+        if $stack5 == 0 goto label4;
+
+        $stack27 = <jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: jdk.internal.misc.Unsafe unsafe>;
+
+        $stack28 = this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: java.lang.Object base>;
+
+        $stack29 = this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: long fieldOffset>;
+
+        $stack26 = (java.lang.Short) value;
+
+        $stack30 = virtualinvoke $stack26.<java.lang.Short: short shortValue()>();
+
+        $stack31 = (long) $stack30;
+
+        virtualinvoke $stack27.<jdk.internal.misc.Unsafe: void putLong(java.lang.Object,long,long)>($stack28, $stack29, $stack31);
+
+        return;
+
+     label4:
+        $stack6 = value instanceof java.lang.Character;
+
+        if $stack6 == 0 goto label5;
+
+        $stack21 = <jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: jdk.internal.misc.Unsafe unsafe>;
+
+        $stack22 = this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: java.lang.Object base>;
+
+        $stack23 = this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: long fieldOffset>;
+
+        $stack20 = (java.lang.Character) value;
+
+        $stack24 = virtualinvoke $stack20.<java.lang.Character: char charValue()>();
+
+        $stack25 = (long) $stack24;
+
+        virtualinvoke $stack21.<jdk.internal.misc.Unsafe: void putLong(java.lang.Object,long,long)>($stack22, $stack23, $stack25);
+
+        return;
+
+     label5:
+        $stack7 = value instanceof java.lang.Integer;
+
+        if $stack7 == 0 goto label6;
+
+        $stack15 = <jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: jdk.internal.misc.Unsafe unsafe>;
+
+        $stack16 = this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: java.lang.Object base>;
+
+        $stack17 = this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: long fieldOffset>;
+
+        $stack14 = (java.lang.Integer) value;
+
+        $stack18 = virtualinvoke $stack14.<java.lang.Integer: int intValue()>();
+
+        $stack19 = (long) $stack18;
+
+        virtualinvoke $stack15.<jdk.internal.misc.Unsafe: void putLong(java.lang.Object,long,long)>($stack16, $stack17, $stack19);
+
+        return;
+
+     label6:
+        $stack8 = value instanceof java.lang.Long;
+
+        if $stack8 == 0 goto label7;
+
+        $stack10 = <jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: jdk.internal.misc.Unsafe unsafe>;
+
+        $stack11 = this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: java.lang.Object base>;
+
+        $stack12 = this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: long fieldOffset>;
+
+        $stack9 = (java.lang.Long) value;
+
+        $stack13 = virtualinvoke $stack9.<java.lang.Long: long longValue()>();
+
+        virtualinvoke $stack10.<jdk.internal.misc.Unsafe: void putLong(java.lang.Object,long,long)>($stack11, $stack12, $stack13);
+
+        return;
+
+     label7:
+        virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: void throwSetIllegalArgumentException(java.lang.Object)>(value);
+
+        return;
+    }
+
+    public void setBoolean(java.lang.Object, boolean) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        java.lang.Object obj;
+        boolean z;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        z := @parameter1: boolean;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: void throwSetIllegalArgumentException(boolean)>(z);
+
+        return;
+    }
+
+    public void setByte(java.lang.Object, byte) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        byte b;
+        java.lang.Object obj;
+        long $stack3;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        b := @parameter1: byte;
+
+        $stack3 = (long) b;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: void setLong(java.lang.Object,long)>(obj, $stack3);
+
+        return;
+    }
+
+    public void setChar(java.lang.Object, char) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        java.lang.Object obj;
+        char c;
+        long $stack3;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        c := @parameter1: char;
+
+        $stack3 = (long) c;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: void setLong(java.lang.Object,long)>(obj, $stack3);
+
+        return;
+    }
+
+    public void setShort(java.lang.Object, short) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        short s;
+        java.lang.Object obj;
+        long $stack3;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        s := @parameter1: short;
+
+        $stack3 = (long) s;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: void setLong(java.lang.Object,long)>(obj, $stack3);
+
+        return;
+    }
+
+    public void setInt(java.lang.Object, int) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        int i;
+        java.lang.Object obj;
+        long $stack3;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        i := @parameter1: int;
+
+        $stack3 = (long) i;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: void setLong(java.lang.Object,long)>(obj, $stack3);
+
+        return;
+    }
+
+    public void setLong(java.lang.Object, long) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        jdk.internal.misc.Unsafe $stack7;
+        long l, $stack5;
+        java.lang.Object $stack6, obj;
+        boolean $stack4;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        l := @parameter1: long;
+
+        $stack4 = this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: boolean isFinal>;
+
+        if $stack4 == 0 goto label1;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: void throwFinalFieldIllegalAccessException(long)>(l);
+
+     label1:
+        $stack7 = <jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: jdk.internal.misc.Unsafe unsafe>;
+
+        $stack6 = this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: java.lang.Object base>;
+
+        $stack5 = this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: long fieldOffset>;
+
+        virtualinvoke $stack7.<jdk.internal.misc.Unsafe: void putLong(java.lang.Object,long,long)>($stack6, $stack5, l);
+
+        return;
+    }
+
+    public void setFloat(java.lang.Object, float) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        float f;
+        java.lang.Object obj;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        f := @parameter1: float;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: void throwSetIllegalArgumentException(float)>(f);
+
+        return;
+    }
+
+    public void setDouble(java.lang.Object, double) throws java.lang.IllegalArgumentException, java.lang.IllegalAccessException
+    {
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl this;
+        java.lang.Object obj;
+        double d;
+
+        this := @this: jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        obj := @parameter0: java.lang.Object;
+
+        d := @parameter1: double;
+
+        virtualinvoke this.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: void throwSetIllegalArgumentException(double)>(d);
+
+        return;
+    }
+}

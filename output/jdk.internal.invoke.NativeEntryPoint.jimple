@@ -1,0 +1,170 @@
+public class jdk.internal.invoke.NativeEntryPoint extends java.lang.Object
+{
+    private final int shadowSpace;
+    private final long[] argMoves;
+    private final long[] returnMoves;
+    private final boolean needTransition;
+    private final java.lang.invoke.MethodType methodType;
+    private final java.lang.String name;
+
+    private void <init>(int, long[], long[], boolean, java.lang.invoke.MethodType, java.lang.String)
+    {
+        long[] argMoves, $stack8, returnMoves, $stack10;
+        java.lang.invoke.MethodType methodType;
+        int shadowSpace;
+        jdk.internal.invoke.NativeEntryPoint this;
+        java.lang.Object $stack7, $stack9;
+        java.lang.String name;
+        boolean needTransition;
+
+        this := @this: jdk.internal.invoke.NativeEntryPoint;
+
+        shadowSpace := @parameter0: int;
+
+        argMoves := @parameter1: long[];
+
+        returnMoves := @parameter2: long[];
+
+        needTransition := @parameter3: boolean;
+
+        methodType := @parameter4: java.lang.invoke.MethodType;
+
+        name := @parameter5: java.lang.String;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<jdk.internal.invoke.NativeEntryPoint: int shadowSpace> = shadowSpace;
+
+        $stack7 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(argMoves);
+
+        $stack8 = (long[]) $stack7;
+
+        this.<jdk.internal.invoke.NativeEntryPoint: long[] argMoves> = $stack8;
+
+        $stack9 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(returnMoves);
+
+        $stack10 = (long[]) $stack9;
+
+        this.<jdk.internal.invoke.NativeEntryPoint: long[] returnMoves> = $stack10;
+
+        this.<jdk.internal.invoke.NativeEntryPoint: boolean needTransition> = needTransition;
+
+        this.<jdk.internal.invoke.NativeEntryPoint: java.lang.invoke.MethodType methodType> = methodType;
+
+        this.<jdk.internal.invoke.NativeEntryPoint: java.lang.String name> = name;
+
+        return;
+    }
+
+    public static jdk.internal.invoke.NativeEntryPoint make(java.lang.String, jdk.internal.invoke.ABIDescriptorProxy, jdk.internal.invoke.VMStorageProxy[], jdk.internal.invoke.VMStorageProxy[], boolean, java.lang.invoke.MethodType)
+    {
+        java.lang.IllegalArgumentException $stack11;
+        long[] $stack9, $stack10;
+        java.lang.invoke.MethodType methodType;
+        int $stack6, $stack8;
+        jdk.internal.invoke.NativeEntryPoint $stack7;
+        java.lang.String name;
+        jdk.internal.invoke.VMStorageProxy[] returnMoves, argMoves;
+        jdk.internal.invoke.ABIDescriptorProxy abi;
+        boolean needTransition;
+
+        name := @parameter0: java.lang.String;
+
+        abi := @parameter1: jdk.internal.invoke.ABIDescriptorProxy;
+
+        argMoves := @parameter2: jdk.internal.invoke.VMStorageProxy[];
+
+        returnMoves := @parameter3: jdk.internal.invoke.VMStorageProxy[];
+
+        needTransition := @parameter4: boolean;
+
+        methodType := @parameter5: java.lang.invoke.MethodType;
+
+        $stack6 = lengthof returnMoves;
+
+        if $stack6 <= 1 goto label1;
+
+        $stack11 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack11.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Multiple register return not supported");
+
+        throw $stack11;
+
+     label1:
+        $stack7 = new jdk.internal.invoke.NativeEntryPoint;
+
+        $stack8 = interfaceinvoke abi.<jdk.internal.invoke.ABIDescriptorProxy: int shadowSpaceBytes()>();
+
+        $stack9 = staticinvoke <jdk.internal.invoke.NativeEntryPoint: long[] encodeVMStorages(jdk.internal.invoke.VMStorageProxy[])>(argMoves);
+
+        $stack10 = staticinvoke <jdk.internal.invoke.NativeEntryPoint: long[] encodeVMStorages(jdk.internal.invoke.VMStorageProxy[])>(returnMoves);
+
+        specialinvoke $stack7.<jdk.internal.invoke.NativeEntryPoint: void <init>(int,long[],long[],boolean,java.lang.invoke.MethodType,java.lang.String)>($stack8, $stack9, $stack10, needTransition, methodType, name);
+
+        return $stack7;
+    }
+
+    private static long[] encodeVMStorages(jdk.internal.invoke.VMStorageProxy[])
+    {
+        long $stack9;
+        jdk.internal.invoke.VMStorageProxy $stack5, $stack7;
+        long[] out;
+        int $stack3, $stack4, $stack6, $stack8, i;
+        jdk.internal.invoke.VMStorageProxy[] moves;
+
+        moves := @parameter0: jdk.internal.invoke.VMStorageProxy[];
+
+        $stack3 = lengthof moves;
+
+        out = newarray (long)[$stack3];
+
+        i = 0;
+
+     label1:
+        $stack4 = lengthof moves;
+
+        if i >= $stack4 goto label2;
+
+        $stack5 = moves[i];
+
+        $stack6 = interfaceinvoke $stack5.<jdk.internal.invoke.VMStorageProxy: int type()>();
+
+        $stack7 = moves[i];
+
+        $stack8 = interfaceinvoke $stack7.<jdk.internal.invoke.VMStorageProxy: int index()>();
+
+        $stack9 = staticinvoke <jdk.internal.invoke.NativeEntryPoint: long vmStorageToVMReg(int,int)>($stack6, $stack8);
+
+        out[i] = $stack9;
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        return out;
+    }
+
+    private static native long vmStorageToVMReg(int, int);
+
+    public java.lang.invoke.MethodType type()
+    {
+        jdk.internal.invoke.NativeEntryPoint this;
+        java.lang.invoke.MethodType $stack1;
+
+        this := @this: jdk.internal.invoke.NativeEntryPoint;
+
+        $stack1 = this.<jdk.internal.invoke.NativeEntryPoint: java.lang.invoke.MethodType methodType>;
+
+        return $stack1;
+    }
+
+    private static native void registerNatives();
+
+    static void <clinit>()
+    {
+        staticinvoke <jdk.internal.invoke.NativeEntryPoint: void registerNatives()>();
+
+        return;
+    }
+}

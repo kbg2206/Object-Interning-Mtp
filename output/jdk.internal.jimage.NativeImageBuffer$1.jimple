@@ -1,0 +1,37 @@
+class jdk.internal.jimage.NativeImageBuffer$1 extends java.lang.Object implements java.security.PrivilegedAction
+{
+
+    void <init>()
+    {
+        jdk.internal.jimage.NativeImageBuffer$1 this;
+
+        this := @this: jdk.internal.jimage.NativeImageBuffer$1;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.Void run()
+    {
+        jdk.internal.jimage.NativeImageBuffer$1 this;
+
+        this := @this: jdk.internal.jimage.NativeImageBuffer$1;
+
+        staticinvoke <java.lang.System: void loadLibrary(java.lang.String)>("jimage");
+
+        return null;
+    }
+
+    public volatile java.lang.Object run()
+    {
+        jdk.internal.jimage.NativeImageBuffer$1 this;
+        java.lang.Void $stack1;
+
+        this := @this: jdk.internal.jimage.NativeImageBuffer$1;
+
+        $stack1 = virtualinvoke this.<jdk.internal.jimage.NativeImageBuffer$1: java.lang.Void run()>();
+
+        return $stack1;
+    }
+}

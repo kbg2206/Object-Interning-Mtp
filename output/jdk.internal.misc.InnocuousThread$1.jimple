@@ -1,0 +1,68 @@
+class jdk.internal.misc.InnocuousThread$1 extends java.lang.Object implements java.security.PrivilegedAction
+{
+    final java.lang.String val$name;
+    final java.lang.Runnable val$target;
+    final int val$priority;
+
+    void <init>(java.lang.String, java.lang.Runnable, int)
+    {
+        jdk.internal.misc.InnocuousThread$1 this;
+        int l3;
+        java.lang.String l1;
+        java.lang.Runnable l2;
+
+        this := @this: jdk.internal.misc.InnocuousThread$1;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.Runnable;
+
+        l3 := @parameter2: int;
+
+        this.<jdk.internal.misc.InnocuousThread$1: java.lang.String val$name> = l1;
+
+        this.<jdk.internal.misc.InnocuousThread$1: java.lang.Runnable val$target> = l2;
+
+        this.<jdk.internal.misc.InnocuousThread$1: int val$priority> = l3;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.Thread run()
+    {
+        jdk.internal.misc.InnocuousThread$1 this;
+        java.lang.Thread $stack5;
+        int $stack4;
+        java.lang.String $stack1;
+        java.lang.ClassLoader $stack3;
+        java.lang.Runnable $stack2;
+
+        this := @this: jdk.internal.misc.InnocuousThread$1;
+
+        $stack1 = this.<jdk.internal.misc.InnocuousThread$1: java.lang.String val$name>;
+
+        $stack2 = this.<jdk.internal.misc.InnocuousThread$1: java.lang.Runnable val$target>;
+
+        $stack3 = staticinvoke <java.lang.ClassLoader: java.lang.ClassLoader getSystemClassLoader()>();
+
+        $stack4 = this.<jdk.internal.misc.InnocuousThread$1: int val$priority>;
+
+        $stack5 = staticinvoke <jdk.internal.misc.InnocuousThread: java.lang.Thread createThread(java.lang.String,java.lang.Runnable,java.lang.ClassLoader,int)>($stack1, $stack2, $stack3, $stack4);
+
+        return $stack5;
+    }
+
+    public volatile java.lang.Object run()
+    {
+        jdk.internal.misc.InnocuousThread$1 this;
+        java.lang.Thread $stack1;
+
+        this := @this: jdk.internal.misc.InnocuousThread$1;
+
+        $stack1 = virtualinvoke this.<jdk.internal.misc.InnocuousThread$1: java.lang.Thread run()>();
+
+        return $stack1;
+    }
+}

@@ -1,0 +1,214 @@
+class jdk.internal.loader.NativeLibraries$NativeLibraryImpl extends java.lang.Object implements jdk.internal.loader.NativeLibrary
+{
+    final java.lang.Class fromClass;
+    final java.lang.String name;
+    final boolean isBuiltin;
+    final boolean isJNI;
+    long handle;
+    int jniVersion;
+    static final boolean $assertionsDisabled;
+
+    void <init>(java.lang.Class, java.lang.String, boolean, boolean)
+    {
+        java.lang.Class fromClass;
+        java.lang.String name;
+        java.lang.AssertionError $stack14;
+        jdk.internal.loader.NativeLibraries$NativeLibraryImpl this;
+        boolean $stack5, isBuiltin, isJNI;
+
+        this := @this: jdk.internal.loader.NativeLibraries$NativeLibraryImpl;
+
+        fromClass := @parameter0: java.lang.Class;
+
+        name := @parameter1: java.lang.String;
+
+        isBuiltin := @parameter2: boolean;
+
+        isJNI := @parameter3: boolean;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack5 = <jdk.internal.loader.NativeLibraries$NativeLibraryImpl: boolean $assertionsDisabled>;
+
+        if $stack5 != 0 goto label1;
+
+        if isBuiltin == 0 goto label1;
+
+        if isJNI != 0 goto label1;
+
+        $stack14 = new java.lang.AssertionError;
+
+        specialinvoke $stack14.<java.lang.AssertionError: void <init>(java.lang.Object)>("a builtin native library must be JNI library");
+
+        throw $stack14;
+
+     label1:
+        this.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl: java.lang.Class fromClass> = fromClass;
+
+        this.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl: java.lang.String name> = name;
+
+        this.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl: boolean isBuiltin> = isBuiltin;
+
+        this.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl: boolean isJNI> = isJNI;
+
+        return;
+    }
+
+    public java.lang.String name()
+    {
+        java.lang.String $stack1;
+        jdk.internal.loader.NativeLibraries$NativeLibraryImpl this;
+
+        this := @this: jdk.internal.loader.NativeLibraries$NativeLibraryImpl;
+
+        $stack1 = this.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl: java.lang.String name>;
+
+        return $stack1;
+    }
+
+    public long find(java.lang.String)
+    {
+        long $stack2;
+        java.lang.String name;
+        jdk.internal.loader.NativeLibraries$NativeLibraryImpl this;
+
+        this := @this: jdk.internal.loader.NativeLibraries$NativeLibraryImpl;
+
+        name := @parameter0: java.lang.String;
+
+        $stack2 = staticinvoke <jdk.internal.loader.NativeLibraries: long findEntry0(jdk.internal.loader.NativeLibraries$NativeLibraryImpl,java.lang.String)>(this, name);
+
+        return $stack2;
+    }
+
+    java.lang.Runnable unloader()
+    {
+        jdk.internal.loader.NativeLibraries$Unloader $stack1;
+        long $stack4;
+        java.lang.String $stack5;
+        jdk.internal.loader.NativeLibraries$NativeLibraryImpl this;
+        boolean $stack2, $stack3;
+
+        this := @this: jdk.internal.loader.NativeLibraries$NativeLibraryImpl;
+
+        $stack1 = new jdk.internal.loader.NativeLibraries$Unloader;
+
+        $stack5 = this.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl: java.lang.String name>;
+
+        $stack4 = this.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl: long handle>;
+
+        $stack3 = this.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl: boolean isBuiltin>;
+
+        $stack2 = this.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl: boolean isJNI>;
+
+        specialinvoke $stack1.<jdk.internal.loader.NativeLibraries$Unloader: void <init>(java.lang.String,long,boolean,boolean)>($stack5, $stack4, $stack3, $stack2);
+
+        return $stack1;
+    }
+
+    boolean open()
+    {
+        long $stack1;
+        byte $stack2;
+        java.lang.InternalError $stack8;
+        java.lang.StringBuilder $stack9, $stack10, $stack12, $stack13;
+        java.lang.String $stack3, $stack11, $stack14;
+        jdk.internal.loader.NativeLibraries$NativeLibraryImpl this;
+        boolean $stack4, $stack5, $stack6, $stack7;
+
+        this := @this: jdk.internal.loader.NativeLibraries$NativeLibraryImpl;
+
+        $stack1 = this.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl: long handle>;
+
+        $stack2 = $stack1 cmp 0L;
+
+        if $stack2 == 0 goto label1;
+
+        $stack8 = new java.lang.InternalError;
+
+        $stack9 = new java.lang.StringBuilder;
+
+        specialinvoke $stack9.<java.lang.StringBuilder: void <init>()>();
+
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Native library ");
+
+        $stack11 = this.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl: java.lang.String name>;
+
+        $stack12 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack11);
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" has been loaded");
+
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack8.<java.lang.InternalError: void <init>(java.lang.String)>($stack14);
+
+        throw $stack8;
+
+     label1:
+        $stack3 = this.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl: java.lang.String name>;
+
+        $stack4 = this.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl: boolean isBuiltin>;
+
+        $stack5 = this.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl: boolean isJNI>;
+
+        $stack6 = virtualinvoke this.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl: boolean throwExceptionIfFail()>();
+
+        $stack7 = staticinvoke <jdk.internal.loader.NativeLibraries: boolean load(jdk.internal.loader.NativeLibraries$NativeLibraryImpl,java.lang.String,boolean,boolean,boolean)>(this, $stack3, $stack4, $stack5, $stack6);
+
+        return $stack7;
+    }
+
+    private boolean throwExceptionIfFail()
+    {
+        java.lang.Boolean $stack4;
+        java.lang.Object $stack3;
+        jdk.internal.loader.NativeLibraries$NativeLibraryImpl this;
+        boolean $stack1, $stack5;
+        jdk.internal.loader.NativeLibraries$NativeLibraryImpl$1 $stack2;
+
+        this := @this: jdk.internal.loader.NativeLibraries$NativeLibraryImpl;
+
+        $stack1 = <jdk.internal.loader.NativeLibraries: boolean loadLibraryOnlyIfPresent>;
+
+        if $stack1 == 0 goto label1;
+
+        return 1;
+
+     label1:
+        $stack2 = new jdk.internal.loader.NativeLibraries$NativeLibraryImpl$1;
+
+        specialinvoke $stack2.<jdk.internal.loader.NativeLibraries$NativeLibraryImpl$1: void <init>(jdk.internal.loader.NativeLibraries$NativeLibraryImpl)>(this);
+
+        $stack3 = staticinvoke <java.security.AccessController: java.lang.Object doPrivileged(java.security.PrivilegedAction)>($stack2);
+
+        $stack4 = (java.lang.Boolean) $stack3;
+
+        $stack5 = virtualinvoke $stack4.<java.lang.Boolean: boolean booleanValue()>();
+
+        return $stack5;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.Class $stack0;
+        boolean $stack1, $stack2;
+
+        $stack0 = class "Ljdk/internal/loader/NativeLibraries;";
+
+        $stack1 = virtualinvoke $stack0.<java.lang.Class: boolean desiredAssertionStatus()>();
+
+        if $stack1 != 0 goto label1;
+
+        $stack2 = 1;
+
+        goto label2;
+
+     label1:
+        $stack2 = 0;
+
+     label2:
+        <jdk.internal.loader.NativeLibraries$NativeLibraryImpl: boolean $assertionsDisabled> = $stack2;
+
+        return;
+    }
+}

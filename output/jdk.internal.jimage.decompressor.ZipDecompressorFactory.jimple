@@ -1,0 +1,39 @@
+public final class jdk.internal.jimage.decompressor.ZipDecompressorFactory extends jdk.internal.jimage.decompressor.ResourceDecompressorFactory
+{
+    public static final java.lang.String NAME;
+
+    public void <init>()
+    {
+        jdk.internal.jimage.decompressor.ZipDecompressorFactory this;
+
+        this := @this: jdk.internal.jimage.decompressor.ZipDecompressorFactory;
+
+        specialinvoke this.<jdk.internal.jimage.decompressor.ResourceDecompressorFactory: void <init>(java.lang.String)>("zip");
+
+        return;
+    }
+
+    public jdk.internal.jimage.decompressor.ResourceDecompressor newDecompressor(java.util.Properties) throws java.io.IOException
+    {
+        jdk.internal.jimage.decompressor.ZipDecompressorFactory this;
+        java.util.Properties properties;
+        jdk.internal.jimage.decompressor.ZipDecompressor $stack2;
+
+        this := @this: jdk.internal.jimage.decompressor.ZipDecompressorFactory;
+
+        properties := @parameter0: java.util.Properties;
+
+        $stack2 = new jdk.internal.jimage.decompressor.ZipDecompressor;
+
+        specialinvoke $stack2.<jdk.internal.jimage.decompressor.ZipDecompressor: void <init>()>();
+
+        return $stack2;
+    }
+
+    public static void <clinit>()
+    {
+        <jdk.internal.jimage.decompressor.ZipDecompressorFactory: java.lang.String NAME> = "zip";
+
+        return;
+    }
+}

@@ -1,0 +1,14 @@
+public class jdk.internal.vm.vector.VectorSupport$VectorSpecies extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        jdk.internal.vm.vector.VectorSupport$VectorSpecies this;
+
+        this := @this: jdk.internal.vm.vector.VectorSupport$VectorSpecies;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+}

@@ -1,0 +1,86 @@
+public final class jdk.internal.module.ModuleInfo$Attributes extends java.lang.Object
+{
+    private final java.lang.module.ModuleDescriptor descriptor;
+    private final jdk.internal.module.ModuleTarget target;
+    private final jdk.internal.module.ModuleHashes recordedHashes;
+    private final jdk.internal.module.ModuleResolution moduleResolution;
+
+    void <init>(java.lang.module.ModuleDescriptor, jdk.internal.module.ModuleTarget, jdk.internal.module.ModuleHashes, jdk.internal.module.ModuleResolution)
+    {
+        jdk.internal.module.ModuleInfo$Attributes this;
+        jdk.internal.module.ModuleResolution moduleResolution;
+        java.lang.module.ModuleDescriptor descriptor;
+        jdk.internal.module.ModuleHashes recordedHashes;
+        jdk.internal.module.ModuleTarget target;
+
+        this := @this: jdk.internal.module.ModuleInfo$Attributes;
+
+        descriptor := @parameter0: java.lang.module.ModuleDescriptor;
+
+        target := @parameter1: jdk.internal.module.ModuleTarget;
+
+        recordedHashes := @parameter2: jdk.internal.module.ModuleHashes;
+
+        moduleResolution := @parameter3: jdk.internal.module.ModuleResolution;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<jdk.internal.module.ModuleInfo$Attributes: java.lang.module.ModuleDescriptor descriptor> = descriptor;
+
+        this.<jdk.internal.module.ModuleInfo$Attributes: jdk.internal.module.ModuleTarget target> = target;
+
+        this.<jdk.internal.module.ModuleInfo$Attributes: jdk.internal.module.ModuleHashes recordedHashes> = recordedHashes;
+
+        this.<jdk.internal.module.ModuleInfo$Attributes: jdk.internal.module.ModuleResolution moduleResolution> = moduleResolution;
+
+        return;
+    }
+
+    public java.lang.module.ModuleDescriptor descriptor()
+    {
+        java.lang.module.ModuleDescriptor $stack1;
+        jdk.internal.module.ModuleInfo$Attributes this;
+
+        this := @this: jdk.internal.module.ModuleInfo$Attributes;
+
+        $stack1 = this.<jdk.internal.module.ModuleInfo$Attributes: java.lang.module.ModuleDescriptor descriptor>;
+
+        return $stack1;
+    }
+
+    public jdk.internal.module.ModuleTarget target()
+    {
+        jdk.internal.module.ModuleTarget $stack1;
+        jdk.internal.module.ModuleInfo$Attributes this;
+
+        this := @this: jdk.internal.module.ModuleInfo$Attributes;
+
+        $stack1 = this.<jdk.internal.module.ModuleInfo$Attributes: jdk.internal.module.ModuleTarget target>;
+
+        return $stack1;
+    }
+
+    public jdk.internal.module.ModuleHashes recordedHashes()
+    {
+        jdk.internal.module.ModuleHashes $stack1;
+        jdk.internal.module.ModuleInfo$Attributes this;
+
+        this := @this: jdk.internal.module.ModuleInfo$Attributes;
+
+        $stack1 = this.<jdk.internal.module.ModuleInfo$Attributes: jdk.internal.module.ModuleHashes recordedHashes>;
+
+        return $stack1;
+    }
+
+    public jdk.internal.module.ModuleResolution moduleResolution()
+    {
+        jdk.internal.module.ModuleResolution $stack1;
+        jdk.internal.module.ModuleInfo$Attributes this;
+
+        this := @this: jdk.internal.module.ModuleInfo$Attributes;
+
+        $stack1 = this.<jdk.internal.module.ModuleInfo$Attributes: jdk.internal.module.ModuleResolution moduleResolution>;
+
+        return $stack1;
+    }
+}

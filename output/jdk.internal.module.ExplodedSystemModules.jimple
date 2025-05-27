@@ -1,0 +1,102 @@
+class jdk.internal.module.ExplodedSystemModules extends java.lang.Object implements jdk.internal.module.SystemModules
+{
+
+    void <init>()
+    {
+        jdk.internal.module.ExplodedSystemModules this;
+
+        this := @this: jdk.internal.module.ExplodedSystemModules;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public boolean hasSplitPackages()
+    {
+        jdk.internal.module.ExplodedSystemModules this;
+
+        this := @this: jdk.internal.module.ExplodedSystemModules;
+
+        return 1;
+    }
+
+    public boolean hasIncubatorModules()
+    {
+        jdk.internal.module.ExplodedSystemModules this;
+
+        this := @this: jdk.internal.module.ExplodedSystemModules;
+
+        return 1;
+    }
+
+    public java.lang.module.ModuleDescriptor[] moduleDescriptors()
+    {
+        java.lang.InternalError $stack1;
+        jdk.internal.module.ExplodedSystemModules this;
+
+        this := @this: jdk.internal.module.ExplodedSystemModules;
+
+        $stack1 = new java.lang.InternalError;
+
+        specialinvoke $stack1.<java.lang.InternalError: void <init>()>();
+
+        throw $stack1;
+    }
+
+    public jdk.internal.module.ModuleTarget[] moduleTargets()
+    {
+        java.lang.InternalError $stack1;
+        jdk.internal.module.ExplodedSystemModules this;
+
+        this := @this: jdk.internal.module.ExplodedSystemModules;
+
+        $stack1 = new java.lang.InternalError;
+
+        specialinvoke $stack1.<java.lang.InternalError: void <init>()>();
+
+        throw $stack1;
+    }
+
+    public jdk.internal.module.ModuleHashes[] moduleHashes()
+    {
+        java.lang.InternalError $stack1;
+        jdk.internal.module.ExplodedSystemModules this;
+
+        this := @this: jdk.internal.module.ExplodedSystemModules;
+
+        $stack1 = new java.lang.InternalError;
+
+        specialinvoke $stack1.<java.lang.InternalError: void <init>()>();
+
+        throw $stack1;
+    }
+
+    public jdk.internal.module.ModuleResolution[] moduleResolutions()
+    {
+        java.lang.InternalError $stack1;
+        jdk.internal.module.ExplodedSystemModules this;
+
+        this := @this: jdk.internal.module.ExplodedSystemModules;
+
+        $stack1 = new java.lang.InternalError;
+
+        specialinvoke $stack1.<java.lang.InternalError: void <init>()>();
+
+        throw $stack1;
+    }
+
+    public java.util.Map moduleReads()
+    {
+        java.lang.InternalError $stack1;
+        jdk.internal.module.ExplodedSystemModules this;
+
+        this := @this: jdk.internal.module.ExplodedSystemModules;
+
+        $stack1 = new java.lang.InternalError;
+
+        specialinvoke $stack1.<java.lang.InternalError: void <init>()>();
+
+        throw $stack1;
+    }
+}

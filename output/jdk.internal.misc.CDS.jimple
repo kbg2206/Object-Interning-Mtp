@@ -1,0 +1,1172 @@
+public class jdk.internal.misc.CDS extends java.lang.Object
+{
+    private static final boolean isDumpingClassList;
+    private static final boolean isDumpingArchive;
+    private static final boolean isSharingEnabled;
+    static final java.lang.String DIRECT_HOLDER_CLASS_NAME;
+    static final java.lang.String DELEGATING_HOLDER_CLASS_NAME;
+    static final java.lang.String BASIC_FORMS_HOLDER_CLASS_NAME;
+    static final java.lang.String INVOKERS_HOLDER_CLASS_NAME;
+    private static java.lang.String[] excludeFlags;
+
+    public void <init>()
+    {
+        jdk.internal.misc.CDS this;
+
+        this := @this: jdk.internal.misc.CDS;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static boolean isDumpingClassList()
+    {
+        boolean $stack0;
+
+        $stack0 = <jdk.internal.misc.CDS: boolean isDumpingClassList>;
+
+        return $stack0;
+    }
+
+    public static boolean isDumpingArchive()
+    {
+        boolean $stack0;
+
+        $stack0 = <jdk.internal.misc.CDS: boolean isDumpingArchive>;
+
+        return $stack0;
+    }
+
+    public static boolean isSharingEnabled()
+    {
+        boolean $stack0;
+
+        $stack0 = <jdk.internal.misc.CDS: boolean isSharingEnabled>;
+
+        return $stack0;
+    }
+
+    private static native boolean isDumpingClassList0();
+
+    private static native boolean isDumpingArchive0();
+
+    private static native boolean isSharingEnabled0();
+
+    private static native void logLambdaFormInvoker(java.lang.String);
+
+    public static native void initializeFromArchive(java.lang.Class);
+
+    public static native void defineArchivedModules(java.lang.ClassLoader, java.lang.ClassLoader);
+
+    public static native long getRandomSeedForDumping();
+
+    public static void traceLambdaFormInvoker(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+    {
+        java.lang.StringBuilder $stack5, $stack6, $stack7, $stack8, $stack9, $stack10, $stack11, $stack12;
+        java.lang.String prefix, holder, name, type, $stack13;
+        boolean $stack4;
+
+        prefix := @parameter0: java.lang.String;
+
+        holder := @parameter1: java.lang.String;
+
+        name := @parameter2: java.lang.String;
+
+        type := @parameter3: java.lang.String;
+
+        $stack4 = <jdk.internal.misc.CDS: boolean isDumpingClassList>;
+
+        if $stack4 == 0 goto label1;
+
+        $stack5 = new java.lang.StringBuilder;
+
+        specialinvoke $stack5.<java.lang.StringBuilder: void <init>()>();
+
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(prefix);
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(holder);
+
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(type);
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        staticinvoke <jdk.internal.misc.CDS: void logLambdaFormInvoker(java.lang.String)>($stack13);
+
+     label1:
+        return;
+    }
+
+    public static void traceSpeciesType(java.lang.String, java.lang.String)
+    {
+        java.lang.StringBuilder $stack3, $stack4, $stack5, $stack6;
+        java.lang.String prefix, cn, $stack7;
+        boolean $stack2;
+
+        prefix := @parameter0: java.lang.String;
+
+        cn := @parameter1: java.lang.String;
+
+        $stack2 = <jdk.internal.misc.CDS: boolean isDumpingClassList>;
+
+        if $stack2 == 0 goto label1;
+
+        $stack3 = new java.lang.StringBuilder;
+
+        specialinvoke $stack3.<java.lang.StringBuilder: void <init>()>();
+
+        $stack4 = virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(prefix);
+
+        $stack5 = virtualinvoke $stack4.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(cn);
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        staticinvoke <jdk.internal.misc.CDS: void logLambdaFormInvoker(java.lang.String)>($stack7);
+
+     label1:
+        return;
+    }
+
+    private static boolean isValidHolderName(java.lang.String)
+    {
+        java.lang.String name;
+        boolean $stack1, $stack2, $stack3, $stack4, $stack5;
+
+        name := @parameter0: java.lang.String;
+
+        $stack1 = virtualinvoke name.<java.lang.String: boolean equals(java.lang.Object)>("java.lang.invoke.DirectMethodHandle$Holder");
+
+        if $stack1 != 0 goto label1;
+
+        $stack2 = virtualinvoke name.<java.lang.String: boolean equals(java.lang.Object)>("java.lang.invoke.DelegatingMethodHandle$Holder");
+
+        if $stack2 != 0 goto label1;
+
+        $stack3 = virtualinvoke name.<java.lang.String: boolean equals(java.lang.Object)>("java.lang.invoke.LambdaForm$Holder");
+
+        if $stack3 != 0 goto label1;
+
+        $stack4 = virtualinvoke name.<java.lang.String: boolean equals(java.lang.Object)>("java.lang.invoke.Invokers$Holder");
+
+        if $stack4 == 0 goto label2;
+
+     label1:
+        $stack5 = 1;
+
+        goto label3;
+
+     label2:
+        $stack5 = 0;
+
+     label3:
+        return $stack5;
+    }
+
+    private static boolean isBasicTypeChar(char)
+    {
+        int $stack2, $i0;
+        char c;
+        java.lang.String $stack1;
+        boolean $stack3;
+
+        c := @parameter0: char;
+
+        $stack1 = "LIJFDV";
+
+        $i0 = (int) c;
+
+        $stack2 = virtualinvoke $stack1.<java.lang.String: int indexOf(int)>($i0);
+
+        if $stack2 < 0 goto label1;
+
+        $stack3 = 1;
+
+        goto label2;
+
+     label1:
+        $stack3 = 0;
+
+     label2:
+        return $stack3;
+    }
+
+    private static boolean isValidMethodType(java.lang.String)
+    {
+        java.lang.String[] $stack4;
+        int $stack5, $stack7, $stack16, i, $i0, $i1;
+        java.lang.String type, $stack6, $stack9, $stack12, $stack15, $stack17;
+        boolean $stack11, $stack14, $stack19;
+        char $stack10, $stack13, $stack18;
+
+        type := @parameter0: java.lang.String;
+
+        $stack4 = virtualinvoke type.<java.lang.String: java.lang.String[] split(java.lang.String)>("_");
+
+        $stack5 = lengthof $stack4;
+
+        if $stack5 != 2 goto label1;
+
+        $stack6 = $stack4[1];
+
+        $stack7 = virtualinvoke $stack6.<java.lang.String: int length()>();
+
+        if $stack7 != 1 goto label1;
+
+        $stack9 = $stack4[1];
+
+        $stack10 = virtualinvoke $stack9.<java.lang.String: char charAt(int)>(0);
+
+        $stack11 = staticinvoke <jdk.internal.misc.CDS: boolean isBasicTypeChar(char)>($stack10);
+
+        if $stack11 != 0 goto label2;
+
+     label1:
+        return 0;
+
+     label2:
+        $stack12 = $stack4[0];
+
+        $stack13 = virtualinvoke $stack12.<java.lang.String: char charAt(int)>(0);
+
+        $stack14 = staticinvoke <jdk.internal.misc.CDS: boolean isBasicTypeChar(char)>($stack13);
+
+        if $stack14 != 0 goto label3;
+
+        return 0;
+
+     label3:
+        i = 1;
+
+     label4:
+        $stack15 = $stack4[0];
+
+        $stack16 = virtualinvoke $stack15.<java.lang.String: int length()>();
+
+        if i >= $stack16 goto label7;
+
+        $stack17 = $stack4[0];
+
+        $stack18 = virtualinvoke $stack17.<java.lang.String: char charAt(int)>(i);
+
+        $stack19 = staticinvoke <jdk.internal.misc.CDS: boolean isBasicTypeChar(char)>($stack18);
+
+        if $stack19 != 0 goto label6;
+
+        $i0 = (int) $stack18;
+
+        if $i0 < 48 goto label5;
+
+        $i1 = (int) $stack18;
+
+        if $i1 <= 57 goto label6;
+
+     label5:
+        return 0;
+
+     label6:
+        i = i + 1;
+
+        goto label4;
+
+     label7:
+        return 1;
+    }
+
+    private static void validateInputLines(java.lang.String[])
+    {
+        boolean $stack7, $stack9, $stack21, $stack23, $stack42;
+        java.lang.StringBuilder $stack14, $stack15, $stack17, $stack25, $stack26, $stack28, $stack31, $stack32, $stack34, $stack37, $stack38, $stack40, $stack49, $stack50, $stack51;
+        java.lang.String[] lines, $stack8;
+        int l2, $stack10, $stack16, $stack19, $stack39, l3;
+        java.lang.String s, $stack18, $stack20, $stack22, $stack27, $stack29, $stack33, $stack35, $stack41, $stack52;
+        java.lang.IllegalArgumentException $stack13, $stack24, $stack30, $stack36, $stack48;
+
+        lines := @parameter0: java.lang.String[];
+
+        l2 = lengthof lines;
+
+        l3 = 0;
+
+     label1:
+        if l3 >= l2 goto label7;
+
+        s = lines[l3];
+
+        $stack7 = virtualinvoke s.<java.lang.String: boolean startsWith(java.lang.String)>("[LF_RESOLVE]");
+
+        if $stack7 != 0 goto label2;
+
+        $stack42 = virtualinvoke s.<java.lang.String: boolean startsWith(java.lang.String)>("[SPECIES_RESOLVE]");
+
+        if $stack42 != 0 goto label2;
+
+        $stack48 = new java.lang.IllegalArgumentException;
+
+        $stack49 = new java.lang.StringBuilder;
+
+        specialinvoke $stack49.<java.lang.StringBuilder: void <init>()>();
+
+        $stack50 = virtualinvoke $stack49.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Wrong prefix: ");
+
+        $stack51 = virtualinvoke $stack50.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(s);
+
+        $stack52 = virtualinvoke $stack51.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack48.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack52);
+
+        throw $stack48;
+
+     label2:
+        $stack8 = virtualinvoke s.<java.lang.String: java.lang.String[] split(java.lang.String)>(" ");
+
+        $stack9 = virtualinvoke s.<java.lang.String: boolean startsWith(java.lang.String)>("[LF_RESOLVE]");
+
+        if $stack9 == 0 goto label5;
+
+        $stack19 = lengthof $stack8;
+
+        if $stack19 == 4 goto label3;
+
+        $stack36 = new java.lang.IllegalArgumentException;
+
+        $stack37 = new java.lang.StringBuilder;
+
+        specialinvoke $stack37.<java.lang.StringBuilder: void <init>()>();
+
+        $stack38 = virtualinvoke $stack37.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Incorrect number of items in the line: ");
+
+        $stack39 = lengthof $stack8;
+
+        $stack40 = virtualinvoke $stack38.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack39);
+
+        $stack41 = virtualinvoke $stack40.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack36.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack41);
+
+        throw $stack36;
+
+     label3:
+        $stack20 = $stack8[1];
+
+        $stack21 = staticinvoke <jdk.internal.misc.CDS: boolean isValidHolderName(java.lang.String)>($stack20);
+
+        if $stack21 != 0 goto label4;
+
+        $stack30 = new java.lang.IllegalArgumentException;
+
+        $stack31 = new java.lang.StringBuilder;
+
+        specialinvoke $stack31.<java.lang.StringBuilder: void <init>()>();
+
+        $stack32 = virtualinvoke $stack31.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Invalid holder class name: ");
+
+        $stack33 = $stack8[1];
+
+        $stack34 = virtualinvoke $stack32.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack33);
+
+        $stack35 = virtualinvoke $stack34.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack30.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack35);
+
+        throw $stack30;
+
+     label4:
+        $stack22 = $stack8[3];
+
+        $stack23 = staticinvoke <jdk.internal.misc.CDS: boolean isValidMethodType(java.lang.String)>($stack22);
+
+        if $stack23 != 0 goto label6;
+
+        $stack24 = new java.lang.IllegalArgumentException;
+
+        $stack25 = new java.lang.StringBuilder;
+
+        specialinvoke $stack25.<java.lang.StringBuilder: void <init>()>();
+
+        $stack26 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Invalid method type: ");
+
+        $stack27 = $stack8[3];
+
+        $stack28 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack27);
+
+        $stack29 = virtualinvoke $stack28.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack24.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack29);
+
+        throw $stack24;
+
+     label5:
+        $stack10 = lengthof $stack8;
+
+        if $stack10 == 2 goto label6;
+
+        $stack13 = new java.lang.IllegalArgumentException;
+
+        $stack14 = new java.lang.StringBuilder;
+
+        specialinvoke $stack14.<java.lang.StringBuilder: void <init>()>();
+
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Incorrect number of items in the line: ");
+
+        $stack16 = lengthof $stack8;
+
+        $stack17 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack16);
+
+        $stack18 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack13.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack18);
+
+        throw $stack13;
+
+     label6:
+        l3 = l3 + 1;
+
+        goto label1;
+
+     label7:
+        return;
+    }
+
+    private static java.lang.Object[] generateLambdaFormHolderClasses(java.lang.String[])
+    {
+        java.lang.Object[] retArray;
+        java.lang.String[] lines;
+        java.util.Map $stack11;
+        jdk.internal.access.JavaLangInvokeAccess $stack10;
+        int $stack12, $stack13, index, index#2;
+        boolean $stack16;
+        java.util.Map$Entry entry;
+        java.util.Iterator $stack15;
+        java.util.Set $stack14;
+        java.util.stream.Stream $stack9;
+        java.lang.Object $stack17, $stack19, $stack21;
+
+        lines := @parameter0: java.lang.String[];
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(lines);
+
+        staticinvoke <jdk.internal.misc.CDS: void validateInputLines(java.lang.String[])>(lines);
+
+        $stack9 = staticinvoke <java.util.Arrays: java.util.stream.Stream stream(java.lang.Object[])>(lines);
+
+        $stack10 = staticinvoke <jdk.internal.access.SharedSecrets: jdk.internal.access.JavaLangInvokeAccess getJavaLangInvokeAccess()>();
+
+        $stack11 = interfaceinvoke $stack10.<jdk.internal.access.JavaLangInvokeAccess: java.util.Map generateHolderClasses(java.util.stream.Stream)>($stack9);
+
+        $stack12 = interfaceinvoke $stack11.<java.util.Map: int size()>();
+
+        $stack13 = $stack12 * 2;
+
+        retArray = newarray (java.lang.Object)[$stack13];
+
+        index = 0;
+
+        $stack14 = interfaceinvoke $stack11.<java.util.Map: java.util.Set entrySet()>();
+
+        $stack15 = interfaceinvoke $stack14.<java.util.Set: java.util.Iterator iterator()>();
+
+     label1:
+        $stack16 = interfaceinvoke $stack15.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack16 == 0 goto label2;
+
+        $stack17 = interfaceinvoke $stack15.<java.util.Iterator: java.lang.Object next()>();
+
+        entry = (java.util.Map$Entry) $stack17;
+
+        index#2 = index + 1;
+
+        $stack19 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getKey()>();
+
+        retArray[index] = $stack19;
+
+        index = index#2 + 1;
+
+        $stack21 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getValue()>();
+
+        retArray[index#2] = $stack21;
+
+        goto label1;
+
+     label2:
+        return retArray;
+    }
+
+    private static native void dumpClassList(java.lang.String);
+
+    private static native void dumpDynamicArchive(java.lang.String);
+
+    private static java.lang.String drainOutput(java.io.InputStream, long, java.lang.String, java.util.List)
+    {
+        long pid;
+        java.lang.Runnable $stack13;
+        java.util.List cmds;
+        java.lang.Thread $stack12;
+        java.lang.StringBuilder $stack6, $stack7, $stack8, $stack9, $stack10;
+        java.lang.String tail, $stack11;
+        java.io.InputStream stream;
+
+        stream := @parameter0: java.io.InputStream;
+
+        pid := @parameter1: long;
+
+        tail := @parameter2: java.lang.String;
+
+        cmds := @parameter3: java.util.List;
+
+        $stack6 = new java.lang.StringBuilder;
+
+        specialinvoke $stack6.<java.lang.StringBuilder: void <init>()>();
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("java_pid");
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(long)>(pid);
+
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("_");
+
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(tail);
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack12 = new java.lang.Thread;
+
+        $stack13 = staticinvoke <jdk.internal.misc.CDS$lambda_drainOutput_0__22: java.lang.Runnable bootstrap$(java.io.InputStream,java.lang.String,java.util.List)>(stream, $stack11, cmds);
+
+        specialinvoke $stack12.<java.lang.Thread: void <init>(java.lang.Runnable)>($stack13);
+
+        virtualinvoke $stack12.<java.lang.Thread: void start()>();
+
+        return $stack11;
+    }
+
+    private static boolean containsExcludedFlags(java.lang.String)
+    {
+        int l2, l3;
+        java.lang.String[] l1;
+        java.lang.String e, testStr;
+        boolean $stack5;
+
+        testStr := @parameter0: java.lang.String;
+
+        l1 = <jdk.internal.misc.CDS: java.lang.String[] excludeFlags>;
+
+        l2 = lengthof l1;
+
+        l3 = 0;
+
+     label1:
+        if l3 >= l2 goto label3;
+
+        e = l1[l3];
+
+        $stack5 = virtualinvoke testStr.<java.lang.String: boolean contains(java.lang.CharSequence)>(e);
+
+        if $stack5 == 0 goto label2;
+
+        return 1;
+
+     label2:
+        l3 = l3 + 1;
+
+        goto label1;
+
+     label3:
+        return 0;
+    }
+
+    private static void dumpSharedArchive(boolean, java.lang.String) throws java.lang.Exception
+    {
+        java.lang.Runtime $stack96;
+        java.lang.StringBuilder $stack19, $stack20, $stack21, $stack22, $stack35, $stack37, $stack38, $stack39, $stack45, $stack46, $stack47, $stack48, $stack49, $stack55, $stack56, $stack57, $stack58, $stack59, $stack60, $stack62, $stack63, $stack64, $stack71, $stack72, $stack74, $stack75, $stack77, $stack78, $stack85, $stack86, $stack87, $stack90, $stack91, $stack92, $stack113, $stack114, $stack115, $stack116, $stack117, $stack118, $stack119, $stack120, $stack24, $stack25, $stack26;
+        java.lang.Object[] $stack98;
+        long $stack17, $stack102, $stack105;
+        java.util.ArrayList $stack70;
+        java.lang.ProcessHandle $stack16;
+        java.lang.String $stack18, fileName, archiveFileName, $stack40, $stack50, $stack61, $stack65, $stack68, $stack69, $stack73, $stack76, $stack79, $stack88, $stack93, $stack103, $stack106, $stack121, arg, $stack23, $stack165, $stack27, $stack41;
+        java.lang.RuntimeException $stack44, $stack54, $stack112;
+        java.io.File $stack32, $stack66, $stack28;
+        boolean isStatic, $stack31, $stack33, $stack34, $stack67, $stack109, $stack137, $stack29;
+        java.lang.Process $stack100;
+        java.lang.String[] $stack95, $stack97, $stack99;
+        int stdOutFile, stdErrFile;
+        java.io.PrintStream $stack36;
+        java.io.InputStream $stack101, $stack104;
+
+        isStatic := @parameter0: boolean;
+
+        fileName := @parameter1: java.lang.String;
+
+        $stack16 = staticinvoke <java.lang.ProcessHandle: java.lang.ProcessHandle current()>();
+
+        $stack17 = interfaceinvoke $stack16.<java.lang.ProcessHandle: long pid()>();
+
+        $stack18 = staticinvoke <java.lang.String: java.lang.String valueOf(long)>($stack17);
+
+        if fileName == null goto label01;
+
+        $stack23 = fileName;
+
+        goto label04;
+
+     label01:
+        $stack19 = new java.lang.StringBuilder;
+
+        specialinvoke $stack19.<java.lang.StringBuilder: void <init>()>();
+
+        $stack20 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("java_pid");
+
+        $stack21 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack18);
+
+        if isStatic == 0 goto label02;
+
+        $stack165 = "_static.jsa";
+
+        goto label03;
+
+     label02:
+        $stack165 = "_dynamic.jsa";
+
+     label03:
+        $stack22 = virtualinvoke $stack21.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack165);
+
+        $stack23 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label04:
+        archiveFileName = $stack23;
+
+        $stack24 = new java.lang.StringBuilder;
+
+        specialinvoke $stack24.<java.lang.StringBuilder: void <init>()>();
+
+        $stack25 = virtualinvoke $stack24.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack23);
+
+        $stack26 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(".temp");
+
+        $stack27 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack28 = new java.io.File;
+
+        specialinvoke $stack28.<java.io.File: void <init>(java.lang.String)>($stack27);
+
+        $stack29 = virtualinvoke $stack28.<java.io.File: boolean exists()>();
+
+        if $stack29 != 0 goto label05;
+
+        virtualinvoke $stack28.<java.io.File: boolean createNewFile()>();
+
+     label05:
+        virtualinvoke $stack28.<java.io.File: boolean delete()>();
+
+        if isStatic == 0 goto label11;
+
+        $stack62 = new java.lang.StringBuilder;
+
+        specialinvoke $stack62.<java.lang.StringBuilder: void <init>()>();
+
+        $stack63 = virtualinvoke $stack62.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(archiveFileName);
+
+        $stack64 = virtualinvoke $stack63.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(".classlist");
+
+        $stack65 = virtualinvoke $stack64.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack66 = new java.io.File;
+
+        specialinvoke $stack66.<java.io.File: void <init>(java.lang.String)>($stack65);
+
+        $stack67 = virtualinvoke $stack66.<java.io.File: boolean exists()>();
+
+        if $stack67 == 0 goto label06;
+
+        virtualinvoke $stack66.<java.io.File: boolean delete()>();
+
+     label06:
+        staticinvoke <jdk.internal.misc.CDS: void dumpClassList(java.lang.String)>($stack65);
+
+        $stack68 = staticinvoke <java.lang.System: java.lang.String getProperty(java.lang.String)>("java.home");
+
+        $stack69 = staticinvoke <java.lang.System: java.lang.String getProperty(java.lang.String)>("java.class.path");
+
+        $stack70 = new java.util.ArrayList;
+
+        specialinvoke $stack70.<java.util.ArrayList: void <init>()>();
+
+        $stack71 = new java.lang.StringBuilder;
+
+        specialinvoke $stack71.<java.lang.StringBuilder: void <init>()>();
+
+        $stack72 = virtualinvoke $stack71.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack68);
+
+        $stack73 = <java.io.File: java.lang.String separator>;
+
+        $stack74 = virtualinvoke $stack72.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack73);
+
+        $stack75 = virtualinvoke $stack74.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("bin");
+
+        $stack76 = <java.io.File: java.lang.String separator>;
+
+        $stack77 = virtualinvoke $stack75.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack76);
+
+        $stack78 = virtualinvoke $stack77.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("java");
+
+        $stack79 = virtualinvoke $stack78.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $stack70.<java.util.List: boolean add(java.lang.Object)>($stack79);
+
+        interfaceinvoke $stack70.<java.util.List: boolean add(java.lang.Object)>("-cp");
+
+        interfaceinvoke $stack70.<java.util.List: boolean add(java.lang.Object)>($stack69);
+
+        interfaceinvoke $stack70.<java.util.List: boolean add(java.lang.Object)>("-Xlog:cds");
+
+        interfaceinvoke $stack70.<java.util.List: boolean add(java.lang.Object)>("-Xshare:dump");
+
+        $stack85 = new java.lang.StringBuilder;
+
+        specialinvoke $stack85.<java.lang.StringBuilder: void <init>()>();
+
+        $stack86 = virtualinvoke $stack85.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("-XX:SharedClassListFile=");
+
+        $stack87 = virtualinvoke $stack86.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack65);
+
+        $stack88 = virtualinvoke $stack87.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $stack70.<java.util.List: boolean add(java.lang.Object)>($stack88);
+
+        $stack90 = new java.lang.StringBuilder;
+
+        specialinvoke $stack90.<java.lang.StringBuilder: void <init>()>();
+
+        $stack91 = virtualinvoke $stack90.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("-XX:SharedArchiveFile=");
+
+        $stack92 = virtualinvoke $stack91.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack27);
+
+        $stack93 = virtualinvoke $stack92.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $stack70.<java.util.List: boolean add(java.lang.Object)>($stack93);
+
+        $stack95 = staticinvoke <jdk.internal.misc.VM: java.lang.String[] getRuntimeArguments()>();
+
+        if $stack95 == null goto label09;
+
+        stdOutFile = lengthof $stack95;
+
+        stdErrFile = 0;
+
+     label07:
+        if stdErrFile >= stdOutFile goto label09;
+
+        arg = $stack95[stdErrFile];
+
+        if arg == null goto label08;
+
+        $stack137 = staticinvoke <jdk.internal.misc.CDS: boolean containsExcludedFlags(java.lang.String)>(arg);
+
+        if $stack137 != 0 goto label08;
+
+        interfaceinvoke $stack70.<java.util.List: boolean add(java.lang.Object)>(arg);
+
+     label08:
+        stdErrFile = stdErrFile + 1;
+
+        goto label07;
+
+     label09:
+        $stack96 = staticinvoke <java.lang.Runtime: java.lang.Runtime getRuntime()>();
+
+        $stack97 = newarray (java.lang.String)[0];
+
+        $stack98 = interfaceinvoke $stack70.<java.util.List: java.lang.Object[] toArray(java.lang.Object[])>($stack97);
+
+        $stack99 = (java.lang.String[]) $stack98;
+
+        $stack100 = virtualinvoke $stack96.<java.lang.Runtime: java.lang.Process exec(java.lang.String[])>($stack99);
+
+        $stack101 = virtualinvoke $stack100.<java.lang.Process: java.io.InputStream getInputStream()>();
+
+        $stack102 = virtualinvoke $stack100.<java.lang.Process: long pid()>();
+
+        $stack103 = staticinvoke <jdk.internal.misc.CDS: java.lang.String drainOutput(java.io.InputStream,long,java.lang.String,java.util.List)>($stack101, $stack102, "stdout", $stack70);
+
+        $stack104 = virtualinvoke $stack100.<java.lang.Process: java.io.InputStream getErrorStream()>();
+
+        $stack105 = virtualinvoke $stack100.<java.lang.Process: long pid()>();
+
+        $stack106 = staticinvoke <jdk.internal.misc.CDS: java.lang.String drainOutput(java.io.InputStream,long,java.lang.String,java.util.List)>($stack104, $stack105, "stderr", $stack70);
+
+        virtualinvoke $stack100.<java.lang.Process: int waitFor()>();
+
+        virtualinvoke $stack66.<java.io.File: boolean delete()>();
+
+        $stack109 = virtualinvoke $stack28.<java.io.File: boolean exists()>();
+
+        if $stack109 != 0 goto label10;
+
+        $stack112 = new java.lang.RuntimeException;
+
+        $stack113 = new java.lang.StringBuilder;
+
+        specialinvoke $stack113.<java.lang.StringBuilder: void <init>()>();
+
+        $stack114 = virtualinvoke $stack113.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Archive file ");
+
+        $stack115 = virtualinvoke $stack114.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack27);
+
+        $stack116 = virtualinvoke $stack115.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" is not created, please check stdout file ");
+
+        $stack117 = virtualinvoke $stack116.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack103);
+
+        $stack118 = virtualinvoke $stack117.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" or stderr file ");
+
+        $stack119 = virtualinvoke $stack118.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack106);
+
+        $stack120 = virtualinvoke $stack119.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" for more detail");
+
+        $stack121 = virtualinvoke $stack120.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack112.<java.lang.RuntimeException: void <init>(java.lang.String)>($stack121);
+
+        throw $stack112;
+
+     label10:
+        goto label12;
+
+     label11:
+        staticinvoke <jdk.internal.misc.CDS: void dumpDynamicArchive(java.lang.String)>($stack27);
+
+        $stack31 = virtualinvoke $stack28.<java.io.File: boolean exists()>();
+
+        if $stack31 != 0 goto label12;
+
+        $stack54 = new java.lang.RuntimeException;
+
+        $stack55 = new java.lang.StringBuilder;
+
+        specialinvoke $stack55.<java.lang.StringBuilder: void <init>()>();
+
+        $stack56 = virtualinvoke $stack55.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Archive file ");
+
+        $stack57 = virtualinvoke $stack56.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack27);
+
+        $stack58 = virtualinvoke $stack57.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" is not created, please check process ");
+
+        $stack59 = virtualinvoke $stack58.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack18);
+
+        $stack60 = virtualinvoke $stack59.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" output for more detail");
+
+        $stack61 = virtualinvoke $stack60.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack54.<java.lang.RuntimeException: void <init>(java.lang.String)>($stack61);
+
+        throw $stack54;
+
+     label12:
+        $stack32 = new java.io.File;
+
+        specialinvoke $stack32.<java.io.File: void <init>(java.lang.String)>(archiveFileName);
+
+        $stack33 = virtualinvoke $stack32.<java.io.File: boolean exists()>();
+
+        if $stack33 == 0 goto label13;
+
+        virtualinvoke $stack32.<java.io.File: boolean delete()>();
+
+     label13:
+        $stack34 = virtualinvoke $stack28.<java.io.File: boolean renameTo(java.io.File)>($stack32);
+
+        if $stack34 != 0 goto label14;
+
+        $stack44 = new java.lang.RuntimeException;
+
+        $stack45 = new java.lang.StringBuilder;
+
+        specialinvoke $stack45.<java.lang.StringBuilder: void <init>()>();
+
+        $stack46 = virtualinvoke $stack45.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Cannot rename temp file ");
+
+        $stack47 = virtualinvoke $stack46.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack27);
+
+        $stack48 = virtualinvoke $stack47.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" to archive file");
+
+        $stack49 = virtualinvoke $stack48.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(archiveFileName);
+
+        $stack50 = virtualinvoke $stack49.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack44.<java.lang.RuntimeException: void <init>(java.lang.String)>($stack50);
+
+        throw $stack44;
+
+     label14:
+        $stack36 = <java.lang.System: java.io.PrintStream out>;
+
+        $stack35 = new java.lang.StringBuilder;
+
+        specialinvoke $stack35.<java.lang.StringBuilder: void <init>()>();
+
+        if isStatic == 0 goto label15;
+
+        $stack41 = "Static";
+
+        goto label16;
+
+     label15:
+        $stack41 = " Dynamic";
+
+     label16:
+        $stack37 = virtualinvoke $stack35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack41);
+
+        $stack38 = virtualinvoke $stack37.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" dump to file ");
+
+        $stack39 = virtualinvoke $stack38.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(archiveFileName);
+
+        $stack40 = virtualinvoke $stack39.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        virtualinvoke $stack36.<java.io.PrintStream: void println(java.lang.String)>($stack40);
+
+        return;
+    }
+
+    public static void lambda$drainOutput$0(java.io.InputStream, java.lang.String, java.util.List)
+    {
+        java.lang.Throwable $stack30, $stack31, $stack33, $stack34, $stack36, $stack37;
+        java.lang.String fileName, $stack13, $stack19, $stack27, $stack29, s;
+        boolean $stack12;
+        java.io.PrintStream $stack10;
+        java.util.Iterator $stack11;
+        java.io.IOException $stack21;
+        java.lang.RuntimeException $stack22;
+        java.io.InputStreamReader $stack8;
+        java.util.List cmds;
+        java.lang.Object $stack15;
+        java.lang.StringBuilder $stack16, $stack17, $stack18, $stack23, $stack24, $stack25, $stack26, $stack28;
+        java.io.BufferedReader $stack9;
+        java.io.InputStream stream;
+
+        stream := @parameter0: java.io.InputStream;
+
+        fileName := @parameter1: java.lang.String;
+
+        cmds := @parameter2: java.util.List;
+
+     label01:
+        $stack8 = new java.io.InputStreamReader;
+
+        specialinvoke $stack8.<java.io.InputStreamReader: void <init>(java.io.InputStream)>(stream);
+
+     label02:
+        $stack9 = new java.io.BufferedReader;
+
+        specialinvoke $stack9.<java.io.BufferedReader: void <init>(java.io.Reader)>($stack8);
+
+     label03:
+        $stack10 = new java.io.PrintStream;
+
+        specialinvoke $stack10.<java.io.PrintStream: void <init>(java.lang.String)>(fileName);
+
+     label04:
+        virtualinvoke $stack10.<java.io.PrintStream: void println(java.lang.String)>("Command:");
+
+        $stack11 = interfaceinvoke cmds.<java.util.List: java.util.Iterator iterator()>();
+
+     label05:
+        $stack12 = interfaceinvoke $stack11.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack12 == 0 goto label06;
+
+        $stack15 = interfaceinvoke $stack11.<java.util.Iterator: java.lang.Object next()>();
+
+        s = (java.lang.String) $stack15;
+
+        $stack16 = new java.lang.StringBuilder;
+
+        specialinvoke $stack16.<java.lang.StringBuilder: void <init>()>();
+
+        $stack17 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(s);
+
+        $stack18 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        virtualinvoke $stack10.<java.io.PrintStream: void print(java.lang.String)>($stack19);
+
+        goto label05;
+
+     label06:
+        virtualinvoke $stack10.<java.io.PrintStream: void println(java.lang.String)>("");
+
+     label07:
+        $stack13 = virtualinvoke $stack9.<java.io.BufferedReader: java.lang.String readLine()>();
+
+        if $stack13 == null goto label08;
+
+        virtualinvoke $stack10.<java.io.PrintStream: void println(java.lang.String)>($stack13);
+
+        goto label07;
+
+     label08:
+        virtualinvoke $stack10.<java.io.PrintStream: void close()>();
+
+        goto label14;
+
+     label09:
+        $stack37 := @caughtexception;
+
+     label10:
+        virtualinvoke $stack10.<java.io.PrintStream: void close()>();
+
+     label11:
+        goto label13;
+
+     label12:
+        $stack36 := @caughtexception;
+
+        virtualinvoke $stack37.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>($stack36);
+
+     label13:
+        throw $stack37;
+
+     label14:
+        virtualinvoke $stack9.<java.io.BufferedReader: void close()>();
+
+        goto label20;
+
+     label15:
+        $stack34 := @caughtexception;
+
+     label16:
+        virtualinvoke $stack9.<java.io.BufferedReader: void close()>();
+
+     label17:
+        goto label19;
+
+     label18:
+        $stack33 := @caughtexception;
+
+        virtualinvoke $stack34.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>($stack33);
+
+     label19:
+        throw $stack34;
+
+     label20:
+        virtualinvoke $stack8.<java.io.InputStreamReader: void close()>();
+
+        goto label26;
+
+     label21:
+        $stack31 := @caughtexception;
+
+     label22:
+        virtualinvoke $stack8.<java.io.InputStreamReader: void close()>();
+
+     label23:
+        goto label25;
+
+     label24:
+        $stack30 := @caughtexception;
+
+        virtualinvoke $stack31.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>($stack30);
+
+     label25:
+        throw $stack31;
+
+     label26:
+        goto label28;
+
+     label27:
+        $stack21 := @caughtexception;
+
+        $stack22 = new java.lang.RuntimeException;
+
+        $stack23 = new java.lang.StringBuilder;
+
+        specialinvoke $stack23.<java.lang.StringBuilder: void <init>()>();
+
+        $stack24 = virtualinvoke $stack23.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("IOExeption happens during drain stream to file ");
+
+        $stack25 = virtualinvoke $stack24.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(fileName);
+
+        $stack26 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(": ");
+
+        $stack27 = virtualinvoke $stack21.<java.io.IOException: java.lang.String getMessage()>();
+
+        $stack28 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack27);
+
+        $stack29 = virtualinvoke $stack28.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack22.<java.lang.RuntimeException: void <init>(java.lang.String)>($stack29);
+
+        throw $stack22;
+
+     label28:
+        return;
+
+        catch java.lang.Throwable from label04 to label08 with label09;
+        catch java.lang.Throwable from label10 to label11 with label12;
+        catch java.lang.Throwable from label03 to label14 with label15;
+        catch java.lang.Throwable from label16 to label17 with label18;
+        catch java.lang.Throwable from label02 to label20 with label21;
+        catch java.lang.Throwable from label22 to label23 with label24;
+        catch java.io.IOException from label01 to label26 with label27;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.String[] $stack3;
+        boolean $stack0, $stack1, $stack2;
+
+        <jdk.internal.misc.CDS: java.lang.String INVOKERS_HOLDER_CLASS_NAME> = "java.lang.invoke.Invokers$Holder";
+
+        <jdk.internal.misc.CDS: java.lang.String BASIC_FORMS_HOLDER_CLASS_NAME> = "java.lang.invoke.LambdaForm$Holder";
+
+        <jdk.internal.misc.CDS: java.lang.String DELEGATING_HOLDER_CLASS_NAME> = "java.lang.invoke.DelegatingMethodHandle$Holder";
+
+        <jdk.internal.misc.CDS: java.lang.String DIRECT_HOLDER_CLASS_NAME> = "java.lang.invoke.DirectMethodHandle$Holder";
+
+        $stack0 = staticinvoke <jdk.internal.misc.CDS: boolean isDumpingClassList0()>();
+
+        <jdk.internal.misc.CDS: boolean isDumpingClassList> = $stack0;
+
+        $stack1 = staticinvoke <jdk.internal.misc.CDS: boolean isDumpingArchive0()>();
+
+        <jdk.internal.misc.CDS: boolean isDumpingArchive> = $stack1;
+
+        $stack2 = staticinvoke <jdk.internal.misc.CDS: boolean isSharingEnabled0()>();
+
+        <jdk.internal.misc.CDS: boolean isSharingEnabled> = $stack2;
+
+        $stack3 = newarray (java.lang.String)[10];
+
+        $stack3[0] = "-XX:DumpLoadedClassList=";
+
+        $stack3[1] = "-XX:+DumpSharedSpaces";
+
+        $stack3[2] = "-XX:+DynamicDumpSharedSpaces";
+
+        $stack3[3] = "-XX:+RecordDynamicDumpInfo";
+
+        $stack3[4] = "-Xshare:";
+
+        $stack3[5] = "-XX:SharedClassListFile=";
+
+        $stack3[6] = "-XX:SharedArchiveFile=";
+
+        $stack3[7] = "-XX:ArchiveClassesAtExit=";
+
+        $stack3[8] = "-XX:+UseSharedSpaces";
+
+        $stack3[9] = "-XX:+RequireSharedSpaces";
+
+        <jdk.internal.misc.CDS: java.lang.String[] excludeFlags> = $stack3;
+
+        return;
+    }
+}

@@ -1,0 +1,1080 @@
+public class jdk.internal.jimage.ImageLocation extends java.lang.Object
+{
+    public static final int ATTRIBUTE_END;
+    public static final int ATTRIBUTE_MODULE;
+    public static final int ATTRIBUTE_PARENT;
+    public static final int ATTRIBUTE_BASE;
+    public static final int ATTRIBUTE_EXTENSION;
+    public static final int ATTRIBUTE_OFFSET;
+    public static final int ATTRIBUTE_COMPRESSED;
+    public static final int ATTRIBUTE_UNCOMPRESSED;
+    public static final int ATTRIBUTE_COUNT;
+    protected final long[] attributes;
+    protected final jdk.internal.jimage.ImageStrings strings;
+
+    public void <init>(long[], jdk.internal.jimage.ImageStrings)
+    {
+        jdk.internal.jimage.ImageLocation this;
+        long[] attributes, $stack4;
+        java.lang.Object $stack3, $stack5;
+        jdk.internal.jimage.ImageStrings strings, $stack6;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        attributes := @parameter0: long[];
+
+        strings := @parameter1: jdk.internal.jimage.ImageStrings;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack3 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(attributes);
+
+        $stack4 = (long[]) $stack3;
+
+        this.<jdk.internal.jimage.ImageLocation: long[] attributes> = $stack4;
+
+        $stack5 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(strings);
+
+        $stack6 = (jdk.internal.jimage.ImageStrings) $stack5;
+
+        this.<jdk.internal.jimage.ImageLocation: jdk.internal.jimage.ImageStrings strings> = $stack6;
+
+        return;
+    }
+
+    jdk.internal.jimage.ImageStrings getStrings()
+    {
+        jdk.internal.jimage.ImageLocation this;
+        jdk.internal.jimage.ImageStrings $stack1;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        $stack1 = this.<jdk.internal.jimage.ImageLocation: jdk.internal.jimage.ImageStrings strings>;
+
+        return $stack1;
+    }
+
+    static long[] decompress(java.nio.ByteBuffer, int)
+    {
+        long $stack12;
+        java.nio.ByteBuffer bytes;
+        short data, $stack11, $s0;
+        long[] attributes;
+        byte $stack10;
+        int $stack8, kind, length, offset, offset#2, $i0, $i1, $i2;
+        java.lang.InternalError $u1;
+        java.lang.String $stack19;
+        java.lang.StringBuilder $stack17, $stack18, $u0;
+
+        bytes := @parameter0: java.nio.ByteBuffer;
+
+        offset := @parameter1: int;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(bytes);
+
+        attributes = newarray (long)[8];
+
+        $stack8 = virtualinvoke bytes.<java.nio.ByteBuffer: int limit()>();
+
+     label1:
+        if offset >= $stack8 goto label4;
+
+        offset#2 = offset + 1;
+
+        $stack10 = virtualinvoke bytes.<java.nio.ByteBuffer: byte get(int)>(offset);
+
+        $s0 = (short) $stack10;
+
+        data = $s0 & 255;
+
+        $i0 = (int) data;
+
+        if $i0 > 7 goto label2;
+
+        goto label4;
+
+     label2:
+        $i1 = (int) data;
+
+        kind = $i1 >>> 3;
+
+        if 8 > kind goto label3;
+
+        $u1 = new java.lang.InternalError;
+
+        $u0 = new java.lang.StringBuilder;
+
+        specialinvoke $u0.<java.lang.StringBuilder: void <init>()>();
+
+        $stack17 = virtualinvoke $u0.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Invalid jimage attribute kind: ");
+
+        $stack18 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(kind);
+
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u1.<java.lang.InternalError: void <init>(java.lang.String)>($stack19);
+
+        throw $u1;
+
+     label3:
+        $stack11 = data & 7;
+
+        $i2 = (int) $stack11;
+
+        length = $i2 + 1;
+
+        $stack12 = staticinvoke <jdk.internal.jimage.ImageLocation: long readValue(int,java.nio.ByteBuffer,int,int)>(length, bytes, offset#2, $stack8);
+
+        attributes[kind] = $stack12;
+
+        offset = offset#2 + length;
+
+        goto label1;
+
+     label4:
+        return attributes;
+    }
+
+    public static byte[] compress(long[])
+    {
+        byte[] $stack10;
+        long value, $stack21;
+        long[] attributes;
+        byte $stack11;
+        int $stack15, $stack16, n, $stack17, $stack18, $stack20, $stack22, kind, i, $i0;
+        jdk.internal.jimage.ImageStream $u0;
+
+        attributes := @parameter0: long[];
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(attributes);
+
+        $u0 = new jdk.internal.jimage.ImageStream;
+
+        specialinvoke $u0.<jdk.internal.jimage.ImageStream: void <init>(int)>(16);
+
+        kind = 1;
+
+     label1:
+        if kind >= 8 goto label4;
+
+        value = attributes[kind];
+
+        $stack11 = value cmp 0L;
+
+        if $stack11 == 0 goto label3;
+
+        $stack15 = staticinvoke <java.lang.Long: int numberOfLeadingZeros(long)>(value);
+
+        $stack16 = 63 - $stack15;
+
+        n = $stack16 >> 3;
+
+        $stack17 = kind << 3;
+
+        $stack18 = $stack17 | n;
+
+        virtualinvoke $u0.<jdk.internal.jimage.ImageStream: jdk.internal.jimage.ImageStream put(int)>($stack18);
+
+        i = n;
+
+     label2:
+        if i < 0 goto label3;
+
+        $stack20 = i << 3;
+
+        $stack21 = value >> $stack20;
+
+        $stack22 = (int) $stack21;
+
+        virtualinvoke $u0.<jdk.internal.jimage.ImageStream: jdk.internal.jimage.ImageStream put(int)>($stack22);
+
+        $i0 = (int) -1;
+
+        i = i + $i0;
+
+        goto label2;
+
+     label3:
+        kind = kind + 1;
+
+        goto label1;
+
+     label4:
+        virtualinvoke $u0.<jdk.internal.jimage.ImageStream: jdk.internal.jimage.ImageStream put(int)>(0);
+
+        $stack10 = virtualinvoke $u0.<jdk.internal.jimage.ImageStream: byte[] toArray()>();
+
+        return $stack10;
+    }
+
+    public boolean verify(java.lang.String)
+    {
+        jdk.internal.jimage.ImageLocation this;
+        long[] $stack3;
+        java.lang.String name;
+        jdk.internal.jimage.ImageStrings $stack2;
+        boolean $stack4;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        name := @parameter0: java.lang.String;
+
+        $stack3 = this.<jdk.internal.jimage.ImageLocation: long[] attributes>;
+
+        $stack2 = this.<jdk.internal.jimage.ImageLocation: jdk.internal.jimage.ImageStrings strings>;
+
+        $stack4 = staticinvoke <jdk.internal.jimage.ImageLocation: boolean verify(java.lang.String,long[],jdk.internal.jimage.ImageStrings)>(name, $stack3, $stack2);
+
+        return $stack4;
+    }
+
+    static boolean verify(java.lang.String, long[], jdk.internal.jimage.ImageStrings)
+    {
+        long $stack9, $stack10, $stack11, $stack12;
+        long[] attributes;
+        int $stack8, moduleOffset, $stack29, index, index#2, $stack15, $stack14, $stack13, $i0, $i1;
+        java.lang.String name;
+        boolean $stack16;
+        char $stack31, $stack33;
+        jdk.internal.jimage.ImageStrings strings;
+
+        name := @parameter0: java.lang.String;
+
+        attributes := @parameter1: long[];
+
+        strings := @parameter2: jdk.internal.jimage.ImageStrings;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(name);
+
+        $stack8 = virtualinvoke name.<java.lang.String: int length()>();
+
+        index = 0;
+
+        $stack9 = attributes[1];
+
+        moduleOffset = (int) $stack9;
+
+        if moduleOffset == 0 goto label2;
+
+        if $stack8 < 1 goto label2;
+
+        $stack29 = interfaceinvoke strings.<jdk.internal.jimage.ImageStrings: int match(int,java.lang.String,int)>(moduleOffset, name, 1);
+
+        index#2 = $stack29 + 1;
+
+        if $stack29 < 0 goto label1;
+
+        if $stack8 <= index#2 goto label1;
+
+        $stack31 = virtualinvoke name.<java.lang.String: char charAt(int)>(0);
+
+        $i0 = (int) $stack31;
+
+        if $i0 != 47 goto label1;
+
+        index = index#2 + 1;
+
+        $stack33 = virtualinvoke name.<java.lang.String: char charAt(int)>(index#2);
+
+        $i1 = (int) $stack33;
+
+        if $i1 == 47 goto label2;
+
+     label1:
+        return 0;
+
+     label2:
+        $stack10 = attributes[2];
+
+        $stack15 = (int) $stack10;
+
+        $stack11 = attributes[3];
+
+        $stack14 = (int) $stack11;
+
+        $stack12 = attributes[4];
+
+        $stack13 = (int) $stack12;
+
+        $stack16 = staticinvoke <jdk.internal.jimage.ImageLocation: boolean verifyName(java.lang.String,java.lang.String,int,int,int,int,int,int,jdk.internal.jimage.ImageStrings)>(null, name, index, $stack8, 0, $stack15, $stack14, $stack13, strings);
+
+        return $stack16;
+    }
+
+    static boolean verify(java.lang.String, java.lang.String, java.nio.ByteBuffer, int, jdk.internal.jimage.ImageStrings)
+    {
+        long $stack20, $stack23, $stack27, $stack28;
+        java.nio.ByteBuffer locations;
+        short data, $stack19, $s0;
+        byte $stack18;
+        int $stack13, $stack15, kind, length, locationOffset, moduleOffset, parentOffset, baseOffset, extOffset, locationOffset#6, $i0, $i1, $i2;
+        java.lang.InternalError $u1;
+        java.lang.String module, name, $stack33;
+        boolean $stack16;
+        java.lang.StringBuilder $stack31, $stack32, $u0;
+        jdk.internal.jimage.ImageStrings strings;
+
+        module := @parameter0: java.lang.String;
+
+        name := @parameter1: java.lang.String;
+
+        locations := @parameter2: java.nio.ByteBuffer;
+
+        locationOffset := @parameter3: int;
+
+        strings := @parameter4: jdk.internal.jimage.ImageStrings;
+
+        moduleOffset = 0;
+
+        parentOffset = 0;
+
+        baseOffset = 0;
+
+        extOffset = 0;
+
+        $stack13 = virtualinvoke locations.<java.nio.ByteBuffer: int limit()>();
+
+     label1:
+        if locationOffset >= $stack13 goto label9;
+
+        locationOffset#6 = locationOffset + 1;
+
+        $stack18 = virtualinvoke locations.<java.nio.ByteBuffer: byte get(int)>(locationOffset);
+
+        $s0 = (short) $stack18;
+
+        data = $s0 & 255;
+
+        $i0 = (int) data;
+
+        if $i0 > 7 goto label2;
+
+        goto label9;
+
+     label2:
+        $i1 = (int) data;
+
+        kind = $i1 >>> 3;
+
+        if 8 > kind goto label3;
+
+        $u1 = new java.lang.InternalError;
+
+        $u0 = new java.lang.StringBuilder;
+
+        specialinvoke $u0.<java.lang.StringBuilder: void <init>()>();
+
+        $stack31 = virtualinvoke $u0.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Invalid jimage attribute kind: ");
+
+        $stack32 = virtualinvoke $stack31.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(kind);
+
+        $stack33 = virtualinvoke $stack32.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u1.<java.lang.InternalError: void <init>(java.lang.String)>($stack33);
+
+        throw $u1;
+
+     label3:
+        $stack19 = data & 7;
+
+        $i2 = (int) $stack19;
+
+        length = $i2 + 1;
+
+        tableswitch(kind)
+        {
+            case 1: goto label4;
+            case 2: goto label6;
+            case 3: goto label5;
+            case 4: goto label7;
+            default: goto label8;
+        };
+
+     label4:
+        $stack28 = staticinvoke <jdk.internal.jimage.ImageLocation: long readValue(int,java.nio.ByteBuffer,int,int)>(length, locations, locationOffset#6, $stack13);
+
+        moduleOffset = (int) $stack28;
+
+        goto label8;
+
+     label5:
+        $stack23 = staticinvoke <jdk.internal.jimage.ImageLocation: long readValue(int,java.nio.ByteBuffer,int,int)>(length, locations, locationOffset#6, $stack13);
+
+        baseOffset = (int) $stack23;
+
+        goto label8;
+
+     label6:
+        $stack27 = staticinvoke <jdk.internal.jimage.ImageLocation: long readValue(int,java.nio.ByteBuffer,int,int)>(length, locations, locationOffset#6, $stack13);
+
+        parentOffset = (int) $stack27;
+
+        goto label8;
+
+     label7:
+        $stack20 = staticinvoke <jdk.internal.jimage.ImageLocation: long readValue(int,java.nio.ByteBuffer,int,int)>(length, locations, locationOffset#6, $stack13);
+
+        extOffset = (int) $stack20;
+
+     label8:
+        locationOffset = locationOffset#6 + length;
+
+        goto label1;
+
+     label9:
+        $stack15 = virtualinvoke name.<java.lang.String: int length()>();
+
+        $stack16 = staticinvoke <jdk.internal.jimage.ImageLocation: boolean verifyName(java.lang.String,java.lang.String,int,int,int,int,int,int,jdk.internal.jimage.ImageStrings)>(module, name, 0, $stack15, moduleOffset, parentOffset, baseOffset, extOffset, strings);
+
+        return $stack16;
+    }
+
+    private static long readValue(int, java.nio.ByteBuffer, int, int)
+    {
+        long $stack10, value;
+        java.nio.ByteBuffer buffer;
+        short $stack9, $s0;
+        byte $stack8;
+        int length, limit, $stack7, offset, j;
+        java.lang.InternalError $u0;
+
+        length := @parameter0: int;
+
+        buffer := @parameter1: java.nio.ByteBuffer;
+
+        offset := @parameter2: int;
+
+        limit := @parameter3: int;
+
+        value = 0L;
+
+        j = 0;
+
+     label1:
+        if j >= length goto label3;
+
+        value = value << 8;
+
+        if offset < limit goto label2;
+
+        $u0 = new java.lang.InternalError;
+
+        specialinvoke $u0.<java.lang.InternalError: void <init>(java.lang.String)>("Missing jimage attribute data");
+
+        throw $u0;
+
+     label2:
+        $stack7 = offset;
+
+        offset = offset + 1;
+
+        $stack8 = virtualinvoke buffer.<java.nio.ByteBuffer: byte get(int)>($stack7);
+
+        $s0 = (short) $stack8;
+
+        $stack9 = $s0 & 255;
+
+        $stack10 = (long) $stack9;
+
+        value = value | $stack10;
+
+        j = j + 1;
+
+        goto label1;
+
+     label3:
+        return value;
+    }
+
+    static boolean verify(java.lang.String, java.lang.String, long[], jdk.internal.jimage.ImageStrings)
+    {
+        long $stack8, $stack9, $stack10, $stack11;
+        long[] attributes;
+        int $stack7, $stack12, $stack13, $stack14, $stack15;
+        java.lang.String module, name;
+        jdk.internal.jimage.ImageStrings strings;
+        boolean $stack16;
+
+        module := @parameter0: java.lang.String;
+
+        name := @parameter1: java.lang.String;
+
+        attributes := @parameter2: long[];
+
+        strings := @parameter3: jdk.internal.jimage.ImageStrings;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(module);
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(name);
+
+        $stack7 = virtualinvoke name.<java.lang.String: int length()>();
+
+        $stack8 = attributes[1];
+
+        $stack15 = (int) $stack8;
+
+        $stack9 = attributes[2];
+
+        $stack14 = (int) $stack9;
+
+        $stack10 = attributes[3];
+
+        $stack13 = (int) $stack10;
+
+        $stack11 = attributes[4];
+
+        $stack12 = (int) $stack11;
+
+        $stack16 = staticinvoke <jdk.internal.jimage.ImageLocation: boolean verifyName(java.lang.String,java.lang.String,int,int,int,int,int,int,jdk.internal.jimage.ImageStrings)>(module, name, 0, $stack7, $stack15, $stack14, $stack13, $stack12, strings);
+
+        return $stack16;
+    }
+
+    private static boolean verifyName(java.lang.String, java.lang.String, int, int, int, int, int, int, jdk.internal.jimage.ImageStrings)
+    {
+        int moduleOffset, parentOffset, baseOffset, $stack11, extOffset, length, $stack15, $stack19, $stack28, $stack29, index, index#3, index#6, $i0, $i1;
+        java.lang.String name, module;
+        boolean $stack12;
+        char $stack14, $stack21;
+        jdk.internal.jimage.ImageStrings strings;
+
+        module := @parameter0: java.lang.String;
+
+        name := @parameter1: java.lang.String;
+
+        index := @parameter2: int;
+
+        length := @parameter3: int;
+
+        moduleOffset := @parameter4: int;
+
+        parentOffset := @parameter5: int;
+
+        baseOffset := @parameter6: int;
+
+        extOffset := @parameter7: int;
+
+        strings := @parameter8: jdk.internal.jimage.ImageStrings;
+
+        if moduleOffset == 0 goto label01;
+
+        $stack28 = interfaceinvoke strings.<jdk.internal.jimage.ImageStrings: int match(int,java.lang.String,int)>(moduleOffset, module, 0);
+
+        $stack29 = virtualinvoke module.<java.lang.String: int length()>();
+
+        if $stack28 == $stack29 goto label01;
+
+        return 0;
+
+     label01:
+        if parentOffset == 0 goto label04;
+
+        $stack19 = interfaceinvoke strings.<jdk.internal.jimage.ImageStrings: int match(int,java.lang.String,int)>(parentOffset, name, index);
+
+        if $stack19 >= 0 goto label02;
+
+        return 0;
+
+     label02:
+        index#3 = index + $stack19;
+
+        if length <= index#3 goto label03;
+
+        index = index#3 + 1;
+
+        $stack21 = virtualinvoke name.<java.lang.String: char charAt(int)>(index#3);
+
+        $i0 = (int) $stack21;
+
+        if $i0 == 47 goto label04;
+
+     label03:
+        return 0;
+
+     label04:
+        $stack11 = interfaceinvoke strings.<jdk.internal.jimage.ImageStrings: int match(int,java.lang.String,int)>(baseOffset, name, index);
+
+        if $stack11 >= 0 goto label05;
+
+        return 0;
+
+     label05:
+        index#3 = index + $stack11;
+
+        if extOffset == 0 goto label09;
+
+        if length <= index#3 goto label06;
+
+        index#6 = index#3 + 1;
+
+        $stack14 = virtualinvoke name.<java.lang.String: char charAt(int)>(index#3);
+
+        $i1 = (int) $stack14;
+
+        if $i1 == 46 goto label07;
+
+     label06:
+        return 0;
+
+     label07:
+        $stack15 = interfaceinvoke strings.<jdk.internal.jimage.ImageStrings: int match(int,java.lang.String,int)>(extOffset, name, index#6);
+
+        if $stack15 >= 0 goto label08;
+
+        return 0;
+
+     label08:
+        index#3 = index#6 + $stack15;
+
+     label09:
+        if length != index#3 goto label10;
+
+        $stack12 = 1;
+
+        goto label11;
+
+     label10:
+        $stack12 = 0;
+
+     label11:
+        return $stack12;
+    }
+
+    long getAttribute(int)
+    {
+        jdk.internal.jimage.ImageLocation this;
+        long $stack8;
+        long[] $stack7;
+        int kind;
+        java.lang.InternalError $stack2;
+        java.lang.StringBuilder $stack3, $stack4, $stack5;
+        java.lang.String $stack6;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        kind := @parameter0: int;
+
+        if kind < 0 goto label1;
+
+        if 8 > kind goto label2;
+
+     label1:
+        $stack2 = new java.lang.InternalError;
+
+        $stack3 = new java.lang.StringBuilder;
+
+        specialinvoke $stack3.<java.lang.StringBuilder: void <init>()>();
+
+        $stack4 = virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Invalid jimage attribute kind: ");
+
+        $stack5 = virtualinvoke $stack4.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(kind);
+
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack2.<java.lang.InternalError: void <init>(java.lang.String)>($stack6);
+
+        throw $stack2;
+
+     label2:
+        $stack7 = this.<jdk.internal.jimage.ImageLocation: long[] attributes>;
+
+        $stack8 = $stack7[kind];
+
+        return $stack8;
+    }
+
+    java.lang.String getAttributeString(int)
+    {
+        jdk.internal.jimage.ImageLocation this;
+        long $stack9;
+        long[] $stack8;
+        int kind, $stack10;
+        java.lang.InternalError $stack2;
+        java.lang.StringBuilder $stack3, $stack4, $stack5;
+        java.lang.String $stack6, $stack11;
+        jdk.internal.jimage.ImageStrings $stack7;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        kind := @parameter0: int;
+
+        if kind < 0 goto label1;
+
+        if 8 > kind goto label2;
+
+     label1:
+        $stack2 = new java.lang.InternalError;
+
+        $stack3 = new java.lang.StringBuilder;
+
+        specialinvoke $stack3.<java.lang.StringBuilder: void <init>()>();
+
+        $stack4 = virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Invalid jimage attribute kind: ");
+
+        $stack5 = virtualinvoke $stack4.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(kind);
+
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack2.<java.lang.InternalError: void <init>(java.lang.String)>($stack6);
+
+        throw $stack2;
+
+     label2:
+        $stack7 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: jdk.internal.jimage.ImageStrings getStrings()>();
+
+        $stack8 = this.<jdk.internal.jimage.ImageLocation: long[] attributes>;
+
+        $stack9 = $stack8[kind];
+
+        $stack10 = (int) $stack9;
+
+        $stack11 = interfaceinvoke $stack7.<jdk.internal.jimage.ImageStrings: java.lang.String get(int)>($stack10);
+
+        return $stack11;
+    }
+
+    public java.lang.String getModule()
+    {
+        jdk.internal.jimage.ImageLocation this;
+        java.lang.String $stack1;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        $stack1 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: java.lang.String getAttributeString(int)>(1);
+
+        return $stack1;
+    }
+
+    public int getModuleOffset()
+    {
+        jdk.internal.jimage.ImageLocation this;
+        int $stack2;
+        long $stack1;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        $stack1 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: long getAttribute(int)>(1);
+
+        $stack2 = (int) $stack1;
+
+        return $stack2;
+    }
+
+    public java.lang.String getBase()
+    {
+        jdk.internal.jimage.ImageLocation this;
+        java.lang.String $stack1;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        $stack1 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: java.lang.String getAttributeString(int)>(3);
+
+        return $stack1;
+    }
+
+    public int getBaseOffset()
+    {
+        jdk.internal.jimage.ImageLocation this;
+        int $stack2;
+        long $stack1;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        $stack1 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: long getAttribute(int)>(3);
+
+        $stack2 = (int) $stack1;
+
+        return $stack2;
+    }
+
+    public java.lang.String getParent()
+    {
+        jdk.internal.jimage.ImageLocation this;
+        java.lang.String $stack1;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        $stack1 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: java.lang.String getAttributeString(int)>(2);
+
+        return $stack1;
+    }
+
+    public int getParentOffset()
+    {
+        jdk.internal.jimage.ImageLocation this;
+        int $stack2;
+        long $stack1;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        $stack1 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: long getAttribute(int)>(2);
+
+        $stack2 = (int) $stack1;
+
+        return $stack2;
+    }
+
+    public java.lang.String getExtension()
+    {
+        jdk.internal.jimage.ImageLocation this;
+        java.lang.String $stack1;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        $stack1 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: java.lang.String getAttributeString(int)>(4);
+
+        return $stack1;
+    }
+
+    public int getExtensionOffset()
+    {
+        jdk.internal.jimage.ImageLocation this;
+        int $stack2;
+        long $stack1;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        $stack1 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: long getAttribute(int)>(4);
+
+        $stack2 = (int) $stack1;
+
+        return $stack2;
+    }
+
+    public java.lang.String getFullName()
+    {
+        jdk.internal.jimage.ImageLocation this;
+        java.lang.String $stack1;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        $stack1 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: java.lang.String getFullName(boolean)>(0);
+
+        return $stack1;
+    }
+
+    public java.lang.String getFullName(boolean)
+    {
+        jdk.internal.jimage.ImageLocation this;
+        int $stack4, $stack8, $stack5;
+        java.lang.StringBuilder $stack3;
+        java.lang.String $stack6, $stack9, $stack11, $stack14, $stack21;
+        boolean modulesPrefix;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        modulesPrefix := @parameter0: boolean;
+
+        $stack3 = new java.lang.StringBuilder;
+
+        specialinvoke $stack3.<java.lang.StringBuilder: void <init>()>();
+
+        $stack4 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: int getModuleOffset()>();
+
+        if $stack4 == 0 goto label2;
+
+        if modulesPrefix == 0 goto label1;
+
+        virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("/modules");
+
+     label1:
+        virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(47);
+
+        $stack21 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: java.lang.String getModule()>();
+
+        virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack21);
+
+        virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(47);
+
+     label2:
+        $stack5 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: int getParentOffset()>();
+
+        if $stack5 == 0 goto label3;
+
+        $stack14 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: java.lang.String getParent()>();
+
+        virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack14);
+
+        virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(47);
+
+     label3:
+        $stack6 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: java.lang.String getBase()>();
+
+        virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack6);
+
+        $stack8 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: int getExtensionOffset()>();
+
+        if $stack8 == 0 goto label4;
+
+        virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(46);
+
+        $stack11 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: java.lang.String getExtension()>();
+
+        virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack11);
+
+     label4:
+        $stack9 = virtualinvoke $stack3.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack9;
+    }
+
+    java.lang.String buildName(boolean, boolean, boolean)
+    {
+        jdk.internal.jimage.ImageLocation this;
+        int $stack20, $stack25, $stack10;
+        java.lang.StringBuilder $stack5;
+        java.lang.String $stack13, $stack23, $stack28, $stack8, $stack6;
+        boolean includeModule, includeParent, includeName;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        includeModule := @parameter0: boolean;
+
+        includeParent := @parameter1: boolean;
+
+        includeName := @parameter2: boolean;
+
+        $stack5 = new java.lang.StringBuilder;
+
+        specialinvoke $stack5.<java.lang.StringBuilder: void <init>()>();
+
+        if includeModule == 0 goto label1;
+
+        $stack25 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: int getModuleOffset()>();
+
+        if $stack25 == 0 goto label1;
+
+        virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("/modules/");
+
+        $stack28 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: java.lang.String getModule()>();
+
+        virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack28);
+
+     label1:
+        if includeParent == 0 goto label2;
+
+        $stack20 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: int getParentOffset()>();
+
+        if $stack20 == 0 goto label2;
+
+        virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(47);
+
+        $stack23 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: java.lang.String getParent()>();
+
+        virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack23);
+
+     label2:
+        if includeName == 0 goto label5;
+
+        if includeModule != 0 goto label3;
+
+        if includeParent == 0 goto label4;
+
+     label3:
+        virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(47);
+
+     label4:
+        $stack8 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: java.lang.String getBase()>();
+
+        virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack8);
+
+        $stack10 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: int getExtensionOffset()>();
+
+        if $stack10 == 0 goto label5;
+
+        virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>(46);
+
+        $stack13 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: java.lang.String getExtension()>();
+
+        virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack13);
+
+     label5:
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $stack6;
+    }
+
+    public long getContentOffset()
+    {
+        jdk.internal.jimage.ImageLocation this;
+        long $stack1;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        $stack1 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: long getAttribute(int)>(5);
+
+        return $stack1;
+    }
+
+    public long getCompressedSize()
+    {
+        jdk.internal.jimage.ImageLocation this;
+        long $stack1;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        $stack1 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: long getAttribute(int)>(6);
+
+        return $stack1;
+    }
+
+    public long getUncompressedSize()
+    {
+        jdk.internal.jimage.ImageLocation this;
+        long $stack1;
+
+        this := @this: jdk.internal.jimage.ImageLocation;
+
+        $stack1 = virtualinvoke this.<jdk.internal.jimage.ImageLocation: long getAttribute(int)>(7);
+
+        return $stack1;
+    }
+
+    static jdk.internal.jimage.ImageLocation readFrom(jdk.internal.jimage.BasicImageReader, int)
+    {
+        jdk.internal.jimage.ImageLocation $stack7;
+        long[] $stack5;
+        jdk.internal.jimage.BasicImageReader reader;
+        int offset;
+        jdk.internal.jimage.ImageStringsReader $stack6;
+
+        reader := @parameter0: jdk.internal.jimage.BasicImageReader;
+
+        offset := @parameter1: int;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(reader);
+
+        $stack5 = virtualinvoke reader.<jdk.internal.jimage.BasicImageReader: long[] getAttributes(int)>(offset);
+
+        $stack6 = virtualinvoke reader.<jdk.internal.jimage.BasicImageReader: jdk.internal.jimage.ImageStringsReader getStrings()>();
+
+        $stack7 = new jdk.internal.jimage.ImageLocation;
+
+        specialinvoke $stack7.<jdk.internal.jimage.ImageLocation: void <init>(long[],jdk.internal.jimage.ImageStrings)>($stack5, $stack6);
+
+        return $stack7;
+    }
+
+    public static void <clinit>()
+    {
+        <jdk.internal.jimage.ImageLocation: int ATTRIBUTE_COUNT> = 8;
+
+        <jdk.internal.jimage.ImageLocation: int ATTRIBUTE_UNCOMPRESSED> = 7;
+
+        <jdk.internal.jimage.ImageLocation: int ATTRIBUTE_COMPRESSED> = 6;
+
+        <jdk.internal.jimage.ImageLocation: int ATTRIBUTE_OFFSET> = 5;
+
+        <jdk.internal.jimage.ImageLocation: int ATTRIBUTE_EXTENSION> = 4;
+
+        <jdk.internal.jimage.ImageLocation: int ATTRIBUTE_BASE> = 3;
+
+        <jdk.internal.jimage.ImageLocation: int ATTRIBUTE_PARENT> = 2;
+
+        <jdk.internal.jimage.ImageLocation: int ATTRIBUTE_MODULE> = 1;
+
+        <jdk.internal.jimage.ImageLocation: int ATTRIBUTE_END> = 0;
+
+        return;
+    }
+}

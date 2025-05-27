@@ -1,0 +1,99 @@
+final class jdk.internal.jimage.decompressor.ZipDecompressor extends java.lang.Object implements jdk.internal.jimage.decompressor.ResourceDecompressor
+{
+
+    void <init>()
+    {
+        jdk.internal.jimage.decompressor.ZipDecompressor this;
+
+        this := @this: jdk.internal.jimage.decompressor.ZipDecompressor;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.String getName()
+    {
+        jdk.internal.jimage.decompressor.ZipDecompressor this;
+
+        this := @this: jdk.internal.jimage.decompressor.ZipDecompressor;
+
+        return "zip";
+    }
+
+    static byte[] decompress(byte[], int) throws java.lang.Exception
+    {
+        byte[] bytesIn, buffer, $stack13;
+        java.io.ByteArrayOutputStream $stack9;
+        java.util.zip.Inflater $stack6;
+        int offset, $stack7, $stack8, $stack10, $stack11, $stack14;
+        boolean $stack12;
+
+        bytesIn := @parameter0: byte[];
+
+        offset := @parameter1: int;
+
+        $stack6 = new java.util.zip.Inflater;
+
+        specialinvoke $stack6.<java.util.zip.Inflater: void <init>()>();
+
+        $stack7 = lengthof bytesIn;
+
+        $stack8 = $stack7 - offset;
+
+        virtualinvoke $stack6.<java.util.zip.Inflater: void setInput(byte[],int,int)>(bytesIn, offset, $stack8);
+
+        $stack9 = new java.io.ByteArrayOutputStream;
+
+        $stack10 = lengthof bytesIn;
+
+        $stack11 = $stack10 - offset;
+
+        specialinvoke $stack9.<java.io.ByteArrayOutputStream: void <init>(int)>($stack11);
+
+        buffer = newarray (byte)[1024];
+
+     label1:
+        $stack12 = virtualinvoke $stack6.<java.util.zip.Inflater: boolean finished()>();
+
+        if $stack12 != 0 goto label2;
+
+        $stack14 = virtualinvoke $stack6.<java.util.zip.Inflater: int inflate(byte[])>(buffer);
+
+        virtualinvoke $stack9.<java.io.ByteArrayOutputStream: void write(byte[],int,int)>(buffer, 0, $stack14);
+
+        goto label1;
+
+     label2:
+        virtualinvoke $stack9.<java.io.ByteArrayOutputStream: void close()>();
+
+        $stack13 = virtualinvoke $stack9.<java.io.ByteArrayOutputStream: byte[] toByteArray()>();
+
+        virtualinvoke $stack6.<java.util.zip.Inflater: void end()>();
+
+        return $stack13;
+    }
+
+    public byte[] decompress(jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider, byte[], int, long) throws java.lang.Exception
+    {
+        byte[] content, $stack7;
+        jdk.internal.jimage.decompressor.ZipDecompressor this;
+        jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider reader;
+        int offset;
+        long originalSize;
+
+        this := @this: jdk.internal.jimage.decompressor.ZipDecompressor;
+
+        reader := @parameter0: jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider;
+
+        content := @parameter1: byte[];
+
+        offset := @parameter2: int;
+
+        originalSize := @parameter3: long;
+
+        $stack7 = staticinvoke <jdk.internal.jimage.decompressor.ZipDecompressor: byte[] decompress(byte[],int)>(content, offset);
+
+        return $stack7;
+    }
+}

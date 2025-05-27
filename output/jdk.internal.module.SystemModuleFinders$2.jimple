@@ -1,0 +1,58 @@
+class jdk.internal.module.SystemModuleFinders$2 extends java.lang.Object implements java.util.function.Supplier
+{
+    final java.lang.String val$mn;
+    final java.net.URI val$uri;
+
+    void <init>(java.lang.String, java.net.URI)
+    {
+        java.lang.String l1;
+        java.net.URI l2;
+        jdk.internal.module.SystemModuleFinders$2 this;
+
+        this := @this: jdk.internal.module.SystemModuleFinders$2;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.net.URI;
+
+        this.<jdk.internal.module.SystemModuleFinders$2: java.lang.String val$mn> = l1;
+
+        this.<jdk.internal.module.SystemModuleFinders$2: java.net.URI val$uri> = l2;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.module.ModuleReader get()
+    {
+        jdk.internal.module.SystemModuleFinders$SystemModuleReader $stack1;
+        jdk.internal.module.SystemModuleFinders$2 this;
+        java.net.URI $stack2;
+        java.lang.String $stack3;
+
+        this := @this: jdk.internal.module.SystemModuleFinders$2;
+
+        $stack1 = new jdk.internal.module.SystemModuleFinders$SystemModuleReader;
+
+        $stack3 = this.<jdk.internal.module.SystemModuleFinders$2: java.lang.String val$mn>;
+
+        $stack2 = this.<jdk.internal.module.SystemModuleFinders$2: java.net.URI val$uri>;
+
+        specialinvoke $stack1.<jdk.internal.module.SystemModuleFinders$SystemModuleReader: void <init>(java.lang.String,java.net.URI)>($stack3, $stack2);
+
+        return $stack1;
+    }
+
+    public volatile java.lang.Object get()
+    {
+        jdk.internal.module.SystemModuleFinders$2 this;
+        java.lang.module.ModuleReader $stack1;
+
+        this := @this: jdk.internal.module.SystemModuleFinders$2;
+
+        $stack1 = virtualinvoke this.<jdk.internal.module.SystemModuleFinders$2: java.lang.module.ModuleReader get()>();
+
+        return $stack1;
+    }
+}

@@ -1,0 +1,485 @@
+class jdk.internal.reflect.UnsafeFieldAccessorFactory extends java.lang.Object
+{
+
+    void <init>()
+    {
+        jdk.internal.reflect.UnsafeFieldAccessorFactory this;
+
+        this := @this: jdk.internal.reflect.UnsafeFieldAccessorFactory;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    static jdk.internal.reflect.FieldAccessor newFieldAccessor(java.lang.reflect.Field, boolean)
+    {
+        jdk.internal.reflect.UnsafeStaticByteFieldAccessorImpl $stack82;
+        jdk.internal.reflect.UnsafeStaticBooleanFieldAccessorImpl $stack83;
+        jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl $stack65;
+        jdk.internal.reflect.UnsafeQualifiedLongFieldAccessorImpl $stack25;
+        jdk.internal.reflect.UnsafeQualifiedStaticObjectFieldAccessorImpl $stack58;
+        jdk.internal.misc.Unsafe $stack48;
+        jdk.internal.reflect.UnsafeIntegerFieldAccessorImpl $stack43;
+        jdk.internal.reflect.UnsafeQualifiedFloatFieldAccessorImpl $stack24;
+        jdk.internal.reflect.UnsafeQualifiedStaticIntegerFieldAccessorImpl $stack62;
+        jdk.internal.reflect.UnsafeQualifiedStaticCharacterFieldAccessorImpl $stack63;
+        jdk.internal.reflect.UnsafeQualifiedByteFieldAccessorImpl $stack29;
+        jdk.internal.reflect.UnsafeQualifiedCharacterFieldAccessorImpl $stack27;
+        jdk.internal.reflect.UnsafeStaticIntegerFieldAccessorImpl $stack79;
+        jdk.internal.reflect.UnsafeQualifiedShortFieldAccessorImpl $stack28;
+        jdk.internal.reflect.UnsafeQualifiedDoubleFieldAccessorImpl $stack23;
+        jdk.internal.reflect.UnsafeObjectFieldAccessorImpl $stack39;
+        jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl $stack78;
+        jdk.internal.reflect.UnsafeQualifiedStaticDoubleFieldAccessorImpl $stack59;
+        jdk.internal.reflect.UnsafeStaticShortFieldAccessorImpl $stack81;
+        jdk.internal.reflect.UnsafeQualifiedStaticBooleanFieldAccessorImpl $stack66;
+        java.lang.reflect.Field field;
+        jdk.internal.reflect.UnsafeStaticObjectFieldAccessorImpl $stack75;
+        jdk.internal.reflect.UnsafeFloatFieldAccessorImpl $stack41;
+        jdk.internal.reflect.UnsafeQualifiedIntegerFieldAccessorImpl $stack26;
+        jdk.internal.reflect.UnsafeQualifiedBooleanFieldAccessorImpl $stack30;
+        jdk.internal.reflect.UnsafeByteFieldAccessorImpl $stack46;
+        jdk.internal.reflect.UnsafeStaticCharacterFieldAccessorImpl $stack80;
+        jdk.internal.reflect.UnsafeShortFieldAccessorImpl $stack45;
+        boolean $stack9, $stack11, $stack13, isReadOnly, $stack84, $stack84#1_2;
+        jdk.internal.reflect.UnsafeQualifiedStaticFloatFieldAccessorImpl $stack60;
+        jdk.internal.reflect.UnsafeDoubleFieldAccessorImpl $stack40;
+        jdk.internal.reflect.UnsafeStaticFloatFieldAccessorImpl $stack77;
+        jdk.internal.reflect.UnsafeQualifiedStaticLongFieldAccessorImpl $stack61;
+        jdk.internal.reflect.UnsafeQualifiedStaticShortFieldAccessorImpl $stack64;
+        jdk.internal.reflect.UnsafeCharacterFieldAccessorImpl $stack44;
+        jdk.internal.reflect.UnsafeLongFieldAccessorImpl $stack42;
+        jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl $stack47;
+        int $stack8, $stack10, $stack12;
+        jdk.internal.reflect.UnsafeStaticDoubleFieldAccessorImpl $stack76;
+        java.lang.Class $stack7, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, $stack37, $stack38, $stack49, $stack50, $stack51, $stack52, $stack53, $stack54, $stack55, $stack56, $stack57, $stack67, $stack68, $stack69, $stack70, $stack71, $stack72, $stack73, $stack74;
+        jdk.internal.reflect.UnsafeQualifiedObjectFieldAccessorImpl $stack22;
+
+        field := @parameter0: java.lang.reflect.Field;
+
+        isReadOnly := @parameter1: boolean;
+
+        $stack7 = virtualinvoke field.<java.lang.reflect.Field: java.lang.Class getType()>();
+
+        $stack8 = virtualinvoke field.<java.lang.reflect.Field: int getModifiers()>();
+
+        $stack9 = staticinvoke <java.lang.reflect.Modifier: boolean isStatic(int)>($stack8);
+
+        $stack10 = virtualinvoke field.<java.lang.reflect.Field: int getModifiers()>();
+
+        $stack11 = staticinvoke <java.lang.reflect.Modifier: boolean isFinal(int)>($stack10);
+
+        $stack12 = virtualinvoke field.<java.lang.reflect.Field: int getModifiers()>();
+
+        $stack13 = staticinvoke <java.lang.reflect.Modifier: boolean isVolatile(int)>($stack12);
+
+        if $stack11 != 0 goto label01;
+
+        if $stack13 == 0 goto label02;
+
+     label01:
+        $stack84#1_2 = 1;
+
+        $stack84 = 1;
+
+        goto label03;
+
+     label02:
+        $stack84#1_2 = 0;
+
+        $stack84 = 0;
+
+     label03:
+        if $stack9 == 0 goto label21;
+
+        $stack48 = <jdk.internal.reflect.UnsafeFieldAccessorImpl: jdk.internal.misc.Unsafe unsafe>;
+
+        $stack49 = virtualinvoke field.<java.lang.reflect.Field: java.lang.Class getDeclaringClass()>();
+
+        virtualinvoke $stack48.<jdk.internal.misc.Unsafe: void ensureClassInitialized(java.lang.Class)>($stack49);
+
+        if $stack84 != 0 goto label12;
+
+        $stack67 = <java.lang.Boolean: java.lang.Class TYPE>;
+
+        if $stack7 != $stack67 goto label04;
+
+        $stack83 = new jdk.internal.reflect.UnsafeStaticBooleanFieldAccessorImpl;
+
+        specialinvoke $stack83.<jdk.internal.reflect.UnsafeStaticBooleanFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return $stack83;
+
+     label04:
+        $stack68 = <java.lang.Byte: java.lang.Class TYPE>;
+
+        if $stack7 != $stack68 goto label05;
+
+        $stack82 = new jdk.internal.reflect.UnsafeStaticByteFieldAccessorImpl;
+
+        specialinvoke $stack82.<jdk.internal.reflect.UnsafeStaticByteFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return $stack82;
+
+     label05:
+        $stack69 = <java.lang.Short: java.lang.Class TYPE>;
+
+        if $stack7 != $stack69 goto label06;
+
+        $stack81 = new jdk.internal.reflect.UnsafeStaticShortFieldAccessorImpl;
+
+        specialinvoke $stack81.<jdk.internal.reflect.UnsafeStaticShortFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return $stack81;
+
+     label06:
+        $stack70 = <java.lang.Character: java.lang.Class TYPE>;
+
+        if $stack7 != $stack70 goto label07;
+
+        $stack80 = new jdk.internal.reflect.UnsafeStaticCharacterFieldAccessorImpl;
+
+        specialinvoke $stack80.<jdk.internal.reflect.UnsafeStaticCharacterFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return $stack80;
+
+     label07:
+        $stack71 = <java.lang.Integer: java.lang.Class TYPE>;
+
+        if $stack7 != $stack71 goto label08;
+
+        $stack79 = new jdk.internal.reflect.UnsafeStaticIntegerFieldAccessorImpl;
+
+        specialinvoke $stack79.<jdk.internal.reflect.UnsafeStaticIntegerFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return $stack79;
+
+     label08:
+        $stack72 = <java.lang.Long: java.lang.Class TYPE>;
+
+        if $stack7 != $stack72 goto label09;
+
+        $stack78 = new jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl;
+
+        specialinvoke $stack78.<jdk.internal.reflect.UnsafeStaticLongFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return $stack78;
+
+     label09:
+        $stack73 = <java.lang.Float: java.lang.Class TYPE>;
+
+        if $stack7 != $stack73 goto label10;
+
+        $stack77 = new jdk.internal.reflect.UnsafeStaticFloatFieldAccessorImpl;
+
+        specialinvoke $stack77.<jdk.internal.reflect.UnsafeStaticFloatFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return $stack77;
+
+     label10:
+        $stack74 = <java.lang.Double: java.lang.Class TYPE>;
+
+        if $stack7 != $stack74 goto label11;
+
+        $stack76 = new jdk.internal.reflect.UnsafeStaticDoubleFieldAccessorImpl;
+
+        specialinvoke $stack76.<jdk.internal.reflect.UnsafeStaticDoubleFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return $stack76;
+
+     label11:
+        $stack75 = new jdk.internal.reflect.UnsafeStaticObjectFieldAccessorImpl;
+
+        specialinvoke $stack75.<jdk.internal.reflect.UnsafeStaticObjectFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return $stack75;
+
+     label12:
+        $stack50 = <java.lang.Boolean: java.lang.Class TYPE>;
+
+        if $stack7 != $stack50 goto label13;
+
+        $stack66 = new jdk.internal.reflect.UnsafeQualifiedStaticBooleanFieldAccessorImpl;
+
+        specialinvoke $stack66.<jdk.internal.reflect.UnsafeQualifiedStaticBooleanFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return $stack66;
+
+     label13:
+        $stack51 = <java.lang.Byte: java.lang.Class TYPE>;
+
+        if $stack7 != $stack51 goto label14;
+
+        $stack65 = new jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl;
+
+        specialinvoke $stack65.<jdk.internal.reflect.UnsafeQualifiedStaticByteFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return $stack65;
+
+     label14:
+        $stack52 = <java.lang.Short: java.lang.Class TYPE>;
+
+        if $stack7 != $stack52 goto label15;
+
+        $stack64 = new jdk.internal.reflect.UnsafeQualifiedStaticShortFieldAccessorImpl;
+
+        specialinvoke $stack64.<jdk.internal.reflect.UnsafeQualifiedStaticShortFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return $stack64;
+
+     label15:
+        $stack53 = <java.lang.Character: java.lang.Class TYPE>;
+
+        if $stack7 != $stack53 goto label16;
+
+        $stack63 = new jdk.internal.reflect.UnsafeQualifiedStaticCharacterFieldAccessorImpl;
+
+        specialinvoke $stack63.<jdk.internal.reflect.UnsafeQualifiedStaticCharacterFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return $stack63;
+
+     label16:
+        $stack54 = <java.lang.Integer: java.lang.Class TYPE>;
+
+        if $stack7 != $stack54 goto label17;
+
+        $stack62 = new jdk.internal.reflect.UnsafeQualifiedStaticIntegerFieldAccessorImpl;
+
+        specialinvoke $stack62.<jdk.internal.reflect.UnsafeQualifiedStaticIntegerFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return $stack62;
+
+     label17:
+        $stack55 = <java.lang.Long: java.lang.Class TYPE>;
+
+        if $stack7 != $stack55 goto label18;
+
+        $stack61 = new jdk.internal.reflect.UnsafeQualifiedStaticLongFieldAccessorImpl;
+
+        specialinvoke $stack61.<jdk.internal.reflect.UnsafeQualifiedStaticLongFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return $stack61;
+
+     label18:
+        $stack56 = <java.lang.Float: java.lang.Class TYPE>;
+
+        if $stack7 != $stack56 goto label19;
+
+        $stack60 = new jdk.internal.reflect.UnsafeQualifiedStaticFloatFieldAccessorImpl;
+
+        specialinvoke $stack60.<jdk.internal.reflect.UnsafeQualifiedStaticFloatFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return $stack60;
+
+     label19:
+        $stack57 = <java.lang.Double: java.lang.Class TYPE>;
+
+        if $stack7 != $stack57 goto label20;
+
+        $stack59 = new jdk.internal.reflect.UnsafeQualifiedStaticDoubleFieldAccessorImpl;
+
+        specialinvoke $stack59.<jdk.internal.reflect.UnsafeQualifiedStaticDoubleFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return $stack59;
+
+     label20:
+        $stack58 = new jdk.internal.reflect.UnsafeQualifiedStaticObjectFieldAccessorImpl;
+
+        specialinvoke $stack58.<jdk.internal.reflect.UnsafeQualifiedStaticObjectFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return $stack58;
+
+     label21:
+        if $stack84#1_2 != 0 goto label30;
+
+        $stack31 = <java.lang.Boolean: java.lang.Class TYPE>;
+
+        if $stack7 != $stack31 goto label22;
+
+        $stack47 = new jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl;
+
+        specialinvoke $stack47.<jdk.internal.reflect.UnsafeBooleanFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return $stack47;
+
+     label22:
+        $stack32 = <java.lang.Byte: java.lang.Class TYPE>;
+
+        if $stack7 != $stack32 goto label23;
+
+        $stack46 = new jdk.internal.reflect.UnsafeByteFieldAccessorImpl;
+
+        specialinvoke $stack46.<jdk.internal.reflect.UnsafeByteFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return $stack46;
+
+     label23:
+        $stack33 = <java.lang.Short: java.lang.Class TYPE>;
+
+        if $stack7 != $stack33 goto label24;
+
+        $stack45 = new jdk.internal.reflect.UnsafeShortFieldAccessorImpl;
+
+        specialinvoke $stack45.<jdk.internal.reflect.UnsafeShortFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return $stack45;
+
+     label24:
+        $stack34 = <java.lang.Character: java.lang.Class TYPE>;
+
+        if $stack7 != $stack34 goto label25;
+
+        $stack44 = new jdk.internal.reflect.UnsafeCharacterFieldAccessorImpl;
+
+        specialinvoke $stack44.<jdk.internal.reflect.UnsafeCharacterFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return $stack44;
+
+     label25:
+        $stack35 = <java.lang.Integer: java.lang.Class TYPE>;
+
+        if $stack7 != $stack35 goto label26;
+
+        $stack43 = new jdk.internal.reflect.UnsafeIntegerFieldAccessorImpl;
+
+        specialinvoke $stack43.<jdk.internal.reflect.UnsafeIntegerFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return $stack43;
+
+     label26:
+        $stack36 = <java.lang.Long: java.lang.Class TYPE>;
+
+        if $stack7 != $stack36 goto label27;
+
+        $stack42 = new jdk.internal.reflect.UnsafeLongFieldAccessorImpl;
+
+        specialinvoke $stack42.<jdk.internal.reflect.UnsafeLongFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return $stack42;
+
+     label27:
+        $stack37 = <java.lang.Float: java.lang.Class TYPE>;
+
+        if $stack7 != $stack37 goto label28;
+
+        $stack41 = new jdk.internal.reflect.UnsafeFloatFieldAccessorImpl;
+
+        specialinvoke $stack41.<jdk.internal.reflect.UnsafeFloatFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return $stack41;
+
+     label28:
+        $stack38 = <java.lang.Double: java.lang.Class TYPE>;
+
+        if $stack7 != $stack38 goto label29;
+
+        $stack40 = new jdk.internal.reflect.UnsafeDoubleFieldAccessorImpl;
+
+        specialinvoke $stack40.<jdk.internal.reflect.UnsafeDoubleFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return $stack40;
+
+     label29:
+        $stack39 = new jdk.internal.reflect.UnsafeObjectFieldAccessorImpl;
+
+        specialinvoke $stack39.<jdk.internal.reflect.UnsafeObjectFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        return $stack39;
+
+     label30:
+        $stack14 = <java.lang.Boolean: java.lang.Class TYPE>;
+
+        if $stack7 != $stack14 goto label31;
+
+        $stack30 = new jdk.internal.reflect.UnsafeQualifiedBooleanFieldAccessorImpl;
+
+        specialinvoke $stack30.<jdk.internal.reflect.UnsafeQualifiedBooleanFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return $stack30;
+
+     label31:
+        $stack15 = <java.lang.Byte: java.lang.Class TYPE>;
+
+        if $stack7 != $stack15 goto label32;
+
+        $stack29 = new jdk.internal.reflect.UnsafeQualifiedByteFieldAccessorImpl;
+
+        specialinvoke $stack29.<jdk.internal.reflect.UnsafeQualifiedByteFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return $stack29;
+
+     label32:
+        $stack16 = <java.lang.Short: java.lang.Class TYPE>;
+
+        if $stack7 != $stack16 goto label33;
+
+        $stack28 = new jdk.internal.reflect.UnsafeQualifiedShortFieldAccessorImpl;
+
+        specialinvoke $stack28.<jdk.internal.reflect.UnsafeQualifiedShortFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return $stack28;
+
+     label33:
+        $stack17 = <java.lang.Character: java.lang.Class TYPE>;
+
+        if $stack7 != $stack17 goto label34;
+
+        $stack27 = new jdk.internal.reflect.UnsafeQualifiedCharacterFieldAccessorImpl;
+
+        specialinvoke $stack27.<jdk.internal.reflect.UnsafeQualifiedCharacterFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return $stack27;
+
+     label34:
+        $stack18 = <java.lang.Integer: java.lang.Class TYPE>;
+
+        if $stack7 != $stack18 goto label35;
+
+        $stack26 = new jdk.internal.reflect.UnsafeQualifiedIntegerFieldAccessorImpl;
+
+        specialinvoke $stack26.<jdk.internal.reflect.UnsafeQualifiedIntegerFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return $stack26;
+
+     label35:
+        $stack19 = <java.lang.Long: java.lang.Class TYPE>;
+
+        if $stack7 != $stack19 goto label36;
+
+        $stack25 = new jdk.internal.reflect.UnsafeQualifiedLongFieldAccessorImpl;
+
+        specialinvoke $stack25.<jdk.internal.reflect.UnsafeQualifiedLongFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return $stack25;
+
+     label36:
+        $stack20 = <java.lang.Float: java.lang.Class TYPE>;
+
+        if $stack7 != $stack20 goto label37;
+
+        $stack24 = new jdk.internal.reflect.UnsafeQualifiedFloatFieldAccessorImpl;
+
+        specialinvoke $stack24.<jdk.internal.reflect.UnsafeQualifiedFloatFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return $stack24;
+
+     label37:
+        $stack21 = <java.lang.Double: java.lang.Class TYPE>;
+
+        if $stack7 != $stack21 goto label38;
+
+        $stack23 = new jdk.internal.reflect.UnsafeQualifiedDoubleFieldAccessorImpl;
+
+        specialinvoke $stack23.<jdk.internal.reflect.UnsafeQualifiedDoubleFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return $stack23;
+
+     label38:
+        $stack22 = new jdk.internal.reflect.UnsafeQualifiedObjectFieldAccessorImpl;
+
+        specialinvoke $stack22.<jdk.internal.reflect.UnsafeQualifiedObjectFieldAccessorImpl: void <init>(java.lang.reflect.Field,boolean)>(field, isReadOnly);
+
+        return $stack22;
+    }
+}

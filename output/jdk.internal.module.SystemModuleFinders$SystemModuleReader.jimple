@@ -1,0 +1,348 @@
+class jdk.internal.module.SystemModuleFinders$SystemModuleReader extends java.lang.Object implements java.lang.module.ModuleReader
+{
+    private final java.lang.String module;
+    private volatile boolean closed;
+
+    private static void checkPermissionToConnect(java.net.URI)
+    {
+        java.io.UncheckedIOException $stack8;
+        java.security.Permission $stack6;
+        java.net.URL $stack4;
+        java.net.URLConnection $stack5;
+        java.io.IOException $stack7;
+        java.net.URI uri;
+        java.lang.SecurityManager $stack3;
+
+        uri := @parameter0: java.net.URI;
+
+        $stack3 = staticinvoke <java.lang.System: java.lang.SecurityManager getSecurityManager()>();
+
+        if $stack3 == null goto label4;
+
+     label1:
+        $stack4 = virtualinvoke uri.<java.net.URI: java.net.URL toURL()>();
+
+        $stack5 = virtualinvoke $stack4.<java.net.URL: java.net.URLConnection openConnection()>();
+
+        $stack6 = virtualinvoke $stack5.<java.net.URLConnection: java.security.Permission getPermission()>();
+
+        virtualinvoke $stack3.<java.lang.SecurityManager: void checkPermission(java.security.Permission)>($stack6);
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack7 := @caughtexception;
+
+        $stack8 = new java.io.UncheckedIOException;
+
+        specialinvoke $stack8.<java.io.UncheckedIOException: void <init>(java.io.IOException)>($stack7);
+
+        throw $stack8;
+
+     label4:
+        return;
+
+        catch java.io.IOException from label1 to label2 with label3;
+    }
+
+    void <init>(java.lang.String, java.net.URI)
+    {
+        jdk.internal.module.SystemModuleFinders$SystemModuleReader this;
+        java.net.URI uri;
+        java.lang.String module;
+
+        this := @this: jdk.internal.module.SystemModuleFinders$SystemModuleReader;
+
+        module := @parameter0: java.lang.String;
+
+        uri := @parameter1: java.net.URI;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        staticinvoke <jdk.internal.module.SystemModuleFinders$SystemModuleReader: void checkPermissionToConnect(java.net.URI)>(uri);
+
+        this.<jdk.internal.module.SystemModuleFinders$SystemModuleReader: java.lang.String module> = module;
+
+        return;
+    }
+
+    private jdk.internal.jimage.ImageLocation findImageLocation(java.lang.String) throws java.io.IOException
+    {
+        jdk.internal.module.SystemModuleFinders$SystemModuleReader this;
+        jdk.internal.jimage.ImageLocation $stack7;
+        jdk.internal.jimage.ImageReader $stack5;
+        java.io.IOException $stack8;
+        java.lang.String name, $stack6;
+        boolean $stack4;
+
+        this := @this: jdk.internal.module.SystemModuleFinders$SystemModuleReader;
+
+        name := @parameter0: java.lang.String;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(name);
+
+        $stack4 = this.<jdk.internal.module.SystemModuleFinders$SystemModuleReader: boolean closed>;
+
+        if $stack4 == 0 goto label1;
+
+        $stack8 = new java.io.IOException;
+
+        specialinvoke $stack8.<java.io.IOException: void <init>(java.lang.String)>("ModuleReader is closed");
+
+        throw $stack8;
+
+     label1:
+        $stack5 = staticinvoke <jdk.internal.module.SystemModuleFinders$SystemImage: jdk.internal.jimage.ImageReader reader()>();
+
+        if $stack5 == null goto label2;
+
+        $stack6 = this.<jdk.internal.module.SystemModuleFinders$SystemModuleReader: java.lang.String module>;
+
+        $stack7 = virtualinvoke $stack5.<jdk.internal.jimage.ImageReader: jdk.internal.jimage.ImageLocation findLocation(java.lang.String,java.lang.String)>($stack6, name);
+
+        return $stack7;
+
+     label2:
+        return null;
+    }
+
+    private boolean containsImageLocation(java.lang.String) throws java.io.IOException
+    {
+        jdk.internal.module.SystemModuleFinders$SystemModuleReader this;
+        jdk.internal.jimage.ImageReader $stack5;
+        java.io.IOException $stack8;
+        java.lang.String name, $stack6;
+        boolean $stack4, $stack7;
+
+        this := @this: jdk.internal.module.SystemModuleFinders$SystemModuleReader;
+
+        name := @parameter0: java.lang.String;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(name);
+
+        $stack4 = this.<jdk.internal.module.SystemModuleFinders$SystemModuleReader: boolean closed>;
+
+        if $stack4 == 0 goto label1;
+
+        $stack8 = new java.io.IOException;
+
+        specialinvoke $stack8.<java.io.IOException: void <init>(java.lang.String)>("ModuleReader is closed");
+
+        throw $stack8;
+
+     label1:
+        $stack5 = staticinvoke <jdk.internal.module.SystemModuleFinders$SystemImage: jdk.internal.jimage.ImageReader reader()>();
+
+        if $stack5 == null goto label2;
+
+        $stack6 = this.<jdk.internal.module.SystemModuleFinders$SystemModuleReader: java.lang.String module>;
+
+        $stack7 = virtualinvoke $stack5.<jdk.internal.jimage.ImageReader: boolean verifyLocation(java.lang.String,java.lang.String)>($stack6, name);
+
+        return $stack7;
+
+     label2:
+        return 0;
+    }
+
+    public java.util.Optional find(java.lang.String) throws java.io.IOException
+    {
+        jdk.internal.access.JavaNetUriAccess $stack6;
+        jdk.internal.module.SystemModuleFinders$SystemModuleReader this;
+        java.util.Optional $stack4, $stack15;
+        java.lang.StringBuilder $stack5, $stack8, $stack10, $stack11, $stack12;
+        java.lang.String name, $stack9, $stack13;
+        java.net.URI $stack14;
+        boolean $stack3;
+
+        this := @this: jdk.internal.module.SystemModuleFinders$SystemModuleReader;
+
+        name := @parameter0: java.lang.String;
+
+        $stack3 = virtualinvoke this.<jdk.internal.module.SystemModuleFinders$SystemModuleReader: boolean containsImageLocation(java.lang.String)>(name);
+
+        if $stack3 == 0 goto label1;
+
+        $stack6 = <jdk.internal.module.SystemModuleFinders: jdk.internal.access.JavaNetUriAccess JNUA>;
+
+        $stack5 = new java.lang.StringBuilder;
+
+        specialinvoke $stack5.<java.lang.StringBuilder: void <init>()>();
+
+        $stack8 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("/");
+
+        $stack9 = this.<jdk.internal.module.SystemModuleFinders$SystemModuleReader: java.lang.String module>;
+
+        $stack10 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack9);
+
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("/");
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $stack14 = interfaceinvoke $stack6.<jdk.internal.access.JavaNetUriAccess: java.net.URI create(java.lang.String,java.lang.String)>("jrt", $stack13);
+
+        $stack15 = staticinvoke <java.util.Optional: java.util.Optional of(java.lang.Object)>($stack14);
+
+        return $stack15;
+
+     label1:
+        $stack4 = staticinvoke <java.util.Optional: java.util.Optional empty()>();
+
+        return $stack4;
+    }
+
+    public java.util.Optional open(java.lang.String) throws java.io.IOException
+    {
+        jdk.internal.module.SystemModuleFinders$SystemModuleReader this;
+        java.util.Optional $stack2, $stack4;
+        java.lang.String name;
+        java.util.function.Function $stack3;
+
+        this := @this: jdk.internal.module.SystemModuleFinders$SystemModuleReader;
+
+        name := @parameter0: java.lang.String;
+
+        $stack2 = virtualinvoke this.<jdk.internal.module.SystemModuleFinders$SystemModuleReader: java.util.Optional read(java.lang.String)>(name);
+
+        $stack3 = staticinvoke <jdk.internal.module.SystemModuleFinders$SystemModuleReader$toInputStream__115: java.util.function.Function bootstrap$(jdk.internal.module.SystemModuleFinders$SystemModuleReader)>(this);
+
+        $stack4 = virtualinvoke $stack2.<java.util.Optional: java.util.Optional map(java.util.function.Function)>($stack3);
+
+        return $stack4;
+    }
+
+    private java.io.InputStream toInputStream(java.nio.ByteBuffer)
+    {
+        jdk.internal.module.SystemModuleFinders$SystemModuleReader this;
+        java.lang.Throwable $stack9;
+        byte[] bytes;
+        java.io.ByteArrayInputStream $stack8;
+        int $stack6;
+        java.nio.ByteBuffer bb;
+
+        this := @this: jdk.internal.module.SystemModuleFinders$SystemModuleReader;
+
+        bb := @parameter0: java.nio.ByteBuffer;
+
+     label1:
+        $stack6 = virtualinvoke bb.<java.nio.ByteBuffer: int remaining()>();
+
+        bytes = newarray (byte)[$stack6];
+
+        virtualinvoke bb.<java.nio.ByteBuffer: java.nio.ByteBuffer get(byte[])>(bytes);
+
+        $stack8 = new java.io.ByteArrayInputStream;
+
+        specialinvoke $stack8.<java.io.ByteArrayInputStream: void <init>(byte[])>(bytes);
+
+     label2:
+        virtualinvoke this.<jdk.internal.module.SystemModuleFinders$SystemModuleReader: void release(java.nio.ByteBuffer)>(bb);
+
+        return $stack8;
+
+     label3:
+        $stack9 := @caughtexception;
+
+     label4:
+        virtualinvoke this.<jdk.internal.module.SystemModuleFinders$SystemModuleReader: void release(java.nio.ByteBuffer)>(bb);
+
+        throw $stack9;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+
+    public java.util.Optional read(java.lang.String) throws java.io.IOException
+    {
+        jdk.internal.module.SystemModuleFinders$SystemModuleReader this;
+        jdk.internal.jimage.ImageLocation $stack3;
+        java.util.Optional $stack4, $stack7;
+        jdk.internal.jimage.ImageReader $stack5;
+        java.lang.String name;
+        java.nio.ByteBuffer $stack6;
+
+        this := @this: jdk.internal.module.SystemModuleFinders$SystemModuleReader;
+
+        name := @parameter0: java.lang.String;
+
+        $stack3 = virtualinvoke this.<jdk.internal.module.SystemModuleFinders$SystemModuleReader: jdk.internal.jimage.ImageLocation findImageLocation(java.lang.String)>(name);
+
+        if $stack3 == null goto label1;
+
+        $stack5 = staticinvoke <jdk.internal.module.SystemModuleFinders$SystemImage: jdk.internal.jimage.ImageReader reader()>();
+
+        $stack6 = virtualinvoke $stack5.<jdk.internal.jimage.ImageReader: java.nio.ByteBuffer getResourceBuffer(jdk.internal.jimage.ImageLocation)>($stack3);
+
+        $stack7 = staticinvoke <java.util.Optional: java.util.Optional of(java.lang.Object)>($stack6);
+
+        return $stack7;
+
+     label1:
+        $stack4 = staticinvoke <java.util.Optional: java.util.Optional empty()>();
+
+        return $stack4;
+    }
+
+    public void release(java.nio.ByteBuffer)
+    {
+        jdk.internal.module.SystemModuleFinders$SystemModuleReader this;
+        java.nio.ByteBuffer bb;
+
+        this := @this: jdk.internal.module.SystemModuleFinders$SystemModuleReader;
+
+        bb := @parameter0: java.nio.ByteBuffer;
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(bb);
+
+        staticinvoke <jdk.internal.jimage.ImageReader: void releaseByteBuffer(java.nio.ByteBuffer)>(bb);
+
+        return;
+    }
+
+    public java.util.stream.Stream list() throws java.io.IOException
+    {
+        jdk.internal.module.SystemModuleFinders$SystemModuleReader this;
+        jdk.internal.module.SystemModuleFinders$ModuleContentSpliterator $stack3;
+        java.util.stream.Stream $stack5;
+        java.io.IOException $stack6;
+        java.lang.String $stack4;
+        boolean $stack2;
+
+        this := @this: jdk.internal.module.SystemModuleFinders$SystemModuleReader;
+
+        $stack2 = this.<jdk.internal.module.SystemModuleFinders$SystemModuleReader: boolean closed>;
+
+        if $stack2 == 0 goto label1;
+
+        $stack6 = new java.io.IOException;
+
+        specialinvoke $stack6.<java.io.IOException: void <init>(java.lang.String)>("ModuleReader is closed");
+
+        throw $stack6;
+
+     label1:
+        $stack3 = new jdk.internal.module.SystemModuleFinders$ModuleContentSpliterator;
+
+        $stack4 = this.<jdk.internal.module.SystemModuleFinders$SystemModuleReader: java.lang.String module>;
+
+        specialinvoke $stack3.<jdk.internal.module.SystemModuleFinders$ModuleContentSpliterator: void <init>(java.lang.String)>($stack4);
+
+        $stack5 = staticinvoke <java.util.stream.StreamSupport: java.util.stream.Stream stream(java.util.Spliterator,boolean)>($stack3, 0);
+
+        return $stack5;
+    }
+
+    public void close()
+    {
+        jdk.internal.module.SystemModuleFinders$SystemModuleReader this;
+
+        this := @this: jdk.internal.module.SystemModuleFinders$SystemModuleReader;
+
+        this.<jdk.internal.module.SystemModuleFinders$SystemModuleReader: boolean closed> = 1;
+
+        return;
+    }
+}

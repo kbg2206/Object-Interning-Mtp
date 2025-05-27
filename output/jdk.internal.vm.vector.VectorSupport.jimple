@@ -1,0 +1,1248 @@
+public class jdk.internal.vm.vector.VectorSupport extends java.lang.Object
+{
+    private static final jdk.internal.misc.Unsafe U;
+    public static final int VECTOR_OP_ABS;
+    public static final int VECTOR_OP_NEG;
+    public static final int VECTOR_OP_SQRT;
+    public static final int VECTOR_OP_ADD;
+    public static final int VECTOR_OP_SUB;
+    public static final int VECTOR_OP_MUL;
+    public static final int VECTOR_OP_DIV;
+    public static final int VECTOR_OP_MIN;
+    public static final int VECTOR_OP_MAX;
+    public static final int VECTOR_OP_AND;
+    public static final int VECTOR_OP_OR;
+    public static final int VECTOR_OP_XOR;
+    public static final int VECTOR_OP_FMA;
+    public static final int VECTOR_OP_LSHIFT;
+    public static final int VECTOR_OP_RSHIFT;
+    public static final int VECTOR_OP_URSHIFT;
+    public static final int VECTOR_OP_CAST;
+    public static final int VECTOR_OP_REINTERPRET;
+    public static final int VECTOR_OP_MASK_TRUECOUNT;
+    public static final int VECTOR_OP_MASK_FIRSTTRUE;
+    public static final int VECTOR_OP_MASK_LASTTRUE;
+    public static final int VECTOR_OP_TAN;
+    public static final int VECTOR_OP_TANH;
+    public static final int VECTOR_OP_SIN;
+    public static final int VECTOR_OP_SINH;
+    public static final int VECTOR_OP_COS;
+    public static final int VECTOR_OP_COSH;
+    public static final int VECTOR_OP_ASIN;
+    public static final int VECTOR_OP_ACOS;
+    public static final int VECTOR_OP_ATAN;
+    public static final int VECTOR_OP_ATAN2;
+    public static final int VECTOR_OP_CBRT;
+    public static final int VECTOR_OP_LOG;
+    public static final int VECTOR_OP_LOG10;
+    public static final int VECTOR_OP_LOG1P;
+    public static final int VECTOR_OP_POW;
+    public static final int VECTOR_OP_EXP;
+    public static final int VECTOR_OP_EXPM1;
+    public static final int VECTOR_OP_HYPOT;
+    public static final int BT_eq;
+    public static final int BT_ne;
+    public static final int BT_le;
+    public static final int BT_ge;
+    public static final int BT_lt;
+    public static final int BT_gt;
+    public static final int BT_overflow;
+    public static final int BT_no_overflow;
+    public static final int BT_unsigned_compare;
+    public static final int BT_ule;
+    public static final int BT_uge;
+    public static final int BT_ult;
+    public static final int BT_ugt;
+    public static final int T_FLOAT;
+    public static final int T_DOUBLE;
+    public static final int T_BYTE;
+    public static final int T_SHORT;
+    public static final int T_INT;
+    public static final int T_LONG;
+    static final boolean $assertionsDisabled;
+
+    public void <init>()
+    {
+        jdk.internal.vm.vector.VectorSupport this;
+
+        this := @this: jdk.internal.vm.vector.VectorSupport;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static java.lang.Object broadcastCoerced(java.lang.Class, java.lang.Class, int, long, jdk.internal.vm.vector.VectorSupport$VectorSpecies, jdk.internal.vm.vector.VectorSupport$BroadcastOperation)
+    {
+        jdk.internal.vm.vector.VectorSupport$BroadcastOperation defaultImpl;
+        long bits;
+        java.lang.AssertionError $stack13;
+        int length;
+        java.lang.Object $stack8;
+        java.lang.Class vmClass, E;
+        jdk.internal.vm.vector.VectorSupport$VectorSpecies s;
+        boolean $stack7, $stack9;
+
+        vmClass := @parameter0: java.lang.Class;
+
+        E := @parameter1: java.lang.Class;
+
+        length := @parameter2: int;
+
+        bits := @parameter3: long;
+
+        s := @parameter4: jdk.internal.vm.vector.VectorSupport$VectorSpecies;
+
+        defaultImpl := @parameter5: jdk.internal.vm.vector.VectorSupport$BroadcastOperation;
+
+        $stack7 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack7 != 0 goto label1;
+
+        $stack9 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack9 != 0 goto label1;
+
+        $stack13 = new java.lang.AssertionError;
+
+        specialinvoke $stack13.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack13;
+
+     label1:
+        $stack8 = interfaceinvoke defaultImpl.<jdk.internal.vm.vector.VectorSupport$BroadcastOperation: java.lang.Object broadcast(long,jdk.internal.vm.vector.VectorSupport$VectorSpecies)>(bits, s);
+
+        return $stack8;
+    }
+
+    public static jdk.internal.vm.vector.VectorSupport$VectorShuffle shuffleIota(java.lang.Class, java.lang.Class, jdk.internal.vm.vector.VectorSupport$VectorSpecies, int, int, int, int, jdk.internal.vm.vector.VectorSupport$ShuffleIotaOperation)
+    {
+        jdk.internal.vm.vector.VectorSupport$ShuffleIotaOperation defaultImpl;
+        jdk.internal.vm.vector.VectorSupport$VectorShuffle $stack9;
+        java.lang.AssertionError $stack16;
+        int length, start, step, wrap;
+        java.lang.Class E, ShuffleClass;
+        jdk.internal.vm.vector.VectorSupport$VectorSpecies s;
+        boolean $stack8, $stack10;
+
+        E := @parameter0: java.lang.Class;
+
+        ShuffleClass := @parameter1: java.lang.Class;
+
+        s := @parameter2: jdk.internal.vm.vector.VectorSupport$VectorSpecies;
+
+        length := @parameter3: int;
+
+        start := @parameter4: int;
+
+        step := @parameter5: int;
+
+        wrap := @parameter6: int;
+
+        defaultImpl := @parameter7: jdk.internal.vm.vector.VectorSupport$ShuffleIotaOperation;
+
+        $stack8 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack8 != 0 goto label1;
+
+        $stack10 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack10 != 0 goto label1;
+
+        $stack16 = new java.lang.AssertionError;
+
+        specialinvoke $stack16.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack16;
+
+     label1:
+        $stack9 = interfaceinvoke defaultImpl.<jdk.internal.vm.vector.VectorSupport$ShuffleIotaOperation: jdk.internal.vm.vector.VectorSupport$VectorShuffle apply(int,int,int,jdk.internal.vm.vector.VectorSupport$VectorSpecies)>(length, start, step, s);
+
+        return $stack9;
+    }
+
+    public static java.lang.Object shuffleToVector(java.lang.Class, java.lang.Class, java.lang.Class, jdk.internal.vm.vector.VectorSupport$VectorShuffle, int, jdk.internal.vm.vector.VectorSupport$ShuffleToVectorOperation)
+    {
+        jdk.internal.vm.vector.VectorSupport$VectorShuffle s;
+        java.lang.AssertionError $stack11;
+        jdk.internal.vm.vector.VectorSupport$ShuffleToVectorOperation defaultImpl;
+        int length;
+        java.lang.Object $stack7;
+        java.lang.Class VM, E, ShuffleClass;
+        boolean $stack6, $stack8;
+
+        VM := @parameter0: java.lang.Class;
+
+        E := @parameter1: java.lang.Class;
+
+        ShuffleClass := @parameter2: java.lang.Class;
+
+        s := @parameter3: jdk.internal.vm.vector.VectorSupport$VectorShuffle;
+
+        length := @parameter4: int;
+
+        defaultImpl := @parameter5: jdk.internal.vm.vector.VectorSupport$ShuffleToVectorOperation;
+
+        $stack6 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack6 != 0 goto label1;
+
+        $stack8 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack8 != 0 goto label1;
+
+        $stack11 = new java.lang.AssertionError;
+
+        specialinvoke $stack11.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack11;
+
+     label1:
+        $stack7 = interfaceinvoke defaultImpl.<jdk.internal.vm.vector.VectorSupport$ShuffleToVectorOperation: java.lang.Object apply(java.lang.Object)>(s);
+
+        return $stack7;
+    }
+
+    public static jdk.internal.vm.vector.VectorSupport$Vector indexVector(java.lang.Class, java.lang.Class, int, jdk.internal.vm.vector.VectorSupport$Vector, int, jdk.internal.vm.vector.VectorSupport$VectorSpecies, jdk.internal.vm.vector.VectorSupport$IndexOperation)
+    {
+        java.lang.AssertionError $stack14;
+        int step, length;
+        jdk.internal.vm.vector.VectorSupport$Vector v, $stack8;
+        java.lang.Class vClass, E;
+        jdk.internal.vm.vector.VectorSupport$IndexOperation defaultImpl;
+        jdk.internal.vm.vector.VectorSupport$VectorSpecies s;
+        boolean $stack7, $stack9;
+
+        vClass := @parameter0: java.lang.Class;
+
+        E := @parameter1: java.lang.Class;
+
+        length := @parameter2: int;
+
+        v := @parameter3: jdk.internal.vm.vector.VectorSupport$Vector;
+
+        step := @parameter4: int;
+
+        s := @parameter5: jdk.internal.vm.vector.VectorSupport$VectorSpecies;
+
+        defaultImpl := @parameter6: jdk.internal.vm.vector.VectorSupport$IndexOperation;
+
+        $stack7 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack7 != 0 goto label1;
+
+        $stack9 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack9 != 0 goto label1;
+
+        $stack14 = new java.lang.AssertionError;
+
+        specialinvoke $stack14.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack14;
+
+     label1:
+        $stack8 = interfaceinvoke defaultImpl.<jdk.internal.vm.vector.VectorSupport$IndexOperation: jdk.internal.vm.vector.VectorSupport$Vector index(jdk.internal.vm.vector.VectorSupport$Vector,int,jdk.internal.vm.vector.VectorSupport$VectorSpecies)>(v, step, s);
+
+        return $stack8;
+    }
+
+    public static long reductionCoerced(int, java.lang.Class, java.lang.Class, int, jdk.internal.vm.vector.VectorSupport$Vector, java.util.function.Function)
+    {
+        long $stack9;
+        java.lang.AssertionError $stack13;
+        java.util.function.Function defaultImpl;
+        java.lang.Long $stack8;
+        int oprId, length;
+        jdk.internal.vm.vector.VectorSupport$Vector v;
+        java.lang.Object $stack7;
+        java.lang.Class vectorClass, elementType;
+        boolean $stack6, $stack10;
+
+        oprId := @parameter0: int;
+
+        vectorClass := @parameter1: java.lang.Class;
+
+        elementType := @parameter2: java.lang.Class;
+
+        length := @parameter3: int;
+
+        v := @parameter4: jdk.internal.vm.vector.VectorSupport$Vector;
+
+        defaultImpl := @parameter5: java.util.function.Function;
+
+        $stack6 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack6 != 0 goto label1;
+
+        $stack10 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack10 != 0 goto label1;
+
+        $stack13 = new java.lang.AssertionError;
+
+        specialinvoke $stack13.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack13;
+
+     label1:
+        $stack7 = interfaceinvoke defaultImpl.<java.util.function.Function: java.lang.Object apply(java.lang.Object)>(v);
+
+        $stack8 = (java.lang.Long) $stack7;
+
+        $stack9 = virtualinvoke $stack8.<java.lang.Long: long longValue()>();
+
+        return $stack9;
+    }
+
+    public static long extract(java.lang.Class, java.lang.Class, int, jdk.internal.vm.vector.VectorSupport$Vector, int, jdk.internal.vm.vector.VectorSupport$VecExtractOp)
+    {
+        jdk.internal.vm.vector.VectorSupport$VecExtractOp defaultImpl;
+        long $stack7;
+        java.lang.AssertionError $stack12;
+        int ix, vlen;
+        jdk.internal.vm.vector.VectorSupport$Vector vec;
+        java.lang.Class vectorClass, elementType;
+        boolean $stack6, $stack8;
+
+        vectorClass := @parameter0: java.lang.Class;
+
+        elementType := @parameter1: java.lang.Class;
+
+        vlen := @parameter2: int;
+
+        vec := @parameter3: jdk.internal.vm.vector.VectorSupport$Vector;
+
+        ix := @parameter4: int;
+
+        defaultImpl := @parameter5: jdk.internal.vm.vector.VectorSupport$VecExtractOp;
+
+        $stack6 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack6 != 0 goto label1;
+
+        $stack8 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack8 != 0 goto label1;
+
+        $stack12 = new java.lang.AssertionError;
+
+        specialinvoke $stack12.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack12;
+
+     label1:
+        $stack7 = interfaceinvoke defaultImpl.<jdk.internal.vm.vector.VectorSupport$VecExtractOp: long apply(java.lang.Object,int)>(vec, ix);
+
+        return $stack7;
+    }
+
+    public static jdk.internal.vm.vector.VectorSupport$Vector insert(java.lang.Class, java.lang.Class, int, jdk.internal.vm.vector.VectorSupport$Vector, int, long, jdk.internal.vm.vector.VectorSupport$VecInsertOp)
+    {
+        long val;
+        java.lang.AssertionError $stack16;
+        int ix, vlen;
+        jdk.internal.vm.vector.VectorSupport$VecInsertOp defaultImpl;
+        jdk.internal.vm.vector.VectorSupport$Vector vec, $stack10;
+        java.lang.Object $stack9;
+        java.lang.Class vectorClass, elementType;
+        boolean $stack8, $stack11;
+
+        vectorClass := @parameter0: java.lang.Class;
+
+        elementType := @parameter1: java.lang.Class;
+
+        vlen := @parameter2: int;
+
+        vec := @parameter3: jdk.internal.vm.vector.VectorSupport$Vector;
+
+        ix := @parameter4: int;
+
+        val := @parameter5: long;
+
+        defaultImpl := @parameter6: jdk.internal.vm.vector.VectorSupport$VecInsertOp;
+
+        $stack8 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack8 != 0 goto label1;
+
+        $stack11 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack11 != 0 goto label1;
+
+        $stack16 = new java.lang.AssertionError;
+
+        specialinvoke $stack16.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack16;
+
+     label1:
+        $stack9 = interfaceinvoke defaultImpl.<jdk.internal.vm.vector.VectorSupport$VecInsertOp: java.lang.Object apply(java.lang.Object,int,long)>(vec, ix, val);
+
+        $stack10 = (jdk.internal.vm.vector.VectorSupport$Vector) $stack9;
+
+        return $stack10;
+    }
+
+    public static java.lang.Object unaryOp(int, java.lang.Class, java.lang.Class, int, java.lang.Object, java.util.function.Function)
+    {
+        java.lang.AssertionError $stack11;
+        java.util.function.Function defaultImpl;
+        int oprId, length;
+        java.lang.Object vm, $stack7;
+        java.lang.Class vmClass, elementType;
+        boolean $stack6, $stack8;
+
+        oprId := @parameter0: int;
+
+        vmClass := @parameter1: java.lang.Class;
+
+        elementType := @parameter2: java.lang.Class;
+
+        length := @parameter3: int;
+
+        vm := @parameter4: java.lang.Object;
+
+        defaultImpl := @parameter5: java.util.function.Function;
+
+        $stack6 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack6 != 0 goto label1;
+
+        $stack8 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack8 != 0 goto label1;
+
+        $stack11 = new java.lang.AssertionError;
+
+        specialinvoke $stack11.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack11;
+
+     label1:
+        $stack7 = interfaceinvoke defaultImpl.<java.util.function.Function: java.lang.Object apply(java.lang.Object)>(vm);
+
+        return $stack7;
+    }
+
+    public static java.lang.Object binaryOp(int, java.lang.Class, java.lang.Class, int, java.lang.Object, java.lang.Object, java.util.function.BiFunction)
+    {
+        java.util.function.BiFunction defaultImpl;
+        java.lang.AssertionError $stack13;
+        int oprId, length;
+        java.lang.Object vm1, vm2, $stack8;
+        java.lang.Class vmClass, elementType;
+        boolean $stack7, $stack9;
+
+        oprId := @parameter0: int;
+
+        vmClass := @parameter1: java.lang.Class;
+
+        elementType := @parameter2: java.lang.Class;
+
+        length := @parameter3: int;
+
+        vm1 := @parameter4: java.lang.Object;
+
+        vm2 := @parameter5: java.lang.Object;
+
+        defaultImpl := @parameter6: java.util.function.BiFunction;
+
+        $stack7 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack7 != 0 goto label1;
+
+        $stack9 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack9 != 0 goto label1;
+
+        $stack13 = new java.lang.AssertionError;
+
+        specialinvoke $stack13.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack13;
+
+     label1:
+        $stack8 = interfaceinvoke defaultImpl.<java.util.function.BiFunction: java.lang.Object apply(java.lang.Object,java.lang.Object)>(vm1, vm2);
+
+        return $stack8;
+    }
+
+    public static java.lang.Object ternaryOp(int, java.lang.Class, java.lang.Class, int, java.lang.Object, java.lang.Object, java.lang.Object, jdk.internal.vm.vector.VectorSupport$TernaryOperation)
+    {
+        java.lang.AssertionError $stack15;
+        int oprId, length;
+        java.lang.Object vm1, vm2, vm3, $stack9;
+        java.lang.Class vmClass, elementType;
+        jdk.internal.vm.vector.VectorSupport$TernaryOperation defaultImpl;
+        boolean $stack8, $stack10;
+
+        oprId := @parameter0: int;
+
+        vmClass := @parameter1: java.lang.Class;
+
+        elementType := @parameter2: java.lang.Class;
+
+        length := @parameter3: int;
+
+        vm1 := @parameter4: java.lang.Object;
+
+        vm2 := @parameter5: java.lang.Object;
+
+        vm3 := @parameter6: java.lang.Object;
+
+        defaultImpl := @parameter7: jdk.internal.vm.vector.VectorSupport$TernaryOperation;
+
+        $stack8 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack8 != 0 goto label1;
+
+        $stack10 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack10 != 0 goto label1;
+
+        $stack15 = new java.lang.AssertionError;
+
+        specialinvoke $stack15.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack15;
+
+     label1:
+        $stack9 = interfaceinvoke defaultImpl.<jdk.internal.vm.vector.VectorSupport$TernaryOperation: java.lang.Object apply(java.lang.Object,java.lang.Object,java.lang.Object)>(vm1, vm2, vm3);
+
+        return $stack9;
+    }
+
+    public static java.lang.Object load(java.lang.Class, java.lang.Class, int, java.lang.Object, long, java.lang.Object, int, jdk.internal.vm.vector.VectorSupport$VectorSpecies, jdk.internal.vm.vector.VectorSupport$LoadOperation)
+    {
+        long offset;
+        java.lang.AssertionError $stack17;
+        jdk.internal.vm.vector.VectorSupport$LoadOperation defaultImpl;
+        int index, length;
+        java.lang.Object container, $stack11, base;
+        java.lang.Class vmClass, E;
+        jdk.internal.vm.vector.VectorSupport$VectorSpecies s;
+        boolean $stack10, $stack12;
+
+        vmClass := @parameter0: java.lang.Class;
+
+        E := @parameter1: java.lang.Class;
+
+        length := @parameter2: int;
+
+        base := @parameter3: java.lang.Object;
+
+        offset := @parameter4: long;
+
+        container := @parameter5: java.lang.Object;
+
+        index := @parameter6: int;
+
+        s := @parameter7: jdk.internal.vm.vector.VectorSupport$VectorSpecies;
+
+        defaultImpl := @parameter8: jdk.internal.vm.vector.VectorSupport$LoadOperation;
+
+        $stack10 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack10 != 0 goto label1;
+
+        $stack12 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack12 != 0 goto label1;
+
+        $stack17 = new java.lang.AssertionError;
+
+        specialinvoke $stack17.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack17;
+
+     label1:
+        $stack11 = interfaceinvoke defaultImpl.<jdk.internal.vm.vector.VectorSupport$LoadOperation: java.lang.Object load(java.lang.Object,int,jdk.internal.vm.vector.VectorSupport$VectorSpecies)>(container, index, s);
+
+        return $stack11;
+    }
+
+    public static jdk.internal.vm.vector.VectorSupport$Vector loadWithMap(java.lang.Class, java.lang.Class, int, java.lang.Class, java.lang.Object, long, jdk.internal.vm.vector.VectorSupport$Vector, java.lang.Object, int, int[], int, jdk.internal.vm.vector.VectorSupport$VectorSpecies, jdk.internal.vm.vector.VectorSupport$LoadVectorOperationWithMap)
+    {
+        long offset;
+        java.lang.AssertionError $stack23;
+        int[] indexMap;
+        int index, indexM, length;
+        jdk.internal.vm.vector.VectorSupport$Vector $stack15, index_vector;
+        jdk.internal.vm.vector.VectorSupport$VectorSpecies s;
+        boolean $stack14, $stack16;
+        java.lang.Object container, base;
+        java.lang.Class vectorClass, E, vectorIndexClass;
+        jdk.internal.vm.vector.VectorSupport$LoadVectorOperationWithMap defaultImpl;
+
+        vectorClass := @parameter0: java.lang.Class;
+
+        E := @parameter1: java.lang.Class;
+
+        length := @parameter2: int;
+
+        vectorIndexClass := @parameter3: java.lang.Class;
+
+        base := @parameter4: java.lang.Object;
+
+        offset := @parameter5: long;
+
+        index_vector := @parameter6: jdk.internal.vm.vector.VectorSupport$Vector;
+
+        container := @parameter7: java.lang.Object;
+
+        index := @parameter8: int;
+
+        indexMap := @parameter9: int[];
+
+        indexM := @parameter10: int;
+
+        s := @parameter11: jdk.internal.vm.vector.VectorSupport$VectorSpecies;
+
+        defaultImpl := @parameter12: jdk.internal.vm.vector.VectorSupport$LoadVectorOperationWithMap;
+
+        $stack14 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack14 != 0 goto label1;
+
+        $stack16 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack16 != 0 goto label1;
+
+        $stack23 = new java.lang.AssertionError;
+
+        specialinvoke $stack23.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack23;
+
+     label1:
+        $stack15 = interfaceinvoke defaultImpl.<jdk.internal.vm.vector.VectorSupport$LoadVectorOperationWithMap: jdk.internal.vm.vector.VectorSupport$Vector loadWithMap(java.lang.Object,int,int[],int,jdk.internal.vm.vector.VectorSupport$VectorSpecies)>(container, index, indexMap, indexM, s);
+
+        return $stack15;
+    }
+
+    public static void store(java.lang.Class, java.lang.Class, int, java.lang.Object, long, jdk.internal.vm.vector.VectorSupport$Vector, java.lang.Object, int, jdk.internal.vm.vector.VectorSupport$StoreVectorOperation)
+    {
+        jdk.internal.vm.vector.VectorSupport$StoreVectorOperation defaultImpl;
+        long offset;
+        java.lang.AssertionError $stack16;
+        int index, length;
+        java.lang.Object container, base;
+        jdk.internal.vm.vector.VectorSupport$Vector v;
+        java.lang.Class vectorClass, elementType;
+        boolean $stack10, $stack11;
+
+        vectorClass := @parameter0: java.lang.Class;
+
+        elementType := @parameter1: java.lang.Class;
+
+        length := @parameter2: int;
+
+        base := @parameter3: java.lang.Object;
+
+        offset := @parameter4: long;
+
+        v := @parameter5: jdk.internal.vm.vector.VectorSupport$Vector;
+
+        container := @parameter6: java.lang.Object;
+
+        index := @parameter7: int;
+
+        defaultImpl := @parameter8: jdk.internal.vm.vector.VectorSupport$StoreVectorOperation;
+
+        $stack10 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack10 != 0 goto label1;
+
+        $stack11 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack11 != 0 goto label1;
+
+        $stack16 = new java.lang.AssertionError;
+
+        specialinvoke $stack16.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack16;
+
+     label1:
+        interfaceinvoke defaultImpl.<jdk.internal.vm.vector.VectorSupport$StoreVectorOperation: void store(java.lang.Object,int,jdk.internal.vm.vector.VectorSupport$Vector)>(container, index, v);
+
+        return;
+    }
+
+    public static void storeWithMap(java.lang.Class, java.lang.Class, int, java.lang.Class, java.lang.Object, long, jdk.internal.vm.vector.VectorSupport$Vector, jdk.internal.vm.vector.VectorSupport$Vector, java.lang.Object, int, int[], int, jdk.internal.vm.vector.VectorSupport$StoreVectorOperationWithMap)
+    {
+        long offset;
+        java.lang.AssertionError $stack22;
+        jdk.internal.vm.vector.VectorSupport$StoreVectorOperationWithMap defaultImpl;
+        int[] indexMap;
+        int index, indexM, length;
+        jdk.internal.vm.vector.VectorSupport$Vector v, index_vector;
+        boolean $stack14, $stack15;
+        java.lang.Object container, base;
+        java.lang.Class vectorClass, elementType, vectorIndexClass;
+
+        vectorClass := @parameter0: java.lang.Class;
+
+        elementType := @parameter1: java.lang.Class;
+
+        length := @parameter2: int;
+
+        vectorIndexClass := @parameter3: java.lang.Class;
+
+        base := @parameter4: java.lang.Object;
+
+        offset := @parameter5: long;
+
+        index_vector := @parameter6: jdk.internal.vm.vector.VectorSupport$Vector;
+
+        v := @parameter7: jdk.internal.vm.vector.VectorSupport$Vector;
+
+        container := @parameter8: java.lang.Object;
+
+        index := @parameter9: int;
+
+        indexMap := @parameter10: int[];
+
+        indexM := @parameter11: int;
+
+        defaultImpl := @parameter12: jdk.internal.vm.vector.VectorSupport$StoreVectorOperationWithMap;
+
+        $stack14 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack14 != 0 goto label1;
+
+        $stack15 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack15 != 0 goto label1;
+
+        $stack22 = new java.lang.AssertionError;
+
+        specialinvoke $stack22.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack22;
+
+     label1:
+        interfaceinvoke defaultImpl.<jdk.internal.vm.vector.VectorSupport$StoreVectorOperationWithMap: void storeWithMap(java.lang.Object,int,jdk.internal.vm.vector.VectorSupport$Vector,int[],int)>(container, index, v, indexMap, indexM);
+
+        return;
+    }
+
+    public static boolean test(int, java.lang.Class, java.lang.Class, int, java.lang.Object, java.lang.Object, java.util.function.BiFunction)
+    {
+        java.util.function.BiFunction defaultImpl;
+        java.lang.AssertionError $stack15;
+        int cond, length;
+        java.lang.Boolean $stack9;
+        java.lang.Object vm1, vm2, $stack8;
+        java.lang.Class vmClass, elementType;
+        boolean $stack7, $stack10, $stack11;
+
+        cond := @parameter0: int;
+
+        vmClass := @parameter1: java.lang.Class;
+
+        elementType := @parameter2: java.lang.Class;
+
+        length := @parameter3: int;
+
+        vm1 := @parameter4: java.lang.Object;
+
+        vm2 := @parameter5: java.lang.Object;
+
+        defaultImpl := @parameter6: java.util.function.BiFunction;
+
+        $stack7 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack7 != 0 goto label1;
+
+        $stack11 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack11 != 0 goto label1;
+
+        $stack15 = new java.lang.AssertionError;
+
+        specialinvoke $stack15.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack15;
+
+     label1:
+        $stack8 = interfaceinvoke defaultImpl.<java.util.function.BiFunction: java.lang.Object apply(java.lang.Object,java.lang.Object)>(vm1, vm2);
+
+        $stack9 = (java.lang.Boolean) $stack8;
+
+        $stack10 = virtualinvoke $stack9.<java.lang.Boolean: boolean booleanValue()>();
+
+        return $stack10;
+    }
+
+    public static jdk.internal.vm.vector.VectorSupport$VectorMask compare(int, java.lang.Class, java.lang.Class, java.lang.Class, int, jdk.internal.vm.vector.VectorSupport$Vector, jdk.internal.vm.vector.VectorSupport$Vector, jdk.internal.vm.vector.VectorSupport$VectorCompareOp)
+    {
+        jdk.internal.vm.vector.VectorSupport$VectorCompareOp defaultImpl;
+        java.lang.AssertionError $stack16;
+        int cond, length;
+        jdk.internal.vm.vector.VectorSupport$VectorMask $stack10;
+        jdk.internal.vm.vector.VectorSupport$Vector v1, v2;
+        java.lang.Object $stack9;
+        java.lang.Class vectorClass, maskClass, elementType;
+        boolean $stack8, $stack11;
+
+        cond := @parameter0: int;
+
+        vectorClass := @parameter1: java.lang.Class;
+
+        maskClass := @parameter2: java.lang.Class;
+
+        elementType := @parameter3: java.lang.Class;
+
+        length := @parameter4: int;
+
+        v1 := @parameter5: jdk.internal.vm.vector.VectorSupport$Vector;
+
+        v2 := @parameter6: jdk.internal.vm.vector.VectorSupport$Vector;
+
+        defaultImpl := @parameter7: jdk.internal.vm.vector.VectorSupport$VectorCompareOp;
+
+        $stack8 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack8 != 0 goto label1;
+
+        $stack11 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack11 != 0 goto label1;
+
+        $stack16 = new java.lang.AssertionError;
+
+        specialinvoke $stack16.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack16;
+
+     label1:
+        $stack9 = interfaceinvoke defaultImpl.<jdk.internal.vm.vector.VectorSupport$VectorCompareOp: java.lang.Object apply(int,java.lang.Object,java.lang.Object)>(cond, v1, v2);
+
+        $stack10 = (jdk.internal.vm.vector.VectorSupport$VectorMask) $stack9;
+
+        return $stack10;
+    }
+
+    public static jdk.internal.vm.vector.VectorSupport$Vector rearrangeOp(java.lang.Class, java.lang.Class, java.lang.Class, int, jdk.internal.vm.vector.VectorSupport$Vector, jdk.internal.vm.vector.VectorSupport$VectorShuffle, jdk.internal.vm.vector.VectorSupport$VectorRearrangeOp)
+    {
+        jdk.internal.vm.vector.VectorSupport$VectorRearrangeOp defaultImpl;
+        jdk.internal.vm.vector.VectorSupport$VectorShuffle sh;
+        java.lang.AssertionError $stack13;
+        int vlen;
+        jdk.internal.vm.vector.VectorSupport$Vector v1, $stack8;
+        java.lang.Class vectorClass, shuffleClass, elementType;
+        boolean $stack7, $stack9;
+
+        vectorClass := @parameter0: java.lang.Class;
+
+        shuffleClass := @parameter1: java.lang.Class;
+
+        elementType := @parameter2: java.lang.Class;
+
+        vlen := @parameter3: int;
+
+        v1 := @parameter4: jdk.internal.vm.vector.VectorSupport$Vector;
+
+        sh := @parameter5: jdk.internal.vm.vector.VectorSupport$VectorShuffle;
+
+        defaultImpl := @parameter6: jdk.internal.vm.vector.VectorSupport$VectorRearrangeOp;
+
+        $stack7 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack7 != 0 goto label1;
+
+        $stack9 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack9 != 0 goto label1;
+
+        $stack13 = new java.lang.AssertionError;
+
+        specialinvoke $stack13.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack13;
+
+     label1:
+        $stack8 = interfaceinvoke defaultImpl.<jdk.internal.vm.vector.VectorSupport$VectorRearrangeOp: jdk.internal.vm.vector.VectorSupport$Vector apply(jdk.internal.vm.vector.VectorSupport$Vector,jdk.internal.vm.vector.VectorSupport$VectorShuffle)>(v1, sh);
+
+        return $stack8;
+    }
+
+    public static jdk.internal.vm.vector.VectorSupport$Vector blend(java.lang.Class, java.lang.Class, java.lang.Class, int, jdk.internal.vm.vector.VectorSupport$Vector, jdk.internal.vm.vector.VectorSupport$Vector, jdk.internal.vm.vector.VectorSupport$VectorMask, jdk.internal.vm.vector.VectorSupport$VectorBlendOp)
+    {
+        jdk.internal.vm.vector.VectorSupport$VectorBlendOp defaultImpl;
+        java.lang.AssertionError $stack15;
+        int length;
+        jdk.internal.vm.vector.VectorSupport$VectorMask m;
+        jdk.internal.vm.vector.VectorSupport$Vector v1, v2, $stack9;
+        java.lang.Class vectorClass, maskClass, elementType;
+        boolean $stack8, $stack10;
+
+        vectorClass := @parameter0: java.lang.Class;
+
+        maskClass := @parameter1: java.lang.Class;
+
+        elementType := @parameter2: java.lang.Class;
+
+        length := @parameter3: int;
+
+        v1 := @parameter4: jdk.internal.vm.vector.VectorSupport$Vector;
+
+        v2 := @parameter5: jdk.internal.vm.vector.VectorSupport$Vector;
+
+        m := @parameter6: jdk.internal.vm.vector.VectorSupport$VectorMask;
+
+        defaultImpl := @parameter7: jdk.internal.vm.vector.VectorSupport$VectorBlendOp;
+
+        $stack8 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack8 != 0 goto label1;
+
+        $stack10 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack10 != 0 goto label1;
+
+        $stack15 = new java.lang.AssertionError;
+
+        specialinvoke $stack15.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack15;
+
+     label1:
+        $stack9 = interfaceinvoke defaultImpl.<jdk.internal.vm.vector.VectorSupport$VectorBlendOp: jdk.internal.vm.vector.VectorSupport$Vector apply(jdk.internal.vm.vector.VectorSupport$Vector,jdk.internal.vm.vector.VectorSupport$Vector,jdk.internal.vm.vector.VectorSupport$VectorMask)>(v1, v2, m);
+
+        return $stack9;
+    }
+
+    public static jdk.internal.vm.vector.VectorSupport$Vector broadcastInt(int, java.lang.Class, java.lang.Class, int, jdk.internal.vm.vector.VectorSupport$Vector, int, jdk.internal.vm.vector.VectorSupport$VectorBroadcastIntOp)
+    {
+        jdk.internal.vm.vector.VectorSupport$VectorBroadcastIntOp defaultImpl;
+        java.lang.AssertionError $stack13;
+        int n, opr, length;
+        jdk.internal.vm.vector.VectorSupport$Vector v, $stack8;
+        java.lang.Class vectorClass, elementType;
+        boolean $stack7, $stack9;
+
+        opr := @parameter0: int;
+
+        vectorClass := @parameter1: java.lang.Class;
+
+        elementType := @parameter2: java.lang.Class;
+
+        length := @parameter3: int;
+
+        v := @parameter4: jdk.internal.vm.vector.VectorSupport$Vector;
+
+        n := @parameter5: int;
+
+        defaultImpl := @parameter6: jdk.internal.vm.vector.VectorSupport$VectorBroadcastIntOp;
+
+        $stack7 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack7 != 0 goto label1;
+
+        $stack9 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack9 != 0 goto label1;
+
+        $stack13 = new java.lang.AssertionError;
+
+        specialinvoke $stack13.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack13;
+
+     label1:
+        $stack8 = interfaceinvoke defaultImpl.<jdk.internal.vm.vector.VectorSupport$VectorBroadcastIntOp: jdk.internal.vm.vector.VectorSupport$Vector apply(jdk.internal.vm.vector.VectorSupport$Vector,int)>(v, n);
+
+        return $stack8;
+    }
+
+    public static jdk.internal.vm.vector.VectorSupport$VectorPayload convert(int, java.lang.Class, java.lang.Class, int, java.lang.Class, java.lang.Class, int, jdk.internal.vm.vector.VectorSupport$VectorPayload, jdk.internal.vm.vector.VectorSupport$VectorSpecies, jdk.internal.vm.vector.VectorSupport$VectorConvertOp)
+    {
+        java.lang.AssertionError $stack17;
+        jdk.internal.vm.vector.VectorSupport$VectorConvertOp defaultImpl;
+        int oprId, fromVLen, toVLen;
+        java.lang.Object $stack11;
+        java.lang.Class fromVectorClass, fromElementType, toVectorClass, toElementType;
+        jdk.internal.vm.vector.VectorSupport$VectorSpecies s;
+        jdk.internal.vm.vector.VectorSupport$VectorPayload v, $stack12;
+        boolean $stack10, $stack13;
+
+        oprId := @parameter0: int;
+
+        fromVectorClass := @parameter1: java.lang.Class;
+
+        fromElementType := @parameter2: java.lang.Class;
+
+        fromVLen := @parameter3: int;
+
+        toVectorClass := @parameter4: java.lang.Class;
+
+        toElementType := @parameter5: java.lang.Class;
+
+        toVLen := @parameter6: int;
+
+        v := @parameter7: jdk.internal.vm.vector.VectorSupport$VectorPayload;
+
+        s := @parameter8: jdk.internal.vm.vector.VectorSupport$VectorSpecies;
+
+        defaultImpl := @parameter9: jdk.internal.vm.vector.VectorSupport$VectorConvertOp;
+
+        $stack10 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack10 != 0 goto label1;
+
+        $stack13 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack13 != 0 goto label1;
+
+        $stack17 = new java.lang.AssertionError;
+
+        specialinvoke $stack17.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack17;
+
+     label1:
+        $stack11 = interfaceinvoke defaultImpl.<jdk.internal.vm.vector.VectorSupport$VectorConvertOp: java.lang.Object apply(java.lang.Object,java.lang.Object)>(v, s);
+
+        $stack12 = (jdk.internal.vm.vector.VectorSupport$VectorPayload) $stack11;
+
+        return $stack12;
+    }
+
+    public static java.lang.Object maybeRebox(java.lang.Object)
+    {
+        jdk.internal.misc.Unsafe $stack1;
+        java.lang.Object v;
+
+        v := @parameter0: java.lang.Object;
+
+        $stack1 = <jdk.internal.vm.vector.VectorSupport: jdk.internal.misc.Unsafe U>;
+
+        virtualinvoke $stack1.<jdk.internal.misc.Unsafe: void loadFence()>();
+
+        return v;
+    }
+
+    public static int maskReductionCoerced(int, java.lang.Class, java.lang.Class, int, java.lang.Object, jdk.internal.vm.vector.VectorSupport$VectorMaskOp)
+    {
+        java.lang.AssertionError $stack11;
+        jdk.internal.vm.vector.VectorSupport$VectorMaskOp defaultImpl;
+        int $stack7, oper, length;
+        java.lang.Object m;
+        java.lang.Class maskClass, elemClass;
+        boolean $stack6, $stack8;
+
+        oper := @parameter0: int;
+
+        maskClass := @parameter1: java.lang.Class;
+
+        elemClass := @parameter2: java.lang.Class;
+
+        length := @parameter3: int;
+
+        m := @parameter4: java.lang.Object;
+
+        defaultImpl := @parameter5: jdk.internal.vm.vector.VectorSupport$VectorMaskOp;
+
+        $stack6 = <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled>;
+
+        if $stack6 != 0 goto label1;
+
+        $stack8 = staticinvoke <jdk.internal.vm.vector.VectorSupport: boolean isNonCapturingLambda(java.lang.Object)>(defaultImpl);
+
+        if $stack8 != 0 goto label1;
+
+        $stack11 = new java.lang.AssertionError;
+
+        specialinvoke $stack11.<java.lang.AssertionError: void <init>(java.lang.Object)>(defaultImpl);
+
+        throw $stack11;
+
+     label1:
+        $stack7 = interfaceinvoke defaultImpl.<jdk.internal.vm.vector.VectorSupport$VectorMaskOp: int apply(java.lang.Object)>(m);
+
+        return $stack7;
+    }
+
+    public static native int getMaxLaneCount(java.lang.Class);
+
+    public static boolean isNonCapturingLambda(java.lang.Object)
+    {
+        java.lang.reflect.Field[] $stack2;
+        int $stack3;
+        java.lang.Object o;
+        java.lang.Class $stack1;
+        boolean $stack4;
+
+        o := @parameter0: java.lang.Object;
+
+        $stack1 = virtualinvoke o.<java.lang.Object: java.lang.Class getClass()>();
+
+        $stack2 = virtualinvoke $stack1.<java.lang.Class: java.lang.reflect.Field[] getDeclaredFields()>();
+
+        $stack3 = lengthof $stack2;
+
+        if $stack3 != 0 goto label1;
+
+        $stack4 = 1;
+
+        goto label2;
+
+     label1:
+        $stack4 = 0;
+
+     label2:
+        return $stack4;
+    }
+
+    private static native int registerNatives();
+
+    static void <clinit>()
+    {
+        jdk.internal.misc.Unsafe $stack3;
+        java.lang.Class $stack0;
+        boolean $stack1, $stack4;
+
+        <jdk.internal.vm.vector.VectorSupport: int T_LONG> = 11;
+
+        <jdk.internal.vm.vector.VectorSupport: int T_INT> = 10;
+
+        <jdk.internal.vm.vector.VectorSupport: int T_SHORT> = 9;
+
+        <jdk.internal.vm.vector.VectorSupport: int T_BYTE> = 8;
+
+        <jdk.internal.vm.vector.VectorSupport: int T_DOUBLE> = 7;
+
+        <jdk.internal.vm.vector.VectorSupport: int T_FLOAT> = 6;
+
+        <jdk.internal.vm.vector.VectorSupport: int BT_ugt> = 17;
+
+        <jdk.internal.vm.vector.VectorSupport: int BT_ult> = 19;
+
+        <jdk.internal.vm.vector.VectorSupport: int BT_uge> = 23;
+
+        <jdk.internal.vm.vector.VectorSupport: int BT_ule> = 21;
+
+        <jdk.internal.vm.vector.VectorSupport: int BT_unsigned_compare> = 16;
+
+        <jdk.internal.vm.vector.VectorSupport: int BT_no_overflow> = 6;
+
+        <jdk.internal.vm.vector.VectorSupport: int BT_overflow> = 2;
+
+        <jdk.internal.vm.vector.VectorSupport: int BT_gt> = 1;
+
+        <jdk.internal.vm.vector.VectorSupport: int BT_lt> = 3;
+
+        <jdk.internal.vm.vector.VectorSupport: int BT_ge> = 7;
+
+        <jdk.internal.vm.vector.VectorSupport: int BT_le> = 5;
+
+        <jdk.internal.vm.vector.VectorSupport: int BT_ne> = 4;
+
+        <jdk.internal.vm.vector.VectorSupport: int BT_eq> = 0;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_HYPOT> = 118;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_EXPM1> = 117;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_EXP> = 116;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_POW> = 115;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_LOG1P> = 114;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_LOG10> = 113;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_LOG> = 112;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_CBRT> = 111;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_ATAN2> = 110;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_ATAN> = 109;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_ACOS> = 108;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_ASIN> = 107;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_COSH> = 106;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_COS> = 105;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_SINH> = 104;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_SIN> = 103;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_TANH> = 102;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_TAN> = 101;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_MASK_LASTTRUE> = 21;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_MASK_FIRSTTRUE> = 20;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_MASK_TRUECOUNT> = 19;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_REINTERPRET> = 18;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_CAST> = 17;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_URSHIFT> = 16;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_RSHIFT> = 15;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_LSHIFT> = 14;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_FMA> = 13;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_XOR> = 12;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_OR> = 11;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_AND> = 10;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_MAX> = 9;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_MIN> = 8;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_DIV> = 7;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_MUL> = 6;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_SUB> = 5;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_ADD> = 4;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_SQRT> = 2;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_NEG> = 1;
+
+        <jdk.internal.vm.vector.VectorSupport: int VECTOR_OP_ABS> = 0;
+
+        $stack0 = class "Ljdk/internal/vm/vector/VectorSupport;";
+
+        $stack1 = virtualinvoke $stack0.<java.lang.Class: boolean desiredAssertionStatus()>();
+
+        if $stack1 != 0 goto label1;
+
+        $stack4 = 1;
+
+        goto label2;
+
+     label1:
+        $stack4 = 0;
+
+     label2:
+        <jdk.internal.vm.vector.VectorSupport: boolean $assertionsDisabled> = $stack4;
+
+        staticinvoke <jdk.internal.vm.vector.VectorSupport: int registerNatives()>();
+
+        $stack3 = staticinvoke <jdk.internal.misc.Unsafe: jdk.internal.misc.Unsafe getUnsafe()>();
+
+        <jdk.internal.vm.vector.VectorSupport: jdk.internal.misc.Unsafe U> = $stack3;
+
+        return;
+    }
+}

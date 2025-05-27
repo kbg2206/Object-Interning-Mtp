@@ -1,0 +1,51 @@
+class jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl extends jdk.internal.reflect.ConstructorAccessorImpl
+{
+    private final java.lang.String message;
+
+    void <init>(java.lang.String)
+    {
+        jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl this;
+        java.lang.String message;
+
+        this := @this: jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl;
+
+        message := @parameter0: java.lang.String;
+
+        specialinvoke this.<jdk.internal.reflect.ConstructorAccessorImpl: void <init>()>();
+
+        this.<jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl: java.lang.String message> = message;
+
+        return;
+    }
+
+    public java.lang.Object newInstance(java.lang.Object[]) throws java.lang.InstantiationException, java.lang.IllegalArgumentException, java.lang.reflect.InvocationTargetException
+    {
+        jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl this;
+        java.lang.Object[] args;
+        java.lang.InstantiationException $stack3, $stack5;
+        java.lang.String $stack2, $stack4;
+
+        this := @this: jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl;
+
+        args := @parameter0: java.lang.Object[];
+
+        $stack2 = this.<jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl: java.lang.String message>;
+
+        if $stack2 != null goto label1;
+
+        $stack5 = new java.lang.InstantiationException;
+
+        specialinvoke $stack5.<java.lang.InstantiationException: void <init>()>();
+
+        throw $stack5;
+
+     label1:
+        $stack3 = new java.lang.InstantiationException;
+
+        $stack4 = this.<jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl: java.lang.String message>;
+
+        specialinvoke $stack3.<java.lang.InstantiationException: void <init>(java.lang.String)>($stack4);
+
+        throw $stack3;
+    }
+}

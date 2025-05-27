@@ -1,0 +1,23 @@
+abstract class jdk.internal.reflect.UnsafeQualifiedFieldAccessorImpl extends jdk.internal.reflect.UnsafeFieldAccessorImpl
+{
+    protected final boolean isReadOnly;
+
+    void <init>(java.lang.reflect.Field, boolean)
+    {
+        java.lang.reflect.Field field;
+        jdk.internal.reflect.UnsafeQualifiedFieldAccessorImpl this;
+        boolean isReadOnly;
+
+        this := @this: jdk.internal.reflect.UnsafeQualifiedFieldAccessorImpl;
+
+        field := @parameter0: java.lang.reflect.Field;
+
+        isReadOnly := @parameter1: boolean;
+
+        specialinvoke this.<jdk.internal.reflect.UnsafeFieldAccessorImpl: void <init>(java.lang.reflect.Field)>(field);
+
+        this.<jdk.internal.reflect.UnsafeQualifiedFieldAccessorImpl: boolean isReadOnly> = isReadOnly;
+
+        return;
+    }
+}

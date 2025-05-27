@@ -1,0 +1,1196 @@
+public class jdk.internal.jimage.ImageStringsReader extends java.lang.Object implements jdk.internal.jimage.ImageStrings
+{
+    public static final int HASH_MULTIPLIER;
+    public static final int POSITIVE_MASK;
+    private final jdk.internal.jimage.BasicImageReader reader;
+
+    void <init>(jdk.internal.jimage.BasicImageReader)
+    {
+        jdk.internal.jimage.BasicImageReader reader, $stack3;
+        java.lang.Object $stack2;
+        jdk.internal.jimage.ImageStringsReader this;
+
+        this := @this: jdk.internal.jimage.ImageStringsReader;
+
+        reader := @parameter0: jdk.internal.jimage.BasicImageReader;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack2 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(reader);
+
+        $stack3 = (jdk.internal.jimage.BasicImageReader) $stack2;
+
+        this.<jdk.internal.jimage.ImageStringsReader: jdk.internal.jimage.BasicImageReader reader> = $stack3;
+
+        return;
+    }
+
+    public java.lang.String get(int)
+    {
+        jdk.internal.jimage.BasicImageReader $stack2;
+        int offset;
+        java.lang.String $stack3;
+        jdk.internal.jimage.ImageStringsReader this;
+
+        this := @this: jdk.internal.jimage.ImageStringsReader;
+
+        offset := @parameter0: int;
+
+        $stack2 = this.<jdk.internal.jimage.ImageStringsReader: jdk.internal.jimage.BasicImageReader reader>;
+
+        $stack3 = virtualinvoke $stack2.<jdk.internal.jimage.BasicImageReader: java.lang.String getString(int)>(offset);
+
+        return $stack3;
+    }
+
+    public int match(int, java.lang.String, int)
+    {
+        jdk.internal.jimage.BasicImageReader $stack4;
+        int offset, stringOffset, $stack5;
+        java.lang.String string;
+        jdk.internal.jimage.ImageStringsReader this;
+
+        this := @this: jdk.internal.jimage.ImageStringsReader;
+
+        offset := @parameter0: int;
+
+        string := @parameter1: java.lang.String;
+
+        stringOffset := @parameter2: int;
+
+        $stack4 = this.<jdk.internal.jimage.ImageStringsReader: jdk.internal.jimage.BasicImageReader reader>;
+
+        $stack5 = virtualinvoke $stack4.<jdk.internal.jimage.BasicImageReader: int match(int,java.lang.String,int)>(offset, string, stringOffset);
+
+        return $stack5;
+    }
+
+    public int add(java.lang.String)
+    {
+        java.lang.InternalError $stack2;
+        java.lang.String string;
+        jdk.internal.jimage.ImageStringsReader this;
+
+        this := @this: jdk.internal.jimage.ImageStringsReader;
+
+        string := @parameter0: java.lang.String;
+
+        $stack2 = new java.lang.InternalError;
+
+        specialinvoke $stack2.<java.lang.InternalError: void <init>(java.lang.String)>("Can not add strings at runtime");
+
+        throw $stack2;
+    }
+
+    public static int hashCode(java.lang.String)
+    {
+        int $stack1;
+        java.lang.String s;
+
+        s := @parameter0: java.lang.String;
+
+        $stack1 = staticinvoke <jdk.internal.jimage.ImageStringsReader: int hashCode(java.lang.String,int)>(s, 16777619);
+
+        return $stack1;
+    }
+
+    public static int hashCode(java.lang.String, int)
+    {
+        int seed, $stack2, $stack3;
+        java.lang.String s;
+
+        s := @parameter0: java.lang.String;
+
+        seed := @parameter1: int;
+
+        $stack2 = staticinvoke <jdk.internal.jimage.ImageStringsReader: int unmaskedHashCode(java.lang.String,int)>(s, seed);
+
+        $stack3 = $stack2 & 2147483647;
+
+        return $stack3;
+    }
+
+    public static int hashCode(java.lang.String, java.lang.String)
+    {
+        int $stack2;
+        java.lang.String module, name;
+
+        module := @parameter0: java.lang.String;
+
+        name := @parameter1: java.lang.String;
+
+        $stack2 = staticinvoke <jdk.internal.jimage.ImageStringsReader: int hashCode(java.lang.String,java.lang.String,int)>(module, name, 16777619);
+
+        return $stack2;
+    }
+
+    public static int hashCode(java.lang.String, java.lang.String, int)
+    {
+        int $stack3, $stack4, $stack5, $stack6, $stack7, seed, seed#2;
+        java.lang.String module, name;
+
+        module := @parameter0: java.lang.String;
+
+        name := @parameter1: java.lang.String;
+
+        seed := @parameter2: int;
+
+        $stack3 = seed * 16777619;
+
+        seed#2 = $stack3 ^ 47;
+
+        $stack4 = staticinvoke <jdk.internal.jimage.ImageStringsReader: int unmaskedHashCode(java.lang.String,int)>(module, seed#2);
+
+        $stack5 = $stack4 * 16777619;
+
+        seed#2 = $stack5 ^ 47;
+
+        $stack6 = staticinvoke <jdk.internal.jimage.ImageStringsReader: int unmaskedHashCode(java.lang.String,int)>(name, seed#2);
+
+        $stack7 = $stack6 & 2147483647;
+
+        return $stack7;
+    }
+
+    public static int unmaskedHashCode(java.lang.String, int)
+    {
+        byte[] buffer;
+        byte $stack35, $stack37, $stack19;
+        short $stack38, $s0;
+        int $stack8, $stack10, $stack11, $stack14, $stack15, $stack33, $stack34, $stack36, $stack39, seed, i, uch, mask, n, $stack16, $stack17, $stack18, $stack27, $stack30, $stack20, seed#41, $i0, $i1, $i2, $i3, $i4, $i5, $i6;
+        java.lang.String s;
+        char $stack9;
+
+        s := @parameter0: java.lang.String;
+
+        seed := @parameter1: int;
+
+        $stack8 = virtualinvoke s.<java.lang.String: int length()>();
+
+        buffer = null;
+
+        i = 0;
+
+     label1:
+        if i >= $stack8 goto label8;
+
+        $stack9 = virtualinvoke s.<java.lang.String: char charAt(int)>(i);
+
+        $i0 = (int) $stack9;
+
+        uch = $i0;
+
+        $i1 = (int) $stack9;
+
+        $i2 = (int) -128;
+
+        $stack10 = $i1 & $i2;
+
+        if $stack10 == 0 goto label5;
+
+        if buffer != null goto label2;
+
+        buffer = newarray (byte)[8];
+
+     label2:
+        $i3 = (int) -64;
+
+        mask = $i3;
+
+        n = 0;
+
+     label3:
+        $stack16 = n;
+
+        n = n + 1;
+
+        $stack17 = uch & 63;
+
+        $stack18 = 128 | $stack17;
+
+        $stack19 = (byte) $stack18;
+
+        buffer[$stack16] = $stack19;
+
+        $stack27 = uch >> 6;
+
+        uch = $stack27;
+
+        $stack30 = mask >> 1;
+
+        mask = $stack30;
+
+        $stack20 = $stack27 & $stack30;
+
+        if $stack20 != 0 goto label3;
+
+        $stack33 = $stack30 << 1;
+
+        $stack34 = $stack33 | $stack27;
+
+        $stack35 = (byte) $stack34;
+
+        buffer[n] = $stack35;
+
+     label4:
+        $stack39 = seed * 16777619;
+
+        $stack36 = n;
+
+        $i4 = (int) -1;
+
+        n = n + $i4;
+
+        $stack37 = buffer[$stack36];
+
+        $s0 = (short) $stack37;
+
+        $stack38 = $s0 & 255;
+
+        $i5 = (int) $stack38;
+
+        seed = $stack39 ^ $i5;
+
+        if 0 <= n goto label4;
+
+        goto label7;
+
+     label5:
+        if $stack9 != 0 goto label6;
+
+        $stack14 = seed * 16777619;
+
+        seed#41 = $stack14 ^ 192;
+
+        $stack15 = seed#41 * 16777619;
+
+        seed = $stack15 ^ 128;
+
+        goto label7;
+
+     label6:
+        $stack11 = seed * 16777619;
+
+        $i6 = (int) $stack9;
+
+        seed = $stack11 ^ $i6;
+
+     label7:
+        i = i + 1;
+
+        goto label1;
+
+     label8:
+        return seed;
+    }
+
+    static int charsFromMUTF8Length(byte[], int, int)
+    {
+        byte[] bytes;
+        short $stack7, $s0;
+        byte ch;
+        int offset, count, $stack6, length, i, $i0;
+
+        bytes := @parameter0: byte[];
+
+        offset := @parameter1: int;
+
+        count := @parameter2: int;
+
+        length = 0;
+
+        i = offset;
+
+     label1:
+        $stack6 = offset + count;
+
+        if i >= $stack6 goto label4;
+
+        ch = bytes[i];
+
+        if ch != 0 goto label2;
+
+        goto label4;
+
+     label2:
+        $s0 = (short) ch;
+
+        $stack7 = $s0 & 192;
+
+        $i0 = (int) $stack7;
+
+        if $i0 == 128 goto label3;
+
+        length = length + 1;
+
+     label3:
+        i = i + 1;
+
+        goto label1;
+
+     label4:
+        return length;
+    }
+
+    static void charsFromMUTF8(char[], byte[], int, int) throws java.io.UTFDataFormatException
+    {
+        byte[] bytes;
+        byte $stack30, ch;
+        boolean $stack40;
+        java.lang.StringBuilder $stack23, $stack25, $stack36, $stack38, $u0, $u2;
+        java.io.UTFDataFormatException $u1, $u3;
+        short $stack11, $stack27, $s0, $s1;
+        int offset, count, $stack10, $stack12, $stack17, $stack18, $stack28, $stack29, $stack31, j, i, uch, mask, $i0, $i1, $i2, $i3, $i4, $i5;
+        java.lang.String $stack24, $stack26, $stack37, $stack39;
+        char $stack13;
+        char[] chars;
+
+        chars := @parameter0: char[];
+
+        bytes := @parameter1: byte[];
+
+        offset := @parameter2: int;
+
+        count := @parameter3: int;
+
+        j = 0;
+
+        i = offset;
+
+     label1:
+        $stack10 = offset + count;
+
+        if i >= $stack10 goto label9;
+
+        ch = bytes[i];
+
+        if ch != 0 goto label2;
+
+        goto label9;
+
+     label2:
+        $s0 = (short) ch;
+
+        $stack11 = $s0 & 128;
+
+        if $stack11 == 0 goto label3;
+
+        $stack40 = 1;
+
+        goto label4;
+
+     label3:
+        $stack40 = 0;
+
+     label4:
+        $i0 = (int) ch;
+
+        uch = $i0 & 127;
+
+        if $stack40 == 0 goto label8;
+
+        mask = 64;
+
+     label5:
+        $stack17 = uch & mask;
+
+        if $stack17 == 0 goto label7;
+
+        i = i + 1;
+
+        ch = bytes[i];
+
+        $s1 = (short) ch;
+
+        $stack27 = $s1 & 192;
+
+        $i1 = (int) $stack27;
+
+        if $i1 == 128 goto label6;
+
+        $u1 = new java.io.UTFDataFormatException;
+
+        $u0 = new java.lang.StringBuilder;
+
+        specialinvoke $u0.<java.lang.StringBuilder: void <init>()>();
+
+        $stack36 = virtualinvoke $u0.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("bad continuation 0x");
+
+        $i2 = (int) ch;
+
+        $stack37 = staticinvoke <java.lang.Integer: java.lang.String toHexString(int)>($i2);
+
+        $stack38 = virtualinvoke $stack36.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack37);
+
+        $stack39 = virtualinvoke $stack38.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u1.<java.io.UTFDataFormatException: void <init>(java.lang.String)>($stack39);
+
+        throw $u1;
+
+     label6:
+        $i3 = (int) -1;
+
+        $stack28 = mask ^ $i3;
+
+        $stack29 = uch & $stack28;
+
+        $stack31 = $stack29 << 6;
+
+        $stack30 = ch & 63;
+
+        $i4 = (int) $stack30;
+
+        uch = $stack31 | $i4;
+
+        mask = mask << 5;
+
+        goto label5;
+
+     label7:
+        $i5 = (int) 65535;
+
+        $stack18 = uch & $i5;
+
+        if $stack18 == uch goto label8;
+
+        $u3 = new java.io.UTFDataFormatException;
+
+        $u2 = new java.lang.StringBuilder;
+
+        specialinvoke $u2.<java.lang.StringBuilder: void <init>()>();
+
+        $stack23 = virtualinvoke $u2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("character out of range \\u");
+
+        $stack24 = staticinvoke <java.lang.Integer: java.lang.String toHexString(int)>(uch);
+
+        $stack25 = virtualinvoke $stack23.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack24);
+
+        $stack26 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u3.<java.io.UTFDataFormatException: void <init>(java.lang.String)>($stack26);
+
+        throw $u3;
+
+     label8:
+        $stack12 = j;
+
+        j = j + 1;
+
+        $stack13 = (char) uch;
+
+        chars[$stack12] = $stack13;
+
+        i = i + 1;
+
+        goto label1;
+
+     label9:
+        return;
+    }
+
+    public static java.lang.String stringFromMUTF8(byte[], int, int)
+    {
+        byte[] bytes;
+        int offset, count, $stack6;
+        char[] chars;
+        java.lang.InternalError $stack9;
+        java.lang.String $stack7;
+        java.io.UTFDataFormatException $stack8;
+
+        bytes := @parameter0: byte[];
+
+        offset := @parameter1: int;
+
+        count := @parameter2: int;
+
+        $stack6 = staticinvoke <jdk.internal.jimage.ImageStringsReader: int charsFromMUTF8Length(byte[],int,int)>(bytes, offset, count);
+
+        chars = newarray (char)[$stack6];
+
+     label1:
+        staticinvoke <jdk.internal.jimage.ImageStringsReader: void charsFromMUTF8(char[],byte[],int,int)>(chars, bytes, offset, count);
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack8 := @caughtexception;
+
+        $stack9 = new java.lang.InternalError;
+
+        specialinvoke $stack9.<java.lang.InternalError: void <init>(java.lang.String,java.lang.Throwable)>("Attempt to convert non modified UTF-8 byte sequence", $stack8);
+
+        throw $stack9;
+
+     label4:
+        $stack7 = new java.lang.String;
+
+        specialinvoke $stack7.<java.lang.String: void <init>(char[])>(chars);
+
+        return $stack7;
+
+        catch java.io.UTFDataFormatException from label1 to label2 with label3;
+    }
+
+    public static java.lang.String stringFromMUTF8(byte[])
+    {
+        int $stack1;
+        byte[] bytes;
+        java.lang.String $stack2;
+
+        bytes := @parameter0: byte[];
+
+        $stack1 = lengthof bytes;
+
+        $stack2 = staticinvoke <jdk.internal.jimage.ImageStringsReader: java.lang.String stringFromMUTF8(byte[],int,int)>(bytes, 0, $stack1);
+
+        return $stack2;
+    }
+
+    private static int charsFromByteBufferLength(java.nio.ByteBuffer, int)
+    {
+        java.nio.ByteBuffer buffer;
+        short $stack10, $s0;
+        byte $stack9;
+        int $stack6, $stack8, offset, length, $stack13, $i0, $i1;
+        java.lang.InternalError $u0;
+        boolean asciiOnly;
+
+        buffer := @parameter0: java.nio.ByteBuffer;
+
+        offset := @parameter1: int;
+
+        length = 0;
+
+        $stack6 = virtualinvoke buffer.<java.nio.ByteBuffer: int limit()>();
+
+        asciiOnly = 1;
+
+     label1:
+        if offset >= $stack6 goto label7;
+
+        $stack8 = offset;
+
+        offset = offset + 1;
+
+        $stack9 = virtualinvoke buffer.<java.nio.ByteBuffer: byte get(int)>($stack8);
+
+        $i0 = (int) $stack9;
+
+        if $i0 >= 0 goto label2;
+
+        asciiOnly = 0;
+
+        goto label5;
+
+     label2:
+        if $stack9 != 0 goto label5;
+
+        if asciiOnly == 0 goto label3;
+
+        $stack13 = length;
+
+        goto label4;
+
+     label3:
+        $stack13 = neg length;
+
+     label4:
+        return $stack13;
+
+     label5:
+        $s0 = (short) $stack9;
+
+        $stack10 = $s0 & 192;
+
+        $i1 = (int) $stack10;
+
+        if $i1 == 128 goto label6;
+
+        length = length + 1;
+
+     label6:
+        goto label1;
+
+     label7:
+        $u0 = new java.lang.InternalError;
+
+        specialinvoke $u0.<java.lang.InternalError: void <init>(java.lang.String)>("No terminating zero byte for modified UTF-8 byte sequence");
+
+        throw $u0;
+    }
+
+    private static void charsFromByteBuffer(char[], java.nio.ByteBuffer, int)
+    {
+        java.nio.ByteBuffer buffer;
+        byte $stack12, $stack29, $stack33;
+        java.lang.InternalError $u1, $u3, $u4;
+        boolean $stack42;
+        java.lang.StringBuilder $stack21, $stack22, $stack39, $stack40, $u0, $u2;
+        short $stack13, $stack30, $s0, $s1;
+        int $stack9, $stack11, $stack14, $stack15, $stack24, $stack28, $stack31, $stack32, $stack34, offset, j, uch, mask, $i0, $i1, $i2, $i3, $i4, $i5;
+        java.lang.String $stack23, $stack41;
+        char $stack16;
+        char[] chars;
+
+        chars := @parameter0: char[];
+
+        buffer := @parameter1: java.nio.ByteBuffer;
+
+        offset := @parameter2: int;
+
+        j = 0;
+
+        $stack9 = virtualinvoke buffer.<java.nio.ByteBuffer: int limit()>();
+
+     label1:
+        if offset >= $stack9 goto label9;
+
+        $stack11 = offset;
+
+        offset = offset + 1;
+
+        $stack12 = virtualinvoke buffer.<java.nio.ByteBuffer: byte get(int)>($stack11);
+
+        if $stack12 != 0 goto label2;
+
+        return;
+
+     label2:
+        $s0 = (short) $stack12;
+
+        $stack13 = $s0 & 128;
+
+        if $stack13 == 0 goto label3;
+
+        $stack42 = 1;
+
+        goto label4;
+
+     label3:
+        $stack42 = 0;
+
+     label4:
+        $i0 = (int) $stack12;
+
+        uch = $i0 & 127;
+
+        if $stack42 == 0 goto label7;
+
+        mask = 64;
+
+     label5:
+        $stack24 = uch & mask;
+
+        if $stack24 == 0 goto label7;
+
+        $stack28 = offset;
+
+        offset = offset + 1;
+
+        $stack29 = virtualinvoke buffer.<java.nio.ByteBuffer: byte get(int)>($stack28);
+
+        $s1 = (short) $stack29;
+
+        $stack30 = $s1 & 192;
+
+        $i1 = (int) $stack30;
+
+        if $i1 == 128 goto label6;
+
+        $u1 = new java.lang.InternalError;
+
+        $u0 = new java.lang.StringBuilder;
+
+        specialinvoke $u0.<java.lang.StringBuilder: void <init>()>();
+
+        $stack39 = virtualinvoke $u0.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Bad continuation in modified UTF-8 byte sequence: ");
+
+        $i2 = (int) $stack29;
+
+        $stack40 = virtualinvoke $stack39.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($i2);
+
+        $stack41 = virtualinvoke $stack40.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u1.<java.lang.InternalError: void <init>(java.lang.String)>($stack41);
+
+        throw $u1;
+
+     label6:
+        $i3 = (int) -1;
+
+        $stack31 = mask ^ $i3;
+
+        $stack32 = uch & $stack31;
+
+        $stack34 = $stack32 << 6;
+
+        $stack33 = $stack29 & 63;
+
+        $i4 = (int) $stack33;
+
+        uch = $stack34 | $i4;
+
+        mask = mask << 5;
+
+        goto label5;
+
+     label7:
+        $i5 = (int) 65535;
+
+        $stack14 = uch & $i5;
+
+        if $stack14 == uch goto label8;
+
+        $u3 = new java.lang.InternalError;
+
+        $u2 = new java.lang.StringBuilder;
+
+        specialinvoke $u2.<java.lang.StringBuilder: void <init>()>();
+
+        $stack21 = virtualinvoke $u2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("UTF-32 char in modified UTF-8 byte sequence: ");
+
+        $stack22 = virtualinvoke $stack21.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(uch);
+
+        $stack23 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $u3.<java.lang.InternalError: void <init>(java.lang.String)>($stack23);
+
+        throw $u3;
+
+     label8:
+        $stack15 = j;
+
+        j = j + 1;
+
+        $stack16 = (char) uch;
+
+        chars[$stack15] = $stack16;
+
+        goto label1;
+
+     label9:
+        $u4 = new java.lang.InternalError;
+
+        specialinvoke $u4.<java.lang.InternalError: void <init>(java.lang.String)>("No terminating zero byte for modified UTF-8 byte sequence");
+
+        throw $u4;
+    }
+
+    public static java.lang.String stringFromByteBuffer(java.nio.ByteBuffer)
+    {
+        java.lang.String $stack1;
+        java.nio.ByteBuffer buffer;
+
+        buffer := @parameter0: java.nio.ByteBuffer;
+
+        $stack1 = staticinvoke <jdk.internal.jimage.ImageStringsReader: java.lang.String stringFromByteBuffer(java.nio.ByteBuffer,int)>(buffer, 0);
+
+        return $stack1;
+    }
+
+    static java.lang.String stringFromByteBuffer(java.nio.ByteBuffer, int)
+    {
+        byte[] asciiBytes;
+        java.nio.ByteBuffer buffer;
+        java.nio.charset.Charset $stack9;
+        byte $stack11;
+        int $stack5, $stack6, $stack10, offset, i;
+        char[] asciiBytes#4;
+        java.lang.String $stack7, $stack8;
+
+        buffer := @parameter0: java.nio.ByteBuffer;
+
+        offset := @parameter1: int;
+
+        $stack5 = staticinvoke <jdk.internal.jimage.ImageStringsReader: int charsFromByteBufferLength(java.nio.ByteBuffer,int)>(buffer, offset);
+
+        if $stack5 <= 0 goto label3;
+
+        asciiBytes = newarray (byte)[$stack5];
+
+        i = 0;
+
+     label1:
+        if i >= $stack5 goto label2;
+
+        $stack10 = offset;
+
+        offset = offset + 1;
+
+        $stack11 = virtualinvoke buffer.<java.nio.ByteBuffer: byte get(int)>($stack10);
+
+        asciiBytes[i] = $stack11;
+
+        i = i + 1;
+
+        goto label1;
+
+     label2:
+        $stack8 = new java.lang.String;
+
+        $stack9 = <java.nio.charset.StandardCharsets: java.nio.charset.Charset US_ASCII>;
+
+        specialinvoke $stack8.<java.lang.String: void <init>(byte[],java.nio.charset.Charset)>(asciiBytes, $stack9);
+
+        return $stack8;
+
+     label3:
+        $stack6 = neg $stack5;
+
+        asciiBytes#4 = newarray (char)[$stack6];
+
+        staticinvoke <jdk.internal.jimage.ImageStringsReader: void charsFromByteBuffer(char[],java.nio.ByteBuffer,int)>(asciiBytes#4, buffer, offset);
+
+        $stack7 = new java.lang.String;
+
+        specialinvoke $stack7.<java.lang.String: void <init>(char[])>(asciiBytes#4);
+
+        return $stack7;
+    }
+
+    static int stringFromByteBufferMatches(java.nio.ByteBuffer, int, java.lang.String, int)
+    {
+        java.nio.ByteBuffer buffer;
+        byte $stack20;
+        int $stack10, offset, $stack11, $stack12, $stack13, $stack14, $stack15, $stack28, $stack35, stringOffset, current, i, $i0, $i1, $i2, $i3, $i4, $i5, $i6;
+        java.lang.String string;
+        char $stack16, $stack17, $stack21, $stack22;
+        char[] $stack30;
+
+        buffer := @parameter0: java.nio.ByteBuffer;
+
+        offset := @parameter1: int;
+
+        string := @parameter2: java.lang.String;
+
+        stringOffset := @parameter3: int;
+
+        $stack10 = virtualinvoke buffer.<java.nio.ByteBuffer: int limit()>();
+
+        current = offset;
+
+        $stack11 = virtualinvoke string.<java.lang.String: int length()>();
+
+     label1:
+        if current >= $stack10 goto label5;
+
+        $stack20 = virtualinvoke buffer.<java.nio.ByteBuffer: byte get(int)>(current);
+
+        $i0 = (int) $stack20;
+
+        if $i0 > 0 goto label2;
+
+        if $stack20 != 0 goto label5;
+
+        $stack35 = current - offset;
+
+        return $stack35;
+
+     label2:
+        if $stack11 <= stringOffset goto label3;
+
+        $stack21 = virtualinvoke string.<java.lang.String: char charAt(int)>(stringOffset);
+
+        $stack22 = (char) $stack20;
+
+        $i1 = (int) $stack21;
+
+        $i2 = (int) $stack22;
+
+        if $i1 == $i2 goto label4;
+
+     label3:
+        $i3 = (int) -1;
+
+        return $i3;
+
+     label4:
+        stringOffset = stringOffset + 1;
+
+        current = current + 1;
+
+        goto label1;
+
+     label5:
+        $stack12 = staticinvoke <jdk.internal.jimage.ImageStringsReader: int charsFromByteBufferLength(java.nio.ByteBuffer,int)>(buffer, current);
+
+        $stack28 = neg $stack12;
+
+        $stack30 = newarray (char)[$stack28];
+
+        staticinvoke <jdk.internal.jimage.ImageStringsReader: void charsFromByteBuffer(char[],java.nio.ByteBuffer,int)>($stack30, buffer, current);
+
+        i = 0;
+
+     label6:
+        if i >= $stack28 goto label8;
+
+        $stack15 = stringOffset;
+
+        stringOffset = stringOffset + 1;
+
+        $stack16 = virtualinvoke string.<java.lang.String: char charAt(int)>($stack15);
+
+        $stack17 = $stack30[i];
+
+        $i4 = (int) $stack16;
+
+        $i5 = (int) $stack17;
+
+        if $i4 == $i5 goto label7;
+
+        $i6 = (int) -1;
+
+        return $i6;
+
+     label7:
+        i = i + 1;
+
+        goto label6;
+
+     label8:
+        $stack13 = current - offset;
+
+        $stack14 = $stack13 + $stack28;
+
+        return $stack14;
+    }
+
+    static int mutf8FromStringLength(java.lang.String)
+    {
+        int $stack8, $stack10, $stack13, $stack16, $stack19, $stack22, length, i, uch, mask, n, $i0, $i1, $i2, $i3;
+        java.lang.String s;
+        char $stack9;
+
+        s := @parameter0: java.lang.String;
+
+        length = 0;
+
+        $stack8 = virtualinvoke s.<java.lang.String: int length()>();
+
+        i = 0;
+
+     label1:
+        if i >= $stack8 goto label6;
+
+        $stack9 = virtualinvoke s.<java.lang.String: char charAt(int)>(i);
+
+        $i0 = (int) $stack9;
+
+        $i1 = (int) 65535;
+
+        uch = $i0 & $i1;
+
+        $i2 = (int) -128;
+
+        $stack10 = uch & $i2;
+
+        if $stack10 == 0 goto label3;
+
+        $i3 = (int) -64;
+
+        mask = $i3;
+
+        n = 0;
+
+     label2:
+        n = n + 1;
+
+        $stack16 = uch >> 6;
+
+        uch = $stack16;
+
+        $stack19 = mask >> 1;
+
+        mask = $stack19;
+
+        $stack13 = $stack16 & $stack19;
+
+        if $stack13 != 0 goto label2;
+
+        $stack22 = n + 1;
+
+        length = length + $stack22;
+
+        goto label5;
+
+     label3:
+        if uch != 0 goto label4;
+
+        length = length + 2;
+
+        goto label5;
+
+     label4:
+        length = length + 1;
+
+     label5:
+        i = i + 1;
+
+        goto label1;
+
+     label6:
+        return length;
+    }
+
+    static void mutf8FromString(byte[], int, java.lang.String)
+    {
+        byte[] bytes, buffer;
+        byte $stack15, $stack39, $stack42, $stack23;
+        int offset, $stack11, $stack13, $stack14, $stack37, $stack38, $stack40, $stack41, j, i, uch, mask, n, $stack20, $stack21, $stack22, $stack31, $stack34, $stack24, j#41, $i0, $i1, $i2, $i3, $i4;
+        java.lang.String s;
+        char $stack12;
+
+        bytes := @parameter0: byte[];
+
+        offset := @parameter1: int;
+
+        s := @parameter2: java.lang.String;
+
+        j = offset;
+
+        buffer = null;
+
+        $stack11 = virtualinvoke s.<java.lang.String: int length()>();
+
+        i = 0;
+
+     label1:
+        if i >= $stack11 goto label8;
+
+        $stack12 = virtualinvoke s.<java.lang.String: char charAt(int)>(i);
+
+        $i0 = (int) $stack12;
+
+        $i1 = (int) 65535;
+
+        uch = $i0 & $i1;
+
+        $i2 = (int) -128;
+
+        $stack13 = uch & $i2;
+
+        if $stack13 == 0 goto label5;
+
+        if buffer != null goto label2;
+
+        buffer = newarray (byte)[8];
+
+     label2:
+        $i3 = (int) -64;
+
+        mask = $i3;
+
+        n = 0;
+
+     label3:
+        $stack20 = n;
+
+        n = n + 1;
+
+        $stack21 = uch & 63;
+
+        $stack22 = 128 | $stack21;
+
+        $stack23 = (byte) $stack22;
+
+        buffer[$stack20] = $stack23;
+
+        $stack31 = uch >> 6;
+
+        uch = $stack31;
+
+        $stack34 = mask >> 1;
+
+        mask = $stack34;
+
+        $stack24 = $stack31 & $stack34;
+
+        if $stack24 != 0 goto label3;
+
+        $stack37 = $stack34 << 1;
+
+        $stack38 = $stack37 | $stack31;
+
+        $stack39 = (byte) $stack38;
+
+        buffer[n] = $stack39;
+
+     label4:
+        $stack40 = j;
+
+        j = j + 1;
+
+        $stack41 = n;
+
+        $i4 = (int) -1;
+
+        n = n + $i4;
+
+        $stack42 = buffer[$stack41];
+
+        bytes[$stack40] = $stack42;
+
+        if 0 <= n goto label4;
+
+        goto label7;
+
+     label5:
+        if uch != 0 goto label6;
+
+        j#41 = j + 1;
+
+        bytes[j] = -64;
+
+        j = j#41 + 1;
+
+        bytes[j#41] = -128;
+
+        goto label7;
+
+     label6:
+        $stack14 = j;
+
+        j = j + 1;
+
+        $stack15 = (byte) uch;
+
+        bytes[$stack14] = $stack15;
+
+     label7:
+        i = i + 1;
+
+        goto label1;
+
+     label8:
+        return;
+    }
+
+    public static byte[] mutf8FromString(java.lang.String)
+    {
+        int $stack3;
+        byte[] bytes;
+        java.lang.String string;
+
+        string := @parameter0: java.lang.String;
+
+        $stack3 = staticinvoke <jdk.internal.jimage.ImageStringsReader: int mutf8FromStringLength(java.lang.String)>(string);
+
+        bytes = newarray (byte)[$stack3];
+
+        staticinvoke <jdk.internal.jimage.ImageStringsReader: void mutf8FromString(byte[],int,java.lang.String)>(bytes, 0, string);
+
+        return bytes;
+    }
+
+    public static void <clinit>()
+    {
+        <jdk.internal.jimage.ImageStringsReader: int POSITIVE_MASK> = 2147483647;
+
+        <jdk.internal.jimage.ImageStringsReader: int HASH_MULTIPLIER> = 16777619;
+
+        return;
+    }
+}

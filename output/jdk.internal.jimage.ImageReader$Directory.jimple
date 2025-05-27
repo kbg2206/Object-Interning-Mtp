@@ -1,0 +1,141 @@
+final class jdk.internal.jimage.ImageReader$Directory extends jdk.internal.jimage.ImageReader$Node
+{
+    private final java.util.List children;
+
+    private void <init>(java.lang.String, java.nio.file.attribute.BasicFileAttributes)
+    {
+        jdk.internal.jimage.ImageReader$Directory this;
+        java.lang.String name;
+        java.nio.file.attribute.BasicFileAttributes fileAttrs;
+        java.util.ArrayList $stack3;
+
+        this := @this: jdk.internal.jimage.ImageReader$Directory;
+
+        name := @parameter0: java.lang.String;
+
+        fileAttrs := @parameter1: java.nio.file.attribute.BasicFileAttributes;
+
+        specialinvoke this.<jdk.internal.jimage.ImageReader$Node: void <init>(java.lang.String,java.nio.file.attribute.BasicFileAttributes)>(name, fileAttrs);
+
+        $stack3 = new java.util.ArrayList;
+
+        specialinvoke $stack3.<java.util.ArrayList: void <init>()>();
+
+        this.<jdk.internal.jimage.ImageReader$Directory: java.util.List children> = $stack3;
+
+        return;
+    }
+
+    static jdk.internal.jimage.ImageReader$Directory create(jdk.internal.jimage.ImageReader$Directory, java.lang.String, java.nio.file.attribute.BasicFileAttributes)
+    {
+        jdk.internal.jimage.ImageReader$Directory $stack4, parent;
+        java.lang.String name;
+        java.nio.file.attribute.BasicFileAttributes fileAttrs;
+
+        parent := @parameter0: jdk.internal.jimage.ImageReader$Directory;
+
+        name := @parameter1: java.lang.String;
+
+        fileAttrs := @parameter2: java.nio.file.attribute.BasicFileAttributes;
+
+        $stack4 = new jdk.internal.jimage.ImageReader$Directory;
+
+        specialinvoke $stack4.<jdk.internal.jimage.ImageReader$Directory: void <init>(java.lang.String,java.nio.file.attribute.BasicFileAttributes)>(name, fileAttrs);
+
+        if parent == null goto label1;
+
+        virtualinvoke parent.<jdk.internal.jimage.ImageReader$Directory: void addChild(jdk.internal.jimage.ImageReader$Node)>($stack4);
+
+     label1:
+        return $stack4;
+    }
+
+    public boolean isDirectory()
+    {
+        jdk.internal.jimage.ImageReader$Directory this;
+
+        this := @this: jdk.internal.jimage.ImageReader$Directory;
+
+        return 1;
+    }
+
+    public java.util.List getChildren()
+    {
+        jdk.internal.jimage.ImageReader$Directory this;
+        java.util.List $stack1, $stack2;
+
+        this := @this: jdk.internal.jimage.ImageReader$Directory;
+
+        $stack1 = this.<jdk.internal.jimage.ImageReader$Directory: java.util.List children>;
+
+        $stack2 = staticinvoke <java.util.Collections: java.util.List unmodifiableList(java.util.List)>($stack1);
+
+        return $stack2;
+    }
+
+    void addChild(jdk.internal.jimage.ImageReader$Node)
+    {
+        jdk.internal.jimage.ImageReader$Node node;
+        jdk.internal.jimage.ImageReader$Directory this;
+        java.util.List $stack2;
+
+        this := @this: jdk.internal.jimage.ImageReader$Directory;
+
+        node := @parameter0: jdk.internal.jimage.ImageReader$Node;
+
+        $stack2 = this.<jdk.internal.jimage.ImageReader$Directory: java.util.List children>;
+
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(node);
+
+        return;
+    }
+
+    public void walk(java.util.function.Consumer)
+    {
+        jdk.internal.jimage.ImageReader$Node child;
+        java.util.Iterator $stack5;
+        jdk.internal.jimage.ImageReader$Directory this, $stack10;
+        java.util.function.Consumer consumer;
+        java.util.List $stack4;
+        java.lang.Object $stack7;
+        boolean $stack6, $stack8;
+
+        this := @this: jdk.internal.jimage.ImageReader$Directory;
+
+        consumer := @parameter0: java.util.function.Consumer;
+
+        interfaceinvoke consumer.<java.util.function.Consumer: void accept(java.lang.Object)>(this);
+
+        $stack4 = this.<jdk.internal.jimage.ImageReader$Directory: java.util.List children>;
+
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack6 = interfaceinvoke $stack5.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack6 == 0 goto label4;
+
+        $stack7 = interfaceinvoke $stack5.<java.util.Iterator: java.lang.Object next()>();
+
+        child = (jdk.internal.jimage.ImageReader$Node) $stack7;
+
+        $stack8 = virtualinvoke child.<jdk.internal.jimage.ImageReader$Node: boolean isDirectory()>();
+
+        if $stack8 == 0 goto label2;
+
+        $stack10 = (jdk.internal.jimage.ImageReader$Directory) child;
+
+        virtualinvoke $stack10.<jdk.internal.jimage.ImageReader$Directory: void walk(java.util.function.Consumer)>(consumer);
+
+        goto label3;
+
+     label2:
+        interfaceinvoke consumer.<java.util.function.Consumer: void accept(java.lang.Object)>(child);
+
+     label3:
+        goto label1;
+
+     label4:
+        return;
+    }
+}

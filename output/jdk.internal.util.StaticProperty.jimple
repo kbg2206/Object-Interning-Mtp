@@ -1,0 +1,225 @@
+public final class jdk.internal.util.StaticProperty extends java.lang.Object
+{
+    private static final java.lang.String JAVA_HOME;
+    private static final java.lang.String USER_HOME;
+    private static final java.lang.String USER_DIR;
+    private static final java.lang.String USER_NAME;
+    private static final java.lang.String JAVA_LIBRARY_PATH;
+    private static final java.lang.String SUN_BOOT_LIBRARY_PATH;
+    private static final java.lang.String JDK_SERIAL_FILTER;
+    private static final java.lang.String JDK_SERIAL_FILTER_FACTORY;
+    private static final java.lang.String JAVA_IO_TMPDIR;
+    private static final java.lang.String NATIVE_ENCODING;
+
+    private void <init>()
+    {
+        jdk.internal.util.StaticProperty this;
+
+        this := @this: jdk.internal.util.StaticProperty;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    private static java.lang.String getProperty(java.util.Properties, java.lang.String)
+    {
+        java.util.Properties props;
+        java.lang.InternalError $stack4;
+        java.lang.StringBuilder $stack5, $stack6, $stack7;
+        java.lang.String key, $stack3, $stack8;
+
+        props := @parameter0: java.util.Properties;
+
+        key := @parameter1: java.lang.String;
+
+        $stack3 = virtualinvoke props.<java.util.Properties: java.lang.String getProperty(java.lang.String)>(key);
+
+        if $stack3 != null goto label1;
+
+        $stack4 = new java.lang.InternalError;
+
+        $stack5 = new java.lang.StringBuilder;
+
+        specialinvoke $stack5.<java.lang.StringBuilder: void <init>()>();
+
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("null property: ");
+
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(key);
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack4.<java.lang.InternalError: void <init>(java.lang.String)>($stack8);
+
+        throw $stack4;
+
+     label1:
+        return $stack3;
+    }
+
+    private static java.lang.String getProperty(java.util.Properties, java.lang.String, java.lang.String)
+    {
+        java.util.Properties props;
+        java.lang.String key, $stack4, defaultVal, $stack5;
+
+        props := @parameter0: java.util.Properties;
+
+        key := @parameter1: java.lang.String;
+
+        defaultVal := @parameter2: java.lang.String;
+
+        $stack4 = virtualinvoke props.<java.util.Properties: java.lang.String getProperty(java.lang.String)>(key);
+
+        if $stack4 != null goto label1;
+
+        $stack5 = defaultVal;
+
+        goto label2;
+
+     label1:
+        $stack5 = $stack4;
+
+     label2:
+        return $stack5;
+    }
+
+    public static java.lang.String javaHome()
+    {
+        java.lang.String $stack0;
+
+        $stack0 = <jdk.internal.util.StaticProperty: java.lang.String JAVA_HOME>;
+
+        return $stack0;
+    }
+
+    public static java.lang.String userHome()
+    {
+        java.lang.String $stack0;
+
+        $stack0 = <jdk.internal.util.StaticProperty: java.lang.String USER_HOME>;
+
+        return $stack0;
+    }
+
+    public static java.lang.String userDir()
+    {
+        java.lang.String $stack0;
+
+        $stack0 = <jdk.internal.util.StaticProperty: java.lang.String USER_DIR>;
+
+        return $stack0;
+    }
+
+    public static java.lang.String userName()
+    {
+        java.lang.String $stack0;
+
+        $stack0 = <jdk.internal.util.StaticProperty: java.lang.String USER_NAME>;
+
+        return $stack0;
+    }
+
+    public static java.lang.String javaLibraryPath()
+    {
+        java.lang.String $stack0;
+
+        $stack0 = <jdk.internal.util.StaticProperty: java.lang.String JAVA_LIBRARY_PATH>;
+
+        return $stack0;
+    }
+
+    public static java.lang.String javaIoTmpDir()
+    {
+        java.lang.String $stack0;
+
+        $stack0 = <jdk.internal.util.StaticProperty: java.lang.String JAVA_IO_TMPDIR>;
+
+        return $stack0;
+    }
+
+    public static java.lang.String sunBootLibraryPath()
+    {
+        java.lang.String $stack0;
+
+        $stack0 = <jdk.internal.util.StaticProperty: java.lang.String SUN_BOOT_LIBRARY_PATH>;
+
+        return $stack0;
+    }
+
+    public static java.lang.String jdkSerialFilter()
+    {
+        java.lang.String $stack0;
+
+        $stack0 = <jdk.internal.util.StaticProperty: java.lang.String JDK_SERIAL_FILTER>;
+
+        return $stack0;
+    }
+
+    public static java.lang.String jdkSerialFilterFactory()
+    {
+        java.lang.String $stack0;
+
+        $stack0 = <jdk.internal.util.StaticProperty: java.lang.String JDK_SERIAL_FILTER_FACTORY>;
+
+        return $stack0;
+    }
+
+    public static java.lang.String nativeEncoding()
+    {
+        java.lang.String $stack0;
+
+        $stack0 = <jdk.internal.util.StaticProperty: java.lang.String NATIVE_ENCODING>;
+
+        return $stack0;
+    }
+
+    static void <clinit>()
+    {
+        java.util.Properties $stack1;
+        java.lang.String $stack2, $stack3, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9, $stack10, $stack11;
+
+        $stack1 = staticinvoke <java.lang.System: java.util.Properties getProperties()>();
+
+        $stack2 = staticinvoke <jdk.internal.util.StaticProperty: java.lang.String getProperty(java.util.Properties,java.lang.String)>($stack1, "java.home");
+
+        <jdk.internal.util.StaticProperty: java.lang.String JAVA_HOME> = $stack2;
+
+        $stack3 = staticinvoke <jdk.internal.util.StaticProperty: java.lang.String getProperty(java.util.Properties,java.lang.String)>($stack1, "user.home");
+
+        <jdk.internal.util.StaticProperty: java.lang.String USER_HOME> = $stack3;
+
+        $stack4 = staticinvoke <jdk.internal.util.StaticProperty: java.lang.String getProperty(java.util.Properties,java.lang.String)>($stack1, "user.dir");
+
+        <jdk.internal.util.StaticProperty: java.lang.String USER_DIR> = $stack4;
+
+        $stack5 = staticinvoke <jdk.internal.util.StaticProperty: java.lang.String getProperty(java.util.Properties,java.lang.String)>($stack1, "user.name");
+
+        <jdk.internal.util.StaticProperty: java.lang.String USER_NAME> = $stack5;
+
+        $stack6 = staticinvoke <jdk.internal.util.StaticProperty: java.lang.String getProperty(java.util.Properties,java.lang.String)>($stack1, "java.io.tmpdir");
+
+        <jdk.internal.util.StaticProperty: java.lang.String JAVA_IO_TMPDIR> = $stack6;
+
+        $stack7 = staticinvoke <jdk.internal.util.StaticProperty: java.lang.String getProperty(java.util.Properties,java.lang.String,java.lang.String)>($stack1, "java.library.path", "");
+
+        <jdk.internal.util.StaticProperty: java.lang.String JAVA_LIBRARY_PATH> = $stack7;
+
+        $stack8 = staticinvoke <jdk.internal.util.StaticProperty: java.lang.String getProperty(java.util.Properties,java.lang.String,java.lang.String)>($stack1, "sun.boot.library.path", "");
+
+        <jdk.internal.util.StaticProperty: java.lang.String SUN_BOOT_LIBRARY_PATH> = $stack8;
+
+        $stack9 = staticinvoke <jdk.internal.util.StaticProperty: java.lang.String getProperty(java.util.Properties,java.lang.String,java.lang.String)>($stack1, "jdk.serialFilter", null);
+
+        <jdk.internal.util.StaticProperty: java.lang.String JDK_SERIAL_FILTER> = $stack9;
+
+        $stack10 = staticinvoke <jdk.internal.util.StaticProperty: java.lang.String getProperty(java.util.Properties,java.lang.String,java.lang.String)>($stack1, "jdk.serialFilterFactory", null);
+
+        <jdk.internal.util.StaticProperty: java.lang.String JDK_SERIAL_FILTER_FACTORY> = $stack10;
+
+        $stack11 = staticinvoke <jdk.internal.util.StaticProperty: java.lang.String getProperty(java.util.Properties,java.lang.String)>($stack1, "native.encoding");
+
+        <jdk.internal.util.StaticProperty: java.lang.String NATIVE_ENCODING> = $stack11;
+
+        return;
+    }
+}

@@ -1,0 +1,282 @@
+public abstract class jdk.internal.ref.PhantomCleanable extends java.lang.ref.PhantomReference implements java.lang.ref.Cleaner$Cleanable
+{
+    jdk.internal.ref.PhantomCleanable prev;
+    jdk.internal.ref.PhantomCleanable next;
+    private final jdk.internal.ref.PhantomCleanable list;
+
+    public void <init>(java.lang.Object, java.lang.ref.Cleaner)
+    {
+        java.lang.ref.Cleaner cleaner;
+        java.lang.ref.ReferenceQueue $stack5;
+        java.lang.Object referent, $stack3;
+        jdk.internal.ref.CleanerImpl $stack4, $stack6;
+        jdk.internal.ref.PhantomCleanable this, $stack7;
+
+        this := @this: jdk.internal.ref.PhantomCleanable;
+
+        referent := @parameter0: java.lang.Object;
+
+        cleaner := @parameter1: java.lang.ref.Cleaner;
+
+        $stack3 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object)>(referent);
+
+        $stack4 = staticinvoke <jdk.internal.ref.CleanerImpl: jdk.internal.ref.CleanerImpl getCleanerImpl(java.lang.ref.Cleaner)>(cleaner);
+
+        $stack5 = $stack4.<jdk.internal.ref.CleanerImpl: java.lang.ref.ReferenceQueue queue>;
+
+        specialinvoke this.<java.lang.ref.PhantomReference: void <init>(java.lang.Object,java.lang.ref.ReferenceQueue)>($stack3, $stack5);
+
+        this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable prev> = this;
+
+        this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable next> = this;
+
+        $stack6 = staticinvoke <jdk.internal.ref.CleanerImpl: jdk.internal.ref.CleanerImpl getCleanerImpl(java.lang.ref.Cleaner)>(cleaner);
+
+        $stack7 = $stack6.<jdk.internal.ref.CleanerImpl: jdk.internal.ref.PhantomCleanable phantomCleanableList>;
+
+        this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable list> = $stack7;
+
+        virtualinvoke this.<jdk.internal.ref.PhantomCleanable: void insert()>();
+
+        staticinvoke <java.lang.ref.Reference: void reachabilityFence(java.lang.Object)>(referent);
+
+        staticinvoke <java.lang.ref.Reference: void reachabilityFence(java.lang.Object)>(cleaner);
+
+        return;
+    }
+
+    void <init>()
+    {
+        jdk.internal.ref.PhantomCleanable this;
+
+        this := @this: jdk.internal.ref.PhantomCleanable;
+
+        specialinvoke this.<java.lang.ref.PhantomReference: void <init>(java.lang.Object,java.lang.ref.ReferenceQueue)>(null, null);
+
+        this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable prev> = this;
+
+        this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable next> = this;
+
+        this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable list> = this;
+
+        return;
+    }
+
+    private void insert()
+    {
+        java.lang.Throwable $stack10;
+        jdk.internal.ref.PhantomCleanable this, $stack3, $stack4, $stack5, $stack6, $stack7, $stack8;
+
+        this := @this: jdk.internal.ref.PhantomCleanable;
+
+        $stack3 = this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable list>;
+
+        entermonitor $stack3;
+
+     label1:
+        $stack4 = this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable list>;
+
+        this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable prev> = $stack4;
+
+        $stack5 = this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable list>;
+
+        $stack6 = $stack5.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable next>;
+
+        this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable next> = $stack6;
+
+        $stack7 = this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable next>;
+
+        $stack7.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable prev> = this;
+
+        $stack8 = this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable list>;
+
+        $stack8.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable next> = this;
+
+        exitmonitor $stack3;
+
+     label2:
+        goto label5;
+
+     label3:
+        $stack10 := @caughtexception;
+
+        exitmonitor $stack3;
+
+     label4:
+        throw $stack10;
+
+     label5:
+        return;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+
+    private boolean remove()
+    {
+        java.lang.Throwable $stack11;
+        jdk.internal.ref.PhantomCleanable this, $stack3, $stack4, $stack6, $stack7, $stack8, $stack9;
+
+        this := @this: jdk.internal.ref.PhantomCleanable;
+
+        $stack3 = this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable list>;
+
+        entermonitor $stack3;
+
+     label1:
+        $stack4 = this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable next>;
+
+        if $stack4 == this goto label3;
+
+        $stack7 = this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable next>;
+
+        $stack6 = this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable prev>;
+
+        $stack7.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable prev> = $stack6;
+
+        $stack9 = this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable prev>;
+
+        $stack8 = this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable next>;
+
+        $stack9.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable next> = $stack8;
+
+        this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable prev> = this;
+
+        this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable next> = this;
+
+        exitmonitor $stack3;
+
+     label2:
+        return 1;
+
+     label3:
+        exitmonitor $stack3;
+
+     label4:
+        return 0;
+
+     label5:
+        $stack11 := @caughtexception;
+
+        exitmonitor $stack3;
+
+     label6:
+        throw $stack11;
+
+        catch java.lang.Throwable from label1 to label2 with label5;
+        catch java.lang.Throwable from label3 to label4 with label5;
+        catch java.lang.Throwable from label5 to label6 with label5;
+    }
+
+    boolean isListEmpty()
+    {
+        java.lang.Throwable $stack9;
+        jdk.internal.ref.PhantomCleanable this, $stack3, $stack4, $stack5, $stack6;
+        boolean $stack8;
+
+        this := @this: jdk.internal.ref.PhantomCleanable;
+
+        $stack3 = this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable list>;
+
+        entermonitor $stack3;
+
+     label1:
+        $stack6 = this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable list>;
+
+        $stack4 = this.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable list>;
+
+        $stack5 = $stack4.<jdk.internal.ref.PhantomCleanable: jdk.internal.ref.PhantomCleanable next>;
+
+        if $stack6 != $stack5 goto label2;
+
+        $stack8 = 1;
+
+        goto label3;
+
+     label2:
+        $stack8 = 0;
+
+     label3:
+        exitmonitor $stack3;
+
+     label4:
+        return $stack8;
+
+     label5:
+        $stack9 := @caughtexception;
+
+        exitmonitor $stack3;
+
+     label6:
+        throw $stack9;
+
+        catch java.lang.Throwable from label1 to label4 with label5;
+        catch java.lang.Throwable from label5 to label6 with label5;
+    }
+
+    public final void clean()
+    {
+        jdk.internal.ref.PhantomCleanable this;
+        boolean $stack1;
+
+        this := @this: jdk.internal.ref.PhantomCleanable;
+
+        $stack1 = virtualinvoke this.<jdk.internal.ref.PhantomCleanable: boolean remove()>();
+
+        if $stack1 == 0 goto label1;
+
+        specialinvoke this.<java.lang.ref.PhantomReference: void clear()>();
+
+        virtualinvoke this.<jdk.internal.ref.PhantomCleanable: void performCleanup()>();
+
+     label1:
+        return;
+    }
+
+    public void clear()
+    {
+        jdk.internal.ref.PhantomCleanable this;
+        boolean $stack1;
+
+        this := @this: jdk.internal.ref.PhantomCleanable;
+
+        $stack1 = virtualinvoke this.<jdk.internal.ref.PhantomCleanable: boolean remove()>();
+
+        if $stack1 == 0 goto label1;
+
+        specialinvoke this.<java.lang.ref.PhantomReference: void clear()>();
+
+     label1:
+        return;
+    }
+
+    protected abstract void performCleanup();
+
+    public final boolean isEnqueued()
+    {
+        java.lang.UnsupportedOperationException $stack1;
+        jdk.internal.ref.PhantomCleanable this;
+
+        this := @this: jdk.internal.ref.PhantomCleanable;
+
+        $stack1 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $stack1.<java.lang.UnsupportedOperationException: void <init>(java.lang.String)>("isEnqueued");
+
+        throw $stack1;
+    }
+
+    public final boolean enqueue()
+    {
+        java.lang.UnsupportedOperationException $stack1;
+        jdk.internal.ref.PhantomCleanable this;
+
+        this := @this: jdk.internal.ref.PhantomCleanable;
+
+        $stack1 = new java.lang.UnsupportedOperationException;
+
+        specialinvoke $stack1.<java.lang.UnsupportedOperationException: void <init>(java.lang.String)>("enqueue");
+
+        throw $stack1;
+    }
+}

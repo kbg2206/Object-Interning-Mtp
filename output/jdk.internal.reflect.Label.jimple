@@ -1,0 +1,111 @@
+class jdk.internal.reflect.Label extends java.lang.Object
+{
+    private final java.util.List patches;
+
+    public void <init>()
+    {
+        jdk.internal.reflect.Label this;
+        java.util.ArrayList $stack1;
+
+        this := @this: jdk.internal.reflect.Label;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = new java.util.ArrayList;
+
+        specialinvoke $stack1.<java.util.ArrayList: void <init>()>();
+
+        this.<jdk.internal.reflect.Label: java.util.List patches> = $stack1;
+
+        return;
+    }
+
+    void add(jdk.internal.reflect.ClassFileAssembler, short, short, int)
+    {
+        short instrBCI, patchBCI;
+        java.util.List $stack6;
+        jdk.internal.reflect.Label this;
+        jdk.internal.reflect.Label$PatchInfo $stack5;
+        jdk.internal.reflect.ClassFileAssembler asm;
+        int stackDepth;
+
+        this := @this: jdk.internal.reflect.Label;
+
+        asm := @parameter0: jdk.internal.reflect.ClassFileAssembler;
+
+        instrBCI := @parameter1: short;
+
+        patchBCI := @parameter2: short;
+
+        stackDepth := @parameter3: int;
+
+        $stack6 = this.<jdk.internal.reflect.Label: java.util.List patches>;
+
+        $stack5 = new jdk.internal.reflect.Label$PatchInfo;
+
+        specialinvoke $stack5.<jdk.internal.reflect.Label$PatchInfo: void <init>(jdk.internal.reflect.ClassFileAssembler,short,short,int)>(asm, instrBCI, patchBCI, stackDepth);
+
+        interfaceinvoke $stack6.<java.util.List: boolean add(java.lang.Object)>($stack5);
+
+        return;
+    }
+
+    public void bind()
+    {
+        short $stack10, $stack11, offset, $stack13;
+        int $stack12, $stack15, $i0, $i1;
+        boolean $stack7;
+        jdk.internal.reflect.ClassFileAssembler $stack9, $stack14, $stack16;
+        java.util.Iterator $stack6;
+        java.util.List $stack5;
+        jdk.internal.reflect.Label this;
+        jdk.internal.reflect.Label$PatchInfo patch;
+        java.lang.Object $stack8;
+
+        this := @this: jdk.internal.reflect.Label;
+
+        $stack5 = this.<jdk.internal.reflect.Label: java.util.List patches>;
+
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $stack7 = interfaceinvoke $stack6.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack7 == 0 goto label2;
+
+        $stack8 = interfaceinvoke $stack6.<java.util.Iterator: java.lang.Object next()>();
+
+        patch = (jdk.internal.reflect.Label$PatchInfo) $stack8;
+
+        $stack9 = patch.<jdk.internal.reflect.Label$PatchInfo: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack10 = virtualinvoke $stack9.<jdk.internal.reflect.ClassFileAssembler: short getLength()>();
+
+        $stack11 = patch.<jdk.internal.reflect.Label$PatchInfo: short instrBCI>;
+
+        $i0 = (int) $stack10;
+
+        $i1 = (int) $stack11;
+
+        $stack12 = $i0 - $i1;
+
+        offset = (short) $stack12;
+
+        $stack14 = patch.<jdk.internal.reflect.Label$PatchInfo: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack13 = patch.<jdk.internal.reflect.Label$PatchInfo: short patchBCI>;
+
+        virtualinvoke $stack14.<jdk.internal.reflect.ClassFileAssembler: void emitShort(short,short)>($stack13, offset);
+
+        $stack16 = patch.<jdk.internal.reflect.Label$PatchInfo: jdk.internal.reflect.ClassFileAssembler asm>;
+
+        $stack15 = patch.<jdk.internal.reflect.Label$PatchInfo: int stackDepth>;
+
+        virtualinvoke $stack16.<jdk.internal.reflect.ClassFileAssembler: void setStack(int)>($stack15);
+
+        goto label1;
+
+     label2:
+        return;
+    }
+}

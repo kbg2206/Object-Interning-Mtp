@@ -1,0 +1,192 @@
+public final class jdk.internal.ref.CleanerImpl extends java.lang.Object implements java.lang.Runnable
+{
+    private static java.util.function.Function cleanerImplAccess;
+    final jdk.internal.ref.PhantomCleanable phantomCleanableList;
+    final java.lang.ref.ReferenceQueue queue;
+
+    public static void setCleanerImplAccess(java.util.function.Function)
+    {
+        java.lang.InternalError $stack2;
+        java.util.function.Function $stack1, access;
+
+        access := @parameter0: java.util.function.Function;
+
+        $stack1 = <jdk.internal.ref.CleanerImpl: java.util.function.Function cleanerImplAccess>;
+
+        if $stack1 != null goto label1;
+
+        <jdk.internal.ref.CleanerImpl: java.util.function.Function cleanerImplAccess> = access;
+
+        goto label2;
+
+     label1:
+        $stack2 = new java.lang.InternalError;
+
+        specialinvoke $stack2.<java.lang.InternalError: void <init>(java.lang.String)>("cleanerImplAccess");
+
+        throw $stack2;
+
+     label2:
+        return;
+    }
+
+    static jdk.internal.ref.CleanerImpl getCleanerImpl(java.lang.ref.Cleaner)
+    {
+        java.lang.ref.Cleaner cleaner;
+        java.lang.Object $stack2;
+        jdk.internal.ref.CleanerImpl $stack3;
+        java.util.function.Function $stack1;
+
+        cleaner := @parameter0: java.lang.ref.Cleaner;
+
+        $stack1 = <jdk.internal.ref.CleanerImpl: java.util.function.Function cleanerImplAccess>;
+
+        $stack2 = interfaceinvoke $stack1.<java.util.function.Function: java.lang.Object apply(java.lang.Object)>(cleaner);
+
+        $stack3 = (jdk.internal.ref.CleanerImpl) $stack2;
+
+        return $stack3;
+    }
+
+    public void <init>()
+    {
+        jdk.internal.ref.CleanerImpl this;
+        java.lang.ref.ReferenceQueue $stack1;
+        jdk.internal.ref.CleanerImpl$PhantomCleanableRef $stack2;
+
+        this := @this: jdk.internal.ref.CleanerImpl;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        $stack1 = new java.lang.ref.ReferenceQueue;
+
+        specialinvoke $stack1.<java.lang.ref.ReferenceQueue: void <init>()>();
+
+        this.<jdk.internal.ref.CleanerImpl: java.lang.ref.ReferenceQueue queue> = $stack1;
+
+        $stack2 = new jdk.internal.ref.CleanerImpl$PhantomCleanableRef;
+
+        specialinvoke $stack2.<jdk.internal.ref.CleanerImpl$PhantomCleanableRef: void <init>()>();
+
+        this.<jdk.internal.ref.CleanerImpl: jdk.internal.ref.PhantomCleanable phantomCleanableList> = $stack2;
+
+        return;
+    }
+
+    public void start(java.lang.ref.Cleaner, java.util.concurrent.ThreadFactory)
+    {
+        jdk.internal.ref.CleanerImpl$CleanerCleanable $stack5;
+        java.lang.Thread $stack6;
+        java.lang.ref.Cleaner cleaner;
+        jdk.internal.ref.CleanerImpl $stack4, this;
+        java.lang.AssertionError $stack13;
+        java.util.concurrent.ThreadFactory threadFactory;
+
+        this := @this: jdk.internal.ref.CleanerImpl;
+
+        cleaner := @parameter0: java.lang.ref.Cleaner;
+
+        threadFactory := @parameter1: java.util.concurrent.ThreadFactory;
+
+        $stack4 = staticinvoke <jdk.internal.ref.CleanerImpl: jdk.internal.ref.CleanerImpl getCleanerImpl(java.lang.ref.Cleaner)>(cleaner);
+
+        if $stack4 == this goto label1;
+
+        $stack13 = new java.lang.AssertionError;
+
+        specialinvoke $stack13.<java.lang.AssertionError: void <init>(java.lang.Object)>("wrong cleaner");
+
+        throw $stack13;
+
+     label1:
+        $stack5 = new jdk.internal.ref.CleanerImpl$CleanerCleanable;
+
+        specialinvoke $stack5.<jdk.internal.ref.CleanerImpl$CleanerCleanable: void <init>(java.lang.ref.Cleaner)>(cleaner);
+
+        if threadFactory != null goto label2;
+
+        threadFactory = staticinvoke <jdk.internal.ref.CleanerImpl$InnocuousThreadFactory: java.util.concurrent.ThreadFactory factory()>();
+
+     label2:
+        $stack6 = interfaceinvoke threadFactory.<java.util.concurrent.ThreadFactory: java.lang.Thread newThread(java.lang.Runnable)>(this);
+
+        virtualinvoke $stack6.<java.lang.Thread: void setDaemon(boolean)>(1);
+
+        virtualinvoke $stack6.<java.lang.Thread: void start()>();
+
+        return;
+    }
+
+    public void run()
+    {
+        java.lang.Throwable $stack16;
+        java.lang.ref.Cleaner$Cleanable $stack13;
+        java.lang.ref.ReferenceQueue $stack8;
+        java.lang.ref.Reference $stack9;
+        jdk.internal.misc.InnocuousThread mlThread, $stack15;
+        java.lang.Thread $stack4;
+        jdk.internal.ref.CleanerImpl this;
+        jdk.internal.ref.PhantomCleanable $stack6;
+        boolean $stack5, $stack7;
+
+        this := @this: jdk.internal.ref.CleanerImpl;
+
+        $stack4 = staticinvoke <java.lang.Thread: java.lang.Thread currentThread()>();
+
+        $stack5 = $stack4 instanceof jdk.internal.misc.InnocuousThread;
+
+        if $stack5 == 0 goto label1;
+
+        $stack15 = (jdk.internal.misc.InnocuousThread) $stack4;
+
+        goto label2;
+
+     label1:
+        $stack15 = null;
+
+     label2:
+        mlThread = $stack15;
+
+     label3:
+        $stack6 = this.<jdk.internal.ref.CleanerImpl: jdk.internal.ref.PhantomCleanable phantomCleanableList>;
+
+        $stack7 = virtualinvoke $stack6.<jdk.internal.ref.PhantomCleanable: boolean isListEmpty()>();
+
+        if $stack7 != 0 goto label7;
+
+        if mlThread == null goto label4;
+
+        virtualinvoke mlThread.<jdk.internal.misc.InnocuousThread: void eraseThreadLocals()>();
+
+     label4:
+        $stack8 = this.<jdk.internal.ref.CleanerImpl: java.lang.ref.ReferenceQueue queue>;
+
+        $stack9 = virtualinvoke $stack8.<java.lang.ref.ReferenceQueue: java.lang.ref.Reference remove(long)>(60000L);
+
+        $stack13 = (java.lang.ref.Cleaner$Cleanable) $stack9;
+
+        if $stack13 == null goto label5;
+
+        interfaceinvoke $stack13.<java.lang.ref.Cleaner$Cleanable: void clean()>();
+
+     label5:
+        goto label3;
+
+     label6:
+        $stack16 := @caughtexception;
+
+        goto label3;
+
+     label7:
+        return;
+
+        catch java.lang.Throwable from label4 to label5 with label6;
+    }
+
+    static void <clinit>()
+    {
+        <jdk.internal.ref.CleanerImpl: java.util.function.Function cleanerImplAccess> = null;
+
+        return;
+    }
+}

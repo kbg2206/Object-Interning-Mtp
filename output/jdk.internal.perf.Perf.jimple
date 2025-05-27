@@ -1,0 +1,283 @@
+public final class jdk.internal.perf.Perf extends java.lang.Object
+{
+    private static jdk.internal.perf.Perf instance;
+    private static final int PERF_MODE_RO;
+    private static final int PERF_MODE_RW;
+
+    private void <init>()
+    {
+        jdk.internal.perf.Perf this;
+
+        this := @this: jdk.internal.perf.Perf;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static jdk.internal.perf.Perf getPerf()
+    {
+        java.lang.RuntimePermission $stack4;
+        java.lang.SecurityManager $stack2;
+        jdk.internal.perf.Perf $stack3;
+
+        $stack2 = staticinvoke <java.lang.System: java.lang.SecurityManager getSecurityManager()>();
+
+        if $stack2 == null goto label1;
+
+        $stack4 = new java.lang.RuntimePermission;
+
+        specialinvoke $stack4.<java.lang.RuntimePermission: void <init>(java.lang.String)>("jdk.internal.perf.Perf.getPerf");
+
+        virtualinvoke $stack2.<java.lang.SecurityManager: void checkPermission(java.security.Permission)>($stack4);
+
+     label1:
+        $stack3 = <jdk.internal.perf.Perf: jdk.internal.perf.Perf instance>;
+
+        return $stack3;
+    }
+
+    public java.nio.ByteBuffer attach(int, java.lang.String) throws java.lang.IllegalArgumentException, java.io.IOException
+    {
+        java.lang.IllegalArgumentException $stack5;
+        java.nio.ByteBuffer $stack6, $stack7;
+        jdk.internal.perf.Perf this;
+        int $stack3, $stack4, lvmid;
+        java.lang.String mode;
+
+        this := @this: jdk.internal.perf.Perf;
+
+        lvmid := @parameter0: int;
+
+        mode := @parameter1: java.lang.String;
+
+        $stack3 = virtualinvoke mode.<java.lang.String: int compareTo(java.lang.String)>("r");
+
+        if $stack3 != 0 goto label1;
+
+        $stack7 = virtualinvoke this.<jdk.internal.perf.Perf: java.nio.ByteBuffer attachImpl(java.lang.String,int,int)>(null, lvmid, 0);
+
+        return $stack7;
+
+     label1:
+        $stack4 = virtualinvoke mode.<java.lang.String: int compareTo(java.lang.String)>("rw");
+
+        if $stack4 != 0 goto label2;
+
+        $stack6 = virtualinvoke this.<jdk.internal.perf.Perf: java.nio.ByteBuffer attachImpl(java.lang.String,int,int)>(null, lvmid, 1);
+
+        return $stack6;
+
+     label2:
+        $stack5 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack5.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("unknown mode");
+
+        throw $stack5;
+    }
+
+    public java.nio.ByteBuffer attach(java.lang.String, int, java.lang.String) throws java.lang.IllegalArgumentException, java.io.IOException
+    {
+        java.lang.IllegalArgumentException $stack6;
+        java.nio.ByteBuffer $stack7, $stack8;
+        jdk.internal.perf.Perf this;
+        int $stack4, $stack5, lvmid;
+        java.lang.String mode, user;
+
+        this := @this: jdk.internal.perf.Perf;
+
+        user := @parameter0: java.lang.String;
+
+        lvmid := @parameter1: int;
+
+        mode := @parameter2: java.lang.String;
+
+        $stack4 = virtualinvoke mode.<java.lang.String: int compareTo(java.lang.String)>("r");
+
+        if $stack4 != 0 goto label1;
+
+        $stack8 = virtualinvoke this.<jdk.internal.perf.Perf: java.nio.ByteBuffer attachImpl(java.lang.String,int,int)>(user, lvmid, 0);
+
+        return $stack8;
+
+     label1:
+        $stack5 = virtualinvoke mode.<java.lang.String: int compareTo(java.lang.String)>("rw");
+
+        if $stack5 != 0 goto label2;
+
+        $stack7 = virtualinvoke this.<jdk.internal.perf.Perf: java.nio.ByteBuffer attachImpl(java.lang.String,int,int)>(user, lvmid, 1);
+
+        return $stack7;
+
+     label2:
+        $stack6 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack6.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("unknown mode");
+
+        throw $stack6;
+    }
+
+    private java.nio.ByteBuffer attachImpl(java.lang.String, int, int) throws java.lang.IllegalArgumentException, java.io.IOException
+    {
+        java.lang.ref.Cleaner $stack8;
+        java.nio.ByteBuffer $stack6, $stack7;
+        jdk.internal.perf.Perf this, $stack10;
+        int lvmid, mode;
+        java.lang.String user;
+        jdk.internal.perf.Perf$CleanerAction $stack9;
+
+        this := @this: jdk.internal.perf.Perf;
+
+        user := @parameter0: java.lang.String;
+
+        lvmid := @parameter1: int;
+
+        mode := @parameter2: int;
+
+        $stack6 = virtualinvoke this.<jdk.internal.perf.Perf: java.nio.ByteBuffer attach(java.lang.String,int,int)>(user, lvmid, mode);
+
+        if lvmid != 0 goto label1;
+
+        return $stack6;
+
+     label1:
+        $stack7 = virtualinvoke $stack6.<java.nio.ByteBuffer: java.nio.ByteBuffer duplicate()>();
+
+        $stack8 = staticinvoke <jdk.internal.ref.CleanerFactory: java.lang.ref.Cleaner cleaner()>();
+
+        $stack9 = new jdk.internal.perf.Perf$CleanerAction;
+
+        $stack10 = <jdk.internal.perf.Perf: jdk.internal.perf.Perf instance>;
+
+        specialinvoke $stack9.<jdk.internal.perf.Perf$CleanerAction: void <init>(jdk.internal.perf.Perf,java.nio.ByteBuffer)>($stack10, $stack6);
+
+        virtualinvoke $stack8.<java.lang.ref.Cleaner: java.lang.ref.Cleaner$Cleanable register(java.lang.Object,java.lang.Runnable)>($stack7, $stack9);
+
+        return $stack7;
+    }
+
+    private native java.nio.ByteBuffer attach(java.lang.String, int, int) throws java.lang.IllegalArgumentException, java.io.IOException;
+
+    private native void detach(java.nio.ByteBuffer);
+
+    public native java.nio.ByteBuffer createLong(java.lang.String, int, int, long);
+
+    public java.nio.ByteBuffer createString(java.lang.String, int, int, java.lang.String, int)
+    {
+        byte[] $stack9, v1;
+        java.nio.ByteBuffer $stack16;
+        int $stack10, $stack11, $stack12, $stack13, variability, units, maxLength, $stack14, $stack15;
+        java.lang.String value, name;
+        jdk.internal.perf.Perf this;
+        sun.nio.cs.UTF_8 $stack8;
+
+        this := @this: jdk.internal.perf.Perf;
+
+        name := @parameter0: java.lang.String;
+
+        variability := @parameter1: int;
+
+        units := @parameter2: int;
+
+        value := @parameter3: java.lang.String;
+
+        maxLength := @parameter4: int;
+
+        $stack8 = <sun.nio.cs.UTF_8: sun.nio.cs.UTF_8 INSTANCE>;
+
+        $stack9 = virtualinvoke value.<java.lang.String: byte[] getBytes(java.nio.charset.Charset)>($stack8);
+
+        $stack10 = lengthof $stack9;
+
+        $stack11 = $stack10 + 1;
+
+        v1 = newarray (byte)[$stack11];
+
+        $stack12 = lengthof $stack9;
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>($stack9, 0, v1, 0, $stack12);
+
+        $stack13 = lengthof $stack9;
+
+        v1[$stack13] = 0;
+
+        $stack14 = lengthof v1;
+
+        $stack15 = staticinvoke <java.lang.Math: int max(int,int)>($stack14, maxLength);
+
+        $stack16 = virtualinvoke this.<jdk.internal.perf.Perf: java.nio.ByteBuffer createByteArray(java.lang.String,int,int,byte[],int)>(name, variability, units, v1, $stack15);
+
+        return $stack16;
+    }
+
+    public java.nio.ByteBuffer createString(java.lang.String, int, int, java.lang.String)
+    {
+        byte[] $stack8, v1;
+        java.nio.ByteBuffer $stack14;
+        jdk.internal.perf.Perf this;
+        int $stack9, $stack10, $stack11, $stack12, variability, units, $stack13;
+        java.lang.String value, name;
+        sun.nio.cs.UTF_8 $stack7;
+
+        this := @this: jdk.internal.perf.Perf;
+
+        name := @parameter0: java.lang.String;
+
+        variability := @parameter1: int;
+
+        units := @parameter2: int;
+
+        value := @parameter3: java.lang.String;
+
+        $stack7 = <sun.nio.cs.UTF_8: sun.nio.cs.UTF_8 INSTANCE>;
+
+        $stack8 = virtualinvoke value.<java.lang.String: byte[] getBytes(java.nio.charset.Charset)>($stack7);
+
+        $stack9 = lengthof $stack8;
+
+        $stack10 = $stack9 + 1;
+
+        v1 = newarray (byte)[$stack10];
+
+        $stack11 = lengthof $stack8;
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>($stack8, 0, v1, 0, $stack11);
+
+        $stack12 = lengthof $stack8;
+
+        v1[$stack12] = 0;
+
+        $stack13 = lengthof v1;
+
+        $stack14 = virtualinvoke this.<jdk.internal.perf.Perf: java.nio.ByteBuffer createByteArray(java.lang.String,int,int,byte[],int)>(name, variability, units, v1, $stack13);
+
+        return $stack14;
+    }
+
+    public native java.nio.ByteBuffer createByteArray(java.lang.String, int, int, byte[], int);
+
+    public native long highResCounter();
+
+    public native long highResFrequency();
+
+    private static native void registerNatives();
+
+    static void <clinit>()
+    {
+        jdk.internal.perf.Perf $stack0;
+
+        <jdk.internal.perf.Perf: int PERF_MODE_RW> = 1;
+
+        <jdk.internal.perf.Perf: int PERF_MODE_RO> = 0;
+
+        staticinvoke <jdk.internal.perf.Perf: void registerNatives()>();
+
+        $stack0 = new jdk.internal.perf.Perf;
+
+        specialinvoke $stack0.<jdk.internal.perf.Perf: void <init>()>();
+
+        <jdk.internal.perf.Perf: jdk.internal.perf.Perf instance> = $stack0;
+
+        return;
+    }
+}

@@ -1,0 +1,132 @@
+class jdk.internal.loader.BuiltinClassLoader$2 extends java.lang.Object implements java.security.PrivilegedExceptionAction
+{
+    final java.lang.String val$name;
+    final jdk.internal.loader.BuiltinClassLoader this$0;
+
+    void <init>(jdk.internal.loader.BuiltinClassLoader, java.lang.String)
+    {
+        jdk.internal.loader.BuiltinClassLoader$2 this;
+        java.lang.String l2;
+        jdk.internal.loader.BuiltinClassLoader this$0;
+
+        this := @this: jdk.internal.loader.BuiltinClassLoader$2;
+
+        this$0 := @parameter0: jdk.internal.loader.BuiltinClassLoader;
+
+        l2 := @parameter1: java.lang.String;
+
+        this.<jdk.internal.loader.BuiltinClassLoader$2: jdk.internal.loader.BuiltinClassLoader this$0> = this$0;
+
+        this.<jdk.internal.loader.BuiltinClassLoader$2: java.lang.String val$name> = l2;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public java.util.List run() throws java.io.IOException
+    {
+        java.net.URL $stack19;
+        java.lang.module.ModuleReference mref;
+        java.lang.module.ModuleReader $stack14;
+        java.util.ArrayList $stack21, result;
+        java.util.Map $stack7;
+        java.lang.String $stack15;
+        java.net.URI u;
+        boolean $stack10;
+        java.util.Iterator $stack9;
+        java.util.Collection $stack8;
+        jdk.internal.loader.BuiltinClassLoader $stack6, $stack13;
+        java.lang.Exception $stack24;
+        jdk.internal.loader.BuiltinClassLoader$2 this;
+        java.util.List $stack11;
+        java.util.Optional $stack16;
+        java.lang.Object $stack12, $stack17;
+
+        this := @this: jdk.internal.loader.BuiltinClassLoader$2;
+
+        result = null;
+
+        $stack6 = this.<jdk.internal.loader.BuiltinClassLoader$2: jdk.internal.loader.BuiltinClassLoader this$0>;
+
+        $stack7 = $stack6.<jdk.internal.loader.BuiltinClassLoader: java.util.Map nameToModule>;
+
+        $stack8 = interfaceinvoke $stack7.<java.util.Map: java.util.Collection values()>();
+
+        $stack9 = interfaceinvoke $stack8.<java.util.Collection: java.util.Iterator iterator()>();
+
+     label1:
+        $stack10 = interfaceinvoke $stack9.<java.util.Iterator: boolean hasNext()>();
+
+        if $stack10 == 0 goto label7;
+
+        $stack12 = interfaceinvoke $stack9.<java.util.Iterator: java.lang.Object next()>();
+
+        mref = (java.lang.module.ModuleReference) $stack12;
+
+        $stack13 = this.<jdk.internal.loader.BuiltinClassLoader$2: jdk.internal.loader.BuiltinClassLoader this$0>;
+
+        $stack14 = virtualinvoke $stack13.<jdk.internal.loader.BuiltinClassLoader: java.lang.module.ModuleReader moduleReaderFor(java.lang.module.ModuleReference)>(mref);
+
+        $stack15 = this.<jdk.internal.loader.BuiltinClassLoader$2: java.lang.String val$name>;
+
+        $stack16 = interfaceinvoke $stack14.<java.lang.module.ModuleReader: java.util.Optional find(java.lang.String)>($stack15);
+
+        $stack17 = virtualinvoke $stack16.<java.util.Optional: java.lang.Object orElse(java.lang.Object)>(null);
+
+        u = (java.net.URI) $stack17;
+
+        if u == null goto label6;
+
+     label2:
+        if result != null goto label3;
+
+        $stack21 = new java.util.ArrayList;
+
+        specialinvoke $stack21.<java.util.ArrayList: void <init>()>();
+
+        result = $stack21;
+
+     label3:
+        $stack19 = virtualinvoke u.<java.net.URI: java.net.URL toURL()>();
+
+        interfaceinvoke result.<java.util.List: boolean add(java.lang.Object)>($stack19);
+
+     label4:
+        goto label6;
+
+     label5:
+        $stack24 := @caughtexception;
+
+     label6:
+        goto label1;
+
+     label7:
+        if result == null goto label8;
+
+        $stack11 = result;
+
+        goto label9;
+
+     label8:
+        $stack11 = staticinvoke <java.util.Collections: java.util.List emptyList()>();
+
+     label9:
+        return $stack11;
+
+        catch java.net.MalformedURLException from label2 to label4 with label5;
+        catch java.lang.IllegalArgumentException from label2 to label4 with label5;
+    }
+
+    public volatile java.lang.Object run() throws java.lang.Exception
+    {
+        jdk.internal.loader.BuiltinClassLoader$2 this;
+        java.util.List $stack1;
+
+        this := @this: jdk.internal.loader.BuiltinClassLoader$2;
+
+        $stack1 = virtualinvoke this.<jdk.internal.loader.BuiltinClassLoader$2: java.util.List run()>();
+
+        return $stack1;
+    }
+}

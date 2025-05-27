@@ -1,0 +1,136 @@
+class jdk.internal.module.ModulePatcher$PatchedModuleReader$1 extends jdk.internal.loader.Resource
+{
+    final java.nio.ByteBuffer val$bb;
+    final jdk.internal.module.ModulePatcher$PatchedModuleReader this$0;
+
+    void <init>(jdk.internal.module.ModulePatcher$PatchedModuleReader, java.nio.ByteBuffer)
+    {
+        jdk.internal.module.ModulePatcher$PatchedModuleReader$1 this;
+        jdk.internal.module.ModulePatcher$PatchedModuleReader this$0;
+        java.nio.ByteBuffer l2;
+
+        this := @this: jdk.internal.module.ModulePatcher$PatchedModuleReader$1;
+
+        this$0 := @parameter0: jdk.internal.module.ModulePatcher$PatchedModuleReader;
+
+        l2 := @parameter1: java.nio.ByteBuffer;
+
+        this.<jdk.internal.module.ModulePatcher$PatchedModuleReader$1: jdk.internal.module.ModulePatcher$PatchedModuleReader this$0> = this$0;
+
+        this.<jdk.internal.module.ModulePatcher$PatchedModuleReader$1: java.nio.ByteBuffer val$bb> = l2;
+
+        specialinvoke this.<jdk.internal.loader.Resource: void <init>()>();
+
+        return;
+    }
+
+    private java.lang.Object shouldNotGetHere(java.lang.Class)
+    {
+        java.lang.InternalError $stack2;
+        java.lang.Class type;
+        jdk.internal.module.ModulePatcher$PatchedModuleReader$1 this;
+
+        this := @this: jdk.internal.module.ModulePatcher$PatchedModuleReader$1;
+
+        type := @parameter0: java.lang.Class;
+
+        $stack2 = new java.lang.InternalError;
+
+        specialinvoke $stack2.<java.lang.InternalError: void <init>(java.lang.String)>("should not get here");
+
+        throw $stack2;
+    }
+
+    public java.lang.String getName()
+    {
+        java.lang.Object $stack1;
+        java.lang.String $stack2;
+        jdk.internal.module.ModulePatcher$PatchedModuleReader$1 this;
+
+        this := @this: jdk.internal.module.ModulePatcher$PatchedModuleReader$1;
+
+        $stack1 = virtualinvoke this.<jdk.internal.module.ModulePatcher$PatchedModuleReader$1: java.lang.Object shouldNotGetHere(java.lang.Class)>(class "Ljava/lang/String;");
+
+        $stack2 = (java.lang.String) $stack1;
+
+        return $stack2;
+    }
+
+    public java.net.URL getURL()
+    {
+        java.lang.Object $stack1;
+        jdk.internal.module.ModulePatcher$PatchedModuleReader$1 this;
+        java.net.URL $stack2;
+
+        this := @this: jdk.internal.module.ModulePatcher$PatchedModuleReader$1;
+
+        $stack1 = virtualinvoke this.<jdk.internal.module.ModulePatcher$PatchedModuleReader$1: java.lang.Object shouldNotGetHere(java.lang.Class)>(class "Ljava/net/URL;");
+
+        $stack2 = (java.net.URL) $stack1;
+
+        return $stack2;
+    }
+
+    public java.net.URL getCodeSourceURL()
+    {
+        jdk.internal.module.ModulePatcher$PatchedModuleReader$1 this;
+        jdk.internal.module.ModulePatcher$PatchedModuleReader $stack1;
+        java.net.URL $stack2;
+
+        this := @this: jdk.internal.module.ModulePatcher$PatchedModuleReader$1;
+
+        $stack1 = this.<jdk.internal.module.ModulePatcher$PatchedModuleReader$1: jdk.internal.module.ModulePatcher$PatchedModuleReader this$0>;
+
+        $stack2 = $stack1.<jdk.internal.module.ModulePatcher$PatchedModuleReader: java.net.URL delegateCodeSourceURL>;
+
+        return $stack2;
+    }
+
+    public java.nio.ByteBuffer getByteBuffer() throws java.io.IOException
+    {
+        jdk.internal.module.ModulePatcher$PatchedModuleReader$1 this;
+        java.nio.ByteBuffer $stack1;
+
+        this := @this: jdk.internal.module.ModulePatcher$PatchedModuleReader$1;
+
+        $stack1 = this.<jdk.internal.module.ModulePatcher$PatchedModuleReader$1: java.nio.ByteBuffer val$bb>;
+
+        return $stack1;
+    }
+
+    public java.io.InputStream getInputStream() throws java.io.IOException
+    {
+        java.lang.Object $stack1;
+        jdk.internal.module.ModulePatcher$PatchedModuleReader$1 this;
+        java.io.InputStream $stack2;
+
+        this := @this: jdk.internal.module.ModulePatcher$PatchedModuleReader$1;
+
+        $stack1 = virtualinvoke this.<jdk.internal.module.ModulePatcher$PatchedModuleReader$1: java.lang.Object shouldNotGetHere(java.lang.Class)>(class "Ljava/io/InputStream;");
+
+        $stack2 = (java.io.InputStream) $stack1;
+
+        return $stack2;
+    }
+
+    public int getContentLength() throws java.io.IOException
+    {
+        jdk.internal.module.ModulePatcher$PatchedModuleReader$1 this;
+        int $stack4;
+        java.lang.Class $stack1;
+        java.lang.Object $stack2;
+        java.lang.Integer $stack3;
+
+        this := @this: jdk.internal.module.ModulePatcher$PatchedModuleReader$1;
+
+        $stack1 = <java.lang.Integer: java.lang.Class TYPE>;
+
+        $stack2 = virtualinvoke this.<jdk.internal.module.ModulePatcher$PatchedModuleReader$1: java.lang.Object shouldNotGetHere(java.lang.Class)>($stack1);
+
+        $stack3 = (java.lang.Integer) $stack2;
+
+        $stack4 = virtualinvoke $stack3.<java.lang.Integer: int intValue()>();
+
+        return $stack4;
+    }
+}
