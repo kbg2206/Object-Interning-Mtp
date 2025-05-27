@@ -1,0 +1,34 @@
+Class: jdk.net.NetworkPermission
+Field: serialVersionUID long
+Method: <init>
+    public void <init>(java.lang.String)
+    {
+        java.lang.String l1;
+        jdk.net.NetworkPermission l0;
+
+        l0 := @this: jdk.net.NetworkPermission;
+
+        l1 := @parameter0: java.lang.String;
+
+        specialinvoke l0.<java.security.BasicPermission: void <init>(java.lang.String)>(l1);
+
+        return;
+    }
+
+Method: <init>
+    public void <init>(java.lang.String, java.lang.String)
+    {
+        java.lang.String l1, l2;
+        jdk.net.NetworkPermission l0;
+
+        l0 := @this: jdk.net.NetworkPermission;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.String;
+
+        specialinvoke l0.<java.security.BasicPermission: void <init>(java.lang.String,java.lang.String)>(l1, l2);
+
+        return;
+    }
+

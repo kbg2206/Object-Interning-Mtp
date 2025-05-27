@@ -1,0 +1,7 @@
+Class: jdk.internal.org.xml.sax.ErrorHandler
+Method: warning
+Unable to retrieve body for method: warning
+Method: error
+Unable to retrieve body for method: error
+Method: fatalError
+Unable to retrieve body for method: fatalError

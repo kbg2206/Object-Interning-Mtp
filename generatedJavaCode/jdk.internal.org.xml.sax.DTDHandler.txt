@@ -1,0 +1,5 @@
+Class: jdk.internal.org.xml.sax.DTDHandler
+Method: notationDecl
+Unable to retrieve body for method: notationDecl
+Method: unparsedEntityDecl
+Unable to retrieve body for method: unparsedEntityDecl

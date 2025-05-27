@@ -1,0 +1,137 @@
+Class: jdk.net.SocketFlow
+Field: UNSET int
+Field: NORMAL_PRIORITY int
+Field: HIGH_PRIORITY int
+Field: priority int
+Field: bandwidth long
+Field: status jdk.net.SocketFlow$Status
+Method: <init>
+    private void <init>()
+    {
+        jdk.net.SocketFlow l0;
+        jdk.net.SocketFlow$Status $stack1;
+
+        l0 := @this: jdk.net.SocketFlow;
+
+        specialinvoke l0.<java.lang.Object: void <init>()>();
+
+        l0.<jdk.net.SocketFlow: int priority> = 1;
+
+        l0.<jdk.net.SocketFlow: long bandwidth> = -1L;
+
+        $stack1 = <jdk.net.SocketFlow$Status: jdk.net.SocketFlow$Status NO_STATUS>;
+
+        l0.<jdk.net.SocketFlow: jdk.net.SocketFlow$Status status> = $stack1;
+
+        return;
+    }
+
+Method: create
+    public static jdk.net.SocketFlow create()
+    {
+        jdk.net.SocketFlow $stack0;
+
+        $stack0 = new jdk.net.SocketFlow;
+
+        specialinvoke $stack0.<jdk.net.SocketFlow: void <init>()>();
+
+        return $stack0;
+    }
+
+Method: priority
+    public jdk.net.SocketFlow priority(int)
+    {
+        int l1;
+        jdk.net.SocketFlow l0;
+        java.lang.IllegalArgumentException $stack5;
+
+        l0 := @this: jdk.net.SocketFlow;
+
+        l1 := @parameter0: int;
+
+        if l1 == 1 goto label1;
+
+        if l1 == 2 goto label1;
+
+        $stack5 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $stack5.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("invalid priority");
+
+        throw $stack5;
+
+     label1:
+        l0.<jdk.net.SocketFlow: int priority> = l1;
+
+        return l0;
+    }
+
+Method: bandwidth
+    public jdk.net.SocketFlow bandwidth(long)
+    {
+        byte $stack3;
+        int $i0;
+        long l1;
+        jdk.net.SocketFlow l0;
+        java.lang.IllegalArgumentException $u0;
+
+        l0 := @this: jdk.net.SocketFlow;
+
+        l1 := @parameter0: long;
+
+        $stack3 = l1 cmp 0L;
+
+        $i0 = (int) $stack3;
+
+        if $i0 >= 0 goto label1;
+
+        $u0 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $u0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("invalid bandwidth");
+
+        throw $u0;
+
+     label1:
+        l0.<jdk.net.SocketFlow: long bandwidth> = l1;
+
+        return l0;
+    }
+
+Method: priority
+    public int priority()
+    {
+        int $stack1;
+        jdk.net.SocketFlow l0;
+
+        l0 := @this: jdk.net.SocketFlow;
+
+        $stack1 = l0.<jdk.net.SocketFlow: int priority>;
+
+        return $stack1;
+    }
+
+Method: bandwidth
+    public long bandwidth()
+    {
+        long $stack1;
+        jdk.net.SocketFlow l0;
+
+        l0 := @this: jdk.net.SocketFlow;
+
+        $stack1 = l0.<jdk.net.SocketFlow: long bandwidth>;
+
+        return $stack1;
+    }
+
+Method: status
+    public jdk.net.SocketFlow$Status status()
+    {
+        jdk.net.SocketFlow l0;
+        jdk.net.SocketFlow$Status $stack1;
+
+        l0 := @this: jdk.net.SocketFlow;
+
+        $stack1 = l0.<jdk.net.SocketFlow: jdk.net.SocketFlow$Status status>;
+
+        return $stack1;
+    }
+

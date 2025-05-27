@@ -1,0 +1,83 @@
+Class: Input9
+Field: a int
+Field: b int
+Field: object_pool java.util.HashMap
+Method: <init>
+    void <init>()
+    {
+        Input9 this;
+
+        this := @this: Input9;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<Input9: int a> = 3;
+
+        this.<Input9: int b> = 5;
+
+        return;
+    }
+
+Method: <init>
+    void <init>(int, int)
+    {
+        int n, m;
+        Input9 this;
+
+        this := @this: Input9;
+
+        n := @parameter0: int;
+
+        m := @parameter1: int;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<Input9: int a> = n;
+
+        this.<Input9: int b> = m;
+
+        return;
+    }
+
+Method: main
+    public static void main(java.lang.String[])
+    {
+        java.io.PrintStream temp$3;
+        java.lang.String[] args;
+        Input9 temp$0, temp$1, temp$2;
+
+        args := @parameter0: java.lang.String[];
+
+        temp$0 = new Input9;
+
+        specialinvoke temp$0.<Input9: void <init>(int,int)>(3, 5);
+
+        temp$1 = new Input9;
+
+        specialinvoke temp$1.<Input9: void <init>(int,int)>(3, 5);
+
+        temp$2 = new Input9;
+
+        specialinvoke temp$2.<Input9: void <init>()>();
+
+        temp$3 = <java.lang.System: java.io.PrintStream out>;
+
+        virtualinvoke temp$3.<java.io.PrintStream: void println(java.lang.String)>("Hello");
+
+        return;
+    }
+
+Method: <clinit>
+    static void <clinit>()
+    {
+        java.util.HashMap object_pool;
+
+        object_pool = new java.util.HashMap;
+
+        specialinvoke object_pool.<java.util.HashMap: void <init>()>();
+
+        <Input9: java.util.HashMap object_pool> = object_pool;
+
+        return;
+    }
+

@@ -1,0 +1,265 @@
+Class: jdk.internal.org.xml.sax.helpers.DefaultHandler
+Method: <init>
+    public void <init>()
+    {
+        jdk.internal.org.xml.sax.helpers.DefaultHandler l0;
+
+        l0 := @this: jdk.internal.org.xml.sax.helpers.DefaultHandler;
+
+        specialinvoke l0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+Method: resolveEntity
+    public jdk.internal.org.xml.sax.InputSource resolveEntity(java.lang.String, java.lang.String) throws java.io.IOException, jdk.internal.org.xml.sax.SAXException
+    {
+        java.lang.String l1, l2;
+        jdk.internal.org.xml.sax.helpers.DefaultHandler l0;
+
+        l0 := @this: jdk.internal.org.xml.sax.helpers.DefaultHandler;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.String;
+
+        return null;
+    }
+
+Method: notationDecl
+    public void notationDecl(java.lang.String, java.lang.String, java.lang.String) throws jdk.internal.org.xml.sax.SAXException
+    {
+        java.lang.String l1, l2, l3;
+        jdk.internal.org.xml.sax.helpers.DefaultHandler l0;
+
+        l0 := @this: jdk.internal.org.xml.sax.helpers.DefaultHandler;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.String;
+
+        l3 := @parameter2: java.lang.String;
+
+        return;
+    }
+
+Method: unparsedEntityDecl
+    public void unparsedEntityDecl(java.lang.String, java.lang.String, java.lang.String, java.lang.String) throws jdk.internal.org.xml.sax.SAXException
+    {
+        java.lang.String l1, l2, l3, l4;
+        jdk.internal.org.xml.sax.helpers.DefaultHandler l0;
+
+        l0 := @this: jdk.internal.org.xml.sax.helpers.DefaultHandler;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.String;
+
+        l3 := @parameter2: java.lang.String;
+
+        l4 := @parameter3: java.lang.String;
+
+        return;
+    }
+
+Method: setDocumentLocator
+    public void setDocumentLocator(jdk.internal.org.xml.sax.Locator)
+    {
+        jdk.internal.org.xml.sax.Locator l1;
+        jdk.internal.org.xml.sax.helpers.DefaultHandler l0;
+
+        l0 := @this: jdk.internal.org.xml.sax.helpers.DefaultHandler;
+
+        l1 := @parameter0: jdk.internal.org.xml.sax.Locator;
+
+        return;
+    }
+
+Method: startDocument
+    public void startDocument() throws jdk.internal.org.xml.sax.SAXException
+    {
+        jdk.internal.org.xml.sax.helpers.DefaultHandler l0;
+
+        l0 := @this: jdk.internal.org.xml.sax.helpers.DefaultHandler;
+
+        return;
+    }
+
+Method: endDocument
+    public void endDocument() throws jdk.internal.org.xml.sax.SAXException
+    {
+        jdk.internal.org.xml.sax.helpers.DefaultHandler l0;
+
+        l0 := @this: jdk.internal.org.xml.sax.helpers.DefaultHandler;
+
+        return;
+    }
+
+Method: startPrefixMapping
+    public void startPrefixMapping(java.lang.String, java.lang.String) throws jdk.internal.org.xml.sax.SAXException
+    {
+        java.lang.String l1, l2;
+        jdk.internal.org.xml.sax.helpers.DefaultHandler l0;
+
+        l0 := @this: jdk.internal.org.xml.sax.helpers.DefaultHandler;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.String;
+
+        return;
+    }
+
+Method: endPrefixMapping
+    public void endPrefixMapping(java.lang.String) throws jdk.internal.org.xml.sax.SAXException
+    {
+        java.lang.String l1;
+        jdk.internal.org.xml.sax.helpers.DefaultHandler l0;
+
+        l0 := @this: jdk.internal.org.xml.sax.helpers.DefaultHandler;
+
+        l1 := @parameter0: java.lang.String;
+
+        return;
+    }
+
+Method: startElement
+    public void startElement(java.lang.String, java.lang.String, java.lang.String, jdk.internal.org.xml.sax.Attributes) throws jdk.internal.org.xml.sax.SAXException
+    {
+        jdk.internal.org.xml.sax.Attributes l4;
+        java.lang.String l1, l2, l3;
+        jdk.internal.org.xml.sax.helpers.DefaultHandler l0;
+
+        l0 := @this: jdk.internal.org.xml.sax.helpers.DefaultHandler;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.String;
+
+        l3 := @parameter2: java.lang.String;
+
+        l4 := @parameter3: jdk.internal.org.xml.sax.Attributes;
+
+        return;
+    }
+
+Method: endElement
+    public void endElement(java.lang.String, java.lang.String, java.lang.String) throws jdk.internal.org.xml.sax.SAXException
+    {
+        java.lang.String l1, l2, l3;
+        jdk.internal.org.xml.sax.helpers.DefaultHandler l0;
+
+        l0 := @this: jdk.internal.org.xml.sax.helpers.DefaultHandler;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.String;
+
+        l3 := @parameter2: java.lang.String;
+
+        return;
+    }
+
+Method: characters
+    public void characters(char[], int, int) throws jdk.internal.org.xml.sax.SAXException
+    {
+        int l2, l3;
+        char[] l1;
+        jdk.internal.org.xml.sax.helpers.DefaultHandler l0;
+
+        l0 := @this: jdk.internal.org.xml.sax.helpers.DefaultHandler;
+
+        l1 := @parameter0: char[];
+
+        l2 := @parameter1: int;
+
+        l3 := @parameter2: int;
+
+        return;
+    }
+
+Method: ignorableWhitespace
+    public void ignorableWhitespace(char[], int, int) throws jdk.internal.org.xml.sax.SAXException
+    {
+        int l2, l3;
+        char[] l1;
+        jdk.internal.org.xml.sax.helpers.DefaultHandler l0;
+
+        l0 := @this: jdk.internal.org.xml.sax.helpers.DefaultHandler;
+
+        l1 := @parameter0: char[];
+
+        l2 := @parameter1: int;
+
+        l3 := @parameter2: int;
+
+        return;
+    }
+
+Method: processingInstruction
+    public void processingInstruction(java.lang.String, java.lang.String) throws jdk.internal.org.xml.sax.SAXException
+    {
+        java.lang.String l1, l2;
+        jdk.internal.org.xml.sax.helpers.DefaultHandler l0;
+
+        l0 := @this: jdk.internal.org.xml.sax.helpers.DefaultHandler;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.String;
+
+        return;
+    }
+
+Method: skippedEntity
+    public void skippedEntity(java.lang.String) throws jdk.internal.org.xml.sax.SAXException
+    {
+        java.lang.String l1;
+        jdk.internal.org.xml.sax.helpers.DefaultHandler l0;
+
+        l0 := @this: jdk.internal.org.xml.sax.helpers.DefaultHandler;
+
+        l1 := @parameter0: java.lang.String;
+
+        return;
+    }
+
+Method: warning
+    public void warning(jdk.internal.org.xml.sax.SAXParseException) throws jdk.internal.org.xml.sax.SAXException
+    {
+        jdk.internal.org.xml.sax.SAXParseException l1;
+        jdk.internal.org.xml.sax.helpers.DefaultHandler l0;
+
+        l0 := @this: jdk.internal.org.xml.sax.helpers.DefaultHandler;
+
+        l1 := @parameter0: jdk.internal.org.xml.sax.SAXParseException;
+
+        return;
+    }
+
+Method: error
+    public void error(jdk.internal.org.xml.sax.SAXParseException) throws jdk.internal.org.xml.sax.SAXException
+    {
+        jdk.internal.org.xml.sax.SAXParseException l1;
+        jdk.internal.org.xml.sax.helpers.DefaultHandler l0;
+
+        l0 := @this: jdk.internal.org.xml.sax.helpers.DefaultHandler;
+
+        l1 := @parameter0: jdk.internal.org.xml.sax.SAXParseException;
+
+        return;
+    }
+
+Method: fatalError
+    public void fatalError(jdk.internal.org.xml.sax.SAXParseException) throws jdk.internal.org.xml.sax.SAXException
+    {
+        jdk.internal.org.xml.sax.SAXParseException l1;
+        jdk.internal.org.xml.sax.helpers.DefaultHandler l0;
+
+        l0 := @this: jdk.internal.org.xml.sax.helpers.DefaultHandler;
+
+        l1 := @parameter0: jdk.internal.org.xml.sax.SAXParseException;
+
+        throw l1;
+    }
+

@@ -1,0 +1,33 @@
+Class: jdk.internal.org.objectweb.asm.Context
+Field: attrs jdk.internal.org.objectweb.asm.Attribute[]
+Field: flags int
+Field: buffer char[]
+Field: bootstrapMethods int[]
+Field: access int
+Field: name java.lang.String
+Field: desc java.lang.String
+Field: labels jdk.internal.org.objectweb.asm.Label[]
+Field: typeRef int
+Field: typePath jdk.internal.org.objectweb.asm.TypePath
+Field: offset int
+Field: start jdk.internal.org.objectweb.asm.Label[]
+Field: end jdk.internal.org.objectweb.asm.Label[]
+Field: index int[]
+Field: mode int
+Field: localCount int
+Field: localDiff int
+Field: local java.lang.Object[]
+Field: stackCount int
+Field: stack java.lang.Object[]
+Method: <init>
+    void <init>()
+    {
+        jdk.internal.org.objectweb.asm.Context l0;
+
+        l0 := @this: jdk.internal.org.objectweb.asm.Context;
+
+        specialinvoke l0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+

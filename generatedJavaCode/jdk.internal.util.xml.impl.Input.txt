@@ -1,0 +1,72 @@
+Class: jdk.internal.util.xml.impl.Input
+Field: pubid java.lang.String
+Field: sysid java.lang.String
+Field: xmlenc java.lang.String
+Field: xmlver char
+Field: src java.io.Reader
+Field: chars char[]
+Field: chLen int
+Field: chIdx int
+Field: next jdk.internal.util.xml.impl.Input
+Method: <init>
+    public void <init>(int)
+    {
+        int l1, $stack4;
+        char[] $stack2, $stack3;
+        jdk.internal.util.xml.impl.Input l0;
+
+        l0 := @this: jdk.internal.util.xml.impl.Input;
+
+        l1 := @parameter0: int;
+
+        specialinvoke l0.<java.lang.Object: void <init>()>();
+
+        $stack2 = newarray (char)[l1];
+
+        l0.<jdk.internal.util.xml.impl.Input: char[] chars> = $stack2;
+
+        $stack3 = l0.<jdk.internal.util.xml.impl.Input: char[] chars>;
+
+        $stack4 = lengthof $stack3;
+
+        l0.<jdk.internal.util.xml.impl.Input: int chLen> = $stack4;
+
+        return;
+    }
+
+Method: <init>
+    public void <init>(char[])
+    {
+        int $stack3;
+        char[] l1, $stack2;
+        jdk.internal.util.xml.impl.Input l0;
+
+        l0 := @this: jdk.internal.util.xml.impl.Input;
+
+        l1 := @parameter0: char[];
+
+        specialinvoke l0.<java.lang.Object: void <init>()>();
+
+        l0.<jdk.internal.util.xml.impl.Input: char[] chars> = l1;
+
+        $stack2 = l0.<jdk.internal.util.xml.impl.Input: char[] chars>;
+
+        $stack3 = lengthof $stack2;
+
+        l0.<jdk.internal.util.xml.impl.Input: int chLen> = $stack3;
+
+        return;
+    }
+
+Method: <init>
+    public void <init>()
+    {
+        jdk.internal.util.xml.impl.Input l0;
+
+        l0 := @this: jdk.internal.util.xml.impl.Input;
+
+        specialinvoke l0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+

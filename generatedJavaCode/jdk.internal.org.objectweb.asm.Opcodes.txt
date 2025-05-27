@@ -1,0 +1,268 @@
+Class: jdk.internal.org.objectweb.asm.Opcodes
+Field: ASM4 int
+Field: ASM5 int
+Field: V1_1 int
+Field: V1_2 int
+Field: V1_3 int
+Field: V1_4 int
+Field: V1_5 int
+Field: V1_6 int
+Field: V1_7 int
+Field: V1_8 int
+Field: ACC_PUBLIC int
+Field: ACC_PRIVATE int
+Field: ACC_PROTECTED int
+Field: ACC_STATIC int
+Field: ACC_FINAL int
+Field: ACC_SUPER int
+Field: ACC_SYNCHRONIZED int
+Field: ACC_VOLATILE int
+Field: ACC_BRIDGE int
+Field: ACC_VARARGS int
+Field: ACC_TRANSIENT int
+Field: ACC_NATIVE int
+Field: ACC_INTERFACE int
+Field: ACC_ABSTRACT int
+Field: ACC_STRICT int
+Field: ACC_SYNTHETIC int
+Field: ACC_ANNOTATION int
+Field: ACC_ENUM int
+Field: ACC_MANDATED int
+Field: ACC_DEPRECATED int
+Field: T_BOOLEAN int
+Field: T_CHAR int
+Field: T_FLOAT int
+Field: T_DOUBLE int
+Field: T_BYTE int
+Field: T_SHORT int
+Field: T_INT int
+Field: T_LONG int
+Field: H_GETFIELD int
+Field: H_GETSTATIC int
+Field: H_PUTFIELD int
+Field: H_PUTSTATIC int
+Field: H_INVOKEVIRTUAL int
+Field: H_INVOKESTATIC int
+Field: H_INVOKESPECIAL int
+Field: H_NEWINVOKESPECIAL int
+Field: H_INVOKEINTERFACE int
+Field: F_NEW int
+Field: F_FULL int
+Field: F_APPEND int
+Field: F_CHOP int
+Field: F_SAME int
+Field: F_SAME1 int
+Field: TOP java.lang.Integer
+Field: INTEGER java.lang.Integer
+Field: FLOAT java.lang.Integer
+Field: DOUBLE java.lang.Integer
+Field: LONG java.lang.Integer
+Field: NULL java.lang.Integer
+Field: UNINITIALIZED_THIS java.lang.Integer
+Field: NOP int
+Field: ACONST_NULL int
+Field: ICONST_M1 int
+Field: ICONST_0 int
+Field: ICONST_1 int
+Field: ICONST_2 int
+Field: ICONST_3 int
+Field: ICONST_4 int
+Field: ICONST_5 int
+Field: LCONST_0 int
+Field: LCONST_1 int
+Field: FCONST_0 int
+Field: FCONST_1 int
+Field: FCONST_2 int
+Field: DCONST_0 int
+Field: DCONST_1 int
+Field: BIPUSH int
+Field: SIPUSH int
+Field: LDC int
+Field: ILOAD int
+Field: LLOAD int
+Field: FLOAD int
+Field: DLOAD int
+Field: ALOAD int
+Field: IALOAD int
+Field: LALOAD int
+Field: FALOAD int
+Field: DALOAD int
+Field: AALOAD int
+Field: BALOAD int
+Field: CALOAD int
+Field: SALOAD int
+Field: ISTORE int
+Field: LSTORE int
+Field: FSTORE int
+Field: DSTORE int
+Field: ASTORE int
+Field: IASTORE int
+Field: LASTORE int
+Field: FASTORE int
+Field: DASTORE int
+Field: AASTORE int
+Field: BASTORE int
+Field: CASTORE int
+Field: SASTORE int
+Field: POP int
+Field: POP2 int
+Field: DUP int
+Field: DUP_X1 int
+Field: DUP_X2 int
+Field: DUP2 int
+Field: DUP2_X1 int
+Field: DUP2_X2 int
+Field: SWAP int
+Field: IADD int
+Field: LADD int
+Field: FADD int
+Field: DADD int
+Field: ISUB int
+Field: LSUB int
+Field: FSUB int
+Field: DSUB int
+Field: IMUL int
+Field: LMUL int
+Field: FMUL int
+Field: DMUL int
+Field: IDIV int
+Field: LDIV int
+Field: FDIV int
+Field: DDIV int
+Field: IREM int
+Field: LREM int
+Field: FREM int
+Field: DREM int
+Field: INEG int
+Field: LNEG int
+Field: FNEG int
+Field: DNEG int
+Field: ISHL int
+Field: LSHL int
+Field: ISHR int
+Field: LSHR int
+Field: IUSHR int
+Field: LUSHR int
+Field: IAND int
+Field: LAND int
+Field: IOR int
+Field: LOR int
+Field: IXOR int
+Field: LXOR int
+Field: IINC int
+Field: I2L int
+Field: I2F int
+Field: I2D int
+Field: L2I int
+Field: L2F int
+Field: L2D int
+Field: F2I int
+Field: F2L int
+Field: F2D int
+Field: D2I int
+Field: D2L int
+Field: D2F int
+Field: I2B int
+Field: I2C int
+Field: I2S int
+Field: LCMP int
+Field: FCMPL int
+Field: FCMPG int
+Field: DCMPL int
+Field: DCMPG int
+Field: IFEQ int
+Field: IFNE int
+Field: IFLT int
+Field: IFGE int
+Field: IFGT int
+Field: IFLE int
+Field: IF_ICMPEQ int
+Field: IF_ICMPNE int
+Field: IF_ICMPLT int
+Field: IF_ICMPGE int
+Field: IF_ICMPGT int
+Field: IF_ICMPLE int
+Field: IF_ACMPEQ int
+Field: IF_ACMPNE int
+Field: GOTO int
+Field: JSR int
+Field: RET int
+Field: TABLESWITCH int
+Field: LOOKUPSWITCH int
+Field: IRETURN int
+Field: LRETURN int
+Field: FRETURN int
+Field: DRETURN int
+Field: ARETURN int
+Field: RETURN int
+Field: GETSTATIC int
+Field: PUTSTATIC int
+Field: GETFIELD int
+Field: PUTFIELD int
+Field: INVOKEVIRTUAL int
+Field: INVOKESPECIAL int
+Field: INVOKESTATIC int
+Field: INVOKEINTERFACE int
+Field: INVOKEDYNAMIC int
+Field: NEW int
+Field: NEWARRAY int
+Field: ANEWARRAY int
+Field: ARRAYLENGTH int
+Field: ATHROW int
+Field: CHECKCAST int
+Field: INSTANCEOF int
+Field: MONITORENTER int
+Field: MONITOREXIT int
+Field: MULTIANEWARRAY int
+Field: IFNULL int
+Field: IFNONNULL int
+Method: <clinit>
+    static void <clinit>()
+    {
+        java.lang.Integer $stack0, $stack1, $stack2, $stack3, $stack4, $stack5, $stack6;
+
+        $stack0 = new java.lang.Integer;
+
+        specialinvoke $stack0.<java.lang.Integer: void <init>(int)>(0);
+
+        <jdk.internal.org.objectweb.asm.Opcodes: java.lang.Integer TOP> = $stack0;
+
+        $stack1 = new java.lang.Integer;
+
+        specialinvoke $stack1.<java.lang.Integer: void <init>(int)>(1);
+
+        <jdk.internal.org.objectweb.asm.Opcodes: java.lang.Integer INTEGER> = $stack1;
+
+        $stack2 = new java.lang.Integer;
+
+        specialinvoke $stack2.<java.lang.Integer: void <init>(int)>(2);
+
+        <jdk.internal.org.objectweb.asm.Opcodes: java.lang.Integer FLOAT> = $stack2;
+
+        $stack3 = new java.lang.Integer;
+
+        specialinvoke $stack3.<java.lang.Integer: void <init>(int)>(3);
+
+        <jdk.internal.org.objectweb.asm.Opcodes: java.lang.Integer DOUBLE> = $stack3;
+
+        $stack4 = new java.lang.Integer;
+
+        specialinvoke $stack4.<java.lang.Integer: void <init>(int)>(4);
+
+        <jdk.internal.org.objectweb.asm.Opcodes: java.lang.Integer LONG> = $stack4;
+
+        $stack5 = new java.lang.Integer;
+
+        specialinvoke $stack5.<java.lang.Integer: void <init>(int)>(5);
+
+        <jdk.internal.org.objectweb.asm.Opcodes: java.lang.Integer NULL> = $stack5;
+
+        $stack6 = new java.lang.Integer;
+
+        specialinvoke $stack6.<java.lang.Integer: void <init>(int)>(6);
+
+        <jdk.internal.org.objectweb.asm.Opcodes: java.lang.Integer UNINITIALIZED_THIS> = $stack6;
+
+        return;
+    }
+

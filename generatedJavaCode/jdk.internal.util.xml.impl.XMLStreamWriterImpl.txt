@@ -1,0 +1,1262 @@
+Class: jdk.internal.util.xml.impl.XMLStreamWriterImpl
+Field: STATE_XML_DECL int
+Field: STATE_PROLOG int
+Field: STATE_DTD_DECL int
+Field: STATE_ELEMENT int
+Field: ELEMENT_STARTTAG_OPEN int
+Field: ELEMENT_STARTTAG_CLOSE int
+Field: ELEMENT_ENDTAG_OPEN int
+Field: ELEMENT_ENDTAG_CLOSE int
+Field: CLOSE_START_TAG char
+Field: OPEN_START_TAG char
+Field: OPEN_END_TAG java.lang.String
+Field: CLOSE_END_TAG char
+Field: START_CDATA java.lang.String
+Field: END_CDATA java.lang.String
+Field: CLOSE_EMPTY_ELEMENT java.lang.String
+Field: ENCODING_PREFIX java.lang.String
+Field: SPACE char
+Field: AMPERSAND char
+Field: DOUBLEQUOT char
+Field: SEMICOLON char
+Field: _state int
+Field: _currentEle jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element
+Field: _writer jdk.internal.util.xml.impl.XMLWriter
+Field: _encoding java.lang.String
+Field: _escapeCharacters boolean
+Field: _doIndent boolean
+Field: _lineSep char[]
+Method: <init>
+    public void <init>(java.io.OutputStream) throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        java.io.OutputStream l1;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        l1 := @parameter0: java.io.OutputStream;
+
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void <init>(java.io.OutputStream,java.lang.String)>(l1, "UTF-8");
+
+        return;
+    }
+
+Method: <init>
+    public void <init>(java.io.OutputStream, java.lang.String) throws jdk.internal.util.xml.XMLStreamException
+    {
+        java.io.OutputStream l1;
+        jdk.internal.util.xml.XMLStreamException $stack14;
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        jdk.internal.util.xml.impl.XMLWriter $stack8;
+        java.nio.charset.Charset l3;
+        char[] $stack6;
+        java.lang.String $stack5, l2;
+        java.io.UnsupportedEncodingException $stack13;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        l1 := @parameter0: java.io.OutputStream;
+
+        l2 := @parameter1: java.lang.String;
+
+        specialinvoke l0.<java.lang.Object: void <init>()>();
+
+        l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: int _state> = 0;
+
+        l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: boolean _escapeCharacters> = 1;
+
+        l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: boolean _doIndent> = 1;
+
+        $stack5 = staticinvoke <java.lang.System: java.lang.String getProperty(java.lang.String)>("line.separator");
+
+        $stack6 = virtualinvoke $stack5.<java.lang.String: char[] toCharArray()>();
+
+        l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: char[] _lineSep> = $stack6;
+
+        l3 = null;
+
+        if l2 != null goto label1;
+
+        l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: java.lang.String _encoding> = "UTF-8";
+
+        goto label5;
+
+     label1:
+        l3 = specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: java.nio.charset.Charset getCharset(java.lang.String)>(l2);
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack13 := @caughtexception;
+
+        $stack14 = new jdk.internal.util.xml.XMLStreamException;
+
+        specialinvoke $stack14.<jdk.internal.util.xml.XMLStreamException: void <init>(java.lang.Throwable)>($stack13);
+
+        throw $stack14;
+
+     label4:
+        l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: java.lang.String _encoding> = l2;
+
+     label5:
+        $stack8 = new jdk.internal.util.xml.impl.XMLWriter;
+
+        specialinvoke $stack8.<jdk.internal.util.xml.impl.XMLWriter: void <init>(java.io.OutputStream,java.lang.String,java.nio.charset.Charset)>(l1, l2, l3);
+
+        l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer> = $stack8;
+
+        return;
+
+        catch java.io.UnsupportedEncodingException from label1 to label2 with label3;
+    }
+
+Method: writeStartDocument
+    public void writeStartDocument() throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        java.lang.String $stack1;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        $stack1 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: java.lang.String _encoding>;
+
+        virtualinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void writeStartDocument(java.lang.String,java.lang.String)>($stack1, "1.0");
+
+        return;
+    }
+
+Method: writeStartDocument
+    public void writeStartDocument(java.lang.String) throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        java.lang.String l1, $stack2;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: java.lang.String _encoding>;
+
+        virtualinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void writeStartDocument(java.lang.String,java.lang.String,java.lang.String)>($stack2, l1, null);
+
+        return;
+    }
+
+Method: writeStartDocument
+    public void writeStartDocument(java.lang.String, java.lang.String) throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        java.lang.String l1, l2;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.String;
+
+        virtualinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void writeStartDocument(java.lang.String,java.lang.String,java.lang.String)>(l1, l2, null);
+
+        return;
+    }
+
+Method: writeStartDocument
+    public void writeStartDocument(java.lang.String, java.lang.String, java.lang.String) throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        int $stack6;
+        java.lang.String l1, l3, l2, l4;
+        jdk.internal.util.xml.XMLStreamException $stack30, $stack32;
+        jdk.internal.util.xml.impl.XMLWriter $stack8, $stack9, $stack10, $stack11, $stack12, $stack13, $stack14, $stack18, $stack19, $stack20;
+        java.io.UnsupportedEncodingException $stack31;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.String;
+
+        l3 := @parameter2: java.lang.String;
+
+        $stack6 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: int _state>;
+
+        if $stack6 <= 0 goto label1;
+
+        $stack30 = new jdk.internal.util.xml.XMLStreamException;
+
+        specialinvoke $stack30.<jdk.internal.util.xml.XMLStreamException: void <init>(java.lang.String)>("XML declaration must be as the first line in the XML document.");
+
+        throw $stack30;
+
+     label1:
+        l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: int _state> = 1;
+
+        l4 = l1;
+
+        if l1 != null goto label2;
+
+        l4 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: java.lang.String _encoding>;
+
+        goto label5;
+
+     label2:
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: java.nio.charset.Charset getCharset(java.lang.String)>(l1);
+
+     label3:
+        goto label5;
+
+     label4:
+        $stack31 := @caughtexception;
+
+        $stack32 = new jdk.internal.util.xml.XMLStreamException;
+
+        specialinvoke $stack32.<jdk.internal.util.xml.XMLStreamException: void <init>(java.lang.Throwable)>($stack31);
+
+        throw $stack32;
+
+     label5:
+        if l2 != null goto label6;
+
+        l2 = "1.0";
+
+     label6:
+        $stack8 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack8.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>("<?xml version=\"");
+
+        $stack9 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack9.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>(l2);
+
+        $stack10 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack10.<jdk.internal.util.xml.impl.XMLWriter: void write(int)>(34);
+
+        if l4 == null goto label7;
+
+        $stack18 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack18.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>(" encoding=\"");
+
+        $stack19 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack19.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>(l4);
+
+        $stack20 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack20.<jdk.internal.util.xml.impl.XMLWriter: void write(int)>(34);
+
+     label7:
+        if l3 == null goto label8;
+
+        $stack12 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack12.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>(" standalone=\"");
+
+        $stack13 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack13.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>(l3);
+
+        $stack14 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack14.<jdk.internal.util.xml.impl.XMLWriter: void write(int)>(34);
+
+     label8:
+        $stack11 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack11.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>("?>");
+
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void writeLineSeparator()>();
+
+        return;
+
+        catch java.io.UnsupportedEncodingException from label2 to label3 with label4;
+    }
+
+Method: writeDTD
+    public void writeDTD(java.lang.String) throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        int $stack5;
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element $stack2, $stack4;
+        jdk.internal.util.xml.impl.XMLWriter $stack3;
+        java.lang.String l1;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        if $stack2 == null goto label1;
+
+        $stack4 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        $stack5 = virtualinvoke $stack4.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: int getState()>();
+
+        if $stack5 != 10 goto label1;
+
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void closeStartTag()>();
+
+     label1:
+        $stack3 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack3.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>(l1);
+
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void writeLineSeparator()>();
+
+        return;
+    }
+
+Method: writeStartElement
+    public void writeStartElement(java.lang.String) throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.XMLStreamException $stack2;
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element $stack4, $stack8, $stack5, $stack6;
+        jdk.internal.util.xml.impl.XMLWriter $stack7;
+        int $stack3, $stack9;
+        java.lang.String l1;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        l1 := @parameter0: java.lang.String;
+
+        if l1 == null goto label1;
+
+        $stack3 = virtualinvoke l1.<java.lang.String: int length()>();
+
+        if $stack3 != 0 goto label2;
+
+     label1:
+        $stack2 = new jdk.internal.util.xml.XMLStreamException;
+
+        specialinvoke $stack2.<jdk.internal.util.xml.XMLStreamException: void <init>(java.lang.String)>("Local Name cannot be null or empty");
+
+        throw $stack2;
+
+     label2:
+        l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: int _state> = 4;
+
+        $stack4 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        if $stack4 == null goto label3;
+
+        $stack8 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        $stack9 = virtualinvoke $stack8.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: int getState()>();
+
+        if $stack9 != 10 goto label3;
+
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void closeStartTag()>();
+
+     label3:
+        $stack5 = new jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element;
+
+        $stack6 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        specialinvoke $stack5.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: void <init>(jdk.internal.util.xml.impl.XMLStreamWriterImpl,jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element,java.lang.String,boolean)>(l0, $stack6, l1, 0);
+
+        l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle> = $stack5;
+
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void openStartTag()>();
+
+        $stack7 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack7.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>(l1);
+
+        return;
+    }
+
+Method: writeEmptyElement
+    public void writeEmptyElement(java.lang.String) throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element $stack2, $stack6, $stack3, $stack4;
+        jdk.internal.util.xml.impl.XMLWriter $stack5;
+        int $stack7;
+        java.lang.String l1;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        if $stack2 == null goto label1;
+
+        $stack6 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        $stack7 = virtualinvoke $stack6.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: int getState()>();
+
+        if $stack7 != 10 goto label1;
+
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void closeStartTag()>();
+
+     label1:
+        $stack3 = new jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element;
+
+        $stack4 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        specialinvoke $stack3.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: void <init>(jdk.internal.util.xml.impl.XMLStreamWriterImpl,jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element,java.lang.String,boolean)>(l0, $stack4, l1, 1);
+
+        l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle> = $stack3;
+
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void openStartTag()>();
+
+        $stack5 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack5.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>(l1);
+
+        return;
+    }
+
+Method: writeAttribute
+    public void writeAttribute(java.lang.String, java.lang.String) throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.XMLStreamException $stack9;
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element $stack3;
+        jdk.internal.util.xml.impl.XMLWriter $stack5, $stack6, $stack7, $stack8;
+        int $stack4;
+        java.lang.String l1, l2;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.String;
+
+        $stack3 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        $stack4 = virtualinvoke $stack3.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: int getState()>();
+
+        if $stack4 == 10 goto label1;
+
+        $stack9 = new jdk.internal.util.xml.XMLStreamException;
+
+        specialinvoke $stack9.<jdk.internal.util.xml.XMLStreamException: void <init>(java.lang.String)>("Attribute not associated with any element");
+
+        throw $stack9;
+
+     label1:
+        $stack5 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack5.<jdk.internal.util.xml.impl.XMLWriter: void write(int)>(32);
+
+        $stack6 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack6.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>(l1);
+
+        $stack7 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack7.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>("=\"");
+
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void writeXMLContent(java.lang.String,boolean,boolean)>(l2, 1, 1);
+
+        $stack8 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack8.<jdk.internal.util.xml.impl.XMLWriter: void write(int)>(34);
+
+        return;
+    }
+
+Method: writeEndDocument
+    public void writeEndDocument() throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element $stack1, $stack3, $stack5, $stack6, $stack9, $stack15, $stack2;
+        jdk.internal.util.xml.impl.XMLWriter $stack8, $stack10, $stack12;
+        int $stack16;
+        java.lang.String $stack11;
+        boolean $stack4;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        $stack1 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        if $stack1 == null goto label1;
+
+        $stack15 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        $stack16 = virtualinvoke $stack15.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: int getState()>();
+
+        if $stack16 != 10 goto label1;
+
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void closeStartTag()>();
+
+     label1:
+        $stack2 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        if $stack2 == null goto label3;
+
+        $stack3 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        $stack4 = virtualinvoke $stack3.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: boolean isEmpty()>();
+
+        if $stack4 != 0 goto label2;
+
+        $stack8 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack8.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>("</");
+
+        $stack10 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        $stack9 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        $stack11 = virtualinvoke $stack9.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: java.lang.String getLocalName()>();
+
+        virtualinvoke $stack10.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>($stack11);
+
+        $stack12 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack12.<jdk.internal.util.xml.impl.XMLWriter: void write(int)>(62);
+
+     label2:
+        $stack5 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        $stack6 = virtualinvoke $stack5.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element getParent()>();
+
+        l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle> = $stack6;
+
+        goto label1;
+
+     label3:
+        return;
+    }
+
+Method: writeEndElement
+    public void writeEndElement() throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.XMLStreamException $stack12;
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element $stack1, $stack3, $stack6, $stack10, $stack11, $stack13, $stack2;
+        jdk.internal.util.xml.impl.XMLWriter $stack5, $stack7, $stack9;
+        int $stack14;
+        java.lang.String $stack8;
+        boolean $stack4;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        $stack1 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        if $stack1 == null goto label1;
+
+        $stack13 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        $stack14 = virtualinvoke $stack13.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: int getState()>();
+
+        if $stack14 != 10 goto label1;
+
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void closeStartTag()>();
+
+     label1:
+        $stack2 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        if $stack2 != null goto label2;
+
+        $stack12 = new jdk.internal.util.xml.XMLStreamException;
+
+        specialinvoke $stack12.<jdk.internal.util.xml.XMLStreamException: void <init>(java.lang.String)>("No element was found to write");
+
+        throw $stack12;
+
+     label2:
+        $stack3 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        $stack4 = virtualinvoke $stack3.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: boolean isEmpty()>();
+
+        if $stack4 == 0 goto label3;
+
+        return;
+
+     label3:
+        $stack5 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack5.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>("</");
+
+        $stack7 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        $stack6 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        $stack8 = virtualinvoke $stack6.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: java.lang.String getLocalName()>();
+
+        virtualinvoke $stack7.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>($stack8);
+
+        $stack9 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack9.<jdk.internal.util.xml.impl.XMLWriter: void write(int)>(62);
+
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void writeLineSeparator()>();
+
+        $stack10 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        $stack11 = virtualinvoke $stack10.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element getParent()>();
+
+        l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle> = $stack11;
+
+        return;
+    }
+
+Method: writeCData
+    public void writeCData(java.lang.String) throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.XMLStreamException $stack14;
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element $stack2, $stack6;
+        jdk.internal.util.xml.impl.XMLWriter $stack3, $stack4, $stack5;
+        int $stack7;
+        java.lang.String l1;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        l1 := @parameter0: java.lang.String;
+
+        if l1 != null goto label1;
+
+        $stack14 = new jdk.internal.util.xml.XMLStreamException;
+
+        specialinvoke $stack14.<jdk.internal.util.xml.XMLStreamException: void <init>(java.lang.String)>("cdata cannot be null");
+
+        throw $stack14;
+
+     label1:
+        $stack2 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        if $stack2 == null goto label2;
+
+        $stack6 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        $stack7 = virtualinvoke $stack6.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: int getState()>();
+
+        if $stack7 != 10 goto label2;
+
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void closeStartTag()>();
+
+     label2:
+        $stack3 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack3.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>("<![CDATA[");
+
+        $stack4 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack4.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>(l1);
+
+        $stack5 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack5.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>("]]>");
+
+        return;
+    }
+
+Method: writeCharacters
+    public void writeCharacters(java.lang.String) throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        int $stack4;
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element $stack2, $stack3;
+        java.lang.String l1;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack2 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        if $stack2 == null goto label1;
+
+        $stack3 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        $stack4 = virtualinvoke $stack3.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: int getState()>();
+
+        if $stack4 != 10 goto label1;
+
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void closeStartTag()>();
+
+     label1:
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void writeXMLContent(java.lang.String)>(l1);
+
+        return;
+    }
+
+Method: writeCharacters
+    public void writeCharacters(char[], int, int) throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element $stack4, $stack6;
+        int l2, l3, $stack7;
+        char[] l1;
+        boolean $stack5;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        l1 := @parameter0: char[];
+
+        l2 := @parameter1: int;
+
+        l3 := @parameter2: int;
+
+        $stack4 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        if $stack4 == null goto label1;
+
+        $stack6 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        $stack7 = virtualinvoke $stack6.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: int getState()>();
+
+        if $stack7 != 10 goto label1;
+
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void closeStartTag()>();
+
+     label1:
+        $stack5 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: boolean _escapeCharacters>;
+
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void writeXMLContent(char[],int,int,boolean)>(l1, l2, l3, $stack5);
+
+        return;
+    }
+
+Method: close
+    public void close() throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        jdk.internal.util.xml.impl.XMLWriter $stack1, $stack2;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        $stack1 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        if $stack1 == null goto label1;
+
+        $stack2 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack2.<jdk.internal.util.xml.impl.XMLWriter: void close()>();
+
+     label1:
+        l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer> = null;
+
+        l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle> = null;
+
+        l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: int _state> = 0;
+
+        return;
+    }
+
+Method: flush
+    public void flush() throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        jdk.internal.util.xml.impl.XMLWriter $stack1, $stack2;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        $stack1 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        if $stack1 == null goto label1;
+
+        $stack2 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack2.<jdk.internal.util.xml.impl.XMLWriter: void flush()>();
+
+     label1:
+        return;
+    }
+
+Method: setDoIndent
+    public void setDoIndent(boolean)
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        boolean l1;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        l1 := @parameter0: boolean;
+
+        l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: boolean _doIndent> = l1;
+
+        return;
+    }
+
+Method: writeXMLContent
+    private void writeXMLContent(char[], int, int, boolean) throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        int l2, l3, l6, $stack9, $stack13, $stack18, $stack21, $stack24, l5, l7, $i0, $i1;
+        java.lang.String $stack28;
+        boolean l4, $stack12;
+        jdk.internal.util.xml.impl.XMLWriter $stack10, $stack11, $stack14, $stack15, $stack19, $stack20, $stack22, $stack23, $stack25, $stack26, $stack27, $stack29, $stack30;
+        char l8;
+        char[] l1;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        l1 := @parameter0: char[];
+
+        l2 := @parameter1: int;
+
+        l3 := @parameter2: int;
+
+        l4 := @parameter3: boolean;
+
+        if l4 != 0 goto label1;
+
+        $stack30 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack30.<jdk.internal.util.xml.impl.XMLWriter: void write(char[],int,int)>(l1, l2, l3);
+
+        return;
+
+     label1:
+        l5 = l2;
+
+        l6 = l2 + l3;
+
+        l7 = l2;
+
+     label2:
+        if l7 >= l6 goto label8;
+
+        l8 = l1[l7];
+
+        $stack11 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        $stack12 = virtualinvoke $stack11.<jdk.internal.util.xml.impl.XMLWriter: boolean canEncode(char)>(l8);
+
+        if $stack12 != 0 goto label3;
+
+        $stack25 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        $stack24 = l7 - l5;
+
+        virtualinvoke $stack25.<jdk.internal.util.xml.impl.XMLWriter: void write(char[],int,int)>(l1, l5, $stack24);
+
+        $stack26 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack26.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>("&#x");
+
+        $stack27 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        $i0 = (int) l8;
+
+        $stack28 = staticinvoke <java.lang.Integer: java.lang.String toHexString(int)>($i0);
+
+        virtualinvoke $stack27.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>($stack28);
+
+        $stack29 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack29.<jdk.internal.util.xml.impl.XMLWriter: void write(int)>(59);
+
+        l5 = l7 + 1;
+
+        goto label7;
+
+     label3:
+        $i1 = (int) l8;
+
+        lookupswitch($i1)
+        {
+            case 38: goto label5;
+            case 60: goto label4;
+            case 62: goto label6;
+            default: goto label7;
+        };
+
+     label4:
+        $stack19 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        $stack18 = l7 - l5;
+
+        virtualinvoke $stack19.<jdk.internal.util.xml.impl.XMLWriter: void write(char[],int,int)>(l1, l5, $stack18);
+
+        $stack20 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack20.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>("&lt;");
+
+        l5 = l7 + 1;
+
+        goto label7;
+
+     label5:
+        $stack22 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        $stack21 = l7 - l5;
+
+        virtualinvoke $stack22.<jdk.internal.util.xml.impl.XMLWriter: void write(char[],int,int)>(l1, l5, $stack21);
+
+        $stack23 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack23.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>("&amp;");
+
+        l5 = l7 + 1;
+
+        goto label7;
+
+     label6:
+        $stack14 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        $stack13 = l7 - l5;
+
+        virtualinvoke $stack14.<jdk.internal.util.xml.impl.XMLWriter: void write(char[],int,int)>(l1, l5, $stack13);
+
+        $stack15 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack15.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>("&gt;");
+
+        l5 = l7 + 1;
+
+     label7:
+        l7 = l7 + 1;
+
+        goto label2;
+
+     label8:
+        $stack10 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        $stack9 = l6 - l5;
+
+        virtualinvoke $stack10.<jdk.internal.util.xml.impl.XMLWriter: void write(char[],int,int)>(l1, l5, $stack9);
+
+        return;
+    }
+
+Method: writeXMLContent
+    private void writeXMLContent(java.lang.String) throws jdk.internal.util.xml.XMLStreamException
+    {
+        int $stack2;
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        java.lang.String l1;
+        boolean $stack3;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        l1 := @parameter0: java.lang.String;
+
+        if l1 == null goto label1;
+
+        $stack2 = virtualinvoke l1.<java.lang.String: int length()>();
+
+        if $stack2 <= 0 goto label1;
+
+        $stack3 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: boolean _escapeCharacters>;
+
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void writeXMLContent(java.lang.String,boolean,boolean)>(l1, $stack3, 0);
+
+     label1:
+        return;
+    }
+
+Method: writeXMLContent
+    private void writeXMLContent(java.lang.String, boolean, boolean) throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        boolean l2, $stack13, l3;
+        int $stack8, $stack9, $stack14, $stack19, $stack22, $stack25, $stack32, l4, l6, $i0, $i1;
+        java.lang.String l1, $stack36;
+        jdk.internal.util.xml.impl.XMLWriter $stack10, $stack12, $stack15, $stack16, $stack20, $stack21, $stack23, $stack24, $stack26, $stack27, $stack28, $stack33, $stack34, $stack35, $stack37, $stack38;
+        char $stack11;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: boolean;
+
+        l3 := @parameter2: boolean;
+
+        if l2 != 0 goto label01;
+
+        $stack38 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack38.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>(l1);
+
+        return;
+
+     label01:
+        l4 = 0;
+
+        $stack8 = virtualinvoke l1.<java.lang.String: int length()>();
+
+        l6 = 0;
+
+     label02:
+        if l6 >= $stack8 goto label11;
+
+        $stack11 = virtualinvoke l1.<java.lang.String: char charAt(int)>(l6);
+
+        $stack12 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        $stack13 = virtualinvoke $stack12.<jdk.internal.util.xml.impl.XMLWriter: boolean canEncode(char)>($stack11);
+
+        if $stack13 != 0 goto label03;
+
+        $stack33 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        $stack32 = l6 - l4;
+
+        virtualinvoke $stack33.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String,int,int)>(l1, l4, $stack32);
+
+        $stack34 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack34.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>("&#x");
+
+        $stack35 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        $i0 = (int) $stack11;
+
+        $stack36 = staticinvoke <java.lang.Integer: java.lang.String toHexString(int)>($i0);
+
+        virtualinvoke $stack35.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>($stack36);
+
+        $stack37 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack37.<jdk.internal.util.xml.impl.XMLWriter: void write(int)>(59);
+
+        l4 = l6 + 1;
+
+        goto label10;
+
+     label03:
+        $i1 = (int) $stack11;
+
+        lookupswitch($i1)
+        {
+            case 34: goto label07;
+            case 38: goto label05;
+            case 60: goto label04;
+            case 62: goto label06;
+            default: goto label10;
+        };
+
+     label04:
+        $stack20 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        $stack19 = l6 - l4;
+
+        virtualinvoke $stack20.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String,int,int)>(l1, l4, $stack19);
+
+        $stack21 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack21.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>("&lt;");
+
+        l4 = l6 + 1;
+
+        goto label10;
+
+     label05:
+        $stack23 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        $stack22 = l6 - l4;
+
+        virtualinvoke $stack23.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String,int,int)>(l1, l4, $stack22);
+
+        $stack24 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack24.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>("&amp;");
+
+        l4 = l6 + 1;
+
+        goto label10;
+
+     label06:
+        $stack15 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        $stack14 = l6 - l4;
+
+        virtualinvoke $stack15.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String,int,int)>(l1, l4, $stack14);
+
+        $stack16 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack16.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>("&gt;");
+
+        l4 = l6 + 1;
+
+        goto label10;
+
+     label07:
+        $stack26 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        $stack25 = l6 - l4;
+
+        virtualinvoke $stack26.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String,int,int)>(l1, l4, $stack25);
+
+        if l3 == 0 goto label08;
+
+        $stack28 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack28.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>("&quot;");
+
+        goto label09;
+
+     label08:
+        $stack27 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack27.<jdk.internal.util.xml.impl.XMLWriter: void write(int)>(34);
+
+     label09:
+        l4 = l6 + 1;
+
+     label10:
+        l6 = l6 + 1;
+
+        goto label02;
+
+     label11:
+        $stack10 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        $stack9 = $stack8 - l4;
+
+        virtualinvoke $stack10.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String,int,int)>(l1, l4, $stack9);
+
+        return;
+    }
+
+Method: openStartTag
+    private void openStartTag() throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element $stack1;
+        jdk.internal.util.xml.impl.XMLWriter $stack2;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        $stack1 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        virtualinvoke $stack1.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: void setState(int)>(10);
+
+        $stack2 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack2.<jdk.internal.util.xml.impl.XMLWriter: void write(int)>(60);
+
+        return;
+    }
+
+Method: closeStartTag
+    private void closeStartTag() throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element $stack1, $stack4, $stack5, $stack6;
+        jdk.internal.util.xml.impl.XMLWriter $stack3, $stack9;
+        boolean $stack2;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        $stack1 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        $stack2 = virtualinvoke $stack1.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: boolean isEmpty()>();
+
+        if $stack2 == 0 goto label1;
+
+        $stack9 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack9.<jdk.internal.util.xml.impl.XMLWriter: void write(java.lang.String)>("/>");
+
+        goto label2;
+
+     label1:
+        $stack3 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        virtualinvoke $stack3.<jdk.internal.util.xml.impl.XMLWriter: void write(int)>(62);
+
+     label2:
+        $stack4 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        $stack5 = virtualinvoke $stack4.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element getParent()>();
+
+        if $stack5 != null goto label3;
+
+        specialinvoke l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: void writeLineSeparator()>();
+
+     label3:
+        $stack6 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element _currentEle>;
+
+        virtualinvoke $stack6.<jdk.internal.util.xml.impl.XMLStreamWriterImpl$Element: void setState(int)>(11);
+
+        return;
+    }
+
+Method: writeLineSeparator
+    private void writeLineSeparator() throws jdk.internal.util.xml.XMLStreamException
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        int $stack3;
+        char[] $stack2, $stack4;
+        jdk.internal.util.xml.impl.XMLWriter $stack5;
+        boolean $stack1;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        $stack1 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: boolean _doIndent>;
+
+        if $stack1 == 0 goto label1;
+
+        $stack5 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: jdk.internal.util.xml.impl.XMLWriter _writer>;
+
+        $stack4 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: char[] _lineSep>;
+
+        $stack2 = l0.<jdk.internal.util.xml.impl.XMLStreamWriterImpl: char[] _lineSep>;
+
+        $stack3 = lengthof $stack2;
+
+        virtualinvoke $stack5.<jdk.internal.util.xml.impl.XMLWriter: void write(char[],int,int)>($stack4, 0, $stack3);
+
+     label1:
+        return;
+    }
+
+Method: getCharset
+    private java.nio.charset.Charset getCharset(java.lang.String) throws java.io.UnsupportedEncodingException
+    {
+        jdk.internal.util.xml.impl.XMLStreamWriterImpl l0;
+        java.lang.IllegalArgumentException $stack11;
+        java.nio.charset.Charset $stack5;
+        java.lang.StringBuilder $stack7, $stack8, $stack9;
+        java.lang.String l1, $stack10;
+        java.io.UnsupportedEncodingException $stack6, $stack12;
+        boolean $stack4;
+
+        l0 := @this: jdk.internal.util.xml.impl.XMLStreamWriterImpl;
+
+        l1 := @parameter0: java.lang.String;
+
+        $stack4 = virtualinvoke l1.<java.lang.String: boolean equalsIgnoreCase(java.lang.String)>("UTF-32");
+
+        if $stack4 == 0 goto label1;
+
+        $stack6 = new java.io.UnsupportedEncodingException;
+
+        $stack7 = new java.lang.StringBuilder;
+
+        specialinvoke $stack7.<java.lang.StringBuilder: void <init>()>();
+
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("The basic XMLWriter does not support ");
+
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(l1);
+
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $stack6.<java.io.UnsupportedEncodingException: void <init>(java.lang.String)>($stack10);
+
+        throw $stack6;
+
+     label1:
+        $stack5 = staticinvoke <java.nio.charset.Charset: java.nio.charset.Charset forName(java.lang.String)>(l1);
+
+     label2:
+        goto label4;
+
+     label3:
+        $stack11 := @caughtexception;
+
+        $stack12 = new java.io.UnsupportedEncodingException;
+
+        specialinvoke $stack12.<java.io.UnsupportedEncodingException: void <init>(java.lang.String)>(l1);
+
+        throw $stack12;
+
+     label4:
+        return $stack5;
+
+        catch java.nio.charset.IllegalCharsetNameException from label1 to label2 with label3;
+        catch java.nio.charset.UnsupportedCharsetException from label1 to label2 with label3;
+    }
+

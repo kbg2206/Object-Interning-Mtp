@@ -1,0 +1,25 @@
+Class: jdk.internal.org.xml.sax.Attributes
+Method: getLength
+Unable to retrieve body for method: getLength
+Method: getURI
+Unable to retrieve body for method: getURI
+Method: getLocalName
+Unable to retrieve body for method: getLocalName
+Method: getQName
+Unable to retrieve body for method: getQName
+Method: getType
+Unable to retrieve body for method: getType
+Method: getValue
+Unable to retrieve body for method: getValue
+Method: getIndex
+Unable to retrieve body for method: getIndex
+Method: getIndex
+Unable to retrieve body for method: getIndex
+Method: getType
+Unable to retrieve body for method: getType
+Method: getType
+Unable to retrieve body for method: getType
+Method: getValue
+Unable to retrieve body for method: getValue
+Method: getValue
+Unable to retrieve body for method: getValue

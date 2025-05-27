@@ -1,0 +1,31 @@
+Class: jdk.internal.util.xml.XMLStreamWriter
+Field: DEFAULT_XML_VERSION java.lang.String
+Field: DEFAULT_ENCODING java.lang.String
+Method: writeStartElement
+Unable to retrieve body for method: writeStartElement
+Method: writeEmptyElement
+Unable to retrieve body for method: writeEmptyElement
+Method: writeEndElement
+Unable to retrieve body for method: writeEndElement
+Method: writeEndDocument
+Unable to retrieve body for method: writeEndDocument
+Method: close
+Unable to retrieve body for method: close
+Method: flush
+Unable to retrieve body for method: flush
+Method: writeAttribute
+Unable to retrieve body for method: writeAttribute
+Method: writeCData
+Unable to retrieve body for method: writeCData
+Method: writeDTD
+Unable to retrieve body for method: writeDTD
+Method: writeStartDocument
+Unable to retrieve body for method: writeStartDocument
+Method: writeStartDocument
+Unable to retrieve body for method: writeStartDocument
+Method: writeStartDocument
+Unable to retrieve body for method: writeStartDocument
+Method: writeCharacters
+Unable to retrieve body for method: writeCharacters
+Method: writeCharacters
+Unable to retrieve body for method: writeCharacters

@@ -1,0 +1,267 @@
+Class: jdk.internal.util.xml.impl.Pair
+Field: name java.lang.String
+Field: value java.lang.String
+Field: num int
+Field: chars char[]
+Field: id int
+Field: list jdk.internal.util.xml.impl.Pair
+Field: next jdk.internal.util.xml.impl.Pair
+Method: <init>
+    public void <init>()
+    {
+        jdk.internal.util.xml.impl.Pair l0;
+
+        l0 := @this: jdk.internal.util.xml.impl.Pair;
+
+        specialinvoke l0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+Method: qname
+    public java.lang.String qname()
+    {
+        int $stack3, $stack4;
+        char[] $stack2, $stack5;
+        java.lang.String $stack1;
+        jdk.internal.util.xml.impl.Pair l0;
+
+        l0 := @this: jdk.internal.util.xml.impl.Pair;
+
+        $stack1 = new java.lang.String;
+
+        $stack5 = l0.<jdk.internal.util.xml.impl.Pair: char[] chars>;
+
+        $stack2 = l0.<jdk.internal.util.xml.impl.Pair: char[] chars>;
+
+        $stack3 = lengthof $stack2;
+
+        $stack4 = $stack3 - 1;
+
+        specialinvoke $stack1.<java.lang.String: void <init>(char[],int,int)>($stack5, 1, $stack4);
+
+        return $stack1;
+    }
+
+Method: local
+    public java.lang.String local()
+    {
+        jdk.internal.util.xml.impl.Pair l0;
+        int $stack5, $stack6, $stack14, $stack15, $stack16, $stack17, $i0, $i1;
+        java.lang.String $u0, $u1;
+        char $stack2, $stack10, $stack13;
+        char[] $stack1, $stack4, $stack7, $stack9, $stack11, $stack12, $stack18;
+
+        l0 := @this: jdk.internal.util.xml.impl.Pair;
+
+        $stack1 = l0.<jdk.internal.util.xml.impl.Pair: char[] chars>;
+
+        $stack2 = $stack1[0];
+
+        if $stack2 == 0 goto label1;
+
+        $u0 = new java.lang.String;
+
+        $stack18 = l0.<jdk.internal.util.xml.impl.Pair: char[] chars>;
+
+        $stack9 = l0.<jdk.internal.util.xml.impl.Pair: char[] chars>;
+
+        $stack10 = $stack9[0];
+
+        $i0 = (int) $stack10;
+
+        $stack17 = $i0 + 1;
+
+        $stack11 = l0.<jdk.internal.util.xml.impl.Pair: char[] chars>;
+
+        $stack14 = lengthof $stack11;
+
+        $stack12 = l0.<jdk.internal.util.xml.impl.Pair: char[] chars>;
+
+        $stack13 = $stack12[0];
+
+        $i1 = (int) $stack13;
+
+        $stack15 = $stack14 - $i1;
+
+        $stack16 = $stack15 - 1;
+
+        specialinvoke $u0.<java.lang.String: void <init>(char[],int,int)>($stack18, $stack17, $stack16);
+
+        return $u0;
+
+     label1:
+        $u1 = new java.lang.String;
+
+        $stack7 = l0.<jdk.internal.util.xml.impl.Pair: char[] chars>;
+
+        $stack4 = l0.<jdk.internal.util.xml.impl.Pair: char[] chars>;
+
+        $stack5 = lengthof $stack4;
+
+        $stack6 = $stack5 - 1;
+
+        specialinvoke $u1.<java.lang.String: void <init>(char[],int,int)>($stack7, 1, $stack6);
+
+        return $u1;
+    }
+
+Method: pref
+    public java.lang.String pref()
+    {
+        char $stack2, $stack5;
+        jdk.internal.util.xml.impl.Pair l0;
+        int $stack6, $i0;
+        char[] $stack1, $stack4, $stack7;
+        java.lang.String $u0;
+
+        l0 := @this: jdk.internal.util.xml.impl.Pair;
+
+        $stack1 = l0.<jdk.internal.util.xml.impl.Pair: char[] chars>;
+
+        $stack2 = $stack1[0];
+
+        if $stack2 == 0 goto label1;
+
+        $u0 = new java.lang.String;
+
+        $stack7 = l0.<jdk.internal.util.xml.impl.Pair: char[] chars>;
+
+        $stack4 = l0.<jdk.internal.util.xml.impl.Pair: char[] chars>;
+
+        $stack5 = $stack4[0];
+
+        $i0 = (int) $stack5;
+
+        $stack6 = $i0 - 1;
+
+        specialinvoke $u0.<java.lang.String: void <init>(char[],int,int)>($stack7, 1, $stack6);
+
+        return $u0;
+
+     label1:
+        return "";
+    }
+
+Method: eqpref
+    public boolean eqpref(char[])
+    {
+        jdk.internal.util.xml.impl.Pair l0;
+        int $stack11, l3, $i0, $i1, $i2, $i3, $i4;
+        char $stack5, $stack6, l2, $stack9, $stack10;
+        char[] $stack4, l1, $stack7, $stack8;
+
+        l0 := @this: jdk.internal.util.xml.impl.Pair;
+
+        l1 := @parameter0: char[];
+
+        $stack4 = l0.<jdk.internal.util.xml.impl.Pair: char[] chars>;
+
+        $stack6 = $stack4[0];
+
+        $stack5 = l1[0];
+
+        $i0 = (int) $stack6;
+
+        $i1 = (int) $stack5;
+
+        if $i0 != $i1 goto label4;
+
+        $stack7 = l0.<jdk.internal.util.xml.impl.Pair: char[] chars>;
+
+        l2 = $stack7[0];
+
+        l3 = 1;
+
+     label1:
+        $i2 = (int) l2;
+
+        if l3 >= $i2 goto label3;
+
+        $stack8 = l0.<jdk.internal.util.xml.impl.Pair: char[] chars>;
+
+        $stack10 = $stack8[l3];
+
+        $stack9 = l1[l3];
+
+        $i3 = (int) $stack10;
+
+        $i4 = (int) $stack9;
+
+        if $i3 == $i4 goto label2;
+
+        return 0;
+
+     label2:
+        $stack11 = l3 + 1;
+
+        l3 = (char) $stack11;
+
+        goto label1;
+
+     label3:
+        return 1;
+
+     label4:
+        return 0;
+    }
+
+Method: eqname
+    public boolean eqname(char[])
+    {
+        char l2, $stack8, $stack9;
+        jdk.internal.util.xml.impl.Pair l0;
+        int $stack5, $stack6, $stack10, l3, $i0, $i1, $i2, $i3;
+        char[] $stack4, l1, $stack7;
+
+        l0 := @this: jdk.internal.util.xml.impl.Pair;
+
+        l1 := @parameter0: char[];
+
+        $stack4 = l0.<jdk.internal.util.xml.impl.Pair: char[] chars>;
+
+        $stack5 = lengthof $stack4;
+
+        l2 = (char) $stack5;
+
+        $stack6 = lengthof l1;
+
+        $i0 = (int) l2;
+
+        if $i0 != $stack6 goto label4;
+
+        l3 = 0;
+
+     label1:
+        $i1 = (int) l2;
+
+        if l3 >= $i1 goto label3;
+
+        $stack7 = l0.<jdk.internal.util.xml.impl.Pair: char[] chars>;
+
+        $stack9 = $stack7[l3];
+
+        $stack8 = l1[l3];
+
+        $i2 = (int) $stack9;
+
+        $i3 = (int) $stack8;
+
+        if $i2 == $i3 goto label2;
+
+        return 0;
+
+     label2:
+        $stack10 = l3 + 1;
+
+        l3 = (char) $stack10;
+
+        goto label1;
+
+     label3:
+        return 1;
+
+     label4:
+        return 0;
+    }
+

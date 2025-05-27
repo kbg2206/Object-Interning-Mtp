@@ -1,0 +1,29 @@
+Class: jdk.internal.org.xml.sax.XMLReader
+Method: getFeature
+Unable to retrieve body for method: getFeature
+Method: setFeature
+Unable to retrieve body for method: setFeature
+Method: getProperty
+Unable to retrieve body for method: getProperty
+Method: setProperty
+Unable to retrieve body for method: setProperty
+Method: setEntityResolver
+Unable to retrieve body for method: setEntityResolver
+Method: getEntityResolver
+Unable to retrieve body for method: getEntityResolver
+Method: setDTDHandler
+Unable to retrieve body for method: setDTDHandler
+Method: getDTDHandler
+Unable to retrieve body for method: getDTDHandler
+Method: setContentHandler
+Unable to retrieve body for method: setContentHandler
+Method: getContentHandler
+Unable to retrieve body for method: getContentHandler
+Method: setErrorHandler
+Unable to retrieve body for method: setErrorHandler
+Method: getErrorHandler
+Unable to retrieve body for method: getErrorHandler
+Method: parse
+Unable to retrieve body for method: parse
+Method: parse
+Unable to retrieve body for method: parse

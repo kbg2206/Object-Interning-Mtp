@@ -1,0 +1,80 @@
+Class: jdk.internal.util.xml.XMLStreamException
+Field: serialVersionUID long
+Field: nested java.lang.Throwable
+Method: <init>
+    public void <init>()
+    {
+        jdk.internal.util.xml.XMLStreamException l0;
+
+        l0 := @this: jdk.internal.util.xml.XMLStreamException;
+
+        specialinvoke l0.<java.lang.Exception: void <init>()>();
+
+        return;
+    }
+
+Method: <init>
+    public void <init>(java.lang.String)
+    {
+        java.lang.String l1;
+        jdk.internal.util.xml.XMLStreamException l0;
+
+        l0 := @this: jdk.internal.util.xml.XMLStreamException;
+
+        l1 := @parameter0: java.lang.String;
+
+        specialinvoke l0.<java.lang.Exception: void <init>(java.lang.String)>(l1);
+
+        return;
+    }
+
+Method: <init>
+    public void <init>(java.lang.Throwable)
+    {
+        java.lang.Throwable l1;
+        jdk.internal.util.xml.XMLStreamException l0;
+
+        l0 := @this: jdk.internal.util.xml.XMLStreamException;
+
+        l1 := @parameter0: java.lang.Throwable;
+
+        specialinvoke l0.<java.lang.Exception: void <init>(java.lang.Throwable)>(l1);
+
+        l0.<jdk.internal.util.xml.XMLStreamException: java.lang.Throwable nested> = l1;
+
+        return;
+    }
+
+Method: <init>
+    public void <init>(java.lang.String, java.lang.Throwable)
+    {
+        java.lang.Throwable l2;
+        java.lang.String l1;
+        jdk.internal.util.xml.XMLStreamException l0;
+
+        l0 := @this: jdk.internal.util.xml.XMLStreamException;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 := @parameter1: java.lang.Throwable;
+
+        specialinvoke l0.<java.lang.Exception: void <init>(java.lang.String,java.lang.Throwable)>(l1, l2);
+
+        l0.<jdk.internal.util.xml.XMLStreamException: java.lang.Throwable nested> = l2;
+
+        return;
+    }
+
+Method: getNestedException
+    public java.lang.Throwable getNestedException()
+    {
+        java.lang.Throwable $stack1;
+        jdk.internal.util.xml.XMLStreamException l0;
+
+        l0 := @this: jdk.internal.util.xml.XMLStreamException;
+
+        $stack1 = l0.<jdk.internal.util.xml.XMLStreamException: java.lang.Throwable nested>;
+
+        return $stack1;
+    }
+

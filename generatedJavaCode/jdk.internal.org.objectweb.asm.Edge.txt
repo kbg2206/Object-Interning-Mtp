@@ -1,0 +1,18 @@
+Class: jdk.internal.org.objectweb.asm.Edge
+Field: NORMAL int
+Field: EXCEPTION int
+Field: info int
+Field: successor jdk.internal.org.objectweb.asm.Label
+Field: next jdk.internal.org.objectweb.asm.Edge
+Method: <init>
+    void <init>()
+    {
+        jdk.internal.org.objectweb.asm.Edge l0;
+
+        l0 := @this: jdk.internal.org.objectweb.asm.Edge;
+
+        specialinvoke l0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+

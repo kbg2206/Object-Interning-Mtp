@@ -1,0 +1,9 @@
+Class: jdk.internal.org.xml.sax.Locator
+Method: getPublicId
+Unable to retrieve body for method: getPublicId
+Method: getSystemId
+Unable to retrieve body for method: getSystemId
+Method: getLineNumber
+Unable to retrieve body for method: getLineNumber
+Method: getColumnNumber
+Unable to retrieve body for method: getColumnNumber
